@@ -1,0 +1,4178 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#14231e" />
+    <meta
+      name="description"
+      content="Rathana Lan, DNKH Digital Transformation Supervisor. DX strategy, governance, manufacturing digitalization, Power Platform, and Smart Factory readiness."
+    />
+    <title>Rathana Lan — Digital Transformation Supervisor</title>
+    <script>
+      try {
+        document.documentElement.dataset.theme =
+          localStorage.getItem("portfolio-theme") || "light";
+      } catch (error) {}
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        color-scheme: dark;
+        --bg: #10110f;
+        --panel: #171915;
+        --text: #f2f1e9;
+        --muted: #a3a69a;
+        --line: #30332c;
+        --accent: #c8f169;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+      body {
+        margin: 0;
+        background: var(--bg);
+        color: var(--text);
+        font:
+          16px/1.6 Inter,
+          ui-sans-serif,
+          system-ui,
+          -apple-system,
+          BlinkMacSystemFont,
+          "Segoe UI",
+          sans-serif;
+      }
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+      a:focus-visible {
+        outline: 2px solid var(--accent);
+        outline-offset: 4px;
+      }
+      .wrap {
+        width: min(1100px, calc(100% - 48px));
+        margin: auto;
+      }
+      header {
+        height: 76px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        border-bottom: 1px solid var(--line);
+      }
+      .brand {
+        font-weight: 750;
+        letter-spacing: -0.04em;
+        font-size: 20px;
+      }
+      .brand span {
+        color: var(--accent);
+      }
+      nav {
+        display: flex;
+        align-items: center;
+        gap: 30px;
+        color: var(--muted);
+        font-size: 14px;
+      }
+      nav a:hover,
+      .text-link:hover {
+        color: var(--accent);
+      }
+      .hero {
+        min-height: 590px;
+        padding: 112px 0 100px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
+      }
+      .eyebrow {
+        color: var(--accent);
+        text-transform: uppercase;
+        letter-spacing: 0.16em;
+        font-size: 12px;
+        font-weight: 700;
+      }
+      h1 {
+        max-width: 850px;
+        margin: 22px 0;
+        font-size: clamp(54px, 9vw, 108px);
+        line-height: 0.98;
+        letter-spacing: -0.075em;
+        font-weight: 650;
+      }
+      h1 em {
+        color: var(--accent);
+        font-style: normal;
+      }
+      .intro {
+        max-width: 570px;
+        color: var(--muted);
+        font-size: 18px;
+        margin: 4px 0 30px;
+      }
+      .button {
+        display: inline-flex;
+        padding: 12px 19px;
+        border-radius: 5px;
+        background: var(--accent);
+        color: #15180f;
+        font-weight: 700;
+        font-size: 14px;
+        transition:
+          transform 0.2s,
+          background 0.2s;
+      }
+      .button:hover {
+        transform: translateY(-2px);
+        background: #d8ff83;
+      }
+      section {
+        padding: 82px 0;
+        border-top: 1px solid var(--line);
+      }
+      .section-head {
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        gap: 20px;
+        margin-bottom: 34px;
+      }
+      h2 {
+        margin: 0;
+        font-size: clamp(30px, 5vw, 48px);
+        line-height: 1.1;
+        letter-spacing: -0.055em;
+      }
+      .section-note {
+        color: var(--muted);
+        font-size: 14px;
+      }
+      .about-grid {
+        display: grid;
+        grid-template-columns: 1.1fr 0.9fr;
+        gap: 60px;
+      }
+      .about-copy {
+        color: var(--muted);
+        font-size: 18px;
+        max-width: 620px;
+      }
+      .about-copy p:first-child {
+        margin-top: 0;
+      }
+      .skills {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 9px;
+        align-content: start;
+      }
+      .tag {
+        padding: 8px 12px;
+        border: 1px solid var(--line);
+        border-radius: 3px;
+        color: #d6d8ce;
+        font-size: 13px;
+      }
+      .projects {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 16px;
+      }
+      .project {
+        min-height: 260px;
+        padding: 25px;
+        border: 1px solid var(--line);
+        background: var(--panel);
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        transition:
+          border-color 0.2s,
+          transform 0.2s;
+      }
+      .project:hover {
+        border-color: #68754b;
+        transform: translateY(-3px);
+      }
+      .project-top {
+        display: flex;
+        justify-content: space-between;
+        color: var(--accent);
+        font-size: 12px;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+      .project h3 {
+        font-size: 25px;
+        letter-spacing: -0.04em;
+        margin: 26px 0 8px;
+      }
+      .project p {
+        max-width: 440px;
+        margin: 0;
+        color: var(--muted);
+        font-size: 14px;
+      }
+      .project-foot {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 25px;
+        color: var(--muted);
+        font-size: 12px;
+      }
+      .contact-box {
+        border: 1px solid var(--line);
+        background: var(--panel);
+        padding: clamp(26px, 6vw, 58px);
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+        gap: 30px;
+      }
+      .contact-box h2 {
+        max-width: 620px;
+        margin: 13px 0 18px;
+      }
+      .contact-box p {
+        color: var(--muted);
+        margin: 0;
+      }
+      footer {
+        padding: 26px 0;
+        display: flex;
+        justify-content: space-between;
+        color: var(--muted);
+        font-size: 12px;
+      }
+      @media (max-width: 700px) {
+        .wrap {
+          width: min(100% - 36px, 1100px);
+        }
+        header {
+          height: 68px;
+        }
+        nav {
+          gap: 16px;
+          font-size: 12px;
+        }
+        .hero {
+          min-height: 520px;
+          padding: 80px 0;
+        }
+        .about-grid,
+        .projects {
+          grid-template-columns: 1fr;
+          gap: 22px;
+        }
+        section {
+          padding: 62px 0;
+        }
+        .section-head {
+          display: block;
+        }
+        .section-note {
+          margin-top: 9px;
+        }
+        .contact-box {
+          align-items: flex-start;
+          flex-direction: column;
+        }
+      }
+      .eyebrow {
+        letter-spacing: 0.12em;
+      }
+      .hero {
+        min-height: 510px;
+      }
+      .portrait {
+        width: 96px;
+        height: 96px;
+        object-fit: cover;
+        border-radius: 50%;
+        border: 2px solid var(--accent);
+        margin-bottom: 24px;
+        background: var(--panel);
+      }
+      .hero h1 {
+        max-width: 970px;
+      }
+      .hero h1 em {
+        display: inline;
+      }
+      blockquote {
+        margin: 26px 0 0;
+        padding: 4px 0 4px 18px;
+        border-left: 2px solid var(--accent);
+        color: var(--text);
+        font-size: 18px;
+      }
+      .facts {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 12px;
+        margin-top: 32px;
+        width: 100%;
+      }
+      .fact {
+        border-left: 2px solid var(--accent);
+        padding: 4px 0 4px 12px;
+      }
+      .fact strong,
+      .fact span {
+        display: block;
+      }
+      .fact strong {
+        font-size: 13px;
+      }
+      .fact span {
+        color: var(--muted);
+        font-size: 12px;
+      }
+      .section-kicker {
+        color: var(--accent);
+        font-size: 12px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.12em;
+      }
+      .section-intro {
+        max-width: 650px;
+        color: var(--muted);
+        margin: 10px 0 28px;
+      }
+      .metric-grid,
+      .leadership-grid,
+      .rhythm-grid,
+      .cert-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 12px;
+      }
+      .metric,
+      .lead-card,
+      .rhythm,
+      .cert,
+      .career-item {
+        border: 1px solid var(--line);
+        background: var(--panel);
+        padding: 20px;
+      }
+      .metric strong {
+        display: block;
+        color: var(--accent);
+        font-size: 28px;
+      }
+      .metric h3,
+      .lead-card h3,
+      .rhythm h3,
+      .career-item h3,
+      .cert h3 {
+        margin: 6px 0;
+        font-size: 18px;
+      }
+      .metric p,
+      .lead-card p,
+      .rhythm p,
+      .career-item p,
+      .cert p {
+        margin: 0;
+        color: var(--muted);
+        font-size: 14px;
+      }
+      .timeline {
+        display: grid;
+        gap: 12px;
+      }
+      .career-item {
+        display: grid;
+        grid-template-columns: 130px 1fr;
+        gap: 20px;
+      }
+      .career-year {
+        color: var(--accent);
+        font-size: 13px;
+        font-weight: 700;
+      }
+      .career-item ul {
+        margin: 12px 0 0;
+        padding-left: 18px;
+        color: var(--muted);
+        font-size: 14px;
+      }
+      .career-item li + li {
+        margin-top: 6px;
+      }
+      .tag-list {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-top: 14px;
+      }
+      .tag {
+        padding: 6px 9px;
+      }
+      .journey {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 0;
+        border: 1px solid var(--line);
+      }
+      .journey-step {
+        padding: 20px;
+        border-right: 1px solid var(--line);
+      }
+      .journey-step:last-child {
+        border: 0;
+      }
+      .journey-step strong {
+        display: block;
+        color: var(--accent);
+        margin-bottom: 7px;
+      }
+      .journey-step span {
+        color: var(--muted);
+        font-size: 13px;
+      }
+      .rhythm-explorer {
+        overflow: hidden;
+        border: 1px solid var(--line);
+        border-radius: 4px;
+        background: var(--panel);
+        box-shadow: var(--shadow);
+      }
+      .rhythm-tabs {
+        display: grid;
+        grid-template-columns: repeat(6, minmax(0, 1fr));
+        border-bottom: 1px solid var(--line);
+      }
+      .rhythm-tab {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+        min-width: 0;
+        min-height: 66px;
+        padding: 14px 16px;
+        border: 0;
+        border-right: 1px solid var(--line);
+        border-bottom: 3px solid transparent;
+        background: transparent;
+        color: var(--muted);
+        font:
+          600 13px "DM Sans",
+          sans-serif;
+        text-align: left;
+        cursor: pointer;
+        transition:
+          background 200ms ease,
+          color 200ms ease,
+          border-color 200ms ease;
+      }
+      .rhythm-tab:last-child {
+        border-right: 0;
+      }
+      .rhythm-tab:hover {
+        background: #f1f5f1;
+        color: var(--text);
+      }
+      .rhythm-tab[aria-selected="true"] {
+        border-bottom-color: var(--accent-warm);
+        background: #edf2ed;
+        color: var(--text);
+      }
+      .rhythm-tab:focus-visible {
+        position: relative;
+        z-index: 1;
+        outline: 3px solid var(--accent);
+        outline-offset: -4px;
+      }
+      .rhythm-tab-no {
+        color: var(--accent-warm);
+        font:
+          700 11px "Manrope",
+          sans-serif;
+      }
+      .rhythm-tab-arrow {
+        color: var(--accent);
+        transition: transform 200ms ease;
+      }
+      .rhythm-tab[aria-selected="true"] .rhythm-tab-arrow {
+        transform: translateX(3px);
+      }
+      .rhythm-panel {
+        position: relative;
+        display: grid;
+        grid-template-columns: 170px minmax(0, 1fr);
+        align-items: center;
+        gap: 24px;
+        min-height: 310px;
+        padding: 42px 48px;
+        isolation: isolate;
+      }
+      .rhythm-index {
+        color: rgba(8, 119, 95, 0.12);
+        font:
+          800 132px/1 "Manrope",
+          sans-serif;
+        letter-spacing: -0.06em;
+      }
+      .rhythm-panel-content {
+        max-width: 650px;
+      }
+      .rhythm-panel-content h3 {
+        margin: 10px 0;
+        color: var(--text);
+        font:
+          700 34px/1.2 "Manrope",
+          sans-serif;
+      }
+      .rhythm-panel-content p {
+        max-width: 580px;
+        margin: 0;
+        color: var(--muted);
+        font-size: 17px;
+      }
+      .rhythm-progress {
+        position: absolute;
+        right: 48px;
+        bottom: 28px;
+        left: 48px;
+        display: grid;
+        grid-template-columns: repeat(6, 1fr);
+        gap: 6px;
+      }
+      .rhythm-progress span {
+        height: 3px;
+        background: var(--line);
+        transition: background 300ms ease;
+      }
+      .rhythm-progress span.is-complete {
+        background: var(--accent);
+      }
+      .rhythm-panel.is-changing .rhythm-panel-content {
+        animation: rhythm-swap 300ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
+      }
+      @keyframes rhythm-swap {
+        from {
+          opacity: 0;
+          transform: translateY(8px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      .project {
+        min-height: 280px;
+      }
+      .project details {
+        margin-top: 16px;
+        color: var(--muted);
+        font-size: 13px;
+      }
+      .project summary {
+        color: var(--accent);
+        cursor: pointer;
+        font-weight: 700;
+      }
+      .project details p {
+        margin-top: 10px;
+      }
+      .contact-links {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px 22px;
+        margin-top: 18px;
+        color: var(--text);
+      }
+      .contact-links a:hover {
+        color: var(--accent);
+      }
+      .contact-layout {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 16px;
+      }
+      .contact-panel,
+      .contact-form {
+        border: 1px solid var(--line);
+        background: var(--panel);
+        padding: clamp(22px, 4vw, 34px);
+      }
+      .contact-form {
+        display: grid;
+        gap: 14px;
+      }
+      .field {
+        display: grid;
+        gap: 6px;
+      }
+      .field label {
+        color: var(--muted);
+        font-size: 13px;
+      }
+      .field input,
+      .field textarea,
+      .language-select {
+        width: 100%;
+        border: 1px solid var(--line);
+        border-radius: 3px;
+        background: var(--bg);
+        color: var(--text);
+        padding: 11px 12px;
+        font: inherit;
+      }
+      .field textarea {
+        min-height: 120px;
+        resize: vertical;
+      }
+      .field input:focus,
+      .field textarea:focus,
+      .language-select:focus {
+        outline: 2px solid var(--accent);
+        outline-offset: 2px;
+      }
+      .language-control {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        color: var(--muted);
+        font-size: 12px;
+      }
+      .language-select {
+        width: auto;
+        padding: 7px 10px;
+        font-size: 12px;
+      }
+      #google_translate_element {
+        display: none;
+      }
+      .print-button {
+        border: 1px solid var(--line);
+        color: var(--text);
+        background: transparent;
+        cursor: pointer;
+        padding: 10px 14px;
+        font: inherit;
+      }
+      .print-button:hover {
+        border-color: var(--accent);
+        color: var(--accent);
+      }
+      .disclaimer {
+        color: var(--muted);
+        font-size: 12px;
+        margin-top: 14px;
+      }
+      @media print {
+        :root {
+          color-scheme: light;
+          --bg: #fff;
+          --panel: #fff;
+          --text: #111;
+          --muted: #444;
+          --line: #bbb;
+          --accent: #365900;
+        }
+        header nav,
+        .button,
+        .print-button {
+          display: none !important;
+        }
+        section,
+        .hero {
+          padding: 30px 0;
+          min-height: 0;
+        }
+        .project,
+        .career-item,
+        .lead-card,
+        .metric,
+        .rhythm,
+        .cert {
+          break-inside: avoid;
+        }
+      }
+      @media (max-width: 700px) {
+        .facts,
+        .metric-grid,
+        .leadership-grid,
+        .rhythm-grid,
+        .cert-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+        .contact-layout {
+          grid-template-columns: 1fr;
+        }
+        .journey {
+          grid-template-columns: repeat(2, 1fr);
+        }
+        .journey-step:nth-child(2) {
+          border-right: 0;
+        }
+        .journey-step:nth-child(-n + 2) {
+          border-bottom: 1px solid var(--line);
+        }
+        .career-item {
+          grid-template-columns: 1fr;
+          gap: 4px;
+        }
+      }
+      @media (max-width: 390px) {
+        nav {
+          gap: 10px;
+        }
+        nav a {
+          font-size: 11px;
+        }
+      }
+      :root {
+        color-scheme: light;
+        --bg: #f3f6f2;
+        --panel: #ffffff;
+        --text: #17251f;
+        --muted: #5b6b64;
+        --line: #d7e1da;
+        --accent: #08775f;
+        --accent-warm: #ad4d34;
+        --lime: #c4e96b;
+        --shadow: 0 16px 40px rgba(21, 47, 37, 0.07);
+      }
+      html {
+        scroll-padding-top: 90px;
+      }
+      body {
+        background: var(--bg);
+        font:
+          16px/1.65 "DM Sans",
+          sans-serif;
+        letter-spacing: 0;
+      }
+      h1,
+      h2,
+      h3,
+      .brand {
+        font-family: "Manrope", sans-serif;
+        letter-spacing: 0;
+      }
+      .wrap {
+        width: min(1160px, calc(100% - 56px));
+      }
+      header.wrap {
+        position: sticky;
+        z-index: 20;
+        top: 0;
+        width: 100%;
+        max-width: none;
+        height: 78px;
+        padding-inline: max(28px, calc((100vw - 1160px) / 2));
+        background: rgba(243, 246, 242, 0.94);
+        border-bottom: 1px solid rgba(215, 225, 218, 0.85);
+      }
+      .brand {
+        font-size: 21px;
+        font-weight: 800;
+      }
+      .brand span {
+        color: var(--accent-warm);
+      }
+      nav {
+        gap: 24px;
+        color: #43564d;
+        font-size: 13px;
+        font-weight: 600;
+      }
+      nav a {
+        position: relative;
+        padding: 8px 0;
+        transition: color 180ms ease;
+      }
+      nav a::after {
+        position: absolute;
+        right: 100%;
+        bottom: 0;
+        left: 0;
+        height: 2px;
+        background: var(--accent-warm);
+        content: "";
+        transition: right 180ms ease;
+      }
+      nav a:hover {
+        color: var(--text);
+      }
+      nav a:hover::after {
+        right: 0;
+      }
+      .language-control {
+        color: var(--muted);
+        font-weight: 600;
+      }
+      .language-select {
+        border-color: var(--line);
+        background: #fff;
+        color: var(--text);
+      }
+      .scroll-progress {
+        position: fixed;
+        z-index: 50;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 3px;
+        background: var(--accent-warm);
+        transform: scaleX(0);
+        transform-origin: left center;
+        pointer-events: none;
+      }
+      .motion-marquee {
+        overflow: hidden;
+        border-block: 1px solid #35463e;
+        background: var(--text);
+        color: #f3f6f2;
+      }
+      .marquee-track {
+        display: flex;
+        width: max-content;
+        animation: marquee-slide 26s linear infinite;
+        will-change: transform;
+      }
+      .marquee-copy {
+        display: flex;
+        flex: 0 0 auto;
+        align-items: center;
+        gap: 28px;
+        padding: 15px 24px;
+      }
+      .marquee-copy span {
+        color: #f3f6f2;
+        font:
+          700 11px "Manrope",
+          sans-serif;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+      }
+      .marquee-copy i {
+        width: 20px;
+        border-top: 1px solid var(--accent-warm);
+      }
+      header nav a[aria-current="location"] {
+        color: var(--accent);
+      }
+      header nav a[aria-current="location"]::after {
+        right: 0;
+      }
+      .hero {
+        position: relative;
+        display: grid;
+        grid-template-columns: minmax(0, 1.12fr) minmax(290px, 0.78fr);
+        grid-template-areas: "eyebrow portrait" "title portrait" "intro portrait" "action portrait" "facts facts";
+        align-content: center;
+        align-items: center;
+        column-gap: 8%;
+        min-height: 700px;
+        padding: 76px 0 84px;
+      }
+      .hero::after {
+        position: absolute;
+        z-index: 0;
+        top: 18%;
+        right: 1.5%;
+        width: 36%;
+        height: 62%;
+        border: 1px solid rgba(8, 119, 95, 0.35);
+        content: "";
+        transform: translate(14px, 14px);
+        animation: frame-drift 8s ease-in-out infinite;
+      }
+      .hero > * {
+        position: relative;
+        z-index: 1;
+      }
+      .hero > .eyebrow {
+        grid-area: eyebrow;
+        align-self: end;
+      }
+      .hero .portrait {
+        grid-area: portrait;
+        justify-self: end;
+        width: min(100%, 200px);
+        height: auto;
+        aspect-ratio: 1 / 1;
+        margin: 0;
+        border: 0;
+        border-radius: 2px;
+        box-shadow: var(--shadow);
+        object-fit: cover;
+        object-position: center;
+        image-rendering: auto;
+        background: #dce7df;
+      }
+      .hero h1 {
+        grid-area: title;
+        max-width: 660px;
+        margin: 18px 0 14px;
+        font-size: 64px;
+        line-height: 1.04;
+        font-weight: 800;
+      }
+      .hero h1 em {
+        display: block;
+        color: var(--accent);
+        font-size: 44px;
+        line-height: 1.18;
+      }
+      .hero .intro {
+        grid-area: intro;
+        max-width: 560px;
+        margin: 0 0 24px;
+        color: var(--muted);
+        font-size: 18px;
+      }
+      .hero > .button {
+        grid-area: action;
+        justify-self: start;
+      }
+      .eyebrow,
+      .section-kicker {
+        color: var(--accent-warm);
+        letter-spacing: 0.12em;
+      }
+      .button {
+        align-items: center;
+        min-height: 48px;
+        padding: 12px 18px;
+        border-radius: 3px;
+        background: var(--accent);
+        color: #fff;
+        transition:
+          transform 180ms ease,
+          background 180ms ease,
+          box-shadow 180ms ease;
+      }
+      .button:hover {
+        transform: translateY(-2px);
+        background: #075c4b;
+        box-shadow: 0 8px 18px rgba(8, 119, 95, 0.18);
+      }
+      section {
+        padding: 96px 0;
+        border-color: var(--line);
+      }
+      section:nth-of-type(even) {
+        background: #eaf0eb;
+      }
+      .section-head {
+        align-items: end;
+        margin-bottom: 38px;
+      }
+      h2 {
+        max-width: 780px;
+        font-size: 44px;
+        line-height: 1.14;
+        font-weight: 700;
+      }
+      .section-note {
+        max-width: 350px;
+        color: var(--muted);
+        line-height: 1.6;
+      }
+      .about-grid {
+        grid-template-columns: 1.05fr 0.95fr;
+        gap: 9%;
+      }
+      .about-copy {
+        color: #50635a;
+        font-size: 17px;
+      }
+      .about-copy blockquote {
+        color: var(--text);
+        border-color: var(--accent-warm);
+        font-family: "Manrope", sans-serif;
+        font-weight: 600;
+      }
+      .tag {
+        border-color: #cbd8cf;
+        border-radius: 2px;
+        background: rgba(255, 255, 255, 0.62);
+        color: #334a3f;
+      }
+      .facts {
+        grid-area: facts;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 0;
+        margin-top: 62px;
+        padding-top: 22px;
+        border-top: 1px solid var(--line);
+      }
+      .fact {
+        border-left: 0;
+        padding: 0 18px;
+      }
+      .fact:first-child {
+        padding-left: 0;
+      }
+      .fact + .fact {
+        border-left: 1px solid var(--line);
+      }
+      .fact strong {
+        color: var(--text);
+        font-family: "Manrope", sans-serif;
+        font-size: 14px;
+      }
+      .fact span {
+        color: var(--muted);
+        font-size: 13px;
+      }
+      .metric,
+      .lead-card,
+      .rhythm,
+      .cert,
+      .career-item,
+      .project,
+      .contact-panel,
+      .contact-form {
+        border: 1px solid var(--line);
+        border-radius: 4px;
+        background: var(--panel);
+        box-shadow: 0 5px 18px rgba(21, 47, 37, 0.035);
+      }
+      .metric,
+      .lead-card,
+      .rhythm,
+      .cert {
+        padding: 24px;
+        transition:
+          transform 220ms ease,
+          box-shadow 220ms ease,
+          border-color 220ms ease;
+      }
+      .metric:hover,
+      .lead-card:hover,
+      .rhythm:hover,
+      .cert:hover {
+        transform: translateY(-4px);
+        border-color: #9dbbae;
+        box-shadow: var(--shadow);
+      }
+      .metric strong {
+        color: var(--accent-warm);
+        font-family: "Manrope", sans-serif;
+        font-size: 30px;
+      }
+      .metric h3,
+      .lead-card h3,
+      .rhythm h3,
+      .career-item h3,
+      .cert h3 {
+        color: var(--text);
+        font-size: 18px;
+        line-height: 1.35;
+      }
+      .metric p,
+      .lead-card p,
+      .rhythm p,
+      .career-item p,
+      .cert p {
+        color: var(--muted);
+        line-height: 1.6;
+      }
+      .career-item {
+        grid-template-columns: 132px 1fr;
+        gap: 24px;
+        padding: 24px 26px;
+      }
+      .career-year {
+        color: var(--accent-warm);
+        font-weight: 700;
+      }
+      .career-item ul {
+        color: var(--muted);
+      }
+      .timeline {
+        position: relative;
+        gap: 14px;
+        padding-left: 20px;
+      }
+      .timeline::before {
+        position: absolute;
+        top: 12px;
+        bottom: 12px;
+        left: 5px;
+        width: 2px;
+        background: var(--accent-warm);
+        content: "";
+        transform: scaleY(0);
+        transform-origin: top;
+        transition: transform 1.2s cubic-bezier(0.2, 0.7, 0.2, 1);
+      }
+      .timeline.is-visible::before {
+        transform: scaleY(1);
+      }
+      .journey {
+        border-color: var(--line);
+        border-radius: 4px;
+        background: #fff;
+      }
+      .journey-step {
+        min-height: 120px;
+        padding: 24px;
+        border-color: var(--line);
+      }
+      .journey-step strong {
+        color: var(--accent);
+        font-family: "Manrope", sans-serif;
+        font-size: 18px;
+      }
+      .project {
+        min-height: 300px;
+        padding: 27px;
+        transition:
+          transform 220ms ease,
+          border-color 220ms ease,
+          box-shadow 220ms ease;
+      }
+      .project:hover {
+        transform: translateY(-5px);
+        border-color: #9dbbae;
+        box-shadow: var(--shadow);
+      }
+      .project-top {
+        color: var(--accent-warm);
+      }
+      .project h3 {
+        color: var(--text);
+        font-family: "Manrope", sans-serif;
+        font-size: 24px;
+        line-height: 1.3;
+      }
+      .project p,
+      .project details {
+        color: var(--muted);
+        line-height: 1.6;
+      }
+      .project summary {
+        color: var(--accent);
+      }
+      .project-tools {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        margin: -12px 0 22px;
+      }
+      .project-filters {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+      .project-filter {
+        min-height: 40px;
+        padding: 8px 13px;
+        border: 1px solid var(--line);
+        border-radius: 2px;
+        background: transparent;
+        color: var(--text);
+        font:
+          600 13px "DM Sans",
+          sans-serif;
+        cursor: pointer;
+        transition:
+          background 180ms ease,
+          border-color 180ms ease,
+          color 180ms ease;
+      }
+      .project-filter:hover {
+        border-color: var(--accent);
+      }
+      .project-filter.is-active {
+        border-color: var(--text);
+        background: var(--text);
+        color: #fff;
+      }
+      .project-filter:focus-visible {
+        outline: 3px solid var(--accent-warm);
+        outline-offset: 3px;
+      }
+      .project-count {
+        margin: 0;
+        color: var(--muted);
+        font-size: 13px;
+        white-space: nowrap;
+      }
+      .project[hidden] {
+        display: none;
+      }
+      .featured-project {
+        grid-column: 1 / -1;
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(300px, 0.82fr);
+        grid-template-areas: "top top" "copy visual" "foot visual";
+        align-items: center;
+        gap: 14px 30px;
+        min-height: 330px;
+      }
+      .featured-project > .project-top {
+        grid-area: top;
+      }
+      .featured-project > div:nth-child(2) {
+        grid-area: copy;
+      }
+      .featured-project > .project-foot {
+        grid-area: foot;
+        align-self: end;
+      }
+      .roadmap-visual {
+        grid-area: visual;
+        align-self: stretch;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 15px;
+        min-height: 230px;
+        padding: 20px;
+        border: 1px solid var(--line);
+        background: #edf2ed;
+      }
+      .roadmap-heading {
+        display: flex;
+        justify-content: space-between;
+        gap: 12px;
+        color: var(--muted);
+        font-size: 11px;
+        font-weight: 700;
+        text-transform: uppercase;
+      }
+      .roadmap-heading span:last-child {
+        color: var(--accent-warm);
+      }
+      .roadmap-stages {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 8px;
+      }
+      .roadmap-stages > div {
+        display: grid;
+        gap: 3px;
+        min-height: 82px;
+        padding: 10px 12px;
+        border-left: 2px solid var(--accent);
+        background: #fff;
+        transition:
+          transform 180ms ease,
+          border-color 180ms ease;
+      }
+      .roadmap-stages > div:nth-child(2),
+      .roadmap-stages > div:nth-child(3) {
+        border-color: var(--accent-warm);
+      }
+      .roadmap-stages span {
+        color: var(--muted);
+        font-size: 10px;
+      }
+      .roadmap-stages strong {
+        color: var(--text);
+        font:
+          700 13px "Manrope",
+          sans-serif;
+      }
+      .roadmap-stages small {
+        color: var(--muted);
+        font-size: 11px;
+      }
+      .featured-project:hover .roadmap-stages > div:nth-child(odd) {
+        transform: translateX(3px);
+      }
+      .featured-project:hover .roadmap-stages > div:nth-child(even) {
+        transform: translateX(-3px);
+      }
+      .contact-layout {
+        gap: 20px;
+      }
+      .contact-panel,
+      .contact-form {
+        padding: 32px;
+      }
+      .contact-panel h2 {
+        font-size: 34px;
+      }
+      .field input,
+      .field textarea {
+        border-radius: 3px;
+        border-color: #cbd8cf;
+        background: #f8faf8;
+      }
+      .print-button {
+        border-radius: 3px;
+      }
+      footer {
+        gap: 18px;
+        border-top: 1px solid var(--line);
+      }
+      .hero > .eyebrow,
+      .hero h1,
+      .hero .intro,
+      .hero > .button,
+      .hero .portrait {
+        animation: rise-in 700ms both;
+      }
+      .hero h1 {
+        animation-delay: 90ms;
+      }
+      .hero .intro {
+        animation-delay: 170ms;
+      }
+      .hero > .button {
+        animation-delay: 240ms;
+      }
+      .hero .portrait {
+        animation:
+          rise-in 700ms 120ms both,
+          portrait-drift 6s 900ms ease-in-out infinite;
+      }
+      .hero .fact {
+        animation: rise-in 500ms both;
+      }
+      .hero .fact:nth-child(2) {
+        animation-delay: 320ms;
+      }
+      .hero .fact:nth-child(3) {
+        animation-delay: 390ms;
+      }
+      .hero .fact:nth-child(4) {
+        animation-delay: 460ms;
+      }
+      .hero .fact:nth-child(5) {
+        animation-delay: 530ms;
+      }
+      .project details[open] > p {
+        animation: detail-reveal 300ms ease both;
+      }
+      .project.filter-enter {
+        animation: filter-settle 420ms ease both;
+      }
+      .reveal {
+        opacity: 0;
+        transform: translateY(22px) scale(0.99);
+        transition:
+          opacity 480ms cubic-bezier(0.2, 0.7, 0.2, 1),
+          transform 480ms cubic-bezier(0.2, 0.7, 0.2, 1);
+      }
+      .reveal.is-visible {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+      .reveal:nth-child(2) {
+        transition-delay: 70ms;
+      }
+      .reveal:nth-child(3) {
+        transition-delay: 130ms;
+      }
+      .reveal:nth-child(4) {
+        transition-delay: 190ms;
+      }
+      @keyframes rise-in {
+        from {
+          opacity: 0;
+          transform: translateY(16px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      @keyframes portrait-drift {
+        0%,
+        100% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(-7px);
+        }
+      }
+      @keyframes frame-drift {
+        0%,
+        100% {
+          translate: 0 0;
+        }
+        50% {
+          translate: 0 8px;
+        }
+      }
+      @keyframes marquee-slide {
+        to {
+          transform: translateX(-50%);
+        }
+      }
+      @keyframes detail-reveal {
+        from {
+          opacity: 0;
+          transform: translateY(-5px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      @keyframes filter-settle {
+        from {
+          opacity: 0;
+          transform: translateY(10px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      @media (max-width: 900px) {
+        header.wrap {
+          padding-inline: 24px;
+        }
+        nav {
+          gap: 14px;
+        }
+        .hero {
+          column-gap: 5%;
+        }
+        .hero h1 {
+          font-size: 54px;
+        }
+        .section-head {
+          align-items: start;
+        }
+      }
+      @media (max-width: 700px) {
+        header.wrap {
+          display: grid;
+          grid-template-columns: auto 1fr;
+          grid-template-rows: 58px 40px;
+          height: 100px;
+          padding-inline: 18px;
+        }
+        header .brand {
+          grid-column: 1;
+          grid-row: 1;
+        }
+        header nav {
+          grid-column: 1 / -1;
+          grid-row: 2;
+          width: 100%;
+          gap: 22px;
+          overflow-x: auto;
+          white-space: nowrap;
+          scrollbar-width: none;
+        }
+        header nav::-webkit-scrollbar {
+          display: none;
+        }
+        header .language-control {
+          grid-column: 2;
+          grid-row: 1;
+          justify-self: end;
+        }
+        .wrap {
+          width: min(100% - 36px, 1160px);
+        }
+        .hero {
+          min-height: 0;
+          grid-template-columns: minmax(0, 1fr) minmax(112px, 0.62fr);
+          grid-template-areas: "eyebrow portrait" "title portrait" "intro intro" "action action" "facts facts";
+          column-gap: 22px;
+          padding: 64px 0 56px;
+        }
+        .hero::after {
+          top: 14%;
+          right: 2%;
+          width: 34%;
+          height: 38%;
+        }
+        .hero .portrait {
+          align-self: center;
+          width: 100%;
+          max-height: 220px;
+        }
+        .hero h1 {
+          margin: 18px 0;
+          font-size: 42px;
+        }
+        .hero h1 em {
+          font-size: 28px;
+          line-height: 1.2;
+        }
+        .hero .intro {
+          font-size: 16px;
+        }
+        .facts {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+          row-gap: 18px;
+          margin-top: 34px;
+        }
+        .fact {
+          padding: 0 10px;
+        }
+        .fact:nth-child(odd) {
+          padding-left: 0;
+          border-left: 0;
+        }
+        .fact:nth-child(even) {
+          border-left: 1px solid var(--line);
+        }
+        section {
+          padding: 68px 0;
+        }
+        .section-head {
+          margin-bottom: 28px;
+        }
+        h2 {
+          font-size: 34px;
+        }
+        .about-grid {
+          grid-template-columns: 1fr;
+          gap: 28px;
+        }
+        .career-item {
+          grid-template-columns: 1fr;
+          gap: 6px;
+          padding: 20px;
+        }
+        .metric-grid,
+        .leadership-grid,
+        .rhythm-grid,
+        .cert-grid {
+          grid-template-columns: 1fr 1fr;
+        }
+        .projects {
+          grid-template-columns: 1fr;
+        }
+        .rhythm-tabs {
+          display: flex;
+          overflow-x: auto;
+          scrollbar-width: none;
+        }
+        .rhythm-tabs::-webkit-scrollbar {
+          display: none;
+        }
+        .rhythm-tab {
+          flex: 0 0 auto;
+          min-width: 142px;
+        }
+        .rhythm-panel {
+          grid-template-columns: 100px minmax(0, 1fr);
+          gap: 18px;
+          min-height: 280px;
+          padding: 30px 24px 50px;
+        }
+        .rhythm-index {
+          font-size: 86px;
+        }
+        .rhythm-panel-content h3 {
+          font-size: 27px;
+        }
+        .rhythm-panel-content p {
+          font-size: 15px;
+        }
+        .rhythm-progress {
+          right: 24px;
+          bottom: 24px;
+          left: 24px;
+        }
+        .project-tools {
+          align-items: flex-start;
+          flex-direction: column;
+        }
+        .featured-project {
+          grid-template-columns: 1fr;
+          grid-template-areas: "top" "copy" "visual" "foot";
+          gap: 14px;
+        }
+        .roadmap-visual {
+          min-height: 0;
+        }
+        .project {
+          min-height: 260px;
+        }
+        .journey-step {
+          padding: 18px;
+        }
+        .contact-layout {
+          grid-template-columns: 1fr;
+        }
+        .contact-panel,
+        .contact-form {
+          padding: 22px;
+        }
+        footer {
+          flex-direction: column;
+        }
+      }
+      @media (max-width: 430px) {
+        .hero {
+          grid-template-columns: minmax(0, 1fr) 118px;
+          column-gap: 14px;
+        }
+        .hero::after {
+          top: 84px;
+          right: 12px;
+          width: 118px;
+          height: 148px;
+          transform: translate(8px, 8px);
+        }
+        .hero h1 {
+          font-size: 32px;
+        }
+        .hero h1 em {
+          font-size: 23px;
+          line-height: 1.2;
+        }
+        .hero .portrait {
+          max-height: 160px;
+        }
+        .metric-grid,
+        .leadership-grid,
+        .rhythm-grid,
+        .cert-grid {
+          grid-template-columns: 1fr;
+        }
+        .journey {
+          grid-template-columns: 1fr;
+        }
+        .journey-step,
+        .journey-step:nth-child(2) {
+          min-height: 0;
+          border-right: 0;
+          border-bottom: 1px solid var(--line);
+        }
+        .journey-step:last-child {
+          border-bottom: 0;
+        }
+      }
+      @media (max-width: 360px) {
+        .hero {
+          grid-template-columns: 1fr;
+          grid-template-areas: "eyebrow" "portrait" "title" "intro" "action" "facts";
+          row-gap: 8px;
+        }
+        .hero .portrait {
+          justify-self: start;
+          width: 148px;
+          max-height: none;
+        }
+        .hero h1 {
+          margin-top: 12px;
+        }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        *,
+        *::before,
+        *::after {
+          scroll-behavior: auto !important;
+          animation-duration: 0.01ms !important;
+          animation-iteration-count: 1 !important;
+          transition-duration: 0.01ms !important;
+        }
+        .reveal {
+          opacity: 1;
+          transform: none;
+          filter: none;
+        }
+        .marquee-track,
+        .hero .portrait {
+          animation: none !important;
+        }
+        .hero::after {
+          animation: none !important;
+        }
+      }
+      @media print {
+        header.wrap {
+          position: static;
+        }
+        section:nth-of-type(even) {
+          background: #fff;
+        }
+        .hero::after,
+        .reveal {
+          opacity: 1;
+          transform: none;
+        }
+      }
+      :root {
+        --bg: #f1f3ef;
+        --panel: #ffffff;
+        --text: #17211c;
+        --muted: #59655e;
+        --line: #cbd3cd;
+        --accent: #08715b;
+        --accent-warm: #a83f2b;
+        --signal-orange: #f1724d;
+        --signal-lime: #d8f36a;
+        --shadow: 0 18px 46px rgba(20, 35, 30, 0.12);
+      }
+      body {
+        background: var(--bg);
+      }
+      header.wrap {
+        background: rgba(241, 243, 239, 0.96);
+        border-color: rgba(23, 33, 28, 0.12);
+      }
+      .hero {
+        width: 100%;
+        max-width: none;
+        min-height: 710px;
+        margin: 0;
+        padding: 76px max(28px, calc((100vw - 1160px) / 2)) 82px;
+        background: #14231e;
+        color: #f2f4ed;
+      }
+      .hero .eyebrow {
+        color: var(--signal-lime);
+      }
+      .hero h1 {
+        color: #f7f8f3;
+      }
+      .hero h1 em {
+        color: var(--signal-lime);
+      }
+      .hero .intro {
+        color: #c3cec6;
+      }
+      .hero .portrait {
+        border: 1px solid rgba(255, 255, 255, 0.72);
+        box-shadow: 16px 16px 0 var(--signal-orange);
+      }
+      .hero::after {
+        right: max(2%, 20px);
+        border-color: rgba(216, 243, 106, 0.55);
+      }
+      .hero .facts {
+        border-color: #40534a;
+      }
+      .hero .fact + .fact {
+        border-color: #40534a;
+      }
+      .hero .fact strong {
+        color: #f5f6f0;
+      }
+      .hero .fact span {
+        color: #b7c4bc;
+      }
+      .button {
+        background: var(--signal-orange);
+        color: #1d241f;
+      }
+      .button:hover {
+        background: #ff9472;
+      }
+      .section-kicker {
+        color: var(--accent-warm);
+      }
+      .section-head h2 {
+        text-wrap: balance;
+      }
+      .project-filter.is-active {
+        border-color: var(--accent-warm);
+        background: var(--accent-warm);
+        color: #fff;
+      }
+      .featured-project {
+        border-color: #263c32;
+        background: #14231e;
+        color: #f4f6ef;
+        box-shadow: 0 22px 54px rgba(13, 28, 22, 0.18);
+      }
+      .featured-project .project-top,
+      .featured-project .project-foot {
+        color: #f0a28b;
+      }
+      .featured-project h3 {
+        color: #f7f8f3;
+      }
+      .featured-project p,
+      .featured-project details {
+        color: #c3cec6;
+      }
+      .featured-project summary {
+        color: var(--signal-lime);
+      }
+      .featured-project .roadmap-visual {
+        border-color: #40534a;
+        background: #101b17;
+      }
+      .featured-project .roadmap-stages > div {
+        background: #1c2b24;
+      }
+      .featured-project .roadmap-stages strong {
+        color: #f3f6ef;
+      }
+      .featured-project .roadmap-stages small,
+      .featured-project .roadmap-stages span {
+        color: #bac7bf;
+      }
+      .project:not(.featured-project) {
+        border-top: 3px solid transparent;
+      }
+      .project:not(.featured-project):hover {
+        border-top-color: var(--signal-orange);
+      }
+      .contact-panel {
+        border-color: #263c32;
+        background: #14231e;
+        color: #f4f6ef;
+      }
+      .contact-panel h2 {
+        color: #f7f8f3;
+      }
+      .contact-panel p {
+        color: #c3cec6;
+      }
+      .contact-panel .eyebrow {
+        color: var(--signal-lime);
+      }
+      .contact-panel .contact-links {
+        color: #f4f6ef;
+      }
+      .rhythm-tab[aria-selected="true"] {
+        border-bottom-color: var(--signal-orange);
+        background: #fff5f0;
+      }
+      .rhythm-tab-no {
+        color: var(--accent-warm);
+      }
+      .rhythm-progress span.is-complete {
+        background: var(--signal-orange);
+      }
+      .scroll-progress {
+        background: var(--signal-orange);
+      }
+      .motion-marquee {
+        border-color: #a83f2b;
+        background: #a83f2b;
+      }
+      .marquee-copy i {
+        border-color: var(--signal-lime);
+      }
+      .pointer-cursor {
+        position: fixed;
+        z-index: 200;
+        top: 0;
+        left: 0;
+        display: none;
+        width: 38px;
+        height: 38px;
+        place-items: center;
+        border: 1px solid var(--signal-orange);
+        border-radius: 50%;
+        background: rgba(241, 114, 77, 0.04);
+        color: #17211c;
+        opacity: 0;
+        pointer-events: none;
+        transform: translate3d(
+            var(--pointer-x, -80px),
+            var(--pointer-y, -80px),
+            0
+          )
+          translate(-50%, -50%);
+        transition:
+          width 200ms cubic-bezier(0.2, 0.7, 0.2, 1),
+          height 200ms cubic-bezier(0.2, 0.7, 0.2, 1),
+          background 200ms ease,
+          border-color 200ms ease,
+          opacity 160ms ease,
+          transform 0ms linear;
+        will-change: transform;
+      }
+      .pointer-cursor::before {
+        color: inherit;
+        content: attr(data-label);
+        font:
+          700 9px "Manrope",
+          sans-serif;
+        letter-spacing: 0.08em;
+      }
+      .pointer-cursor::after {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 5px;
+        height: 5px;
+        border-radius: 50%;
+        background: var(--signal-orange);
+        content: "";
+        transform: translate(-50%, -50%);
+        transition:
+          opacity 120ms ease,
+          transform 120ms ease;
+      }
+      .pointer-cursor.is-enabled {
+        display: grid;
+      }
+      .pointer-cursor.is-visible {
+        opacity: 1;
+      }
+      .pointer-cursor.is-engaged {
+        width: 72px;
+        height: 72px;
+        border-color: var(--signal-orange);
+        background: rgba(241, 114, 77, 0.16);
+        animation: cursor-halo 1.6s ease-out infinite;
+      }
+      .pointer-cursor.is-engaged::before {
+        position: absolute;
+        top: calc(100% + 3px);
+        left: 50%;
+        padding: 3px 6px;
+        border-radius: 2px;
+        background: var(--signal-orange);
+        color: #17211c;
+        font-size: 8px;
+        white-space: nowrap;
+        transform: translateX(-50%);
+      }
+      .pointer-cursor.is-engaged::after {
+        width: 7px;
+        height: 7px;
+        opacity: 1;
+        animation: cursor-orbit 1.25s linear infinite;
+      }
+      .pointer-cursor.is-pressed {
+        width: 30px;
+        height: 30px;
+        animation: cursor-click 360ms ease-out;
+      }
+      @keyframes cursor-orbit {
+        from { transform: translate(-50%, -50%) rotate(0deg) translateY(-31px) rotate(0deg); }
+        to { transform: translate(-50%, -50%) rotate(360deg) translateY(-31px) rotate(-360deg); }
+      }
+      @keyframes cursor-halo {
+        0% { box-shadow: 0 0 0 0 rgba(241, 114, 77, 0.27); }
+        75%, 100% { box-shadow: 0 0 0 13px rgba(241, 114, 77, 0); }
+      }
+      @keyframes cursor-click {
+        0% { box-shadow: 0 0 0 0 rgba(241, 114, 77, 0.55); }
+        100% { box-shadow: 0 0 0 18px rgba(241, 114, 77, 0); }
+      }
+      html.has-pointer-cursor,
+      html.has-pointer-cursor body,
+      html.has-pointer-cursor a,
+      html.has-pointer-cursor button,
+      html.has-pointer-cursor summary,
+      html.has-pointer-cursor select {
+        cursor: none !important;
+      }
+      html.has-pointer-cursor input,
+      html.has-pointer-cursor textarea {
+        cursor: text !important;
+      }
+      @media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+        .pointer-cursor.is-enabled {
+          display: grid;
+        }
+      }
+      @media (max-width: 700px) {
+        .hero {
+          min-height: 0;
+          padding: 64px 18px 56px;
+        }
+        .hero::after {
+          border-color: rgba(216, 243, 106, 0.55);
+        }
+        .projects {
+          grid-template-columns: minmax(0, 1fr);
+        }
+        .project,
+        .featured-project,
+        .roadmap-visual {
+          min-width: 0;
+        }
+        .contact-layout {
+          grid-template-columns: minmax(0, 1fr);
+        }
+        .contact-layout > * {
+          min-width: 0;
+        }
+        .contact-links a {
+          overflow-wrap: anywhere;
+        }
+      }
+      @media (max-width: 430px) {
+        .hero {
+          padding-inline: 18px;
+        }
+      }
+      @media (max-width: 360px) {
+        .hero {
+          padding-inline: 18px;
+        }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .pointer-cursor {
+          display: none !important;
+        }
+        .pointer-cursor.is-engaged,
+        .pointer-cursor.is-engaged::after,
+        .pointer-cursor.is-pressed { animation: none !important; }
+      }
+      @media print {
+        .hero {
+          background: #fff;
+          color: #111;
+        }
+        .hero h1,
+        .hero .fact strong {
+          color: #111;
+        }
+        .hero .intro,
+        .hero .fact span {
+          color: #444;
+        }
+      }
+      :root {
+        --tone-strategy: #b64b30;
+        --tint-strategy: #ffe3d8;
+        --tone-operations: #2d6797;
+        --tint-operations: #dfeefa;
+        --tone-people: #94435b;
+        --tint-people: #f3e1e9;
+        --tone-factory: #08715b;
+        --tint-factory: #dcefe3;
+      }
+      main > section:nth-of-type(4n + 1) {
+        background: #fae9e1;
+      }
+      main > section:nth-of-type(4n + 2) {
+        background: #e3eff7;
+      }
+      main > section:nth-of-type(4n + 3) {
+        background: #e5efe3;
+      }
+      main > section:nth-of-type(4n) {
+        background: #f1e4ea;
+      }
+      .project[data-category="strategy"] {
+        --category-accent: var(--tone-strategy);
+        --category-tint: var(--tint-strategy);
+      }
+      .project[data-category="operations"] {
+        --category-accent: var(--tone-operations);
+        --category-tint: var(--tint-operations);
+      }
+      .project[data-category="people"] {
+        --category-accent: var(--tone-people);
+        --category-tint: var(--tint-people);
+      }
+      .project[data-category="factory"] {
+        --category-accent: var(--tone-factory);
+        --category-tint: var(--tint-factory);
+      }
+      .project:not(.featured-project) {
+        border-top: 3px solid var(--category-accent);
+        background: var(--category-tint);
+      }
+      .project:not(.featured-project) .project-top {
+        color: var(--category-accent);
+      }
+      .project:not(.featured-project):hover {
+        border-color: var(--category-accent);
+      }
+      .project-filter.is-active[data-filter="all"] {
+        border-color: #14231e;
+        background: #14231e;
+      }
+      .project-filter.is-active[data-filter="strategy"] {
+        border-color: var(--tone-strategy);
+        background: var(--tone-strategy);
+      }
+      .project-filter.is-active[data-filter="operations"] {
+        border-color: var(--tone-operations);
+        background: var(--tone-operations);
+      }
+      .project-filter.is-active[data-filter="people"] {
+        border-color: var(--tone-people);
+        background: var(--tone-people);
+      }
+      .project-filter.is-active[data-filter="factory"] {
+        border-color: var(--tone-factory);
+        background: var(--tone-factory);
+      }
+      .skills .tag:nth-child(4n + 1) {
+        border-color: #e8c2b5;
+        background: var(--tint-strategy);
+        color: #783624;
+      }
+      .skills .tag:nth-child(4n + 2) {
+        border-color: #bfd1e0;
+        background: var(--tint-operations);
+        color: #244f73;
+      }
+      .skills .tag:nth-child(4n + 3) {
+        border-color: #ddc0cb;
+        background: var(--tint-people);
+        color: #71344a;
+      }
+      .skills .tag:nth-child(4n) {
+        border-color: #b9d5c5;
+        background: var(--tint-factory);
+        color: #145944;
+      }
+      .metric-grid .metric:nth-child(4n + 1),
+      .leadership-grid .lead-card:nth-child(4n + 1),
+      .cert-grid .cert:nth-child(4n + 1) {
+        border-top: 3px solid var(--tone-strategy);
+        background: var(--tint-strategy);
+      }
+      .metric-grid .metric:nth-child(4n + 2),
+      .leadership-grid .lead-card:nth-child(4n + 2),
+      .cert-grid .cert:nth-child(4n + 2) {
+        border-top: 3px solid var(--tone-operations);
+        background: var(--tint-operations);
+      }
+      .metric-grid .metric:nth-child(4n + 3),
+      .leadership-grid .lead-card:nth-child(4n + 3),
+      .cert-grid .cert:nth-child(4n + 3) {
+        border-top: 3px solid var(--tone-people);
+        background: var(--tint-people);
+      }
+      .metric-grid .metric:nth-child(4n),
+      .leadership-grid .lead-card:nth-child(4n),
+      .cert-grid .cert:nth-child(4n) {
+        border-top: 3px solid var(--tone-factory);
+        background: var(--tint-factory);
+      }
+      .metric-grid .metric:nth-child(4n + 1) strong {
+        color: var(--tone-strategy);
+      }
+      .metric-grid .metric:nth-child(4n + 2) strong {
+        color: var(--tone-operations);
+      }
+      .metric-grid .metric:nth-child(4n + 3) strong {
+        color: var(--tone-people);
+      }
+      .metric-grid .metric:nth-child(4n) strong {
+        color: var(--tone-factory);
+      }
+      .journey-step:nth-child(4n + 1) {
+        background: var(--tint-strategy);
+      }
+      .journey-step:nth-child(4n + 2) {
+        background: var(--tint-operations);
+      }
+      .journey-step:nth-child(4n + 3) {
+        background: var(--tint-people);
+      }
+      .journey-step:nth-child(4n) {
+        background: var(--tint-factory);
+      }
+      .journey-step:nth-child(4n + 1) strong {
+        color: var(--tone-strategy);
+      }
+      .journey-step:nth-child(4n + 2) strong {
+        color: var(--tone-operations);
+      }
+      .journey-step:nth-child(4n + 3) strong {
+        color: var(--tone-people);
+      }
+      .journey-step:nth-child(4n) strong {
+        color: var(--tone-factory);
+      }
+      :root {
+        --tint-strategy: #ffe3d8;
+        --tint-operations: #dfeefa;
+        --tint-people: #f3e1e9;
+        --tint-factory: #dcefe3;
+        --theme-button-bg: #fff;
+      }
+      :root[data-theme="dark"] {
+        color-scheme: dark;
+        --bg: #101713;
+        --panel: #18221c;
+        --text: #f1f5f0;
+        --muted: #bac6bd;
+        --line: #35443a;
+        --accent: #74d4ad;
+        --accent-warm: #ff9878;
+        --tone-strategy: #ff9878;
+        --tone-operations: #8ac6f0;
+        --tone-people: #e7a4bd;
+        --tone-factory: #74d4ad;
+        --tint-strategy: #34231f;
+        --tint-operations: #1d2d38;
+        --tint-people: #33232c;
+        --tint-factory: #1c3028;
+        --theme-button-bg: #25332b;
+        --shadow: 0 18px 46px rgba(0, 0, 0, 0.24);
+      }
+      :root[data-theme="dark"] body {
+        background: var(--bg);
+        color: var(--text);
+      }
+      :root[data-theme="dark"] header.wrap {
+        background: rgba(16, 23, 19, 0.96);
+        border-color: var(--line);
+      }
+      .hero::after {
+        top: 26%;
+        right: max(5%, 60px);
+        width: 220px;
+        height: 220px;
+      }
+      :root[data-theme="dark"] nav {
+        color: #cad4cc;
+      }
+      :root[data-theme="dark"] .language-select,
+      :root[data-theme="dark"] .theme-toggle {
+        border-color: var(--line);
+        background: var(--theme-button-bg);
+        color: var(--text);
+      }
+      :root[data-theme="dark"] main > section:nth-of-type(4n + 1) {
+        background: #1d201c;
+      }
+      :root[data-theme="dark"] main > section:nth-of-type(4n + 2) {
+        background: #172129;
+      }
+      :root[data-theme="dark"] main > section:nth-of-type(4n + 3) {
+        background: #19231d;
+      }
+      :root[data-theme="dark"] main > section:nth-of-type(4n) {
+        background: #241c22;
+      }
+      :root[data-theme="dark"] .metric,
+      :root[data-theme="dark"] .lead-card,
+      :root[data-theme="dark"] .rhythm,
+      :root[data-theme="dark"] .cert,
+      :root[data-theme="dark"] .career-item,
+      :root[data-theme="dark"] .project:not(.featured-project),
+      :root[data-theme="dark"] .contact-form,
+      :root[data-theme="dark"] .rhythm-explorer {
+        border-color: var(--line);
+        color: var(--text);
+      }
+      :root[data-theme="dark"] .project:not(.featured-project) {
+        background: var(--category-tint);
+      }
+      :root[data-theme="dark"] .metric-grid .metric,
+      :root[data-theme="dark"] .leadership-grid .lead-card,
+      :root[data-theme="dark"] .cert-grid .cert {
+        background: var(--panel);
+      }
+      :root[data-theme="dark"] .journey {
+        border-color: var(--line);
+        background: var(--panel);
+      }
+      :root[data-theme="dark"] .journey-step {
+        border-color: var(--line);
+      }
+      :root[data-theme="dark"] .journey-step:nth-child(n) {
+        background: transparent;
+      }
+      :root[data-theme="dark"] .skills .tag {
+        border-color: var(--line);
+        background: var(--panel);
+        color: var(--text);
+      }
+      :root[data-theme="dark"] .rhythm-tab {
+        border-color: var(--line);
+        color: var(--muted);
+      }
+      :root[data-theme="dark"] .rhythm-tab:hover,
+      :root[data-theme="dark"] .rhythm-tab[aria-selected="true"] {
+        background: #26352d;
+        color: var(--text);
+      }
+      :root[data-theme="dark"] .rhythm-panel {
+        background: var(--panel);
+      }
+      :root[data-theme="dark"] .rhythm-index {
+        color: rgba(116, 212, 173, 0.15);
+      }
+      :root[data-theme="dark"] .roadmap-visual,
+      :root[data-theme="dark"] .roadmap-stages > div {
+        border-color: var(--line);
+        background: #101713;
+      }
+      :root[data-theme="dark"] .roadmap-stages strong {
+        color: var(--text);
+      }
+      :root[data-theme="dark"] .roadmap-stages span,
+      :root[data-theme="dark"] .roadmap-stages small {
+        color: var(--muted);
+      }
+      :root[data-theme="dark"] .field input,
+      :root[data-theme="dark"] .field textarea {
+        border-color: var(--line);
+        background: #111a15;
+        color: var(--text);
+      }
+      :root[data-theme="dark"] .about-copy {
+        color: var(--muted);
+      }
+      :root[data-theme="dark"] .project-filter {
+        border-color: var(--line);
+        color: var(--text);
+      }
+      :root[data-theme="dark"] .project-filter.is-active {
+        color: #101713;
+      }
+      :root[data-theme="dark"] .project-filter.is-active[data-filter="all"] {
+        color: #fff;
+      }
+      .theme-toggle {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        min-height: 40px;
+        padding: 8px 12px;
+        border: 1px solid var(--line);
+        border-radius: 3px;
+        background: var(--theme-button-bg);
+        color: var(--text);
+        font:
+          600 12px "DM Sans",
+          sans-serif;
+        cursor: pointer;
+        transition:
+          background 180ms ease,
+          border-color 180ms ease,
+          transform 180ms ease;
+      }
+      .theme-toggle:hover {
+        transform: translateY(-1px);
+        border-color: var(--accent);
+      }
+      .theme-icon {
+        font-size: 15px;
+        line-height: 1;
+      }
+      body,
+      header.wrap,
+      main > section,
+      .project:not(.featured-project),
+      .metric,
+      .lead-card,
+      .cert,
+      .contact-form {
+        transition:
+          background-color 220ms ease,
+          color 220ms ease,
+          border-color 220ms ease;
+      }
+      .project-thumbnail {
+        position: relative;
+        display: flex;
+        min-width: 0;
+        height: 132px;
+        flex-direction: column;
+        justify-content: space-between;
+        overflow: hidden;
+        margin: 4px 0 18px;
+        padding: 13px 15px;
+        border: 1px solid rgba(23, 33, 28, 0.1);
+        color: #17211c;
+      }
+      .featured-project .project-thumbnail {
+        width: 100%;
+        height: auto;
+        min-height: 230px;
+        margin: 0;
+      }
+      .resume-snapshot {
+        padding: 0;
+        border-block: 1px solid var(--line);
+        background: var(--panel);
+      }
+      .resume-track {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+      }
+      .resume-item {
+        display: flex;
+        align-items: flex-start;
+        gap: 12px;
+        min-width: 0;
+        padding: 20px 16px;
+        border-right: 1px solid var(--line);
+      }
+      .resume-item:first-child {
+        padding-left: 0;
+      }
+      .resume-item:last-child {
+        border-right: 0;
+      }
+      .resume-year {
+        flex: 0 0 auto;
+        color: var(--accent-warm);
+        font:
+          800 12px "Manrope",
+          sans-serif;
+      }
+      .resume-item strong,
+      .resume-item small {
+        display: block;
+      }
+      .resume-item strong {
+        color: var(--text);
+        font:
+          700 12px/1.4 "Manrope",
+          sans-serif;
+      }
+      .resume-item small {
+        margin-top: 3px;
+        color: var(--muted);
+        font-size: 11px;
+        line-height: 1.4;
+      }
+      .thumb-operations {
+        background: linear-gradient(135deg, #dfeefa, #c8e0f1);
+      }
+      .thumb-people {
+        background: linear-gradient(135deg, #f3e1e9, #e8ccda);
+      }
+      .thumb-factory {
+        background: linear-gradient(135deg, #dcefe3, #c5e2d1);
+      }
+      .thumb-toolbar {
+        display: flex;
+        justify-content: space-between;
+        gap: 8px;
+        color: rgba(23, 33, 28, 0.68);
+        font:
+          700 9px "Manrope",
+          sans-serif;
+        letter-spacing: 0.09em;
+      }
+      .thumb-status {
+        color: #17211c;
+      }
+      .thumb-flow {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 9px;
+      }
+      .thumb-flow span {
+        display: grid;
+        min-width: 68px;
+        height: 34px;
+        place-items: center;
+        border: 1px solid rgba(45, 103, 151, 0.45);
+        background: rgba(255, 255, 255, 0.76);
+        color: #244f73;
+        font:
+          700 9px "Manrope",
+          sans-serif;
+      }
+      .thumb-flow i {
+        width: 17px;
+        height: 1px;
+        background: #2d6797;
+      }
+      .thumb-flow-caption {
+        display: flex;
+        justify-content: space-between;
+        gap: 8px;
+        color: rgba(23, 33, 28, 0.64);
+        font-size: 8px;
+      }
+      .thumb-learning {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        align-items: end;
+        gap: 8px;
+      }
+      .thumb-learning div {
+        display: grid;
+        gap: 6px;
+        min-height: 52px;
+        align-content: end;
+        padding: 7px;
+        border-bottom: 2px solid #94435b;
+        background: rgba(255, 255, 255, 0.65);
+      }
+      .thumb-learning div:nth-child(2) {
+        min-height: 62px;
+      }
+      .thumb-learning div:nth-child(3) {
+        min-height: 72px;
+      }
+      .thumb-learning div:nth-child(4) {
+        min-height: 82px;
+      }
+      .thumb-learning b {
+        color: #94435b;
+        font:
+          700 9px "Manrope",
+          sans-serif;
+      }
+      .thumb-learning span {
+        color: #50313d;
+        font-size: 9px;
+      }
+      .thumb-factory-floor {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 5px;
+      }
+      .thumb-factory-node {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 3px;
+        width: 75px;
+        padding: 7px;
+        border: 1px solid rgba(8, 113, 91, 0.45);
+        background: rgba(255, 255, 255, 0.72);
+      }
+      .thumb-factory-node b {
+        grid-column: 1 / -1;
+        color: #145944;
+        font:
+          700 8px "Manrope",
+          sans-serif;
+        text-align: center;
+      }
+      .thumb-factory-node i {
+        height: 18px;
+        background: #b5d9c5;
+      }
+      .thumb-factory-link {
+        width: 15px;
+        border-top: 1px dashed #08715b;
+      }
+      :root[data-theme="dark"] .project-thumbnail {
+        border-color: rgba(255, 255, 255, 0.12);
+      }
+      :root[data-theme="dark"] .thumb-operations {
+        background: linear-gradient(135deg, #243745, #1d2d38);
+      }
+      :root[data-theme="dark"] .thumb-people {
+        background: linear-gradient(135deg, #3a2932, #33232c);
+      }
+      :root[data-theme="dark"] .thumb-factory {
+        background: linear-gradient(135deg, #243b30, #1c3028);
+      }
+      :root[data-theme="dark"] .thumb-toolbar,
+      :root[data-theme="dark"] .thumb-status {
+        color: #e5eee8;
+      }
+      :root[data-theme="dark"] .thumb-flow span,
+      :root[data-theme="dark"] .thumb-learning div,
+      :root[data-theme="dark"] .thumb-factory-node {
+        background: rgba(16, 23, 19, 0.82);
+      }
+      :root[data-theme="dark"] .thumb-flow span {
+        color: #b9ddf5;
+      }
+      :root[data-theme="dark"] .thumb-flow-caption,
+      :root[data-theme="dark"] .thumb-learning span {
+        color: #d6dfd8;
+      }
+      :root[data-theme="dark"] .thumb-learning b {
+        color: #f0b8ca;
+      }
+      :root[data-theme="dark"] .thumb-factory-node b {
+        color: #a4e2c1;
+      }
+      :root[data-theme="dark"] .thumb-factory-node i {
+        background: #315947;
+      }
+      :root[data-theme="dark"] .resume-snapshot {
+        border-color: var(--line);
+        background: #18221c;
+      }
+      @media (max-width: 700px) {
+        header.wrap {
+          grid-template-columns: auto 1fr auto;
+        }
+        header .brand {
+          grid-column: 1;
+        }
+        header .theme-toggle {
+          grid-column: 2;
+          grid-row: 1;
+          justify-self: end;
+          margin-right: 8px;
+        }
+        header .language-control {
+          grid-column: 3;
+          grid-row: 1;
+        }
+        .hero::after {
+          top: 84px;
+          right: 14px;
+          width: 132px;
+          height: 132px;
+        }
+        .hero .portrait {
+          width: min(100%, 200px);
+          max-height: none;
+          aspect-ratio: 1 / 1;
+        }
+        .resume-track {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+        .resume-item {
+          padding: 15px 10px;
+          border-bottom: 1px solid var(--line);
+        }
+        .resume-item:nth-child(odd) {
+          padding-left: 0;
+          border-right: 1px solid var(--line);
+        }
+        .resume-item:nth-child(even) {
+          border-right: 0;
+        }
+        .resume-item:nth-child(n + 3) {
+          border-bottom: 0;
+        }
+        .resume-item > span:last-child {
+          min-width: 0;
+        }
+        .resume-item strong {
+          overflow-wrap: anywhere;
+        }
+      }
+      @media (max-width: 360px) {
+        header.wrap {
+          column-gap: 6px;
+        }
+        header .theme-toggle {
+          width: 40px;
+          min-height: 40px;
+          padding: 8px;
+          gap: 0;
+        }
+        header #theme-label {
+          display: none;
+        }
+        .hero::after {
+          top: 84px;
+          right: auto;
+          left: 10px;
+          width: 220px;
+          height: 220px;
+        }
+        .hero .portrait {
+          justify-self: start;
+          width: min(100%, 200px);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="scroll-progress" id="scroll-progress" aria-hidden="true"></div>
+    <div class="pointer-cursor" id="pointer-cursor" aria-hidden="true"></div>
+    <header class="wrap">
+      <a class="brand" href="#home" aria-label="Rathana Lan home"
+        >RL<span>.</span></a
+      >
+      <nav aria-label="Main navigation">
+        <a href="#about">Profile</a>
+        <a href="#experience">Journey</a>
+        <a href="#leadership">Leadership</a>
+        <a href="#projects">Projects</a>
+        <a href="#contact">Contact</a>
+      </nav>
+      <button
+        class="theme-toggle"
+        id="theme-toggle"
+        type="button"
+        aria-label="Switch to dark mode"
+        aria-pressed="false"
+      >
+        <span class="theme-icon" id="theme-icon" aria-hidden="true">◐</span>
+        <span id="theme-label">Dark mode</span>
+      </button>
+      <label class="language-control" for="language-select"
+        >Language
+        <select
+          class="language-select"
+          id="language-select"
+          aria-label="Choose page language"
+        >
+          <option value="en">English</option>
+          <option value="km">ខ្មែរ</option>
+          <option value="ja">日本語</option>
+          <option value="zh-CN">中文</option>
+        </select>
+      </label>
+    </header>
+
+    <main>
+      <div class="wrap hero" id="home">
+        <div class="eyebrow">DNKH Digital Transformation Portfolio</div>
+        <img
+          class="portrait"
+          src="https://media.licdn.com/dms/image/v2/D5603AQEAm_ysSno8Aw/profile-displayphoto-shrink_200_200/B56ZWLT41pGUAY-/0/1741799001942?e=2147483647&amp;v=beta&amp;t=NVLX9GDNoIqE-DpmigCotfv-BPeMk5fxECjnmi8FYmk"
+          alt="Professional profile photo of Rathana Lan"
+          referrerpolicy="no-referrer"
+          loading="eager"
+        />
+        <h1>Rathana Lan<br /><em>Digital Transformation Supervisor</em></h1>
+        <p class="intro">
+          Digital leadership for manufacturing value creation. I connect DNKH
+          manufacturing needs with practical technology through DX strategy,
+          governance, Power Platform leadership, team coaching, and Smart
+          Factory readiness.
+        </p>
+        <a class="button" href="#experience"
+          >Explore my DX journey <span aria-hidden="true">&nbsp;↘</span></a
+        >
+        <div class="facts" aria-label="Professional profile">
+          <div class="fact">
+            <strong>Industry</strong
+            ><span>Manufacturing digital transformation</span>
+          </div>
+          <div class="fact"><strong>Location</strong><span>Cambodia</span></div>
+          <div class="fact">
+            <strong>Leadership scope</strong><span>DNKH TIE - DX</span>
+          </div>
+          <div class="fact">
+            <strong>Focus</strong
+            ><span>Strategy, governance &amp; capability</span>
+          </div>
+        </div>
+      </div>
+
+      <section class="resume-snapshot" aria-label="Career highlights">
+        <div class="wrap resume-track">
+          <div class="resume-item">
+            <span class="resume-year">2020</span
+            ><span
+              ><strong>Production leadership</strong
+              ><small>DENSO Cambodia</small></span
+            >
+          </div>
+          <div class="resume-item">
+            <span class="resume-year">2021</span
+            ><span
+              ><strong>Quality systems</strong
+              ><small>ISO 9001 · IATF 16949</small></span
+            >
+          </div>
+          <div class="resume-item">
+            <span class="resume-year">2022–23</span
+            ><span
+              ><strong>Manufacturing improvement</strong
+              ><small>Standard work · kaizen</small></span
+            >
+          </div>
+          <div class="resume-item">
+            <span class="resume-year">2024–Now</span
+            ><span
+              ><strong>Digital transformation</strong
+              ><small>DNKH · TIE - DX</small></span
+            >
+          </div>
+        </div>
+      </section>
+
+      <div class="motion-marquee" aria-hidden="true">
+        <div class="marquee-track">
+          <div class="marquee-copy">
+            <span>Manufacturing</span><i></i><span>Digital transformation</span
+            ><i></i><span>People &amp; capability</span><i></i
+            ><span>Governance</span><i></i><span>Smart Factory</span><i></i>
+          </div>
+          <div class="marquee-copy">
+            <span>Manufacturing</span><i></i><span>Digital transformation</span
+            ><i></i><span>People &amp; capability</span><i></i
+            ><span>Governance</span><i></i><span>Smart Factory</span><i></i>
+          </div>
+        </div>
+      </div>
+
+      <section id="about">
+        <div class="wrap">
+          <div class="section-head">
+            <div>
+              <span class="section-kicker">Executive profile</span>
+              <h2>Digital leadership for manufacturing value creation.</h2>
+            </div>
+          </div>
+          <div class="about-grid">
+            <div class="about-copy">
+              <p>
+                I translate DNKH manufacturing challenges into practical digital
+                initiatives. I lead roadmap execution, governance improvement,
+                management visibility, Power Platform adoption, and structured
+                collaboration between DX members, users, management, and
+                manufacturing stakeholders.
+              </p>
+              <p>
+                My leadership approach combines manufacturing understanding,
+                fact-based decisions, reusable architecture, responsible
+                governance, and continuous development of local DX capability.
+              </p>
+              <blockquote>
+                “Digital transformation creates value when manufacturing needs,
+                clear governance, capable people, and scalable technology work
+                together.”
+              </blockquote>
+            </div>
+            <div>
+              <h3>Core competencies</h3>
+              <div class="skills" aria-label="Core competencies">
+                <span class="tag">DX strategy &amp; roadmap</span
+                ><span class="tag">Power Platform leadership</span
+                ><span class="tag">Application &amp; data governance</span
+                ><span class="tag">Manufacturing digitalization</span
+                ><span class="tag">Automation improvement</span
+                ><span class="tag">Pain point &amp; Kadai analysis</span
+                ><span class="tag">Digital solution design</span
+                ><span class="tag">Management KPI visibility</span
+                ><span class="tag">Process digitalization</span
+                ><span class="tag">DX team leadership</span
+                ><span class="tag">Citizen developer development</span
+                ><span class="tag">DX coaching &amp; mentoring</span
+                ><span class="tag">Smart Factory readiness</span
+                ><span class="tag">Cross-functional collaboration</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section aria-labelledby="capability-title">
+        <div class="wrap">
+          <div class="section-head">
+            <div>
+              <span class="section-kicker">Core competencies</span>
+              <h2 id="capability-title">
+                A balanced operating system for performance.
+              </h2>
+            </div>
+            <p class="section-note">
+              Capability across daily management, improvement, risk control,
+              team development, and cross-functional execution.
+            </p>
+          </div>
+          <div class="metric-grid">
+            <article class="metric">
+              <strong>90%</strong>
+              <h3>DX Strategy &amp; Execution</h3>
+              <p>Roadmap alignment and value realization.</p>
+            </article>
+            <article class="metric">
+              <strong>88%</strong>
+              <h3>Quality &amp; Digital Solution Design</h3>
+              <p>Fact-based, governed solution planning.</p>
+            </article>
+            <article class="metric">
+              <strong>92%</strong>
+              <h3>Power Platform &amp; Automation</h3>
+              <p>Apps, workflows, dashboards, and standards.</p>
+            </article>
+            <article class="metric">
+              <strong>86%</strong>
+              <h3>DX Talent Development</h3>
+              <p>Coaching, learning paths, and local capability.</p>
+            </article>
+            <article class="metric">
+              <strong>89%</strong>
+              <h3>Automation Improvement</h3>
+              <p>Practical improvement connected to operations.</p>
+            </article>
+          </div>
+          <p class="disclaimer">
+            Percentages represent presentation emphasis for this portfolio, not
+            formal assessment scores.
+          </p>
+        </div>
+      </section>
+
+      <section id="experience">
+        <div class="wrap">
+          <div class="section-head">
+            <div>
+              <span class="section-kicker">Professional experience</span>
+              <h2>Driving DNKH digital transformation.</h2>
+            </div>
+            <p class="section-note">
+              From shopfloor leadership to strategy, governance, and Smart
+              Factory readiness.
+            </p>
+          </div>
+          <div class="timeline">
+            <article class="career-item">
+              <div class="career-year">27 Jul 2020</div>
+              <div>
+                <h3>Production Team Leader</h3>
+                <p>DENSO Cambodia · Production</p>
+                <ul>
+                  <li>Joined DENSO Cambodia as a Production Team Leader.</li>
+                  <li>
+                    Built practical experience in daily production control,
+                    associate coordination, quality, safety, productivity, 5S,
+                    and continuous improvement.
+                  </li>
+                  <li>
+                    Developed the shopfloor leadership and manufacturing
+                    understanding that became the foundation for digital
+                    transformation work.
+                  </li>
+                </ul>
+              </div>
+            </article>
+            <article class="career-item">
+              <div class="career-year">2021</div>
+              <div>
+                <h3>Quality System &amp; Manufacturing Foundation</h3>
+                <p>DNKH Manufacturing</p>
+                <ul>
+                  <li>
+                    Participated in quality-system activities covering ISO 9001,
+                    IATF 16949, audit preparation, risk and opportunity, KPI
+                    planning, and continuous-improvement documentation.
+                  </li>
+                  <li>
+                    Expanded manufacturing knowledge through structured problem
+                    solving, standardization, and fact-based improvement.
+                  </li>
+                </ul>
+              </div>
+            </article>
+            <article class="career-item">
+              <div class="career-year">2022–2023</div>
+              <div>
+                <h3>Manufacturing Improvement Development</h3>
+                <p>DNKH Production &amp; Improvement</p>
+                <ul>
+                  <li>
+                    Continued developing process understanding, root-cause
+                    thinking, operational efficiency, standardized work, and
+                    improvement capability.
+                  </li>
+                  <li>
+                    Strengthened the connection between shopfloor problems,
+                    data, people development, and practical kaizen.
+                  </li>
+                </ul>
+              </div>
+            </article>
+            <article class="career-item">
+              <div class="career-year">Since 2024</div>
+              <div>
+                <h3>DX Supervisor</h3>
+                <p>DNKH · TIE - DX</p>
+                <ul>
+                  <li>
+                    Started the DX Supervisor role and led early digital
+                    transformation direction.
+                  </li>
+                  <li>
+                    Developed Power Apps capability, production-data analysis,
+                    AI visual-inspection concepts, DX roadmap activities, and
+                    Smart Factory foundations.
+                  </li>
+                  <li>
+                    Connected production leadership experience with digital
+                    solution planning and manufacturing improvement.
+                  </li>
+                </ul>
+              </div>
+            </article>
+            <article class="career-item">
+              <div class="career-year">2025</div>
+              <div>
+                <h3>DX Solution Development &amp; Deployment</h3>
+                <p>DNKH Digital Transformation</p>
+                <ul>
+                  <li>
+                    Drove application and workflow activities including Daily
+                    Job Management, purchasing-related applications, individual
+                    work planning, user guidance, and deployment support.
+                  </li>
+                  <li>
+                    Continued roadmap execution, stakeholder coordination,
+                    process digitalization, and practical adoption of Power
+                    Platform solutions.
+                  </li>
+                </ul>
+              </div>
+            </article>
+            <article class="career-item">
+              <div class="career-year">2026–Now</div>
+              <div>
+                <h3>DX Strategy, Governance &amp; Smart Factory Leadership</h3>
+                <p>DNKH · TIE - DX</p>
+                <ul>
+                  <li>
+                    Lead DNKH DX strategy and roadmap activities linked with
+                    Manufacturing Design, productivity improvement, and Smart
+                    Factory direction.
+                  </li>
+                  <li>
+                    Drive governance, Power Platform standards, KPI visibility,
+                    management review, member coaching, regional benchmarking,
+                    and cross-functional digital projects.
+                  </li>
+                  <li>
+                    Support AI, IoT, AGV/AMR, productivity applications, quality
+                    visibility, and scalable internal capability.
+                  </li>
+                </ul>
+              </div>
+            </article>
+            <article class="career-item">
+              <div class="career-year">FY30 Vision</div>
+              <div>
+                <h3>Scalable Digital Manufacturing</h3>
+                <p>DNKH Future Direction</p>
+                <ul>
+                  <li>
+                    Develop reusable solutions, stronger internal capability,
+                    enterprise data utilization, responsible AI and IoT
+                    adoption, and mature governance.
+                  </li>
+                  <li>
+                    Prepare sustainable Smart Factory systems connecting people,
+                    process, data, technology, and measurable manufacturing
+                    value.
+                  </li>
+                </ul>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section aria-labelledby="scope-title">
+        <div class="wrap">
+          <div class="section-head">
+            <div>
+              <span class="section-kicker">Leadership scope</span>
+              <h2 id="scope-title">The work behind the transformation.</h2>
+            </div>
+          </div>
+          <div class="leadership-grid">
+            <article class="lead-card">
+              <h3>DX Strategy &amp; Roadmap</h3>
+              <p>
+                Connect DNKH digital activities with Manufacturing Design,
+                productivity improvement, management priorities, and long-term
+                Smart Factory direction.
+              </p>
+            </article>
+            <article class="lead-card">
+              <h3>Governance &amp; Standards</h3>
+              <p>
+                Strengthen application ownership, version history, access
+                control, data quality, maintenance flow, and reusable solution
+                standards.
+              </p>
+            </article>
+            <article class="lead-card">
+              <h3>Power Platform Leadership</h3>
+              <p>
+                Guide business solutions using Power Apps, Power Automate, Power
+                BI, SharePoint, and governed application architecture.
+              </p>
+            </article>
+            <article class="lead-card">
+              <h3>Management Visibility</h3>
+              <p>
+                Improve roadmap control, KPI monitoring, dashboard
+                communication, action ownership, and structured countermeasure
+                follow-up.
+              </p>
+            </article>
+            <article class="lead-card">
+              <h3>Manufacturing Digitalization</h3>
+              <p>
+                Translate section pain points and Kadai into prioritized,
+                practical, maintainable, and scalable digital use cases.
+              </p>
+            </article>
+            <article class="lead-card">
+              <h3>DX Capability Building</h3>
+              <p>
+                Develop employees, section DX champions, citizen developers, and
+                specialists through role-based learning connected to real work.
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section aria-labelledby="rhythm-title">
+        <div class="wrap">
+          <div class="section-head">
+            <div>
+              <span class="section-kicker">Leadership operating rhythm</span>
+              <h2 id="rhythm-title">
+                From problem discovery to sustainable scale.
+              </h2>
+            </div>
+            <p class="section-note">
+              A lifecycle that keeps people, process, data, technology,
+              governance, and business value connected.
+            </p>
+          </div>
+          <div class="rhythm-explorer">
+            <div
+              class="rhythm-tabs"
+              role="tablist"
+              aria-label="DX lifecycle stages"
+              aria-orientation="horizontal"
+            >
+              <button
+                class="rhythm-tab"
+                id="rhythm-tab-discover"
+                type="button"
+                role="tab"
+                aria-selected="true"
+                aria-controls="rhythm-panel"
+                tabindex="0"
+                data-step="01"
+                data-title="Understand the real need"
+                data-copy="Consult users, clarify pain points, understand current workflows, and define the business Kadai."
+              >
+                <span class="rhythm-tab-no">01</span><span>Discover</span
+                ><span class="rhythm-tab-arrow" aria-hidden="true">↗</span>
+              </button>
+              <button
+                class="rhythm-tab"
+                id="rhythm-tab-prioritize"
+                type="button"
+                role="tab"
+                aria-selected="false"
+                aria-controls="rhythm-panel"
+                tabindex="-1"
+                data-step="02"
+                data-title="Choose where to focus"
+                data-copy="Assess value, urgency, feasibility, ownership, future expansion, and alignment with the DX roadmap."
+              >
+                <span class="rhythm-tab-no">02</span><span>Prioritize</span
+                ><span class="rhythm-tab-arrow" aria-hidden="true">↗</span>
+              </button>
+              <button
+                class="rhythm-tab"
+                id="rhythm-tab-design"
+                type="button"
+                role="tab"
+                aria-selected="false"
+                aria-controls="rhythm-panel"
+                tabindex="-1"
+                data-step="03"
+                data-title="Build for reuse"
+                data-copy="Select the platform, data model, user experience, controls, and reusable architecture."
+              >
+                <span class="rhythm-tab-no">03</span><span>Design</span
+                ><span class="rhythm-tab-arrow" aria-hidden="true">↗</span>
+              </button>
+              <button
+                class="rhythm-tab"
+                id="rhythm-tab-deliver"
+                type="button"
+                role="tab"
+                aria-selected="false"
+                aria-controls="rhythm-panel"
+                tabindex="-1"
+                data-step="04"
+                data-title="Release with control"
+                data-copy="Coordinate development, validation, feedback, documentation, access, and a controlled release."
+              >
+                <span class="rhythm-tab-no">04</span><span>Deliver</span
+                ><span class="rhythm-tab-arrow" aria-hidden="true">↗</span>
+              </button>
+              <button
+                class="rhythm-tab"
+                id="rhythm-tab-adopt"
+                type="button"
+                role="tab"
+                aria-selected="false"
+                aria-controls="rhythm-panel"
+                tabindex="-1"
+                data-step="05"
+                data-title="Make it useful in practice"
+                data-copy="Support training, communication, usage visibility, feedback, issue resolution, and practical improvement."
+              >
+                <span class="rhythm-tab-no">05</span><span>Adopt</span
+                ><span class="rhythm-tab-arrow" aria-hidden="true">↗</span>
+              </button>
+              <button
+                class="rhythm-tab"
+                id="rhythm-tab-scale"
+                type="button"
+                role="tab"
+                aria-selected="false"
+                aria-controls="rhythm-panel"
+                tabindex="-1"
+                data-step="06"
+                data-title="Expand responsibly"
+                data-copy="Standardize successful patterns, strengthen governance, reuse components, and expand responsibly across DNKH."
+              >
+                <span class="rhythm-tab-no">06</span><span>Scale</span
+                ><span class="rhythm-tab-arrow" aria-hidden="true">↗</span>
+              </button>
+            </div>
+            <div
+              class="rhythm-panel"
+              id="rhythm-panel"
+              role="tabpanel"
+              aria-labelledby="rhythm-tab-discover"
+              tabindex="0"
+            >
+              <span class="rhythm-index" id="rhythm-index" aria-hidden="true"
+                >01</span
+              >
+              <div
+                class="rhythm-panel-content"
+                id="rhythm-panel-content"
+                aria-live="polite"
+              >
+                <span class="section-kicker" id="rhythm-kicker"
+                  >STAGE 01 / DISCOVER</span
+                >
+                <h3 id="rhythm-panel-title">Understand the real need</h3>
+                <p id="rhythm-panel-copy">
+                  Consult users, clarify pain points, understand current
+                  workflows, and define the business Kadai.
+                </p>
+              </div>
+              <div
+                class="rhythm-progress"
+                id="rhythm-progress"
+                aria-hidden="true"
+              >
+                <span class="is-complete"></span><span></span><span></span
+                ><span></span><span></span><span></span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section aria-labelledby="journey-title">
+        <div class="wrap">
+          <div class="section-head">
+            <div>
+              <span class="section-kicker">Transformation journey</span>
+              <h2 id="journey-title">
+                From individual solutions to a sustainable digital portfolio.
+              </h2>
+            </div>
+          </div>
+          <div class="journey">
+            <div class="journey-step">
+              <strong>Foundation</strong
+              ><span>Mindset · standards · use cases</span>
+            </div>
+            <div class="journey-step">
+              <strong>FY26 Strategy</strong
+              ><span>Roadmap · governance · visibility</span>
+            </div>
+            <div class="journey-step">
+              <strong>Scale</strong><span>Reusable solutions · champions</span>
+            </div>
+            <div class="journey-step">
+              <strong>Smart Factory</strong
+              ><span>Data · automation · AI · IoT</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="leadership">
+        <div class="wrap">
+          <div class="section-head">
+            <div>
+              <span class="section-kicker">Leadership &amp; management</span>
+              <h2>How I create the conditions for teams to succeed.</h2>
+            </div>
+            <p class="section-note">
+              A management approach grounded in clarity, accountability,
+              respect, and continuous learning.
+            </p>
+          </div>
+          <div class="leadership-grid">
+            <article class="lead-card">
+              <h3>Team Direction</h3>
+              <p>
+                Translate plant priorities into clear shift targets, ownership,
+                communication, and daily routines.
+              </p>
+            </article>
+            <article class="lead-card">
+              <h3>Performance Control</h3>
+              <p>
+                Use KPI visibility and genba facts to detect gaps early and
+                drive disciplined countermeasures.
+              </p>
+            </article>
+            <article class="lead-card">
+              <h3>Safety &amp; Prevention</h3>
+              <p>
+                Promote hazard awareness, compliance, stop-work confidence, and
+                prevention-focused behavior.
+              </p>
+            </article>
+            <article class="lead-card">
+              <h3>Problem Solving</h3>
+              <p>
+                Lead containment, root cause analysis, corrective action,
+                verification, and horizontal deployment.
+              </p>
+            </article>
+            <article class="lead-card">
+              <h3>DX Talent Development</h3>
+              <p>
+                Build capability with coaching, feedback, skills assessment,
+                mentoring, and structured learning.
+              </p>
+            </article>
+            <article class="lead-card">
+              <h3>Cross-functional Alignment</h3>
+              <p>
+                Connect operations with technical and support teams to move
+                decisions into effective execution.
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section aria-labelledby="impact-title">
+        <div class="wrap">
+          <div class="section-head">
+            <div>
+              <span class="section-kicker">Achievement dashboard</span>
+              <h2 id="impact-title">Impact made visible.</h2>
+            </div>
+            <p class="section-note">
+              Professional contribution areas based on current DNKH DX strategy
+              and portfolio work. No unverified numerical claims are presented.
+            </p>
+          </div>
+          <div class="metric-grid">
+            <article class="metric">
+              <h3>DX Roadmap Leadership</h3>
+              <p>
+                Aligning FY26 execution with Manufacturing Design and long-term
+                readiness.
+              </p>
+            </article>
+            <article class="metric">
+              <h3>Management Visibility</h3>
+              <p>
+                Roadmap-based activity control, KPI monitoring, and structured
+                follow-up.
+              </p>
+            </article>
+            <article class="metric">
+              <h3>DX Governance</h3>
+              <p>
+                Version history, access control, data quality, and maintenance
+                standards.
+              </p>
+            </article>
+            <article class="metric">
+              <h3>DX Talent Development</h3>
+              <p>
+                Role-based learning for employees, champions, and specialists.
+              </p>
+            </article>
+            <article class="metric">
+              <h3>Power Platform Enablement</h3>
+              <p>
+                Apps, automation, dashboards, and reusable solution
+                architecture.
+              </p>
+            </article>
+            <article class="metric">
+              <h3>Manufacturing Digitalization</h3>
+              <p>
+                Turning section pain points into governed digital use cases.
+              </p>
+            </article>
+            <article class="metric">
+              <h3>Coaching &amp; Knowledge Transfer</h3>
+              <p>
+                Supporting members and citizen developers through practical
+                learning.
+              </p>
+            </article>
+            <article class="metric">
+              <h3>Smart Factory Readiness</h3>
+              <p>
+                Building foundations for data, AI, IoT, AGV/AMR, and scalable
+                systems.
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="projects">
+        <div class="wrap">
+          <div class="section-head">
+            <div>
+              <span class="section-kicker">Selected work</span>
+              <h2>Digital change, made practical.</h2>
+            </div>
+            <p class="section-note">
+              Four visual case studies, plus two additional initiatives. Open a
+              project to see its contribution, value, and next direction.
+            </p>
+          </div>
+          <div class="project-tools">
+            <div
+              class="project-filters"
+              role="group"
+              aria-label="Filter projects"
+            >
+              <button
+                class="project-filter is-active"
+                type="button"
+                data-filter="all"
+                aria-pressed="true"
+              >
+                All work
+              </button>
+              <button
+                class="project-filter"
+                type="button"
+                data-filter="strategy"
+                aria-pressed="false"
+              >
+                Strategy
+              </button>
+              <button
+                class="project-filter"
+                type="button"
+                data-filter="operations"
+                aria-pressed="false"
+              >
+                Operations
+              </button>
+              <button
+                class="project-filter"
+                type="button"
+                data-filter="people"
+                aria-pressed="false"
+              >
+                People
+              </button>
+              <button
+                class="project-filter"
+                type="button"
+                data-filter="factory"
+                aria-pressed="false"
+              >
+                Smart Factory
+              </button>
+            </div>
+            <p class="project-count" id="project-count" aria-live="polite">
+              Showing all 6 projects
+            </p>
+          </div>
+          <div class="projects">
+            <article class="project featured-project" data-category="strategy">
+              <div class="project-top">
+                <span>01 / Strategy</span><span>FY26</span>
+              </div>
+              <div>
+                <h3>FY26 DX Strategy &amp; Governance</h3>
+                <p>
+                  Executive direction for roadmap execution, common governance,
+                  management visibility, and Smart Factory readiness.
+                </p>
+                <details>
+                  <summary>Project details</summary>
+                  <p>
+                    Align digital activities to Manufacturing Design,
+                    productivity priorities, and long-term direction. Establish
+                    clear ownership, standards, KPI visibility, and management
+                    review so the roadmap can be executed and sustained.
+                  </p>
+                </details>
+              </div>
+              <div
+                class="roadmap-visual project-thumbnail thumb-strategy"
+                role="img"
+                aria-label="Transformation progression: foundation, FY26 strategy, scale, Smart Factory"
+              >
+                <div class="roadmap-heading">
+                  <span>DX transformation path</span><span>FY26 → FY30</span>
+                </div>
+                <div class="roadmap-stages">
+                  <div>
+                    <span>01</span><strong>Foundation</strong
+                    ><small>Mindset · standards</small>
+                  </div>
+                  <div>
+                    <span>02</span><strong>Strategy</strong
+                    ><small>Roadmap · visibility</small>
+                  </div>
+                  <div>
+                    <span>03</span><strong>Scale</strong
+                    ><small>Reuse · champions</small>
+                  </div>
+                  <div>
+                    <span>04</span><strong>Smart Factory</strong
+                    ><small>Data · automation</small>
+                  </div>
+                </div>
+              </div>
+              <div class="project-foot">
+                <span>Roadmap · Governance · Visibility</span>
+              </div>
+            </article>
+            <article class="project" data-category="operations">
+              <div class="project-top">
+                <span>02 / Portfolio</span><span>DNKH</span>
+              </div>
+              <div
+                class="project-thumbnail thumb-operations"
+                role="img"
+                aria-label="Illustrated project intake workflow connecting needs, selection, and delivery"
+              >
+                <div class="thumb-toolbar">
+                  <span>DX PORTFOLIO</span
+                  ><span class="thumb-status">LIVE FLOW</span>
+                </div>
+                <div class="thumb-flow">
+                  <span>NEED</span><i></i><span>ASSESS</span><i></i
+                  ><span>DELIVER</span>
+                </div>
+                <div class="thumb-flow-caption">
+                  <span>Section input</span><span>Value &amp; owner</span
+                  ><span>Review cycle</span>
+                </div>
+              </div>
+              <div>
+                <h3>DX Portfolio &amp; Data Collection</h3>
+                <p>
+                  A structured workflow for discovering needs, selecting
+                  solutions, and managing digital work responsibly.
+                </p>
+                <details>
+                  <summary>Project details</summary>
+                  <p>
+                    Connect user needs and section pain points with project
+                    selection, ownership, data collection, progress monitoring,
+                    and review. The next direction is to keep portfolio
+                    information current and useful for prioritization.
+                  </p>
+                </details>
+              </div>
+              <div class="project-foot">
+                <span>Discovery · Prioritization · Control</span>
+              </div>
+            </article>
+            <article class="project" data-category="people">
+              <div class="project-top">
+                <span>03 / Capability</span><span>Learning</span>
+              </div>
+              <div
+                class="project-thumbnail thumb-people"
+                role="img"
+                aria-label="Illustrated role-based digital learning path from awareness to specialist"
+              >
+                <div class="thumb-toolbar">
+                  <span>DX LEARNING PATH</span
+                  ><span class="thumb-status">PEOPLE FIRST</span>
+                </div>
+                <div class="thumb-learning">
+                  <div><b>01</b><span>Confident</span></div>
+                  <div><b>02</b><span>Champion</span></div>
+                  <div><b>03</b><span>Builder</span></div>
+                  <div><b>04</b><span>Specialist</span></div>
+                </div>
+              </div>
+              <div>
+                <h3>DX Learning Path</h3>
+                <p>
+                  A role-based journey from digital confidence to section
+                  delivery and scalable factory systems.
+                </p>
+                <details>
+                  <summary>Project details</summary>
+                  <p>
+                    Build practical development paths for employees, section DX
+                    champions, citizen developers, and specialists. Connect
+                    learning to real work, coaching, governance, and sustainable
+                    internal capability.
+                  </p>
+                </details>
+              </div>
+              <div class="project-foot">
+                <span>People · Coaching · Capability</span>
+              </div>
+            </article>
+            <article class="project" data-category="factory">
+              <div class="project-top">
+                <span>04 / Benchmark</span><span>FY30</span>
+              </div>
+              <div
+                class="project-thumbnail thumb-factory"
+                role="img"
+                aria-label="Illustrated connected smart factory with data, robotics, and automation nodes"
+              >
+                <div class="thumb-toolbar">
+                  <span>SMART FACTORY</span
+                  ><span class="thumb-status">FY30</span>
+                </div>
+                <div class="thumb-factory-floor">
+                  <div class="thumb-factory-node">
+                    <b>DATA</b><i></i><i></i><i></i>
+                  </div>
+                  <div class="thumb-factory-link"></div>
+                  <div class="thumb-factory-node">
+                    <b>AI</b><i></i><i></i><i></i>
+                  </div>
+                  <div class="thumb-factory-link"></div>
+                  <div class="thumb-factory-node">
+                    <b>ROBOTICS</b><i></i><i></i><i></i>
+                  </div>
+                </div>
+              </div>
+              <div>
+                <h3>FY30 Benchmark &amp; Smart Factory</h3>
+                <p>
+                  Benchmark-led planning across data, automation, AI, robotics,
+                  AMR, and digital foundations.
+                </p>
+                <details>
+                  <summary>Project details</summary>
+                  <p>
+                    Use regional benchmarking and future-state thinking to
+                    inform Smart Factory readiness. Focus areas include data
+                    utilization, automation, AI, robotics, AGV/AMR, and the
+                    foundations needed for scalable manufacturing systems.
+                  </p>
+                </details>
+              </div>
+              <div class="project-foot">
+                <span>Data · AI · Automation · IoT</span>
+              </div>
+            </article>
+            <article class="project" data-category="factory">
+              <div class="project-top">
+                <span>05 / Transformation</span><span>FY30</span>
+              </div>
+              <div>
+                <h3>DNKH DX Journey to FY30</h3>
+                <p>
+                  An executive transformation story from foundation and adoption
+                  toward scalable digital manufacturing.
+                </p>
+                <details>
+                  <summary>Project details</summary>
+                  <p>
+                    Connect the stages of transformation through a clear
+                    narrative: establish foundations, execute the FY26 strategy,
+                    scale reusable solutions and champions, and prepare for
+                    Smart Factory capabilities. Keep milestones and benefit
+                    evidence verified.
+                  </p>
+                </details>
+              </div>
+              <div class="project-foot">
+                <span>Foundation · Adoption · Scale</span>
+              </div>
+            </article>
+            <article class="project" data-category="people">
+              <div class="project-top">
+                <span>06 / Policy</span><span>People</span>
+              </div>
+              <div>
+                <h3>DX Policy &amp; Citizen Developers</h3>
+                <p>
+                  Policy, governance, training, and community foundations for
+                  sustainable local digital capability.
+                </p>
+                <details>
+                  <summary>Project details</summary>
+                  <p>
+                    Shape DX policy activities covering application development
+                    leadership, governance, standardization, HRD, training,
+                    maintenance, and the citizen developer ecosystem. Embed
+                    clear ownership, practical learning, governance support, and
+                    reuse into normal operations.
+                  </p>
+                </details>
+              </div>
+              <div class="project-foot">
+                <span>Policy · HRD · Community</span>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="credentials">
+        <div class="wrap">
+          <div class="section-head">
+            <div>
+              <span class="section-kicker">Credentials &amp; development</span>
+              <h2>Learning that strengthens leadership practice.</h2>
+            </div>
+            <p class="section-note">
+              Formal certificate names and credential details should be added
+              only when verified.
+            </p>
+          </div>
+          <div class="cert-grid">
+            <article class="cert">
+              <h3>Lean Manufacturing</h3>
+              <p>
+                Professional capability area; formal credential to be added when
+                verified.
+              </p>
+            </article>
+            <article class="cert">
+              <h3>Six Sigma</h3>
+              <p>
+                Professional development area; training details to be added when
+                verified.
+              </p>
+            </article>
+            <article class="cert">
+              <h3>Safety Management</h3>
+              <p>
+                Professional capability area; formal credential to be added when
+                verified.
+              </p>
+            </article>
+            <article class="cert">
+              <h3>Leadership Development</h3>
+              <p>
+                Professional development area; program details to be added when
+                verified.
+              </p>
+            </article>
+          </div>
+          <article class="career-item" style="margin-top: 12px">
+            <div class="career-year">Ongoing</div>
+            <div>
+              <h3>Education &amp; Professional Development</h3>
+              <p>
+                Continuous learning in manufacturing DX, Power Platform, data,
+                automation, AI, IoT, AGV/AMR, and leadership. Portfolio summary
+                based on current professional focus.
+              </p>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section id="contact">
+        <div class="wrap">
+          <div class="section-head">
+            <div>
+              <span class="section-kicker">Contact</span>
+              <h2>Discuss operations, leadership, and improvement.</h2>
+            </div>
+            <p class="section-note">
+              Professional networking, career opportunities, or manufacturing
+              leadership collaboration.
+            </p>
+          </div>
+          <div class="contact-layout">
+            <article class="contact-panel">
+              <div>
+                <div class="eyebrow">Let’s build stronger operations.</div>
+                <h2>
+                  Manufacturing leadership. Practical digital transformation.
+                </h2>
+                <p>
+                  I welcome conversations about production leadership, quality
+                  improvement, safety performance, team capability, and
+                  operational excellence.
+                </p>
+                <div class="contact-links">
+                  <a href="mailto:rathana.lan.a3f@ap.denso.com"
+                    >rathana.lan.a3f@ap.denso.com</a
+                  ><a href="tel:+855017801002">+855 (0) 17 801 002</a
+                  ><span>Cambodia</span>
+                </div>
+              </div>
+              <div>
+                <a
+                  class="button"
+                  href="mailto:rathana.lan.a3f@ap.denso.com?subject=Professional%20inquiry"
+                  >Email Rathana <span aria-hidden="true">&nbsp;↗</span></a
+                >
+              </div>
+              <p style="margin-top: 24px">
+                <button
+                  class="print-button"
+                  type="button"
+                  onclick="window.print()"
+                >
+                  Print / Save as PDF
+                </button>
+              </p>
+            </article>
+            <form class="contact-form" id="contact-form">
+              <div class="field">
+                <label for="name">Name</label
+                ><input
+                  id="name"
+                  name="name"
+                  autocomplete="name"
+                  required
+                  placeholder="Your name"
+                />
+              </div>
+              <div class="field">
+                <label for="email">Email</label
+                ><input
+                  id="email"
+                  name="email"
+                  type="email"
+                  autocomplete="email"
+                  required
+                  placeholder="name@company.com"
+                />
+              </div>
+              <div class="field">
+                <label for="subject">Subject</label
+                ><input
+                  id="subject"
+                  name="subject"
+                  required
+                  value="Professional inquiry"
+                />
+              </div>
+              <div class="field">
+                <label for="message">Message</label
+                ><textarea
+                  id="message"
+                  name="message"
+                  required
+                  placeholder="How can we work together?"
+                ></textarea>
+              </div>
+              <button class="button" type="submit">
+                Prepare email <span aria-hidden="true">&nbsp;↗</span>
+              </button>
+            </form>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="wrap">
+      <span
+        >© <span id="year">2026</span> Rathana Lan. All rights reserved.</span
+      >
+      <span
+        >Manufacturing Leadership · Operational Excellence · DX Talent
+        Development</span
+      >
+    </footer>
+    <script>
+      document.getElementById("year").textContent = new Date().getFullYear();
+      const themeToggle = document.getElementById("theme-toggle");
+      const themeIcon = document.getElementById("theme-icon");
+      const themeLabel = document.getElementById("theme-label");
+      const themeColorMeta = document.querySelector('meta[name="theme-color"]');
+      function applyTheme(theme, save = false) {
+        const isDark = theme === "dark";
+        document.documentElement.dataset.theme = isDark ? "dark" : "light";
+        themeToggle.setAttribute("aria-pressed", String(isDark));
+        themeToggle.setAttribute(
+          "aria-label",
+          `Switch to ${isDark ? "light" : "dark"} mode`,
+        );
+        themeIcon.textContent = isDark ? "☼" : "◐";
+        themeLabel.textContent = isDark ? "Light mode" : "Dark mode";
+        themeColorMeta.content = isDark ? "#101713" : "#14231e";
+        if (save) {
+          try {
+            localStorage.setItem("portfolio-theme", isDark ? "dark" : "light");
+          } catch (error) {}
+        }
+      }
+      applyTheme(document.documentElement.dataset.theme);
+      themeToggle.addEventListener("click", () => {
+        applyTheme(
+          document.documentElement.dataset.theme === "dark" ? "light" : "dark",
+          true,
+        );
+      });
+      document
+        .getElementById("contact-form")
+        .addEventListener("submit", function (event) {
+          event.preventDefault();
+          const fields = new FormData(event.currentTarget);
+          const body = `From: ${fields.get("name")} (${fields.get("email")})\n\n${fields.get("message")}`;
+          window.location.href = `mailto:rathana.lan.a3f@ap.denso.com?subject=${encodeURIComponent(fields.get("subject"))}&body=${encodeURIComponent(body)}`;
+        });
+      const languageSelect = document.getElementById("language-select");
+      languageSelect.value = localStorage.getItem("portfolio-language") || "en";
+      languageSelect.addEventListener("change", function () {
+        const language = languageSelect.value;
+        localStorage.setItem("portfolio-language", language);
+        const applyTranslation = (attempt = 0) => {
+          const translator = document.querySelector(".goog-te-combo");
+          if (translator) {
+            translator.value = language;
+            translator.dispatchEvent(new Event("change", { bubbles: true }));
+          } else if (attempt < 30) {
+            window.setTimeout(() => applyTranslation(attempt + 1), 200);
+          }
+        };
+        applyTranslation();
+      });
+      window.googleTranslateElementInit = function () {
+        new google.translate.TranslateElement(
+          {
+            pageLanguage: "en",
+            includedLanguages: "en,km,ja,zh-CN",
+            autoDisplay: false,
+          },
+          "google_translate_element",
+        );
+        if (languageSelect.value !== "en")
+          languageSelect.dispatchEvent(new Event("change"));
+      };
+      const revealItems = document.querySelectorAll(
+        ".hero .fact, .resume-snapshot, section .section-head, .about-copy, .skills .tag, .career-item, .timeline, .metric, .lead-card, .rhythm, .rhythm-explorer, .project-tools, .project, .cert, .contact-panel, .contact-form, .journey-step, footer",
+      );
+      const reducedMotion = window.matchMedia(
+        "(prefers-reduced-motion: reduce)",
+      ).matches;
+      if ("IntersectionObserver" in window && !reducedMotion) {
+        const revealObserver = new IntersectionObserver(
+          (entries, observer) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                entry.target.classList.add("reveal", "is-visible");
+                observer.unobserve(entry.target);
+              }
+            });
+          },
+          { threshold: 0.12 },
+        );
+        revealItems.forEach((item) => {
+          item.classList.add("reveal");
+          revealObserver.observe(item);
+        });
+      } else {
+        revealItems.forEach((item) =>
+          item.classList.add("reveal", "is-visible"),
+        );
+      }
+      const scrollProgress = document.getElementById("scroll-progress");
+      const navLinks = [...document.querySelectorAll("header nav a")];
+      const pageSections = [...document.querySelectorAll("main section[id]")];
+      let scrollUpdateQueued = false;
+      const updateScrollState = () => {
+        const maxScroll =
+          document.documentElement.scrollHeight - window.innerHeight;
+        scrollProgress.style.transform = `scaleX(${maxScroll > 0 ? window.scrollY / maxScroll : 0})`;
+        const activeThreshold =
+          window.scrollY + document.querySelector("header").offsetHeight + 90;
+        let activeSection = "";
+        pageSections.forEach((section) => {
+          if (section.offsetTop <= activeThreshold) activeSection = section.id;
+        });
+        navLinks.forEach((link) => {
+          if (link.hash === `#${activeSection}`)
+            link.setAttribute("aria-current", "location");
+          else link.removeAttribute("aria-current");
+        });
+      };
+      const scheduleScrollUpdate = () => {
+        if (scrollUpdateQueued) return;
+        scrollUpdateQueued = true;
+        requestAnimationFrame(() => {
+          updateScrollState();
+          scrollUpdateQueued = false;
+        });
+      };
+      window.addEventListener("scroll", scheduleScrollUpdate, {
+        passive: true,
+      });
+      window.addEventListener("resize", scheduleScrollUpdate);
+      updateScrollState();
+      const projectFilterButtons = document.querySelectorAll(".project-filter");
+      const projectCards = document.querySelectorAll(".projects .project");
+      const projectCount = document.getElementById("project-count");
+      projectFilterButtons.forEach((button) => {
+        button.addEventListener("click", () => {
+          const selectedFilter = button.dataset.filter;
+          let visibleCount = 0;
+          projectCards.forEach((card, index) => {
+            const isVisible =
+              selectedFilter === "all" ||
+              card.dataset.category === selectedFilter;
+            card.hidden = !isVisible;
+            if (isVisible && !reducedMotion) {
+              card.style.setProperty(
+                "--filter-delay",
+                `${Math.min(index, 5) * 45}ms`,
+              );
+              card.classList.remove("filter-enter");
+              void card.offsetWidth;
+              card.addEventListener(
+                "animationend",
+                () => {
+                  card.classList.remove("filter-enter");
+                  card.style.removeProperty("--filter-delay");
+                },
+                { once: true },
+              );
+              card.classList.add("filter-enter");
+            }
+            if (isVisible) visibleCount += 1;
+          });
+          projectFilterButtons.forEach((filterButton) => {
+            const isActive = filterButton === button;
+            filterButton.classList.toggle("is-active", isActive);
+            filterButton.setAttribute("aria-pressed", String(isActive));
+          });
+          projectCount.textContent =
+            selectedFilter === "all"
+              ? `Showing all ${visibleCount} projects`
+              : `Showing ${visibleCount} ${visibleCount === 1 ? "project" : "projects"} · ${button.textContent.trim()}`;
+        });
+      });
+    </script>
+    <script>
+      const rhythmTabs = [...document.querySelectorAll(".rhythm-tab")];
+      const rhythmPanel = document.getElementById("rhythm-panel");
+      const rhythmIndex = document.getElementById("rhythm-index");
+      const rhythmKicker = document.getElementById("rhythm-kicker");
+      const rhythmTitle = document.getElementById("rhythm-panel-title");
+      const rhythmCopy = document.getElementById("rhythm-panel-copy");
+      const rhythmSegments = [
+        ...document.querySelectorAll("#rhythm-progress span"),
+      ];
+      const reducedMotionForRhythm = window.matchMedia(
+        "(prefers-reduced-motion: reduce)",
+      ).matches;
+      function activateRhythmTab(tab, moveFocus = false) {
+        const selectedIndex = rhythmTabs.indexOf(tab);
+        rhythmTabs.forEach((item, index) => {
+          const selected = item === tab;
+          item.setAttribute("aria-selected", String(selected));
+          item.tabIndex = selected ? 0 : -1;
+          rhythmSegments[index].classList.toggle(
+            "is-complete",
+            index <= selectedIndex,
+          );
+        });
+        rhythmPanel.setAttribute("aria-labelledby", tab.id);
+        rhythmIndex.textContent = tab.dataset.step;
+        rhythmKicker.textContent = `STAGE ${tab.dataset.step} / ${tab.children[1].textContent.toUpperCase()}`;
+        rhythmTitle.textContent = tab.dataset.title;
+        rhythmCopy.textContent = tab.dataset.copy;
+        if (!reducedMotionForRhythm) {
+          rhythmPanel.classList.remove("is-changing");
+          void rhythmPanel.offsetWidth;
+          rhythmPanel.classList.add("is-changing");
+          rhythmPanel.addEventListener(
+            "animationend",
+            () => rhythmPanel.classList.remove("is-changing"),
+            { once: true },
+          );
+        }
+        if (moveFocus) {
+          tab.focus();
+          tab.scrollIntoView({ block: "nearest", inline: "nearest" });
+        }
+      }
+      rhythmTabs.forEach((tab, index) => {
+        tab.addEventListener("click", () => activateRhythmTab(tab));
+        tab.addEventListener("keydown", (event) => {
+          let nextIndex = index;
+          if (event.key === "ArrowRight")
+            nextIndex = (index + 1) % rhythmTabs.length;
+          else if (event.key === "ArrowLeft")
+            nextIndex = (index - 1 + rhythmTabs.length) % rhythmTabs.length;
+          else if (event.key === "Home") nextIndex = 0;
+          else if (event.key === "End") nextIndex = rhythmTabs.length - 1;
+          else return;
+          event.preventDefault();
+          activateRhythmTab(rhythmTabs[nextIndex], true);
+        });
+      });
+    </script>
+    <script>
+      const pointerCursor = document.getElementById("pointer-cursor");
+      const supportsHoverPointer = window.matchMedia(
+        "(hover: hover) and (pointer: fine)",
+      ).matches;
+      const prefersReducedPointerMotion = window.matchMedia(
+        "(prefers-reduced-motion: reduce)",
+      ).matches;
+      if (supportsHoverPointer && !prefersReducedPointerMotion) {
+        const pointerTargets = "a, button, summary, select, [role='tab']";
+        document.documentElement.classList.add("has-pointer-cursor");
+        pointerCursor.classList.add("is-enabled");
+        document.addEventListener(
+          "pointermove",
+          (event) => {
+            pointerCursor.style.setProperty(
+              "--pointer-x",
+              `${event.clientX}px`,
+            );
+            pointerCursor.style.setProperty(
+              "--pointer-y",
+              `${event.clientY}px`,
+            );
+            const target =
+              event.target instanceof Element ? event.target : null;
+            const isEditable = Boolean(
+              target?.closest("input, textarea, [contenteditable='true']"),
+            );
+            pointerCursor.classList.toggle("is-visible", !isEditable);
+          },
+          { passive: true },
+        );
+        document.addEventListener("pointerover", (event) => {
+          if (!(event.target instanceof Element)) return;
+          const target = event.target.closest(pointerTargets);
+          if (!target) return;
+          pointerCursor.dataset.label = target.matches("summary")
+            ? "OPEN"
+            : target.matches("a")
+              ? "GO"
+              : "SELECT";
+          pointerCursor.classList.add("is-engaged");
+        });
+        document.addEventListener("pointerout", (event) => {
+          const relatedTarget =
+            event.relatedTarget instanceof Element
+              ? event.relatedTarget.closest(pointerTargets)
+              : null;
+          if (!relatedTarget) pointerCursor.classList.remove("is-engaged");
+        });
+        document.addEventListener("pointerdown", () =>
+          pointerCursor.classList.add("is-pressed"),
+        );
+        window.addEventListener("pointerup", () =>
+          pointerCursor.classList.remove("is-pressed"),
+        );
+        window.addEventListener("blur", () =>
+          pointerCursor.classList.remove(
+            "is-visible",
+            "is-engaged",
+            "is-pressed",
+          ),
+        );
+      }
+    </script>
+    <div id="google_translate_element" aria-hidden="true"></div>
+    <script
+      src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"
+      async
+    ></script>
+  </body>
+</html>
