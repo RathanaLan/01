@@ -49,14 +49,21 @@
       /* Flash highlight animation for new/updated items */
       @keyframes highlight-flash {
         0% {
-          background-color: rgb(238 242 255); /* indigo-50 */
-          border-color: rgb(129 140 248); /* indigo-400 */
+          background-color: rgba(
+            99,
+            102,
+            241,
+            0.1
+          ); /* indigo-500 with low opacity */
+          border-color: rgb(129, 140, 248); /* indigo-400 */
           transform: scale(1.015);
+          box-shadow: 0 4px 6px -1px rgba(99, 102, 241, 0.2);
         }
         100% {
-          background-color: rgb(255 255 255); /* white */
-          border-color: rgb(241 245 249); /* slate-100 */
+          background-color: rgba(255, 255, 255, 0.7); /* translucent white */
+          border-color: rgba(226, 232, 240, 0.8); /* slate-200 */
           transform: scale(1);
+          box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
         }
       }
 
@@ -66,9 +73,9 @@
 
       /* Smooth exit animation for deleted items */
       .row-deleting {
-        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
         opacity: 0 !important;
-        transform: translateX(18px) scale(0.96) !important;
+        transform: translateX(24px) scale(0.95) !important;
         max-height: 0px !important;
         padding-top: 0px !important;
         padding-bottom: 0px !important;
@@ -79,18 +86,26 @@
     </style>
   </head>
   <body
-    class="bg-slate-50 text-slate-800 antialiased min-h-screen flex flex-col items-center justify-center p-4 sm:p-6 lg:p-8"
+    class="bg-gradient-to-br from-slate-100 to-slate-200 text-slate-800 antialiased min-h-screen flex flex-col items-center justify-center p-4 sm:p-6 lg:p-8 relative overflow-hidden"
   >
+    <!-- Background decorative elements for modern feel -->
+    <div
+      class="absolute top-0 left-1/4 w-96 h-96 bg-indigo-300 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-blob pointer-events-none"
+    ></div>
+    <div
+      class="absolute top-0 right-1/4 w-96 h-96 bg-emerald-300 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-blob animation-delay-2000 pointer-events-none"
+    ></div>
+
     <main
-      class="w-full max-w-xl bg-white rounded-2xl shadow-xl shadow-slate-200/70 border border-slate-200/80 overflow-hidden transition-all"
+      class="w-full max-w-xl bg-white/70 backdrop-blur-xl rounded-2xl shadow-xl shadow-slate-200/50 border border-white/50 overflow-hidden transition-all relative z-10"
     >
       <!-- Header Section -->
       <header
-        class="px-6 sm:px-8 pt-7 pb-6 border-b border-slate-100 bg-gradient-to-b from-slate-50/70 to-white flex items-center justify-between"
+        class="px-6 sm:px-8 pt-7 pb-6 border-b border-white/40 bg-white/40 flex items-center justify-between"
       >
         <div class="flex items-center space-x-3.5">
           <div
-            class="w-10 h-10 rounded-xl bg-indigo-600 flex items-center justify-center text-white shadow-md shadow-indigo-200"
+            class="w-10 h-10 rounded-xl bg-gradient-to-tr from-indigo-600 to-indigo-500 flex items-center justify-center text-white shadow-md shadow-indigo-200"
           >
             <i data-lucide="users" class="w-5 h-5"></i>
           </div>
@@ -100,7 +115,7 @@
             >
               User Records
             </h1>
-            <p class="text-xs text-slate-500 mt-0.5">
+            <p class="text-xs text-slate-500 mt-0.5 font-medium">
               Real-time collaborative directory
             </p>
           </div>
@@ -109,7 +124,7 @@
         <!-- Real-time Live Connection Badge -->
         <div
           id="liveBadge"
-          class="flex items-center gap-1.5 px-3 py-1 bg-emerald-50 text-emerald-700 border border-emerald-200/70 rounded-full text-xs font-semibold select-none shadow-sm transition-colors duration-300"
+          class="flex items-center gap-1.5 px-3 py-1 bg-emerald-100/50 text-emerald-700 border border-emerald-200/50 rounded-full text-xs font-semibold select-none shadow-sm transition-colors duration-300"
         >
           <span
             class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"
@@ -124,7 +139,7 @@
           <div class="flex items-center justify-between">
             <label
               for="nameInput"
-              class="block text-xs font-semibold uppercase tracking-wider text-slate-500"
+              class="block text-xs font-bold uppercase tracking-wider text-slate-500"
             >
               Add New Member
             </label>
@@ -134,9 +149,9 @@
           </div>
 
           <div class="flex gap-2.5 flex-col sm:flex-row">
-            <div class="relative flex-1">
+            <div class="relative flex-1 group">
               <div
-                class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400"
+                class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400 group-focus-within:text-indigo-500 transition-colors"
               >
                 <i data-lucide="user-plus" class="w-4 h-4"></i>
               </div>
@@ -146,15 +161,15 @@
                 placeholder="e.g. Maya Lin"
                 required
                 autocomplete="off"
-                class="w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm font-medium text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 focus:bg-white transition-all duration-150"
+                class="w-full pl-10 pr-4 py-2.5 bg-white/60 border border-slate-200/80 rounded-xl text-sm font-medium text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-400 focus:bg-white transition-all duration-200 shadow-sm"
               />
             </div>
             <button
               type="submit"
               id="submitBtn"
-              class="inline-flex items-center justify-center px-5 py-2.5 bg-indigo-600 hover:bg-indigo-700 active:scale-[0.98] text-white text-sm font-semibold rounded-xl shadow-sm shadow-indigo-100 hover:shadow transition-all duration-150 gap-2 shrink-0 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
+              class="inline-flex items-center justify-center px-5 py-2.5 bg-slate-900 hover:bg-slate-800 active:scale-[0.98] text-white text-sm font-semibold rounded-xl shadow-md hover:shadow-lg transition-all duration-150 gap-2 shrink-0 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              <i data-lucide="plus" class="w-4 h-4"></i>
+              <i data-lucide="plus" class="w-4 h-4 text-slate-300"></i>
               <span>Add User</span>
             </button>
           </div>
@@ -163,7 +178,7 @@
         <div>
           <div class="flex items-center justify-between mb-3">
             <h2
-              class="text-xs font-semibold uppercase tracking-wider text-slate-500"
+              class="text-xs font-bold uppercase tracking-wider text-slate-500"
             >
               Stored Records
             </h2>
@@ -171,7 +186,7 @@
               id="refreshBtn"
               type="button"
               title="Manual sync with database"
-              class="text-xs text-slate-500 hover:text-slate-800 px-2 py-1 rounded-lg hover:bg-slate-100 transition-colors flex items-center gap-1.5 cursor-pointer"
+              class="text-xs font-medium text-slate-500 hover:text-slate-800 px-2 py-1 rounded-lg hover:bg-white/60 transition-colors flex items-center gap-1.5 cursor-pointer"
             >
               <i data-lucide="refresh-cw" class="w-3.5 h-3.5"></i>
               <span>Refresh</span>
@@ -184,26 +199,32 @@
             <li
               class="py-10 text-center flex flex-col items-center justify-center text-slate-400"
             >
-              <i data-lucide="loader-2" class="w-8 h-8 animate-spin mb-2"></i>
-              <span class="text-sm font-medium">Connecting to Supabase...</span>
+              <i
+                data-lucide="loader-2"
+                class="w-8 h-8 animate-spin mb-3 text-indigo-400"
+              ></i>
+              <span class="text-sm font-medium text-slate-500"
+                >Connecting to database...</span
+              >
             </li>
           </ul>
         </div>
       </div>
 
       <footer
-        class="px-6 sm:px-8 py-3.5 bg-slate-50/80 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500"
+        class="px-6 sm:px-8 py-3.5 bg-white/30 border-t border-white/40 flex items-center justify-between text-xs text-slate-500 backdrop-blur-md"
       >
         <span class="flex items-center gap-1.5">
           <span class="w-1.5 h-1.5 rounded-full bg-indigo-500"></span>
           Table:
           <code
-            class="font-mono text-slate-700 bg-white border border-slate-200 px-1.5 py-0.5 rounded text-[11px]"
+            class="font-mono text-slate-700 bg-white/60 border border-slate-200/60 px-1.5 py-0.5 rounded text-[11px] shadow-sm"
             >User_Record</code
           >
         </span>
-        <span class="text-[11px] text-slate-400"
-          >PostgreSQL Realtime Channel</span
+        <span
+          class="text-[11px] font-medium text-slate-400 hidden sm:inline-block"
+          >Supabase Realtime Channel</span
         >
       </footer>
     </main>
@@ -211,40 +232,40 @@
     <!-- Delete Confirmation Modal -->
     <div
       id="deleteModal"
-      class="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/40 backdrop-blur-sm opacity-0 pointer-events-none transition-opacity duration-200 p-4"
+      class="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/20 backdrop-blur-sm opacity-0 pointer-events-none transition-opacity duration-200 p-4"
     >
       <div
         id="deleteModalDialog"
-        class="bg-white rounded-2xl max-w-sm w-full p-6 shadow-2xl border border-slate-100 transform scale-95 transition-transform duration-200"
+        class="bg-white/90 backdrop-blur-xl rounded-2xl max-w-sm w-full p-6 shadow-2xl border border-white/50 transform scale-95 transition-transform duration-200"
       >
         <div
-          class="w-12 h-12 rounded-full bg-rose-50 text-rose-600 flex items-center justify-center mx-auto mb-4 border border-rose-100"
+          class="w-12 h-12 rounded-full bg-rose-100 text-rose-600 flex items-center justify-center mx-auto mb-4 border border-rose-200 shadow-sm"
         >
-          <i data-lucide="trash-2" class="w-6 h-6"></i>
+          <i data-lucide="alert-triangle" class="w-6 h-6"></i>
         </div>
-        <h3 class="text-base font-semibold text-slate-900 text-center">
+        <h3 class="text-base font-bold text-slate-900 text-center">
           Delete Record
         </h3>
         <p
-          class="text-xs text-slate-500 text-center mt-1.5 mb-6 leading-relaxed"
+          class="text-sm text-slate-500 text-center mt-1.5 mb-6 leading-relaxed font-medium"
         >
           Are you sure you want to remove this record? This change will
-          synchronize instantly across all connected sessions.
+          synchronize instantly for everyone.
         </p>
-        <div class="flex gap-2.5">
+        <div class="flex gap-3">
           <button
             type="button"
             id="cancelDelete"
-            class="flex-1 px-4 py-2.5 border border-slate-200 rounded-xl text-xs font-semibold text-slate-700 hover:bg-slate-50 active:bg-slate-100 transition-colors cursor-pointer"
+            class="flex-1 px-4 py-2.5 border-2 border-slate-200 rounded-xl text-sm font-bold text-slate-600 hover:bg-slate-50 hover:border-slate-300 active:bg-slate-100 transition-colors cursor-pointer"
           >
             Cancel
           </button>
           <button
             type="button"
             id="confirmDelete"
-            class="flex-1 px-4 py-2.5 bg-rose-600 hover:bg-rose-700 active:bg-rose-800 rounded-xl text-xs font-semibold text-white shadow-sm shadow-rose-200 transition-colors cursor-pointer"
+            class="flex-1 px-4 py-2.5 bg-rose-600 hover:bg-rose-700 active:bg-rose-800 rounded-xl text-sm font-bold text-white shadow-md shadow-rose-200 transition-all cursor-pointer"
           >
-            Confirm Delete
+            Delete
           </button>
         </div>
       </div>
@@ -253,7 +274,7 @@
     <!-- Notification Toast Container -->
     <div
       id="toastContainer"
-      class="fixed bottom-5 right-5 z-50 flex flex-col gap-2.5 pointer-events-none"
+      class="fixed bottom-5 right-5 z-50 flex flex-col gap-3 pointer-events-none"
     ></div>
 
     <script type="module">
@@ -284,37 +305,40 @@
 
       let deleteTargetId = null;
 
-      // Helper: Show custom toast notifications
       function showToast(message, type = "info") {
         const toast = document.createElement("div");
 
         const config = {
           success: {
-            border: "border-emerald-200",
-            bg: "bg-emerald-50",
+            border: "border-emerald-200/60",
+            bg: "bg-emerald-50/90",
             text: "text-emerald-800",
             icon: "check-circle-2",
+            shadow: "shadow-emerald-100",
           },
           error: {
-            border: "border-rose-200",
-            bg: "bg-rose-50",
+            border: "border-rose-200/60",
+            bg: "bg-rose-50/90",
             text: "text-rose-800",
             icon: "alert-circle",
+            shadow: "shadow-rose-100",
           },
           info: {
-            border: "border-slate-200",
-            bg: "bg-white",
+            border: "border-slate-200/60",
+            bg: "bg-white/90",
             text: "text-slate-800",
-            icon: "bell",
+            icon: "info",
+            shadow: "shadow-slate-100",
           },
         }[type] || {
           border: "border-slate-200",
           bg: "bg-white",
           text: "text-slate-800",
           icon: "info",
+          shadow: "",
         };
 
-        toast.className = `flex items-center gap-2.5 px-4 py-3 rounded-xl shadow-lg border text-xs font-semibold pointer-events-auto transition-all duration-300 transform translate-y-3 opacity-0 ${config.bg} ${config.border} ${config.text}`;
+        toast.className = `flex items-center gap-3 px-4 py-3.5 rounded-xl shadow-lg border backdrop-blur-md text-sm font-semibold pointer-events-auto transition-all duration-300 transform translate-y-4 opacity-0 ${config.bg} ${config.border} ${config.text} ${config.shadow}`;
         toast.innerHTML = `
         <i data-lucide="${config.icon}" class="w-4 h-4 shrink-0"></i>
         <span>${message}</span>
@@ -324,16 +348,15 @@
         lucide.createIcons({ root: toast });
 
         requestAnimationFrame(() => {
-          toast.classList.remove("translate-y-3", "opacity-0");
+          toast.classList.remove("translate-y-4", "opacity-0");
         });
 
         setTimeout(() => {
-          toast.classList.add("translate-y-3", "opacity-0");
-          setTimeout(() => toast.remove(), 320);
-        }, 3500);
+          toast.classList.add("translate-y-4", "opacity-0");
+          setTimeout(() => toast.remove(), 300);
+        }, 4000);
       }
 
-      // Helper: Modal display controllers
       function openDeleteModal(id) {
         deleteTargetId = id;
         deleteModal.classList.remove("opacity-0", "pointer-events-none");
@@ -357,7 +380,6 @@
           : name.slice(0, 2).toUpperCase();
       }
 
-      // Event: Form Submission for Adding Users
       form.addEventListener("submit", async (e) => {
         e.preventDefault();
         const val = input.value.trim();
@@ -365,7 +387,7 @@
 
         submitBtn.disabled = true;
         const originalHtml = submitBtn.innerHTML;
-        submitBtn.innerHTML = `<i data-lucide="loader-2" class="w-4 h-4 animate-spin"></i><span>Adding...</span>`;
+        submitBtn.innerHTML = `<i data-lucide="loader-2" class="w-4 h-4 animate-spin text-slate-400"></i><span>Adding...</span>`;
         lucide.createIcons({ root: submitBtn });
 
         try {
@@ -378,7 +400,7 @@
 
           input.value = "";
           showToast("User added to directory", "success");
-          // Realtime handles DOM update, but we optionally trigger a flash here locally
+          // Realtime handles DOM update globally, but we pass ID to trigger flash locally
           const newId = data && data[0] ? data[0].id : null;
           if (newId) loadNames(newId);
         } catch (err) {
@@ -390,15 +412,12 @@
         }
       });
 
-      // Core Function: Load and Render Names
       async function loadNames(highlightId = null) {
-        // Avoid wiping out user input if someone is actively editing inline
+        // Prevent UI wipe if user is currently typing in an inline edit field
         const activeInput = document.querySelector(
           "#nameList input[type='text']",
         );
-        if (activeInput) {
-          return;
-        }
+        if (activeInput) return;
 
         try {
           const { data, error } = await supabase
@@ -414,12 +433,12 @@
 
           if (!data || data.length === 0) {
             list.innerHTML = `
-            <li class="py-10 text-center flex flex-col items-center justify-center bg-slate-50/60 rounded-xl border border-dashed border-slate-200">
-              <div class="w-10 h-10 rounded-full bg-slate-100 flex items-center justify-center text-slate-400 mb-2">
-                <i data-lucide="user-x" class="w-5 h-5"></i>
+            <li class="py-12 text-center flex flex-col items-center justify-center bg-slate-50/50 rounded-xl border border-dashed border-slate-200 shadow-sm">
+              <div class="w-12 h-12 rounded-full bg-slate-100 flex items-center justify-center text-slate-400 mb-3 border border-slate-200">
+                <i data-lucide="inbox" class="w-6 h-6"></i>
               </div>
-              <p class="text-xs font-semibold text-slate-700">No records found</p>
-              <p class="text-[11px] text-slate-400 mt-0.5">Add a new user using the field above</p>
+              <p class="text-sm font-bold text-slate-700">No records found</p>
+              <p class="text-xs font-medium text-slate-500 mt-1">Add a new user using the field above</p>
             </li>
           `;
             lucide.createIcons({ root: list });
@@ -433,25 +452,25 @@
             const isHighlighted =
               highlightId && String(row.id) === String(highlightId);
 
-            li.className = `group flex items-center justify-between p-3 rounded-xl border transition-all duration-200 gap-3 ${
+            li.className = `group flex items-center justify-between p-3.5 rounded-xl border transition-all duration-200 gap-3 shadow-sm ${
               isHighlighted
-                ? "row-highlight border-indigo-400"
-                : "border-slate-200/70 bg-white hover:border-slate-300 hover:shadow-sm"
+                ? "row-highlight border-indigo-400 z-10 relative"
+                : "border-white/80 bg-white/70 backdrop-blur-md hover:border-slate-300 hover:shadow-md hover:bg-white"
             }`;
 
             // Content section (Avatar + Name)
             const contentContainer = document.createElement("div");
             contentContainer.className =
-              "flex items-center gap-3 flex-1 min-w-0";
+              "flex items-center gap-3.5 flex-1 min-w-0";
 
             const avatar = document.createElement("div");
             avatar.className =
-              "w-8 h-8 rounded-lg bg-indigo-50 border border-indigo-100 text-indigo-600 flex items-center justify-center font-bold text-xs shrink-0 select-none";
+              "w-9 h-9 rounded-full bg-gradient-to-br from-indigo-50 to-slate-100 border border-indigo-100/60 text-indigo-700 flex items-center justify-center font-bold text-xs shrink-0 select-none shadow-sm";
             avatar.textContent = getInitials(row.User_Name);
 
             const nameSpan = document.createElement("span");
             nameSpan.className =
-              "text-sm font-medium text-slate-700 truncate select-all";
+              "text-sm font-semibold text-slate-700 truncate select-all";
             nameSpan.textContent = row.User_Name;
 
             contentContainer.appendChild(avatar);
@@ -459,37 +478,39 @@
 
             // Action buttons (Edit & Delete)
             const actions = document.createElement("div");
-            actions.className = "flex items-center gap-1 shrink-0";
+            actions.className =
+              "flex items-center gap-1.5 shrink-0 opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity duration-200";
 
-            // Edit Action
+            // Inline Edit Action setup
             const editBtn = document.createElement("button");
             editBtn.type = "button";
             editBtn.className =
-              "p-1.5 text-slate-400 hover:text-indigo-600 hover:bg-indigo-50 rounded-lg transition-colors cursor-pointer focus:outline-none focus:ring-2 focus:ring-indigo-500/20";
+              "p-2 text-slate-400 hover:text-indigo-600 hover:bg-indigo-50 rounded-lg transition-colors cursor-pointer focus:outline-none focus:ring-2 focus:ring-indigo-500/20";
             editBtn.title = "Edit record";
             editBtn.innerHTML = `<i data-lucide="pencil" class="w-4 h-4"></i>`;
 
             editBtn.onclick = () => {
               const editWrapper = document.createElement("div");
-              editWrapper.className = "flex items-center gap-2 flex-1 min-w-0";
+              editWrapper.className =
+                "flex items-center gap-2.5 flex-1 min-w-0";
 
               const editInput = document.createElement("input");
               editInput.type = "text";
               editInput.value = row.User_Name;
               editInput.className =
-                "flex-1 px-3 py-1.5 text-sm bg-white border border-indigo-400 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500/20 font-medium text-slate-800";
+                "flex-1 px-3 py-1.5 text-sm bg-white border-2 border-indigo-400 rounded-lg focus:outline-none focus:ring-4 focus:ring-indigo-500/10 font-bold text-slate-800 shadow-inner";
 
               const saveBtn = document.createElement("button");
               saveBtn.type = "button";
               saveBtn.className =
-                "p-1.5 text-emerald-600 hover:bg-emerald-50 rounded-lg transition-colors cursor-pointer focus:outline-none focus:ring-2 focus:ring-emerald-500/20";
+                "p-2 text-emerald-600 hover:bg-emerald-50 rounded-lg transition-colors cursor-pointer focus:outline-none focus:ring-2 focus:ring-emerald-500/20 bg-white shadow-sm border border-slate-100";
               saveBtn.title = "Save (Enter)";
               saveBtn.innerHTML = `<i data-lucide="check" class="w-4 h-4"></i>`;
 
               const cancelBtn = document.createElement("button");
               cancelBtn.type = "button";
               cancelBtn.className =
-                "p-1.5 text-slate-400 hover:text-slate-600 hover:bg-slate-100 rounded-lg transition-colors cursor-pointer focus:outline-none focus:ring-2 focus:ring-slate-500/20";
+                "p-2 text-slate-500 hover:text-slate-700 hover:bg-slate-100 rounded-lg transition-colors cursor-pointer focus:outline-none focus:ring-2 focus:ring-slate-500/20 bg-white shadow-sm border border-slate-100";
               cancelBtn.title = "Cancel (Esc)";
               cancelBtn.innerHTML = `<i data-lucide="x" class="w-4 h-4"></i>`;
 
@@ -497,14 +518,16 @@
                 const trimmed = editInput.value.trim();
                 if (!trimmed) {
                   showToast("Name cannot be empty", "error");
+                  editInput.focus();
                   return;
                 }
                 if (trimmed === row.User_Name) {
-                  loadNames();
+                  loadNames(); // Reset if no change
                   return;
                 }
 
                 saveBtn.disabled = true;
+                editInput.disabled = true;
                 try {
                   const { error: updateError } = await supabase
                     .from("User_Record")
@@ -513,39 +536,46 @@
 
                   if (updateError) throw updateError;
 
-                  showToast("User updated successfully", "success");
-                  loadNames(row.id);
+                  showToast("Record updated successfully", "success");
+                  loadNames(row.id); // Trigger flash highlight on success
                 } catch (updateError) {
                   showToast(updateError.message, "error");
                   saveBtn.disabled = false;
+                  editInput.disabled = false;
+                  editInput.focus();
                 }
               };
 
               saveBtn.onclick = handleSave;
-              cancelBtn.onclick = () => loadNames();
+              cancelBtn.onclick = () => loadNames(); // Reloading resets DOM state
 
               editInput.addEventListener("keydown", (e) => {
                 if (e.key === "Enter") handleSave();
                 if (e.key === "Escape") loadNames();
               });
 
-              editWrapper.appendChild(avatar);
+              // Replace content with input
+              editWrapper.appendChild(avatar.cloneNode(true));
               editWrapper.appendChild(editInput);
               li.replaceChild(editWrapper, contentContainer);
 
+              // Swap action buttons
               actions.innerHTML = "";
+              actions.className =
+                "flex items-center gap-1.5 shrink-0 opacity-100"; // keep visible while editing
               actions.appendChild(saveBtn);
               actions.appendChild(cancelBtn);
               lucide.createIcons({ root: li });
+
               editInput.focus();
               editInput.select();
             };
 
-            // Delete Action
+            // Delete Action setup
             const delBtn = document.createElement("button");
             delBtn.type = "button";
             delBtn.className =
-              "p-1.5 text-slate-400 hover:text-rose-600 hover:bg-rose-50 rounded-lg transition-colors cursor-pointer focus:outline-none focus:ring-2 focus:ring-rose-500/20";
+              "p-2 text-slate-400 hover:text-rose-600 hover:bg-rose-50 rounded-lg transition-colors cursor-pointer focus:outline-none focus:ring-2 focus:ring-rose-500/20";
             delBtn.title = "Delete record";
             delBtn.innerHTML = `<i data-lucide="trash-2" class="w-4 h-4"></i>`;
             delBtn.onclick = () => openDeleteModal(row.id);
@@ -562,19 +592,20 @@
         } catch (err) {
           showToast(err.message || "Failed to load directory", "error");
           list.innerHTML = `
-          <li class="p-4 bg-rose-50 border border-rose-200 rounded-xl text-xs text-rose-700 text-center font-medium">
-            ${err.message || "Failed to communicate with Supabase. Check your URL and Key."}
+          <li class="p-4 bg-rose-50/80 border border-rose-200/80 rounded-xl text-xs text-rose-700 text-center font-semibold">
+            ${err.message || "Failed to communicate with database. Verify configuration."}
           </li>
         `;
           recordCount.textContent = `0 records`;
         }
       }
 
-      // Event: Modal Confirm Delete Handler
       confirmDeleteBtn.onclick = async () => {
         if (deleteTargetId) {
           confirmDeleteBtn.disabled = true;
-          confirmDeleteBtn.textContent = "Deleting...";
+          const originalHtml = confirmDeleteBtn.innerHTML;
+          confirmDeleteBtn.innerHTML = `<i data-lucide="loader-2" class="w-4 h-4 animate-spin mx-auto"></i>`;
+          lucide.createIcons({ root: confirmDeleteBtn });
 
           const idToDelete = deleteTargetId;
 
@@ -587,13 +618,14 @@
             if (error) throw error;
 
             showToast("Record removed", "info");
+
             // Smooth slide-out removal on the client
             const targetLi = document.querySelector(
               `li[data-id="${idToDelete}"]`,
             );
             if (targetLi) {
               targetLi.classList.add("row-deleting");
-              setTimeout(() => loadNames(), 350);
+              setTimeout(() => loadNames(), 350); // wait for animation
             } else {
               loadNames();
             }
@@ -601,7 +633,7 @@
             showToast(error.message, "error");
           } finally {
             confirmDeleteBtn.disabled = false;
-            confirmDeleteBtn.textContent = "Confirm Delete";
+            confirmDeleteBtn.innerHTML = originalHtml;
             closeDeleteModal();
           }
         }
@@ -614,13 +646,12 @@
         if (e.target === deleteModal) closeDeleteModal();
       });
 
-      // Event: Manual Refresh
+      // Manual Refresh
       refreshBtn.addEventListener("click", () => {
         loadNames();
-        showToast("Directory refreshed", "info");
+        showToast("Directory synced", "info");
       });
 
-      // Supabase Realtime Subscription Setup
       supabase
         .channel("public:User_Record")
         .on(
@@ -656,27 +687,17 @@
         .subscribe((status) => {
           // Update connection badge based on realtime socket status
           if (status === "SUBSCRIBED") {
-            liveBadge.classList.replace("bg-amber-50", "bg-emerald-50");
-            liveBadge.classList.replace("text-amber-700", "text-emerald-700");
-            liveBadge.classList.replace(
-              "border-amber-200/70",
-              "border-emerald-200/70",
-            );
-            liveBadge
-              .querySelector("span")
-              .classList.replace("bg-amber-500", "bg-emerald-500");
+            liveBadge.className =
+              "flex items-center gap-1.5 px-3 py-1 bg-emerald-100/70 text-emerald-700 border border-emerald-200/50 rounded-full text-xs font-semibold select-none shadow-sm transition-colors duration-300";
+            liveBadge.querySelector("span").className =
+              "w-2 h-2 rounded-full bg-emerald-500 animate-pulse";
             liveBadgeText.textContent = "Live Sync";
           } else if (status === "CHANNEL_ERROR" || status === "TIMED_OUT") {
-            liveBadge.classList.replace("bg-emerald-50", "bg-amber-50");
-            liveBadge.classList.replace("text-emerald-700", "text-amber-700");
-            liveBadge.classList.replace(
-              "border-emerald-200/70",
-              "border-amber-200/70",
-            );
-            liveBadge
-              .querySelector("span")
-              .classList.replace("bg-emerald-500", "bg-amber-500");
-            liveBadgeText.textContent = "Connecting...";
+            liveBadge.className =
+              "flex items-center gap-1.5 px-3 py-1 bg-amber-100/70 text-amber-700 border border-amber-200/50 rounded-full text-xs font-semibold select-none shadow-sm transition-colors duration-300";
+            liveBadge.querySelector("span").className =
+              "w-2 h-2 rounded-full bg-amber-500";
+            liveBadgeText.textContent = "Reconnecting...";
           }
         });
 
