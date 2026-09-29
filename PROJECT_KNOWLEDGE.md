@@ -49,10 +49,10 @@
   - **Row Level Security (RLS)**: Enabled. Users can only select, insert, or update their own profile matching `auth.uid() = id`.
   - **Triggers**: `on_auth_user_created_profile` automatically creates a profile row upon signup via `create_profile_for_new_user()`.
 - **Table `public."User_Request"`**:
-  - Fields: `id` (int8, primary key), `created_at` (timestamptz), `User_Name` (text), `User_Sbuject` (text), `User_Message` (text).
-  - **Purpose**: Stores contact requests, direct inquiries, and public guestbook comments from the portfolio.
-  - **Policies Needed**: Requires public `anon` INSERT and SELECT policies so portfolio visitors can submit and view messages without logging in (see migration `supabase/migrations/202609300001_user_request.sql`).
-  - **Realtime**: Added to `supabase_realtime` publication for instant live comment sync.
+  - Fields: `id` (int8, primary key), `created_at` (timestamptz), `User_Name` (text), `User_Sbuject` (text), `User_Message` (text), `User_Like_Count` (int8, default 0).
+  - **Purpose**: Stores contact requests, direct inquiries, public guestbook comments, and live like counts from the portfolio.
+  - **Policies Needed**: Requires public `anon` INSERT, SELECT, and UPDATE policies so portfolio visitors can submit, read, and like messages (see migration `supabase/migrations/202609300001_user_request.sql`).
+  - **Realtime**: Added to `supabase_realtime` publication for instant live comment and like count sync.
 - **Storage Buckets**:
   - `profile-photos`: Private bucket (5MB limit; jpg, png, webp).
 
@@ -88,6 +88,29 @@
     3. **Background Auto-Poll (3.5s)**: Guaranteed live sync across all tabs and devices even if WebSocket publications are restricted.
     4. **WebSocket Channel**: Supabase Realtime channel (`event: '*'`) for millisecond push events.
     5. **Manual Refresh Trigger**: Added interactive `↻` button in `.live-status-pill`.
+- **2026-09-30 (Live Database Likes System - User_Like_Count)**:
+  - **Feature**: Connected the heart like button on every comment card directly to column `User_Like_Count` in Supabase `public."User_Request"`.
+  - **Functionality**:
+    1. **Real Count Display**: Cards read and display the actual numeric count from `item.User_Like_Count` (defaults to 0 if null).
+    2. **Direct Database Persistence**: Clicking like sends a `PATCH` / `.update()` directly to Supabase (`persistLikeCountToSupabase()`), incrementing or decrementing the persisted count.
+    3. **Multi-User Realtime Sync**:
+       - Supabase Realtime channel listens for `postgres_changes` with `eventType === 'UPDATE'` and updates the DOM count instantaneously without re-rendering the whole card (`updateCommentLikeCountUI()`).
+       - Periodic background auto-poll (3.5s) syncs like counts across tabs and visitors.
+    4. **Client-Side State**: `localStorage` records liked comment IDs (`dnkh_portfolio_liked_comments`) so the current visitor's heart toggle (`❤️ / 🤍`) persists across page reloads.
+- **2026-09-30 (Mobile Responsiveness Overhaul - Header & Footer)**:
+  - **Issues Identified on Phones (<= 768px & <= 480px)**:
+    1. **Header Horizontal Overflow**: The theme toggle displayed full text `"Dark mode"` (120px) alongside language selector and hamburger, overflowing narrow phone screens (360px-414px) and pushing elements off-screen.
+    2. **Mobile Nav Drawer Offsets**: `nav.main-nav` was positioned absolutely inside `.wrap` (which had a fixed margin and relative positioning), causing it to cut off or float awkwardly with uneven side gutters instead of spanning the full viewport edge-to-edge.
+    3. **Hamburger Animation & Accessibility**: Lacked open/close state animations and touch targets were unoptimized for fingers.
+    4. **Footer Wrapping Disorder**: `.footer-container` lacked centered column rules for mobile, causing two long lines of copyright and organization text to wrap unevenly against the screen edges.
+  - **Fixes Applied**:
+    1. **Header Actions Optimization**: On mobile, `#theme-label` text is hidden so `.theme-toggle` becomes a sleek 36px icon button (`◐`); reduced `.language-select` footprint and header gap. Header now fits comfortably even on 320px screens with zero horizontal overflow.
+    2. **Fixed Edge-to-Edge Mobile Drawer**: Configured `nav.main-nav` to `position: fixed; top: 60px; left: 0; right: 0; width: 100%; max-height: calc(100vh - 60px); overflow-y: auto;` with smooth slide-down animation and 44px+ tap targets.
+    3. **Animated Hamburger 'X'**: Added CSS keyframe transitions turning 3 hamburger lines into a crisp 'X' close icon when opened (`.is-active`), with background scroll locking and outside-click/Escape dismissal in `app.js`.
+    4. **Centered Mobile Footer**: Added media query rules converting `.footer-container` into a centered vertical flex column with balanced margins and comfortable line spacing.
+    5. **Cache-Busters**: Bumped `styles.css?v=20260930_v6` and `app.js?v=20260930_v6` in `Aboutme/index.html`.
+
+
 
 
 

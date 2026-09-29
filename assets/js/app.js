@@ -56,17 +56,51 @@ document.addEventListener("DOMContentLoaded", () => {
   const mainNav = document.getElementById("main-nav");
 
   if (mobileNavToggle && mainNav) {
-    mobileNavToggle.addEventListener("click", () => {
+    function closeMobileNav() {
+      mainNav.classList.remove("is-open");
+      mobileNavToggle.classList.remove("is-active");
+      mobileNavToggle.setAttribute("aria-expanded", "false");
+      document.body.style.overflow = "";
+    }
+
+    mobileNavToggle.addEventListener("click", (e) => {
+      e.stopPropagation();
       const isOpen = mainNav.classList.toggle("is-open");
+      mobileNavToggle.classList.toggle("is-active", isOpen);
       mobileNavToggle.setAttribute("aria-expanded", String(isOpen));
+      document.body.style.overflow = isOpen ? "hidden" : "";
     });
 
     // Close menu when clicking a nav link
     mainNav.querySelectorAll("a").forEach((link) => {
       link.addEventListener("click", () => {
-        mainNav.classList.remove("is-open");
-        mobileNavToggle.setAttribute("aria-expanded", "false");
+        closeMobileNav();
       });
+    });
+
+    // Dismiss on outside click
+    document.addEventListener("click", (e) => {
+      if (
+        mainNav.classList.contains("is-open") &&
+        !mainNav.contains(e.target) &&
+        !mobileNavToggle.contains(e.target)
+      ) {
+        closeMobileNav();
+      }
+    });
+
+    // Dismiss on Escape key
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && mainNav.classList.contains("is-open")) {
+        closeMobileNav();
+      }
+    });
+
+    // Reset when resizing window to desktop
+    window.addEventListener("resize", () => {
+      if (window.innerWidth > 768 && mainNav.classList.contains("is-open")) {
+        closeMobileNav();
+      }
     });
   }
 
@@ -253,6 +287,77 @@ document.addEventListener("DOMContentLoaded", () => {
   const loadedCommentIds = new Set();
   let totalComments = 0;
 
+  function updateCommentLikeCountUI(id, newCount) {
+    if (!id || !commentsFeed) return;
+    const card = commentsFeed.querySelector(`.comment-card[data-id="${id}"]`);
+    if (!card) return;
+
+    const countSpan = card.querySelector(".like-count");
+    if (countSpan) {
+      const cleanCount = Math.max(0, parseInt(newCount, 10) || 0);
+      countSpan.textContent = cleanCount;
+    }
+  }
+
+  async function persistLikeCountToSupabase(id, isLiking) {
+    if (!id) return;
+    try {
+      // 1. Fetch current like count from database
+      let currentCount = 0;
+      if (supabaseClient) {
+        const { data, error } = await supabaseClient
+          .from("User_Request")
+          .select("User_Like_Count")
+          .eq("id", id)
+          .single();
+        if (!error && data && data.User_Like_Count != null) {
+          currentCount = parseInt(data.User_Like_Count, 10) || 0;
+        }
+      } else {
+        const res = await fetch(`${sbConfig.url}/rest/v1/User_Request?id=eq.${id}&select=User_Like_Count`, {
+          headers: {
+            apikey: sbConfig.publishableKey,
+            Authorization: `Bearer ${sbConfig.publishableKey}`,
+          },
+        });
+        if (res.ok) {
+          const list = await res.json();
+          if (list && list[0] && list[0].User_Like_Count != null) {
+            currentCount = parseInt(list[0].User_Like_Count, 10) || 0;
+          }
+        }
+      }
+
+      // 2. Compute updated count (never negative)
+      const targetCount = isLiking ? currentCount + 1 : Math.max(0, currentCount - 1);
+
+      // 3. Persist into User_Like_Count in Supabase
+      if (supabaseClient) {
+        const { error } = await supabaseClient
+          .from("User_Request")
+          .update({ User_Like_Count: targetCount })
+          .eq("id", id);
+        if (error) throw error;
+      } else {
+        const res = await fetch(`${sbConfig.url}/rest/v1/User_Request?id=eq.${id}`, {
+          method: "PATCH",
+          headers: {
+            apikey: sbConfig.publishableKey,
+            Authorization: `Bearer ${sbConfig.publishableKey}`,
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ User_Like_Count: targetCount }),
+        });
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      }
+
+      // Update UI with confirmed count
+      updateCommentLikeCountUI(id, targetCount);
+    } catch (err) {
+      console.warn("Could not sync like to User_Like_Count:", err);
+    }
+  }
+
   function renderCommentCard(item, isNew = false) {
     const card = document.createElement("article");
     card.className = `comment-card${isNew ? " is-new" : ""}`;
@@ -267,8 +372,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const likedMap = getLikedComments();
     const isLiked = item.id ? !!likedMap[item.id] : false;
-    const baseLikes = item.id ? (Math.abs(Number(item.id)) % 4 + 1) : 1;
-    const displayLikes = baseLikes + (isLiked ? 1 : 0);
+    const realLikes = item.User_Like_Count != null ? Math.max(0, parseInt(item.User_Like_Count, 10) || 0) : 0;
 
     card.innerHTML = `
       <div class="comment-head-row">
@@ -293,17 +397,21 @@ document.addEventListener("DOMContentLoaded", () => {
         <span class="comment-status-tag">
           <span class="status-dot-pulse"></span> Logged in Supabase
         </span>
-        <button class="comment-like-btn${isLiked ? " is-liked" : ""}" type="button" aria-label="Like message">
+        <button class="comment-like-btn${isLiked ? " is-liked" : ""}" type="button" aria-label="Like message" data-id="${item.id || ""}">
           <span class="heart-icon">${isLiked ? "❤️" : "🤍"}</span>
-          <span class="like-count">${displayLikes}</span>
+          <span class="like-count">${realLikes}</span>
         </button>
       </div>
     `;
 
     const likeBtn = card.querySelector(".comment-like-btn");
     if (likeBtn && item.id) {
-      likeBtn.addEventListener("click", (e) => {
+      let isUpdating = false;
+      likeBtn.addEventListener("click", async (e) => {
         e.stopPropagation();
+        if (isUpdating) return;
+        isUpdating = true;
+
         const currentlyLiked = likeBtn.classList.contains("is-liked");
         const countSpan = likeBtn.querySelector(".like-count");
         const heartSpan = likeBtn.querySelector(".heart-icon");
@@ -312,14 +420,20 @@ document.addEventListener("DOMContentLoaded", () => {
         if (currentlyLiked) {
           likeBtn.classList.remove("is-liked");
           heartSpan.textContent = "🤍";
-          countSpan.textContent = Math.max(0, count - 1);
+          const newLocalCount = Math.max(0, count - 1);
+          countSpan.textContent = newLocalCount;
           setLikedComment(item.id, false);
+          await persistLikeCountToSupabase(item.id, false);
         } else {
           likeBtn.classList.add("is-liked");
           heartSpan.textContent = "❤️";
-          countSpan.textContent = count + 1;
+          const newLocalCount = count + 1;
+          countSpan.textContent = newLocalCount;
           setLikedComment(item.id, true);
+          await persistLikeCountToSupabase(item.id, true);
         }
+
+        isUpdating = false;
       });
     }
 
@@ -328,7 +442,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function addCommentToFeed(item, isNew = false) {
     if (!commentsFeed) return;
-    if (item.id && loadedCommentIds.has(item.id)) return;
+    if (item.id && loadedCommentIds.has(item.id)) {
+      if (item.User_Like_Count != null) {
+        updateCommentLikeCountUI(item.id, item.User_Like_Count);
+      }
+      return;
+    }
     if (item.id) loadedCommentIds.add(item.id);
 
     const emptyEl = commentsFeed.querySelector(".comments-empty");
@@ -405,6 +524,13 @@ document.addEventListener("DOMContentLoaded", () => {
         newItems.forEach((item) => {
           addCommentToFeed(item, true);
         });
+
+        // Sync real likes from Supabase for all existing cards
+        rows.forEach((item) => {
+          if (item.id && item.User_Like_Count != null) {
+            updateCommentLikeCountUI(item.id, item.User_Like_Count);
+          }
+        });
       }
 
       if (commentsCount) {
@@ -428,7 +554,11 @@ document.addEventListener("DOMContentLoaded", () => {
             { event: "*", schema: "public", table: "User_Request" },
             (payload) => {
               console.log("Realtime event received:", payload);
-              if (payload && payload.new) {
+              if (payload && payload.eventType === "UPDATE" && payload.new) {
+                updateCommentLikeCountUI(payload.new.id, payload.new.User_Like_Count);
+              } else if (payload && payload.eventType === "INSERT" && payload.new) {
+                addCommentToFeed(payload.new, true);
+              } else if (payload && payload.new) {
                 addCommentToFeed(payload.new, true);
               } else {
                 loadComments(true);

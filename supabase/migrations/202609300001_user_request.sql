@@ -37,3 +37,16 @@ begin
   end if;
 end;
 $$;
+
+-- 5. Ensure User_Like_Count column exists and allow public update
+alter table if exists public."User_Request"
+  add column if not exists "User_Like_Count" int8 default 0;
+
+drop policy if exists "Allow public update like count on User_Request" on public."User_Request";
+create policy "Allow public update like count on User_Request"
+on public."User_Request"
+for update
+to anon, authenticated
+using (true)
+with check (true);
+
