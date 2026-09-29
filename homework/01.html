@@ -2,128 +2,686 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>User Record Demo</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>User Record Directory</title>
+
+    <!-- Google Font: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ["Inter", "sans-serif"],
+            },
+          },
+        },
+      };
+    </script>
+
+    <!-- Lucide Icons CDN -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
     <style>
-      body {
-        font-family: "Segoe UI", Roboto, sans-serif;
-        background: linear-gradient(135deg, #4a90e2, #50e3c2);
-        min-height: 100vh;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        padding: 40px 20px;
-        color: #fff;
+      /* Custom scrollbar styling */
+      ::-webkit-scrollbar {
+        width: 6px;
       }
-      h1 {
-        margin-bottom: 20px;
+      ::-webkit-scrollbar-track {
+        background: transparent;
       }
-      form {
-        display: flex;
-        gap: 10px;
-        margin-bottom: 30px;
-        flex-wrap: wrap;
-        justify-content: center;
+      ::-webkit-scrollbar-thumb {
+        background: #cbd5e1;
+        border-radius: 9999px;
       }
-      input {
-        padding: 10px 15px;
-        border-radius: 8px;
-        border: none;
-        font-size: 1rem;
-        min-width: 200px;
+      ::-webkit-scrollbar-thumb:hover {
+        background: #94a3b8;
       }
-      button {
-        padding: 10px 20px;
-        border: none;
-        border-radius: 8px;
-        background: #facc15;
-        color: #000;
-        font-weight: bold;
-        cursor: pointer;
-        transition:
-          transform 0.2s ease,
-          background 0.3s ease;
+
+      /* Flash highlight animation for new/updated items */
+      @keyframes highlight-flash {
+        0% {
+          background-color: rgb(238 242 255); /* indigo-50 */
+          border-color: rgb(129 140 248); /* indigo-400 */
+          transform: scale(1.015);
+        }
+        100% {
+          background-color: rgb(255 255 255); /* white */
+          border-color: rgb(241 245 249); /* slate-100 */
+          transform: scale(1);
+        }
       }
-      button:hover {
-        background: #fbbf24;
-        transform: scale(1.05);
+
+      .row-highlight {
+        animation: highlight-flash 2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
       }
-      ul {
-        list-style: none;
-        width: 100%;
-        max-width: 400px;
-        padding: 0;
-      }
-      li {
-        background: rgba(255, 255, 255, 0.2);
-        padding: 12px 16px;
-        margin-bottom: 10px;
-        border-radius: 10px;
-        font-size: 1.1rem;
-        text-align: center;
-        backdrop-filter: blur(4px);
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+
+      /* Smooth exit animation for deleted items */
+      .row-deleting {
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        opacity: 0 !important;
+        transform: translateX(18px) scale(0.96) !important;
+        max-height: 0px !important;
+        padding-top: 0px !important;
+        padding-bottom: 0px !important;
+        margin-bottom: 0px !important;
+        border-color: transparent !important;
+        overflow: hidden;
       }
     </style>
   </head>
-  <body>
-    <h1>User Record Demo</h1>
+  <body
+    class="bg-slate-50 text-slate-800 antialiased min-h-screen flex flex-col items-center justify-center p-4 sm:p-6 lg:p-8"
+  >
+    <main
+      class="w-full max-w-xl bg-white rounded-2xl shadow-xl shadow-slate-200/70 border border-slate-200/80 overflow-hidden transition-all"
+    >
+      <!-- Header Section -->
+      <header
+        class="px-6 sm:px-8 pt-7 pb-6 border-b border-slate-100 bg-gradient-to-b from-slate-50/70 to-white flex items-center justify-between"
+      >
+        <div class="flex items-center space-x-3.5">
+          <div
+            class="w-10 h-10 rounded-xl bg-indigo-600 flex items-center justify-center text-white shadow-md shadow-indigo-200"
+          >
+            <i data-lucide="users" class="w-5 h-5"></i>
+          </div>
+          <div>
+            <h1
+              class="text-lg sm:text-xl font-bold text-slate-900 tracking-tight leading-tight"
+            >
+              User Records
+            </h1>
+            <p class="text-xs text-slate-500 mt-0.5">
+              Real-time collaborative directory
+            </p>
+          </div>
+        </div>
 
-    <form id="nameForm">
-      <input type="text" id="nameInput" placeholder="Enter a name" required />
-      <button type="submit">Add Name</button>
-    </form>
+        <!-- Real-time Live Connection Badge -->
+        <div
+          id="liveBadge"
+          class="flex items-center gap-1.5 px-3 py-1 bg-emerald-50 text-emerald-700 border border-emerald-200/70 rounded-full text-xs font-semibold select-none shadow-sm transition-colors duration-300"
+        >
+          <span
+            class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"
+          ></span>
+          <span id="liveBadgeText">Live Sync</span>
+        </div>
+      </header>
 
-    <h2>Stored Names</h2>
-    <ul id="nameList"></ul>
+      <div class="p-6 sm:p-8 space-y-6">
+        <!-- Add User Form -->
+        <form id="nameForm" class="space-y-2.5">
+          <div class="flex items-center justify-between">
+            <label
+              for="nameInput"
+              class="block text-xs font-semibold uppercase tracking-wider text-slate-500"
+            >
+              Add New Member
+            </label>
+            <span id="recordCount" class="text-xs font-medium text-slate-400"
+              >0 records</span
+            >
+          </div>
+
+          <div class="flex gap-2.5 flex-col sm:flex-row">
+            <div class="relative flex-1">
+              <div
+                class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400"
+              >
+                <i data-lucide="user-plus" class="w-4 h-4"></i>
+              </div>
+              <input
+                type="text"
+                id="nameInput"
+                placeholder="e.g. Maya Lin"
+                required
+                autocomplete="off"
+                class="w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm font-medium text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 focus:bg-white transition-all duration-150"
+              />
+            </div>
+            <button
+              type="submit"
+              id="submitBtn"
+              class="inline-flex items-center justify-center px-5 py-2.5 bg-indigo-600 hover:bg-indigo-700 active:scale-[0.98] text-white text-sm font-semibold rounded-xl shadow-sm shadow-indigo-100 hover:shadow transition-all duration-150 gap-2 shrink-0 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              <i data-lucide="plus" class="w-4 h-4"></i>
+              <span>Add User</span>
+            </button>
+          </div>
+        </form>
+
+        <div>
+          <div class="flex items-center justify-between mb-3">
+            <h2
+              class="text-xs font-semibold uppercase tracking-wider text-slate-500"
+            >
+              Stored Records
+            </h2>
+            <button
+              id="refreshBtn"
+              type="button"
+              title="Manual sync with database"
+              class="text-xs text-slate-500 hover:text-slate-800 px-2 py-1 rounded-lg hover:bg-slate-100 transition-colors flex items-center gap-1.5 cursor-pointer"
+            >
+              <i data-lucide="refresh-cw" class="w-3.5 h-3.5"></i>
+              <span>Refresh</span>
+            </button>
+          </div>
+
+          <!-- Scrollable Dynamic List -->
+          <ul id="nameList" class="space-y-2 max-h-80 overflow-y-auto pr-1">
+            <!-- Populated dynamically via JS -->
+            <li
+              class="py-10 text-center flex flex-col items-center justify-center text-slate-400"
+            >
+              <i data-lucide="loader-2" class="w-8 h-8 animate-spin mb-2"></i>
+              <span class="text-sm font-medium">Connecting to Supabase...</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <footer
+        class="px-6 sm:px-8 py-3.5 bg-slate-50/80 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500"
+      >
+        <span class="flex items-center gap-1.5">
+          <span class="w-1.5 h-1.5 rounded-full bg-indigo-500"></span>
+          Table:
+          <code
+            class="font-mono text-slate-700 bg-white border border-slate-200 px-1.5 py-0.5 rounded text-[11px]"
+            >User_Record</code
+          >
+        </span>
+        <span class="text-[11px] text-slate-400"
+          >PostgreSQL Realtime Channel</span
+        >
+      </footer>
+    </main>
+
+    <!-- Delete Confirmation Modal -->
+    <div
+      id="deleteModal"
+      class="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/40 backdrop-blur-sm opacity-0 pointer-events-none transition-opacity duration-200 p-4"
+    >
+      <div
+        id="deleteModalDialog"
+        class="bg-white rounded-2xl max-w-sm w-full p-6 shadow-2xl border border-slate-100 transform scale-95 transition-transform duration-200"
+      >
+        <div
+          class="w-12 h-12 rounded-full bg-rose-50 text-rose-600 flex items-center justify-center mx-auto mb-4 border border-rose-100"
+        >
+          <i data-lucide="trash-2" class="w-6 h-6"></i>
+        </div>
+        <h3 class="text-base font-semibold text-slate-900 text-center">
+          Delete Record
+        </h3>
+        <p
+          class="text-xs text-slate-500 text-center mt-1.5 mb-6 leading-relaxed"
+        >
+          Are you sure you want to remove this record? This change will
+          synchronize instantly across all connected sessions.
+        </p>
+        <div class="flex gap-2.5">
+          <button
+            type="button"
+            id="cancelDelete"
+            class="flex-1 px-4 py-2.5 border border-slate-200 rounded-xl text-xs font-semibold text-slate-700 hover:bg-slate-50 active:bg-slate-100 transition-colors cursor-pointer"
+          >
+            Cancel
+          </button>
+          <button
+            type="button"
+            id="confirmDelete"
+            class="flex-1 px-4 py-2.5 bg-rose-600 hover:bg-rose-700 active:bg-rose-800 rounded-xl text-xs font-semibold text-white shadow-sm shadow-rose-200 transition-colors cursor-pointer"
+          >
+            Confirm Delete
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Notification Toast Container -->
+    <div
+      id="toastContainer"
+      class="fixed bottom-5 right-5 z-50 flex flex-col gap-2.5 pointer-events-none"
+    ></div>
 
     <script type="module">
       import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm";
 
-      // Replace with your project URL and anon key
-      const supabaseUrl = "https://dgehlxhbggqxiznsryrv.supabase.co";
-      const supabaseKey = "sb_publishable_0r0SqqjiXg8KGQVqQZM0TQ_KuCheFqj";
+      // Import credentials from local config file
+      import { supabaseUrl, supabaseKey } from "./supabaseConfig.js";
+
+      // Initialize Supabase Client
       const supabase = createClient(supabaseUrl, supabaseKey);
 
+      // DOM Elements
       const form = document.getElementById("nameForm");
       const input = document.getElementById("nameInput");
+      const submitBtn = document.getElementById("submitBtn");
       const list = document.getElementById("nameList");
+      const recordCount = document.getElementById("recordCount");
+      const refreshBtn = document.getElementById("refreshBtn");
 
-      // Insert new name into User_Record
+      const deleteModal = document.getElementById("deleteModal");
+      const deleteModalDialog = document.getElementById("deleteModalDialog");
+      const confirmDeleteBtn = document.getElementById("confirmDelete");
+      const cancelDeleteBtn = document.getElementById("cancelDelete");
+
+      const toastContainer = document.getElementById("toastContainer");
+      const liveBadge = document.getElementById("liveBadge");
+      const liveBadgeText = document.getElementById("liveBadgeText");
+
+      let deleteTargetId = null;
+
+      // Helper: Show custom toast notifications
+      function showToast(message, type = "info") {
+        const toast = document.createElement("div");
+
+        const config = {
+          success: {
+            border: "border-emerald-200",
+            bg: "bg-emerald-50",
+            text: "text-emerald-800",
+            icon: "check-circle-2",
+          },
+          error: {
+            border: "border-rose-200",
+            bg: "bg-rose-50",
+            text: "text-rose-800",
+            icon: "alert-circle",
+          },
+          info: {
+            border: "border-slate-200",
+            bg: "bg-white",
+            text: "text-slate-800",
+            icon: "bell",
+          },
+        }[type] || {
+          border: "border-slate-200",
+          bg: "bg-white",
+          text: "text-slate-800",
+          icon: "info",
+        };
+
+        toast.className = `flex items-center gap-2.5 px-4 py-3 rounded-xl shadow-lg border text-xs font-semibold pointer-events-auto transition-all duration-300 transform translate-y-3 opacity-0 ${config.bg} ${config.border} ${config.text}`;
+        toast.innerHTML = `
+        <i data-lucide="${config.icon}" class="w-4 h-4 shrink-0"></i>
+        <span>${message}</span>
+      `;
+
+        toastContainer.appendChild(toast);
+        lucide.createIcons({ root: toast });
+
+        requestAnimationFrame(() => {
+          toast.classList.remove("translate-y-3", "opacity-0");
+        });
+
+        setTimeout(() => {
+          toast.classList.add("translate-y-3", "opacity-0");
+          setTimeout(() => toast.remove(), 320);
+        }, 3500);
+      }
+
+      // Helper: Modal display controllers
+      function openDeleteModal(id) {
+        deleteTargetId = id;
+        deleteModal.classList.remove("opacity-0", "pointer-events-none");
+        deleteModalDialog.classList.remove("scale-95");
+        deleteModalDialog.classList.add("scale-100");
+      }
+
+      function closeDeleteModal() {
+        deleteTargetId = null;
+        deleteModal.classList.add("opacity-0", "pointer-events-none");
+        deleteModalDialog.classList.remove("scale-100");
+        deleteModalDialog.classList.add("scale-95");
+      }
+
+      // Helper: Generate clean 2-letter initials for avatar badge
+      function getInitials(name) {
+        if (!name) return "U";
+        const parts = name.trim().split(/\s+/);
+        return parts.length >= 2
+          ? (parts[0][0] + parts[1][0]).toUpperCase()
+          : name.slice(0, 2).toUpperCase();
+      }
+
+      // Event: Form Submission for Adding Users
       form.addEventListener("submit", async (e) => {
         e.preventDefault();
-        const { error } = await supabase
-          .from("User_Record")
-          .insert([{ User_Name: input.value }]);
+        const val = input.value.trim();
+        if (!val) return;
 
-        if (error) {
-          alert("Error: " + error.message);
-        } else {
+        submitBtn.disabled = true;
+        const originalHtml = submitBtn.innerHTML;
+        submitBtn.innerHTML = `<i data-lucide="loader-2" class="w-4 h-4 animate-spin"></i><span>Adding...</span>`;
+        lucide.createIcons({ root: submitBtn });
+
+        try {
+          const { data, error } = await supabase
+            .from("User_Record")
+            .insert([{ User_Name: val }])
+            .select();
+
+          if (error) throw error;
+
           input.value = "";
-          loadNames();
+          showToast("User added to directory", "success");
+          // Realtime handles DOM update, but we optionally trigger a flash here locally
+          const newId = data && data[0] ? data[0].id : null;
+          if (newId) loadNames(newId);
+        } catch (err) {
+          showToast(err.message, "error");
+        } finally {
+          submitBtn.disabled = false;
+          submitBtn.innerHTML = originalHtml;
+          lucide.createIcons({ root: submitBtn });
         }
       });
 
-      // Load names from User_Record
-      async function loadNames() {
-        const { data, error } = await supabase
-          .from("User_Record")
-          .select("User_Name")
-          .order("id", { ascending: true });
+      // Core Function: Load and Render Names
+      async function loadNames(highlightId = null) {
+        // Avoid wiping out user input if someone is actively editing inline
+        const activeInput = document.querySelector(
+          "#nameList input[type='text']",
+        );
+        if (activeInput) {
+          return;
+        }
 
-        list.innerHTML = "";
-        if (error) {
-          list.innerHTML = "<li>Error loading names</li>";
-        } else {
+        try {
+          const { data, error } = await supabase
+            .from("User_Record")
+            .select("id, User_Name")
+            .order("id", { ascending: true });
+
+          if (error) throw error;
+
+          list.innerHTML = "";
+          const count = data ? data.length : 0;
+          recordCount.textContent = `${count} ${count === 1 ? "record" : "records"}`;
+
+          if (!data || data.length === 0) {
+            list.innerHTML = `
+            <li class="py-10 text-center flex flex-col items-center justify-center bg-slate-50/60 rounded-xl border border-dashed border-slate-200">
+              <div class="w-10 h-10 rounded-full bg-slate-100 flex items-center justify-center text-slate-400 mb-2">
+                <i data-lucide="user-x" class="w-5 h-5"></i>
+              </div>
+              <p class="text-xs font-semibold text-slate-700">No records found</p>
+              <p class="text-[11px] text-slate-400 mt-0.5">Add a new user using the field above</p>
+            </li>
+          `;
+            lucide.createIcons({ root: list });
+            return;
+          }
+
           data.forEach((row) => {
             const li = document.createElement("li");
-            li.textContent = row.User_Name;
+            li.dataset.id = row.id;
+
+            const isHighlighted =
+              highlightId && String(row.id) === String(highlightId);
+
+            li.className = `group flex items-center justify-between p-3 rounded-xl border transition-all duration-200 gap-3 ${
+              isHighlighted
+                ? "row-highlight border-indigo-400"
+                : "border-slate-200/70 bg-white hover:border-slate-300 hover:shadow-sm"
+            }`;
+
+            // Content section (Avatar + Name)
+            const contentContainer = document.createElement("div");
+            contentContainer.className =
+              "flex items-center gap-3 flex-1 min-w-0";
+
+            const avatar = document.createElement("div");
+            avatar.className =
+              "w-8 h-8 rounded-lg bg-indigo-50 border border-indigo-100 text-indigo-600 flex items-center justify-center font-bold text-xs shrink-0 select-none";
+            avatar.textContent = getInitials(row.User_Name);
+
+            const nameSpan = document.createElement("span");
+            nameSpan.className =
+              "text-sm font-medium text-slate-700 truncate select-all";
+            nameSpan.textContent = row.User_Name;
+
+            contentContainer.appendChild(avatar);
+            contentContainer.appendChild(nameSpan);
+
+            // Action buttons (Edit & Delete)
+            const actions = document.createElement("div");
+            actions.className = "flex items-center gap-1 shrink-0";
+
+            // Edit Action
+            const editBtn = document.createElement("button");
+            editBtn.type = "button";
+            editBtn.className =
+              "p-1.5 text-slate-400 hover:text-indigo-600 hover:bg-indigo-50 rounded-lg transition-colors cursor-pointer focus:outline-none focus:ring-2 focus:ring-indigo-500/20";
+            editBtn.title = "Edit record";
+            editBtn.innerHTML = `<i data-lucide="pencil" class="w-4 h-4"></i>`;
+
+            editBtn.onclick = () => {
+              const editWrapper = document.createElement("div");
+              editWrapper.className = "flex items-center gap-2 flex-1 min-w-0";
+
+              const editInput = document.createElement("input");
+              editInput.type = "text";
+              editInput.value = row.User_Name;
+              editInput.className =
+                "flex-1 px-3 py-1.5 text-sm bg-white border border-indigo-400 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500/20 font-medium text-slate-800";
+
+              const saveBtn = document.createElement("button");
+              saveBtn.type = "button";
+              saveBtn.className =
+                "p-1.5 text-emerald-600 hover:bg-emerald-50 rounded-lg transition-colors cursor-pointer focus:outline-none focus:ring-2 focus:ring-emerald-500/20";
+              saveBtn.title = "Save (Enter)";
+              saveBtn.innerHTML = `<i data-lucide="check" class="w-4 h-4"></i>`;
+
+              const cancelBtn = document.createElement("button");
+              cancelBtn.type = "button";
+              cancelBtn.className =
+                "p-1.5 text-slate-400 hover:text-slate-600 hover:bg-slate-100 rounded-lg transition-colors cursor-pointer focus:outline-none focus:ring-2 focus:ring-slate-500/20";
+              cancelBtn.title = "Cancel (Esc)";
+              cancelBtn.innerHTML = `<i data-lucide="x" class="w-4 h-4"></i>`;
+
+              const handleSave = async () => {
+                const trimmed = editInput.value.trim();
+                if (!trimmed) {
+                  showToast("Name cannot be empty", "error");
+                  return;
+                }
+                if (trimmed === row.User_Name) {
+                  loadNames();
+                  return;
+                }
+
+                saveBtn.disabled = true;
+                try {
+                  const { error: updateError } = await supabase
+                    .from("User_Record")
+                    .update({ User_Name: trimmed })
+                    .eq("id", row.id);
+
+                  if (updateError) throw updateError;
+
+                  showToast("User updated successfully", "success");
+                  loadNames(row.id);
+                } catch (updateError) {
+                  showToast(updateError.message, "error");
+                  saveBtn.disabled = false;
+                }
+              };
+
+              saveBtn.onclick = handleSave;
+              cancelBtn.onclick = () => loadNames();
+
+              editInput.addEventListener("keydown", (e) => {
+                if (e.key === "Enter") handleSave();
+                if (e.key === "Escape") loadNames();
+              });
+
+              editWrapper.appendChild(avatar);
+              editWrapper.appendChild(editInput);
+              li.replaceChild(editWrapper, contentContainer);
+
+              actions.innerHTML = "";
+              actions.appendChild(saveBtn);
+              actions.appendChild(cancelBtn);
+              lucide.createIcons({ root: li });
+              editInput.focus();
+              editInput.select();
+            };
+
+            // Delete Action
+            const delBtn = document.createElement("button");
+            delBtn.type = "button";
+            delBtn.className =
+              "p-1.5 text-slate-400 hover:text-rose-600 hover:bg-rose-50 rounded-lg transition-colors cursor-pointer focus:outline-none focus:ring-2 focus:ring-rose-500/20";
+            delBtn.title = "Delete record";
+            delBtn.innerHTML = `<i data-lucide="trash-2" class="w-4 h-4"></i>`;
+            delBtn.onclick = () => openDeleteModal(row.id);
+
+            actions.appendChild(editBtn);
+            actions.appendChild(delBtn);
+
+            li.appendChild(contentContainer);
+            li.appendChild(actions);
             list.appendChild(li);
           });
+
+          lucide.createIcons({ root: list });
+        } catch (err) {
+          showToast(err.message || "Failed to load directory", "error");
+          list.innerHTML = `
+          <li class="p-4 bg-rose-50 border border-rose-200 rounded-xl text-xs text-rose-700 text-center font-medium">
+            ${err.message || "Failed to communicate with Supabase. Check your URL and Key."}
+          </li>
+        `;
+          recordCount.textContent = `0 records`;
         }
       }
 
-      // Initial load
+      // Event: Modal Confirm Delete Handler
+      confirmDeleteBtn.onclick = async () => {
+        if (deleteTargetId) {
+          confirmDeleteBtn.disabled = true;
+          confirmDeleteBtn.textContent = "Deleting...";
+
+          const idToDelete = deleteTargetId;
+
+          try {
+            const { error } = await supabase
+              .from("User_Record")
+              .delete()
+              .eq("id", idToDelete);
+
+            if (error) throw error;
+
+            showToast("Record removed", "info");
+            // Smooth slide-out removal on the client
+            const targetLi = document.querySelector(
+              `li[data-id="${idToDelete}"]`,
+            );
+            if (targetLi) {
+              targetLi.classList.add("row-deleting");
+              setTimeout(() => loadNames(), 350);
+            } else {
+              loadNames();
+            }
+          } catch (error) {
+            showToast(error.message, "error");
+          } finally {
+            confirmDeleteBtn.disabled = false;
+            confirmDeleteBtn.textContent = "Confirm Delete";
+            closeDeleteModal();
+          }
+        }
+      };
+
+      cancelDeleteBtn.onclick = closeDeleteModal;
+
+      // Close Modal on Outside Click
+      deleteModal.addEventListener("mousedown", (e) => {
+        if (e.target === deleteModal) closeDeleteModal();
+      });
+
+      // Event: Manual Refresh
+      refreshBtn.addEventListener("click", () => {
+        loadNames();
+        showToast("Directory refreshed", "info");
+      });
+
+      // Supabase Realtime Subscription Setup
+      supabase
+        .channel("public:User_Record")
+        .on(
+          "postgres_changes",
+          { event: "*", schema: "public", table: "User_Record" },
+          (payload) => {
+            // If the user is currently editing an item inline, do not disrupt typing
+            const isActivelyEditing = document.querySelector(
+              "#nameList input[type='text']",
+            );
+            if (isActivelyEditing) return;
+
+            if (payload.eventType === "DELETE") {
+              const deletedId = payload.old ? payload.old.id : null;
+              const rowElem = document.querySelector(
+                `li[data-id="${deletedId}"]`,
+              );
+              if (rowElem) {
+                rowElem.classList.add("row-deleting");
+                setTimeout(() => loadNames(), 350);
+              } else {
+                loadNames();
+              }
+            } else if (payload.eventType === "INSERT") {
+              const newId = payload.new ? payload.new.id : null;
+              loadNames(newId);
+            } else if (payload.eventType === "UPDATE") {
+              const updatedId = payload.new ? payload.new.id : null;
+              loadNames(updatedId);
+            }
+          },
+        )
+        .subscribe((status) => {
+          // Update connection badge based on realtime socket status
+          if (status === "SUBSCRIBED") {
+            liveBadge.classList.replace("bg-amber-50", "bg-emerald-50");
+            liveBadge.classList.replace("text-amber-700", "text-emerald-700");
+            liveBadge.classList.replace(
+              "border-amber-200/70",
+              "border-emerald-200/70",
+            );
+            liveBadge
+              .querySelector("span")
+              .classList.replace("bg-amber-500", "bg-emerald-500");
+            liveBadgeText.textContent = "Live Sync";
+          } else if (status === "CHANNEL_ERROR" || status === "TIMED_OUT") {
+            liveBadge.classList.replace("bg-emerald-50", "bg-amber-50");
+            liveBadge.classList.replace("text-emerald-700", "text-amber-700");
+            liveBadge.classList.replace(
+              "border-emerald-200/70",
+              "border-amber-200/70",
+            );
+            liveBadge
+              .querySelector("span")
+              .classList.replace("bg-emerald-500", "bg-amber-500");
+            liveBadgeText.textContent = "Connecting...";
+          }
+        });
+
+      // Initialize generic Lucide Icons and Load initial data
+      lucide.createIcons();
       loadNames();
     </script>
   </body>
