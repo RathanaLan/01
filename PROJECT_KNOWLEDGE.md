@@ -108,7 +108,17 @@
     2. **Fixed Edge-to-Edge Mobile Drawer**: Configured `nav.main-nav` to `position: fixed; top: 60px; left: 0; right: 0; width: 100%; max-height: calc(100vh - 60px); overflow-y: auto;` with smooth slide-down animation and 44px+ tap targets.
     3. **Animated Hamburger 'X'**: Added CSS keyframe transitions turning 3 hamburger lines into a crisp 'X' close icon when opened (`.is-active`), with background scroll locking and outside-click/Escape dismissal in `app.js`.
     4. **Centered Mobile Footer**: Added media query rules converting `.footer-container` into a centered vertical flex column with balanced margins and comfortable line spacing.
-    5. **Cache-Busters**: Bumped `styles.css?v=20260930_v6` and `app.js?v=20260930_v6` in `Aboutme/index.html`.
+- **2026-09-30 (Root index.html 2026 Executive Portal Upgrade)**:
+  - **Replaced Legacy 404 Splash Screen**: Replaced the outdated 404 error page at root `index.html` with a modern 2026 **Executive Gateway Portal** connecting all facets of Rathana Lan's digital ecosystem.
+  - **Key Capabilities**:
+    1. **Bento Portal Architecture**: Features a primary destination card (`Aboutme/index.html`), smart factory project shortcut (`Aboutme/index.html#projects`), and academic research hub (`homework/index.html`).
+    2. **Interactive Constellation Canvas**: High-DPI hardware-accelerated particle network with dynamic node connections and pointer attraction for both desktop mouse and mobile touchscreens.
+    3. **Time-Aware Greeting**: Automatically renders localized greetings (*"Good morning"*, *"Good afternoon"*, *"Good evening"*).
+    4. **Smart Auto-Redirect**: Automatically carries visitors to `Aboutme/index.html` after 7 seconds, with an instant "Stay Here" pause button and "Enter Now" bypass.
+    5. **Universal Responsiveness & Accessibility**: 100% responsive down to 320px screens with viewport metadata, reduced motion compatibility, and semantic landmarks.
+    6. **Enlarged High-Impact Redirect Banner**: Expanded padding, font size (16px), glowing countdown badge, and prominent dual action buttons (`Stay Here` & `Enter Now 🚀`) for strong visual prominence and thumb ergonomics.
+
+
 
 
 
