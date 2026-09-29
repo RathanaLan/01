@@ -1,1236 +1,247 @@
 <!doctype html>
-<html lang="en" data-theme="light">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="theme-color" content="#14231e" />
-    <meta
-      name="description"
-      content="Rathana Lan, DNKH Digital Transformation Supervisor. DX strategy, governance, manufacturing digitalization, Power Platform, and Smart Factory readiness."
-    />
-    <title>Rathana Lan — Digital Transformation Supervisor</title>
-    <script src="assets/js/theme.js"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&family=Noto+Sans+Khmer:wght@400;500;600;700&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" href="assets/css/styles.css" />
+    <title>404 - Page Not Found</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-family: "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        color: #fff;
+        overflow: hidden;
+      }
+
+      /* Animated gradient background */
+      body::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(-45deg, #ff6ec4, #7873f5, #4ade80, #facc15);
+        background-size: 400% 400%;
+        animation: gradientBG 12s ease infinite;
+        z-index: -2;
+      }
+      @keyframes gradientBG {
+        0% {
+          background-position: 0% 50%;
+        }
+        50% {
+          background-position: 100% 50%;
+        }
+        100% {
+          background-position: 0% 50%;
+        }
+      }
+
+      /* Floating shapes */
+      .shape {
+        position: absolute;
+        border-radius: 50%;
+        opacity: 0.25;
+        animation: float 20s infinite ease-in-out;
+      }
+      .shape:nth-child(1) {
+        width: 120px;
+        height: 120px;
+        background: #ff6ec4;
+        top: 10%;
+        left: 15%;
+        animation-delay: 0s;
+      }
+      .shape:nth-child(2) {
+        width: 80px;
+        height: 80px;
+        background: #4ade80;
+        top: 70%;
+        left: 25%;
+        animation-delay: 5s;
+      }
+      .shape:nth-child(3) {
+        width: 150px;
+        height: 150px;
+        background: #facc15;
+        top: 40%;
+        left: 75%;
+        animation-delay: 10s;
+      }
+      .shape:nth-child(4) {
+        width: 100px;
+        height: 100px;
+        background: #7873f5;
+        top: 80%;
+        left: 60%;
+        animation-delay: 15s;
+      }
+
+      @keyframes float {
+        0%,
+        100% {
+          transform: translateY(0) rotate(0deg);
+        }
+        50% {
+          transform: translateY(-40px) rotate(180deg);
+        }
+      }
+
+      /* Particle canvas */
+      canvas {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+      }
+
+      .container {
+        text-align: center;
+        padding: 40px;
+        background: rgba(0, 0, 0, 0.5);
+        border-radius: 16px;
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
+        max-width: 700px;
+        z-index: 1;
+      }
+
+      h1 {
+        font-size: 6rem;
+        margin-bottom: 10px;
+        color: #facc15;
+      }
+
+      h2 {
+        font-weight: 400;
+        margin-bottom: 20px;
+      }
+
+      p {
+        font-size: 1.2rem;
+        line-height: 1.6;
+        margin-bottom: 30px;
+      }
+
+      a {
+        display: inline-block;
+        padding: 12px 28px;
+        background: #4ade80;
+        color: #000;
+        font-weight: bold;
+        text-decoration: none;
+        border-radius: 8px;
+        transition:
+          transform 0.2s ease,
+          background 0.3s ease;
+      }
+      a:hover {
+        background: #22c55e;
+        transform: scale(1.05);
+      }
+    </style>
   </head>
   <body>
-    <div class="scroll-progress" id="scroll-progress" aria-hidden="true"></div>
-    <div class="pointer-cursor" id="pointer-cursor" aria-hidden="true"></div>
-    <header class="wrap">
-      <a class="brand" href="#home" aria-label="Rathana Lan home"
-        >RL<span>.</span></a
-      >
-      <nav aria-label="Main navigation">
-        <a href="#about">Profile</a>
-        <a href="#experience">Journey</a>
-        <a href="#leadership">Leadership</a>
-        <a href="#projects">Projects</a>
-        <a href="#contact">Contact</a>
-        <a href="login.html">Sign in</a>
-        <a href="profile.html">My profile</a>
-      </nav>
-      <button
-        class="theme-toggle"
-        id="theme-toggle"
-        type="button"
-        aria-label="Switch to dark mode"
-        aria-pressed="false"
-      >
-        <span class="theme-icon" id="theme-icon" aria-hidden="true">◐</span>
-        <span id="theme-label">Dark mode</span>
-      </button>
-      <label class="language-control" for="language-select"
-        >Language
-        <select
-          class="language-select"
-          id="language-select"
-          aria-label="Choose page language"
-        >
-          <option value="en">English</option>
-          <option value="km">ខ្មែរ</option>
-          <option value="ja">日本語</option>
-          <option value="zh-CN">中文</option>
-        </select>
-      </label>
-    </header>
+    <!-- Floating shapes -->
+    <div class="shape"></div>
+    <div class="shape"></div>
+    <div class="shape"></div>
+    <div class="shape"></div>
 
-    <main>
-      <div class="wrap hero" id="home">
-        <div class="eyebrow">DNKH Digital Transformation Portfolio</div>
-        <img
-          class="portrait"
-          src="https://media.licdn.com/dms/image/v2/D5603AQEAm_ysSno8Aw/profile-displayphoto-shrink_200_200/B56ZWLT41pGUAY-/0/1741799001942?e=2147483647&amp;v=beta&amp;t=NVLX9GDNoIqE-DpmigCotfv-BPeMk5fxECjnmi8FYmk"
-          alt="Professional profile photo of Rathana Lan"
-          referrerpolicy="no-referrer"
-          loading="eager"
-        />
-        <h1>Rathana Lan<br /><em>Digital Transformation Supervisor</em></h1>
-        <p class="intro">
-          Digital leadership for manufacturing value creation. I connect DNKH
-          manufacturing needs with practical technology through DX strategy,
-          governance, Power Platform leadership, team coaching, and Smart
-          Factory readiness.
-        </p>
-        <a class="button" href="#experience"
-          >Explore my DX journey <span aria-hidden="true">&nbsp;↘</span></a
-        >
-        <div class="facts" aria-label="Professional profile">
-          <div class="fact">
-            <strong>Industry</strong
-            ><span>Manufacturing digital transformation</span>
-          </div>
-          <div class="fact"><strong>Location</strong><span>Cambodia</span></div>
-          <div class="fact">
-            <strong>Leadership scope</strong><span>DNKH TIE - DX</span>
-          </div>
-          <div class="fact">
-            <strong>Focus</strong
-            ><span>Strategy, governance &amp; capability</span>
-          </div>
-        </div>
-      </div>
+    <!-- Particle canvas -->
+    <canvas id="particles"></canvas>
 
-      <section class="resume-snapshot" aria-label="Career highlights">
-        <div class="wrap resume-track">
-          <div class="resume-item">
-            <span class="resume-year">2020</span
-            ><span
-              ><strong>Production leadership</strong
-              ><small>DENSO Cambodia</small></span
-            >
-          </div>
-          <div class="resume-item">
-            <span class="resume-year">2021</span
-            ><span
-              ><strong>Quality systems</strong
-              ><small>ISO 9001 · IATF 16949</small></span
-            >
-          </div>
-          <div class="resume-item">
-            <span class="resume-year">2022–23</span
-            ><span
-              ><strong>Manufacturing improvement</strong
-              ><small>Standard work · kaizen</small></span
-            >
-          </div>
-          <div class="resume-item">
-            <span class="resume-year">2024–Now</span
-            ><span
-              ><strong>Digital transformation</strong
-              ><small>DNKH · TIE - DX</small></span
-            >
-          </div>
-        </div>
-      </section>
+    <!-- Main content -->
+    <div class="container">
+      <h1>404</h1>
+      <h2>Oops! Page Not Found</h2>
+      <p>
+        Looks like you wandered off the map.<br />
+        Don’t worry — let’s get you back home.
+      </p>
+      <a href="/index.html">🏠 Go Home</a>
+    </div>
 
-      <div class="motion-marquee" aria-hidden="true">
-        <div class="marquee-track">
-          <div class="marquee-copy">
-            <span>Manufacturing</span><i></i><span>Digital transformation</span
-            ><i></i><span>People &amp; capability</span><i></i
-            ><span>Governance</span><i></i><span>Smart Factory</span><i></i>
-          </div>
-          <div class="marquee-copy">
-            <span>Manufacturing</span><i></i><span>Digital transformation</span
-            ><i></i><span>People &amp; capability</span><i></i
-            ><span>Governance</span><i></i><span>Smart Factory</span><i></i>
-          </div>
-        </div>
-      </div>
+    <script>
+      // Continuous colorful water droplet trail
+      const canvas = document.getElementById("particles");
+      const ctx = canvas.getContext("2d");
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
 
-      <section id="about">
-        <div class="wrap">
-          <div class="section-head">
-            <div>
-              <span class="section-kicker">Executive profile</span>
-              <h2>Digital leadership for manufacturing value creation.</h2>
-            </div>
-          </div>
-          <div class="about-grid">
-            <div class="about-copy">
-              <p>
-                I translate DNKH manufacturing challenges into practical digital
-                initiatives. I lead roadmap execution, governance improvement,
-                management visibility, Power Platform adoption, and structured
-                collaboration between DX members, users, management, and
-                manufacturing stakeholders.
-              </p>
-              <p>
-                My leadership approach combines manufacturing understanding,
-                fact-based decisions, reusable architecture, responsible
-                governance, and continuous development of local DX capability.
-              </p>
-              <blockquote>
-                “Digital transformation creates value when manufacturing needs,
-                clear governance, capable people, and scalable technology work
-                together.”
-              </blockquote>
-            </div>
-            <div>
-              <h3>Core competencies</h3>
-              <div class="skills" aria-label="Core competencies">
-                <span class="tag">DX strategy &amp; roadmap</span
-                ><span class="tag">Power Platform leadership</span
-                ><span class="tag">Application &amp; data governance</span
-                ><span class="tag">Manufacturing digitalization</span
-                ><span class="tag">Automation improvement</span
-                ><span class="tag">Pain point &amp; Kadai analysis</span
-                ><span class="tag">Digital solution design</span
-                ><span class="tag">Management KPI visibility</span
-                ><span class="tag">Process digitalization</span
-                ><span class="tag">DX team leadership</span
-                ><span class="tag">Citizen developer development</span
-                ><span class="tag">DX coaching &amp; mentoring</span
-                ><span class="tag">Smart Factory readiness</span
-                ><span class="tag">Cross-functional collaboration</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+      let droplets = [];
 
-      <section aria-labelledby="capability-title">
-        <div class="wrap">
-          <div class="section-head">
-            <div>
-              <span class="section-kicker">Core competencies</span>
-              <h2 id="capability-title">
-                A balanced operating system for performance.
-              </h2>
-            </div>
-            <p class="section-note">
-              Capability across daily management, improvement, risk control,
-              team development, and cross-functional execution.
-            </p>
-          </div>
-          <div class="metric-grid">
-            <article class="metric">
-              <strong>90%</strong>
-              <h3>DX Strategy &amp; Execution</h3>
-              <p>Roadmap alignment and value realization.</p>
-            </article>
-            <article class="metric">
-              <strong>88%</strong>
-              <h3>Quality &amp; Digital Solution Design</h3>
-              <p>Fact-based, governed solution planning.</p>
-            </article>
-            <article class="metric">
-              <strong>92%</strong>
-              <h3>Power Platform &amp; Automation</h3>
-              <p>Apps, workflows, dashboards, and standards.</p>
-            </article>
-            <article class="metric">
-              <strong>86%</strong>
-              <h3>DX Talent Development</h3>
-              <p>Coaching, learning paths, and local capability.</p>
-            </article>
-            <article class="metric">
-              <strong>89%</strong>
-              <h3>Automation Improvement</h3>
-              <p>Practical improvement connected to operations.</p>
-            </article>
-          </div>
-          <p class="disclaimer">
-            Percentages represent presentation emphasis for this portfolio, not
-            formal assessment scores.
-          </p>
-        </div>
-      </section>
+      // Spawn droplets at mouse position (when moving)
+      document.addEventListener("mousemove", (e) => {
+        spawnDroplets(e.clientX, e.clientY);
+        lastMouseX = e.clientX;
+        lastMouseY = e.clientY;
+      });
 
-      <section id="experience">
-        <div class="wrap">
-          <div class="section-head">
-            <div>
-              <span class="section-kicker">Professional experience</span>
-              <h2>Driving DNKH digital transformation.</h2>
-            </div>
-            <p class="section-note">
-              From shopfloor leadership to strategy, governance, and Smart
-              Factory readiness.
-            </p>
-          </div>
-          <div class="timeline">
-            <article class="career-item">
-              <div class="career-year">27 Jul 2020</div>
-              <div>
-                <h3>Production Team Leader</h3>
-                <p>DENSO Cambodia · Production</p>
-                <ul>
-                  <li>Joined DENSO Cambodia as a Production Team Leader.</li>
-                  <li>
-                    Built practical experience in daily production control,
-                    associate coordination, quality, safety, productivity, 5S,
-                    and continuous improvement.
-                  </li>
-                  <li>
-                    Developed the shopfloor leadership and manufacturing
-                    understanding that became the foundation for digital
-                    transformation work.
-                  </li>
-                </ul>
-              </div>
-            </article>
-            <article class="career-item">
-              <div class="career-year">2021</div>
-              <div>
-                <h3>Quality System &amp; Manufacturing Foundation</h3>
-                <p>DNKH Manufacturing</p>
-                <ul>
-                  <li>
-                    Participated in quality-system activities covering ISO 9001,
-                    IATF 16949, audit preparation, risk and opportunity, KPI
-                    planning, and continuous-improvement documentation.
-                  </li>
-                  <li>
-                    Expanded manufacturing knowledge through structured problem
-                    solving, standardization, and fact-based improvement.
-                  </li>
-                </ul>
-              </div>
-            </article>
-            <article class="career-item">
-              <div class="career-year">2022–2023</div>
-              <div>
-                <h3>Manufacturing Improvement Development</h3>
-                <p>DNKH Production &amp; Improvement</p>
-                <ul>
-                  <li>
-                    Continued developing process understanding, root-cause
-                    thinking, operational efficiency, standardized work, and
-                    improvement capability.
-                  </li>
-                  <li>
-                    Strengthened the connection between shopfloor problems,
-                    data, people development, and practical kaizen.
-                  </li>
-                </ul>
-              </div>
-            </article>
-            <article class="career-item">
-              <div class="career-year">Since 2024</div>
-              <div>
-                <h3>DX Supervisor</h3>
-                <p>DNKH · TIE - DX</p>
-                <ul>
-                  <li>
-                    Started the DX Supervisor role and led early digital
-                    transformation direction.
-                  </li>
-                  <li>
-                    Developed Power Apps capability, production-data analysis,
-                    AI visual-inspection concepts, DX roadmap activities, and
-                    Smart Factory foundations.
-                  </li>
-                  <li>
-                    Connected production leadership experience with digital
-                    solution planning and manufacturing improvement.
-                  </li>
-                </ul>
-              </div>
-            </article>
-            <article class="career-item">
-              <div class="career-year">2025</div>
-              <div>
-                <h3>DX Solution Development &amp; Deployment</h3>
-                <p>DNKH Digital Transformation</p>
-                <ul>
-                  <li>
-                    Drove application and workflow activities including Daily
-                    Job Management, purchasing-related applications, individual
-                    work planning, user guidance, and deployment support.
-                  </li>
-                  <li>
-                    Continued roadmap execution, stakeholder coordination,
-                    process digitalization, and practical adoption of Power
-                    Platform solutions.
-                  </li>
-                </ul>
-              </div>
-            </article>
-            <article class="career-item">
-              <div class="career-year">2026–Now</div>
-              <div>
-                <h3>DX Strategy, Governance &amp; Smart Factory Leadership</h3>
-                <p>DNKH · TIE - DX</p>
-                <ul>
-                  <li>
-                    Lead DNKH DX strategy and roadmap activities linked with
-                    Manufacturing Design, productivity improvement, and Smart
-                    Factory direction.
-                  </li>
-                  <li>
-                    Drive governance, Power Platform standards, KPI visibility,
-                    management review, member coaching, regional benchmarking,
-                    and cross-functional digital projects.
-                  </li>
-                  <li>
-                    Support AI, IoT, AGV/AMR, productivity applications, quality
-                    visibility, and scalable internal capability.
-                  </li>
-                </ul>
-              </div>
-            </article>
-            <article class="career-item">
-              <div class="career-year">FY30 Vision</div>
-              <div>
-                <h3>Scalable Digital Manufacturing</h3>
-                <p>DNKH Future Direction</p>
-                <ul>
-                  <li>
-                    Develop reusable solutions, stronger internal capability,
-                    enterprise data utilization, responsible AI and IoT
-                    adoption, and mature governance.
-                  </li>
-                  <li>
-                    Prepare sustainable Smart Factory systems connecting people,
-                    process, data, technology, and measurable manufacturing
-                    value.
-                  </li>
-                </ul>
-              </div>
-            </article>
-          </div>
-        </div>
-      </section>
+      // Track last mouse position (default center of screen)
+      let lastMouseX = canvas.width / 2;
+      let lastMouseY = canvas.height / 2;
 
-      <section aria-labelledby="scope-title">
-        <div class="wrap">
-          <div class="section-head">
-            <div>
-              <span class="section-kicker">Leadership scope</span>
-              <h2 id="scope-title">The work behind the transformation.</h2>
-            </div>
-          </div>
-          <div class="leadership-grid">
-            <article class="lead-card">
-              <h3>DX Strategy &amp; Roadmap</h3>
-              <p>
-                Connect DNKH digital activities with Manufacturing Design,
-                productivity improvement, management priorities, and long-term
-                Smart Factory direction.
-              </p>
-            </article>
-            <article class="lead-card">
-              <h3>Governance &amp; Standards</h3>
-              <p>
-                Strengthen application ownership, version history, access
-                control, data quality, maintenance flow, and reusable solution
-                standards.
-              </p>
-            </article>
-            <article class="lead-card">
-              <h3>Power Platform Leadership</h3>
-              <p>
-                Guide business solutions using Power Apps, Power Automate, Power
-                BI, SharePoint, and governed application architecture.
-              </p>
-            </article>
-            <article class="lead-card">
-              <h3>Management Visibility</h3>
-              <p>
-                Improve roadmap control, KPI monitoring, dashboard
-                communication, action ownership, and structured countermeasure
-                follow-up.
-              </p>
-            </article>
-            <article class="lead-card">
-              <h3>Manufacturing Digitalization</h3>
-              <p>
-                Translate section pain points and Kadai into prioritized,
-                practical, maintainable, and scalable digital use cases.
-              </p>
-            </article>
-            <article class="lead-card">
-              <h3>DX Capability Building</h3>
-              <p>
-                Develop employees, section DX champions, citizen developers, and
-                specialists through role-based learning connected to real work.
-              </p>
-            </article>
-          </div>
-        </div>
-      </section>
+      function spawnDroplets(x, y) {
+        for (let i = 0; i < 2; i++) {
+          droplets.push({
+            x: x,
+            y: y,
+            radius: Math.random() * 6 + 4,
+            alpha: 1,
+            hue: Math.random() * 360, // rainbow color
+            ripple: 0,
+            vx: (Math.random() - 0.5) * 1.2,
+            vy: (Math.random() - 0.5) * 1.2,
+          });
+        }
+      }
 
-      <section aria-labelledby="rhythm-title">
-        <div class="wrap">
-          <div class="section-head">
-            <div>
-              <span class="section-kicker">Leadership operating rhythm</span>
-              <h2 id="rhythm-title">
-                From problem discovery to sustainable scale.
-              </h2>
-            </div>
-            <p class="section-note">
-              A lifecycle that keeps people, process, data, technology,
-              governance, and business value connected.
-            </p>
-          </div>
-          <div class="rhythm-explorer">
-            <div
-              class="rhythm-tabs"
-              role="tablist"
-              aria-label="DX lifecycle stages"
-              aria-orientation="horizontal"
-            >
-              <button
-                class="rhythm-tab"
-                id="rhythm-tab-discover"
-                type="button"
-                role="tab"
-                aria-selected="true"
-                aria-controls="rhythm-panel"
-                tabindex="0"
-                data-step="01"
-                data-title="Understand the real need"
-                data-copy="Consult users, clarify pain points, understand current workflows, and define the business Kadai."
-              >
-                <span class="rhythm-tab-no">01</span><span>Discover</span
-                ><span class="rhythm-tab-arrow" aria-hidden="true">↗</span>
-              </button>
-              <button
-                class="rhythm-tab"
-                id="rhythm-tab-prioritize"
-                type="button"
-                role="tab"
-                aria-selected="false"
-                aria-controls="rhythm-panel"
-                tabindex="-1"
-                data-step="02"
-                data-title="Choose where to focus"
-                data-copy="Assess value, urgency, feasibility, ownership, future expansion, and alignment with the DX roadmap."
-              >
-                <span class="rhythm-tab-no">02</span><span>Prioritize</span
-                ><span class="rhythm-tab-arrow" aria-hidden="true">↗</span>
-              </button>
-              <button
-                class="rhythm-tab"
-                id="rhythm-tab-design"
-                type="button"
-                role="tab"
-                aria-selected="false"
-                aria-controls="rhythm-panel"
-                tabindex="-1"
-                data-step="03"
-                data-title="Build for reuse"
-                data-copy="Select the platform, data model, user experience, controls, and reusable architecture."
-              >
-                <span class="rhythm-tab-no">03</span><span>Design</span
-                ><span class="rhythm-tab-arrow" aria-hidden="true">↗</span>
-              </button>
-              <button
-                class="rhythm-tab"
-                id="rhythm-tab-deliver"
-                type="button"
-                role="tab"
-                aria-selected="false"
-                aria-controls="rhythm-panel"
-                tabindex="-1"
-                data-step="04"
-                data-title="Release with control"
-                data-copy="Coordinate development, validation, feedback, documentation, access, and a controlled release."
-              >
-                <span class="rhythm-tab-no">04</span><span>Deliver</span
-                ><span class="rhythm-tab-arrow" aria-hidden="true">↗</span>
-              </button>
-              <button
-                class="rhythm-tab"
-                id="rhythm-tab-adopt"
-                type="button"
-                role="tab"
-                aria-selected="false"
-                aria-controls="rhythm-panel"
-                tabindex="-1"
-                data-step="05"
-                data-title="Make it useful in practice"
-                data-copy="Support training, communication, usage visibility, feedback, issue resolution, and practical improvement."
-              >
-                <span class="rhythm-tab-no">05</span><span>Adopt</span
-                ><span class="rhythm-tab-arrow" aria-hidden="true">↗</span>
-              </button>
-              <button
-                class="rhythm-tab"
-                id="rhythm-tab-scale"
-                type="button"
-                role="tab"
-                aria-selected="false"
-                aria-controls="rhythm-panel"
-                tabindex="-1"
-                data-step="06"
-                data-title="Expand responsibly"
-                data-copy="Standardize successful patterns, strengthen governance, reuse components, and expand responsibly across DNKH."
-              >
-                <span class="rhythm-tab-no">06</span><span>Scale</span
-                ><span class="rhythm-tab-arrow" aria-hidden="true">↗</span>
-              </button>
-            </div>
-            <div
-              class="rhythm-panel"
-              id="rhythm-panel"
-              role="tabpanel"
-              aria-labelledby="rhythm-tab-discover"
-              tabindex="0"
-            >
-              <span class="rhythm-index" id="rhythm-index" aria-hidden="true"
-                >01</span
-              >
-              <div
-                class="rhythm-panel-content"
-                id="rhythm-panel-content"
-                aria-live="polite"
-              >
-                <span class="section-kicker" id="rhythm-kicker"
-                  >STAGE 01 / DISCOVER</span
-                >
-                <h3 id="rhythm-panel-title">Understand the real need</h3>
-                <p id="rhythm-panel-copy">
-                  Consult users, clarify pain points, understand current
-                  workflows, and define the business Kadai.
-                </p>
-              </div>
-              <div
-                class="rhythm-progress"
-                id="rhythm-progress"
-                aria-hidden="true"
-              >
-                <span class="is-complete"></span><span></span><span></span
-                ><span></span><span></span><span></span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+      function animate() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-      <section aria-labelledby="journey-title">
-        <div class="wrap">
-          <div class="section-head">
-            <div>
-              <span class="section-kicker">Transformation journey</span>
-              <h2 id="journey-title">
-                From individual solutions to a sustainable digital portfolio.
-              </h2>
-            </div>
-          </div>
-          <div class="journey">
-            <div class="journey-step">
-              <strong>Foundation</strong
-              ><span>Mindset · standards · use cases</span>
-            </div>
-            <div class="journey-step">
-              <strong>FY26 Strategy</strong
-              ><span>Roadmap · governance · visibility</span>
-            </div>
-            <div class="journey-step">
-              <strong>Scale</strong><span>Reusable solutions · champions</span>
-            </div>
-            <div class="journey-step">
-              <strong>Smart Factory</strong
-              ><span>Data · automation · AI · IoT</span>
-            </div>
-          </div>
-        </div>
-      </section>
+        // Always spawn new droplets at last mouse position
+        spawnDroplets(lastMouseX, lastMouseY);
 
-      <section id="leadership">
-        <div class="wrap">
-          <div class="section-head">
-            <div>
-              <span class="section-kicker">Leadership &amp; management</span>
-              <h2>How I create the conditions for teams to succeed.</h2>
-            </div>
-            <p class="section-note">
-              A management approach grounded in clarity, accountability,
-              respect, and continuous learning.
-            </p>
-          </div>
-          <div class="leadership-grid">
-            <article class="lead-card">
-              <h3>Team Direction</h3>
-              <p>
-                Translate plant priorities into clear shift targets, ownership,
-                communication, and daily routines.
-              </p>
-            </article>
-            <article class="lead-card">
-              <h3>Performance Control</h3>
-              <p>
-                Use KPI visibility and genba facts to detect gaps early and
-                drive disciplined countermeasures.
-              </p>
-            </article>
-            <article class="lead-card">
-              <h3>Safety &amp; Prevention</h3>
-              <p>
-                Promote hazard awareness, compliance, stop-work confidence, and
-                prevention-focused behavior.
-              </p>
-            </article>
-            <article class="lead-card">
-              <h3>Problem Solving</h3>
-              <p>
-                Lead containment, root cause analysis, corrective action,
-                verification, and horizontal deployment.
-              </p>
-            </article>
-            <article class="lead-card">
-              <h3>DX Talent Development</h3>
-              <p>
-                Build capability with coaching, feedback, skills assessment,
-                mentoring, and structured learning.
-              </p>
-            </article>
-            <article class="lead-card">
-              <h3>Cross-functional Alignment</h3>
-              <p>
-                Connect operations with technical and support teams to move
-                decisions into effective execution.
-              </p>
-            </article>
-          </div>
-        </div>
-      </section>
+        droplets.forEach((d, i) => {
+          // Main droplet
+          ctx.beginPath();
+          ctx.arc(d.x, d.y, d.radius, 0, Math.PI * 2);
+          ctx.fillStyle = `hsla(${d.hue}, 100%, 70%, ${d.alpha})`;
+          ctx.fill();
 
-      <section aria-labelledby="impact-title">
-        <div class="wrap">
-          <div class="section-head">
-            <div>
-              <span class="section-kicker">Achievement dashboard</span>
-              <h2 id="impact-title">Impact made visible.</h2>
-            </div>
-            <p class="section-note">
-              Professional contribution areas based on current DNKH DX strategy
-              and portfolio work. No unverified numerical claims are presented.
-            </p>
-          </div>
-          <div class="metric-grid">
-            <article class="metric">
-              <h3>DX Roadmap Leadership</h3>
-              <p>
-                Aligning FY26 execution with Manufacturing Design and long-term
-                readiness.
-              </p>
-            </article>
-            <article class="metric">
-              <h3>Management Visibility</h3>
-              <p>
-                Roadmap-based activity control, KPI monitoring, and structured
-                follow-up.
-              </p>
-            </article>
-            <article class="metric">
-              <h3>DX Governance</h3>
-              <p>
-                Version history, access control, data quality, and maintenance
-                standards.
-              </p>
-            </article>
-            <article class="metric">
-              <h3>DX Talent Development</h3>
-              <p>
-                Role-based learning for employees, champions, and specialists.
-              </p>
-            </article>
-            <article class="metric">
-              <h3>Power Platform Enablement</h3>
-              <p>
-                Apps, automation, dashboards, and reusable solution
-                architecture.
-              </p>
-            </article>
-            <article class="metric">
-              <h3>Manufacturing Digitalization</h3>
-              <p>
-                Turning section pain points into governed digital use cases.
-              </p>
-            </article>
-            <article class="metric">
-              <h3>Coaching &amp; Knowledge Transfer</h3>
-              <p>
-                Supporting members and citizen developers through practical
-                learning.
-              </p>
-            </article>
-            <article class="metric">
-              <h3>Smart Factory Readiness</h3>
-              <p>
-                Building foundations for data, AI, IoT, AGV/AMR, and scalable
-                systems.
-              </p>
-            </article>
-          </div>
-        </div>
-      </section>
+          // Ripple ring
+          ctx.beginPath();
+          ctx.arc(d.x, d.y, d.radius + d.ripple, 0, Math.PI * 2);
+          ctx.strokeStyle = `hsla(${d.hue}, 100%, 70%, ${d.alpha * 0.5})`;
+          ctx.lineWidth = 2;
+          ctx.stroke();
 
-      <section id="projects">
-        <div class="wrap">
-          <div class="section-head">
-            <div>
-              <span class="section-kicker">Selected work</span>
-              <h2>Digital change, made practical.</h2>
-            </div>
-            <p class="section-note">
-              Four visual case studies, plus two additional initiatives. Open a
-              project to see its contribution, value, and next direction.
-            </p>
-          </div>
-          <div class="project-tools">
-            <div
-              class="project-filters"
-              role="group"
-              aria-label="Filter projects"
-            >
-              <button
-                class="project-filter is-active"
-                type="button"
-                data-filter="all"
-                aria-pressed="true"
-              >
-                All work
-              </button>
-              <button
-                class="project-filter"
-                type="button"
-                data-filter="strategy"
-                aria-pressed="false"
-              >
-                Strategy
-              </button>
-              <button
-                class="project-filter"
-                type="button"
-                data-filter="operations"
-                aria-pressed="false"
-              >
-                Operations
-              </button>
-              <button
-                class="project-filter"
-                type="button"
-                data-filter="people"
-                aria-pressed="false"
-              >
-                People
-              </button>
-              <button
-                class="project-filter"
-                type="button"
-                data-filter="factory"
-                aria-pressed="false"
-              >
-                Smart Factory
-              </button>
-            </div>
-            <p class="project-count" id="project-count" aria-live="polite">
-              Showing all 6 projects
-            </p>
-          </div>
-          <div class="projects">
-            <article class="project featured-project" data-category="strategy">
-              <div class="project-top">
-                <span>01 / Strategy</span><span>FY26</span>
-              </div>
-              <div>
-                <h3>FY26 DX Strategy &amp; Governance</h3>
-                <p>
-                  Executive direction for roadmap execution, common governance,
-                  management visibility, and Smart Factory readiness.
-                </p>
-                <details>
-                  <summary>Project details</summary>
-                  <p>
-                    Align digital activities to Manufacturing Design,
-                    productivity priorities, and long-term direction. Establish
-                    clear ownership, standards, KPI visibility, and management
-                    review so the roadmap can be executed and sustained.
-                  </p>
-                </details>
-              </div>
-              <div
-                class="roadmap-visual project-thumbnail thumb-strategy"
-                role="img"
-                aria-label="Transformation progression: foundation, FY26 strategy, scale, Smart Factory"
-              >
-                <div class="roadmap-heading">
-                  <span>DX transformation path</span><span>FY26 → FY30</span>
-                </div>
-                <div class="roadmap-stages">
-                  <div>
-                    <span>01</span><strong>Foundation</strong
-                    ><small>Mindset · standards</small>
-                  </div>
-                  <div>
-                    <span>02</span><strong>Strategy</strong
-                    ><small>Roadmap · visibility</small>
-                  </div>
-                  <div>
-                    <span>03</span><strong>Scale</strong
-                    ><small>Reuse · champions</small>
-                  </div>
-                  <div>
-                    <span>04</span><strong>Smart Factory</strong
-                    ><small>Data · automation</small>
-                  </div>
-                </div>
-              </div>
-              <div class="project-foot">
-                <span>Roadmap · Governance · Visibility</span>
-              </div>
-            </article>
-            <article class="project" data-category="operations">
-              <div class="project-top">
-                <span>02 / Portfolio</span><span>DNKH</span>
-              </div>
-              <div
-                class="project-thumbnail thumb-operations"
-                role="img"
-                aria-label="Illustrated project intake workflow connecting needs, selection, and delivery"
-              >
-                <div class="thumb-toolbar">
-                  <span>DX PORTFOLIO</span
-                  ><span class="thumb-status">LIVE FLOW</span>
-                </div>
-                <div class="thumb-flow">
-                  <span>NEED</span><i></i><span>ASSESS</span><i></i
-                  ><span>DELIVER</span>
-                </div>
-                <div class="thumb-flow-caption">
-                  <span>Section input</span><span>Value &amp; owner</span
-                  ><span>Review cycle</span>
-                </div>
-              </div>
-              <div>
-                <h3>DX Portfolio &amp; Data Collection</h3>
-                <p>
-                  A structured workflow for discovering needs, selecting
-                  solutions, and managing digital work responsibly.
-                </p>
-                <details>
-                  <summary>Project details</summary>
-                  <p>
-                    Connect user needs and section pain points with project
-                    selection, ownership, data collection, progress monitoring,
-                    and review. The next direction is to keep portfolio
-                    information current and useful for prioritization.
-                  </p>
-                </details>
-              </div>
-              <div class="project-foot">
-                <span>Discovery · Prioritization · Control</span>
-              </div>
-            </article>
-            <article class="project" data-category="people">
-              <div class="project-top">
-                <span>03 / Capability</span><span>Learning</span>
-              </div>
-              <div
-                class="project-thumbnail thumb-people"
-                role="img"
-                aria-label="Illustrated role-based digital learning path from awareness to specialist"
-              >
-                <div class="thumb-toolbar">
-                  <span>DX LEARNING PATH</span
-                  ><span class="thumb-status">PEOPLE FIRST</span>
-                </div>
-                <div class="thumb-learning">
-                  <div><b>01</b><span>Confident</span></div>
-                  <div><b>02</b><span>Champion</span></div>
-                  <div><b>03</b><span>Builder</span></div>
-                  <div><b>04</b><span>Specialist</span></div>
-                </div>
-              </div>
-              <div>
-                <h3>DX Learning Path</h3>
-                <p>
-                  A role-based journey from digital confidence to section
-                  delivery and scalable factory systems.
-                </p>
-                <details>
-                  <summary>Project details</summary>
-                  <p>
-                    Build practical development paths for employees, section DX
-                    champions, citizen developers, and specialists. Connect
-                    learning to real work, coaching, governance, and sustainable
-                    internal capability.
-                  </p>
-                </details>
-              </div>
-              <div class="project-foot">
-                <span>People · Coaching · Capability</span>
-              </div>
-            </article>
-            <article class="project" data-category="factory">
-              <div class="project-top">
-                <span>04 / Benchmark</span><span>FY30</span>
-              </div>
-              <div
-                class="project-thumbnail thumb-factory"
-                role="img"
-                aria-label="Illustrated connected smart factory with data, robotics, and automation nodes"
-              >
-                <div class="thumb-toolbar">
-                  <span>SMART FACTORY</span
-                  ><span class="thumb-status">FY30</span>
-                </div>
-                <div class="thumb-factory-floor">
-                  <div class="thumb-factory-node">
-                    <b>DATA</b><i></i><i></i><i></i>
-                  </div>
-                  <div class="thumb-factory-link"></div>
-                  <div class="thumb-factory-node">
-                    <b>AI</b><i></i><i></i><i></i>
-                  </div>
-                  <div class="thumb-factory-link"></div>
-                  <div class="thumb-factory-node">
-                    <b>ROBOTICS</b><i></i><i></i><i></i>
-                  </div>
-                </div>
-              </div>
-              <div>
-                <h3>FY30 Benchmark &amp; Smart Factory</h3>
-                <p>
-                  Benchmark-led planning across data, automation, AI, robotics,
-                  AMR, and digital foundations.
-                </p>
-                <details>
-                  <summary>Project details</summary>
-                  <p>
-                    Use regional benchmarking and future-state thinking to
-                    inform Smart Factory readiness. Focus areas include data
-                    utilization, automation, AI, robotics, AGV/AMR, and the
-                    foundations needed for scalable manufacturing systems.
-                  </p>
-                </details>
-              </div>
-              <div class="project-foot">
-                <span>Data · AI · Automation · IoT</span>
-              </div>
-            </article>
-            <article class="project" data-category="factory">
-              <div class="project-top">
-                <span>05 / Transformation</span><span>FY30</span>
-              </div>
-              <div>
-                <h3>DNKH DX Journey to FY30</h3>
-                <p>
-                  An executive transformation story from foundation and adoption
-                  toward scalable digital manufacturing.
-                </p>
-                <details>
-                  <summary>Project details</summary>
-                  <p>
-                    Connect the stages of transformation through a clear
-                    narrative: establish foundations, execute the FY26 strategy,
-                    scale reusable solutions and champions, and prepare for
-                    Smart Factory capabilities. Keep milestones and benefit
-                    evidence verified.
-                  </p>
-                </details>
-              </div>
-              <div class="project-foot">
-                <span>Foundation · Adoption · Scale</span>
-              </div>
-            </article>
-            <article class="project" data-category="people">
-              <div class="project-top">
-                <span>06 / Policy</span><span>People</span>
-              </div>
-              <div>
-                <h3>DX Policy &amp; Citizen Developers</h3>
-                <p>
-                  Policy, governance, training, and community foundations for
-                  sustainable local digital capability.
-                </p>
-                <details>
-                  <summary>Project details</summary>
-                  <p>
-                    Shape DX policy activities covering application development
-                    leadership, governance, standardization, HRD, training,
-                    maintenance, and the citizen developer ecosystem. Embed
-                    clear ownership, practical learning, governance support, and
-                    reuse into normal operations.
-                  </p>
-                </details>
-              </div>
-              <div class="project-foot">
-                <span>Policy · HRD · Community</span>
-              </div>
-            </article>
-          </div>
-        </div>
-      </section>
+          d.x += d.vx;
+          d.y += d.vy;
+          d.alpha -= 0.008; // slow fade
+          d.ripple += 0.3; // ripple expands outward
 
-      <section id="credentials">
-        <div class="wrap">
-          <div class="section-head">
-            <div>
-              <span class="section-kicker">Credentials &amp; development</span>
-              <h2>Learning that strengthens leadership practice.</h2>
-            </div>
-            <p class="section-note">
-              Formal certificate names and credential details should be added
-              only when verified.
-            </p>
-          </div>
-          <div class="cert-grid">
-            <article class="cert">
-              <h3>Lean Manufacturing</h3>
-              <p>
-                Professional capability area; formal credential to be added when
-                verified.
-              </p>
-            </article>
-            <article class="cert">
-              <h3>Six Sigma</h3>
-              <p>
-                Professional development area; training details to be added when
-                verified.
-              </p>
-            </article>
-            <article class="cert">
-              <h3>Safety Management</h3>
-              <p>
-                Professional capability area; formal credential to be added when
-                verified.
-              </p>
-            </article>
-            <article class="cert">
-              <h3>Leadership Development</h3>
-              <p>
-                Professional development area; program details to be added when
-                verified.
-              </p>
-            </article>
-          </div>
-          <article class="career-item" style="margin-top: 12px">
-            <div class="career-year">Ongoing</div>
-            <div>
-              <h3>Education &amp; Professional Development</h3>
-              <p>
-                Continuous learning in manufacturing DX, Power Platform, data,
-                automation, AI, IoT, AGV/AMR, and leadership. Portfolio summary
-                based on current professional focus.
-              </p>
-            </div>
-          </article>
-        </div>
-      </section>
+          if (d.alpha <= 0) droplets.splice(i, 1);
+        });
 
-      <section id="contact">
-        <div class="wrap">
-          <div class="section-head">
-            <div>
-              <span class="section-kicker">Contact</span>
-              <h2>Discuss operations, leadership, and improvement.</h2>
-            </div>
-            <p class="section-note">
-              Professional networking, career opportunities, or manufacturing
-              leadership collaboration.
-            </p>
-          </div>
-          <div class="contact-layout">
-            <article class="contact-panel">
-              <div>
-                <div class="eyebrow">Let’s build stronger operations.</div>
-                <h2>
-                  Manufacturing leadership. Practical digital transformation.
-                </h2>
-                <p>
-                  I welcome conversations about production leadership, quality
-                  improvement, safety performance, team capability, and
-                  operational excellence.
-                </p>
-                <div class="contact-links">
-                  <a href="mailto:rathana.lan.a3f@ap.denso.com"
-                    >rathana.lan.a3f@ap.denso.com</a
-                  ><a href="tel:+855017801002">+855 (0) 17 801 002</a
-                  ><span>Cambodia</span>
-                </div>
-              </div>
-              <div>
-                <a
-                  class="button"
-                  href="mailto:rathana.lan.a3f@ap.denso.com?subject=Professional%20inquiry"
-                  >Email Rathana <span aria-hidden="true">&nbsp;↗</span></a
-                >
-              </div>
-              <p style="margin-top: 24px">
-                <button
-                  class="print-button"
-                  type="button"
-                  onclick="window.print()"
-                >
-                  Print / Save as PDF
-                </button>
-              </p>
-            </article>
-            <form class="contact-form" id="contact-form">
-              <div class="field">
-                <label for="name">Name</label
-                ><input
-                  id="name"
-                  name="name"
-                  autocomplete="name"
-                  required
-                  placeholder="Your name"
-                />
-              </div>
-              <div class="field">
-                <label for="email">Email</label
-                ><input
-                  id="email"
-                  name="email"
-                  type="email"
-                  autocomplete="email"
-                  required
-                  placeholder="name@company.com"
-                />
-              </div>
-              <div class="field">
-                <label for="subject">Subject</label
-                ><input
-                  id="subject"
-                  name="subject"
-                  required
-                  value="Professional inquiry"
-                />
-              </div>
-              <div class="field">
-                <label for="message">Message</label
-                ><textarea
-                  id="message"
-                  name="message"
-                  required
-                  placeholder="How can we work together?"
-                ></textarea>
-              </div>
-              <button class="button" type="submit">
-                Prepare email <span aria-hidden="true">&nbsp;↗</span>
-              </button>
-            </form>
-          </div>
-        </div>
-      </section>
-    </main>
+        requestAnimationFrame(animate);
+      }
+      animate();
 
-    <footer class="wrap">
-      <span
-        >© <span id="year">2026</span> Rathana Lan. All rights reserved.</span
-      >
-      <span
-        >Manufacturing Leadership · Operational Excellence · DX Talent
-        Development</span
-      >
-    </footer>
-    <script src="assets/js/app.js"></script>
-
-    <div id="google_translate_element" aria-hidden="true"></div>
-    <script
-      src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"
-      async
-    ></script>
+      window.addEventListener("resize", () => {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+      });
+    </script>
   </body>
 </html>
