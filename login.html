@@ -1,0 +1,193 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#14231e" />
+    <meta
+      name="description"
+      content="Sign in to the DNKH Digital Transformation Portfolio."
+    />
+    <title>Sign in | Rathana Lan</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="assets/css/login.css" />
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="assets/js/supabase-config.js"></script>
+    <script src="assets/js/login.js" defer></script>
+  </head>
+  <body>
+    <main class="login-shell">
+      <section class="brand-panel" aria-labelledby="brand-heading">
+        <header class="brand-header">
+          <a
+            class="brand-mark"
+            href="index.html"
+            aria-label="Rathana Lan portfolio home"
+            >RL<span>.</span></a
+          >
+          <span class="brand-caption">DNKH · DIGITAL TRANSFORMATION</span>
+        </header>
+
+        <div class="brand-content">
+          <p class="eyebrow">
+            <span class="status-dot"></span> Manufacturing, moving forward
+          </p>
+          <h1 id="brand-heading">
+            Better systems.<br /><span>Stronger</span> operations.
+          </h1>
+          <p class="brand-description">
+            A focused workspace for digital initiatives, operational visibility,
+            and the people who make transformation real.
+          </p>
+
+          <div class="profile-row">
+            <img
+              class="profile-photo"
+              src="https://media.licdn.com/dms/image/v2/D5603AQEAm_ysSno8Aw/profile-displayphoto-shrink_200_200/B56ZWLT41pGUAY-/0/1741799001942?e=2147483647&amp;v=beta&amp;t=NVLX9GDNoIqE-DpmigCotfv-BPeMk5fxECjnmi8FYmk"
+              alt="Rathana Lan"
+              width="56"
+              height="56"
+              referrerpolicy="no-referrer"
+            />
+            <div>
+              <strong>Rathana Lan</strong>
+              <span>Digital Transformation Supervisor</span>
+            </div>
+          </div>
+
+          <div class="principles" aria-label="Portfolio focus areas">
+            <div><span>01</span><strong>Strategy</strong></div>
+            <div><span>02</span><strong>Governance</strong></div>
+            <div><span>03</span><strong>Capability</strong></div>
+            <div><span>04</span><strong>Smart Factory</strong></div>
+          </div>
+        </div>
+
+        <footer class="brand-footer">
+          <span>CAMBODIA</span>
+          <span>PEOPLE · PROCESS · TECHNOLOGY</span>
+        </footer>
+      </section>
+
+      <section class="form-panel" aria-labelledby="signin-title">
+        <div class="form-topline">
+          <span class="secure-label"
+            ><span aria-hidden="true">●</span> PRIVATE WORKSPACE</span
+          >
+          <a class="back-link" href="index.html"
+            >Back to portfolio <span aria-hidden="true">↗</span></a
+          >
+        </div>
+
+        <div class="form-wrap">
+          <p class="eyebrow form-eyebrow" id="form-eyebrow">Welcome back</p>
+          <h2 id="signin-title">Sign in to continue.</h2>
+          <p class="form-description" id="form-description">
+            Use your authorized workspace account to continue.
+          </p>
+
+          <form id="login-form">
+            <div class="field" id="name-field" hidden>
+              <label for="display-name">Name</label>
+              <input
+                id="display-name"
+                name="displayName"
+                type="text"
+                autocomplete="name"
+                placeholder="Your name"
+              />
+            </div>
+
+            <div class="field" id="email-field">
+              <label for="email">Work email</label>
+              <input
+                id="email"
+                name="email"
+                type="email"
+                autocomplete="username"
+                placeholder="you@company.com"
+                required
+              />
+            </div>
+
+            <div class="field code-field" id="code-field" hidden>
+              <div class="label-row">
+                <label for="email-code">Email verification code</label>
+                <button class="text-button" id="edit-email" type="button">
+                  Change email
+                </button>
+              </div>
+              <p class="code-destination" id="code-destination"></p>
+              <input
+                id="email-code"
+                name="emailCode"
+                type="text"
+                inputmode="numeric"
+                autocomplete="one-time-code"
+                pattern="[0-9]{6}"
+                maxlength="6"
+                placeholder="Enter 6-digit code"
+              />
+            </div>
+
+            <div class="form-options" id="email-step-options">
+              <label class="remember-option" id="remember-option"
+                ><input type="checkbox" name="remember" checked /><span
+                  >Keep me signed in</span
+                ></label
+              >
+            </div>
+
+            <div
+              class="form-options code-options"
+              id="code-step-options"
+              hidden
+            >
+              <button class="text-button" id="resend-code" type="button">
+                Send a new code
+              </button>
+              <span
+                class="resend-countdown"
+                id="resend-countdown"
+                aria-live="polite"
+              ></span>
+            </div>
+
+            <button class="submit-button" id="submit-button" type="submit">
+              Email me a code <span aria-hidden="true">→</span>
+            </button>
+            <p
+              class="form-feedback"
+              id="form-feedback"
+              role="status"
+              aria-live="polite"
+            ></p>
+          </form>
+
+          <p class="mode-switch" id="mode-switch">
+            New to the workspace?
+            <button type="button" id="mode-toggle">Create an account</button>
+          </p>
+
+          <div class="access-note">
+            <span class="note-mark" aria-hidden="true">i</span>
+            <p id="access-note-text">
+              Access is intended for authorized team members. Contact the
+              portfolio owner if you need an account.
+            </p>
+          </div>
+        </div>
+
+        <footer class="form-footer">
+          <span>© <span id="year"></span> Rathana Lan</span>
+          <a href="mailto:rathana.lan.a3f@ap.denso.com">Contact support</a>
+        </footer>
+      </section>
+    </main>
+  </body>
+</html>
