@@ -253,9 +253,92 @@
 
         <footer class="form-footer">
           <span>© <span id="year"></span> Rathana Lan</span>
-          <a href="mailto:lanrathana@gmail.com">Contact support</a>
+          <a href="https://t.me/loyeelrn" target="_blank" rel="noopener noreferrer">Contact support</a>
         </footer>
       </section>
     </main>
+
+    <!-- Account Already Exists Alert Modal -->
+    <div
+      class="modal-backdrop"
+      id="account-exists-modal"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="modal-alert-title"
+      hidden
+    >
+      <div class="modal-card">
+        <button
+          class="modal-close"
+          id="modal-close-btn"
+          type="button"
+          aria-label="Close dialog"
+        >
+          ✕
+        </button>
+
+        <div class="modal-badge-wrap">
+          <span class="pulse-ring" aria-hidden="true"></span>
+          <div class="modal-badge-icon" aria-hidden="true">
+            <svg
+              width="26"
+              height="26"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2.2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path
+                d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"
+              />
+              <line x1="12" y1="9" x2="12" y2="13" />
+              <line x1="12" y1="17" x2="12.01" y2="17" />
+            </svg>
+          </div>
+        </div>
+
+        <div class="modal-header-text">
+          <span class="modal-tag">Workspace Notice</span>
+          <h3 id="modal-alert-title">Account Already Exists</h3>
+        </div>
+
+        <p class="modal-desc">
+          An account with this email is already registered in the DNKH workspace:
+        </p>
+
+        <div class="modal-email-chip">
+          <svg
+            width="15"
+            height="15"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
+            <rect width="20" height="16" x="2" y="4" rx="2" />
+            <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
+          </svg>
+          <span id="modal-email-display">you@company.com</span>
+        </div>
+
+        <p class="modal-sub">
+          You cannot create a duplicate account. Please sign in with your password, or reset your credentials if needed.
+        </p>
+
+        <div class="modal-actions">
+          <button class="modal-btn-primary" id="modal-signin-btn" type="button">
+            Sign In with Password <span aria-hidden="true">→</span>
+          </button>
+          <button class="modal-btn-secondary" id="modal-reset-btn" type="button">
+            Reset Password
+          </button>
+        </div>
+      </div>
+    </div>
   </body>
 </html>

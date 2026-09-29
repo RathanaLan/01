@@ -27,6 +27,12 @@ const switchToPasswordBtn = document.getElementById("switch-to-password-btn");
 const codeTip = document.getElementById("code-tip");
 const rememberOption = document.getElementById("remember-option");
 const year = document.getElementById("year");
+const accountExistsModal = document.getElementById("account-exists-modal");
+const modalCloseBtn = document.getElementById("modal-close-btn");
+const modalSigninBtn = document.getElementById("modal-signin-btn");
+const modalResetBtn = document.getElementById("modal-reset-btn");
+const modalEmailDisplay = document.getElementById("modal-email-display");
+let activeModalEmail = "";
 
 const pageConfig = window.PORTFOLIO_SUPABASE_CONFIG || {};
 const hasSupabaseConfig = Boolean(
@@ -294,6 +300,54 @@ async function handlePasswordSignIn() {
   }
 }
 
+// Show eye-catching duplicate account modal popup
+function showAccountExistsModal(email) {
+  activeModalEmail = (email || emailInput.value || "").trim().toLowerCase();
+  if (modalEmailDisplay) {
+    modalEmailDisplay.textContent = activeModalEmail;
+  }
+  if (accountExistsModal) {
+    accountExistsModal.hidden = false;
+    requestAnimationFrame(() => {
+      accountExistsModal.classList.add("is-open");
+      if (modalSigninBtn) modalSigninBtn.focus();
+    });
+  }
+}
+
+function hideAccountExistsModal() {
+  if (!accountExistsModal) return;
+  accountExistsModal.classList.remove("is-open");
+  setTimeout(() => {
+    accountExistsModal.hidden = true;
+  }, 270);
+}
+
+// Alert and prevent duplicate account creation
+function handleExistingAccountAlert(email) {
+  // Highlight email input with shake animation
+  emailInput.classList.add("input-error");
+  setTimeout(() => emailInput.classList.remove("input-error"), 4000);
+
+  // Switch form to Sign In mode immediately
+  setMode("signin");
+  setSigninMethod("password");
+  emailInput.value = email;
+
+  // Prominently display error feedback
+  showFeedback(
+    `⚠️ Account already exists! "${email}" is already registered. Please sign in with your password.`,
+    "error",
+  );
+
+  // Focus password input for instant sign in
+  passwordInput.value = "";
+  passwordInput.focus();
+
+  // Open the custom eye-catching popup dialog
+  showAccountExistsModal(email);
+}
+
 // Password Sign Up
 async function handlePasswordSignUp() {
   const name = displayNameInput.value.trim();
@@ -328,8 +382,8 @@ async function handlePasswordSignUp() {
     return;
   }
 
-  setBusy(true, "Creating account…");
-  showFeedback("Registering your workspace account…", "loading");
+  setBusy(true, "Checking account…");
+  showFeedback("Verifying account availability…", "loading");
 
   try {
     const { data, error } = await client.auth.signUp({
@@ -341,8 +395,35 @@ async function handlePasswordSignUp() {
         },
       },
     });
-    if (error) throw error;
 
+    // Check Case 1: Supabase enumeration protection returns data.user with empty identities array if user exists
+    const userAlreadyExists = Boolean(
+      data?.user &&
+      Array.isArray(data.user.identities) &&
+      data.user.identities.length === 0,
+    );
+
+    if (userAlreadyExists) {
+      handleExistingAccountAlert(email);
+      return;
+    }
+
+    // Check Case 2: Direct Supabase duplicate error
+    if (error) {
+      const errMsg = (error.message || "").toLowerCase();
+      if (
+        errMsg.includes("already registered") ||
+        errMsg.includes("already exists") ||
+        errMsg.includes("user_already_exists") ||
+        error.status === 422
+      ) {
+        handleExistingAccountAlert(email);
+        return;
+      }
+      throw error;
+    }
+
+    // Case 3: Fresh account created successfully!
     if (data?.session) {
       // User is immediately logged in
       try {
@@ -369,15 +450,16 @@ async function handlePasswordSignUp() {
       emailInput.value = email;
     }
   } catch (error) {
-    const msg = error.message || "Could not create account.";
-    if (msg.toLowerCase().includes("already registered") || msg.toLowerCase().includes("user already exists")) {
-      showFeedback("An account with this email already exists. Switching to Sign In…", "error");
-      setTimeout(() => {
-        setMode("signin");
-        emailInput.value = email;
-      }, 1400);
+    const msg = (error.message || "").toLowerCase();
+    if (
+      msg.includes("already registered") ||
+      msg.includes("already exists") ||
+      msg.includes("user_already_exists") ||
+      error.status === 422
+    ) {
+      handleExistingAccountAlert(email);
     } else {
-      showFeedback(msg, "error");
+      showFeedback(error.message || "Could not create account.", "error");
     }
   } finally {
     setBusy(false, mode === "signup" ? "Create account" : "Sign in");
@@ -624,6 +706,53 @@ if (editEmailBtn) {
 
 if (resendButton) {
   resendButton.addEventListener("click", resendCode);
+}
+
+// Account Exists Modal Events
+if (modalCloseBtn) {
+  modalCloseBtn.addEventListener("click", hideAccountExistsModal);
+}
+
+if (accountExistsModal) {
+  accountExistsModal.addEventListener("click", (event) => {
+    if (event.target === accountExistsModal) {
+      hideAccountExistsModal();
+    }
+  });
+}
+
+window.addEventListener("keydown", (event) => {
+  if (
+    event.key === "Escape" &&
+    accountExistsModal &&
+    !accountExistsModal.hidden
+  ) {
+    hideAccountExistsModal();
+  }
+});
+
+if (modalSigninBtn) {
+  modalSigninBtn.addEventListener("click", () => {
+    hideAccountExistsModal();
+    setMode("signin");
+    setSigninMethod("password");
+    if (activeModalEmail) {
+      emailInput.value = activeModalEmail;
+    }
+    passwordInput.value = "";
+    passwordInput.focus();
+    showFeedback("Please enter your password to sign in.", "info");
+  });
+}
+
+if (modalResetBtn) {
+  modalResetBtn.addEventListener("click", () => {
+    hideAccountExistsModal();
+    if (activeModalEmail) {
+      emailInput.value = activeModalEmail;
+    }
+    handleForgotPassword();
+  });
 }
 
 if (loginForm) {

@@ -97,6 +97,34 @@
         gap: 10px;
       }
 
+      .brand-mark {
+        font-family: "Manrope", sans-serif;
+        font-size: 22px;
+        font-weight: 800;
+        letter-spacing: -0.04em;
+        color: #fff;
+        display: inline-flex;
+        align-items: center;
+        text-decoration: none;
+      }
+
+      .brand-dot {
+        display: inline-block;
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        background: #f1724d;
+        margin-left: 2px;
+        box-shadow: 0 0 8px #f1724d;
+      }
+
+      .title-link {
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        margin-right: 2px;
+      }
+
       .header .title {
         font-family: "Manrope", sans-serif;
         font-size: clamp(20px, 3vw, 26px);
@@ -556,6 +584,9 @@
     <!-- Responsive Sticky Navigation Header -->
     <header class="header">
       <div class="title-wrap">
+        <a href="../index.html" class="title-link" aria-label="Executive Portal">
+          <span class="brand-mark">RL<span class="brand-dot"></span></span>
+        </a>
         <span class="title">Guidder</span>
         <span class="badge-tag">Academic Hub</span>
       </div>
@@ -563,9 +594,10 @@
       <nav class="nav-buttons" aria-label="Portal Navigation">
         <a href="../index.html">← Gateway</a>
         <a href="../Aboutme/index.html">Portfolio</a>
-        <a href="../Aboutme/index.html#projects">Projects</a>
-        <a href="../Aboutme/index.html#contact">Contact</a>
         <a href="01.html" class="btn-active">Homework #01</a>
+        <a href="../profile.html">My Profile</a>
+        <a href="../login.html">Sign In</a>
+        <a href="https://t.me/loyeelrn" target="_blank" rel="noopener noreferrer">Support</a>
       </nav>
     </header>
 
@@ -627,6 +659,7 @@
       <div class="auth-aux-links">
         <span>Forgot password? <a href="../profile.html">Click here to reset</a></span>
         <span>Don't have an account? <a href="../login.html">Sign Up</a></span>
+        <span>Need help? <a href="https://t.me/loyeelrn" target="_blank" rel="noopener noreferrer">Contact Support</a></span>
       </div>
 
       <!-- Distributed Systems & Messaging Research Article -->

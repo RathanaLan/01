@@ -155,4 +155,29 @@
     6. **Brand Favicon Across All Pages (Replaced Default Browser Globe)**:
        - **Created Brand Favicon Asset**: Created [favicon.svg](file:///d:/My_PortFolio/favicon.svg) and [assets/img/favicon.svg](file:///d:/My_PortFolio/assets/img/favicon.svg) featuring the signature dark squircle `#14231e` base, bold white **RL** typography, and vibrant coral `#f1724d` accent dot matching the header identity.
        - **Dual Embedding for High Compatibility**: Inlined an SVG Data URI `<link rel="icon" ...>` alongside the external SVG file across all 6 HTML pages (`login.html`, `profile.html`, `Aboutme/index.html`, `index.html`, `homework/index.html`, `homework/01.html`). Guarantees crisp high-DPI rendering across Chrome, Edge, Safari, Firefox, and local `file:///` protocols without generic fallback globe icons.
+    7. **Duplicate Account Prevention & Eye-Catching Alert Modal**:
+       - **Dual Detection**: In Supabase Auth, existing users return either a direct error (`already registered` / 422) or, when enumeration protection is active, an empty identities array (`data.user.identities.length === 0`).
+       - **High-Aesthetic Eye-Catching Modal (`#account-exists-modal`)**:
+         - Completely replaced generic `window.alert()` with a custom, glassmorphic modal popup tailored to the portfolio's executive design system.
+         - **Visual Design**: Deep dark forest card (`#182a24`) with glowing top gradient accent bar (`#f1724d` to `#d8f36a`), double-drop shadow, and a pulsating coral radar ring badge (`modal-radar-pulse`) surrounding a floating warning icon.
+         - **Dynamic Email Display**: Highlights the duplicate address within a lime-accented monospace chip (`#modal-email-display`).
+         - **Action Buttons**:
+           1. *"Sign In with Password →"* (Primary lime button): Closes modal, immediately switches form to Sign In with password method, auto-fills the email, clears and focuses the password field.
+           2. *"Reset Password"* (Secondary glass button): Closes modal, populates the email, and triggers self-service password reset email instructions.
+         - **Accessibility & UX**: Backdrop click dismissal, `Escape` key shortcut, close button `✕`, focus trapping, and smooth scale/fade entry transitions (`is-open`).
 
+    8. **Full 2026 Executive Design System Harmonization Across All Pages**:
+       - **[profile.html](file:///d:/My_PortFolio/profile.html) & [assets/css/profile.css](file:///d:/My_PortFolio/assets/css/profile.css)**: Completely redesigned with frosted glassmorphism, ambient backdrop glow mesh, interactive theme toggle switch (dark/light), camera badge icon over avatar wrap, 2026 rounded inputs with focus glow, character counter pill, and refined coral Danger Zone card.
+       - **[homework/01.html](file:///d:/My_PortFolio/homework/01.html)**: Integrated a sticky executive top navigation header with `RL.` brand mark, breadcrumb tag, and pill links back to Homework Hub, Portfolio, and Member Profile.
+       - **[homework/index.html](file:///d:/My_PortFolio/homework/index.html)**: Upgraded top sticky navigation bar with `RL.` brand mark and unified navigation links to Gateway, Portfolio, Homework #01, My Profile, and Sign In.
+       - **[Aboutme/index.html](file:///d:/My_PortFolio/Aboutme/index.html)**: Harmonized navigation pill links to point directly to the Homework Hub (`../homework/index.html`), Sign In (`../login.html`), and My Profile (`../profile.html`).
+       - **[index.html](file:///d:/My_PortFolio/index.html)**: Full interactive constellation portal with time-based dynamic greeting, enlarged auto-redirect indicator, bento gateway grid, and high-performance canvas layer.
+    9. **Direct Support Routing (Telegram Integration)**:
+       - **Unified Support Link**: All "Support", "Contact support", and assistance buttons across every page now direct directly to the portfolio owner's Telegram channel/profile: [https://t.me/loyeelrn](https://t.me/loyeelrn) (`target="_blank"` with `rel="noopener noreferrer"`).
+       - **Updated Files**:
+         - [login.html](file:///d:/My_PortFolio/login.html): Footer "Contact support" link.
+         - [profile.html](file:///d:/My_PortFolio/profile.html): Footer "Contact Support" link.
+         - [Aboutme/index.html](file:///d:/My_PortFolio/Aboutme/index.html): Direct Telegram contact method card button and site footer link.
+         - [index.html](file:///d:/My_PortFolio/index.html): Gateway footer "Support" link.
+         - [homework/index.html](file:///d:/My_PortFolio/homework/index.html): Sticky navigation "Support" link and coursework auth auxiliary "Contact Support" link.
+         - [homework/01.html](file:///d:/My_PortFolio/homework/01.html): Top navigation "Support" pill button with Lucide icon.

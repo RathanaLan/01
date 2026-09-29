@@ -182,9 +182,14 @@ async function renderProfile(profile) {
     bioInput.value = profile.bio || "";
     if (bioCount) bioCount.textContent = (profile.bio || "").length;
   }
-  if (cardName) cardName.textContent = profile.display_name || "Your profile";
-  if (cardTitle) cardTitle.textContent = profile.job_title || "Add a role title";
-  if (accountStatus) accountStatus.textContent = currentUser.email || "Signed in";
+  if (cardName) cardName.textContent = profile.display_name || "Your Profile";
+  if (cardTitle) cardTitle.textContent = profile.job_title || "Digital Transformation Team";
+  const statusText = document.getElementById("account-status-text");
+  if (statusText) {
+    statusText.textContent = currentUser.email || "Signed in";
+  } else if (accountStatus) {
+    accountStatus.textContent = currentUser.email || "Signed in";
+  }
 
   const photoUrl = await getPhotoUrl(profile.avatar_path);
   showAvatar(photoUrl, profile.display_name);
@@ -194,8 +199,12 @@ async function requireSession() {
   if (!supabaseClient) {
     setMessage("Supabase is not configured. Set the project URL and publishable key in assets/js/supabase-config.js.", "error");
     if (saveButton) saveButton.disabled = true;
-    const accountStatus = document.getElementById("account-status");
-    if (accountStatus) accountStatus.textContent = "Setup required";
+    const statusText = document.getElementById("account-status-text");
+    if (statusText) statusText.textContent = "Setup required";
+    else {
+      const accountStatus = document.getElementById("account-status");
+      if (accountStatus) accountStatus.textContent = "Setup required";
+    }
     return false;
   }
 
@@ -546,6 +555,39 @@ if (supabaseClient) {
     if (event === "SIGNED_OUT") {
       window.location.replace("login.html?logged_out=true");
     }
+  });
+}
+
+// Theme Toggle
+const themeToggle = document.getElementById("theme-toggle");
+const themeIcon = document.getElementById("theme-icon");
+const themeLabel = document.getElementById("theme-label");
+
+function applyTheme(theme, save = false) {
+  const isDark = theme === "dark";
+  document.documentElement.dataset.theme = isDark ? "dark" : "light";
+  if (themeToggle) {
+    themeToggle.setAttribute("aria-pressed", String(isDark));
+  }
+  if (themeIcon) {
+    themeIcon.textContent = isDark ? "☼" : "◐";
+  }
+  if (themeLabel) {
+    themeLabel.textContent = isDark ? "Light" : "Dark";
+  }
+  if (save) {
+    try {
+      localStorage.setItem("portfolio-theme", isDark ? "dark" : "light");
+    } catch (e) {}
+  }
+}
+
+applyTheme(document.documentElement.dataset.theme || "light");
+
+if (themeToggle) {
+  themeToggle.addEventListener("click", () => {
+    const current = document.documentElement.dataset.theme;
+    applyTheme(current === "dark" ? "light" : "dark", true);
   });
 }
 
