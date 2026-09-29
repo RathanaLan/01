@@ -116,12 +116,43 @@
     3. **Time-Aware Greeting**: Automatically renders localized greetings (*"Good morning"*, *"Good afternoon"*, *"Good evening"*).
     4. **Smart Auto-Redirect**: Automatically carries visitors to `Aboutme/index.html` after 7 seconds, with an instant "Stay Here" pause button and "Enter Now" bypass.
     5. **Universal Responsiveness & Accessibility**: 100% responsive down to 320px screens with viewport metadata, reduced motion compatibility, and semantic landmarks.
-    6. **Enlarged High-Impact Redirect Banner**: Expanded padding, font size (16px), glowing countdown badge, and prominent dual action buttons (`Stay Here` & `Enter Now 🚀`) for strong visual prominence and thumb ergonomics.
-
-
-
-
-
-
-
+- **2026-09-30 (homework/index.html Mobile Responsiveness Overhaul)**:
+  - **Identified Responsiveness Flaws**:
+    1. Fixed `width: 500px; height: 730px;` on `.content-user` card caused horizontal layout breakages on phone screens.
+    2. `.div-form` had hardcoded `margin: 50px;`, subtracting 100px from mobile screens.
+    3. Body had hardcoded `height: 2500px;` and invalid `-ms-inline-grid`.
+    4. Fixed `padding: 50px; border: 2px solid blue;` on research essay overflowed narrow screens.
+    5. Header navigation buttons overflowed horizontally off-screen on mobile.
+  - **Applied Improvements**:
+    1. Replaced fixed dimensional styles with fluid constraints (`width: min(520px, 100%)` for cards and `width: min(880px, 100%)` for the research essay).
+    2. Mobile-responsive sticky header with horizontally scrollable pill buttons and direct links back to Gateway (`../index.html`), Portfolio (`../Aboutme/index.html`), Projects, and Homework #01 (`01.html`).
+    3. Modern inputs and touch targets (48px height) with focus rings and smooth transitions.
+    4. Beautiful typography stack using `Manrope` and `DM Sans`.
+    5. Floating Back-to-Top button with smooth scrolling.
+- **2026-09-30 (Supabase Authentication & Profile Architecture Upgrade)**:
+  - **Identified Deficiencies**:
+    1. `login.html` exclusively relied on email OTP codes (`signInWithOtp`), which easily hit free-tier rate limits (3/hour) or failed when email confirmation was pending, with no password fields or sign-in toggles.
+    2. `login.css` had an unclosed nested duplication causing malformed rules.
+    3. `profile.js` completely halted rendering if `public.profiles` query failed or had strict RLS, rather than gracefully displaying account metadata.
+  - **Architecture Improvements Applied**:
+    1. **Dual-Mode Authentication (`login.html` & `login.js`)**:
+       - **Email + Password (Primary & Most Reliable)**: Added `#password` and `#password-confirm` with show/hide password toggle, invoking `supabase.auth.signInWithPassword()` and `supabase.auth.signUp()`.
+       - **Email One-Time Code (Alternative/Passwordless)**: User can toggle seamlessly to "Email code" tab to receive and verify 6-digit OTP codes via `supabase.auth.signInWithOtp()` and `supabase.auth.verifyOtp()`.
+       - **Forgot Password**: Added direct self-service password reset request via `supabase.auth.resetPasswordForEmail()`.
+       - **Instant Session Detection**: Automatically detects existing Supabase auth sessions on load and redirects logged-in users directly to `profile.html`.
+    2. **Resilient Profile Management (`profile.html` & `profile.js`)**:
+       - **Dual-Layer Persistence**: Saves profile updates to `public.profiles` via `.upsert()` AND synchronizes `user_metadata` in Supabase Auth via `supabase.auth.updateUser()`.
+       - **Non-Blocking Fault Tolerance**: If database tables or RLS are unavailable or undergoing migration, profile form falls back instantly to `currentUser.user_metadata` so the user never sees a blank or broken screen.
+       - **Live Avatar & Card Preview**: Dynamic initials placeholder fallback and instant client preview for uploaded images.
+       - **Storage Policies & Clean Sign Out**: Folder-isolated uploads in `profile-photos` storage bucket, auto-refresh token handling, and clean `signOut()` with session invalidation.
+    4. **Supabase Email Redirection & OTP Token Resolution**:
+       - **Why `localhost:3000` Occurred**: Supabase projects ship by default with **Site URL** set to `http://localhost:3000` and default Magic Link email templates containing only `<a href="{{ .ConfirmationURL }}">Log In</a>` without printing `{{ .Token }}`. Clicking the email link redirects to `localhost:3000`, causing connection refused errors.
+       - **Client-Side Mitigations**: Passed `emailRedirectTo: window.location.origin + .../profile.html` in `signInWithOtp()`, added `#switch-to-password-btn` quick switch, and added hash detection for `#access_token=` callbacks.
+       - **Dashboard Configuration**: User must set **Site URL** and **Redirect URLs** in Supabase Auth -> URL Configuration to match their web origin (e.g. `http://localhost:5500` or production domain), and insert `{{ .Token }}` into Auth -> Email Templates -> Magic Link to display the 6-digit code in the email body.
+    5. **Profile Photo Storage & Guaranteed Fallback**:
+       - **Why Photos Didn't Save**: Supabase requires a Storage bucket named `profile-photos` to be manually created in the dashboard. If uncreated, `upload()` failed silently and reverted `avatar_path` to null.
+       - **Dual Fallback Strategy**: `profile.js` now compresses selected photos to a lightweight Base64 data URL (< 35KB) via HTML5 Canvas. If the Supabase `profile-photos` bucket is missing or blocked, the photo automatically falls back to saving directly in `public.profiles.avatar_path`, `user_metadata.avatar_path`, and `localStorage`. If the bucket exists, it uploads to Supabase storage. Either way, photos persist across reloads.
+    6. **Brand Favicon Across All Pages (Replaced Default Browser Globe)**:
+       - **Created Brand Favicon Asset**: Created [favicon.svg](file:///d:/My_PortFolio/favicon.svg) and [assets/img/favicon.svg](file:///d:/My_PortFolio/assets/img/favicon.svg) featuring the signature dark squircle `#14231e` base, bold white **RL** typography, and vibrant coral `#f1724d` accent dot matching the header identity.
+       - **Dual Embedding for High Compatibility**: Inlined an SVG Data URI `<link rel="icon" ...>` alongside the external SVG file across all 6 HTML pages (`login.html`, `profile.html`, `Aboutme/index.html`, `index.html`, `homework/index.html`, `homework/01.html`). Guarantees crisp high-DPI rendering across Chrome, Edge, Safari, Firefox, and local `file:///` protocols without generic fallback globe icons.
 

@@ -3,475 +3,681 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Welcome Back Guys</title>
-  </head>
-  <script>
-    window.onscroll = function () {
-      const btn = document.getElementById("backToTopBtn");
-      if (
-        document.body.scrollTop > 200 ||
-        document.documentElement.scrollTop > 200
-      ) {
-        btn.style.display = "block";
-      } else {
-        btn.style.display = "none";
-      }
-    };
-    function scrollToTop() {
-      window.scrollTo({
-        top: 0,
-        behavior: "smooth",
-      });
-    }
-  </script>
+    <meta name="theme-color" content="#0d0f2b" />
+    <meta
+      name="description"
+      content="Guidder · Academic coursework, user login module, and distributed systems research by Rathana Lan."
+    />
+    <title>Guidder · Homework Portal | Rathana Lan</title>
+    <link
+      rel="icon"
+      type="image/svg+xml"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='b' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' stop-color='%2314231e'/%3E%3Cstop offset='100%25' stop-color='%230b1512'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='64' height='64' rx='15' fill='url(%23b)'/%3E%3Crect x='1' y='1' width='62' height='62' rx='14' fill='none' stroke='%23253a31' stroke-width='1.5'/%3E%3Ctext x='12' y='44' font-family='system-ui,sans-serif' font-weight='800' font-size='28' fill='%23f5f7f1' letter-spacing='-1'%3ERL%3C/text%3E%3Ccircle cx='51' cy='41' r='4.5' fill='%23f1724d'/%3E%3C/svg%3E"
+    />
+    <link rel="alternate icon" type="image/svg+xml" href="../favicon.svg" />
 
-  <style>
-    #backToTopBtn {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      padding: 10px 15px;
-      font-size: 14px;
-      background-color: #333;
-      color: white;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-      display: none; /* hidden until user scrolls */
-    }
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400..700;1,9..40,400..700&family=Manrope:wght@500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
 
-    #backToTopBtn:hover {
-      background-color: #555;
-    }
-    body {
-      box-sizing: border-box;
-      margin: 0;
-      font-family: Arial, Helvetica, sans-serif;
-      background-color: rgb(197, 221, 242);
-      overflow-y: scroll;
-      display: -ms-inline-grid;
-      height: 2500px;
-    }
-    .header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 10px 20px;
-      background: linear-gradient(
-        to right,
-        rgb(7, 7, 101),
-        rgb(40, 40, 130),
-        rgb(62, 90, 132),
-        rgb(50, 50, 137),
-        rgb(21, 21, 119)
-      );
-      position: sticky;
-      top: 0;
-      z-index: 1;
-      height: 50px;
-    }
-    .header .title {
-      font-size: 26px;
-      font-weight: bold;
-      color: rgb(226, 226, 229);
-    }
-    .nav-buttons {
-      display: flex;
-      gap: 15px;
-    }
-    .nav-buttons a {
-      text-decoration: none;
-      color: rgb(219, 218, 215);
-      padding: 8px 16px;
-      border-radius: 18px;
-      font-weight: bold;
-      transition:
-        background-color 0.9s,
-        color 0.3s;
-      border: 1px solid rgb(116, 116, 180);
-      background-color: rgba(0, 255, 255, 0.15);
-    }
-    .nav-buttons a:hover {
-      background-color: #11114e;
-      border: 2px solid rgb(0, 0, 15);
-      color: rgb(213, 208, 208);
-      box-shadow: 11px 15px 24px -2px rgba(148, 140, 220, 0.35);
-      -webkit-box-shadow: 11px 15px 24px -2px rgba(148, 140, 220, 0.35);
-      -moz-box-shadow: 11px 15px 24px -2px rgba(148, 140, 220, 0.35);
-    }
-    .user-info {
-      width: auto;
-      height: auto;
-      background-color: rgba(82, 124, 187, 0);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-    .content-user {
-      width: 500px;
-      height: 730px;
-      box-sizing: border-box;
-      background-color: rgb(241, 237, 237);
-      justify-content: center;
-      border-radius: 12px;
-      position: relative;
-      text-align: center;
-    }
-    .user-title {
-      width: 80px;
-      height: 80px;
-      color: white;
-      border-radius: 50%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      font-size: 28px;
-      font-weight: bold;
-      margin: 0 auto 15px;
-      background-color: rgb(13, 11, 116);
-      padding: 25px;
-      margin-top: 40px;
-      margin-bottom: -10px;
-      border: 6px solid rgb(141, 229, 170);
-    }
-    .content-user h2 {
-      color: darkblue;
-      margin-bottom: -5px;
-      font-size: 32px;
-    }
-    .content-user p {
-      color: #11114e;
-      font-size: 18px;
-    }
-    .content-user:hover {
-      border: 2px solid rgb(12, 1, 41);
-      background-color: #15153d;
-      border-radius: 20px;
-      transition:
-        background-color 0.7s,
-        border-radiuos 0.5s;
-      box-shadow: 11px 15px 24px 1px rgba(148, 140, 220, 0.67);
-      -webkit-box-shadow: 11px 15px 24px 1px rgba(148, 140, 220, 0.67);
-      -moz-box-shadow: 11px 15px 24px 1px rgba(148, 140, 220, 0.67);
-      p {
-        transition: color 0.7s;
-        color: white;
+    <style>
+      :root {
+        --bg-grad-start: #0a0e27;
+        --bg-grad-mid: #151b47;
+        --bg-grad-end: #0f1738;
+        --card-bg: rgba(255, 255, 255, 0.95);
+        --card-bg-dark: #12163b;
+        --primary: #252874;
+        --primary-light: #3d42b0;
+        --accent-emerald: #10b981;
+        --accent-rose: #f43f5e;
+        --text-dark: #0f172a;
+        --text-muted: #64748b;
+        --text-light: #f8fafc;
+        --radius-sm: 8px;
+        --radius-md: 14px;
+        --radius-lg: 20px;
+        --radius-full: 9999px;
+        --shadow-card: 0 16px 36px -6px rgba(10, 14, 45, 0.35);
+        --shadow-glow: 0 0 24px rgba(79, 70, 229, 0.4);
+        --transition: all 0.28s cubic-bezier(0.16, 1, 0.3, 1);
       }
-      h2 {
-        transition: color 0.7s;
-        color: wheat;
+
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
       }
+
+      html {
+        scroll-behavior: smooth;
+        -webkit-text-size-adjust: 100%;
+      }
+
+      body {
+        margin: 0;
+        min-height: 100vh;
+        font-family: "DM Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        background: linear-gradient(135deg, var(--bg-grad-start) 0%, var(--bg-grad-mid) 50%, var(--bg-grad-end) 100%);
+        background-attachment: fixed;
+        color: var(--text-light);
+        line-height: 1.6;
+        display: flex;
+        flex-direction: column;
+        overflow-x: hidden;
+      }
+
+      /* --------------------------------------------------------------------------
+         1. Sticky Modern Header
+         -------------------------------------------------------------------------- */
+      .header {
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        background: rgba(10, 14, 39, 0.85);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+        padding: 12px 24px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 16px;
+      }
+
+      .header .title-wrap {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .header .title {
+        font-family: "Manrope", sans-serif;
+        font-size: clamp(20px, 3vw, 26px);
+        font-weight: 800;
+        letter-spacing: -0.03em;
+        background: linear-gradient(135deg, #fff 0%, #a5b4fc 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+
+      .header .badge-tag {
+        font-size: 11px;
+        font-weight: 700;
+        text-transform: uppercase;
+        padding: 3px 8px;
+        border-radius: var(--radius-full);
+        background: rgba(99, 102, 241, 0.2);
+        border: 1px solid rgba(129, 140, 248, 0.35);
+        color: #c7d2fe;
+      }
+
+      .nav-buttons {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        padding-bottom: 2px;
+      }
+
+      .nav-buttons a {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        text-decoration: none;
+        color: #e2e8f0;
+        padding: 7px 14px;
+        border-radius: var(--radius-full);
+        font-size: 13px;
+        font-weight: 600;
+        border: 1px solid rgba(255, 255, 255, 0.14);
+        background: rgba(255, 255, 255, 0.06);
+        transition: var(--transition);
+        white-space: nowrap;
+      }
+
+      .nav-buttons a:hover {
+        background: rgba(99, 102, 241, 0.3);
+        border-color: #818cf8;
+        color: #fff;
+        transform: translateY(-1px);
+      }
+
+      .nav-buttons a.btn-active {
+        background: #4f46e5;
+        border-color: #6366f1;
+        color: #fff;
+      }
+
+      /* --------------------------------------------------------------------------
+         2. Main Content & User Info Card
+         -------------------------------------------------------------------------- */
+      .main-content {
+        flex: 1;
+        width: 100%;
+        padding: 32px 16px 48px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .user-info {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        margin-bottom: 24px;
+      }
+
+      .content-user {
+        width: min(520px, 100%);
+        background: var(--card-bg);
+        color: var(--text-dark);
+        border-radius: var(--radius-lg);
+        padding: 36px 28px 32px;
+        position: relative;
+        text-align: center;
+        box-shadow: var(--shadow-card);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        transition: var(--transition);
+      }
+
+      .content-user:hover {
+        box-shadow: 0 20px 45px -8px rgba(79, 70, 229, 0.45);
+        border-color: #818cf8;
+      }
+
+      /* Promotional Discount Tag */
+      .span {
+        position: absolute;
+        top: 18px;
+        right: 18px;
+        background: linear-gradient(135deg, #e11d48 0%, #be123c 100%);
+        color: #fff;
+        border-radius: var(--radius-md);
+        padding: 8px 12px;
+        font-size: 11px;
+        font-weight: 700;
+        text-transform: uppercase;
+        line-height: 1.25;
+        box-shadow: 0 4px 12px rgba(225, 29, 72, 0.35);
+        border: 1px solid rgba(255, 255, 255, 0.25);
+        transition: var(--transition);
+      }
+
+      .span:hover {
+        transform: scale(1.05);
+      }
+
+      .span .discount-price {
+        display: block;
+        font-family: "Manrope", sans-serif;
+        color: #fff;
+        font-weight: 800;
+        font-size: 24px;
+        margin-top: 2px;
+      }
+
+      /* Profile Circle */
       .user-title {
-        transition: 0.7s;
-        border: 4px solid rgb(38, 28, 128);
-        background-color: rgb(9, 19, 78);
+        width: 86px;
+        height: 86px;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 0 auto 16px;
+        background: linear-gradient(135deg, #1e1b4b 0%, #312e81 100%);
+        border: 4px solid #34d399;
+        box-shadow: 0 6px 18px rgba(0, 0, 0, 0.2);
+        transition: var(--transition);
       }
-      form h1 {
-        transition: 0.7s;
-        color: white;
+
+      .user-title h1 {
+        font-family: "Manrope", sans-serif;
+        color: #fff;
+        font-size: 28px;
+        font-weight: 800;
+        margin: 0;
       }
-      form label {
-        transition: 0.7s;
-        color: white;
+
+      .content-user h2 {
+        font-family: "Manrope", sans-serif;
+        color: #1e1b4b;
+        font-size: clamp(24px, 4vw, 30px);
+        font-weight: 800;
+        margin-bottom: 4px;
       }
-    }
-    .content-user p:hover {
-      color: #d6d6e6;
-      font-size: 20px;
-      transition: font-size 0.6s;
-    }
-    .content-user h2:hover {
-      color: rgb(235, 235, 239);
-      margin-bottom: -5px;
-      font-size: 38px;
-      transition: font-size 0.6s;
-    }
-    .user-title h1:hover {
-      transition: 0.7s;
-      width: 75px;
-      height: 75px;
-      border: 4px solid rgb(235, 228, 230);
-      border-radius: 100px;
-      background-color: rgb(155, 155, 171);
-      padding: 15px;
-      color: #11114e;
-    }
-    form h1 {
-      color: rgb(35, 35, 144);
-    }
-    h1:hover {
-      transition: 0.7s;
-      color: rgb(169, 138, 138);
-    }
-    form p {
-      margin-top: -15px;
-      color: #c2c2e4;
-    }
 
-    .login-to {
-      display: blocks;
-    }
-    .frm-label {
-      text-align: left;
-    }
-    .div-form {
-      display: block;
-      justify-content: left;
-      text-align: left;
-      margin: 50px;
-      white-space: 20px;
-      width: auto;
-    }
-    .frm-label {
-      font-size: 18px;
-      font-weight: 700;
-      color: #232365;
-    }
-    .input-mail {
-      width: 100%;
-      height: 45px;
-      border: 4px solid #ccc;
-      margin-top: 12px;
-      margin-bottom: 12px;
-      font-size: 20px;
-      padding-left: 10px;
-      outline: none;
-      border-radius: 6px;
-    }
-    .input-password {
-      width: 100%;
-      height: 45px;
-      border: 4px solid #ccc;
-      margin-top: 12px;
-      margin-bottom: 12px;
-      font-size: 20px;
-      padding-left: 10px;
-      outline: none;
-      border-radius: 6px;
-    }
-    .Log-in {
-      width: 100%;
-      height: 45px;
-      border: 0px solid rgb(147, 141, 141);
-      border-radius: 12px;
-      background-color: rgb(58, 53, 87);
-      color: white;
-      font-size: 18px;
-      margin-left: 5px;
-    }
-    .input-mail:focus {
-      transition: 0.6s;
-      border: 4px solid rgb(197, 8, 137);
-      border-radius: 12px;
-    }
+      .content-user .user-role {
+        color: #475569;
+        font-size: 15px;
+        font-weight: 500;
+        margin-bottom: 20px;
+      }
 
-    .input-mail:hover {
-      transition: 0.6s;
-      border: 4px solid rgb(197, 8, 137);
-      border-radius: 12px;
-      background-color: rgb(172, 189, 229);
-      font-size: 18px;
-    }
+      .content-user hr {
+        border: 0;
+        height: 1px;
+        background: #e2e8f0;
+        margin: 20px 0 24px;
+      }
 
-    .input-password:hover {
-      transition: 0.6s;
-      border: 4px solid rgb(67, 194, 92);
-      border-radius: 12px;
-      font-size: 18px;
-    }
-    .Log-in:hover {
-      transition: 0.25s;
-      background-color: rgb(28, 28, 99);
-      font-size: 20px;
-    }
-    span a:hover {
-      transition: 0.2s;
-      background-color: rgb(29, 8, 94);
-      color: rgb(235, 227, 227);
-      font-size: 16px;
-      padding: 12px;
-      margin-top: 120px 120px;
-      border-radius: 6px;
-    }
-    p:hover {
-      color: rgb(33, 6, 76);
-    }
-    .information {
-      text-align: center;
-      font-size: 20px;
-    }
-    .span {
-      color: rgb(212, 206, 206);
-      position: absolute;
-      top: 10px;
-      right: 10px;
-      background-color: #e7122e;
-      border-radius: 12px;
-      padding: 10px;
-      box-shadow: 5px 15px 24px 1px rgba(163, 147, 152, 0.67);
-      -webkit-box-shadow: 11px 15px 24px 1px rgba(156, 182, 170, 0.67);
-      -moz-box-shadow: 5px 15px 24px 1px rgba(148, 140, 220, 0.67);
-    }
-    .span:hover {
-      transition: 1s;
-      box-shadow: 11px 15px 24px 1px rgba(189, 77, 129, 0.67);
-      -webkit-box-shadow: 11px 15px 24px 1px rgba(201, 103, 188, 0.67);
-      -moz-box-shadow: 11px 15px 24px 1px rgba(148, 140, 220, 0.67);
-    }
-  </style>
+      /* --------------------------------------------------------------------------
+         3. Responsive Login Form
+         -------------------------------------------------------------------------- */
+      .login-to {
+        width: 100%;
+        text-align: left;
+      }
+
+      .login-to h1.idr {
+        font-family: "Manrope", sans-serif;
+        font-size: 22px;
+        font-weight: 800;
+        color: #1e1b4b;
+        margin-bottom: 4px;
+        text-align: center;
+      }
+
+      .login-to .form-desc {
+        font-size: 13.5px;
+        color: #64748b;
+        text-align: center;
+        margin-bottom: 22px;
+      }
+
+      .div-form {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+      }
+
+      .form-group {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+      }
+
+      .frm-label {
+        font-size: 13.5px;
+        font-weight: 700;
+        color: #1e293b;
+      }
+
+      .input-mail,
+      .input-password {
+        width: 100%;
+        height: 48px;
+        padding: 0 14px;
+        border: 2px solid #cbd5e1;
+        border-radius: var(--radius-sm);
+        font-size: 15px;
+        font-family: inherit;
+        color: #0f172a;
+        background: #fff;
+        outline: none;
+        transition: var(--transition);
+      }
+
+      .input-mail:focus,
+      .input-password:focus {
+        border-color: #6366f1;
+        box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
+      }
+
+      .Log-in {
+        width: 100%;
+        height: 48px;
+        border: none;
+        border-radius: var(--radius-sm);
+        background: linear-gradient(135deg, #312e81 0%, #4338ca 100%);
+        color: #fff;
+        font-family: "Manrope", sans-serif;
+        font-size: 16px;
+        font-weight: 700;
+        cursor: pointer;
+        transition: var(--transition);
+        margin-top: 6px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 4px 12px rgba(49, 46, 129, 0.3);
+      }
+
+      .Log-in:hover {
+        background: linear-gradient(135deg, #1e1b4b 0%, #3730a3 100%);
+        transform: translateY(-1px);
+        box-shadow: 0 6px 16px rgba(49, 46, 129, 0.45);
+      }
+
+      /* Helper Auth Links */
+      .auth-aux-links {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        text-align: center;
+        margin-top: 16px;
+        margin-bottom: 24px;
+        font-size: 14px;
+        color: #cbd5e1;
+      }
+
+      .auth-aux-links a {
+        color: #818cf8;
+        font-weight: 700;
+        text-decoration: none;
+        transition: var(--transition);
+      }
+
+      .auth-aux-links a:hover {
+        color: #a5b4fc;
+        text-decoration: underline;
+      }
+
+      /* --------------------------------------------------------------------------
+         4. Research & Distributed Systems "Read Me" Section
+         -------------------------------------------------------------------------- */
+      .readme-card {
+        width: min(880px, 100%);
+        background: rgba(18, 24, 61, 0.75);
+        border: 1px solid rgba(129, 140, 248, 0.25);
+        border-radius: var(--radius-lg);
+        padding: clamp(24px, 4vw, 40px);
+        box-shadow: var(--shadow-card);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+      }
+
+      .readme-card .kicker {
+        font-size: 11px;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        color: #818cf8;
+        margin-bottom: 8px;
+        display: block;
+      }
+
+      .readme-card h1 {
+        font-family: "Manrope", sans-serif;
+        font-size: clamp(24px, 3.5vw, 34px);
+        font-weight: 800;
+        color: #fff;
+        margin-bottom: 16px;
+        letter-spacing: -0.02em;
+      }
+
+      .readme-card p {
+        font-size: 15px;
+        color: #cbd5e1;
+        line-height: 1.75;
+        margin-bottom: 18px;
+        text-align: justify;
+      }
+
+      .readme-card .see-also-section {
+        background: rgba(255, 255, 255, 0.04);
+        border-radius: var(--radius-md);
+        padding: 20px;
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        margin-top: 20px;
+      }
+
+      .readme-card .see-also-section h3 {
+        font-size: 15px;
+        color: #a5b4fc;
+        margin-bottom: 10px;
+        font-family: "Manrope", sans-serif;
+      }
+
+      .readme-card .see-also-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+        gap: 8px;
+        font-size: 13px;
+        color: #94a3b8;
+      }
+
+      /* --------------------------------------------------------------------------
+         5. Floating Back-to-Top Button
+         -------------------------------------------------------------------------- */
+      #backToTopBtn {
+        position: fixed;
+        bottom: 24px;
+        right: 24px;
+        width: 44px;
+        height: 44px;
+        border-radius: 50%;
+        background: #4f46e5;
+        color: #fff;
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+        cursor: pointer;
+        display: none;
+        align-items: center;
+        justify-content: center;
+        font-size: 18px;
+        z-index: 99;
+        transition: var(--transition);
+      }
+
+      #backToTopBtn:hover {
+        background: #4338ca;
+        transform: translateY(-3px);
+        box-shadow: 0 10px 24px rgba(79, 70, 229, 0.6);
+      }
+
+      /* --------------------------------------------------------------------------
+         6. Responsive Breakpoints
+         -------------------------------------------------------------------------- */
+      @media (max-width: 768px) {
+        .header {
+          padding: 10px 16px;
+          flex-direction: column;
+          align-items: stretch;
+          gap: 12px;
+        }
+
+        .header .title-wrap {
+          justify-content: space-between;
+        }
+
+        .nav-buttons {
+          width: 100%;
+          justify-content: flex-start;
+          gap: 8px;
+        }
+
+        .content-user {
+          padding: 28px 18px 24px;
+        }
+
+        .span {
+          top: 14px;
+          right: 14px;
+          padding: 6px 10px;
+        }
+
+        .span .discount-price {
+          font-size: 20px;
+        }
+
+        .readme-card {
+          padding: 20px 16px;
+        }
+
+        .readme-card p {
+          text-align: left;
+        }
+
+        #backToTopBtn {
+          bottom: 16px;
+          right: 16px;
+          width: 40px;
+          height: 40px;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .content-user h2 {
+          font-size: 22px;
+        }
+
+        .user-title {
+          width: 74px;
+          height: 74px;
+          margin-top: 10px;
+        }
+
+        .user-title h1 {
+          font-size: 24px;
+        }
+
+        .input-mail,
+        .input-password,
+        .Log-in {
+          height: 44px;
+          font-size: 14px;
+        }
+      }
+    </style>
+  </head>
   <body>
-    <button onclick="scrollToTop()" id="backToTopBtn">⬆ Back to Top</button>
-    <div class="header">
-      <div class="title">Guidder</div>
-      <nav class="nav-buttons">
-        <a href="#" class="nav-next">Home</a>
-        <a href="#" class="nav-next">About</a>
-        <a href="#" class="nav-next">Projects</a>
-        <a href="#" class="nav-next">Contact</a>
-      </nav>
-    </div>
-    <br />
-    <div class="user-info">
-      <div class="content-user">
-        <div class="user-title">
-          <h1>LR</h1>
-        </div>
-        <br />
-        <span class="span"
-          >New user discount<br />
-          <span style="color: #f8f8fa; font-weight: bold; font-size: 30px"
-            >50$</span
-          ></span
-        >
-        <h2>Rathana Lan</h2>
-        <p>Full time farmer development</p>
-        <hr />
-        <form action="submit" class="login-to" title="Hello">
-          <h1 class="idr">Welcome Back</h1>
-          <p>Please input your credentail to login</p>
-          <div class="div-form">
-            <label for="" class="frm-label">User Name</label>
-            <br />
-            <input
-              class="input-mail"
-              type="text"
-              placeholder="Enter your email"
-            /><br />
-            <label for="" class="frm-label">Password</label>
-            <br />
-            <input
-              class="input-password"
-              placeholder="Enter your password"
-              type="password"
-              value=""
-            />
-            <br /><br /><button class="Log-in">Log In</button>
-          </div>
-        </form>
-      </div>
-    </div>
-    <br />
-    <div style="display: grid; left: 50%">
-      <span class="information">
-        Forgot password?
-        <a
-          href="#4"
-          class="infl"
-          style="text-decoration: none; font-weight: bold"
-          >click here to reset</a
-        > </span
-      ><br />
-      <span class="information">
-        Dont have account?
-        <a
-          href="#4"
-          class="infl"
-          style="text-decoration: none; font-weight: bold"
-          >Sign Up</a
-        >
-      </span>
-    </div>
+    <!-- Floating Back to Top Button -->
+    <button onclick="scrollToTop()" id="backToTopBtn" type="button" aria-label="Back to top">↑</button>
 
-    <div
-      style="
-        padding: 50px 50px;
-        border: 2px solid blue;
-        margin: 10px 10px;
-        border-radius: 16px;
-      "
-    >
-      <h1>Read Me</h1>
-      <p>
-        Events vs. messages In distributed systems, events represent a fact or
-        state change (e.g., OrderPlaced) and are typically broadcast
-        asynchronously to multiple consumers, promoting loose coupling and
-        scalability. While events generally do not expect an immediate response,
-        acknowledgment mechanisms are often implemented at the infrastructure
-        level (e.g., Kafka commit offsets, SNS delivery statuses) rather than
-        being an inherent part of the event pattern itself.[8][9] In contrast,
-        messages serve a broader role, encompassing commands (e.g.,
-        ProcessPayment), events (e.g., PaymentProcessed), and documents (e.g.,
-        DataPayload). Both events and messages can support various delivery
-        guarantees, including at-least-once, at-most-once, and exactly-once,
-        depending on the technology stack and implementation. However,
-        exactly-once delivery is often achieved through idempotency mechanisms
-        rather than true, infrastructure-level exactly-once semantics.[8][9]
-        Delivery patterns for both events and messages include publish/subscribe
-        (one-to-many) and point-to-point (one-to-one). While request/reply is
-        technically possible, it is more commonly associated with messaging
-        patterns rather than pure event-driven systems. Events excel at state
-        propagation and decoupled notifications, while messages are better
-        suited for command execution, workflow orchestration, and explicit
-        coordination.[8][9] Modern architectures commonly combine both
-        approaches, leveraging events for distributed state change notifications
-        and messages for targeted command execution and structured workflows
-        based on specific timing, ordering, and delivery requirements.[8][9] See
-        also Airmail – Service which transports mail by air Amateur radio
-        emergency communications – Fallback service Beacon – Device used to
-        attract attention Communications satellite – Artificial satellite that
-        relays radio signals Communication studies – Academic discipline Drums
-        in communication – Drums used for long-distance signalling and
-        communications Email – Mail sent using electronic means Emergency Alert
-        System – Method of emergency broadcasting in the United States
-        Encryption – Process of converting plaintext to ciphertext Express mail
-        – Accelerated mail delivery service Flag semaphore – System to transmit
-        information by hand Instant messaging – Form of computer communication
-        over the internet or locally List of interstellar radio messages Mail –
-        System for transporting documents and other small packages Message in a
-        bottle – Form of communication Network packet – Formatted unit of data
-        carried by a packet-switched network Optical telegraph – Tower-based
-        signaling network Pioneer plaque – Plaques on the Pioneer 10 and 11
-        space probes with pictorial messages about humanity Pony Express –
-        1860–1861 mail service in the United States Radio – Use of radio waves
-        for communication Semaphore – Mechanical apparatus used to send messages
-        Semiotics – Study of signs Sign language – Language that uses manual
-        communication and body language to convey meaning Smoke signal – Smoke
-        used as a mode of communication SMS – Text messaging service component
-        Telegram – Message sent through telegraphy Telegraphy – Long distance
-        transmission of text Telephony – Field of telecommunication services
-        Television – Medium for transmitting moving images and sound Voicemail –
-        Voice message storage and retrieval References Communication in Everyday
-        Life: A Survey of Communication. ISBN 978-1-5443-4987-9. Theories of
-        Human Communication. ISBN 978-1-57766-706-3. Zhao, Xinyan; Fink, Edward
-        L. (2021). "Proattitudinal versus counterattitudinal messages: Message
-        discrepancy, reactance, and the boomerang effect". Communication
-        Monographs. 88 (3): 286–305. doi:10.1080/03637751.2020.1813317.
-        Retrieved 2024-05-24. So, Jiyeon; Kim, Soela; Cohen, Heather (2017).
-        "Message fatigue: Conceptual definition, operationalization, and
-        correlates". Communication Monographs. 84: 5–29.
-        doi:10.1080/03637751.2016.1250429. Retrieved 2024-05-24. Tsai, Wan-Hsiu
-        (Sunny); Lancaster, Alyse R. (2012). "Message Strategies in
-        Direct-to-Consumer Pharmaceutical Advertising: A Content Analysis Using
-        Taylor's Six-Segment Message Strategy Wheel". Health Marketing
-        Quarterly. 29 (3): 239–255. doi:10.1080/07359683.2012.705708. PMID
-        22905945. Retrieved 2024-05-24. "Send a message definition". Cambridge
-        English Dictionary. Retrieved September 24, 2023. Marie, A. (November 8,
-        2022). "A Mixed Message is THE Message". Medium. Kleppmann, Martin.
-        Designing Data-Intensive Applications: The Big Ideas Behind Reliable,
-        Scalable, and Maintainable Systems. ISBN 978-1-4493-7332-0. Building
-        Event-Driven Microservices: Leveraging Organizational Data at Scale.
-        ISBN 978-1-4920-5789-5.
-      </p>
-    </div>
+    <!-- Responsive Sticky Navigation Header -->
+    <header class="header">
+      <div class="title-wrap">
+        <span class="title">Guidder</span>
+        <span class="badge-tag">Academic Hub</span>
+      </div>
+
+      <nav class="nav-buttons" aria-label="Portal Navigation">
+        <a href="../index.html">← Gateway</a>
+        <a href="../Aboutme/index.html">Portfolio</a>
+        <a href="../Aboutme/index.html#projects">Projects</a>
+        <a href="../Aboutme/index.html#contact">Contact</a>
+        <a href="01.html" class="btn-active">Homework #01</a>
+      </nav>
+    </header>
+
+    <!-- Main Content Area -->
+    <main class="main-content">
+      <!-- Responsive User Login & Profile Card -->
+      <section class="user-info" aria-label="User Profile & Login Module">
+        <div class="content-user">
+          <!-- Promotional Badge -->
+          <div class="span">
+            New user discount
+            <span class="discount-price">$50</span>
+          </div>
+
+          <!-- Profile Initials Circle -->
+          <div class="user-title" aria-hidden="true">
+            <h1>LR</h1>
+          </div>
+
+          <h2>Rathana Lan</h2>
+          <p class="user-role">Digital Transformation &amp; Smart Factory Developer</p>
+          <hr />
+
+          <!-- Interactive Login Form -->
+          <form class="login-to" onsubmit="event.preventDefault(); alert('Demo Login: Authentication connected to Supabase.');" title="Account Credentials">
+            <h1 class="idr">Welcome Back</h1>
+            <p class="form-desc">Please input your credentials to access the coursework</p>
+
+            <div class="div-form">
+              <div class="form-group">
+                <label for="user-mail-input" class="frm-label">Email / User Name</label>
+                <input
+                  id="user-mail-input"
+                  class="input-mail"
+                  type="email"
+                  placeholder="Enter your email"
+                  required
+                />
+              </div>
+
+              <div class="form-group">
+                <label for="user-password-input" class="frm-label">Password</label>
+                <input
+                  id="user-password-input"
+                  class="input-password"
+                  placeholder="Enter your password"
+                  type="password"
+                  required
+                />
+              </div>
+
+              <button class="Log-in" type="submit">Log In</button>
+            </div>
+          </form>
+        </div>
+      </section>
+
+      <!-- Account Auxiliary Links -->
+      <div class="auth-aux-links">
+        <span>Forgot password? <a href="../profile.html">Click here to reset</a></span>
+        <span>Don't have an account? <a href="../login.html">Sign Up</a></span>
+      </div>
+
+      <!-- Distributed Systems & Messaging Research Article -->
+      <article class="readme-card" aria-label="Distributed Systems Research Note">
+        <span class="kicker">Distributed Systems Engineering</span>
+        <h1>Read Me · Events vs. Messages</h1>
+
+        <p>
+          In distributed systems, <strong>events</strong> represent an immutable fact or state change (e.g., <em>OrderPlaced</em>) and are typically broadcast asynchronously to multiple consumers, promoting loose coupling and scalability. While events generally do not expect an immediate response, acknowledgment mechanisms are often implemented at the infrastructure level (e.g., Kafka commit offsets, SNS delivery statuses) rather than being an inherent part of the event pattern itself.
+        </p>
+
+        <p>
+          In contrast, <strong>messages</strong> serve a broader role, encompassing commands (e.g., <em>ProcessPayment</em>), events (e.g., <em>PaymentProcessed</em>), and documents (e.g., <em>DataPayload</em>). Both events and messages can support various delivery guarantees, including at-least-once, at-most-once, and exactly-once, depending on the technology stack and implementation. However, exactly-once delivery is often achieved through idempotency mechanisms rather than true, infrastructure-level exactly-once semantics.
+        </p>
+
+        <p>
+          Delivery patterns for both events and messages include publish/subscribe (one-to-many) and point-to-point (one-to-one). While request/reply is technically possible, it is more commonly associated with messaging patterns rather than pure event-driven systems. Events excel at state propagation and decoupled notifications, while messages are better suited for command execution, workflow orchestration, and explicit coordination. Modern cloud architectures commonly combine both approaches, leveraging events for distributed state change notifications and messages for targeted command execution and structured workflows based on specific timing, ordering, and delivery requirements.
+        </p>
+
+        <div class="see-also-section">
+          <h3>Communication Concepts &amp; References</h3>
+          <div class="see-also-grid">
+            <div>• Airmail &amp; Instant Messaging</div>
+            <div>• Optical &amp; Telegraphic Networks</div>
+            <div>• Packet-Switched Networks</div>
+            <div>• Kafka Event Streams &amp; Offsets</div>
+            <div>• Kleppmann: Designing Data-Intensive Apps</div>
+            <div>• Idempotent Message Handlers</div>
+          </div>
+        </div>
+      </article>
+    </main>
+
+    <!-- Interactive Smooth Scroll Script -->
+    <script>
+      const btn = document.getElementById("backToTopBtn");
+
+      window.addEventListener("scroll", () => {
+        if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
+          btn.style.display = "inline-flex";
+        } else {
+          btn.style.display = "none";
+        }
+      });
+
+      function scrollToTop() {
+        window.scrollTo({
+          top: 0,
+          behavior: "smooth",
+        });
+      }
+    </script>
   </body>
 </html>

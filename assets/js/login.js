@@ -1,12 +1,33 @@
 const loginForm = document.getElementById("login-form");
 const formFeedback = document.getElementById("form-feedback");
 const emailInput = document.getElementById("email");
+const emailField = document.getElementById("email-field");
+const passwordInput = document.getElementById("password");
+const passwordField = document.getElementById("password-field");
+const togglePasswordBtn = document.getElementById("toggle-password");
+const forgotPasswordBtn = document.getElementById("forgot-password");
+const passwordConfirmInput = document.getElementById("password-confirm");
+const passwordConfirmField = document.getElementById("password-confirm-field");
+const togglePasswordConfirmBtn = document.getElementById("toggle-password-confirm");
 const emailCodeInput = document.getElementById("email-code");
+const codeField = document.getElementById("code-field");
 const displayNameInput = document.getElementById("display-name");
+const nameField = document.getElementById("name-field");
 const submitButton = document.getElementById("submit-button");
 const modeToggle = document.getElementById("mode-toggle");
+const modeSwitch = document.getElementById("mode-switch");
 const resendButton = document.getElementById("resend-code");
+const authNavTabs = document.getElementById("auth-nav-tabs");
+const tabPassword = document.getElementById("tab-password");
+const tabOtp = document.getElementById("tab-otp");
+const editEmailBtn = document.getElementById("edit-email");
+const emailStepOptions = document.getElementById("email-step-options");
+const codeStepOptions = document.getElementById("code-step-options");
+const switchToPasswordBtn = document.getElementById("switch-to-password-btn");
+const codeTip = document.getElementById("code-tip");
+const rememberOption = document.getElementById("remember-option");
 const year = document.getElementById("year");
+
 const pageConfig = window.PORTFOLIO_SUPABASE_CONFIG || {};
 const hasSupabaseConfig = Boolean(
   pageConfig.url &&
@@ -14,23 +35,28 @@ const hasSupabaseConfig = Boolean(
   !pageConfig.url.includes("YOUR_PROJECT_ID") &&
   !pageConfig.publishableKey.includes("YOUR_SUPABASE_"),
 );
+
 let supabaseClient = null;
-let mode = "signin";
-let step = "email";
+let mode = "signin"; // 'signin' | 'signup'
+let signinMethod = "password"; // 'password' | 'otp'
+let otpStep = "email"; // 'email' | 'code'
 let pendingEmail = "";
 let resendTimer = null;
 
 function getSupabaseClient() {
   if (!hasSupabaseConfig || !window.supabase) return null;
   if (!supabaseClient) {
+    const rememberCheckbox = document.querySelector('[name="remember"]');
+    const storage = rememberCheckbox && !rememberCheckbox.checked
+      ? window.sessionStorage
+      : window.localStorage;
+
     supabaseClient = window.supabase.createClient(
       pageConfig.url,
       pageConfig.publishableKey,
       {
         auth: {
-          storage: document.querySelector('[name="remember"]').checked
-            ? window.localStorage
-            : window.sessionStorage,
+          storage,
           persistSession: true,
           autoRefreshToken: true,
           detectSessionInUrl: true,
@@ -42,103 +68,20 @@ function getSupabaseClient() {
 }
 
 function showFeedback(message, type = "error") {
+  if (!formFeedback) return;
   formFeedback.textContent = message;
   formFeedback.dataset.type = type;
-}
-
-function setMode(nextMode) {
-  mode = nextMode;
-  const isSignup = mode === "signup";
-  document.getElementById("form-eyebrow").textContent = isSignup
-    ? "Join the workspace"
-    : "Welcome back";
-  document.getElementById("signin-title").textContent = isSignup
-    ? "Create your account."
-    : "Sign in to continue.";
-  document.getElementById("form-description").textContent = isSignup
-    ? "We’ll verify your email and create your workspace account."
-    : "We’ll email you a secure, one-time sign-in code.";
-  nameField.hidden = !isSignup;
-  displayNameInput.required = isSignup;
-  document.getElementById("mode-switch").firstChild.textContent = isSignup
-    ? "Already registered? "
-    : "New to the workspace? ";
-  modeToggle.textContent = isSignup ? "Sign in" : "Create an account";
-  document.getElementById("access-note-text").textContent = isSignup
-    ? "Each email belongs to one account. Existing accounts can request a sign-in code instead of registering again."
-    : "Access is intended for authorized team members. Contact the portfolio owner if you need an account.";
-  showFeedback("");
 }
 
 function setBusy(isBusy, label) {
   submitButton.disabled = isBusy;
   submitButton.setAttribute("aria-busy", String(isBusy));
-  submitButton.firstChild.textContent = `${label} `;
-}
-
-function setMode(nextMode) {
-  mode = nextMode;
-  const isSignup = mode === "signup";
-  document.getElementById("form-eyebrow").textContent = isSignup
-    ? "Join the workspace"
-    : "Welcome back";
-  document.getElementById("signin-title").textContent = isSignup
-    ? "Create your account."
-    : "Sign in to continue.";
-  document.getElementById("form-description").textContent = isSignup
-    ? "We’ll verify your email and create your workspace account."
-    : "We’ll email you a secure, one-time sign-in code.";
-  document.getElementById("name-field").hidden = !isSignup;
-  displayNameInput.required = isSignup;
-  document.getElementById("access-note-text").textContent = isSignup
-    ? "Each email belongs to one account. Existing accounts can request a sign-in code instead of registering again."
-    : "Access is intended for authorized team members. Contact the portfolio owner if you need an account.";
-  modeToggle.textContent = isSignup ? "Sign in" : "Create an account";
-  document.getElementById("mode-switch").firstChild.textContent = isSignup
-    ? "Already registered? "
-    : "New to the workspace? ";
-  showFeedback("");
-}
-
-function clearResendTimer() {
-  if (resendTimer) window.clearInterval(resendTimer);
-  resendTimer = null;
-  resendButton.disabled = false;
-  document.getElementById("resend-countdown").textContent = "";
-}
-
-function startResendCooldown(seconds = 30) {
-  clearResendTimer();
-  let remaining = seconds;
-  const countdown = document.getElementById("resend-countdown");
-  resendButton.disabled = true;
-  countdown.textContent = `Available in ${remaining}s`;
-  resendTimer = window.setInterval(() => {
-    remaining -= 1;
-    if (remaining <= 0) {
-      clearResendTimer();
-      return;
-    }
-    countdown.textContent = `Available in ${remaining}s`;
-  }, 1000);
-}
-
-function showCodeStep(email) {
-  step = "code";
-  pendingEmail = email;
-  document.getElementById("email-field").hidden = true;
-  document.getElementById("name-field").hidden = true;
-  document.getElementById("code-field").hidden = false;
-  document.getElementById("email-step-options").hidden = true;
-  document.getElementById("code-step-options").hidden = false;
-  document.getElementById("mode-switch").hidden = true;
-  document.getElementById("code-destination").textContent =
-    `We sent a 6-digit code to ${email}.`;
-  emailCodeInput.required = true;
-  submitButton.firstChild.textContent = "Verify and continue ";
-  showFeedback("Check your inbox and enter the code to continue.", "success");
-  startResendCooldown();
-  emailCodeInput.focus();
+  const arrow = submitButton.querySelector("span");
+  if (arrow) {
+    submitButton.innerHTML = `${label} <span aria-hidden="true">→</span>`;
+  } else {
+    submitButton.textContent = label;
+  }
 }
 
 function getProfileUrl() {
@@ -149,134 +92,575 @@ function getProfileUrl() {
   return new URL(path, window.location.origin).href;
 }
 
-function showEmailStep() {
-  step = "email";
-  clearResendTimer();
-  document.getElementById("email-field").hidden = false;
-  document.getElementById("name-field").hidden = mode !== "signup";
-  document.getElementById("code-field").hidden = true;
-  document.getElementById("email-step-options").hidden = false;
-  document.getElementById("code-step-options").hidden = true;
-  document.getElementById("mode-switch").hidden = false;
-  emailCodeInput.required = false;
-  emailCodeInput.value = "";
-  submitButton.firstChild.textContent = "Email me a code ";
-  showFeedback("");
-  emailInput.focus();
+function updateUI() {
+  const isSignup = mode === "signup";
+  const eyebrowEl = document.getElementById("form-eyebrow");
+  const titleEl = document.getElementById("signin-title");
+  const descEl = document.getElementById("form-description");
+  const accessNoteEl = document.getElementById("access-note-text");
+
+  if (isSignup) {
+    if (authNavTabs) authNavTabs.hidden = true;
+    if (eyebrowEl) eyebrowEl.textContent = "Join the workspace";
+    if (titleEl) titleEl.textContent = "Create your account.";
+    if (descEl) descEl.textContent = "Register with your name, work email, and a secure password.";
+    if (accessNoteEl) {
+      accessNoteEl.textContent = "Workspace accounts are authorized for DNKH Digital Transformation portal activities.";
+    }
+
+    nameField.hidden = false;
+    displayNameInput.required = true;
+
+    emailField.hidden = false;
+    emailInput.required = true;
+
+    passwordField.hidden = false;
+    passwordInput.required = true;
+    if (forgotPasswordBtn) forgotPasswordBtn.hidden = true;
+
+    passwordConfirmField.hidden = false;
+    passwordConfirmInput.required = true;
+
+    codeField.hidden = true;
+    emailCodeInput.required = false;
+
+    emailStepOptions.hidden = false;
+    codeStepOptions.hidden = true;
+
+    modeSwitch.firstChild.textContent = "Already registered? ";
+    modeToggle.textContent = "Sign in";
+
+    submitButton.innerHTML = 'Create account <span aria-hidden="true">→</span>';
+  } else {
+    // Sign In Mode
+    if (authNavTabs) authNavTabs.hidden = false;
+    if (eyebrowEl) eyebrowEl.textContent = "Welcome back";
+    if (titleEl) titleEl.textContent = "Sign in to continue.";
+    if (accessNoteEl) {
+      accessNoteEl.textContent = "Access is intended for authorized team members. Contact the portfolio owner if you need an account.";
+    }
+
+    nameField.hidden = true;
+    displayNameInput.required = false;
+
+    passwordConfirmField.hidden = true;
+    passwordConfirmInput.required = false;
+
+    modeSwitch.firstChild.textContent = "New to the workspace? ";
+    modeToggle.textContent = "Create an account";
+
+    if (codeTip) codeTip.hidden = true;
+
+    if (signinMethod === "password") {
+      tabPassword.classList.add("is-active");
+      tabPassword.setAttribute("aria-selected", "true");
+      tabOtp.classList.remove("is-active");
+      tabOtp.setAttribute("aria-selected", "false");
+
+      if (descEl) descEl.textContent = "Use your authorized work email and password to continue.";
+
+      emailField.hidden = false;
+      emailInput.required = true;
+
+      passwordField.hidden = false;
+      passwordInput.required = true;
+      if (forgotPasswordBtn) forgotPasswordBtn.hidden = false;
+
+      codeField.hidden = true;
+      emailCodeInput.required = false;
+
+      emailStepOptions.hidden = false;
+      codeStepOptions.hidden = true;
+
+      submitButton.innerHTML = 'Sign in <span aria-hidden="true">→</span>';
+    } else {
+      // OTP Method
+      tabOtp.classList.add("is-active");
+      tabOtp.setAttribute("aria-selected", "true");
+      tabPassword.classList.remove("is-active");
+      tabPassword.setAttribute("aria-selected", "false");
+
+      passwordField.hidden = true;
+      passwordInput.required = false;
+
+      if (otpStep === "email") {
+        if (codeTip) codeTip.hidden = true;
+        if (descEl) descEl.textContent = "We’ll email you a secure, one-time verification code.";
+        emailField.hidden = false;
+        emailInput.required = true;
+
+        codeField.hidden = true;
+        emailCodeInput.required = false;
+
+        emailStepOptions.hidden = false;
+        codeStepOptions.hidden = true;
+
+        submitButton.innerHTML = 'Email me a code <span aria-hidden="true">→</span>';
+      } else {
+        if (codeTip) codeTip.hidden = false;
+        if (descEl) descEl.textContent = `Enter the 6-digit code sent to ${pendingEmail}.`;
+        emailField.hidden = true;
+        emailInput.required = false;
+
+        codeField.hidden = false;
+        emailCodeInput.required = true;
+
+        emailStepOptions.hidden = true;
+        codeStepOptions.hidden = false;
+
+        submitButton.innerHTML = 'Verify and continue <span aria-hidden="true">→</span>';
+      }
+    }
+  }
 }
 
+function setMode(nextMode) {
+  mode = nextMode;
+  showFeedback("");
+  updateUI();
+}
+
+function setSigninMethod(method) {
+  signinMethod = method;
+  otpStep = "email";
+  showFeedback("");
+  updateUI();
+}
+
+function clearResendTimer() {
+  if (resendTimer) window.clearInterval(resendTimer);
+  resendTimer = null;
+  if (resendButton) resendButton.disabled = false;
+  const countdown = document.getElementById("resend-countdown");
+  if (countdown) countdown.textContent = "";
+}
+
+function startResendCooldown(seconds = 30) {
+  clearResendTimer();
+  let remaining = seconds;
+  const countdown = document.getElementById("resend-countdown");
+  if (resendButton) resendButton.disabled = true;
+  if (countdown) countdown.textContent = `Available in ${remaining}s`;
+  resendTimer = window.setInterval(() => {
+    remaining -= 1;
+    if (remaining <= 0) {
+      clearResendTimer();
+      return;
+    }
+    if (countdown) countdown.textContent = `Available in ${remaining}s`;
+  }, 1000);
+}
+
+// Password Sign In
+async function handlePasswordSignIn() {
+  const email = emailInput.value.trim().toLowerCase();
+  const password = passwordInput.value;
+  if (!email || !password) {
+    showFeedback("Please enter your work email and password.", "error");
+    return;
+  }
+
+  const client = getSupabaseClient();
+  if (!client) {
+    showFeedback("Supabase is not configured yet. Check assets/js/supabase-config.js.", "setup");
+    return;
+  }
+
+  setBusy(true, "Signing in…");
+  showFeedback("Verifying your credentials…", "loading");
+
+  try {
+    const { data, error } = await client.auth.signInWithPassword({
+      email,
+      password,
+    });
+    if (error) throw error;
+
+    showFeedback("Signed in successfully! Opening your profile…", "success");
+    setTimeout(() => {
+      window.location.assign(getProfileUrl());
+    }, 600);
+  } catch (error) {
+    const msg = error.message || "Failed to sign in.";
+    if (msg.toLowerCase().includes("invalid login credentials")) {
+      showFeedback("Invalid email or password. Please check your credentials and try again.", "error");
+    } else if (msg.toLowerCase().includes("email not confirmed")) {
+      showFeedback("Email not confirmed. Please click the confirmation link sent to your email.", "error");
+    } else {
+      showFeedback(msg, "error");
+    }
+  } finally {
+    setBusy(false, "Sign in");
+  }
+}
+
+// Password Sign Up
+async function handlePasswordSignUp() {
+  const name = displayNameInput.value.trim();
+  const email = emailInput.value.trim().toLowerCase();
+  const password = passwordInput.value;
+  const confirmPassword = passwordConfirmInput.value;
+
+  if (!name) {
+    showFeedback("Please enter your full name.", "error");
+    displayNameInput.focus();
+    return;
+  }
+  if (!email) {
+    showFeedback("Please enter your work email.", "error");
+    emailInput.focus();
+    return;
+  }
+  if (!password || password.length < 6) {
+    showFeedback("Password must be at least 6 characters long.", "error");
+    passwordInput.focus();
+    return;
+  }
+  if (password !== confirmPassword) {
+    showFeedback("Passwords do not match. Please verify both password fields.", "error");
+    passwordConfirmInput.focus();
+    return;
+  }
+
+  const client = getSupabaseClient();
+  if (!client) {
+    showFeedback("Supabase is not configured yet. Check assets/js/supabase-config.js.", "setup");
+    return;
+  }
+
+  setBusy(true, "Creating account…");
+  showFeedback("Registering your workspace account…", "loading");
+
+  try {
+    const { data, error } = await client.auth.signUp({
+      email,
+      password,
+      options: {
+        data: {
+          display_name: name,
+        },
+      },
+    });
+    if (error) throw error;
+
+    if (data?.session) {
+      // User is immediately logged in
+      try {
+        await client.from("profiles").upsert({
+          id: data.user.id,
+          display_name: name,
+          updated_at: new Date().toISOString(),
+        });
+      } catch (profileErr) {
+        console.warn("Initial profile upsert notice:", profileErr);
+      }
+
+      showFeedback("Account created! Opening your profile…", "success");
+      setTimeout(() => {
+        window.location.assign(getProfileUrl());
+      }, 700);
+    } else if (data?.user) {
+      // Confirmation email required
+      showFeedback(
+        `Account created! A confirmation email was sent to ${email}. Please confirm your email, then return here to sign in.`,
+        "success",
+      );
+      setMode("signin");
+      emailInput.value = email;
+    }
+  } catch (error) {
+    const msg = error.message || "Could not create account.";
+    if (msg.toLowerCase().includes("already registered") || msg.toLowerCase().includes("user already exists")) {
+      showFeedback("An account with this email already exists. Switching to Sign In…", "error");
+      setTimeout(() => {
+        setMode("signin");
+        emailInput.value = email;
+      }, 1400);
+    } else {
+      showFeedback(msg, "error");
+    }
+  } finally {
+    setBusy(false, mode === "signup" ? "Create account" : "Sign in");
+  }
+}
+
+// Forgot Password
+async function handleForgotPassword() {
+  const email = emailInput.value.trim().toLowerCase();
+  if (!email) {
+    showFeedback("Enter your work email in the email field above to request a reset link.", "error");
+    emailInput.focus();
+    return;
+  }
+  const client = getSupabaseClient();
+  if (!client) return;
+
+  showFeedback("Sending password reset instructions…", "loading");
+  try {
+    const { error } = await client.auth.resetPasswordForEmail(email, {
+      redirectTo: getProfileUrl(),
+    });
+    if (error) throw error;
+    showFeedback(`Password reset instructions sent to ${email}. Check your inbox.`, "success");
+  } catch (error) {
+    showFeedback(error.message || "Could not send password reset email.", "error");
+  }
+}
+
+// Send OTP Code
 async function sendCode() {
-  if (!loginForm.reportValidity()) return;
   const client = getSupabaseClient();
   if (!client) {
     showFeedback(
-      "Connect Supabase first: add your project URL and publishable/anon key in assets/js/supabase-config.js.",
+      "Connect Supabase first: add your project URL and publishable key in assets/js/supabase-config.js.",
       "setup",
     );
     return;
   }
 
   const email = emailInput.value.trim().toLowerCase();
-  setBusy(true, "Sending code…");
-  showFeedback(
-    mode === "signup" ? "Creating your account…" : "Sending your code…",
-    "loading",
-  );
-
-  try {
-    const { error } = await client.auth.signInWithOtp({
-      email,
-      options: {
-        shouldCreateUser: mode === "signup",
-        ...(mode === "signup"
-          ? { data: { display_name: displayNameInput.value.trim() } }
-          : {}),
-      },
-    });
-    if (error) throw error;
-    showCodeStep(email);
-  } catch (error) {
-    showFeedback(
-      error.message || "Could not send a code. Check the email and try again.",
-    );
-  } finally {
-    setBusy(false, step === "code" ? "Verify and continue" : "Email me a code");
-  }
-}
-
-async function verifyCode() {
-  if (!emailCodeInput.reportValidity()) return;
-  const client = getSupabaseClient();
-  if (!client) {
-    showFeedback("Supabase is not configured yet.", "setup");
+  if (!email) {
+    showFeedback("Please enter your work email.", "error");
+    emailInput.focus();
     return;
   }
 
+  setBusy(true, "Sending code…");
+  showFeedback("Sending your 6-digit code…", "loading");
+
+  try {
+    let emailRedirectTo = undefined;
+    if (window.location.protocol.startsWith("http")) {
+      emailRedirectTo = new URL("profile.html", window.location.href).href;
+    }
+
+    const { error } = await client.auth.signInWithOtp({
+      email,
+      options: {
+        shouldCreateUser: false,
+        emailRedirectTo,
+      },
+    });
+    if (error) throw error;
+
+    pendingEmail = email;
+    otpStep = "code";
+    updateUI();
+    const destination = document.getElementById("code-destination");
+    if (destination) destination.textContent = `We sent a 6-digit code to ${email}.`;
+    showFeedback("Check your inbox and enter the 6-digit code to continue.", "success");
+    startResendCooldown();
+    emailCodeInput.focus();
+  } catch (error) {
+    showFeedback(
+      error.message || "Could not send code. Check your email or use password sign in.",
+      "error",
+    );
+  } finally {
+    setBusy(false, otpStep === "code" ? "Verify and continue" : "Email me a code");
+  }
+}
+
+// Verify OTP Code
+async function verifyCode() {
+  const code = emailCodeInput.value.trim();
+  if (!code || code.length !== 6) {
+    showFeedback("Please enter the 6-digit verification code.", "error");
+    emailCodeInput.focus();
+    return;
+  }
+
+  const client = getSupabaseClient();
+  if (!client) return;
+
   setBusy(true, "Verifying…");
   showFeedback("Verifying your email code…", "loading");
+
   try {
     const { error } = await client.auth.verifyOtp({
       email: pendingEmail,
-      token: emailCodeInput.value.trim(),
+      token: code,
       type: "email",
     });
     if (error) throw error;
+
     clearResendTimer();
-    showFeedback("Verified. Opening the portfolio…", "success");
-    window.location.assign(getProfileUrl());
+    showFeedback("Verified successfully! Opening your profile…", "success");
+    setTimeout(() => {
+      window.location.assign(getProfileUrl());
+    }, 600);
   } catch (error) {
     showFeedback(
-      error.message ||
-        "That code is invalid or expired. Request a new one and try again.",
+      error.message || "That code is invalid or expired. Request a new one and try again.",
+      "error",
     );
   } finally {
     setBusy(false, "Verify and continue");
   }
 }
 
+// Resend OTP Code
 async function resendCode() {
   const client = getSupabaseClient();
-  if (!client || resendButton.disabled) return;
+  if (!client || resendButton.disabled || !pendingEmail) return;
+
   resendButton.disabled = true;
-  showFeedback("Sending another code…", "loading");
+  showFeedback("Sending a fresh code…", "loading");
+
   try {
+    let emailRedirectTo = undefined;
+    if (window.location.protocol.startsWith("http")) {
+      emailRedirectTo = new URL("profile.html", window.location.href).href;
+    }
+
     const { error } = await client.auth.signInWithOtp({
       email: pendingEmail,
       options: {
-        shouldCreateUser: mode === "signup",
-        ...(mode === "signup"
-          ? { data: { display_name: displayNameInput.value.trim() } }
-          : {}),
+        shouldCreateUser: false,
+        emailRedirectTo,
       },
     });
     if (error) throw error;
-    showFeedback(`A new code was sent to ${pendingEmail}.`, "success");
+    showFeedback(`A fresh code was sent to ${pendingEmail}.`, "success");
     startResendCooldown();
   } catch (error) {
     resendButton.disabled = false;
-    showFeedback(
-      error.message || "Could not resend the code. Try again shortly.",
-    );
+    showFeedback(error.message || "Could not resend the code. Try again shortly.", "error");
   }
 }
 
-year.textContent = new Date().getFullYear();
-modeToggle.addEventListener("click", () => {
-  if (step === "code") return;
-  setMode(mode === "signin" ? "signup" : "signin");
-});
-document.getElementById("edit-email").addEventListener("click", showEmailStep);
-resendButton.addEventListener("click", resendCode);
-setMode("signin");
-loginForm.addEventListener("submit", (event) => {
-  event.preventDefault();
-  if (step === "email") void sendCode();
-  else void verifyCode();
-});
+// Check session on initial load
+async function checkCurrentSession() {
+  const client = getSupabaseClient();
+  if (!client) return;
 
+  const urlParams = new URLSearchParams(window.location.search);
+  if (urlParams.get("logged_out") === "true") {
+    showFeedback("You have been signed out.", "info");
+    return;
+  }
+  if (urlParams.get("account") === "deleted") {
+    showFeedback("Your account has been deleted.", "info");
+    return;
+  }
+
+  // Detect email link callback (#access_token=... or ?code=...)
+  if (window.location.hash.includes("access_token=") || window.location.search.includes("code=")) {
+    showFeedback("Authenticating from email link…", "loading");
+    try {
+      const { data: { session } } = await client.auth.getSession();
+      if (session?.user) {
+        showFeedback("Verified from email link! Opening your profile…", "success");
+        setTimeout(() => {
+          window.location.assign(getProfileUrl());
+        }, 500);
+        return;
+      }
+    } catch (_) {}
+  }
+
+  try {
+    const { data: { session } } = await client.auth.getSession();
+    if (session?.user) {
+      showFeedback("You are already signed in. Opening your profile…", "success");
+      setTimeout(() => {
+        window.location.assign(getProfileUrl());
+      }, 700);
+    }
+  } catch (err) {
+    console.warn("Session check warning:", err);
+  }
+}
+
+// Event Listeners
+if (tabPassword) {
+  tabPassword.addEventListener("click", () => setSigninMethod("password"));
+}
+if (tabOtp) {
+  tabOtp.addEventListener("click", () => setSigninMethod("otp"));
+}
+
+if (switchToPasswordBtn) {
+  switchToPasswordBtn.addEventListener("click", () => {
+    setSigninMethod("password");
+    passwordInput.focus();
+  });
+}
+
+if (modeToggle) {
+  modeToggle.addEventListener("click", () => {
+    setMode(mode === "signin" ? "signup" : "signin");
+  });
+}
+
+if (togglePasswordBtn) {
+  togglePasswordBtn.addEventListener("click", () => {
+    const isPw = passwordInput.type === "password";
+    passwordInput.type = isPw ? "text" : "password";
+    togglePasswordBtn.textContent = isPw ? "Hide" : "Show";
+  });
+}
+
+if (togglePasswordConfirmBtn) {
+  togglePasswordConfirmBtn.addEventListener("click", () => {
+    const isPw = passwordConfirmInput.type === "password";
+    passwordConfirmInput.type = isPw ? "text" : "password";
+    togglePasswordConfirmBtn.textContent = isPw ? "Hide" : "Show";
+  });
+}
+
+if (forgotPasswordBtn) {
+  forgotPasswordBtn.addEventListener("click", handleForgotPassword);
+}
+
+if (editEmailBtn) {
+  editEmailBtn.addEventListener("click", () => {
+    otpStep = "email";
+    clearResendTimer();
+    updateUI();
+    emailInput.focus();
+  });
+}
+
+if (resendButton) {
+  resendButton.addEventListener("click", resendCode);
+}
+
+if (loginForm) {
+  loginForm.addEventListener("submit", (event) => {
+    event.preventDefault();
+    if (!loginForm.reportValidity()) return;
+
+    if (mode === "signup") {
+      void handlePasswordSignUp();
+    } else if (signinMethod === "password") {
+      void handlePasswordSignIn();
+    } else if (otpStep === "email") {
+      void sendCode();
+    } else {
+      void verifyCode();
+    }
+  });
+}
+
+if (year) {
+  year.textContent = new Date().getFullYear();
+}
+
+// Check for mode in URL (e.g. login.html?mode=signup)
+const urlParams = new URLSearchParams(window.location.search);
+if (urlParams.get("mode") === "signup") {
+  setMode("signup");
+} else {
+  updateUI();
+}
+
+// If Supabase is not configured, inform user
 if (!hasSupabaseConfig || !window.supabase) {
   showFeedback(
-    "Online sign-in needs Supabase project settings. Add the project URL and public key to assets/js/supabase-config.js.",
+    "Online sign-in needs Supabase project settings. Add project URL and public key in assets/js/supabase-config.js.",
     "setup",
   );
+} else {
+  void checkCurrentSession();
 }

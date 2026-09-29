@@ -9,6 +9,12 @@
       content="Sign in to the DNKH Digital Transformation Portfolio."
     />
     <title>Sign in | Rathana Lan</title>
+    <link
+      rel="icon"
+      type="image/svg+xml"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='b' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' stop-color='%2314231e'/%3E%3Cstop offset='100%25' stop-color='%230b1512'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='64' height='64' rx='15' fill='url(%23b)'/%3E%3Crect x='1' y='1' width='62' height='62' rx='14' fill='none' stroke='%23253a31' stroke-width='1.5'/%3E%3Ctext x='12' y='44' font-family='system-ui,sans-serif' font-weight='800' font-size='28' fill='%23f5f7f1' letter-spacing='-1'%3ERL%3C/text%3E%3Ccircle cx='51' cy='41' r='4.5' fill='%23f1724d'/%3E%3C/svg%3E"
+    />
+    <link rel="alternate icon" type="image/svg+xml" href="favicon.svg" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -79,7 +85,7 @@
           <span class="secure-label"
             ><span aria-hidden="true">●</span> PRIVATE WORKSPACE</span
           >
-          <a class="back-link" href="index.html"
+          <a class="back-link" href="Aboutme/index.html"
             >Back to portfolio <span aria-hidden="true">↗</span></a
           >
         </div>
@@ -88,18 +94,23 @@
           <p class="eyebrow form-eyebrow" id="form-eyebrow">Welcome back</p>
           <h2 id="signin-title">Sign in to continue.</h2>
           <p class="form-description" id="form-description">
-            Use your authorized workspace account to continue.
+            Use your workspace credentials to access the portfolio dashboard.
           </p>
+
+          <div class="auth-nav-tabs" id="auth-nav-tabs" role="tablist" aria-label="Sign-in method">
+            <button class="auth-tab-btn is-active" id="tab-password" type="button" role="tab" aria-selected="true">Password</button>
+            <button class="auth-tab-btn" id="tab-otp" type="button" role="tab" aria-selected="false">Email code</button>
+          </div>
 
           <form id="login-form">
             <div class="field" id="name-field" hidden>
-              <label for="display-name">Name</label>
+              <label for="display-name">Full name</label>
               <input
                 id="display-name"
                 name="displayName"
                 type="text"
                 autocomplete="name"
-                placeholder="Your name"
+                placeholder="Your full name"
               />
             </div>
 
@@ -113,6 +124,56 @@
                 placeholder="you@company.com"
                 required
               />
+            </div>
+
+            <div class="field" id="password-field">
+              <div class="label-row">
+                <label for="password">Password</label>
+                <button class="text-button" id="forgot-password" type="button">
+                  Forgot password?
+                </button>
+              </div>
+              <div class="password-wrap">
+                <input
+                  id="password"
+                  name="password"
+                  type="password"
+                  autocomplete="current-password"
+                  placeholder="Enter your password (min 6 chars)"
+                  minlength="6"
+                  required
+                />
+                <button
+                  class="password-toggle"
+                  id="toggle-password"
+                  type="button"
+                  aria-label="Toggle password visibility"
+                >
+                  Show
+                </button>
+              </div>
+            </div>
+
+            <div class="field" id="password-confirm-field" hidden>
+              <label for="password-confirm">Confirm password</label>
+              <div class="password-wrap">
+                <input
+                  id="password-confirm"
+                  name="passwordConfirm"
+                  type="password"
+                  autocomplete="new-password"
+                  placeholder="Confirm your password"
+                  minlength="6"
+                />
+                <button
+                  class="password-toggle"
+                  id="toggle-password-confirm"
+                  type="button"
+                  aria-label="Toggle confirm password visibility"
+                >
+                  Show
+                </button>
+              </div>
             </div>
 
             <div class="field code-field" id="code-field" hidden>
@@ -151,6 +212,9 @@
               <button class="text-button" id="resend-code" type="button">
                 Send a new code
               </button>
+              <button class="text-button" id="switch-to-password-btn" type="button">
+                Use password instead
+              </button>
               <span
                 class="resend-countdown"
                 id="resend-countdown"
@@ -158,8 +222,12 @@
               ></span>
             </div>
 
+            <div class="code-tip" id="code-tip" hidden>
+              💡 <strong>Tip:</strong> If the email has a "Log in" button instead of numbers, or redirects to localhost, switch to <strong>Password</strong> sign-in or check the setup guide below.
+            </div>
+
             <button class="submit-button" id="submit-button" type="submit">
-              Email me a code <span aria-hidden="true">→</span>
+              Sign in <span aria-hidden="true">→</span>
             </button>
             <p
               class="form-feedback"
