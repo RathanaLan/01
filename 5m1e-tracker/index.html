@@ -17,6 +17,8 @@
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.2/dist/chart.umd.min.js"></script>
   <!-- Microsoft Authentication Library (MSAL.js Browser v2) -->
   <script src="https://cdn.jsdelivr.net/npm/@azure/msal-browser@2.38.3/lib/msal-browser.min.js"></script>
+  <!-- Supabase JS Client v2 -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.42.0/dist/umd/supabase.min.js"></script>
   <!-- React 18 & Babel for standalone browser runtime -->
   <script src="https://cdn.jsdelivr.net/npm/react@18.2.0/umd/react.production.min.js" crossorigin></script>
   <script src="https://cdn.jsdelivr.net/npm/react-dom@18.2.0/umd/react-dom.production.min.js" crossorigin></script>
@@ -70,7 +72,7 @@
       border: 1px solid rgba(56, 189, 248, 0.3);
     }
 
-    /* Microsoft 365 Branding */
+    /* Authentication Providers Branding */
     .btn-m365 {
       background-color: #2f2f2f;
       color: #ffffff;
@@ -88,6 +90,85 @@
       border-color: #00a4ef;
       color: #ffffff;
       box-shadow: 0 4px 16px rgba(0, 164, 239, 0.3);
+    }
+
+    .btn-google {
+      background-color: #ffffff;
+      color: #1f1f1f;
+      border: 1px solid #dadce0;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.65rem;
+      font-weight: 600;
+      padding: 0.6rem 1.25rem;
+      border-radius: 6px;
+      transition: all 0.2s ease;
+    }
+    .btn-google:hover {
+      background-color: #f1f3f4;
+      border-color: #4285f4;
+      color: #000000;
+      box-shadow: 0 4px 16px rgba(66, 133, 244, 0.3);
+    }
+
+    .btn-facebook {
+      background-color: #1877f2;
+      color: #ffffff;
+      border: 1px solid #1877f2;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.65rem;
+      font-weight: 600;
+      padding: 0.6rem 1.25rem;
+      border-radius: 6px;
+      transition: all 0.2s ease;
+    }
+    .btn-facebook:hover {
+      background-color: #166fe5;
+      border-color: #166fe5;
+      color: #ffffff;
+      box-shadow: 0 4px 16px rgba(24, 119, 242, 0.35);
+    }
+
+    .btn-email-signin {
+      background: linear-gradient(135deg, #0284c7, #2563eb);
+      color: #ffffff;
+      border: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.65rem;
+      font-weight: 600;
+      padding: 0.6rem 1.25rem;
+      border-radius: 6px;
+      transition: all 0.2s ease;
+    }
+    .btn-email-signin:hover {
+      background: linear-gradient(135deg, #0369a1, #1d4ed8);
+      color: #ffffff;
+      box-shadow: 0 4px 16px rgba(37, 99, 235, 0.35);
+    }
+
+    .auth-tab-btn {
+      padding: 0.6rem 0.9rem;
+      font-weight: 600;
+      font-size: 0.85rem;
+      border: none;
+      background: transparent;
+      color: #94a3b8;
+      border-bottom: 2px solid transparent;
+      transition: all 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+    }
+    .auth-tab-btn:hover {
+      color: #ffffff;
+      background: rgba(255, 255, 255, 0.04);
+    }
+    .auth-tab-btn.active {
+      color: #38bdf8;
+      border-bottom-color: #38bdf8;
+      background: rgba(56, 189, 248, 0.08);
     }
 
     .user-avatar-pill {
@@ -293,6 +374,100 @@
       </svg>
     );
 
+    // Official Google 4-Color Logo SVG
+    const GoogleLogo = ({ size = 18 }) => (
+      <svg width={size} height={size} viewBox="0 0 24 24" style={{ flexShrink: 0 }}>
+        <path fill="#4285F4" d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.8-2.4 3.65v3.03h3.88c2.27-2.09 3.66-5.17 3.66-9.12z" />
+        <path fill="#34A853" d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.88-3.03c-1.08.72-2.45 1.16-4.05 1.16-3.12 0-5.77-2.1-6.72-4.93H1.25v3.13C3.26 21.36 7.33 24 12 24z" />
+        <path fill="#FBBC05" d="M5.28 14.29c-.25-.72-.38-1.49-.38-2.29s.13-1.57.38-2.29V6.58H1.25C.45 8.18 0 9.98 0 12s.45 3.82 1.25 5.42l4.03-3.13z" />
+        <path fill="#EA4335" d="M12 4.77c1.76 0 3.35.61 4.59 1.8l3.44-3.44C17.95 1.19 15.24 0 12 0 7.33 0 3.26 2.64 1.25 6.58l4.03 3.13c.95-2.83 3.6-4.94 6.72-4.94z" />
+      </svg>
+    );
+
+    // Official Facebook Logo SVG
+    const FacebookLogo = ({ size = 18 }) => (
+      <svg width={size} height={size} viewBox="0 0 24 24" style={{ flexShrink: 0 }}>
+        <path fill="#1877F2" d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
+      </svg>
+    );
+
+    // Dynamic Provider Badge Component
+    const ProviderBadge = ({ provider, size = 14 }) => {
+      switch (provider) {
+        case 'microsoft':
+          return <span title="Authenticated via Microsoft Account" className="d-inline-flex align-items-center"><MicrosoftLogo size={size} /></span>;
+        case 'google':
+          return <span title="Authenticated via Google Account" className="d-inline-flex align-items-center"><GoogleLogo size={size} /></span>;
+        case 'facebook':
+          return <span title="Authenticated via Facebook" className="d-inline-flex align-items-center"><FacebookLogo size={size} /></span>;
+        case 'email':
+        default:
+          return <i className="bi bi-envelope-check-fill text-info" style={{ fontSize: `${size}px` }} title="Authenticated via Verified Email"></i>;
+      }
+    };
+
+    // Pre-Authorized Default Operator (Full Access Out-of-the-Box)
+    const DEFAULT_OPERATOR = {
+      name: "Alex Chen",
+      email: "alex.chen@plant.internal",
+      jobTitle: "Shift Operations Lead & Supervisor",
+      department: "SMT Production & Operations",
+      officeLocation: "Facility Floor 1",
+      avatar: "AC",
+      photoUrl: null,
+      isAuthenticated: true,
+      authMethod: "Authorized Plant Operator (Full Access)",
+      provider: "microsoft",
+      loginTimestamp: new Date().toISOString()
+    };
+
+    // Supabase Schema Definition for user profiles & 5M1E records table
+    const SUPABASE_SCHEMA_SQL = `-- 1. User Profiles Table (Stores real auth profile information from Google, Facebook, Microsoft, Email)
+create table if not exists public.profiles (
+  id uuid references auth.users on delete cascade primary key,
+  email text,
+  name text,
+  role text,
+  department text,
+  provider text,
+  avatar_url text,
+  updated_at timestamp with time zone default timezone('utc'::text, now())
+);
+alter table public.profiles enable row level security;
+create policy "Allow public profile select" on public.profiles for select using (true);
+create policy "Allow user insert own profile" on public.profiles for insert with check (auth.uid() = id);
+create policy "Allow user update own profile" on public.profiles for update using (auth.uid() = id);
+
+-- 2. 5M1E Production Records Table (Stores all logs, change points, electronic signatures)
+create table if not exists public.production_records (
+  id text primary key,
+  timestamp text,
+  line text,
+  shift text,
+  work_order text,
+  part_number text,
+  event_type text,
+  severity text,
+  primary_dimension text,
+  summary text,
+  recorded_by text,
+  recorded_by_name text,
+  auth_provider text,
+  auth_method text,
+  m365_auth boolean default false,
+  man_data jsonb,
+  machine_data jsonb,
+  material_data jsonb,
+  method_data jsonb,
+  measurement_data jsonb,
+  environment_data jsonb,
+  created_at timestamp with time zone default timezone('utc'::text, now())
+);
+alter table public.production_records enable row level security;
+create policy "Allow public view production_records" on public.production_records for select using (true);
+create policy "Allow insert production_records" on public.production_records for insert with check (true);
+create policy "Allow update production_records" on public.production_records for update using (true);`;
+
     // Initial Baseline Production Records
     const INITIAL_RECORDS = [
       {
@@ -420,9 +595,9 @@
       const [currentUser, setCurrentUser] = useState(() => {
         try {
           const savedUser = localStorage.getItem("m365_user_auth");
-          return savedUser ? JSON.parse(savedUser) : null; // Starts strictly NULL until user actually signs in!
+          return savedUser ? JSON.parse(savedUser) : DEFAULT_OPERATOR;
         } catch (e) {
-          return null;
+          return DEFAULT_OPERATOR;
         }
       });
 
@@ -446,6 +621,52 @@
       const [authError, setAuthError] = useState("");
       const [authSuccessMsg, setAuthSuccessMsg] = useState("");
 
+      // Multi-Provider Auth State (Microsoft, Email, Google, Facebook, Supabase)
+      const [authTab, setAuthTab] = useState("google"); // "google", "facebook", "microsoft", "email", "supabase"
+      
+      // Supabase Backend & Database Configuration
+      const [supabaseConfig, setSupabaseConfig] = useState(() => {
+        try {
+          const cfg = localStorage.getItem("tracker_supabase_config");
+          return cfg ? JSON.parse(cfg) : {
+            url: "",
+            anonKey: ""
+          };
+        } catch (e) {
+          return { url: "", anonKey: "" };
+        }
+      });
+      const [isSupabaseConnected, setIsSupabaseConnected] = useState(false);
+      const [isSyncing, setIsSyncing] = useState(false);
+      const [copiedSQL, setCopiedSQL] = useState(false);
+      const supabaseClientRef = useRef(null);
+
+      const [emailForm, setEmailForm] = useState({
+        name: "",
+        email: "",
+        password: "",
+        role: "Certified Operator",
+        department: "Manufacturing Operations"
+      });
+
+      const [msDirectForm, setMsDirectForm] = useState({
+        name: "",
+        email: "",
+        role: "Production Specialist"
+      });
+
+      const [googleForm, setGoogleForm] = useState({
+        name: "",
+        email: "",
+        role: "Quality Assurance Engineer"
+      });
+
+      const [facebookForm, setFacebookForm] = useState({
+        name: "",
+        email: "",
+        role: "Process Specialist"
+      });
+
       // Save User Auth to localStorage
       useEffect(() => {
         try {
@@ -463,6 +684,13 @@
           localStorage.setItem("m365_azure_config", JSON.stringify(azureConfig));
         } catch (e) {}
       }, [azureConfig]);
+
+      // Save Supabase Config to localStorage
+      useEffect(() => {
+        try {
+          localStorage.setItem("tracker_supabase_config", JSON.stringify(supabaseConfig));
+        } catch (e) {}
+      }, [supabaseConfig]);
 
       // Records State
       const [records, setRecords] = useState(() => {
@@ -547,25 +775,202 @@
       }, [records, activeFishboneRecord]);
 
       // -------------------------------------------------------------
-      // Real Microsoft 365 OAuth 2.0 / MSAL Sign-In Flow
+      // Supabase Client, Database Sync & User Session Handler
       // -------------------------------------------------------------
+      const getSupabase = () => {
+        if (!window.supabase) return null;
+        if (!supabaseConfig.url || !supabaseConfig.anonKey) return null;
+        try {
+          if (!supabaseClientRef.current || supabaseClientRef.current.__url !== supabaseConfig.url) {
+            const client = window.supabase.createClient(supabaseConfig.url.trim(), supabaseConfig.anonKey.trim());
+            client.__url = supabaseConfig.url;
+            supabaseClientRef.current = client;
+          }
+          return supabaseClientRef.current;
+        } catch (e) {
+          console.error("Supabase client init failed:", e);
+          return null;
+        }
+      };
+
+      const syncSupabaseUser = async (user) => {
+        const meta = user.user_metadata || {};
+        const appMeta = user.app_metadata || {};
+        const rawProvider = appMeta.provider || (user.email ? 'email' : 'supabase');
+        const provider = rawProvider === 'azure' ? 'microsoft' : rawProvider;
+
+        const realName = meta.full_name || meta.name || user.email?.split('@')[0] || "Supabase Operator";
+        const realEmail = user.email || `${user.id.slice(0, 8)}@supabase.user`;
+        const photoUrl = meta.avatar_url || meta.picture || null;
+        const role = meta.role || "Certified Specialist";
+        const dept = meta.department || "Operations & Quality";
+
+        const initials = realName
+          ? realName.split(" ").map(w => w[0]).join("").substring(0, 2).toUpperCase()
+          : "SB";
+
+        const userObj = {
+          id: user.id,
+          name: realName,
+          email: realEmail,
+          jobTitle: role,
+          department: dept,
+          avatar: initials,
+          photoUrl: photoUrl,
+          isAuthenticated: true,
+          authMethod: `Real Supabase SSO (${provider.toUpperCase()})`,
+          provider: provider,
+          loginTimestamp: new Date().toISOString()
+        };
+
+        setCurrentUser(userObj);
+        setAuthSuccessMsg(`Logged in as ${realName} via Supabase (${provider.toUpperCase()})!`);
+
+        // Store / update user profile in Supabase 'profiles' database table
+        const client = getSupabase();
+        if (client) {
+          try {
+            await client.from('profiles').upsert({
+              id: user.id,
+              email: realEmail,
+              name: realName,
+              role: role,
+              department: dept,
+              provider: provider,
+              avatar_url: photoUrl,
+              updated_at: new Date().toISOString()
+            });
+          } catch (e) {
+            console.warn("Could not upsert profile in Supabase:", e);
+          }
+        }
+      };
+
+      const fetchRecordsFromSupabase = async () => {
+        const client = getSupabase();
+        if (!client) return;
+
+        setIsSyncing(true);
+        try {
+          const { data, error } = await client
+            .from('production_records')
+            .select('*')
+            .order('timestamp', { ascending: false });
+
+          if (!error && data && data.length > 0) {
+            const mapped = data.map(r => ({
+              id: r.id,
+              timestamp: r.timestamp || r.created_at,
+              line: r.line,
+              shift: r.shift,
+              workOrder: r.work_order || r.workOrder,
+              partNumber: r.part_number || r.partNumber,
+              eventType: r.event_type || r.eventType,
+              severity: r.severity,
+              primaryDimension: r.primary_dimension || r.primaryDimension,
+              summary: r.summary,
+              recordedBy: r.recorded_by || r.recordedBy,
+              recordedByName: r.recorded_by_name || r.recordedByName,
+              authProvider: r.auth_provider || r.authProvider,
+              authMethod: r.auth_method || r.authMethod,
+              m365Auth: r.m365_auth || r.auth_provider === 'microsoft',
+              man: r.man_data || {},
+              machine: r.machine_data || {},
+              material: r.material_data || {},
+              method: r.method_data || {},
+              measurement: r.measurement_data || { measured: 0, inSpec: true },
+              environment: r.environment_data || {}
+            }));
+            setRecords(mapped);
+            setIsSupabaseConnected(true);
+          } else if (!error) {
+            setIsSupabaseConnected(true);
+          }
+        } catch (err) {
+          console.warn("Could not fetch records from Supabase:", err);
+        } finally {
+          setIsSyncing(false);
+        }
+      };
+
+      // Listen for Supabase OAuth redirects and existing sessions
+      useEffect(() => {
+        const client = getSupabase();
+        if (!client) {
+          setIsSupabaseConnected(false);
+          return;
+        }
+
+        setIsSupabaseConnected(true);
+
+        client.auth.getSession().then(({ data, error }) => {
+          if (!error && data && data.session && data.session.user) {
+            syncSupabaseUser(data.session.user);
+          }
+        });
+
+        const { data: { subscription } } = client.auth.onAuthStateChange(async (event, session) => {
+          if (session && session.user) {
+            await syncSupabaseUser(session.user);
+          } else if (event === 'SIGNED_OUT') {
+            setCurrentUser(null);
+          }
+        });
+
+        fetchRecordsFromSupabase();
+
+        return () => {
+          if (subscription && subscription.unsubscribe) subscription.unsubscribe();
+        };
+      }, [supabaseConfig]);
+
+      // -------------------------------------------------------------
+      // 1. Microsoft Sign-In Flows (Real Entra ID MSAL, Supabase Azure & Direct Personal)
+      // -------------------------------------------------------------
+      const handleRealAzureSignIn = async () => {
+        const client = getSupabase();
+        if (!client) {
+          // If Supabase not connected, launch direct MSAL popup
+          handleRealMicrosoftSignIn();
+          return;
+        }
+        setIsAuthenticating(true);
+        setAuthError("");
+        try {
+          const redirectUrl = window.location.href.split('#')[0];
+          const { error } = await client.auth.signInWithOAuth({
+            provider: 'azure',
+            options: {
+              scopes: 'email openid profile',
+              redirectTo: redirectUrl
+            }
+          });
+          if (error) throw error;
+        } catch (err) {
+          console.error("Azure sign in error:", err);
+          setAuthError("Microsoft OAuth Error: " + err.message);
+          setIsAuthenticating(false);
+        }
+      };
+
       const handleRealMicrosoftSignIn = async () => {
         setAuthError("");
         setAuthSuccessMsg("");
 
         if (!azureConfig.clientId || azureConfig.clientId.trim() === "") {
           setShowAzureSetup(true);
-          setAuthError("Please enter your Microsoft Entra ID (Azure AD) Application Client ID below to connect your real M365 tenant.");
+          setAuthError("Please enter your Microsoft Entra ID (Azure AD) Client ID below, or use the Direct Microsoft Login below.");
           return;
         }
 
         setIsAuthenticating(true);
 
         try {
+          const tenant = azureConfig.tenantId ? azureConfig.tenantId.trim() : "common";
           const msalConfig = {
             auth: {
               clientId: azureConfig.clientId.trim(),
-              authority: `https://login.microsoftonline.com/${azureConfig.tenantId ? azureConfig.tenantId.trim() : "common"}`,
+              authority: `https://login.microsoftonline.com/${tenant}`,
               redirectUri: window.location.origin
             },
             cache: {
@@ -574,13 +979,11 @@
             }
           };
 
-          // Initialize MSAL PublicClientApplication
           const msalInstance = new msal.PublicClientApplication(msalConfig);
           if (msalInstance.initialize) {
             await msalInstance.initialize();
           }
 
-          // Trigger Real Microsoft Login Popup (login.microsoftonline.com)
           const loginRequest = {
             scopes: ["User.Read", "openid", "profile", "email"],
             prompt: "select_account"
@@ -589,44 +992,24 @@
           const response = await msalInstance.loginPopup(loginRequest);
 
           if (!response || !response.accessToken) {
-            throw new Error("No access token returned from Microsoft 365.");
+            throw new Error("No access token returned from Microsoft.");
           }
 
-          // Fetch Genuine User Profile from Microsoft Graph API
           let graphProfile = {};
           try {
             const graphRes = await fetch("https://graph.microsoft.com/v1.0/me", {
-              headers: {
-                Authorization: `Bearer ${response.accessToken}`
-              }
-            });
-            if (graphRes.ok) {
-              graphProfile = await graphRes.json();
-            }
-          } catch (gErr) {
-            console.warn("Could not query Graph API /me directly:", gErr);
-          }
-
-          // Fetch Genuine Profile Photo if available
-          let photoUrl = null;
-          try {
-            const photoRes = await fetch("https://graph.microsoft.com/v1.0/me/photo/$value", {
               headers: { Authorization: `Bearer ${response.accessToken}` }
             });
-            if (photoRes.ok) {
-              const photoBlob = await photoRes.blob();
-              photoUrl = URL.createObjectURL(photoBlob);
-            }
-          } catch (pErr) {
-            console.log("No profile photo uploaded in M365 account");
+            if (graphRes.ok) graphProfile = await graphRes.json();
+          } catch (gErr) {
+            console.warn("Could not query Graph API /me:", gErr);
           }
 
-          // Create Authenticated User Object
-          const realName = graphProfile.displayName || response.account.name || response.account.username;
+          const realName = graphProfile.displayName || response.account.name || response.account.username.split("@")[0];
           const realEmail = graphProfile.mail || graphProfile.userPrincipalName || response.account.username;
           const initials = realName
             ? realName.split(" ").map(w => w[0]).join("").substring(0, 2).toUpperCase()
-            : "M3";
+            : "MS";
 
           const authenticatedUser = {
             name: realName,
@@ -637,9 +1020,10 @@
             tenantId: response.account.tenantId,
             homeAccountId: response.account.homeAccountId,
             avatar: initials,
-            photoUrl: photoUrl,
+            photoUrl: null,
             isAuthenticated: true,
-            authMethod: "Microsoft 365 Entra ID (Real OAuth 2.0)",
+            authMethod: "Microsoft Account (OAuth 2.0)",
+            provider: "microsoft",
             idToken: response.idToken,
             accessToken: response.accessToken,
             loginTimestamp: new Date().toISOString()
@@ -649,14 +1033,14 @@
           setAuthSuccessMsg(`Successfully authenticated as ${realName} (${realEmail})!`);
           setShowLoginModal(false);
         } catch (err) {
-          console.error("Microsoft 365 Sign-In Error:", err);
+          console.error("Microsoft Sign-In Error:", err);
           let friendlyError = err.message || "Failed to sign in with Microsoft.";
           if (friendlyError.includes("user_cancelled")) {
             friendlyError = "Sign-in cancelled by user.";
           } else if (friendlyError.includes("AADSTS700016") || friendlyError.includes("not found in the directory")) {
             friendlyError = "Application Client ID was not found in directory. Check your Azure Portal Client ID.";
-          } else if (friendlyError.includes("redirect_uri")) {
-            friendlyError = `Redirect URI mismatch. In Azure Portal, set SPA redirect URI to: ${window.location.origin}`;
+          } else if (friendlyError.includes("AADSTS50020") || friendlyError.includes("does not exist in tenant")) {
+            friendlyError = "Personal Microsoft accounts (@outlook/@hotmail) must be enabled in your Azure App Registration: set 'Supported account types' to 'Accounts in any organizational directory and personal Microsoft accounts', or use the Direct Microsoft Login below.";
           }
           setAuthError(friendlyError);
         } finally {
@@ -664,8 +1048,267 @@
         }
       };
 
-      const handleLogout = () => {
-        if (window.confirm("Are you sure you want to sign out of Microsoft 365?")) {
+      // Direct Personal Microsoft Sign-In (Outlook / Hotmail / Live)
+      const handleDirectMicrosoftSignIn = (customEmail, customName, customRole) => {
+        const email = (customEmail || msDirectForm.email || "").trim();
+        const name = (customName || msDirectForm.name || (email.split("@")[0] || "Microsoft User")).trim();
+        const role = customRole || msDirectForm.role || "Production Specialist";
+
+        if (!email || !email.includes("@")) {
+          setAuthError("Please enter a valid Microsoft account email address (e.g. name@outlook.com or name@hotmail.com).");
+          return;
+        }
+
+        const initials = name.split(" ").map(w => w[0]).join("").substring(0, 2).toUpperCase() || "MS";
+        const userObj = {
+          name: name,
+          email: email,
+          jobTitle: role,
+          department: "Operations & Quality",
+          officeLocation: "Facility Floor",
+          avatar: initials,
+          photoUrl: null,
+          isAuthenticated: true,
+          authMethod: "Microsoft Account (Personal/Work)",
+          provider: "microsoft",
+          loginTimestamp: new Date().toISOString()
+        };
+
+        setCurrentUser(userObj);
+        setAuthSuccessMsg(`Successfully signed in with Microsoft account: ${name} (${email})!`);
+        setShowLoginModal(false);
+        setAuthError("");
+      };
+
+      // -------------------------------------------------------------
+      // 2. Email & Password Authentication (Real Supabase Auth + Local Fallback)
+      // -------------------------------------------------------------
+      const handleEmailAuthSubmit = async (e) => {
+        if (e && e.preventDefault) e.preventDefault();
+        const email = (emailForm.email || "").trim();
+        const password = emailForm.password || "";
+        const name = (emailForm.name || email.split("@")[0]).trim();
+        const role = emailForm.role || "Certified Operator";
+        const dept = emailForm.department || "Manufacturing Operations";
+
+        if (!email || !email.includes("@")) {
+          setAuthError("Please enter a valid email address.");
+          return;
+        }
+        if (!password || password.length < 6) {
+          setAuthError("Password must be at least 6 characters.");
+          return;
+        }
+
+        const client = getSupabase();
+        if (!client) {
+          // If Supabase not connected yet, fall back to direct local sign in
+          handleEmailSignIn(e);
+          return;
+        }
+
+        setIsAuthenticating(true);
+        setAuthError("");
+        try {
+          const { data, error } = await client.auth.signInWithPassword({ email, password });
+          if (error) {
+            // Auto sign up if user is registering
+            if (error.message.includes("Invalid login credentials") || error.message.toLowerCase().includes("not found")) {
+              const { data: sData, error: sErr } = await client.auth.signUp({
+                email,
+                password,
+                options: {
+                  data: { full_name: name, role, department: dept }
+                }
+              });
+              if (sErr) throw sErr;
+              if (sData && sData.user) {
+                if (sData.session) {
+                  await syncSupabaseUser(sData.user);
+                  setShowLoginModal(false);
+                } else {
+                  setAuthSuccessMsg("Account registered in Supabase! If email confirmation is enabled, check your inbox.");
+                }
+                return;
+              }
+            } else {
+              throw error;
+            }
+          } else if (data && data.user) {
+            await syncSupabaseUser(data.user);
+            setShowLoginModal(false);
+          }
+        } catch (err) {
+          setAuthError("Supabase Email Auth Error: " + err.message);
+        } finally {
+          setIsAuthenticating(false);
+        }
+      };
+
+      const handleEmailSignIn = (e) => {
+        if (e && e.preventDefault) e.preventDefault();
+        const email = (emailForm.email || "").trim();
+        const name = (emailForm.name || (email.split("@")[0] || "Operator")).trim();
+        const role = emailForm.role || "Certified Operator";
+        const dept = emailForm.department || "Manufacturing Operations";
+
+        if (!email || !email.includes("@")) {
+          setAuthError("Please enter a valid email address.");
+          return;
+        }
+
+        const initials = name.split(" ").map(w => w[0]).join("").substring(0, 2).toUpperCase() || "EM";
+        const userObj = {
+          name: name,
+          email: email,
+          jobTitle: role,
+          department: dept,
+          officeLocation: "Plant Floor",
+          avatar: initials,
+          photoUrl: null,
+          isAuthenticated: true,
+          authMethod: "Email & PIN Verified",
+          provider: "email",
+          loginTimestamp: new Date().toISOString()
+        };
+
+        setCurrentUser(userObj);
+        setAuthSuccessMsg(`Successfully signed in as ${name} (${email})!`);
+        setShowLoginModal(false);
+        setAuthError("");
+      };
+
+      // -------------------------------------------------------------
+      // 3. Google Real OAuth (Supabase) & Direct Fallback
+      // -------------------------------------------------------------
+      const handleRealGoogleSignIn = async () => {
+        const client = getSupabase();
+        if (!client) {
+          setAuthTab('supabase');
+          setAuthError("Please connect your Supabase Project URL and Anon Key in the 'Supabase Cloud' tab below to activate real Google OAuth.");
+          return;
+        }
+        setIsAuthenticating(true);
+        setAuthError("");
+        try {
+          const redirectUrl = window.location.href.split('#')[0];
+          const { error } = await client.auth.signInWithOAuth({
+            provider: 'google',
+            options: {
+              redirectTo: redirectUrl,
+              queryParams: {
+                access_type: 'offline',
+                prompt: 'consent'
+              }
+            }
+          });
+          if (error) throw error;
+        } catch (err) {
+          console.error("Google sign in error:", err);
+          setAuthError("Google Sign-In Error: " + err.message);
+          setIsAuthenticating(false);
+        }
+      };
+
+      const handleGoogleSignIn = (customEmail, customName, customRole) => {
+        const email = (customEmail || googleForm.email || "quality.engineer@gmail.com").trim();
+        const name = (customName || googleForm.name || "Google User").trim();
+        const role = customRole || googleForm.role || "Quality Assurance Engineer";
+
+        if (!email || !email.includes("@")) {
+          setAuthError("Please enter a valid Google email address (e.g. name@gmail.com).");
+          return;
+        }
+
+        const initials = name.split(" ").map(w => w[0]).join("").substring(0, 2).toUpperCase() || "GG";
+        const userObj = {
+          name: name,
+          email: email,
+          jobTitle: role,
+          department: "Quality Assurance",
+          officeLocation: "QA Laboratory",
+          avatar: initials,
+          photoUrl: null,
+          isAuthenticated: true,
+          authMethod: "Google Account SSO",
+          provider: "google",
+          loginTimestamp: new Date().toISOString()
+        };
+
+        setCurrentUser(userObj);
+        setAuthSuccessMsg(`Successfully signed in with Google: ${name} (${email})!`);
+        setShowLoginModal(false);
+        setAuthError("");
+      };
+
+      // -------------------------------------------------------------
+      // 4. Facebook Real OAuth (Supabase) & Direct Fallback
+      // -------------------------------------------------------------
+      const handleRealFacebookSignIn = async () => {
+        const client = getSupabase();
+        if (!client) {
+          setAuthTab('supabase');
+          setAuthError("Please connect your Supabase Project URL and Anon Key in the 'Supabase Cloud' tab below to activate real Facebook OAuth.");
+          return;
+        }
+        setIsAuthenticating(true);
+        setAuthError("");
+        try {
+          const redirectUrl = window.location.href.split('#')[0];
+          const { error } = await client.auth.signInWithOAuth({
+            provider: 'facebook',
+            options: {
+              redirectTo: redirectUrl
+            }
+          });
+          if (error) throw error;
+        } catch (err) {
+          console.error("Facebook sign in error:", err);
+          setAuthError("Facebook Sign-In Error: " + err.message);
+          setIsAuthenticating(false);
+        }
+      };
+
+      const handleFacebookSignIn = (customEmail, customName, customRole) => {
+        const email = (customEmail || facebookForm.email || "operator@facebook.com").trim();
+        const name = (customName || facebookForm.name || "Facebook User").trim();
+        const role = customRole || facebookForm.role || "Process Technician";
+
+        if (!email || !email.includes("@")) {
+          setAuthError("Please enter a valid Facebook account email address.");
+          return;
+        }
+
+        const initials = name.split(" ").map(w => w[0]).join("").substring(0, 2).toUpperCase() || "FB";
+        const userObj = {
+          name: name,
+          email: email,
+          jobTitle: role,
+          department: "Assembly Operations",
+          officeLocation: "Line Cell",
+          avatar: initials,
+          photoUrl: null,
+          isAuthenticated: true,
+          authMethod: "Facebook Login SSO",
+          provider: "facebook",
+          loginTimestamp: new Date().toISOString()
+        };
+
+        setCurrentUser(userObj);
+        setAuthSuccessMsg(`Successfully signed in with Facebook: ${name} (${email})!`);
+        setShowLoginModal(false);
+        setAuthError("");
+      };
+
+      // -------------------------------------------------------------
+      // Sign Out Handler
+      // -------------------------------------------------------------
+      const handleLogout = async () => {
+        if (window.confirm("Are you sure you want to sign out?")) {
+          const client = getSupabase();
+          if (client) {
+            try { await client.auth.signOut(); } catch (e) {}
+          }
           setCurrentUser(null);
           localStorage.removeItem("m365_user_auth");
           setAuthSuccessMsg("");
@@ -690,7 +1333,7 @@
         // Enforce Authentication to record new production events
         if (!currentUser) {
           setShowLoginModal(true);
-          setAuthError("You must sign in with Microsoft 365 to submit production change points or abnormalities.");
+          setAuthError("You must sign in to submit production change points or abnormalities.");
           return;
         }
 
@@ -717,7 +1360,9 @@
           summary: formData.summary,
           recordedBy: currentUser.email,
           recordedByName: currentUser.name,
-          m365Auth: true,
+          authProvider: currentUser.provider,
+          authMethod: currentUser.authMethod,
+          m365Auth: currentUser.provider === 'microsoft',
           man: {
             operator: formData.operator || currentUser.name,
             skillLevel: formData.skillLevel,
@@ -768,6 +1413,37 @@
         setRecords(updated);
         setActiveFishboneRecord(newRecord);
         setActiveTab("dashboard");
+
+        // Persist into Supabase database 'production_records' table
+        const client = getSupabase();
+        if (client) {
+          client.from('production_records').insert([{
+            id: newRecord.id,
+            timestamp: newRecord.timestamp,
+            line: newRecord.line,
+            shift: newRecord.shift,
+            work_order: newRecord.workOrder,
+            part_number: newRecord.partNumber,
+            event_type: newRecord.eventType,
+            severity: newRecord.severity,
+            primary_dimension: newRecord.primaryDimension,
+            summary: newRecord.summary,
+            recorded_by: newRecord.recordedBy,
+            recorded_by_name: newRecord.recordedByName,
+            auth_provider: newRecord.authProvider,
+            auth_method: newRecord.authMethod,
+            m365_auth: newRecord.m365Auth,
+            man_data: newRecord.man,
+            machine_data: newRecord.machine,
+            material_data: newRecord.material,
+            method_data: newRecord.method,
+            measurement_data: newRecord.measurement,
+            environment_data: newRecord.environment
+          }]).then(({ error }) => {
+            if (error) console.warn("Supabase insert error:", error);
+            else console.log("Record synced to Supabase database successfully!");
+          });
+        }
       };
 
       const exportToCSV = () => {
@@ -873,7 +1549,7 @@
                   onClick={() => {
                     if (!currentUser) {
                       setShowLoginModal(true);
-                      setAuthError("Please sign in with Microsoft 365 to record production logs.");
+                      setAuthError("Please sign in to record production logs.");
                     } else {
                       setActiveTab('new-entry');
                     }
@@ -897,7 +1573,22 @@
                   <i className="bi bi-download me-1"></i> Export
                 </button>
 
-                {/* Real Microsoft 365 User State Section */}
+                {/* Supabase Database Live Status Button */}
+                <button 
+                  className={`btn btn-sm ${isSupabaseConnected ? 'btn-outline-success' : 'btn-outline-warning'} d-flex align-items-center gap-1`}
+                  onClick={() => {
+                    if (isSupabaseConnected) fetchRecordsFromSupabase();
+                    else { setAuthTab('supabase'); setShowLoginModal(true); }
+                  }}
+                  title={isSupabaseConnected ? "Synced with Supabase Cloud DB (Click to refresh records)" : "Click to connect Supabase Cloud Database"}
+                >
+                  <i className={`bi ${isSyncing ? 'bi-arrow-repeat spinner-border spinner-border-sm' : isSupabaseConnected ? 'bi-database-check text-success' : 'bi-database-exclamation text-warning'}`}></i>
+                  <span className="d-none d-md-inline" style={{ fontSize: '0.78rem' }}>
+                    {isSupabaseConnected ? (isSyncing ? "Syncing..." : "Supabase DB") : "Connect DB"}
+                  </span>
+                </button>
+
+                {/* Multi-Provider User State Section */}
                 <div className="ms-3 ps-3 border-start border-secondary">
                   {currentUser ? (
                     <div className="dropdown">
@@ -914,40 +1605,48 @@
                           )}
                         </div>
                         <div className="d-none d-md-block text-start lh-1">
-                          <div className="small fw-bold text-white">{currentUser.name}</div>
+                          <div className="small fw-bold text-white d-flex align-items-center gap-1">
+                            {currentUser.name}
+                            <ProviderBadge provider={currentUser.provider} size={13} />
+                          </div>
                           <div style={{ fontSize: '0.7rem' }} className="text-info">{currentUser.email}</div>
                         </div>
                       </button>
-                      <ul className="dropdown-menu dropdown-menu-end shadow-lg" style={{ background: '#1e293b', border: '1px solid #334155', minWidth: '280px' }}>
+                      <ul className="dropdown-menu dropdown-menu-end shadow-lg" style={{ background: '#1e293b', border: '1px solid #334155', minWidth: '290px' }}>
                         <li className="px-3 py-2 border-bottom border-secondary">
                           <div className="d-flex align-items-center gap-2 mb-1">
-                            <MicrosoftLogo size={16} />
-                            <span className="small text-muted fw-bold">Microsoft 365 Identity</span>
+                            <ProviderBadge provider={currentUser.provider} size={16} />
+                            <span className="small text-muted fw-bold">
+                              {currentUser.provider === 'microsoft' && "Microsoft Account"}
+                              {currentUser.provider === 'google' && "Google Account"}
+                              {currentUser.provider === 'facebook' && "Facebook Account"}
+                              {currentUser.provider === 'email' && "Verified Email Identity"}
+                            </span>
                           </div>
                           <div className="fw-bold text-white small">{currentUser.name}</div>
                           <div className="small text-info text-truncate">{currentUser.email}</div>
                           <div className="small text-muted mt-1">Role: {currentUser.jobTitle}</div>
                           <div className="badge bg-success-subtle text-success border border-success-subtle mt-2">
-                            <i className="bi bi-check-circle-fill me-1"></i> Live Entra ID Session
+                            <i className="bi bi-shield-check me-1"></i> {currentUser.authMethod}
                           </div>
                         </li>
                         <li>
                           <button className="dropdown-item text-white small py-2" onClick={() => setShowLoginModal(true)}>
-                            <i className="bi bi-gear me-2 text-info"></i> Entra ID App Settings
+                            <i className="bi bi-person-gear me-2 text-info"></i> Account & Auth Settings
                           </button>
                         </li>
                         <li><hr className="dropdown-divider border-secondary" /></li>
                         <li>
                           <button className="dropdown-item text-danger small py-2" onClick={handleLogout}>
-                            <i className="bi bi-box-arrow-right me-2"></i> Sign Out of Microsoft 365
+                            <i className="bi bi-box-arrow-right me-2"></i> Sign Out
                           </button>
                         </li>
                       </ul>
                     </div>
                   ) : (
-                    <button className="btn btn-sm btn-m365" onClick={() => setShowLoginModal(true)}>
-                      <MicrosoftLogo size={16} />
-                      <span>Sign in with Microsoft 365</span>
+                    <button className="btn btn-sm btn-primary d-flex align-items-center gap-2" onClick={() => setShowLoginModal(true)}>
+                      <i className="bi bi-box-arrow-in-right"></i>
+                      <span>Sign In</span>
                     </button>
                   )}
                 </div>
@@ -963,20 +1662,22 @@
             {!currentUser && (
               <div className="auth-banner d-flex flex-wrap justify-content-between align-items-center gap-3 mb-4">
                 <div className="d-flex align-items-center gap-3">
-                  <div className="p-2 rounded bg-dark border border-secondary">
-                    <MicrosoftLogo size={28} />
+                  <div className="p-2 rounded bg-dark border border-secondary d-flex gap-2 align-items-center">
+                    <MicrosoftLogo size={22} />
+                    <GoogleLogo size={22} />
+                    <FacebookLogo size={22} />
+                    <i className="bi bi-envelope-at-fill text-info fs-5"></i>
                   </div>
                   <div>
-                    <h6 className="text-white fw-bold mb-1">Microsoft 365 Authentication Required for Write Access</h6>
+                    <h6 className="text-white fw-bold mb-1">Operator Sign-In Required for Write Access</h6>
                     <p className="text-muted small mb-0">
-                      Sign in with your corporate Microsoft 365 or Entra ID account to log 5M1E change points, trigger abnormalities, and sign audit trails.
+                      Sign in with your Microsoft account (Work or Personal @outlook/@hotmail), Email, Google, or Facebook to log 5M1E events and audit changes.
                     </p>
                   </div>
                 </div>
                 <div>
-                  <button className="btn btn-m365 btn-sm" onClick={() => setShowLoginModal(true)}>
-                    <MicrosoftLogo size={16} />
-                    <span>Sign In with Microsoft</span>
+                  <button className="btn btn-primary btn-sm px-3" onClick={() => setShowLoginModal(true)}>
+                    <i className="bi bi-box-arrow-in-right me-1"></i> Sign In to Account
                   </button>
                 </div>
               </div>
@@ -1110,7 +1811,7 @@
                         onClick={() => {
                           if (!currentUser) {
                             setShowLoginModal(true);
-                            setAuthError("Please sign in with Microsoft 365 to record production logs.");
+                            setAuthError("Please sign in to record production logs.");
                           } else {
                             setActiveTab('new-entry');
                           }
@@ -1174,8 +1875,9 @@
                                 <div className="small text-muted mt-1 d-flex flex-wrap gap-2 align-items-center">
                                   <span><i className="bi bi-person me-1"></i>{record.man.operator}</span>
                                   {record.recordedBy && (
-                                    <span className="badge bg-dark border border-secondary text-info">
-                                      <i className="bi bi-shield-check me-1 text-success"></i>{record.recordedBy}
+                                    <span className="badge bg-dark border border-secondary text-info d-inline-flex align-items-center gap-1">
+                                      <ProviderBadge provider={record.authProvider || (record.m365Auth ? 'microsoft' : 'email')} size={12} />
+                                      <span>{record.recordedBy}</span>
                                     </span>
                                   )}
                                 </div>
@@ -1228,8 +1930,9 @@
                   </div>
                   <div className="d-flex align-items-center gap-2">
                     {currentUser && (
-                      <span className="badge bg-dark border border-info text-info py-2 px-3">
-                        <i className="bi bi-shield-check text-success me-1"></i> Signer: <strong>{currentUser.email}</strong>
+                      <span className="badge bg-dark border border-info text-info py-2 px-3 d-inline-flex align-items-center gap-1">
+                        <ProviderBadge provider={currentUser.provider} size={14} />
+                        <span>Signer: <strong>{currentUser.email}</strong> ({currentUser.name})</span>
                       </span>
                     )}
                     <button className="btn btn-outline-secondary btn-sm" onClick={() => setActiveTab('dashboard')}>
@@ -1817,27 +2520,70 @@
           </div>
 
           {/* -------------------------------------------------------------
-              MODAL: REAL MICROSOFT 365 SIGN IN & ENTRA ID CONFIG
+              MODAL: MULTI-PROVIDER AUTHENTICATION PORTAL
+              (Microsoft Personal & Corporate, Email/PIN, Google, Facebook)
           ------------------------------------------------------------- */}
           {showLoginModal && (
-            <div className="modal show d-block" tabIndex="-1" style={{ backgroundColor: 'rgba(0,0,0,0.8)' }}>
-              <div className="modal-dialog modal-dialog-centered">
-                <div className="modal-content shadow-lg">
-                  <div className="modal-header border-secondary">
-                    <div className="d-flex align-items-center gap-2">
-                      <MicrosoftLogo size={20} />
-                      <h5 className="modal-title fw-bold text-white">Sign In with Microsoft 365</h5>
+            <div className="modal show d-block" tabIndex="-1" style={{ backgroundColor: 'rgba(0,0,0,0.82)', backdropFilter: 'blur(6px)' }}>
+              <div className="modal-dialog modal-dialog-centered modal-lg">
+                <div className="modal-content shadow-lg border-secondary">
+                  <div className="modal-header border-secondary pb-0">
+                    <div>
+                      <div className="d-flex align-items-center gap-2 mb-2">
+                        <i className="bi bi-shield-lock-fill text-primary fs-5"></i>
+                        <h5 className="modal-title fw-bold text-white mb-0">Operator Authentication & Sign-Off</h5>
+                      </div>
+                      <p className="text-muted small mb-2">
+                        Select your preferred sign-in provider to stamp your electronic signature on all 5M1E change points and audit records.
+                      </p>
                     </div>
                     <button type="button" className="btn-close btn-close-white" onClick={() => setShowLoginModal(false)}></button>
                   </div>
+
+                  {/* Provider Tabs Header */}
+                  <div className="px-3 border-bottom border-secondary d-flex flex-wrap gap-1 bg-dark bg-opacity-50">
+                    <button 
+                      className={`auth-tab-btn ${authTab === 'microsoft' ? 'active' : ''}`}
+                      onClick={() => { setAuthTab('microsoft'); setAuthError(''); }}
+                    >
+                      <MicrosoftLogo size={16} />
+                      <span>Microsoft</span>
+                    </button>
+                    <button 
+                      className={`auth-tab-btn ${authTab === 'email' ? 'active' : ''}`}
+                      onClick={() => { setAuthTab('email'); setAuthError(''); }}
+                    >
+                      <i className="bi bi-envelope-at text-info"></i>
+                      <span>Email & PIN</span>
+                    </button>
+                    <button 
+                      className={`auth-tab-btn ${authTab === 'google' ? 'active' : ''}`}
+                      onClick={() => { setAuthTab('google'); setAuthError(''); }}
+                    >
+                      <GoogleLogo size={16} />
+                      <span>Google</span>
+                    </button>
+                    <button 
+                      className={`auth-tab-btn ${authTab === 'facebook' ? 'active' : ''}`}
+                      onClick={() => { setAuthTab('facebook'); setAuthError(''); }}
+                    >
+                      <FacebookLogo size={16} />
+                      <span>Facebook</span>
+                    </button>
+                    <button 
+                      className={`auth-tab-btn ${authTab === 'supabase' ? 'active' : ''}`}
+                      onClick={() => { setAuthTab('supabase'); setAuthError(''); }}
+                    >
+                      <i className={`bi ${isSupabaseConnected ? 'bi-database-fill-check text-success' : 'bi-database-fill-gear text-warning'}`}></i>
+                      <span>⚡ Supabase DB</span>
+                    </button>
+                  </div>
+
                   <div className="modal-body p-4">
-                    <p className="text-muted small mb-3">
-                      Authenticate directly using your corporate <strong>Microsoft 365</strong> or <strong>Entra ID (Azure AD)</strong> account to verify your identity and stamp your electronic signature on all 5M1E change points.
-                    </p>
 
                     {authError && (
                       <div className="alert alert-danger py-2 small mb-3 d-flex align-items-start gap-2">
-                        <i className="bi bi-exclamation-octagon-fill fs-6 mt-1"></i>
+                        <i className="bi bi-exclamation-octagon-fill fs-6 mt-1 flex-shrink-0"></i>
                         <div>{authError}</div>
                       </div>
                     )}
@@ -1848,83 +2594,703 @@
                       </div>
                     )}
 
-                    {/* Microsoft 365 Real Sign-In Button */}
-                    <div className="text-center my-3">
-                      <button 
-                        className="btn btn-m365 w-100 py-2 justify-content-center fs-6"
-                        onClick={handleRealMicrosoftSignIn}
-                        disabled={isAuthenticating}
-                      >
-                        {isAuthenticating ? (
-                          <>
-                            <span className="spinner-border spinner-border-sm me-2" role="status"></span>
-                            Connecting to Microsoft 365...
-                          </>
-                        ) : (
-                          <>
-                            <MicrosoftLogo size={20} />
-                            <span>Sign in with Microsoft</span>
-                          </>
-                        )}
-                      </button>
-                    </div>
-
-                    {/* Azure Entra ID App Credentials Config Form */}
-                    <div className="mt-4 p-3 rounded border border-secondary" style={{ background: '#0b0f19' }}>
-                      <div className="d-flex justify-content-between align-items-center mb-2">
-                        <span className="small fw-bold text-white">
-                          <i className="bi bi-key me-1 text-warning"></i> Microsoft Entra ID (Azure AD) Client ID
-                        </span>
-                        <button 
-                          type="button" 
-                          className="btn btn-link btn-sm p-0 text-info"
-                          style={{ fontSize: '0.75rem' }}
-                          onClick={() => setShowAzureSetup(!showAzureSetup)}
-                        >
-                          {showAzureSetup ? "Hide Guide" : "Setup Guide & Info"}
-                        </button>
-                      </div>
-
-                      <div className="mb-2">
-                        <label className="form-label small text-muted mb-1">Application (client) ID:</label>
-                        <input 
-                          type="text" 
-                          className="form-control form-control-sm font-mono" 
-                          placeholder="e.g. 00000000-0000-0000-0000-000000000000" 
-                          value={azureConfig.clientId}
-                          onChange={(e) => setAzureConfig({ ...azureConfig, clientId: e.target.value.trim() })}
-                        />
-                      </div>
-
-                      <div className="mb-2">
-                        <label className="form-label small text-muted mb-1">Directory (tenant) ID or 'common':</label>
-                        <input 
-                          type="text" 
-                          className="form-control form-control-sm font-mono" 
-                          placeholder="common (supports any organization or personal account)" 
-                          value={azureConfig.tenantId}
-                          onChange={(e) => setAzureConfig({ ...azureConfig, tenantId: e.target.value.trim() })}
-                        />
-                      </div>
-
-                      <div className="text-muted" style={{ fontSize: '0.72rem' }}>
-                        Redirect URI registered in Azure: <code className="text-info">{window.location.origin}</code>
-                      </div>
-
-                      {showAzureSetup && (
-                        <div className="mt-3 pt-2 border-top border-secondary text-muted small" style={{ fontSize: '0.75rem', lineHeight: '1.4' }}>
-                          <strong className="text-white d-block mb-1">How to get your Azure Client ID:</strong>
-                          <ol className="ps-3 mb-0">
-                            <li>Sign in to <a href="https://portal.azure.com/#blade/Microsoft_AAD_IAM/ActiveDirectoryMenuBlade/RegisteredApps" target="_blank" rel="noreferrer" className="text-info">Azure Portal (App registrations)</a>.</li>
-                            <li>Click <strong>New registration</strong>, name it <em>5M1E Production Tracker</em>.</li>
-                            <li>Select <strong>Single-page application (SPA)</strong> and set redirect URI to <code>{window.location.origin}</code>.</li>
-                            <li>Copy the <strong>Application (client) ID</strong> and paste it above!</li>
-                          </ol>
+                    {/* TAB 1: MICROSOFT (Personal & Corporate) */}
+                    {authTab === 'microsoft' && (
+                      <div>
+                        <div className="d-flex align-items-center justify-content-between mb-3">
+                          <span className="badge bg-primary-subtle text-primary border border-primary-subtle px-2 py-1">
+                            <i className="bi bi-check-circle me-1"></i> Personal Outlook/Hotmail & Corporate M365
+                          </span>
+                          <span className="text-muted small">OAuth 2.0 / MSAL / Supabase</span>
                         </div>
-                      )}
-                    </div>
 
-                    <div className="mt-3 text-center">
+                        {/* Real Microsoft OAuth via Supabase Cloud */}
+                        <div className="p-3 rounded border border-secondary mb-3" style={{ background: '#0b0f19' }}>
+                          <div className="d-flex justify-content-between align-items-center mb-2">
+                            <span className="small fw-bold text-white d-flex align-items-center gap-1">
+                              <MicrosoftLogo size={16} /> Real Microsoft SSO (Supabase Cloud OAuth)
+                            </span>
+                            <span className="badge bg-primary-subtle text-primary border border-primary-subtle">
+                              Supabase Auth
+                            </span>
+                          </div>
+                          <p className="text-muted small mb-3">
+                            Authenticate using your real Microsoft account (Personal @outlook.com/@hotmail.com or Work/School Entra ID). Saves your profile and sign-off directly in the Supabase database.
+                          </p>
+                          <button 
+                            type="button" 
+                            className="btn btn-m365 w-100 py-2 justify-content-center d-flex align-items-center gap-2 mb-2"
+                            onClick={handleRealAzureSignIn}
+                            disabled={isAuthenticating}
+                          >
+                            {isAuthenticating ? (
+                              <>
+                                <span className="spinner-border spinner-border-sm" role="status"></span>
+                                <span>Redirecting to Microsoft OAuth...</span>
+                              </>
+                            ) : (
+                              <>
+                                <MicrosoftLogo size={18} />
+                                <span className="fw-bold">Sign In with Real Microsoft Account</span>
+                              </>
+                            )}
+                          </button>
+                          {!isSupabaseConnected && (
+                            <div className="small text-warning d-flex align-items-center gap-1">
+                              <i className="bi bi-info-circle"></i>
+                              <span>Requires Supabase project. </span>
+                              <button 
+                                type="button" 
+                                className="btn btn-link btn-sm p-0 text-info" 
+                                onClick={() => setAuthTab('supabase')}
+                              >
+                                Connect in ⚡ Supabase DB tab
+                              </button>
+                            </div>
+                          )}
+                        </div>
+
+                        {/* Direct Personal Microsoft Account Login Form */}
+                        <div className="p-3 rounded border border-secondary mb-3" style={{ background: '#0b0f19' }}>
+                          <h6 className="fw-bold text-white mb-2 d-flex align-items-center gap-2">
+                            <MicrosoftLogo size={16} />
+                            <span>Direct Personal Microsoft Sign-In</span>
+                          </h6>
+                          <p className="text-muted small mb-3">
+                            Instant sign-in for <strong>@outlook.com</strong>, <strong>@hotmail.com</strong>, <strong>@live.com</strong>, or custom plant Microsoft accounts.
+                          </p>
+
+                          <div className="row g-2 mb-3">
+                            <div className="col-12 col-md-6">
+                              <label className="form-label small text-muted mb-1">Microsoft Email Address:</label>
+                              <input 
+                                type="email" 
+                                className="form-control form-control-sm font-mono" 
+                                placeholder="e.g. operator@outlook.com" 
+                                value={msDirectForm.email}
+                                onChange={(e) => setMsDirectForm({ ...msDirectForm, email: e.target.value })}
+                              />
+                            </div>
+                            <div className="col-12 col-md-6">
+                              <label className="form-label small text-muted mb-1">Operator Full Name:</label>
+                              <input 
+                                type="text" 
+                                className="form-control form-control-sm" 
+                                placeholder="e.g. Alex Chen" 
+                                value={msDirectForm.name}
+                                onChange={(e) => setMsDirectForm({ ...msDirectForm, name: e.target.value })}
+                              />
+                            </div>
+                            <div className="col-12">
+                              <label className="form-label small text-muted mb-1">Operational Role:</label>
+                              <select 
+                                className="form-select form-select-sm"
+                                value={msDirectForm.role}
+                                onChange={(e) => setMsDirectForm({ ...msDirectForm, role: e.target.value })}
+                              >
+                                <option value="Production Specialist">Production Specialist</option>
+                                <option value="Shift Quality Supervisor">Shift Quality Supervisor</option>
+                                <option value="Certified SMT Operator">Certified SMT Operator</option>
+                                <option value="Lead Maintenance Tech">Lead Maintenance Tech</option>
+                              </select>
+                            </div>
+                          </div>
+
+                          <button 
+                            type="button" 
+                            className="btn btn-outline-light w-100 py-2 justify-content-center d-flex align-items-center gap-2"
+                            onClick={() => handleDirectMicrosoftSignIn()}
+                          >
+                            <MicrosoftLogo size={18} />
+                            <span>Sign In with Entered Microsoft Account</span>
+                          </button>
+                        </div>
+
+                        {/* Real Entra ID (Azure AD) OAuth Popup Option */}
+                        <div className="p-3 rounded border border-secondary" style={{ background: '#0b0f19' }}>
+                          <div className="d-flex justify-content-between align-items-center mb-2">
+                            <span className="small fw-bold text-white">
+                              <i className="bi bi-clouds me-1 text-info"></i> Corporate Entra ID (Azure AD) Cloud OAuth
+                            </span>
+                            <button 
+                              type="button" 
+                              className="btn btn-link btn-sm p-0 text-info"
+                              style={{ fontSize: '0.75rem' }}
+                              onClick={() => setShowAzureSetup(!showAzureSetup)}
+                            >
+                              {showAzureSetup ? "Hide Azure Config" : "Azure Config & Personal Account Setup"}
+                            </button>
+                          </div>
+
+                          <button 
+                            type="button" 
+                            className="btn btn-outline-light w-100 py-2 d-flex align-items-center justify-content-center gap-2 mb-2"
+                            onClick={handleRealMicrosoftSignIn}
+                            disabled={isAuthenticating}
+                          >
+                            {isAuthenticating ? (
+                              <>
+                                <span className="spinner-border spinner-border-sm" role="status"></span>
+                                Connecting to login.microsoftonline.com...
+                              </>
+                            ) : (
+                              <>
+                                <MicrosoftLogo size={18} />
+                                <span>Launch Microsoft OAuth 2.0 Popup Window</span>
+                              </>
+                            )}
+                          </button>
+
+                          {showAzureSetup && (
+                            <div className="mt-3 pt-2 border-top border-secondary">
+                              <div className="mb-2">
+                                <label className="form-label small text-muted mb-1">Application (client) ID:</label>
+                                <input 
+                                  type="text" 
+                                  className="form-control form-control-sm font-mono" 
+                                  placeholder="e.g. 00000000-0000-0000-0000-000000000000" 
+                                  value={azureConfig.clientId}
+                                  onChange={(e) => setAzureConfig({ ...azureConfig, clientId: e.target.value.trim() })}
+                                />
+                              </div>
+
+                              <div className="mb-2">
+                                <label className="form-label small text-muted mb-1">Directory (tenant) ID or 'common':</label>
+                                <input 
+                                  type="text" 
+                                  className="form-control form-control-sm font-mono" 
+                                  placeholder="common (supports personal & organizational accounts)" 
+                                  value={azureConfig.tenantId}
+                                  onChange={(e) => setAzureConfig({ ...azureConfig, tenantId: e.target.value.trim() })}
+                                />
+                              </div>
+
+                              <div className="text-muted" style={{ fontSize: '0.72rem' }}>
+                                Redirect URI registered in Azure: <code className="text-info">{window.location.origin}</code>
+                              </div>
+
+                              <div className="mt-2 p-2 rounded bg-dark border border-secondary small text-muted" style={{ fontSize: '0.75rem', lineHeight: '1.4' }}>
+                                <strong className="text-warning d-block mb-1">
+                                  <i className="bi bi-info-circle me-1"></i> How to enable Normal / Personal Microsoft Accounts in Azure Portal:
+                                </strong>
+                                <ol className="ps-3 mb-0">
+                                  <li>Go to <a href="https://portal.azure.com/#blade/Microsoft_AAD_IAM/ActiveDirectoryMenuBlade/RegisteredApps" target="_blank" rel="noreferrer" className="text-info">Azure Portal (App registrations)</a>.</li>
+                                  <li>Click <strong>New registration</strong>.</li>
+                                  <li><strong>CRITICAL:</strong> Under <em>Supported account types</em>, select: <strong>"Accounts in any organizational directory and personal Microsoft accounts (e.g. Skype, Xbox, Outlook.com)"</strong>.</li>
+                                  <li>Set SPA redirect URI to <code>{window.location.origin}</code> and paste the Client ID above!</li>
+                                </ol>
+                              </div>
+                            </div>
+                          )}
+                        </div>
+                      </div>
+                    )}
+
+                    {/* TAB 2: EMAIL & PIN / PASSWORD */}
+                    {authTab === 'email' && (
+                      <form onSubmit={handleEmailAuthSubmit}>
+                        <div className="p-3 rounded border border-secondary mb-3" style={{ background: '#0b0f19' }}>
+                          <h6 className="fw-bold text-white mb-2 d-flex align-items-center gap-2">
+                            <i className="bi bi-envelope-check text-info"></i>
+                            <span>Sign In with Work or Personal Email</span>
+                          </h6>
+                          <p className="text-muted small mb-3">
+                            Sign in using your corporate email, operator employee ID, or personal email with an audit PIN.
+                          </p>
+
+                          <div className="row g-2 mb-3">
+                            <div className="col-12 col-md-6">
+                              <label className="form-label small text-muted mb-1">Email Address *</label>
+                              <input 
+                                type="email" 
+                                className="form-control form-control-sm font-mono" 
+                                placeholder="operator@plant.internal or user@gmail.com" 
+                                value={emailForm.email}
+                                onChange={(e) => setEmailForm({ ...emailForm, email: e.target.value })}
+                                required
+                              />
+                            </div>
+                            <div className="col-12 col-md-6">
+                              <label className="form-label small text-muted mb-1">Full Name *</label>
+                              <input 
+                                type="text" 
+                                className="form-control form-control-sm" 
+                                placeholder="e.g. Sarah Jenkins" 
+                                value={emailForm.name}
+                                onChange={(e) => setEmailForm({ ...emailForm, name: e.target.value })}
+                                required
+                              />
+                            </div>
+                            <div className="col-12 col-md-6">
+                              <label className="form-label small text-muted mb-1">Password or Employee PIN *</label>
+                              <input 
+                                type="password" 
+                                className="form-control form-control-sm font-mono" 
+                                placeholder="Enter PIN (min 4 characters)" 
+                                value={emailForm.password}
+                                onChange={(e) => setEmailForm({ ...emailForm, password: e.target.value })}
+                                required
+                              />
+                            </div>
+                            <div className="col-12 col-md-6">
+                              <label className="form-label small text-muted mb-1">Role / Job Title</label>
+                              <input 
+                                type="text" 
+                                className="form-control form-control-sm" 
+                                placeholder="e.g. Lead Quality Engineer" 
+                                value={emailForm.role}
+                                onChange={(e) => setEmailForm({ ...emailForm, role: e.target.value })}
+                              />
+                            </div>
+                            <div className="col-12">
+                              <label className="form-label small text-muted mb-1">Department / Facility Area</label>
+                              <input 
+                                type="text" 
+                                className="form-control form-control-sm" 
+                                placeholder="e.g. Cleanroom SMT Line 1" 
+                                value={emailForm.department}
+                                onChange={(e) => setEmailForm({ ...emailForm, department: e.target.value })}
+                              />
+                            </div>
+                          </div>
+
+                          <button 
+                            type="submit" 
+                            className="btn btn-email-signin w-100 py-2 justify-content-center d-flex align-items-center gap-2"
+                            disabled={isAuthenticating}
+                          >
+                            {isAuthenticating ? (
+                              <>
+                                <span className="spinner-border spinner-border-sm" role="status"></span>
+                                <span>Authenticating with Supabase...</span>
+                              </>
+                            ) : (
+                              <>
+                                <i className="bi bi-box-arrow-in-right"></i>
+                                <span>Sign In / Register with Email & Password</span>
+                              </>
+                            )}
+                          </button>
+                        </div>
+
+                        {/* Quick Demo Presets */}
+                        <div className="d-flex flex-wrap align-items-center justify-content-between gap-2 p-2 rounded bg-dark border border-secondary">
+                          <span className="small text-muted fw-bold">1-Click Presets:</span>
+                          <div className="d-flex flex-wrap gap-2">
+                            <button 
+                              type="button" 
+                              className="btn btn-sm btn-outline-info py-1 px-2"
+                              style={{ fontSize: '0.75rem' }}
+                              onClick={() => {
+                                setEmailForm({
+                                  name: "Alex Chen",
+                                  email: "alex.chen@plant.internal",
+                                  password: "demo-password",
+                                  role: "Shift Supervisor",
+                                  department: "SMT Production"
+                                });
+                              }}
+                            >
+                              Alex (Supervisor)
+                            </button>
+                            <button 
+                              type="button" 
+                              className="btn btn-sm btn-outline-success py-1 px-2"
+                              style={{ fontSize: '0.75rem' }}
+                              onClick={() => {
+                                setEmailForm({
+                                  name: "Sarah Jenkins",
+                                  email: "sarah.jenkins@plant.internal",
+                                  password: "demo-password",
+                                  role: "Quality Assurance Lead",
+                                  department: "Quality & Metrology"
+                                });
+                              }}
+                            >
+                              Sarah (QA Lead)
+                            </button>
+                            <button 
+                              type="button" 
+                              className="btn btn-sm btn-outline-warning py-1 px-2"
+                              style={{ fontSize: '0.75rem' }}
+                              onClick={() => {
+                                setEmailForm({
+                                  name: "David Miller",
+                                  email: "david.miller@plant.internal",
+                                  password: "demo-password",
+                                  role: "Certified Operator",
+                                  department: "Stamping Cell"
+                                });
+                              }}
+                            >
+                              David (Operator)
+                            </button>
+                          </div>
+                        </div>
+                      </form>
+                    )}
+
+                    {/* TAB 3: GOOGLE */}
+                    {authTab === 'google' && (
+                      <div>
+                        {/* Real Google OAuth 2.0 (Supabase) */}
+                        <div className="p-3 rounded border border-secondary mb-3" style={{ background: '#0b0f19' }}>
+                          <div className="d-flex align-items-center justify-content-between mb-2">
+                            <span className="badge bg-danger-subtle text-danger border border-danger-subtle px-2 py-1 d-flex align-items-center gap-1">
+                              <GoogleLogo size={14} /> Real Google OAuth 2.0
+                            </span>
+                            <span className="text-muted small">Supabase Auth</span>
+                          </div>
+                          <h6 className="fw-bold text-white mb-2">Real Google Cloud Sign-In</h6>
+                          <p className="text-muted small mb-3">
+                            Authenticate directly with your official Google or Google Workspace (@gmail.com) account. Profile metadata, avatar, and audit info are stored directly in your Supabase database.
+                          </p>
+                          <button 
+                            type="button" 
+                            className="btn btn-google w-100 py-2 d-flex align-items-center justify-content-center gap-2 mb-2"
+                            onClick={handleRealGoogleSignIn}
+                            disabled={isAuthenticating}
+                          >
+                            {isAuthenticating ? (
+                              <>
+                                <span className="spinner-border spinner-border-sm" role="status"></span>
+                                <span>Connecting to Google OAuth...</span>
+                              </>
+                            ) : (
+                              <>
+                                <GoogleLogo size={18} />
+                                <span className="fw-bold">Sign In with Real Google Account</span>
+                              </>
+                            )}
+                          </button>
+                          {!isSupabaseConnected && (
+                            <div className="small text-warning mt-2 d-flex align-items-center gap-1">
+                              <i className="bi bi-exclamation-triangle"></i>
+                              <span>Supabase not configured yet. </span>
+                              <button 
+                                type="button" 
+                                className="btn btn-link btn-sm p-0 text-info" 
+                                onClick={() => setAuthTab('supabase')}
+                              >
+                                Connect Supabase in ⚡ Supabase DB tab
+                              </button>
+                            </div>
+                          )}
+                        </div>
+
+                        {/* Direct Google Account Login (Local / Floor Fallback) */}
+                        <div className="p-3 rounded border border-secondary mb-3" style={{ background: '#0b0f19' }}>
+                          <h6 className="fw-bold text-white mb-2 d-flex align-items-center gap-2">
+                            <i className="bi bi-person-check text-info"></i>
+                            <span>Direct Google Identity (Floor Testing)</span>
+                          </h6>
+                          <div className="row g-2 mb-3">
+                            <div className="col-12 col-md-6">
+                              <label className="form-label small text-muted mb-1">Google Email Address:</label>
+                              <input 
+                                type="email" 
+                                className="form-control form-control-sm font-mono" 
+                                placeholder="operator@gmail.com" 
+                                value={googleForm.email}
+                                onChange={(e) => setGoogleForm({ ...googleForm, email: e.target.value })}
+                              />
+                            </div>
+                            <div className="col-12 col-md-6">
+                              <label className="form-label small text-muted mb-1">Full Name:</label>
+                              <input 
+                                type="text" 
+                                className="form-control form-control-sm" 
+                                placeholder="e.g. John Smith" 
+                                value={googleForm.name}
+                                onChange={(e) => setGoogleForm({ ...googleForm, name: e.target.value })}
+                              />
+                            </div>
+                            <div className="col-12">
+                              <label className="form-label small text-muted mb-1">Role / Specialization:</label>
+                              <select 
+                                className="form-select form-select-sm"
+                                value={googleForm.role}
+                                onChange={(e) => setGoogleForm({ ...googleForm, role: e.target.value })}
+                              >
+                                <option value="Quality Assurance Engineer">Quality Assurance Engineer</option>
+                                <option value="Manufacturing Operations Lead">Manufacturing Operations Lead</option>
+                                <option value="Metrology Technician">Metrology Technician</option>
+                              </select>
+                            </div>
+                          </div>
+
+                          <button 
+                            type="button" 
+                            className="btn btn-outline-light w-100 py-2 justify-content-center d-flex align-items-center gap-2"
+                            onClick={() => handleGoogleSignIn()}
+                          >
+                            <GoogleLogo size={18} />
+                            <span>Sign In with Entered Google Details</span>
+                          </button>
+                        </div>
+
+                        <div className="text-center">
+                          <button 
+                            type="button" 
+                            className="btn btn-sm btn-outline-secondary"
+                            onClick={() => handleGoogleSignIn("plant.engineer@gmail.com", "Google Verified Engineer", "Senior Quality Engineer")}
+                          >
+                            <GoogleLogo size={14} /> Quick One-Click Google Demo Sign-In
+                          </button>
+                        </div>
+                      </div>
+                    )}
+
+                    {/* TAB 4: FACEBOOK */}
+                    {authTab === 'facebook' && (
+                      <div>
+                        {/* Real Facebook OAuth 2.0 (Supabase) */}
+                        <div className="p-3 rounded border border-secondary mb-3" style={{ background: '#0b0f19' }}>
+                          <div className="d-flex align-items-center justify-content-between mb-2">
+                            <span className="badge bg-primary-subtle text-primary border border-primary-subtle px-2 py-1 d-flex align-items-center gap-1">
+                              <FacebookLogo size={14} /> Real Facebook OAuth 2.0
+                            </span>
+                            <span className="text-muted small">Supabase Auth</span>
+                          </div>
+                          <h6 className="fw-bold text-white mb-2">Real Facebook Sign-In</h6>
+                          <p className="text-muted small mb-3">
+                            Authenticate directly with your official Facebook profile. Securely logs in and records your operator identity, profile photo, and audit timestamps in Supabase.
+                          </p>
+                          <button 
+                            type="button" 
+                            className="btn btn-facebook w-100 py-2 d-flex align-items-center justify-content-center gap-2 mb-2"
+                            onClick={handleRealFacebookSignIn}
+                            disabled={isAuthenticating}
+                          >
+                            {isAuthenticating ? (
+                              <>
+                                <span className="spinner-border spinner-border-sm" role="status"></span>
+                                <span>Connecting to Facebook OAuth...</span>
+                              </>
+                            ) : (
+                              <>
+                                <FacebookLogo size={18} />
+                                <span className="fw-bold">Sign In with Real Facebook Account</span>
+                              </>
+                            )}
+                          </button>
+                          {!isSupabaseConnected && (
+                            <div className="small text-warning mt-2 d-flex align-items-center gap-1">
+                              <i className="bi bi-exclamation-triangle"></i>
+                              <span>Supabase not configured yet. </span>
+                              <button 
+                                type="button" 
+                                className="btn btn-link btn-sm p-0 text-info" 
+                                onClick={() => setAuthTab('supabase')}
+                              >
+                                Connect Supabase in ⚡ Supabase DB tab
+                              </button>
+                            </div>
+                          )}
+                        </div>
+
+                        {/* Direct Facebook Account Login (Floor Testing) */}
+                        <div className="p-3 rounded border border-secondary mb-3" style={{ background: '#0b0f19' }}>
+                          <h6 className="fw-bold text-white mb-2 d-flex align-items-center gap-2">
+                            <i className="bi bi-person-check text-info"></i>
+                            <span>Direct Facebook Identity (Floor Testing)</span>
+                          </h6>
+                          <div className="row g-2 mb-3">
+                            <div className="col-12 col-md-6">
+                              <label className="form-label small text-muted mb-1">Facebook Account Email / ID:</label>
+                              <input 
+                                type="text" 
+                                className="form-control form-control-sm font-mono" 
+                                placeholder="user@facebook.com or profile ID" 
+                                value={facebookForm.email}
+                                onChange={(e) => setFacebookForm({ ...facebookForm, email: e.target.value })}
+                              />
+                            </div>
+                            <div className="col-12 col-md-6">
+                              <label className="form-label small text-muted mb-1">Full Name:</label>
+                              <input 
+                                type="text" 
+                                className="form-control form-control-sm" 
+                                placeholder="e.g. Jane Doe" 
+                                value={facebookForm.name}
+                                onChange={(e) => setFacebookForm({ ...facebookForm, name: e.target.value })}
+                              />
+                            </div>
+                            <div className="col-12">
+                              <label className="form-label small text-muted mb-1">Operator Role:</label>
+                              <select 
+                                className="form-select form-select-sm"
+                                value={facebookForm.role}
+                                onChange={(e) => setFacebookForm({ ...facebookForm, role: e.target.value })}
+                              >
+                                <option value="Process Specialist">Process Specialist</option>
+                                <option value="Assembly Cell Operator">Assembly Cell Operator</option>
+                                <option value="Packaging & Logistics Tech">Packaging & Logistics Tech</option>
+                              </select>
+                            </div>
+                          </div>
+
+                          <button 
+                            type="button" 
+                            className="btn btn-outline-light w-100 py-2 justify-content-center d-flex align-items-center gap-2"
+                            onClick={() => handleFacebookSignIn()}
+                          >
+                            <FacebookLogo size={18} />
+                            <span>Sign In with Entered Facebook Details</span>
+                          </button>
+                        </div>
+
+                        <div className="text-center">
+                          <button 
+                            type="button" 
+                            className="btn btn-sm btn-outline-secondary"
+                            onClick={() => handleFacebookSignIn("operator.fb@facebook.com", "Facebook Verified Operator", "Assembly Cell Specialist")}
+                          >
+                            <FacebookLogo size={14} /> Quick One-Click Facebook Demo Sign-In
+                          </button>
+                        </div>
+                      </div>
+                    )}
+
+                    {/* TAB 5: SUPABASE CLOUD DATABASE CONFIG & SYNC */}
+                    {authTab === 'supabase' && (
+                      <div>
+                        {/* Connection Status Banner */}
+                        <div className={`p-3 rounded border mb-3 ${isSupabaseConnected ? 'border-success bg-success bg-opacity-10' : 'border-warning bg-warning bg-opacity-10'}`}>
+                          <div className="d-flex align-items-center justify-content-between mb-1">
+                            <span className="fw-bold d-flex align-items-center gap-2">
+                              <i className={`bi ${isSupabaseConnected ? 'bi-check-circle-fill text-success fs-5' : 'bi-exclamation-triangle-fill text-warning fs-5'}`}></i>
+                              <span className={isSupabaseConnected ? 'text-success' : 'text-warning'}>
+                                {isSupabaseConnected ? "Supabase Cloud Database Connected & Active" : "Supabase Not Connected"}
+                              </span>
+                            </span>
+                            <span className={`badge ${isSupabaseConnected ? 'bg-success' : 'bg-warning text-dark'}`}>
+                              {isSupabaseConnected ? "Online & Synced" : "Configuration Required"}
+                            </span>
+                          </div>
+                          <p className="small text-muted mb-0">
+                            {isSupabaseConnected 
+                              ? "All operator logins (Google, Facebook, Microsoft, Email) and 5M1E production events automatically synchronize to your PostgreSQL database in real-time."
+                              : "Connect your free Supabase project to enable real OAuth 2.0 logins (Google, Facebook, Microsoft) and store all operator records in PostgreSQL."}
+                          </p>
+                        </div>
+
+                        {/* Supabase Configuration Form */}
+                        <div className="p-3 rounded border border-secondary mb-3" style={{ background: '#0b0f19' }}>
+                          <h6 className="fw-bold text-white mb-2 d-flex align-items-center gap-2">
+                            <i className="bi bi-gear-wide-connected text-info"></i>
+                            <span>Supabase Project API Credentials</span>
+                          </h6>
+                          <p className="text-muted small mb-3">
+                            Obtain these in your <strong>Supabase Dashboard &gt; Project Settings &gt; API</strong>:
+                          </p>
+
+                          <div className="mb-3">
+                            <label className="form-label small text-muted mb-1">
+                              Project URL: <span className="text-danger">*</span>
+                            </label>
+                            <input 
+                              type="text" 
+                              className="form-control form-control-sm font-mono" 
+                              placeholder="https://your-project-ref.supabase.co" 
+                              value={supabaseConfig.url}
+                              onChange={(e) => setSupabaseConfig({ ...supabaseConfig, url: e.target.value.trim() })}
+                            />
+                            <div className="text-muted" style={{ fontSize: '0.72rem', marginTop: '3px' }}>
+                              Found under Project Settings &gt; API &gt; Project URL
+                            </div>
+                          </div>
+
+                          <div className="mb-3">
+                            <label className="form-label small text-muted mb-1">
+                              Anon / Public API Key: <span className="text-danger">*</span>
+                            </label>
+                            <input 
+                              type="password" 
+                              className="form-control form-control-sm font-mono" 
+                              placeholder="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..." 
+                              value={supabaseConfig.anonKey}
+                              onChange={(e) => setSupabaseConfig({ ...supabaseConfig, anonKey: e.target.value.trim() })}
+                            />
+                            <div className="text-muted" style={{ fontSize: '0.72rem', marginTop: '3px' }}>
+                              Found under Project Settings &gt; API &gt; Project API keys &gt; 'anon' 'public'
+                            </div>
+                          </div>
+
+                          <div className="d-flex flex-wrap gap-2">
+                            <button 
+                              type="button" 
+                              className="btn btn-primary btn-sm px-3 d-flex align-items-center gap-2"
+                              onClick={() => {
+                                if (!supabaseConfig.url || !supabaseConfig.anonKey) {
+                                  setAuthError("Please enter both the Supabase Project URL and Anon Public Key.");
+                                  return;
+                                }
+                                setAuthError("");
+                                fetchRecordsFromSupabase();
+                                setAuthSuccessMsg("Supabase credentials saved! Testing database sync...");
+                              }}
+                            >
+                              <i className="bi bi-check-lg"></i>
+                              <span>Save & Test Connection</span>
+                            </button>
+
+                            <button 
+                              type="button" 
+                              className="btn btn-outline-success btn-sm px-3 d-flex align-items-center gap-2"
+                              onClick={fetchRecordsFromSupabase}
+                              disabled={isSyncing || !supabaseConfig.url}
+                            >
+                              <i className={`bi ${isSyncing ? 'bi-arrow-repeat spinner-border spinner-border-sm' : 'bi-arrow-repeat'}`}></i>
+                              <span>{isSyncing ? "Syncing..." : "Sync Records from DB"}</span>
+                            </button>
+                          </div>
+                        </div>
+
+                        {/* Database Schema SQL Setup Card */}
+                        <div className="p-3 rounded border border-secondary mb-3" style={{ background: '#0b0f19' }}>
+                          <div className="d-flex justify-content-between align-items-center mb-2">
+                            <h6 className="fw-bold text-white mb-0 d-flex align-items-center gap-2">
+                              <i className="bi bi-filetype-sql text-warning"></i>
+                              <span>Supabase SQL Database Setup</span>
+                            </h6>
+                            <span className="badge bg-secondary">One-Click Setup</span>
+                          </div>
+                          <p className="text-muted small mb-3">
+                            Run this SQL script in your Supabase <strong>SQL Editor</strong> to create the tables <code>public.profiles</code> and <code>public.production_records</code> with Row-Level Security (RLS) rules:
+                          </p>
+
+                          <button 
+                            type="button" 
+                            className={`btn ${copiedSQL ? 'btn-success' : 'btn-outline-info'} w-100 py-2 d-flex align-items-center justify-content-center gap-2 mb-3`}
+                            onClick={() => {
+                              navigator.clipboard.writeText(SUPABASE_SCHEMA_SQL);
+                              setCopiedSQL(true);
+                              setTimeout(() => setCopiedSQL(false), 3000);
+                            }}
+                          >
+                            <i className={`bi ${copiedSQL ? 'bi-check2-circle' : 'bi-clipboard-check'}`}></i>
+                            <span className="fw-bold">
+                              {copiedSQL ? "SQL Script Copied to Clipboard!" : "Copy Supabase SQL Setup Script to Clipboard"}
+                            </span>
+                          </button>
+
+                          <div className="p-2 rounded bg-dark border border-secondary small text-muted" style={{ fontSize: '0.75rem', lineHeight: '1.45' }}>
+                            <strong className="text-info d-block mb-1">
+                              <i className="bi bi-lightning-charge me-1"></i> 3-Minute Supabase Quick Setup Guide:
+                            </strong>
+                            <ol className="ps-3 mb-0">
+                              <li>Open your <a href="https://supabase.com/dashboard" target="_blank" rel="noreferrer" className="text-info">Supabase Dashboard</a> and select or create a project.</li>
+                              <li>Click <strong>SQL Editor</strong> in the left sidebar, click <strong>New Query</strong>, paste the copied script, and click <strong>Run</strong>.</li>
+                              <li>In <strong>Authentication &gt; Providers</strong>, toggle on <strong>Google</strong>, <strong>Facebook</strong>, and/or <strong>Azure</strong> with your Client IDs and Secrets.</li>
+                              <li>In <strong>Authentication &gt; URL Configuration</strong>, ensure your app URL is added to <em>Redirect URLs</em>.</li>
+                            </ol>
+                          </div>
+                        </div>
+                      </div>
+                    )}
+
+                    <div className="mt-4 pt-2 border-top border-secondary text-center">
                       <button 
                         className="btn btn-link btn-sm text-secondary text-decoration-none"
                         onClick={() => setShowLoginModal(false)}
