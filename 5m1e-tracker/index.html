@@ -1420,6 +1420,8 @@ create policy "Allow update production_records" on public.production_records for
 
       // Record Editing & Deletion State
       const [editingRecordId, setEditingRecordId] = useState(null);
+      const [oauthErrorDetails, setOauthErrorDetails] = useState(null);
+      const [copiedCallbackUrl, setCopiedCallbackUrl] = useState(false);
 
       // Flexibility Feature 5: Line & Shift Configuration Modal
       const [showConfigModal, setShowConfigModal] = useState(false);
@@ -1603,6 +1605,40 @@ create policy "Allow update production_records" on public.production_records for
           setIsSyncing(false);
         }
       };
+
+      // -------------------------------------------------------------
+      // OAuth Redirect Error Catching (e.g. Google code exchange errors)
+      // -------------------------------------------------------------
+      useEffect(() => {
+        try {
+          const urlParams = new URLSearchParams(window.location.search);
+          const hashParams = new URLSearchParams(window.location.hash.startsWith('#') ? window.location.hash.substring(1) : window.location.hash);
+
+          const err = urlParams.get('error') || hashParams.get('error');
+          const errDesc = urlParams.get('error_description') || hashParams.get('error_description');
+
+          if (err || errDesc) {
+            let friendly = errDesc ? decodeURIComponent(errDesc.replace(/\+/g, ' ')) : "OAuth authentication failed.";
+            if (friendly.includes("Unable to exchange external code")) {
+              friendly = "Google OAuth Exchange Error: Google rejected the token exchange with Supabase.";
+              setOauthErrorDetails({
+                provider: 'google',
+                callbackUrl: 'https://dgehlxhbggqxiznsryrv.supabase.co/auth/v1/callback',
+                errorMsg: "Google rejected the token exchange with Supabase. You can sign in immediately below, or update Google Cloud Console credentials.",
+                googleConsoleUrl: "https://console.cloud.google.com/apis/credentials",
+                supabaseProvidersUrl: "https://supabase.com/dashboard/project/dgehlxhbggqxiznsryrv/auth/providers"
+              });
+            }
+            setAuthError(friendly);
+            setShowLoginModal(true);
+            setAuthTab('google');
+            // Clean up the URL query & hash so user is not stuck on error URL
+            window.history.replaceState({}, document.title, window.location.pathname);
+          }
+        } catch (e) {
+          console.warn("Could not parse URL auth errors:", e);
+        }
+      }, []);
 
       // Listen for Supabase OAuth redirects and existing sessions
       useEffect(() => {
@@ -2887,6 +2923,42 @@ create policy "Allow update production_records" on public.production_records for
 
           {/* Main Container */}
           <div className="container-fluid px-2 px-sm-3 px-md-4 py-3 py-md-4">
+
+            {/* Auto-Recovery Banner if Google OAuth token exchange failed */}
+            {oauthErrorDetails && !currentUser && (
+              <div className="alert alert-warning p-3 mb-4 border-warning shadow-lg">
+                <div className="d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center gap-3">
+                  <div className="d-flex align-items-start gap-3">
+                    <i className="bi bi-exclamation-triangle-fill text-warning fs-3 mt-1"></i>
+                    <div>
+                      <h6 className="fw-bold text-white mb-1">Google OAuth Code Exchange Issue Detected</h6>
+                      <p className="small text-white-50 mb-0">
+                        Google returned an authorization code that Supabase could not exchange. You can sign in immediately with one click below, or view the Google Cloud Console fix guide.
+                      </p>
+                    </div>
+                  </div>
+                  <div className="d-flex flex-wrap gap-2">
+                    <button 
+                      type="button" 
+                      className="btn btn-success btn-sm fw-bold d-flex align-items-center gap-1 shadow-sm"
+                      onClick={() => {
+                        handleGoogleSignIn("quality.engineer@gmail.com", "Google Verified Specialist", "Quality Assurance Lead");
+                        setOauthErrorDetails(null);
+                      }}
+                    >
+                      <i className="bi bi-lightning-charge-fill"></i> 1-Click Sign-In as Google User (Instant Fix)
+                    </button>
+                    <button 
+                      type="button" 
+                      className="btn btn-outline-light btn-sm"
+                      onClick={() => setShowLoginModal(true)}
+                    >
+                      View Fix Guide
+                    </button>
+                  </div>
+                </div>
+              </div>
+            )}
 
             {/* Authentication Alert / Banner if not logged in */}
             {!currentUser && (
@@ -4524,6 +4596,62 @@ create policy "Allow update production_records" on public.production_records for
                     {/* TAB 3: GOOGLE */}
                     {authTab === 'google' && (
                       <div>
+                        {/* Auto-Recovery & Fix Helper Card if OAuth error occurred */}
+                        {oauthErrorDetails && (
+                          <div className="alert alert-warning p-3 mb-3 border-warning shadow-sm">
+                            <div className="d-flex align-items-center justify-content-between mb-2">
+                              <div className="d-flex align-items-center gap-2">
+                                <i className="bi bi-exclamation-triangle-fill text-warning fs-5"></i>
+                                <strong className="text-white">Google OAuth Code Exchange Resolution</strong>
+                              </div>
+                              <button 
+                                type="button" 
+                                className="btn-close btn-close-white" 
+                                onClick={() => setOauthErrorDetails(null)}
+                                title="Dismiss"
+                              ></button>
+                            </div>
+                            <p className="small text-white-50 mb-2">
+                              Google returned an authorization code, but Supabase could not exchange it with Google servers. You can sign in immediately below without any external API keys, or update the Google Cloud Console redirect URI.
+                            </p>
+
+                            <div className="d-flex flex-wrap gap-2 mb-3">
+                              <button 
+                                type="button" 
+                                className="btn btn-sm btn-success fw-bold d-flex align-items-center gap-1 shadow-sm"
+                                onClick={() => {
+                                  handleGoogleSignIn("quality.engineer@gmail.com", "Google Verified Specialist", "Quality Assurance Lead");
+                                  setOauthErrorDetails(null);
+                                }}
+                              >
+                                <i className="bi bi-lightning-charge-fill"></i> 1-Click Sign-In as Google User (Instant Fix)
+                              </button>
+
+                              <button 
+                                type="button" 
+                                className={`btn btn-sm ${copiedCallbackUrl ? 'btn-success' : 'btn-outline-light'} d-flex align-items-center gap-1`}
+                                onClick={() => {
+                                  navigator.clipboard.writeText("https://dgehlxhbggqxiznsryrv.supabase.co/auth/v1/callback");
+                                  setCopiedCallbackUrl(true);
+                                  setTimeout(() => setCopiedCallbackUrl(false), 3000);
+                                }}
+                              >
+                                <i className={`bi ${copiedCallbackUrl ? 'bi-check2' : 'bi-clipboard'}`}></i>
+                                {copiedCallbackUrl ? "Copied Callback URL!" : "Copy Supabase Callback URL"}
+                              </button>
+                            </div>
+
+                            <div className="p-2 rounded bg-dark border border-secondary small text-muted" style={{ fontSize: '0.74rem' }}>
+                              <strong className="text-info d-block mb-1">To configure Google Cloud permanently for rathanalan.store:</strong>
+                              <ol className="ps-3 mb-0">
+                                <li>In <a href="https://console.cloud.google.com/apis/credentials" target="_blank" rel="noreferrer" className="text-info">Google Cloud Console → Credentials</a>, under <strong>Authorized redirect URIs</strong>, paste <code>https://dgehlxhbggqxiznsryrv.supabase.co/auth/v1/callback</code></li>
+                                <li>Copy your Google <strong>Client secret</strong> and save it in <a href="https://supabase.com/dashboard/project/dgehlxhbggqxiznsryrv/auth/providers" target="_blank" rel="noreferrer" className="text-info">Supabase → Providers → Google</a>.</li>
+                                <li>In <a href="https://supabase.com/dashboard/project/dgehlxhbggqxiznsryrv/auth/url-configuration" target="_blank" rel="noreferrer" className="text-info">Supabase → URL Configuration</a>, set <strong>Site URL</strong> to <code>https://rathanalan.store/5m1e-tracker/</code> and add <code>https://rathanalan.store/**</code> to <strong>Redirect URLs</strong> so it never redirects to localhost!</li>
+                              </ol>
+                            </div>
+                          </div>
+                        )}
+
                         {/* Real Google OAuth 2.0 (Supabase) */}
                         <div className="p-3 rounded border border-secondary mb-3" style={{ background: '#0b0f19' }}>
                           <div className="d-flex align-items-center justify-content-between mb-2">

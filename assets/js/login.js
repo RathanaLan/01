@@ -776,8 +776,21 @@ if (year) {
   year.textContent = new Date().getFullYear();
 }
 
-// Check for mode in URL (e.g. login.html?mode=signup)
+// Check for mode or OAuth errors in URL
 const urlParams = new URLSearchParams(window.location.search);
+const hashParams = new URLSearchParams(window.location.hash.startsWith("#") ? window.location.hash.slice(1) : window.location.hash);
+const oauthError = urlParams.get("error") || hashParams.get("error");
+const oauthErrorDesc = urlParams.get("error_description") || hashParams.get("error_description");
+
+if (oauthError || oauthErrorDesc) {
+  let friendly = oauthErrorDesc ? decodeURIComponent(oauthErrorDesc.replace(/\+/g, " ")) : "Authentication failed.";
+  if (friendly.includes("Unable to exchange external code")) {
+    friendly = "Google OAuth Error: Google rejected the token exchange. Verify that 'Authorized redirect URIs' in Google Cloud Console matches your Supabase callback URL (https://dgehlxhbggqxiznsryrv.supabase.co/auth/v1/callback) and the Client Secret is correct.";
+  }
+  showFeedback(friendly, "error");
+  window.history.replaceState({}, document.title, window.location.pathname);
+}
+
 if (urlParams.get("mode") === "signup") {
   setMode("signup");
 } else {

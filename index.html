@@ -524,6 +524,17 @@
         }
       }
     </style>
+
+    <script>
+      // Automatic forwarder for OAuth callbacks or errors from Supabase
+      (function() {
+        const s = window.location.search;
+        const h = window.location.hash;
+        if (s.includes('error=') || s.includes('code=') || h.includes('access_token=') || h.includes('error=')) {
+          window.location.replace('5m1e-tracker/index.html' + s + h);
+        }
+      })();
+    </script>
   </head>
   <body>
     <!-- Ambient Radial Mesh Glow -->

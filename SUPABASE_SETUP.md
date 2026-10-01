@@ -33,11 +33,14 @@ In Supabase **Authentication → Providers → Email**, enable email sign-in. In
 
 The page verifies this numeric code through Supabase's email `verifyOtp` flow. Set an appropriate OTP expiry in the Email provider settings. For production, configure a trusted SMTP provider; Supabase's built-in email service is intended mainly for testing and is rate-limited.
 
-In **Authentication → URL Configuration**, set the site URL and add the development and production redirect URLs. Examples:
-
-- Local development: `http://localhost:5500/**` (use your actual local server port)
-- GitHub Pages: `https://YOUR_GITHUB_NAME.github.io/YOUR_REPOSITORY/**`
-- Custom domain: `https://YOUR_DOMAIN/**`
+In **Authentication → URL Configuration**, set the site URL and add the development and production redirect URLs:
+- **Site URL**: `https://rathanalan.store/5m1e-tracker/`
+- **Redirect URLs**:
+  - `https://rathanalan.store/**`
+  - `https://rathanalan.store/5m1e-tracker/**`
+  - `https://www.rathanalan.store/**`
+  - `https://www.rathanalan.store/5m1e-tracker/**`
+  - `http://localhost:3000/**` (for local development)
 
 Open `login.html` through localhost or HTTPS when testing authentication. A `file://` URL is not a valid auth redirect origin.
 
