@@ -9,6 +9,8 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <!-- Bootstrap Icons -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <!-- Custom 5M1E Responsive Stylesheet -->
+  <link rel="stylesheet" href="styles.css">
   <!-- Google Fonts: Inter & JetBrains Mono -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -25,324 +27,955 @@
   <script src="https://cdn.jsdelivr.net/npm/@babel/standalone@7.24.4/babel.min.js"></script>
 
   <style>
-    :root {
-      --font-main: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-      --font-mono: 'JetBrains Mono', monospace;
-      
-      --c-man: #38bdf8;
-      --c-machine: #fb923c;
-      --c-material: #34d399;
-      --c-method: #a78bfa;
-      --c-measurement: #f43f5e;
-      --c-environment: #2dd4bf;
-      
-      --bg-dark: #0f172a;
-      --surface-dark: #1e293b;
-      --surface-border: #334155;
-      --text-muted: #94a3b8;
-    }
+/* ========================================================
+   5M1E PRODUCTION QUALITY SUITE - RESPONSIVE & SMOOTH DESIGN SYSTEM
+   ======================================================== */
 
-    body {
-      font-family: var(--font-main);
-      background-color: var(--bg-dark);
-      color: #f8fafc;
-      min-height: 100vh;
-      margin: 0;
-      padding-bottom: 2rem;
-    }
+:root {
+  --font-main: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+  
+  /* 5M1E Dimension Colors */
+  --c-man: #38bdf8;
+  --c-machine: #fb923c;
+  --c-material: #34d399;
+  --c-method: #a78bfa;
+  --c-measurement: #f43f5e;
+  --c-environment: #2dd4bf;
+  
+  /* Dark Theme Surfaces */
+  --bg-dark: #0f172a;
+  --surface-dark: #1e293b;
+  --surface-border: #334155;
+  --surface-border-subtle: rgba(255, 255, 255, 0.08);
+  --text-muted: #94a3b8;
+  
+  /* Layout Dimensions */
+  --nav-height: 64px;
+  --mobile-bottom-nav-height: 62px;
+  
+  /* Smooth Transitions */
+  --ease-smooth: cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-fast: 0.18s var(--ease-smooth);
+  --transition-normal: 0.25s var(--ease-smooth);
+}
 
-    .font-mono {
-      font-family: var(--font-mono);
-    }
+/* Global Reset & Base */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
 
-    /* Header & Navigation */
-    .navbar-custom {
-      background: rgba(15, 23, 42, 0.94);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--surface-border);
-    }
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+  overscroll-behavior-x: none;
+}
 
-    .brand-badge {
-      font-size: 0.75rem;
-      letter-spacing: 0.1em;
-      padding: 0.25rem 0.5rem;
-      border-radius: 4px;
-      background: rgba(56, 189, 248, 0.15);
-      color: var(--c-man);
-      border: 1px solid rgba(56, 189, 248, 0.3);
-    }
+body {
+  font-family: var(--font-main);
+  background-color: var(--bg-dark);
+  color: #f8fafc;
+  min-height: 100vh;
+  margin: 0;
+  padding-bottom: calc(2rem + env(safe-area-inset-bottom, 0px));
+  overflow-x: hidden;
+  position: relative;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
 
-    /* Authentication Providers Branding */
-    .btn-m365 {
-      background-color: #2f2f2f;
-      color: #ffffff;
-      border: 1px solid #4a4a4a;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.65rem;
-      font-weight: 600;
-      padding: 0.6rem 1.25rem;
-      border-radius: 6px;
-      transition: all 0.2s ease;
-    }
-    .btn-m365:hover {
-      background-color: #3d3d3d;
-      border-color: #00a4ef;
-      color: #ffffff;
-      box-shadow: 0 4px 16px rgba(0, 164, 239, 0.3);
-    }
+/* Custom Smooth Industrial Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: rgba(15, 23, 42, 0.6);
+}
+::-webkit-scrollbar-thumb {
+  background: #334155;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #475569;
+}
 
-    .btn-google {
-      background-color: #ffffff;
-      color: #1f1f1f;
-      border: 1px solid #dadce0;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.65rem;
-      font-weight: 600;
-      padding: 0.6rem 1.25rem;
-      border-radius: 6px;
-      transition: all 0.2s ease;
-    }
-    .btn-google:hover {
-      background-color: #f1f3f4;
-      border-color: #4285f4;
-      color: #000000;
-      box-shadow: 0 4px 16px rgba(66, 133, 244, 0.3);
-    }
+/* Smooth Animation Keyframes */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
 
-    .btn-facebook {
-      background-color: #1877f2;
-      color: #ffffff;
-      border: 1px solid #1877f2;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.65rem;
-      font-weight: 600;
-      padding: 0.6rem 1.25rem;
-      border-radius: 6px;
-      transition: all 0.2s ease;
-    }
-    .btn-facebook:hover {
-      background-color: #166fe5;
-      border-color: #166fe5;
-      color: #ffffff;
-      box-shadow: 0 4px 16px rgba(24, 119, 242, 0.35);
-    }
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
 
-    .btn-email-signin {
-      background: linear-gradient(135deg, #0284c7, #2563eb);
-      color: #ffffff;
-      border: none;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.65rem;
-      font-weight: 600;
-      padding: 0.6rem 1.25rem;
-      border-radius: 6px;
-      transition: all 0.2s ease;
-    }
-    .btn-email-signin:hover {
-      background: linear-gradient(135deg, #0369a1, #1d4ed8);
-      color: #ffffff;
-      box-shadow: 0 4px 16px rgba(37, 99, 235, 0.35);
-    }
+@keyframes pulseGlow {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.6; }
+}
 
-    .auth-tab-btn {
-      padding: 0.6rem 0.9rem;
-      font-weight: 600;
-      font-size: 0.85rem;
-      border: none;
-      background: transparent;
-      color: #94a3b8;
-      border-bottom: 2px solid transparent;
-      transition: all 0.2s ease;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.45rem;
-    }
-    .auth-tab-btn:hover {
-      color: #ffffff;
-      background: rgba(255, 255, 255, 0.04);
-    }
-    .auth-tab-btn.active {
-      color: #38bdf8;
-      border-bottom-color: #38bdf8;
-      background: rgba(56, 189, 248, 0.08);
-    }
+/* Typography & Utility Helpers */
+.font-mono {
+  font-family: var(--font-mono);
+}
 
-    .user-avatar-pill {
-      background: #1e293b;
-      border: 1px solid var(--surface-border);
-      border-radius: 30px;
-      padding: 0.25rem 0.75rem 0.25rem 0.35rem;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
-    .avatar-circle {
-      width: 32px;
-      height: 32px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, #0078d4, #002050);
-      color: #ffffff;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 0.8rem;
-      font-weight: 700;
-      overflow: hidden;
-    }
-    .avatar-img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
+.text-purple {
+  color: var(--c-method) !important;
+}
 
-    /* KPI Summary Cards */
-    .kpi-card {
-      background: var(--surface-dark);
-      border: 1px solid var(--surface-border);
-      border-radius: 12px;
-      padding: 1.25rem;
-      transition: transform 0.2s ease, border-color 0.2s ease;
-    }
+.text-teal {
+  color: var(--c-environment) !important;
+}
 
-    .kpi-card:hover {
-      transform: translateY(-2px);
-      border-color: #475569;
-    }
+/* Contained Layout Mode (For ultrawide 21:9 monitors) */
+.app-container-contained {
+  max-width: 1440px;
+  margin-left: auto;
+  margin-right: auto;
+  box-shadow: 0 0 50px rgba(0, 0, 0, 0.4);
+}
 
-    .kpi-value {
-      font-size: 1.85rem;
-      font-weight: 700;
-      font-family: var(--font-mono);
-      line-height: 1.2;
-    }
+/* ========================================================
+   NAVIGATION & HEADER
+   ======================================================== */
 
-    /* 5M1E Dimension Color Tags */
-    .badge-man { background-color: rgba(56, 189, 248, 0.15); color: var(--c-man); border: 1px solid rgba(56, 189, 248, 0.4); }
-    .badge-machine { background-color: rgba(251, 146, 60, 0.15); color: var(--c-machine); border: 1px solid rgba(251, 146, 60, 0.4); }
-    .badge-material { background-color: rgba(52, 211, 153, 0.15); color: var(--c-material); border: 1px solid rgba(52, 211, 153, 0.4); }
-    .badge-method { background-color: rgba(167, 139, 250, 0.15); color: var(--c-method); border: 1px solid rgba(167, 139, 250, 0.4); }
-    .badge-measurement { background-color: rgba(244, 63, 94, 0.15); color: var(--c-measurement); border: 1px solid rgba(244, 63, 94, 0.4); }
-    .badge-environment { background-color: rgba(45, 212, 191, 0.15); color: var(--c-environment); border: 1px solid rgba(45, 212, 191, 0.4); }
+.navbar-custom {
+  background: rgba(15, 23, 42, 0.94);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--surface-border);
+  min-height: var(--nav-height);
+  z-index: 1030;
+  transition: all var(--transition-normal);
+}
 
-    /* Surface Card */
-    .surface-card {
-      background: var(--surface-dark);
-      border: 1px solid var(--surface-border);
-      border-radius: 14px;
-      overflow: hidden;
-    }
+.brand-badge {
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  padding: 0.25rem 0.5rem;
+  border-radius: 6px;
+  background: rgba(56, 189, 248, 0.15);
+  color: var(--c-man);
+  border: 1px solid rgba(56, 189, 248, 0.35);
+  white-space: nowrap;
+  font-weight: 700;
+}
 
-    .dimension-tab-btn {
-      border-radius: 8px !important;
-      font-weight: 600;
-      padding: 0.65rem 1rem;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      border: 1px solid transparent;
-      color: var(--text-muted);
-      transition: all 0.2s ease;
-      background: rgba(255, 255, 255, 0.03);
-    }
+.navbar-brand-title {
+  font-size: clamp(0.92rem, 2.2vw, 1.25rem);
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 0;
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
 
-    .dimension-tab-btn:hover {
-      background: rgba(255, 255, 255, 0.08);
-      color: #fff;
-    }
+/* Mobile Nav Toggle Button */
+.btn-nav-toggle {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid var(--surface-border);
+  color: #f8fafc;
+  border-radius: 8px;
+  padding: 0.4rem 0.65rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.15rem;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  min-width: 42px;
+  min-height: 42px;
+  touch-action: manipulation;
+}
 
-    .dimension-tab-btn.active {
-      background: #2563eb !important;
-      color: #fff !important;
-      border-color: #3b82f6 !important;
-      box-shadow: 0 4px 12px rgba(37, 99, 235, 0.35);
-    }
+.btn-nav-toggle:hover, .btn-nav-toggle:focus {
+  background: rgba(255, 255, 255, 0.12);
+  color: #38bdf8;
+  border-color: #38bdf8;
+}
 
-    /* Custom Table */
-    .table-custom {
-      --bs-table-bg: transparent;
-      --bs-table-color: #e2e8f0;
-      --bs-table-border-color: var(--surface-border);
-    }
+/* Mobile Menu Collapse Drawer */
+.mobile-nav-panel {
+  background: #111a2e;
+  border-top: 1px solid var(--surface-border);
+  border-bottom: 1px solid var(--surface-border);
+  padding: 1rem;
+  animation: slideDown 0.25s var(--ease-smooth);
+}
 
-    .table-custom th {
-      background-color: rgba(15, 23, 42, 0.6);
-      font-size: 0.75rem;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      color: var(--text-muted);
-      padding: 0.85rem 1rem;
-    }
+.mobile-nav-item {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  font-size: 0.92rem;
+  font-weight: 600;
+  border: 1px solid transparent;
+  color: #cbd5e1;
+  background: rgba(255, 255, 255, 0.03);
+  text-align: left;
+  margin-bottom: 0.5rem;
+  transition: all var(--transition-fast);
+  min-height: 44px;
+  touch-action: manipulation;
+}
 
-    .table-custom td {
-      padding: 0.95rem 1rem;
-      vertical-align: middle;
-    }
+.mobile-nav-item:hover, .mobile-nav-item:active {
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
+}
 
-    .table-row-hover:hover td {
-      background-color: rgba(255, 255, 255, 0.03);
-    }
+.mobile-nav-item.active {
+  background: #2563eb;
+  color: #ffffff;
+  border-color: #3b82f6;
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.35);
+}
 
-    /* Fishbone SVG Canvas */
-    .fishbone-wrapper {
-      background: #0b0f19;
-      border: 1px solid var(--surface-border);
-      border-radius: 12px;
-      padding: 1.5rem;
-      overflow-x: auto;
-    }
+/* Mobile Bottom Navigation Bar (Immediate thumb accessibility) */
+.mobile-bottom-bar {
+  display: none;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(15, 23, 42, 0.96);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-top: 1px solid var(--surface-border);
+  z-index: 1020;
+  height: calc(var(--mobile-bottom-nav-height) + env(safe-area-inset-bottom, 0px));
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
 
-    .fishbone-svg {
-      width: 100%;
-      min-width: 860px;
-      height: 480px;
-    }
+.mobile-bottom-bar-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  height: var(--mobile-bottom-nav-height);
+}
 
-    .fishbone-spine {
-      stroke: #475569;
-      stroke-width: 3;
-    }
+.bottom-nav-btn {
+  background: transparent;
+  border: none;
+  color: #94a3b8;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.7rem;
+  font-weight: 600;
+  gap: 3px;
+  flex: 1;
+  height: 100%;
+  cursor: pointer;
+  transition: color 0.15s ease, transform 0.15s ease;
+  padding: 4px 0;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
 
-    /* Inputs styling */
-    .form-control, .form-select {
-      background-color: #0b0f19;
-      border: 1px solid #334155;
-      color: #f8fafc;
-    }
+.bottom-nav-btn i {
+  font-size: 1.18rem;
+  line-height: 1;
+}
 
-    .form-control:focus, .form-select:focus {
-      background-color: #0f172a;
-      border-color: #38bdf8;
-      color: #fff;
-      box-shadow: 0 0 0 0.25rem rgba(56, 189, 248, 0.2);
-    }
+.bottom-nav-btn.active {
+  color: #38bdf8;
+}
 
-    .form-control::placeholder {
-      color: #64748b;
-    }
+.bottom-nav-btn.active i {
+  transform: scale(1.1);
+}
 
-    /* Modal Backdrop Dark */
-    .modal-content {
-      background-color: #1e293b;
-      border: 1px solid var(--surface-border);
-      color: #f8fafc;
-    }
+.bottom-nav-btn-fab {
+  position: relative;
+  top: -10px;
+  background: linear-gradient(135deg, #0284c7, #2563eb);
+  color: #ffffff !important;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 16px rgba(37, 99, 235, 0.5);
+  border: 2px solid var(--bg-dark);
+  transition: transform 0.2s var(--ease-smooth);
+}
 
-    .auth-banner {
-      background: linear-gradient(90deg, rgba(0, 120, 212, 0.15), rgba(15, 23, 42, 0.6));
-      border: 1px solid rgba(0, 120, 212, 0.4);
-      border-radius: 12px;
-      padding: 1rem 1.25rem;
-    }
+.bottom-nav-btn-fab:active {
+  transform: scale(0.95);
+}
 
-    @media print {
-      body { background-color: #fff !important; color: #000 !important; }
-      .navbar-custom, .no-print, button { display: none !important; }
-      .surface-card, .kpi-card { background: #fff !important; border: 1px solid #ccc !important; color: #000 !important; }
-    }
+.bottom-nav-btn-fab i {
+  font-size: 1.4rem;
+}
+
+/* User Avatar Pill */
+.user-avatar-pill {
+  background: #1e293b;
+  border: 1px solid var(--surface-border);
+  border-radius: 30px;
+  padding: 0.25rem 0.75rem 0.25rem 0.35rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-height: 40px;
+  transition: all var(--transition-fast);
+}
+
+.user-avatar-pill:hover {
+  background: #283548;
+  border-color: #475569;
+}
+
+.avatar-circle {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #0078d4, #002050);
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+  font-weight: 700;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.avatar-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* ========================================================
+   QUICK FILTER PRESET CHIPS
+   ======================================================== */
+
+.filter-chips-container {
+  display: flex;
+  overflow-x: auto;
+  white-space: nowrap;
+  gap: 0.5rem;
+  padding: 0.25rem 0 0.5rem 0;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+}
+
+.filter-chips-container::-webkit-scrollbar {
+  display: none;
+}
+
+.filter-chip {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--surface-border);
+  color: #cbd5e1;
+  border-radius: 20px;
+  padding: 0.35rem 0.85rem;
+  font-size: 0.78rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  flex-shrink: 0;
+  user-select: none;
+  touch-action: manipulation;
+  min-height: 34px;
+}
+
+.filter-chip:hover {
+  background: rgba(255, 255, 255, 0.09);
+  color: #f8fafc;
+  border-color: #475569;
+}
+
+.filter-chip.active {
+  background: #2563eb;
+  color: #ffffff;
+  border-color: #3b82f6;
+  box-shadow: 0 2px 10px rgba(37, 99, 235, 0.4);
+}
+
+.filter-chip .chip-count {
+  background: rgba(0, 0, 0, 0.35);
+  padding: 0.1rem 0.45rem;
+  border-radius: 10px;
+  font-size: 0.7rem;
+  font-family: var(--font-mono);
+}
+
+/* ========================================================
+   KPI SUMMARY CARDS
+   ======================================================== */
+
+.kpi-card {
+  background: var(--surface-dark);
+  border: 1px solid var(--surface-border);
+  border-radius: 12px;
+  padding: 1.15rem;
+  transition: transform var(--transition-normal), border-color var(--transition-normal), box-shadow var(--transition-normal);
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.kpi-card:hover {
+  transform: translateY(-2px);
+  border-color: #475569;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+}
+
+.kpi-title {
+  font-size: clamp(0.72rem, 1.8vw, 0.82rem);
+  text-transform: uppercase;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+
+.kpi-value {
+  font-size: clamp(1.4rem, 4vw, 1.85rem);
+  font-weight: 700;
+  font-family: var(--font-mono);
+  line-height: 1.2;
+}
+
+.kpi-subtitle {
+  font-size: clamp(0.7rem, 1.5vw, 0.78rem);
+}
+
+/* 5M1E Dimension Color Tags */
+.badge-man { background-color: rgba(56, 189, 248, 0.15); color: var(--c-man); border: 1px solid rgba(56, 189, 248, 0.4); }
+.badge-machine { background-color: rgba(251, 146, 60, 0.15); color: var(--c-machine); border: 1px solid rgba(251, 146, 60, 0.4); }
+.badge-material { background-color: rgba(52, 211, 153, 0.15); color: var(--c-material); border: 1px solid rgba(52, 211, 153, 0.4); }
+.badge-method { background-color: rgba(167, 139, 250, 0.15); color: var(--c-method); border: 1px solid rgba(167, 139, 250, 0.4); }
+.badge-measurement { background-color: rgba(244, 63, 94, 0.15); color: var(--c-measurement); border: 1px solid rgba(244, 63, 94, 0.4); }
+.badge-environment { background-color: rgba(45, 212, 191, 0.15); color: var(--c-environment); border: 1px solid rgba(45, 212, 191, 0.4); }
+
+/* ========================================================
+   SURFACE CARDS, TABLES & MOBILE CARDS
+   ======================================================== */
+
+.surface-card {
+  background: var(--surface-dark);
+  border: 1px solid var(--surface-border);
+  border-radius: 14px;
+  overflow: hidden;
+  animation: fadeIn 0.3s var(--ease-smooth);
+}
+
+/* Custom Responsive Table */
+.table-responsive {
+  -webkit-overflow-scrolling: touch;
+  max-height: 70vh;
+}
+
+.table-custom {
+  --bs-table-bg: transparent;
+  --bs-table-color: #e2e8f0;
+  --bs-table-border-color: var(--surface-border);
+}
+
+.table-custom th {
+  background-color: rgba(15, 23, 42, 0.85);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-muted);
+  padding: 0.85rem 1rem;
+  white-space: nowrap;
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  backdrop-filter: blur(8px);
+}
+
+.table-custom td {
+  padding: 0.95rem 1rem;
+  vertical-align: middle;
+  transition: background-color var(--transition-fast);
+}
+
+.table-row-hover:hover td {
+  background-color: rgba(255, 255, 255, 0.04);
+}
+
+/* Mobile Record Card View */
+.mobile-record-card {
+  background: #151f32;
+  border: 1px solid var(--surface-border);
+  border-radius: 12px;
+  padding: 1rem;
+  margin-bottom: 0.85rem;
+  transition: transform var(--transition-fast), border-color var(--transition-fast);
+  animation: fadeIn 0.25s var(--ease-smooth);
+}
+
+.mobile-record-card:active {
+  transform: scale(0.99);
+}
+
+.mobile-record-card.border-critical {
+  border-left: 4px solid #f43f5e;
+}
+
+.mobile-record-card.border-warning {
+  border-left: 4px solid #fb923c;
+}
+
+.mobile-record-card.border-normal {
+  border-left: 4px solid #38bdf8;
+}
+
+.mobile-record-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 0.65rem;
+  gap: 0.5rem;
+}
+
+.mobile-record-body {
+  font-size: 0.9rem;
+  color: #e2e8f0;
+  margin-bottom: 0.75rem;
+  line-height: 1.4;
+}
+
+.mobile-record-meta {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.5rem;
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  background: rgba(0, 0, 0, 0.25);
+  padding: 0.65rem;
+  border-radius: 8px;
+  margin-bottom: 0.75rem;
+}
+
+.mobile-record-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  padding-top: 0.65rem;
+}
+
+/* Compact / High-Density Control Room Mode */
+.density-compact .table-custom th {
+  padding: 0.5rem 0.65rem;
+  font-size: 0.7rem;
+}
+
+.density-compact .table-custom td {
+  padding: 0.5rem 0.65rem;
+  font-size: 0.82rem;
+}
+
+.density-compact .kpi-card {
+  padding: 0.75rem 0.9rem;
+}
+
+.density-compact .kpi-value {
+  font-size: 1.35rem;
+}
+
+.density-compact .mobile-record-card {
+  padding: 0.65rem 0.85rem;
+  margin-bottom: 0.5rem;
+}
+
+.density-compact .mobile-record-meta {
+  padding: 0.4rem;
+  margin-bottom: 0.4rem;
+  font-size: 0.72rem;
+}
+
+/* ========================================================
+   5M1E STEPPER & FORM CONTROLS
+   ======================================================== */
+
+.dimension-stepper-container {
+  display: flex;
+  overflow-x: auto;
+  white-space: nowrap;
+  gap: 0.5rem;
+  padding-bottom: 0.5rem;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+}
+
+.dimension-stepper-container::-webkit-scrollbar {
+  display: none;
+}
+
+.dimension-tab-btn {
+  border-radius: 8px !important;
+  font-weight: 600;
+  font-size: 0.88rem;
+  padding: 0.65rem 1rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  border: 1px solid transparent;
+  color: var(--text-muted);
+  transition: all var(--transition-fast);
+  background: rgba(255, 255, 255, 0.03);
+  flex-shrink: 0;
+  min-height: 42px;
+  touch-action: manipulation;
+}
+
+.dimension-tab-btn:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
+}
+
+.dimension-tab-btn.active {
+  background: #2563eb !important;
+  color: #fff !important;
+  border-color: #3b82f6 !important;
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.35);
+}
+
+.form-control, .form-select {
+  background-color: #0b0f19;
+  border: 1px solid #334155;
+  color: #f8fafc;
+  min-height: 42px;
+  font-size: 0.92rem;
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.form-control:focus, .form-select:focus {
+  background-color: #0f172a;
+  border-color: #38bdf8;
+  color: #fff;
+  box-shadow: 0 0 0 0.25rem rgba(56, 189, 248, 0.2);
+}
+
+.form-control::placeholder {
+  color: #64748b;
+}
+
+/* ========================================================
+   ISHIKAWA (FISHBONE) DIAGRAM
+   ======================================================== */
+
+.fishbone-wrapper {
+  background: #0b0f19;
+  border: 1px solid var(--surface-border);
+  border-radius: 12px;
+  padding: 1.25rem;
+  overflow-x: auto;
+  position: relative;
+  -webkit-overflow-scrolling: touch;
+}
+
+.fishbone-scroll-hint {
+  display: none;
+  font-size: 0.75rem;
+  color: #38bdf8;
+  background: rgba(56, 189, 248, 0.1);
+  border: 1px solid rgba(56, 189, 248, 0.25);
+  border-radius: 6px;
+  padding: 0.4rem 0.75rem;
+  margin-bottom: 0.75rem;
+}
+
+.fishbone-svg {
+  width: 100%;
+  min-width: 840px;
+  height: auto;
+  aspect-ratio: 1000 / 520;
+}
+
+.fishbone-spine {
+  stroke: #475569;
+  stroke-width: 3;
+}
+
+.fishbone-card {
+  rx: 8;
+  ry: 8;
+  filter: drop-shadow(0px 4px 8px rgba(0,0,0,0.4));
+}
+
+.fishbone-breakdown-card {
+  background: #111827;
+  border: 1px solid var(--surface-border);
+  border-radius: 10px;
+  padding: 0.85rem;
+  height: 100%;
+  transition: transform var(--transition-fast);
+}
+
+.fishbone-breakdown-card:hover {
+  transform: translateY(-2px);
+}
+
+.fishbone-breakdown-card h6 {
+  font-size: 0.85rem;
+  margin-bottom: 0.5rem;
+  font-weight: 700;
+}
+
+.fishbone-param-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.78rem;
+  padding: 0.25rem 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.fishbone-param-row:last-child {
+  border-bottom: none;
+}
+
+/* ========================================================
+   MODALS & DEEP INSPECTION DRAWER
+   ======================================================== */
+
+.modal-content {
+  background-color: #1e293b;
+  border: 1px solid var(--surface-border);
+  color: #f8fafc;
+  border-radius: 14px;
+  animation: fadeIn 0.25s var(--ease-smooth);
+}
+
+.inspection-modal-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 0.85rem;
+}
+
+.dimension-detail-card {
+  background: #0f172a;
+  border: 1px solid var(--surface-border);
+  border-radius: 10px;
+  padding: 0.9rem;
+  height: 100%;
+}
+
+.dimension-detail-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  padding-bottom: 0.5rem;
+  margin-bottom: 0.65rem;
+}
+
+.param-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.82rem;
+  padding: 0.3rem 0;
+  border-bottom: 1px dashed rgba(255, 255, 255, 0.05);
+}
+
+.param-item:last-child {
+  border-bottom: none;
+}
+
+/* Auth Provider Tabs */
+.auth-tabs-scroll {
+  display: flex;
+  overflow-x: auto;
+  white-space: nowrap;
+  gap: 0.25rem;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+  padding-bottom: 2px;
+}
+
+.auth-tabs-scroll::-webkit-scrollbar {
+  display: none;
+}
+
+.auth-tab-btn {
+  padding: 0.65rem 0.95rem;
+  font-weight: 600;
+  font-size: 0.85rem;
+  border: none;
+  background: transparent;
+  color: #94a3b8;
+  border-bottom: 2px solid transparent;
+  transition: all var(--transition-fast);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-shrink: 0;
+  min-height: 42px;
+  touch-action: manipulation;
+}
+
+.auth-tab-btn:hover {
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.auth-tab-btn.active {
+  color: #38bdf8;
+  border-bottom-color: #38bdf8;
+  background: rgba(56, 189, 248, 0.08);
+}
+
+.btn-m365, .btn-google, .btn-facebook, .btn-email-signin {
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+  font-weight: 600;
+  padding: 0.65rem 1.25rem;
+  border-radius: 8px;
+  transition: all var(--transition-fast);
+  touch-action: manipulation;
+}
+
+.btn-m365 { background-color: #2f2f2f; color: #fff; border: 1px solid #4a4a4a; }
+.btn-m365:hover { background-color: #3d3d3d; border-color: #00a4ef; color: #fff; box-shadow: 0 4px 16px rgba(0, 164, 239, 0.3); }
+
+.btn-google { background-color: #fff; color: #1f1f1f; border: 1px solid #dadce0; }
+.btn-google:hover { background-color: #f1f3f4; border-color: #4285f4; color: #000; box-shadow: 0 4px 16px rgba(66, 133, 244, 0.3); }
+
+.btn-facebook { background-color: #1877f2; color: #fff; border: 1px solid #1877f2; }
+.btn-facebook:hover { background-color: #166fe5; border-color: #166fe5; color: #fff; box-shadow: 0 4px 16px rgba(24, 119, 242, 0.35); }
+
+.btn-email-signin { background: linear-gradient(135deg, #0284c7, #2563eb); color: #fff; border: none; }
+.btn-email-signin:hover { background: linear-gradient(135deg, #0369a1, #1d4ed8); color: #fff; box-shadow: 0 4px 16px rgba(37, 99, 235, 0.35); }
+
+/* ========================================================
+   RESPONSIVE MEDIA QUERIES
+   ======================================================== */
+
+/* Tablet & Mobile Screens (< 992px) */
+@media (max-width: 991.98px) {
+  .navbar-custom {
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+  }
+  
+  .desktop-nav-items {
+    display: none !important;
+  }
+  
+  .mobile-bottom-bar {
+    display: block;
+  }
+  
+  body {
+    padding-bottom: calc(var(--mobile-bottom-nav-height) + 1.5rem + env(safe-area-inset-bottom, 0px));
+  }
+  
+  .fishbone-scroll-hint {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+}
+
+/* Mobile Phones (< 768px) */
+@media (max-width: 767.98px) {
+  .brand-badge {
+    font-size: 0.65rem;
+    padding: 0.2rem 0.4rem;
+  }
+
+  .navbar-brand-title {
+    font-size: 0.95rem;
+  }
+
+  .kpi-card {
+    padding: 0.95rem;
+  }
+
+  .kpi-value {
+    font-size: 1.45rem;
+  }
+
+  .surface-card {
+    border-radius: 10px;
+  }
+
+  .btn {
+    min-height: 42px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .form-control, .form-select {
+    font-size: 16px; /* Prevents iOS auto-zoom */
+  }
+
+  .modal-dialog {
+    margin: 0.5rem;
+  }
+}
+
+/* Small Phones (< 576px) */
+@media (max-width: 575.98px) {
+  .container-fluid {
+    padding-left: 0.75rem !important;
+    padding-right: 0.75rem !important;
+  }
+
+  .modal-fullscreen-sm-down .modal-content {
+    min-height: 100vh;
+    border-radius: 0;
+    border: none;
+  }
+
+  .dimension-tab-btn {
+    font-size: 0.8rem;
+    padding: 0.5rem 0.75rem;
+  }
+
+  .auth-tab-btn {
+    font-size: 0.8rem;
+    padding: 0.5rem 0.75rem;
+  }
+}
+
+/* Print View for Shift Handover Report */
+@media print {
+  body {
+    background-color: #fff !important;
+    color: #000 !important;
+    padding-bottom: 0 !important;
+  }
+  .navbar-custom, .mobile-bottom-bar, .no-print, button {
+    display: none !important;
+  }
+  .surface-card, .kpi-card, .mobile-record-card {
+    background: #fff !important;
+    border: 1px solid #ccc !important;
+    color: #000 !important;
+  }
+  .table-custom {
+    color: #000 !important;
+  }
+  .table-custom th {
+    background-color: #eee !important;
+    color: #000 !important;
+  }
+}
+
   </style>
 </head>
 <body>
@@ -709,11 +1342,89 @@ create policy "Allow update production_records" on public.production_records for
       }, [records]);
 
       const [activeTab, setActiveTab] = useState("dashboard");
+      const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+      const [viewMode, setViewMode] = useState("auto"); // "auto", "cards", "table"
       const [selectedLine, setSelectedLine] = useState("ALL");
       const [selectedShift, setSelectedShift] = useState("ALL");
       const [selectedDimension, setSelectedDimension] = useState("ALL");
       const [searchQuery, setSearchQuery] = useState("");
       const [activeFishboneRecord, setActiveFishboneRecord] = useState(null);
+
+      // Flexibility Feature 1: Density & Layout Width Controls
+      const [density, setDensity] = useState(() => {
+        try { return localStorage.getItem("tracker_density") || "comfortable"; } catch (e) { return "comfortable"; }
+      });
+      const [layoutWidth, setLayoutWidth] = useState(() => {
+        try { return localStorage.getItem("tracker_layout_width") || "fluid"; } catch (e) { return "fluid"; }
+      });
+
+      useEffect(() => {
+        try { localStorage.setItem("tracker_density", density); } catch (e) {}
+      }, [density]);
+
+      useEffect(() => {
+        try { localStorage.setItem("tracker_layout_width", layoutWidth); } catch (e) {}
+      }, [layoutWidth]);
+
+      // Flexibility Feature 2: Quick Filter Preset Chips & Multi-Column Sorting
+      const [quickFilter, setQuickFilter] = useState("ALL"); // "ALL", "CRITICAL", "WARNING", "CHANGE_POINT", "ABNORMALITY", "OOS", "MY_LOGS"
+      const [sortBy, setSortBy] = useState("newest"); // "newest", "oldest", "severity", "line", "workOrder"
+      const [isFilterPanelOpen, setIsFilterPanelOpen] = useState(true);
+
+      // Flexibility Feature 3: Configurable Production Lines & Shifts
+      const [linesList, setLinesList] = useState(() => {
+        try {
+          const saved = localStorage.getItem("tracker_custom_lines");
+          return saved ? JSON.parse(saved) : [
+            { id: "LINE-01", name: "Line 1: SMT Solder" },
+            { id: "LINE-02", name: "Line 2: Stamping CNC" },
+            { id: "LINE-03", name: "Line 3: Cleanroom Assembly" }
+          ];
+        } catch (e) {
+          return [
+            { id: "LINE-01", name: "Line 1: SMT Solder" },
+            { id: "LINE-02", name: "Line 2: Stamping CNC" },
+            { id: "LINE-03", name: "Line 3: Cleanroom Assembly" }
+          ];
+        }
+      });
+
+      const [shiftsList, setShiftsList] = useState(() => {
+        try {
+          const saved = localStorage.getItem("tracker_custom_shifts");
+          return saved ? JSON.parse(saved) : [
+            { id: "SHIFT-A", name: "Shift A (Morning)" },
+            { id: "SHIFT-B", name: "Shift B (Evening)" },
+            { id: "SHIFT-C", name: "Shift C (Night)" }
+          ];
+        } catch (e) {
+          return [
+            { id: "SHIFT-A", name: "Shift A (Morning)" },
+            { id: "SHIFT-B", name: "Shift B (Evening)" },
+            { id: "SHIFT-C", name: "Shift C (Night)" }
+          ];
+        }
+      });
+
+      useEffect(() => {
+        try { localStorage.setItem("tracker_custom_lines", JSON.stringify(linesList)); } catch (e) {}
+      }, [linesList]);
+
+      useEffect(() => {
+        try { localStorage.setItem("tracker_custom_shifts", JSON.stringify(shiftsList)); } catch (e) {}
+      }, [shiftsList]);
+
+      // Flexibility Feature 4: Deep 5M1E Inspection Modal & Resolution
+      const [inspectingRecord, setInspectingRecord] = useState(null);
+      const [countermeasureText, setCountermeasureText] = useState("");
+
+      // Record Editing & Deletion State
+      const [editingRecordId, setEditingRecordId] = useState(null);
+
+      // Flexibility Feature 5: Line & Shift Configuration Modal
+      const [showConfigModal, setShowConfigModal] = useState(false);
+      const [newLineForm, setNewLineForm] = useState({ id: "", name: "" });
+      const [newShiftForm, setNewShiftForm] = useState({ id: "", name: "" });
 
       const [formStep, setFormStep] = useState("man");
       const [formData, setFormData] = useState({
@@ -1347,6 +2058,98 @@ create policy "Allow update production_records" on public.production_records for
         const lslVal = parseFloat(formData.lsl) || 0;
         const inSpec = measuredVal >= lslVal && measuredVal <= uslVal;
 
+        if (editingRecordId) {
+          // UPDATE EXISTING RECORD
+          const existing = records.find(r => r.id === editingRecordId) || {};
+          const updatedRecord = {
+            ...existing,
+            line: formData.line,
+            shift: formData.shift,
+            workOrder: formData.workOrder,
+            partNumber: formData.partNumber || "N/A",
+            eventType: formData.eventType,
+            severity: formData.severity,
+            primaryDimension: formData.primaryDimension,
+            summary: formData.summary,
+            lastEditedBy: currentUser.email,
+            lastEditedByName: currentUser.name,
+            lastEditedAt: new Date().toISOString().replace("T", " ").substring(0, 16),
+            man: {
+              operator: formData.operator || (currentUser ? currentUser.name : "Operator"),
+              skillLevel: formData.skillLevel,
+              certified: formData.certified,
+              notes: formData.manNotes
+            },
+            machine: {
+              stationId: formData.stationId || "STATION-GEN",
+              status: formData.machineStatus,
+              temperature: parseFloat(formData.temperature) || 0,
+              pressure: parseFloat(formData.pressure) || 0,
+              rpm: parseFloat(formData.rpm) || 0,
+              toolLife: parseInt(formData.toolLife) || 0
+            },
+            material: {
+              partNumber: formData.materialPart || "N/A",
+              lotNumber: formData.lotNumber || "N/A",
+              supplier: formData.supplier || "N/A",
+              coaVerified: formData.coaVerified,
+              notes: formData.materialNotes
+            },
+            method: {
+              sopNumber: formData.sopNumber || "SOP-STD-001",
+              recipeId: formData.recipeId || "DEFAULT",
+              stdCycleTime: parseFloat(formData.stdCycleTime) || 0,
+              actCycleTime: parseFloat(formData.actCycleTime) || 0,
+              notes: formData.methodNotes
+            },
+            measurement: {
+              toolId: formData.toolId || "GAUGE-01",
+              calibrationDue: formData.calibrationDue || "2026-12-31",
+              feature: formData.feature || "General",
+              nominal: parseFloat(formData.nominal) || 0,
+              lsl: lslVal,
+              usl: uslVal,
+              measured: measuredVal,
+              inSpec: inSpec
+            },
+            environment: {
+              temp: parseFloat(formData.envTemp) || 0,
+              humidity: parseFloat(formData.envHumidity) || 0,
+              esdGrounding: formData.esdGrounding,
+              cleanroomClass: formData.cleanroomClass
+            }
+          };
+
+          const updated = records.map(r => r.id === editingRecordId ? updatedRecord : r);
+          setRecords(updated);
+          setActiveFishboneRecord(updatedRecord);
+          setEditingRecordId(null);
+          setActiveTab("dashboard");
+
+          // Sync update to Supabase
+          const client = getSupabase();
+          if (client) {
+            client.from('production_records').update({
+              line: updatedRecord.line,
+              shift: updatedRecord.shift,
+              work_order: updatedRecord.workOrder,
+              part_number: updatedRecord.partNumber,
+              event_type: updatedRecord.eventType,
+              severity: updatedRecord.severity,
+              primary_dimension: updatedRecord.primaryDimension,
+              summary: updatedRecord.summary,
+              man_data: updatedRecord.man,
+              machine_data: updatedRecord.machine,
+              material_data: updatedRecord.material,
+              method_data: updatedRecord.method,
+              measurement_data: updatedRecord.measurement,
+              environment_data: updatedRecord.environment
+            }).eq('id', editingRecordId).then(() => {}).catch(err => console.warn(err));
+          }
+          return;
+        }
+
+        // CREATE NEW RECORD
         const newRecord = {
           id: `LOG-${new Date().getFullYear()}-${String(records.length + 1).padStart(3, "0")}`,
           timestamp: new Date().toISOString().replace("T", " ").substring(0, 16),
@@ -1481,6 +2284,158 @@ create policy "Allow update production_records" on public.production_records for
         document.body.removeChild(link);
       };
 
+      // Flexibility Feature: Export Full System Backup to JSON
+      const exportToJSON = () => {
+        const payload = {
+          app: "5M1E Production Tracker",
+          version: "2.1-flexible",
+          exportDate: new Date().toISOString(),
+          lines: linesList,
+          shifts: shiftsList,
+          recordsCount: records.length,
+          records: records
+        };
+        const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(payload, null, 2));
+        const downloadAnchor = document.createElement("a");
+        downloadAnchor.setAttribute("href", dataStr);
+        downloadAnchor.setAttribute("download", `5M1E_FullBackup_${new Date().toISOString().slice(0, 10)}.json`);
+        document.body.appendChild(downloadAnchor);
+        downloadAnchor.click();
+        downloadAnchor.remove();
+      };
+
+      // Flexibility Feature: Import Records from JSON Backup
+      const handleImportJSON = (e) => {
+        const file = e.target.files && e.target.files[0];
+        if (!file) return;
+        const reader = new FileReader();
+        reader.onload = (event) => {
+          try {
+            const parsed = JSON.parse(event.target.result);
+            let importedRecords = [];
+            if (parsed.records && Array.isArray(parsed.records)) {
+              importedRecords = parsed.records;
+              if (parsed.lines && Array.isArray(parsed.lines)) setLinesList(parsed.lines);
+              if (parsed.shifts && Array.isArray(parsed.shifts)) setShiftsList(parsed.shifts);
+            } else if (Array.isArray(parsed)) {
+              importedRecords = parsed;
+            } else {
+              alert("Unrecognized JSON format. Expected { records: [...] } or array of records.");
+              return;
+            }
+
+            const existingIds = new Set(records.map(r => r.id));
+            const newToAdd = importedRecords.filter(r => !existingIds.has(r.id));
+            const combined = [...importedRecords.filter(r => existingIds.has(r.id)), ...newToAdd, ...records.filter(r => !new Set(importedRecords.map(x=>x.id)).has(r.id))];
+            setRecords(combined);
+            alert(`Import complete! ${importedRecords.length} records processed (${newToAdd.length} new records added).`);
+          } catch (err) {
+            alert("Error parsing JSON file: " + err.message);
+          }
+        };
+        reader.readAsText(file);
+      };
+
+      // -------------------------------------------------------------
+      // Record Editing & Deletion Handlers
+      // -------------------------------------------------------------
+      const handleStartEdit = (record) => {
+        if (!record) return;
+        setEditingRecordId(record.id);
+        setFormData({
+          line: record.line || (linesList[0] ? linesList[0].id : "LINE-01"),
+          shift: record.shift || (shiftsList[0] ? shiftsList[0].id : "SHIFT-A"),
+          workOrder: record.workOrder || "",
+          partNumber: record.partNumber || "",
+          eventType: record.eventType || "Change Point",
+          severity: record.severity || "Warning",
+          primaryDimension: record.primaryDimension || "Man",
+          summary: record.summary || "",
+          operator: record.man ? (record.man.operator || "") : "",
+          skillLevel: record.man ? (record.man.skillLevel || "Tier 3") : "Tier 3",
+          certified: record.man ? !!record.man.certified : true,
+          manNotes: record.man ? (record.man.notes || "") : "",
+          stationId: record.machine ? (record.machine.stationId || "") : "",
+          machineStatus: record.machine ? (record.machine.status || "Running") : "Running",
+          temperature: record.machine ? (record.machine.temperature ?? 24.0) : 24.0,
+          pressure: record.machine ? (record.machine.pressure ?? 0.5) : 0.5,
+          rpm: record.machine ? (record.machine.rpm ?? 0) : 0,
+          toolLife: record.machine ? (record.machine.toolLife ?? 0) : 0,
+          materialPart: record.material ? (record.material.partNumber || "") : "",
+          lotNumber: record.material ? (record.material.lotNumber || "") : "",
+          supplier: record.material ? (record.material.supplier || "") : "",
+          coaVerified: record.material ? !!record.material.coaVerified : true,
+          materialNotes: record.material ? (record.material.notes || "") : "",
+          sopNumber: record.method ? (record.method.sopNumber || "") : "",
+          recipeId: record.method ? (record.method.recipeId || "") : "",
+          stdCycleTime: record.method ? (record.method.stdCycleTime ?? 30) : 30,
+          actCycleTime: record.method ? (record.method.actCycleTime ?? 30) : 30,
+          methodNotes: record.method ? (record.method.notes || "") : "",
+          toolId: record.measurement ? (record.measurement.toolId || "") : "",
+          calibrationDue: record.measurement ? (record.measurement.calibrationDue || "") : "",
+          feature: record.measurement ? (record.measurement.feature || "") : "",
+          nominal: record.measurement ? (record.measurement.nominal ?? 10.0) : 10.0,
+          lsl: record.measurement ? (record.measurement.lsl ?? 9.8) : 9.8,
+          usl: record.measurement ? (record.measurement.usl ?? 10.2) : 10.2,
+          measured: record.measurement ? (record.measurement.measured ?? 10.0) : 10.0,
+          envTemp: record.environment ? (record.environment.temp ?? 22.5) : 22.5,
+          envHumidity: record.environment ? (record.environment.humidity ?? 50) : 50,
+          esdGrounding: record.environment ? (record.environment.esdGrounding || "Pass") : "Pass",
+          cleanroomClass: record.environment ? (record.environment.cleanroomClass || "ISO 7") : "ISO 7"
+        });
+        setInspectingRecord(null);
+        setActiveTab("new-entry");
+      };
+
+      const handleCancelEdit = () => {
+        setEditingRecordId(null);
+        setActiveTab("dashboard");
+      };
+
+      const handleDeleteRecord = (id) => {
+        if (!confirm(`Are you sure you want to permanently delete record ${id}?`)) return;
+        const updated = records.filter(r => r.id !== id);
+        setRecords(updated);
+        if (activeFishboneRecord && activeFishboneRecord.id === id) {
+          setActiveFishboneRecord(updated.length > 0 ? updated[0] : null);
+        }
+        if (inspectingRecord && inspectingRecord.id === id) {
+          setInspectingRecord(null);
+        }
+        const client = getSupabase();
+        if (client) {
+          client.from('production_records').delete().eq('id', id).then(() => {}).catch(err => console.warn(err));
+        }
+      };
+
+      // Flexibility Feature: Add Countermeasure / Resolve Anomaly
+      const handleSaveCountermeasure = () => {
+        if (!inspectingRecord || !countermeasureText.trim()) return;
+        const noteWithSigner = `${countermeasureText.trim()} — Resolved by ${currentUser ? currentUser.name : 'Supervisor'} on ${new Date().toLocaleString()}`;
+        const updated = records.map(r => {
+          if (r.id === inspectingRecord.id) {
+            return {
+              ...r,
+              severity: r.severity === 'Critical' ? 'Normal' : r.severity,
+              eventType: r.eventType === 'Abnormality' ? 'Resolved' : r.eventType,
+              summary: `${r.summary} [RESOLVED]`,
+              countermeasure: noteWithSigner
+            };
+          }
+          return r;
+        });
+        setRecords(updated);
+        setInspectingRecord(prev => ({
+          ...prev,
+          severity: prev.severity === 'Critical' ? 'Normal' : prev.severity,
+          eventType: prev.eventType === 'Abnormality' ? 'Resolved' : prev.eventType,
+          summary: `${prev.summary} [RESOLVED]`,
+          countermeasure: noteWithSigner
+        }));
+        setCountermeasureText("");
+        alert("Countermeasure saved and record marked as resolved!");
+      };
+
       const getDimensionBadgeClass = (dim) => {
         switch (dim.toLowerCase()) {
           case "man": return "badge-man";
@@ -1499,25 +2454,55 @@ create policy "Allow update production_records" on public.production_records for
         return <span className="badge bg-success text-white"><i className="bi bi-check-circle-fill me-1"></i>Normal</span>;
       };
 
-      // Filtered Records
+      // Filtered & Sorted Records with Quick Filter Chips & Dynamic Multi-column Sorting
       const filteredRecords = records.filter(r => {
+        // 1. Quick Filter Preset Chips
+        if (quickFilter === "CRITICAL" && r.severity !== "Critical") return false;
+        if (quickFilter === "WARNING" && r.severity !== "Warning") return false;
+        if (quickFilter === "CHANGE_POINT" && r.eventType !== "Change Point") return false;
+        if (quickFilter === "ABNORMALITY" && r.eventType !== "Abnormality") return false;
+        if (quickFilter === "OOS" && r.measurement && r.measurement.inSpec) return false;
+        if (quickFilter === "MY_LOGS") {
+          if (!currentUser) return false;
+          const myEmail = (currentUser.email || "").toLowerCase();
+          const myName = (currentUser.name || "").toLowerCase();
+          const recBy = (r.recordedBy || "").toLowerCase();
+          const op = (r.man && r.man.operator || "").toLowerCase();
+          if (!recBy.includes(myEmail) && !op.includes(myName)) return false;
+        }
+
+        // 2. Dropdown Filters
         if (selectedLine !== "ALL" && r.line !== selectedLine) return false;
         if (selectedShift !== "ALL" && r.shift !== selectedShift) return false;
         if (selectedDimension !== "ALL" && r.primaryDimension.toUpperCase() !== selectedDimension) return false;
         if (searchQuery.trim() !== "") {
           const q = searchQuery.toLowerCase();
           const match =
-            r.id.toLowerCase().includes(q) ||
-            r.workOrder.toLowerCase().includes(q) ||
-            r.partNumber.toLowerCase().includes(q) ||
-            r.summary.toLowerCase().includes(q) ||
-            r.man.operator.toLowerCase().includes(q) ||
-            r.machine.stationId.toLowerCase().includes(q) ||
+            (r.id && r.id.toLowerCase().includes(q)) ||
+            (r.workOrder && r.workOrder.toLowerCase().includes(q)) ||
+            (r.partNumber && r.partNumber.toLowerCase().includes(q)) ||
+            (r.summary && r.summary.toLowerCase().includes(q)) ||
+            (r.man && r.man.operator && r.man.operator.toLowerCase().includes(q)) ||
+            (r.machine && r.machine.stationId && r.machine.stationId.toLowerCase().includes(q)) ||
             (r.recordedBy && r.recordedBy.toLowerCase().includes(q)) ||
-            r.material.lotNumber.toLowerCase().includes(q);
+            (r.material && r.material.lotNumber && r.material.lotNumber.toLowerCase().includes(q));
           if (!match) return false;
         }
         return true;
+      }).sort((a, b) => {
+        if (sortBy === "newest") {
+          return new Date(b.timestamp || 0) - new Date(a.timestamp || 0);
+        } else if (sortBy === "oldest") {
+          return new Date(a.timestamp || 0) - new Date(b.timestamp || 0);
+        } else if (sortBy === "severity") {
+          const weight = { "Critical": 3, "Warning": 2, "Normal": 1, "Resolved": 0 };
+          return (weight[b.severity] || 0) - (weight[a.severity] || 0);
+        } else if (sortBy === "line") {
+          return (a.line || "").localeCompare(b.line || "");
+        } else if (sortBy === "workOrder") {
+          return (a.workOrder || "").localeCompare(b.workOrder || "");
+        }
+        return 0;
       });
 
       const totalLogs = records.length;
@@ -1527,17 +2512,62 @@ create policy "Allow update production_records" on public.production_records for
       const outOfSpec = records.filter(r => !r.measurement.inSpec).length;
 
       return (
-        <div>
+        <div className={`${density === "compact" ? "density-compact" : ""} ${layoutWidth === "contained" ? "app-container-contained" : ""}`}>
           {/* Top Navbar */}
-          <nav className="navbar navbar-expand-lg navbar-custom sticky-top">
-            <div className="container-fluid px-4">
-              <div className="d-flex align-items-center gap-3">
-                <span className="brand-badge fw-bold">5M1E INDUSTRIAL OPS</span>
-                <span className="navbar-brand text-white fw-bold mb-0 fs-5">Production Quality & Change Tracker</span>
+          <nav className="navbar navbar-custom sticky-top">
+            <div className="container-fluid px-2 px-sm-3 px-md-4">
+              <div className="d-flex align-items-center gap-2 gap-sm-3">
+                <span className="brand-badge fw-bold">5M1E OPS</span>
+                <span className="navbar-brand-title">Production Quality & Change Tracker</span>
               </div>
 
-              {/* Navigation Items */}
-              <div className="d-flex align-items-center gap-2">
+              {/* Mobile Header Controls (<992px) */}
+              <div className="d-flex align-items-center gap-2 d-lg-none">
+                <button 
+                  className={`btn btn-sm ${isSupabaseConnected ? 'btn-outline-success' : 'btn-outline-warning'} p-1 px-2 d-flex align-items-center gap-1`}
+                  onClick={() => {
+                    if (isSupabaseConnected) fetchRecordsFromSupabase();
+                    else { setAuthTab('supabase'); setShowLoginModal(true); }
+                  }}
+                  title={isSupabaseConnected ? "Synced with Supabase Cloud DB" : "Connect Supabase DB"}
+                >
+                  <i className={`bi ${isSyncing ? 'bi-arrow-repeat spinner-border spinner-border-sm' : isSupabaseConnected ? 'bi-database-check text-success' : 'bi-database-exclamation text-warning'}`}></i>
+                  <span style={{ fontSize: '0.72rem' }}>DB</span>
+                </button>
+
+                {currentUser ? (
+                  <div 
+                    className="avatar-circle" 
+                    style={{ width: '32px', height: '32px', cursor: 'pointer' }}
+                    onClick={() => setShowLoginModal(true)}
+                    title={currentUser.name}
+                  >
+                    {currentUser.photoUrl ? (
+                      <img src={currentUser.photoUrl} alt="Avatar" className="avatar-img" />
+                    ) : (
+                      currentUser.avatar
+                    )}
+                  </div>
+                ) : (
+                  <button 
+                    className="btn btn-sm btn-primary py-1 px-2"
+                    onClick={() => setShowLoginModal(true)}
+                  >
+                    <i className="bi bi-box-arrow-in-right"></i>
+                  </button>
+                )}
+
+                <button 
+                  className="btn-nav-toggle"
+                  onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                  aria-label="Toggle navigation menu"
+                >
+                  <i className={`bi ${isMobileMenuOpen ? 'bi-x-lg text-danger' : 'bi-list'}`}></i>
+                </button>
+              </div>
+
+              {/* Desktop Navigation Items (>=992px) */}
+              <div className="desktop-nav-items d-none d-lg-flex align-items-center gap-2">
                 <button 
                   className={`btn btn-sm ${activeTab === 'dashboard' ? 'btn-primary' : 'btn-outline-secondary'}`}
                   onClick={() => setActiveTab('dashboard')}
@@ -1569,9 +2599,94 @@ create policy "Allow update production_records" on public.production_records for
                 >
                   <i className="bi bi-graph-up me-1"></i> Radar Analytics
                 </button>
-                <button className="btn btn-sm btn-outline-info" onClick={exportToCSV} title="Export CSV">
-                  <i className="bi bi-download me-1"></i> Export
-                </button>
+                {/* Data & Layout Flexibility Menu */}
+                <div className="dropdown">
+                  <button className="btn btn-sm btn-outline-secondary dropdown-toggle d-flex align-items-center gap-1" data-bs-toggle="dropdown">
+                    <i className="bi bi-sliders2"></i>
+                    <span>Layout & Data</span>
+                  </button>
+                  <ul className="dropdown-menu dropdown-menu-end shadow-lg" style={{ background: '#1e293b', border: '1px solid #334155', minWidth: '240px' }}>
+                    <li className="px-3 py-1 text-muted small fw-bold text-uppercase">Display Density</li>
+                    <li>
+                      <button 
+                        className={`dropdown-item small d-flex justify-content-between align-items-center py-2 text-white ${density === 'comfortable' ? 'bg-primary' : ''}`}
+                        onClick={() => setDensity('comfortable')}
+                      >
+                        <span><i className="bi bi-aspect-ratio me-2"></i> Comfortable (Touch)</span>
+                        {density === 'comfortable' && <i className="bi bi-check-lg"></i>}
+                      </button>
+                    </li>
+                    <li>
+                      <button 
+                        className={`dropdown-item small d-flex justify-content-between align-items-center py-2 text-white ${density === 'compact' ? 'bg-primary' : ''}`}
+                        onClick={() => setDensity('compact')}
+                      >
+                        <span><i className="bi bi-distribute-vertical me-2"></i> Compact (Control Room)</span>
+                        {density === 'compact' && <i className="bi bi-check-lg"></i>}
+                      </button>
+                    </li>
+                    <li><hr className="dropdown-divider border-secondary" /></li>
+                    <li className="px-3 py-1 text-muted small fw-bold text-uppercase">Screen Layout</li>
+                    <li>
+                      <button 
+                        className={`dropdown-item small d-flex justify-content-between align-items-center py-2 text-white ${layoutWidth === 'fluid' ? 'bg-primary' : ''}`}
+                        onClick={() => setLayoutWidth('fluid')}
+                      >
+                        <span><i className="bi bi-arrows-fullscreen me-2"></i> Full Width (Fluid)</span>
+                        {layoutWidth === 'fluid' && <i className="bi bi-check-lg"></i>}
+                      </button>
+                    </li>
+                    <li>
+                      <button 
+                        className={`dropdown-item small d-flex justify-content-between align-items-center py-2 text-white ${layoutWidth === 'contained' ? 'bg-primary' : ''}`}
+                        onClick={() => setLayoutWidth('contained')}
+                      >
+                        <span><i className="bi bi-box me-2"></i> Contained (1440px Max)</span>
+                        {layoutWidth === 'contained' && <i className="bi bi-check-lg"></i>}
+                      </button>
+                    </li>
+                    <li><hr className="dropdown-divider border-secondary" /></li>
+                    <li className="px-3 py-1 text-muted small fw-bold text-uppercase">Production Floor Setup</li>
+                    <li>
+                      <button 
+                        className="dropdown-item small py-2 text-warning d-flex align-items-center"
+                        onClick={() => setShowConfigModal(true)}
+                      >
+                        <i className="bi bi-gear-wide-connected me-2"></i> Manage Lines & Shifts
+                      </button>
+                    </li>
+                    <li><hr className="dropdown-divider border-secondary" /></li>
+                    <li className="px-3 py-1 text-muted small fw-bold text-uppercase">Import & Export</li>
+                    <li>
+                      <button className="dropdown-item small py-2 text-white" onClick={exportToCSV}>
+                        <i className="bi bi-filetype-csv me-2 text-info"></i> Export to CSV (Excel)
+                      </button>
+                    </li>
+                    <li>
+                      <button className="dropdown-item small py-2 text-white" onClick={exportToJSON}>
+                        <i className="bi bi-filetype-json me-2 text-success"></i> Backup All to JSON
+                      </button>
+                    </li>
+                    <li>
+                      <label className="dropdown-item small py-2 text-white mb-0" style={{ cursor: 'pointer' }}>
+                        <i className="bi bi-upload me-2 text-warning"></i> Restore from JSON Backup
+                        <input type="file" accept=".json" onChange={handleImportJSON} style={{ display: 'none' }} />
+                      </label>
+                    </li>
+                    <li><hr className="dropdown-divider border-secondary" /></li>
+                    <li className="px-3 py-1 text-muted small fw-bold text-uppercase">Legal & Compliance</li>
+                    <li>
+                      <a className="dropdown-item small py-2 text-white" href="privacy.html" target="_blank" rel="noreferrer">
+                        <i className="bi bi-shield-check me-2 text-info"></i> Privacy Policy
+                      </a>
+                    </li>
+                    <li>
+                      <a className="dropdown-item small py-2 text-white" href="terms.html" target="_blank" rel="noreferrer">
+                        <i className="bi bi-file-earmark-text me-2 text-warning"></i> Terms of Service
+                      </a>
+                    </li>
+                  </ul>
+                </div>
 
                 {/* Supabase Database Live Status Button */}
                 <button 
@@ -1583,7 +2698,7 @@ create policy "Allow update production_records" on public.production_records for
                   title={isSupabaseConnected ? "Synced with Supabase Cloud DB (Click to refresh records)" : "Click to connect Supabase Cloud Database"}
                 >
                   <i className={`bi ${isSyncing ? 'bi-arrow-repeat spinner-border spinner-border-sm' : isSupabaseConnected ? 'bi-database-check text-success' : 'bi-database-exclamation text-warning'}`}></i>
-                  <span className="d-none d-md-inline" style={{ fontSize: '0.78rem' }}>
+                  <span style={{ fontSize: '0.78rem' }}>
                     {isSupabaseConnected ? (isSyncing ? "Syncing..." : "Supabase DB") : "Connect DB"}
                   </span>
                 </button>
@@ -1604,7 +2719,7 @@ create policy "Allow update production_records" on public.production_records for
                             currentUser.avatar
                           )}
                         </div>
-                        <div className="d-none d-md-block text-start lh-1">
+                        <div className="text-start lh-1">
                           <div className="small fw-bold text-white d-flex align-items-center gap-1">
                             {currentUser.name}
                             <ProviderBadge provider={currentUser.provider} size={13} />
@@ -1653,10 +2768,125 @@ create policy "Allow update production_records" on public.production_records for
 
               </div>
             </div>
+
+            {/* Mobile Nav Collapse Menu Drawer (<992px) */}
+            {isMobileMenuOpen && (
+              <div className="mobile-nav-panel d-lg-none w-100">
+                {currentUser && (
+                  <div className="d-flex align-items-center justify-content-between p-2 mb-3 rounded bg-dark border border-secondary">
+                    <div className="d-flex align-items-center gap-2">
+                      <div className="avatar-circle">
+                        {currentUser.photoUrl ? (
+                          <img src={currentUser.photoUrl} alt="Avatar" className="avatar-img" />
+                        ) : (
+                          currentUser.avatar
+                        )}
+                      </div>
+                      <div>
+                        <div className="small fw-bold text-white d-flex align-items-center gap-1">
+                          {currentUser.name}
+                          <ProviderBadge provider={currentUser.provider} size={12} />
+                        </div>
+                        <div style={{ fontSize: '0.72rem' }} className="text-info text-truncate">{currentUser.email}</div>
+                      </div>
+                    </div>
+                    <button 
+                      className="btn btn-outline-danger btn-sm py-1 px-2"
+                      onClick={() => { handleLogout(); setIsMobileMenuOpen(false); }}
+                      title="Sign Out"
+                    >
+                      <i className="bi bi-box-arrow-right"></i>
+                    </button>
+                  </div>
+                )}
+
+                <div className="row g-2 mb-2">
+                  <div className="col-6">
+                    <button 
+                      className={`mobile-nav-item ${activeTab === 'dashboard' ? 'active' : ''}`}
+                      onClick={() => { setActiveTab('dashboard'); setIsMobileMenuOpen(false); }}
+                    >
+                      <i className="bi bi-speedometer2 text-primary"></i> Dashboard & Logs
+                    </button>
+                  </div>
+                  <div className="col-6">
+                    <button 
+                      className={`mobile-nav-item ${activeTab === 'new-entry' ? 'active' : ''}`}
+                      onClick={() => {
+                        setIsMobileMenuOpen(false);
+                        if (!currentUser) {
+                          setShowLoginModal(true);
+                          setAuthError("Please sign in to record production logs.");
+                        } else {
+                          setActiveTab('new-entry');
+                        }
+                      }}
+                    >
+                      <i className="bi bi-plus-circle text-success"></i> Record Event
+                    </button>
+                  </div>
+                  <div className="col-6">
+                    <button 
+                      className={`mobile-nav-item ${activeTab === 'fishbone' ? 'active' : ''}`}
+                      onClick={() => { setActiveTab('fishbone'); setIsMobileMenuOpen(false); }}
+                    >
+                      <i className="bi bi-diagram-3 text-warning"></i> Fishbone
+                    </button>
+                  </div>
+                  <div className="col-6">
+                    <button 
+                      className={`mobile-nav-item ${activeTab === 'analytics' ? 'active' : ''}`}
+                      onClick={() => { setActiveTab('analytics'); setIsMobileMenuOpen(false); }}
+                    >
+                      <i className="bi bi-graph-up text-info"></i> Analytics
+                    </button>
+                  </div>
+                  <div className="col-6">
+                    <button 
+                      className="mobile-nav-item"
+                      onClick={() => { exportToCSV(); setIsMobileMenuOpen(false); }}
+                    >
+                      <i className="bi bi-download text-light"></i> Export CSV
+                    </button>
+                  </div>
+                  <div className="col-6">
+                    <button 
+                      className="mobile-nav-item"
+                      onClick={() => { 
+                        setIsMobileMenuOpen(false);
+                        setAuthTab('supabase'); 
+                        setShowLoginModal(true); 
+                      }}
+                    >
+                      <i className="bi bi-database text-warning"></i> Supabase DB
+                    </button>
+                  </div>
+                </div>
+
+                {!currentUser && (
+                  <button 
+                    className="btn btn-primary w-100 py-2 d-flex align-items-center justify-content-center gap-2 mt-2"
+                    onClick={() => { setIsMobileMenuOpen(false); setShowLoginModal(true); }}
+                  >
+                    <i className="bi bi-box-arrow-in-right"></i> Sign In to Account
+                  </button>
+                )}
+
+                <div className="d-flex justify-content-center align-items-center gap-3 pt-3 mt-3 border-top border-secondary text-muted" style={{ fontSize: '0.8rem' }}>
+                  <a href="privacy.html" target="_blank" rel="noreferrer" className="text-info text-decoration-none">
+                    <i className="bi bi-shield-check me-1"></i> Privacy Policy
+                  </a>
+                  <span>•</span>
+                  <a href="terms.html" target="_blank" rel="noreferrer" className="text-warning text-decoration-none">
+                    <i className="bi bi-file-earmark-text me-1"></i> Terms of Service
+                  </a>
+                </div>
+              </div>
+            )}
           </nav>
 
           {/* Main Container */}
-          <div className="container-fluid px-4 py-4">
+          <div className="container-fluid px-2 px-sm-3 px-md-4 py-3 py-md-4">
 
             {/* Authentication Alert / Banner if not logged in */}
             {!currentUser && (
@@ -1684,50 +2914,50 @@ create policy "Allow update production_records" on public.production_records for
             )}
 
             {/* Global KPI Strip */}
-            <div className="row g-3 mb-4">
-              <div className="col-12 col-sm-6 col-lg-3">
+            <div className="row g-2 g-md-3 mb-4">
+              <div className="col-6 col-lg-3">
                 <div className="kpi-card">
-                  <div className="d-flex justify-content-between align-items-center text-muted mb-2">
-                    <span className="text-uppercase small fw-bold">Total Shift Logs</span>
+                  <div className="d-flex justify-content-between align-items-center text-muted mb-1 mb-md-2">
+                    <span className="kpi-title text-primary">Total Logs</span>
                     <i className="bi bi-card-checklist fs-5 text-primary"></i>
                   </div>
                   <div className="kpi-value text-white">{totalLogs}</div>
-                  <div className="small text-muted mt-1">Logged across all active work cells</div>
+                  <div className="kpi-subtitle text-muted mt-1 text-truncate">Active work cells</div>
                 </div>
               </div>
 
-              <div className="col-12 col-sm-6 col-lg-3">
+              <div className="col-6 col-lg-3">
                 <div className="kpi-card">
-                  <div className="d-flex justify-content-between align-items-center text-muted mb-2">
-                    <span className="text-uppercase small fw-bold">Change Points (4M/5M1E)</span>
+                  <div className="d-flex justify-content-between align-items-center text-muted mb-1 mb-md-2">
+                    <span className="kpi-title text-warning">Changes</span>
                     <i className="bi bi-arrow-repeat fs-5 text-warning"></i>
                   </div>
                   <div className="kpi-value text-warning">{changePoints}</div>
-                  <div className="small text-muted mt-1">Man/Machine/Material/Method transitions</div>
+                  <div className="kpi-subtitle text-muted mt-1 text-truncate">5M1E transitions</div>
                 </div>
               </div>
 
-              <div className="col-12 col-sm-6 col-lg-3">
+              <div className="col-6 col-lg-3">
                 <div className="kpi-card">
-                  <div className="d-flex justify-content-between align-items-center text-muted mb-2">
-                    <span className="text-uppercase small fw-bold">Active Abnormalities</span>
+                  <div className="d-flex justify-content-between align-items-center text-muted mb-1 mb-md-2">
+                    <span className="kpi-title text-danger">Anomalies</span>
                     <i className="bi bi-exclamation-diamond fs-5 text-danger"></i>
                   </div>
                   <div className="kpi-value text-danger">{abnormalities}</div>
-                  <div className="small text-muted mt-1">{criticals} Critical severity events</div>
+                  <div className="kpi-subtitle text-muted mt-1 text-truncate">{criticals} Critical</div>
                 </div>
               </div>
 
-              <div className="col-12 col-sm-6 col-lg-3">
+              <div className="col-6 col-lg-3">
                 <div className="kpi-card">
-                  <div className="d-flex justify-content-between align-items-center text-muted mb-2">
-                    <span className="text-uppercase small fw-bold">Measurement Pass Rate</span>
+                  <div className="d-flex justify-content-between align-items-center text-muted mb-1 mb-md-2">
+                    <span className="kpi-title text-info">Pass Rate</span>
                     <i className="bi bi-rulers fs-5 text-info"></i>
                   </div>
                   <div className="kpi-value text-info">
                     {totalLogs > 0 ? (((totalLogs - outOfSpec) / totalLogs) * 100).toFixed(1) : 100}%
                   </div>
-                  <div className="small text-muted mt-1">{outOfSpec} Out-of-spec dimensions flagged</div>
+                  <div className="kpi-subtitle text-muted mt-1 text-truncate">{outOfSpec} OOS flagged</div>
                 </div>
               </div>
             </div>
@@ -1735,7 +2965,82 @@ create policy "Allow update production_records" on public.production_records for
             {/* VIEW 1: DASHBOARD */}
             {activeTab === 'dashboard' && (
               <div>
-                <div className="surface-card p-3 mb-4">
+                {/* Flexibility Feature: Instant Triage Filter Chips */}
+                <div className="filter-chips-container mb-2">
+                  <button 
+                    className={`filter-chip ${quickFilter === 'ALL' ? 'active' : ''}`}
+                    onClick={() => setQuickFilter('ALL')}
+                  >
+                    <span>All Records</span>
+                    <span className="chip-count">{records.length}</span>
+                  </button>
+
+                  <button 
+                    className={`filter-chip ${quickFilter === 'CRITICAL' ? 'active' : ''}`}
+                    onClick={() => setQuickFilter(quickFilter === 'CRITICAL' ? 'ALL' : 'CRITICAL')}
+                  >
+                    <i className="bi bi-exclamation-triangle-fill text-danger"></i>
+                    <span>Critical</span>
+                    <span className="chip-count">{criticals}</span>
+                  </button>
+
+                  <button 
+                    className={`filter-chip ${quickFilter === 'WARNING' ? 'active' : ''}`}
+                    onClick={() => setQuickFilter(quickFilter === 'WARNING' ? 'ALL' : 'WARNING')}
+                  >
+                    <i className="bi bi-exclamation-circle-fill text-warning"></i>
+                    <span>Warnings</span>
+                    <span className="chip-count">{records.filter(r => r.severity === 'Warning').length}</span>
+                  </button>
+
+                  <button 
+                    className={`filter-chip ${quickFilter === 'CHANGE_POINT' ? 'active' : ''}`}
+                    onClick={() => setQuickFilter(quickFilter === 'CHANGE_POINT' ? 'ALL' : 'CHANGE_POINT')}
+                  >
+                    <i className="bi bi-arrow-repeat text-warning"></i>
+                    <span>Change Points</span>
+                    <span className="chip-count">{changePoints}</span>
+                  </button>
+
+                  <button 
+                    className={`filter-chip ${quickFilter === 'ABNORMALITY' ? 'active' : ''}`}
+                    onClick={() => setQuickFilter(quickFilter === 'ABNORMALITY' ? 'ALL' : 'ABNORMALITY')}
+                  >
+                    <i className="bi bi-lightning-charge-fill text-danger"></i>
+                    <span>Abnormalities</span>
+                    <span className="chip-count">{abnormalities}</span>
+                  </button>
+
+                  <button 
+                    className={`filter-chip ${quickFilter === 'OOS' ? 'active' : ''}`}
+                    onClick={() => setQuickFilter(quickFilter === 'OOS' ? 'ALL' : 'OOS')}
+                  >
+                    <i className="bi bi-x-octagon-fill text-danger"></i>
+                    <span>Out of Spec</span>
+                    <span className="chip-count">{outOfSpec}</span>
+                  </button>
+
+                  {currentUser && (
+                    <button 
+                      className={`filter-chip ${quickFilter === 'MY_LOGS' ? 'active' : ''}`}
+                      onClick={() => setQuickFilter(quickFilter === 'MY_LOGS' ? 'ALL' : 'MY_LOGS')}
+                    >
+                      <i className="bi bi-person-fill text-info"></i>
+                      <span>My Logs</span>
+                    </button>
+                  )}
+
+                  <button 
+                    className="filter-chip ms-auto text-info"
+                    onClick={() => setIsFilterPanelOpen(!isFilterPanelOpen)}
+                    title={isFilterPanelOpen ? "Hide Advanced Filter Inputs" : "Show Advanced Filter Inputs"}
+                  >
+                    <i className={`bi ${isFilterPanelOpen ? 'bi-chevron-up' : 'bi-chevron-down'}`}></i>
+                    <span>{isFilterPanelOpen ? 'Hide Filters' : 'More Filters'}</span>
+                  </button>
+                </div>
+                {isFilterPanelOpen && (
+                <div className="surface-card p-2 p-md-3 mb-3 mb-md-4">
                   <div className="row g-2 align-items-center">
                     <div className="col-12 col-md-3">
                       <div className="input-group">
@@ -1745,69 +3050,107 @@ create policy "Allow update production_records" on public.production_records for
                         <input 
                           type="text" 
                           className="form-control" 
-                          placeholder="Search WO#, lot, operator, email..." 
+                          placeholder="Search WO#, lot, operator..." 
                           value={searchQuery}
                           onChange={(e) => setSearchQuery(e.target.value)}
                         />
                       </div>
                     </div>
 
-                    <div className="col-6 col-md-2">
+                    <div className="col-6 col-sm-4 col-md-2">
                       <select 
                         className="form-select" 
                         value={selectedLine} 
                         onChange={(e) => setSelectedLine(e.target.value)}
                       >
                         <option value="ALL">All Lines</option>
-                        <option value="LINE-01">Line 1: SMT Solder</option>
-                        <option value="LINE-02">Line 2: Stamping CNC</option>
-                        <option value="LINE-03">Line 3: Cleanroom Assembly</option>
+                        {linesList.map(l => (
+                          <option key={l.id} value={l.id}>{l.name || l.id}</option>
+                        ))}
                       </select>
                     </div>
 
-                    <div className="col-6 col-md-2">
+                    <div className="col-6 col-sm-4 col-md-2">
                       <select 
                         className="form-select" 
                         value={selectedShift} 
                         onChange={(e) => setSelectedShift(e.target.value)}
                       >
                         <option value="ALL">All Shifts</option>
-                        <option value="SHIFT-A">Shift A (Morning)</option>
-                        <option value="SHIFT-B">Shift B (Evening)</option>
-                        <option value="SHIFT-C">Shift C (Night)</option>
+                        {shiftsList.map(s => (
+                          <option key={s.id} value={s.id}>{s.name || s.id}</option>
+                        ))}
                       </select>
                     </div>
 
-                    <div className="col-6 col-md-2">
+                    <div className="col-12 col-sm-4 col-md-2">
                       <select 
                         className="form-select" 
                         value={selectedDimension} 
                         onChange={(e) => setSelectedDimension(e.target.value)}
                       >
-                        <option value="ALL">All 5M1E Categories</option>
+                        <option value="ALL">All Categories</option>
                         <option value="MAN">1. Man (Operator)</option>
                         <option value="MACHINE">2. Machine (Tool)</option>
                         <option value="MATERIAL">3. Material (Lot)</option>
                         <option value="METHOD">4. Method (SOP)</option>
-                        <option value="MEASUREMENT">5. Measurement (QC)</option>
+                        <option value="MEASUREMENT">5. Measurement</option>
                         <option value="ENVIRONMENT">6. Environment</option>
                       </select>
                     </div>
 
-                    <div className="col-6 col-md-3 text-end">
+                    <div className="col-12 col-md-3 d-flex justify-content-between justify-content-md-end align-items-center gap-2">
+                      {/* View Mode Toggle for Mobile / Tablet */}
+                      <div className="btn-group btn-group-sm" role="group" aria-label="View Mode">
+                        <button 
+                          type="button" 
+                          className={`btn ${viewMode === 'cards' || (viewMode === 'auto') ? 'btn-primary' : 'btn-outline-secondary'}`}
+                          onClick={() => setViewMode('cards')}
+                          title="Card View (Optimized for Mobile/Touch)"
+                        >
+                          <i className="bi bi-grid-fill me-1"></i> Cards
+                        </button>
+                        <button 
+                          type="button" 
+                          className={`btn ${viewMode === 'table' ? 'btn-primary' : 'btn-outline-secondary'}`}
+                          onClick={() => setViewMode('table')}
+                          title="Full Table View"
+                        >
+                          <i className="bi bi-table me-1"></i> Table
+                        </button>
+                      </div>
+
                       <button 
-                        className="btn btn-outline-secondary btn-sm me-2"
+                        className="btn btn-outline-secondary btn-sm"
                         onClick={() => {
                           setSelectedLine("ALL");
                           setSelectedShift("ALL");
                           setSelectedDimension("ALL");
                           setSearchQuery("");
                         }}
+                        title="Reset Filters"
                       >
-                        <i className="bi bi-arrow-counterclockwise me-1"></i> Reset
+                        <i className="bi bi-arrow-counterclockwise"></i>
                       </button>
+
+                      <div className="d-flex align-items-center gap-1">
+                        <select 
+                          className="form-select form-select-sm"
+                          style={{ minWidth: '110px' }}
+                          value={sortBy}
+                          onChange={(e) => setSortBy(e.target.value)}
+                          title="Sort records by"
+                        >
+                          <option value="newest">🕒 Newest</option>
+                          <option value="oldest">⏳ Oldest</option>
+                          <option value="severity">⚠️ Severity</option>
+                          <option value="line">🏭 Line</option>
+                          <option value="workOrder">📄 WO#</option>
+                        </select>
+                      </div>
+
                       <button 
-                        className="btn btn-primary btn-sm"
+                        className="btn btn-primary btn-sm d-none d-sm-inline-flex"
                         onClick={() => {
                           if (!currentUser) {
                             setShowLoginModal(true);
@@ -1822,8 +3165,127 @@ create policy "Allow update production_records" on public.production_records for
                     </div>
                   </div>
                 </div>
+                )}
 
-                <div className="surface-card">
+                {/* Mobile / Card View (Active when viewMode is 'cards' or default on mobile) */}
+                {(viewMode === 'cards' || viewMode === 'auto') && (
+                  <div className="d-lg-none">
+                    {filteredRecords.length === 0 ? (
+                      <div className="surface-card p-4 text-center text-muted">
+                        <i className="bi bi-inbox fs-2 d-block mb-2"></i>
+                        No 5M1E records match the selected filters.
+                      </div>
+                    ) : (
+                      filteredRecords.map(record => (
+                        <div 
+                          key={`card-${record.id}`} 
+                          className={`mobile-record-card ${
+                            record.severity === 'Critical' ? 'border-critical' : 
+                            record.severity === 'Warning' ? 'border-warning' : 'border-normal'
+                          }`}
+                        >
+                          <div className="mobile-record-header" style={{ cursor: 'pointer' }} onClick={() => setInspectingRecord(record)}>
+                            <div>
+                              <span className="font-mono fw-bold text-white me-2">{record.id}</span>
+                              <span className="small text-muted">{record.timestamp}</span>
+                            </div>
+                            <div className="d-flex align-items-center gap-1">
+                              {getSeverityBadge(record.severity)}
+                              <span className={`badge ${getDimensionBadgeClass(record.primaryDimension)} ms-1`}>
+                                {record.primaryDimension}
+                              </span>
+                            </div>
+                          </div>
+
+                          <div className="mobile-record-body">
+                            <strong className="text-white d-block mb-1">{record.summary}</strong>
+                            <div className="d-flex flex-wrap gap-1 align-items-center mb-2">
+                              <span className="badge bg-secondary">{record.line}</span>
+                              <span className="badge bg-dark border border-secondary">{record.shift}</span>
+                              <span className="badge bg-dark border border-secondary text-info font-mono">{record.workOrder}</span>
+                              <span className="small text-muted font-mono">{record.partNumber}</span>
+                            </div>
+                          </div>
+
+                          <div className="mobile-record-meta">
+                            <div>
+                              <i className="bi bi-person me-1 text-info"></i>
+                              <span>{record.man.operator || "Operator N/A"}</span>
+                            </div>
+                            <div className="text-end">
+                              {record.measurement.inSpec ? (
+                                <span className="badge bg-success-subtle text-success border border-success-subtle">
+                                  <i className="bi bi-check me-1"></i>In-Spec ({record.measurement.measured})
+                                </span>
+                              ) : (
+                                <span className="badge bg-danger-subtle text-danger border border-danger-subtle">
+                                  <i className="bi bi-x me-1"></i>OOS ({record.measurement.measured})
+                                </span>
+                              )}
+                            </div>
+                          </div>
+
+                          <div className="mobile-record-footer">
+                            <div className="small text-muted d-flex align-items-center gap-1 text-truncate">
+                              {record.recordedBy && (
+                                <>
+                                  <ProviderBadge provider={record.authProvider || (record.m365Auth ? 'microsoft' : 'email')} size={12} />
+                                  <span style={{ fontSize: '0.72rem' }}>{record.recordedBy}</span>
+                                </>
+                              )}
+                            </div>
+                            <div className="d-flex flex-wrap gap-1 justify-content-end">
+                              <button 
+                                className="btn btn-sm btn-outline-info py-1 px-2"
+                                onClick={(e) => {
+                                  e.stopPropagation();
+                                  setInspectingRecord(record);
+                                }}
+                                title="Inspect 6 Dimensions"
+                              >
+                                <i className="bi bi-zoom-in"></i>
+                              </button>
+                              <button 
+                                className="btn btn-sm btn-outline-warning py-1 px-2"
+                                onClick={(e) => {
+                                  e.stopPropagation();
+                                  handleStartEdit(record);
+                                }}
+                                title="Edit this 5M1E Record"
+                              >
+                                <i className="bi bi-pencil-square"></i> Edit
+                              </button>
+                              <button 
+                                className="btn btn-sm btn-outline-danger py-1 px-2"
+                                onClick={(e) => {
+                                  e.stopPropagation();
+                                  handleDeleteRecord(record.id);
+                                }}
+                                title="Delete Record"
+                              >
+                                <i className="bi bi-trash"></i>
+                              </button>
+                              <button 
+                                className="btn btn-sm btn-outline-primary py-1 px-2"
+                                onClick={(e) => {
+                                  e.stopPropagation();
+                                  setActiveFishboneRecord(record);
+                                  setActiveTab('fishbone');
+                                }}
+                                title="Open in Fishbone"
+                              >
+                                <i className="bi bi-diagram-3"></i>
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                      ))
+                    )}
+                  </div>
+                )}
+
+                {/* Table View (Always visible on Desktop, or toggled on mobile) */}
+                <div className={`surface-card ${(viewMode === 'cards' || viewMode === 'auto') ? 'd-none d-lg-block' : 'd-block'}`}>
                   <div className="table-responsive">
                     <table className="table table-custom mb-0">
                       <thead>
@@ -1848,7 +3310,7 @@ create policy "Allow update production_records" on public.production_records for
                           </tr>
                         ) : (
                           filteredRecords.map(record => (
-                            <tr key={record.id} className="table-row-hover">
+                            <tr key={record.id} className="table-row-hover" style={{ cursor: 'pointer' }} onClick={() => setInspectingRecord(record)}>
                               <td>
                                 <div className="font-mono fw-bold text-white">{record.id}</div>
                                 <div className="small text-muted">{record.timestamp}</div>
@@ -1893,7 +3355,28 @@ create policy "Allow update production_records" on public.production_records for
                                   </span>
                                 )}
                               </td>
-                              <td className="text-end">
+                              <td className="text-end" onClick={(e) => e.stopPropagation()}>
+                                <button 
+                                  className="btn btn-sm btn-outline-info me-1"
+                                  title="Inspect 6 Dimensions & Audit Trail"
+                                  onClick={() => setInspectingRecord(record)}
+                                >
+                                  <i className="bi bi-zoom-in"></i>
+                                </button>
+                                <button 
+                                  className="btn btn-sm btn-outline-warning me-1"
+                                  title="Edit Record"
+                                  onClick={() => handleStartEdit(record)}
+                                >
+                                  <i className="bi bi-pencil-square"></i>
+                                </button>
+                                <button 
+                                  className="btn btn-sm btn-outline-danger me-1"
+                                  title="Delete Record"
+                                  onClick={() => handleDeleteRecord(record.id)}
+                                >
+                                  <i className="bi bi-trash"></i>
+                                </button>
                                 <button 
                                   className="btn btn-sm btn-outline-primary"
                                   title="Generate Ishikawa Fishbone Diagram"
@@ -1902,7 +3385,7 @@ create policy "Allow update production_records" on public.production_records for
                                     setActiveTab('fishbone');
                                   }}
                                 >
-                                  <i className="bi bi-diagram-3 me-1"></i> Fishbone
+                                  <i className="bi bi-diagram-3"></i>
                                 </button>
                               </td>
                             </tr>
@@ -1915,17 +3398,31 @@ create policy "Allow update production_records" on public.production_records for
               </div>
             )}
 
-            {/* VIEW 2: NEW 5M1E RECORDING FORM */}
+            {/* VIEW 2: 5M1E RECORDING / EDITING FORM */}
             {activeTab === 'new-entry' && (
-              <div className="surface-card p-4">
-                <div className="d-flex justify-content-between align-items-center mb-4 pb-3 border-bottom border-secondary">
+              <div className="surface-card p-3 p-md-4">
+                {editingRecordId && (
+                  <div className="alert alert-warning py-2 px-3 d-flex justify-content-between align-items-center mb-4">
+                    <div className="d-flex align-items-center gap-2">
+                      <i className="bi bi-pencil-square fs-5"></i>
+                      <div>
+                        <strong>Editing Mode Active: Record {editingRecordId}</strong>
+                        <div className="small">Updating parameters across the 6 dimensions. Changes will be signed with your active profile.</div>
+                      </div>
+                    </div>
+                    <button type="button" className="btn btn-sm btn-outline-dark fw-bold" onClick={handleCancelEdit}>
+                      Cancel Edit
+                    </button>
+                  </div>
+                )}
+                <div className="d-flex flex-column flex-sm-row justify-content-between align-items-start align-items-sm-center gap-2 mb-4 pb-3 border-bottom border-secondary">
                   <div>
                     <h4 className="fw-bold text-white mb-1">
-                      <i className="bi bi-clipboard2-plus text-primary me-2"></i>
-                      Record 5M1E Production Event / Change Point
+                      <i className={`bi ${editingRecordId ? 'bi-pencil-square text-warning' : 'bi-clipboard2-plus text-primary'} me-2`}></i>
+                      {editingRecordId ? `Edit 5M1E Event (${editingRecordId})` : "Record 5M1E Production Event / Change Point"}
                     </h4>
                     <p className="text-muted small mb-0">
-                      Document Man, Machine, Material, Method, Measurement, and Environment parameters for full traceability.
+                      {editingRecordId ? "Modify and re-audit Man, Machine, Material, Method, Measurement, and Environment parameters." : "Document Man, Machine, Material, Method, Measurement, and Environment parameters for full traceability."}
                     </p>
                   </div>
                   <div className="d-flex align-items-center gap-2">
@@ -1947,17 +3444,17 @@ create policy "Allow update production_records" on public.production_records for
                     <div className="col-12 col-md-3">
                       <label className="form-label small text-muted">Production Line</label>
                       <select className="form-select" name="line" value={formData.line} onChange={handleInputChange}>
-                        <option value="LINE-01">Line 1: SMT Solder</option>
-                        <option value="LINE-02">Line 2: Stamping CNC</option>
-                        <option value="LINE-03">Line 3: Cleanroom Assembly</option>
+                        {linesList.map(l => (
+                          <option key={l.id} value={l.id}>{l.name || l.id}</option>
+                        ))}
                       </select>
                     </div>
                     <div className="col-12 col-md-2">
                       <label className="form-label small text-muted">Shift</label>
                       <select className="form-select" name="shift" value={formData.shift} onChange={handleInputChange}>
-                        <option value="SHIFT-A">Shift A (06:00 - 14:00)</option>
-                        <option value="SHIFT-B">Shift B (14:00 - 22:00)</option>
-                        <option value="SHIFT-C">Shift C (22:00 - 06:00)</option>
+                        {shiftsList.map(s => (
+                          <option key={s.id} value={s.id}>{s.name || s.id}</option>
+                        ))}
                       </select>
                     </div>
                     <div className="col-12 col-md-2">
@@ -2026,7 +3523,7 @@ create policy "Allow update production_records" on public.production_records for
                   </div>
 
                   {/* 5M1E Dimensional Stepper Navigation */}
-                  <div className="d-flex flex-wrap gap-2 mb-4 pb-2 border-bottom border-secondary">
+                  <div className="dimension-stepper-container mb-4 pb-2 border-bottom border-secondary">
                     <button 
                       type="button" 
                       className={`dimension-tab-btn ${formStep === 'man' ? 'active' : ''}`}
@@ -2275,38 +3772,39 @@ create policy "Allow update production_records" on public.production_records for
                   </div>
 
                   {/* Form Actions */}
-                  <div className="d-flex justify-content-between">
-                    <div>
+                  <div className="d-flex flex-column flex-sm-row justify-content-between gap-3 mt-4">
+                    <div className="d-flex gap-2">
                       {formStep !== 'man' && (
                         <button 
                           type="button" 
-                          className="btn btn-outline-secondary me-2"
+                          className="btn btn-outline-secondary flex-grow-1 flex-sm-grow-0"
                           onClick={() => {
                             const steps = ['man', 'machine', 'material', 'method', 'measurement', 'environment'];
                             const idx = steps.indexOf(formStep);
                             if (idx > 0) setFormStep(steps[idx - 1]);
                           }}
                         >
-                          <i className="bi bi-chevron-left me-1"></i> Previous Dimension
+                          <i className="bi bi-chevron-left me-1"></i> Previous
                         </button>
                       )}
                       {formStep !== 'environment' && (
                         <button 
                           type="button" 
-                          className="btn btn-outline-primary"
+                          className="btn btn-outline-primary flex-grow-1 flex-sm-grow-0"
                           onClick={() => {
                             const steps = ['man', 'machine', 'material', 'method', 'measurement', 'environment'];
                             const idx = steps.indexOf(formStep);
                             if (idx < steps.length - 1) setFormStep(steps[idx + 1]);
                           }}
                         >
-                          Next Dimension <i className="bi bi-chevron-right ms-1"></i>
+                          Next <i className="bi bi-chevron-right ms-1"></i>
                         </button>
                       )}
                     </div>
 
-                    <button type="submit" className="btn btn-success px-4 fw-bold">
-                      <i className="bi bi-check2-circle me-2"></i> Save & Log 5M1E Record
+                    <button type="submit" className={`btn ${editingRecordId ? 'btn-warning text-dark' : 'btn-success'} px-4 fw-bold w-100 w-sm-auto`}>
+                      <i className={`bi ${editingRecordId ? 'bi-check2-all' : 'bi-check2-circle'} me-2`}></i>
+                      {editingRecordId ? `Update & Save Record (${editingRecordId})` : "Save & Log 5M1E Record"}
                     </button>
                   </div>
                 </form>
@@ -2316,21 +3814,20 @@ create policy "Allow update production_records" on public.production_records for
             {/* VIEW 3: ISHIKAWA (FISHBONE) DIAGRAM */}
             {activeTab === 'fishbone' && (
               <div>
-                <div className="surface-card p-3 mb-3 d-flex justify-content-between align-items-center">
+                <div className="surface-card p-3 mb-3 d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center gap-3">
                   <div>
                     <h5 className="text-white fw-bold mb-1">
                       <i className="bi bi-diagram-3 text-primary me-2"></i>
-                      Dynamic 5M1E Ishikawa (Fishbone) Root Cause Diagram
+                      Dynamic 5M1E Ishikawa Root Cause Diagram
                     </h5>
                     <span className="text-muted small">
                       Visualizing root causes mapped across the 6 manufacturing bones.
                     </span>
                   </div>
-                  <div className="d-flex align-items-center gap-2">
-                    <span className="small text-muted">Select Event:</span>
+                  <div className="d-flex flex-wrap align-items-center gap-2 w-100 w-md-auto justify-content-between justify-content-md-end">
                     <select 
-                      className="form-select form-select-sm"
-                      style={{ width: '280px' }}
+                      className="form-select form-select-sm flex-grow-1 flex-md-grow-0"
+                      style={{ minWidth: '200px', maxWidth: '340px' }}
                       value={activeFishboneRecord ? activeFishboneRecord.id : ''}
                       onChange={(e) => {
                         const rec = records.find(r => r.id === e.target.value);
@@ -2344,13 +3841,17 @@ create policy "Allow update production_records" on public.production_records for
                       ))}
                     </select>
                     <button className="btn btn-sm btn-outline-light" onClick={() => window.print()}>
-                      <i className="bi bi-printer me-1"></i> Print / PDF
+                      <i className="bi bi-printer me-1"></i> Print
                     </button>
                   </div>
                 </div>
 
                 {activeFishboneRecord && (
                   <div className="fishbone-wrapper">
+                    <div className="fishbone-scroll-hint">
+                      <i className="bi bi-arrows-expand-vertical" style={{ transform: 'rotate(90deg)' }}></i>
+                      <span>Swipe horizontally to view all 6 fishbone branches</span>
+                    </div>
                     <svg className="fishbone-svg" viewBox="0 0 1000 520">
                       {/* Spine */}
                       <line x1="60" y1="260" x2="820" y2="260" className="fishbone-spine" />
@@ -2444,6 +3945,59 @@ create policy "Allow update production_records" on public.production_records for
                         </div>
                       </div>
                     </div>
+
+                    {/* Mobile 6-Dimension Breakdown Cards */}
+                    <div className="row g-2 mt-3 d-lg-none">
+                      <div className="col-12 col-sm-6">
+                        <div className="fishbone-breakdown-card">
+                          <h6 className="text-info"><i className="bi bi-person me-1"></i> 1. Man (Personnel)</h6>
+                          <div className="fishbone-param-row"><span>Operator:</span><strong className="text-white">{activeFishboneRecord.man.operator}</strong></div>
+                          <div className="fishbone-param-row"><span>Skill:</span><span>{activeFishboneRecord.man.skillLevel}</span></div>
+                          <div className="fishbone-param-row"><span>Certification:</span><span className={activeFishboneRecord.man.certified ? "text-success" : "text-danger"}>{activeFishboneRecord.man.certified ? "Validated" : "Missing"}</span></div>
+                        </div>
+                      </div>
+                      <div className="col-12 col-sm-6">
+                        <div className="fishbone-breakdown-card">
+                          <h6 className="text-warning"><i className="bi bi-cpu me-1"></i> 2. Machine (Tool)</h6>
+                          <div className="fishbone-param-row"><span>Station:</span><strong className="text-white">{activeFishboneRecord.machine.stationId}</strong></div>
+                          <div className="fishbone-param-row"><span>Status:</span><span>{activeFishboneRecord.machine.status}</span></div>
+                          <div className="fishbone-param-row"><span>Temp / Press:</span><span>{activeFishboneRecord.machine.temperature}°C / {activeFishboneRecord.machine.pressure} bar</span></div>
+                        </div>
+                      </div>
+                      <div className="col-12 col-sm-6">
+                        <div className="fishbone-breakdown-card">
+                          <h6 className="text-success"><i className="bi bi-box-seam me-1"></i> 3. Material (Parts)</h6>
+                          <div className="fishbone-param-row"><span>Lot Number:</span><strong className="text-white">{activeFishboneRecord.material.lotNumber}</strong></div>
+                          <div className="fishbone-param-row"><span>Vendor:</span><span>{activeFishboneRecord.material.supplier}</span></div>
+                          <div className="fishbone-param-row"><span>CoA Status:</span><span className={activeFishboneRecord.material.coaVerified ? "text-success" : "text-danger"}>{activeFishboneRecord.material.coaVerified ? "Approved" : "Pending"}</span></div>
+                        </div>
+                      </div>
+                      <div className="col-12 col-sm-6">
+                        <div className="fishbone-breakdown-card">
+                          <h6 style={{ color: '#a78bfa' }}><i className="bi bi-journal-code me-1"></i> 4. Method (SOP)</h6>
+                          <div className="fishbone-param-row"><span>Recipe ID:</span><strong className="text-white">{activeFishboneRecord.method.recipeId}</strong></div>
+                          <div className="fishbone-param-row"><span>SOP Number:</span><span>{activeFishboneRecord.method.sopNumber}</span></div>
+                          <div className="fishbone-param-row"><span>Cycle Time:</span><span>Act {activeFishboneRecord.method.actCycleTime}s (Std {activeFishboneRecord.method.stdCycleTime}s)</span></div>
+                        </div>
+                      </div>
+                      <div className="col-12 col-sm-6">
+                        <div className="fishbone-breakdown-card">
+                          <h6 className="text-danger"><i className="bi bi-rulers me-1"></i> 5. Measurement</h6>
+                          <div className="fishbone-param-row"><span>Result:</span><strong className={activeFishboneRecord.measurement.inSpec ? "text-success" : "text-danger"}>{activeFishboneRecord.measurement.inSpec ? "PASS" : "OUT OF SPEC"}</strong></div>
+                          <div className="fishbone-param-row"><span>Gauge / Tool:</span><span>{activeFishboneRecord.measurement.toolId}</span></div>
+                          <div className="fishbone-param-row"><span>Measured:</span><span>{activeFishboneRecord.measurement.measured} (LSL {activeFishboneRecord.measurement.lsl} / USL {activeFishboneRecord.measurement.usl})</span></div>
+                        </div>
+                      </div>
+                      <div className="col-12 col-sm-6">
+                        <div className="fishbone-breakdown-card">
+                          <h6 style={{ color: '#2dd4bf' }}><i className="bi bi-cloud-sun me-1"></i> 6. Environment</h6>
+                          <div className="fishbone-param-row"><span>Cleanroom:</span><strong className="text-white">{activeFishboneRecord.environment.cleanroomClass}</strong></div>
+                          <div className="fishbone-param-row"><span>Temp / RH:</span><span>{activeFishboneRecord.environment.temp}°C / {activeFishboneRecord.environment.humidity}%</span></div>
+                          <div className="fishbone-param-row"><span>ESD Grounding:</span><span>{activeFishboneRecord.environment.esdGrounding}</span></div>
+                        </div>
+                      </div>
+                    </div>
+
                   </div>
                 )}
               </div>
@@ -2517,6 +4071,43 @@ create policy "Allow update production_records" on public.production_records for
               </div>
             )}
 
+            {/* Application Footer with Legal Links (Privacy Policy & Terms of Service) */}
+            <footer className="mt-5 pt-4 pb-3 border-top border-secondary">
+              <div className="d-flex flex-column flex-md-row justify-content-between align-items-center gap-3">
+                <div className="text-center text-md-start">
+                  <div className="d-flex align-items-center justify-content-center justify-content-md-start gap-2 mb-1">
+                    <span className="brand-badge" style={{ fontSize: '0.68rem', padding: '0.15rem 0.45rem' }}>5M1E SUITE</span>
+                    <span className="small text-white fw-bold">Production Quality & Anomaly Tracker</span>
+                    <span className="badge bg-success-subtle text-success border border-success-subtle" style={{ fontSize: '0.65rem' }}>v2.4 Live</span>
+                  </div>
+                  <div className="small text-muted">
+                    DNKH Digital Transformation • Lean Manufacturing 6-Dimension Process Traceability
+                  </div>
+                </div>
+
+                <div className="d-flex flex-wrap justify-content-center align-items-center gap-3 small">
+                  <a href="privacy.html" target="_blank" rel="noreferrer" className="text-info text-decoration-none d-flex align-items-center gap-1">
+                    <i className="bi bi-shield-check"></i> Privacy Policy
+                  </a>
+                  <span className="text-secondary">•</span>
+                  <a href="terms.html" target="_blank" rel="noreferrer" className="text-info text-decoration-none d-flex align-items-center gap-1">
+                    <i className="bi bi-file-earmark-text"></i> Terms of Service
+                  </a>
+                  <span className="text-secondary">•</span>
+                  <button 
+                    type="button" 
+                    className="btn btn-link btn-sm p-0 text-muted text-decoration-none"
+                    onClick={() => setShowConfigModal(true)}
+                  >
+                    <i className="bi bi-gear me-1"></i> Floor Config
+                  </button>
+                </div>
+              </div>
+              <div className="text-center text-muted mt-3" style={{ fontSize: '0.72rem' }}>
+                © 2026 DNKH Digital Transformation. Cryptographically signed audit trail enabled.
+              </div>
+            </footer>
+
           </div>
 
           {/* -------------------------------------------------------------
@@ -2525,7 +4116,7 @@ create policy "Allow update production_records" on public.production_records for
           ------------------------------------------------------------- */}
           {showLoginModal && (
             <div className="modal show d-block" tabIndex="-1" style={{ backgroundColor: 'rgba(0,0,0,0.82)', backdropFilter: 'blur(6px)' }}>
-              <div className="modal-dialog modal-dialog-centered modal-lg">
+              <div className="modal-dialog modal-dialog-centered modal-lg modal-fullscreen-sm-down">
                 <div className="modal-content shadow-lg border-secondary">
                   <div className="modal-header border-secondary pb-0">
                     <div>
@@ -2541,7 +4132,7 @@ create policy "Allow update production_records" on public.production_records for
                   </div>
 
                   {/* Provider Tabs Header */}
-                  <div className="px-3 border-bottom border-secondary d-flex flex-wrap gap-1 bg-dark bg-opacity-50">
+                  <div className="px-3 border-bottom border-secondary auth-tabs-scroll d-flex gap-1 bg-dark bg-opacity-50">
                     <button 
                       className={`auth-tab-btn ${authTab === 'microsoft' ? 'active' : ''}`}
                       onClick={() => { setAuthTab('microsoft'); setAuthError(''); }}
@@ -3291,6 +4882,16 @@ create policy "Allow update production_records" on public.production_records for
                     )}
 
                     <div className="mt-4 pt-2 border-top border-secondary text-center">
+                      <div className="small text-muted mb-2" style={{ fontSize: '0.78rem' }}>
+                        By signing in or submitting 5M1E logs, you agree to our{' '}
+                        <a href="terms.html" target="_blank" rel="noreferrer" className="text-info text-decoration-none fw-semibold">
+                          Terms of Service
+                        </a>{' '}
+                        and{' '}
+                        <a href="privacy.html" target="_blank" rel="noreferrer" className="text-info text-decoration-none fw-semibold">
+                          Privacy Policy
+                        </a>.
+                      </div>
                       <button 
                         className="btn btn-link btn-sm text-secondary text-decoration-none"
                         onClick={() => setShowLoginModal(false)}
@@ -3304,6 +4905,398 @@ create policy "Allow update production_records" on public.production_records for
               </div>
             </div>
           )}
+
+          {/* MODAL 1: 5M1E Deep Inspection & Resolution Modal */}
+          {inspectingRecord && (
+            <div className="modal show d-block" tabIndex="-1" style={{ backgroundColor: 'rgba(0,0,0,0.85)', backdropFilter: 'blur(6px)' }}>
+              <div className="modal-dialog modal-dialog-centered modal-xl modal-fullscreen-sm-down">
+                <div className="modal-content shadow-lg border-secondary">
+                  <div className="modal-header border-secondary">
+                    <div>
+                      <div className="d-flex align-items-center gap-2 mb-1">
+                        <span className="font-mono fs-5 fw-bold text-white">{inspectingRecord.id}</span>
+                        {getSeverityBadge(inspectingRecord.severity)}
+                        <span className={`badge ${getDimensionBadgeClass(inspectingRecord.primaryDimension)}`}>
+                          {inspectingRecord.primaryDimension}
+                        </span>
+                        <span className="badge bg-secondary">{inspectingRecord.line}</span>
+                        <span className="badge bg-dark border border-secondary">{inspectingRecord.shift}</span>
+                      </div>
+                      <div className="small text-muted">
+                        Recorded at {inspectingRecord.timestamp} • Work Order: <span className="text-info font-mono">{inspectingRecord.workOrder}</span> • Part: <span className="font-mono text-white">{inspectingRecord.partNumber}</span>
+                      </div>
+                    </div>
+                    <button type="button" className="btn-close btn-close-white" onClick={() => setInspectingRecord(null)}></button>
+                  </div>
+
+                  <div className="modal-body p-3 p-md-4">
+                    {/* Event Summary Banner */}
+                    <div className="p-3 rounded mb-3 border border-secondary" style={{ background: '#0b0f19' }}>
+                      <div className="small text-muted text-uppercase fw-bold mb-1">Event Summary</div>
+                      <h5 className="text-white mb-2">{inspectingRecord.summary}</h5>
+                      <div className="d-flex flex-wrap gap-3 small text-muted">
+                        <span><i className="bi bi-person me-1 text-info"></i>Operator: <strong>{inspectingRecord.man && inspectingRecord.man.operator}</strong></span>
+                        <span><i className="bi bi-shield-check me-1 text-success"></i>Signed by: <strong>{inspectingRecord.recordedBy || 'Internal Floor'}</strong></span>
+                        {inspectingRecord.countermeasure && (
+                          <span className="text-warning"><i className="bi bi-tools me-1"></i>Countermeasure: {inspectingRecord.countermeasure}</span>
+                        )}
+                      </div>
+                    </div>
+
+                    {/* 6 Dimension Diagnostics Cards */}
+                    <div className="inspection-modal-grid mb-4">
+                      {/* 1. Man */}
+                      <div className="dimension-detail-card">
+                        <div className="dimension-detail-card-header">
+                          <span className="fw-bold text-info"><i className="bi bi-person me-1"></i> 1. Man</span>
+                          <span className="badge badge-man">Operator</span>
+                        </div>
+                        <div className="param-item"><span>Operator:</span><strong className="text-white">{inspectingRecord.man ? inspectingRecord.man.operator : 'N/A'}</strong></div>
+                        <div className="param-item"><span>Skill Level:</span><span>{inspectingRecord.man ? inspectingRecord.man.skillLevel : 'N/A'}</span></div>
+                        <div className="param-item"><span>Certification:</span><span className={inspectingRecord.man && inspectingRecord.man.certified ? "text-success" : "text-danger"}>{inspectingRecord.man && inspectingRecord.man.certified ? "Validated" : "Not Validated"}</span></div>
+                        <div className="param-item"><span>Notes:</span><span className="text-muted small text-truncate" style={{ maxWidth: '160px' }}>{inspectingRecord.man ? inspectingRecord.man.notes : 'None'}</span></div>
+                      </div>
+
+                      {/* 2. Machine */}
+                      <div className="dimension-detail-card">
+                        <div className="dimension-detail-card-header">
+                          <span className="fw-bold text-warning"><i className="bi bi-cpu me-1"></i> 2. Machine</span>
+                          <span className="badge badge-machine">Tooling</span>
+                        </div>
+                        <div className="param-item"><span>Station Tag:</span><strong className="text-white font-mono">{inspectingRecord.machine ? inspectingRecord.machine.stationId : 'N/A'}</strong></div>
+                        <div className="param-item"><span>Status:</span><span>{inspectingRecord.machine ? inspectingRecord.machine.status : 'N/A'}</span></div>
+                        <div className="param-item"><span>Temperature:</span><span className="font-mono">{inspectingRecord.machine ? inspectingRecord.machine.temperature : 'N/A'} °C</span></div>
+                        <div className="param-item"><span>Pressure:</span><span className="font-mono">{inspectingRecord.machine ? inspectingRecord.machine.pressure : 'N/A'} bar</span></div>
+                      </div>
+
+                      {/* 3. Material */}
+                      <div className="dimension-detail-card">
+                        <div className="dimension-detail-card-header">
+                          <span className="fw-bold text-success"><i className="bi bi-box-seam me-1"></i> 3. Material</span>
+                          <span className="badge badge-material">Parts</span>
+                        </div>
+                        <div className="param-item"><span>Lot Number:</span><strong className="text-white font-mono">{inspectingRecord.material ? inspectingRecord.material.lotNumber : 'N/A'}</strong></div>
+                        <div className="param-item"><span>Supplier:</span><span>{inspectingRecord.material ? inspectingRecord.material.supplier : 'N/A'}</span></div>
+                        <div className="param-item"><span>CoA Verified:</span><span className={inspectingRecord.material && inspectingRecord.material.coaVerified ? "text-success" : "text-danger"}>{inspectingRecord.material && inspectingRecord.material.coaVerified ? "Approved" : "Pending"}</span></div>
+                        <div className="param-item"><span>Material Notes:</span><span className="text-muted small text-truncate" style={{ maxWidth: '160px' }}>{inspectingRecord.material ? inspectingRecord.material.notes : 'None'}</span></div>
+                      </div>
+
+                      {/* 4. Method */}
+                      <div className="dimension-detail-card">
+                        <div className="dimension-detail-card-header">
+                          <span className="fw-bold text-purple"><i className="bi bi-journal-code me-1"></i> 4. Method</span>
+                          <span className="badge badge-method">SOP</span>
+                        </div>
+                        <div className="param-item"><span>SOP Number:</span><strong className="text-white font-mono">{inspectingRecord.method ? inspectingRecord.method.sopNumber : 'N/A'}</strong></div>
+                        <div className="param-item"><span>Recipe / Program:</span><span className="font-mono">{inspectingRecord.method ? inspectingRecord.method.recipeId : 'N/A'}</span></div>
+                        <div className="param-item"><span>Cycle Time:</span><span>Act {inspectingRecord.method ? inspectingRecord.method.actCycleTime : 0}s (Std {inspectingRecord.method ? inspectingRecord.method.stdCycleTime : 0}s)</span></div>
+                        <div className="param-item"><span>Deviation:</span><span className="text-muted small text-truncate" style={{ maxWidth: '160px' }}>{inspectingRecord.method ? inspectingRecord.method.notes : 'None'}</span></div>
+                      </div>
+
+                      {/* 5. Measurement */}
+                      <div className="dimension-detail-card">
+                        <div className="dimension-detail-card-header">
+                          <span className="fw-bold text-danger"><i className="bi bi-rulers me-1"></i> 5. Measurement</span>
+                          <span className="badge badge-measurement">QC</span>
+                        </div>
+                        <div className="param-item"><span>Measured Value:</span><strong className={`font-mono ${inspectingRecord.measurement && inspectingRecord.measurement.inSpec ? "text-success" : "text-danger"}`}>{inspectingRecord.measurement ? inspectingRecord.measurement.measured : 'N/A'}</strong></div>
+                        <div className="param-item"><span>Spec Tolerance:</span><span className="font-mono">{inspectingRecord.measurement ? `LSL ${inspectingRecord.measurement.lsl} / USL ${inspectingRecord.measurement.usl}` : 'N/A'}</span></div>
+                        <div className="param-item"><span>Inspection Tool:</span><span className="font-mono">{inspectingRecord.measurement ? inspectingRecord.measurement.toolId : 'N/A'}</span></div>
+                        <div className="param-item"><span>Pass Status:</span><span className={inspectingRecord.measurement && inspectingRecord.measurement.inSpec ? "badge bg-success" : "badge bg-danger"}>{inspectingRecord.measurement && inspectingRecord.measurement.inSpec ? "IN-SPEC" : "OUT-OF-SPEC"}</span></div>
+                      </div>
+
+                      {/* 6. Environment */}
+                      <div className="dimension-detail-card">
+                        <div className="dimension-detail-card-header">
+                          <span className="fw-bold text-teal"><i className="bi bi-cloud-sun me-1"></i> 6. Environment</span>
+                          <span className="badge badge-environment">Ambient</span>
+                        </div>
+                        <div className="param-item"><span>Cleanroom Class:</span><strong className="text-white">{inspectingRecord.environment ? inspectingRecord.environment.cleanroomClass : 'N/A'}</strong></div>
+                        <div className="param-item"><span>Room Temperature:</span><span className="font-mono">{inspectingRecord.environment ? inspectingRecord.environment.temp : 'N/A'} °C</span></div>
+                        <div className="param-item"><span>Relative Humidity:</span><span className="font-mono">{inspectingRecord.environment ? inspectingRecord.environment.humidity : 'N/A'} % RH</span></div>
+                        <div className="param-item"><span>ESD Grounding:</span><span>{inspectingRecord.environment ? inspectingRecord.environment.esdGrounding : 'N/A'}</span></div>
+                      </div>
+                    </div>
+
+                    {/* Countermeasure Resolution Form */}
+                    <div className="p-3 rounded border border-secondary" style={{ background: '#0b0f19' }}>
+                      <h6 className="fw-bold text-white mb-2"><i className="bi bi-wrench-adjustable me-2 text-warning"></i>Floor Supervisor Countermeasure & Action Log</h6>
+                      <div className="input-group">
+                        <input 
+                          type="text" 
+                          className="form-control" 
+                          placeholder="Describe corrective actions taken (e.g. recalibrated sensor, replaced tool, purged solder paste)..."
+                          value={countermeasureText}
+                          onChange={(e) => setCountermeasureText(e.target.value)}
+                        />
+                        <button 
+                          type="button" 
+                          className="btn btn-success fw-bold"
+                          onClick={handleSaveCountermeasure}
+                        >
+                          <i className="bi bi-check2-circle me-1"></i> Resolve & Close
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="modal-footer border-secondary justify-content-between">
+                    <div className="d-flex gap-2">
+                      <button 
+                        type="button" 
+                        className="btn btn-warning fw-semibold btn-sm"
+                        onClick={() => handleStartEdit(inspectingRecord)}
+                      >
+                        <i className="bi bi-pencil-square me-1"></i> Edit Full Record
+                      </button>
+                      <button 
+                        type="button" 
+                        className="btn btn-outline-danger btn-sm"
+                        onClick={() => handleDeleteRecord(inspectingRecord.id)}
+                      >
+                        <i className="bi bi-trash me-1"></i> Delete
+                      </button>
+                      <button 
+                        type="button" 
+                        className="btn btn-outline-primary btn-sm"
+                        onClick={() => {
+                          setActiveFishboneRecord(inspectingRecord);
+                          setActiveTab('fishbone');
+                          setInspectingRecord(null);
+                        }}
+                      >
+                        <i className="bi bi-diagram-3 me-1"></i> Open in Ishikawa Diagram
+                      </button>
+                    </div>
+                    <button type="button" className="btn btn-secondary btn-sm" onClick={() => setInspectingRecord(null)}>
+                      Close
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* MODAL 2: Production Lines & Shifts Customization Modal */}
+          {showConfigModal && (
+            <div className="modal show d-block" tabIndex="-1" style={{ backgroundColor: 'rgba(0,0,0,0.85)', backdropFilter: 'blur(6px)' }}>
+              <div className="modal-dialog modal-dialog-centered modal-lg modal-fullscreen-sm-down">
+                <div className="modal-content shadow-lg border-secondary">
+                  <div className="modal-header border-secondary">
+                    <div className="d-flex align-items-center gap-2">
+                      <i className="bi bi-gear-wide-connected text-warning fs-5"></i>
+                      <h5 className="modal-title fw-bold text-white mb-0">Production Floor Lines & Shifts Setup</h5>
+                    </div>
+                    <button type="button" className="btn-close btn-close-white" onClick={() => setShowConfigModal(false)}></button>
+                  </div>
+
+                  <div className="modal-body p-3 p-md-4">
+                    <p className="text-muted small mb-4">
+                      Customize work cells, manufacturing lines, and operating shifts to match your facility's exact naming standards.
+                    </p>
+
+                    <div className="row g-4">
+                      {/* Lines Management */}
+                      <div className="col-12 col-md-6">
+                        <div className="p-3 rounded border border-secondary h-100" style={{ background: '#0b0f19' }}>
+                          <h6 className="fw-bold text-info mb-3"><i className="bi bi-buildings me-2"></i>Active Production Lines ({linesList.length})</h6>
+                          
+                          <div className="list-group mb-3" style={{ maxHeight: '200px', overflowY: 'auto' }}>
+                            {linesList.map(l => (
+                              <div key={l.id} className="list-group-item bg-dark text-white border-secondary d-flex justify-content-between align-items-center py-2">
+                                <div>
+                                  <span className="badge bg-secondary font-mono me-2">{l.id}</span>
+                                  <span className="small">{l.name}</span>
+                                </div>
+                                {linesList.length > 1 && (
+                                  <button 
+                                    className="btn btn-link text-danger p-0"
+                                    onClick={() => setLinesList(linesList.filter(x => x.id !== l.id))}
+                                    title="Delete Line"
+                                  >
+                                    <i className="bi bi-trash"></i>
+                                  </button>
+                                )}
+                              </div>
+                            ))}
+                          </div>
+
+                          <div className="row g-2">
+                            <div className="col-5">
+                              <input 
+                                type="text" 
+                                className="form-control form-control-sm font-mono" 
+                                placeholder="LINE-04"
+                                value={newLineForm.id}
+                                onChange={(e) => setNewLineForm({ ...newLineForm, id: e.target.value.toUpperCase() })}
+                              />
+                            </div>
+                            <div className="col-7">
+                              <input 
+                                type="text" 
+                                className="form-control form-control-sm" 
+                                placeholder="Packaging Cell"
+                                value={newLineForm.name}
+                                onChange={(e) => setNewLineForm({ ...newLineForm, name: e.target.value })}
+                              />
+                            </div>
+                            <div className="col-12">
+                              <button 
+                                className="btn btn-sm btn-outline-info w-100"
+                                onClick={() => {
+                                  if (!newLineForm.id.trim()) return alert("Enter Line ID");
+                                  setLinesList([...linesList, { id: newLineForm.id.trim(), name: newLineForm.name.trim() || newLineForm.id.trim() }]);
+                                  setNewLineForm({ id: "", name: "" });
+                                }}
+                              >
+                                <i className="bi bi-plus-lg me-1"></i> Add Custom Line
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Shifts Management */}
+                      <div className="col-12 col-md-6">
+                        <div className="p-3 rounded border border-secondary h-100" style={{ background: '#0b0f19' }}>
+                          <h6 className="fw-bold text-warning mb-3"><i className="bi bi-clock-history me-2"></i>Operating Shifts ({shiftsList.length})</h6>
+                          
+                          <div className="list-group mb-3" style={{ maxHeight: '200px', overflowY: 'auto' }}>
+                            {shiftsList.map(s => (
+                              <div key={s.id} className="list-group-item bg-dark text-white border-secondary d-flex justify-content-between align-items-center py-2">
+                                <div>
+                                  <span className="badge bg-dark border border-secondary font-mono me-2">{s.id}</span>
+                                  <span className="small">{s.name}</span>
+                                </div>
+                                {shiftsList.length > 1 && (
+                                  <button 
+                                    className="btn btn-link text-danger p-0"
+                                    onClick={() => setShiftsList(shiftsList.filter(x => x.id !== s.id))}
+                                    title="Delete Shift"
+                                  >
+                                    <i className="bi bi-trash"></i>
+                                  </button>
+                                )}
+                              </div>
+                            ))}
+                          </div>
+
+                          <div className="row g-2">
+                            <div className="col-5">
+                              <input 
+                                type="text" 
+                                className="form-control form-control-sm font-mono" 
+                                placeholder="SHIFT-D"
+                                value={newShiftForm.id}
+                                onChange={(e) => setNewShiftForm({ ...newShiftForm, id: e.target.value.toUpperCase() })}
+                              />
+                            </div>
+                            <div className="col-7">
+                              <input 
+                                type="text" 
+                                className="form-control form-control-sm" 
+                                placeholder="Weekend Rotation"
+                                value={newShiftForm.name}
+                                onChange={(e) => setNewShiftForm({ ...newShiftForm, name: e.target.value })}
+                              />
+                            </div>
+                            <div className="col-12">
+                              <button 
+                                className="btn btn-sm btn-outline-warning w-100"
+                                onClick={() => {
+                                  if (!newShiftForm.id.trim()) return alert("Enter Shift ID");
+                                  setShiftsList([...shiftsList, { id: newShiftForm.id.trim(), name: newShiftForm.name.trim() || newShiftForm.id.trim() }]);
+                                  setNewShiftForm({ id: "", name: "" });
+                                }}
+                              >
+                                <i className="bi bi-plus-lg me-1"></i> Add Custom Shift
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="modal-footer border-secondary justify-content-between">
+                    <button 
+                      type="button" 
+                      className="btn btn-outline-secondary btn-sm"
+                      onClick={() => {
+                        setLinesList([
+                          { id: "LINE-01", name: "Line 1: SMT Solder" },
+                          { id: "LINE-02", name: "Line 2: Stamping CNC" },
+                          { id: "LINE-03", name: "Line 3: Cleanroom Assembly" }
+                        ]);
+                        setShiftsList([
+                          { id: "SHIFT-A", name: "Shift A (Morning)" },
+                          { id: "SHIFT-B", name: "Shift B (Evening)" },
+                          { id: "SHIFT-C", name: "Shift C (Night)" }
+                        ]);
+                      }}
+                    >
+                      Reset Defaults
+                    </button>
+                    <button type="button" className="btn btn-primary btn-sm px-3" onClick={() => setShowConfigModal(false)}>
+                      Done
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* Mobile Bottom Navigation Bar (Thumb Friendly on Phones) */}
+          <div className="mobile-bottom-bar d-lg-none">
+            <div className="mobile-bottom-bar-inner">
+              <button 
+                className={`bottom-nav-btn ${activeTab === 'dashboard' ? 'active' : ''}`}
+                onClick={() => setActiveTab('dashboard')}
+              >
+                <i className="bi bi-speedometer2"></i>
+                <span>Logs</span>
+              </button>
+
+              <button 
+                className={`bottom-nav-btn ${activeTab === 'fishbone' ? 'active' : ''}`}
+                onClick={() => setActiveTab('fishbone')}
+              >
+                <i className="bi bi-diagram-3"></i>
+                <span>Fishbone</span>
+              </button>
+
+              <button 
+                className="bottom-nav-btn bottom-nav-btn-fab"
+                onClick={() => {
+                  if (!currentUser) {
+                    setShowLoginModal(true);
+                    setAuthError("Please sign in to record production logs.");
+                  } else {
+                    setActiveTab('new-entry');
+                  }
+                }}
+                title="Record 5M1E Event"
+              >
+                <i className="bi bi-plus-lg"></i>
+              </button>
+
+              <button 
+                className={`bottom-nav-btn ${activeTab === 'analytics' ? 'active' : ''}`}
+                onClick={() => setActiveTab('analytics')}
+              >
+                <i className="bi bi-graph-up"></i>
+                <span>Analytics</span>
+              </button>
+
+              <button 
+                className={`bottom-nav-btn ${showLoginModal ? 'active' : ''}`}
+                onClick={() => setShowLoginModal(true)}
+              >
+                <i className={`bi ${currentUser ? 'bi-person-circle text-info' : 'bi-shield-lock'}`}></i>
+                <span>{currentUser ? 'Profile' : 'Auth'}</span>
+              </button>
+            </div>
+          </div>
 
         </div>
       );
