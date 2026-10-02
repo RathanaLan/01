@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+
+{% block title %}Sign Up - Web PPT Clone{% endblock %}
+{% block body_class %}auth-body{% endblock %}
+
+{% block content %}
+<div class="auth-wrapper">
+  <div class="auth-card">
+    <div class="auth-header">
+      <div class="auth-logo">
+        <span class="logo-icon">📊</span>
+        <span class="logo-text">SlideCraft</span>
+      </div>
+      <h1 class="auth-title">Create Account</h1>
+      <p class="auth-subtitle">Get started with online presentations in seconds</p>
+    </div>
+
+    <form method="POST" action="{{ url_for('register') }}" class="auth-form">
+      <div class="form-group">
+        <label for="username">Username</label>
+        <input 
+          type="text" 
+          id="username" 
+          name="username" 
+          value="{{ username or '' }}" 
+          required 
+          autofocus 
+          placeholder="Choose a username"
+          class="form-control"
+        >
+      </div>
+
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input 
+          type="password" 
+          id="password" 
+          name="password" 
+          required 
+          placeholder="At least 4 characters"
+          class="form-control"
+        >
+      </div>
+
+      <div class="form-group">
+        <label for="confirm_password">Confirm Password</label>
+        <input 
+          type="password" 
+          id="confirm_password" 
+          name="confirm_password" 
+          required 
+          placeholder="Confirm password"
+          class="form-control"
+        >
+      </div>
+
+      <button type="submit" class="btn btn-primary btn-block">Sign Up</button>
+    </form>
+
+    <div class="auth-footer">
+      <p>Already have an account? <a href="{{ url_for('login') }}">Log in here</a></p>
+    </div>
+  </div>
+</div>
+{% endblock %}

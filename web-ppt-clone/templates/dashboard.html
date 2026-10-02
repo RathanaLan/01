@@ -1,0 +1,148 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard - SlideCraft{% endblock %}
+{% block body_class %}dashboard-body{% endblock %}
+
+{% block content %}
+<header class="app-navbar">
+  <div class="navbar-left">
+    <a href="{{ url_for('dashboard') }}" class="brand-link">
+      <span class="brand-icon">📊</span>
+      <span class="brand-name">SlideCraft</span>
+    </a>
+  </div>
+  <div class="navbar-right">
+    <span class="user-greeting">👋 Hi, <strong>{{ username }}</strong></span>
+    <a href="{{ url_for('logout') }}" class="btn btn-outline-danger btn-sm">Log Out</a>
+  </div>
+</header>
+
+<main class="dashboard-main">
+  <div class="dashboard-header">
+    <div>
+      <h1 class="page-title">My Presentations</h1>
+      <p class="page-subtitle">Create, edit, and present your slides</p>
+    </div>
+    <div class="dashboard-actions">
+      <button type="button" class="btn btn-primary" onclick="openNewModal()">
+        <span>+ New Presentation</span>
+      </button>
+    </div>
+  </div>
+
+  {% if presentations %}
+    <div class="presentations-grid">
+      <!-- Create New Card -->
+      <div class="new-pres-card" onclick="openNewModal()">
+        <div class="new-pres-icon">+</div>
+        <div class="new-pres-text">Create Blank Deck</div>
+      </div>
+
+      {% for pres in presentations %}
+        <div class="pres-card" id="pres-card-{{ pres.id }}">
+          <div class="pres-thumbnail" onclick="window.location.href='{{ url_for('editor', pres_id=pres.id) }}'">
+            <div class="thumbnail-aspect">
+              <span class="thumb-icon">📑</span>
+            </div>
+            <div class="thumb-overlay">Click to open</div>
+          </div>
+          <div class="pres-details">
+            <h3 class="pres-title" title="{{ pres.title }}">{{ pres.title }}</h3>
+            <p class="pres-date">Updated: {{ pres.updated_at }}</p>
+            <div class="pres-card-actions">
+              <a href="{{ url_for('editor', pres_id=pres.id) }}" class="btn btn-sm btn-primary">Edit</a>
+              <button type="button" class="btn btn-sm btn-outline-danger" onclick="deletePres({{ pres.id }}, '{{ pres.title | replace("'", "\\'") }}')">Delete</button>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  {% else %}
+    <div class="empty-state">
+      <div class="empty-icon">📂</div>
+      <h2>No presentations found</h2>
+      <p>You haven't created any slide decks yet. Start your first deck now!</p>
+      <button type="button" class="btn btn-primary btn-lg" onclick="openNewModal()">
+        + Create First Presentation
+      </button>
+    </div>
+  {% endif %}
+</main>
+
+<!-- New Presentation Modal -->
+<div class="modal-backdrop" id="newModal" style="display: none;">
+  <div class="modal-dialog">
+    <div class="modal-header">
+      <h2>Create New Presentation</h2>
+      <button type="button" class="modal-close" onclick="closeNewModal()">&times;</button>
+    </div>
+    <form action="{{ url_for('new_presentation') }}" method="GET">
+      <div class="modal-body">
+        <label for="deck-title">Deck Title</label>
+        <input 
+          type="text" 
+          id="deck-title" 
+          name="title" 
+          value="Untitled Presentation" 
+          class="form-control" 
+          required 
+          autocomplete="off"
+        >
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" onclick="closeNewModal()">Cancel</button>
+        <button type="submit" class="btn btn-primary">Create Deck</button>
+      </div>
+    </form>
+  </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+  function openNewModal() {
+    const modal = document.getElementById('newModal');
+    modal.style.display = 'flex';
+    setTimeout(() => {
+      const input = document.getElementById('deck-title');
+      input.focus();
+      input.select();
+    }, 100);
+  }
+
+  function closeNewModal() {
+    document.getElementById('newModal').style.display = 'none';
+  }
+
+  window.addEventListener('click', (e) => {
+    const modal = document.getElementById('newModal');
+    if (e.target === modal) {
+      closeNewModal();
+    }
+  });
+
+  async function deletePres(id, title) {
+    if (!confirm(`Are you sure you want to delete "${title}"? This cannot be undone.`)) {
+      return;
+    }
+    try {
+      const res = await fetch(`/api/presentations/${id}`, {
+        method: 'DELETE'
+      });
+      const data = await res.json();
+      if (data.success) {
+        const card = document.getElementById(`pres-card-${id}`);
+        if (card) {
+          card.style.transform = 'scale(0.8)';
+          card.style.opacity = '0';
+          setTimeout(() => card.remove(), 250);
+        }
+      } else {
+        alert(data.error || 'Failed to delete presentation.');
+      }
+    } catch (err) {
+      alert('Error connecting to server.');
+    }
+  }
+</script>
+{% endblock %}

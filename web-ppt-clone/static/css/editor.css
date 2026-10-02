@@ -1,0 +1,1240 @@
+/* ==========================================================================
+   MICROSOFT POWERPOINT THEME & DESIGN TOKENS
+   ========================================================================== */
+:root {
+  --ppt-red: #c43e1c;
+  --ppt-red-dark: #a83214;
+  --ppt-red-light: #fbeee9;
+  --ppt-accent: #d24726;
+  
+  --ribbon-bg: #f3f4f6;
+  --ribbon-border: #d1d5db;
+  --panel-bg: #ffffff;
+  --stage-bg: #404040; /* PowerPoint Stage Slate Canvas */
+  --status-bar-bg: #e5e7eb;
+  
+  --font-office: 'Segoe UI', 'Inter', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Consolas', monospace;
+}
+
+body.powerpoint-app {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  height: 100vh;
+  width: 100vw;
+  font-family: var(--font-office);
+  background: var(--stage-bg);
+  user-select: none;
+  -webkit-font-smoothing: antialiased;
+}
+
+.ppt-window {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+}
+
+/* ==========================================================================
+   1. POWERPOINT TITLE BAR (ORANGE-RED OFFICE HEADER)
+   ========================================================================== */
+.ppt-title-bar {
+  height: 44px;
+  background-color: var(--ppt-red);
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 10px;
+  flex-shrink: 0;
+  z-index: 1000;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+.title-bar-left {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* PowerPoint "P" Tile Icon */
+.ppt-brand-tile {
+  width: 26px;
+  height: 26px;
+  background: #ffffff;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.25);
+  cursor: pointer;
+}
+.ppt-brand-letter {
+  font-size: 17px;
+  font-weight: 900;
+  color: var(--ppt-red);
+  line-height: 1;
+}
+
+/* Quick Access Toolbar */
+.quick-access-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+.qat-btn {
+  background: transparent;
+  border: none;
+  color: #ffffff;
+  width: 26px;
+  height: 26px;
+  border-radius: 3px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+.qat-btn:hover {
+  background: rgba(255, 255, 255, 0.22);
+}
+
+.title-bar-sep {
+  width: 1px;
+  height: 18px;
+  background: rgba(255, 255, 255, 0.35);
+  margin: 0 4px;
+}
+
+/* Deck Title Box */
+.deck-title-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.deck-title-box {
+  background: transparent;
+  border: 1px solid transparent;
+  color: #ffffff;
+  font-size: 13.5px;
+  font-weight: 700;
+  padding: 3px 7px;
+  border-radius: 4px;
+  outline: none;
+  font-family: inherit;
+  width: 220px;
+  transition: all 0.15s ease;
+}
+.deck-title-box:hover {
+  background: rgba(255, 255, 255, 0.18);
+  border-color: rgba(255, 255, 255, 0.3);
+}
+.deck-title-box:focus {
+  background: #ffffff;
+  color: #0f172a;
+  border-color: #ffffff;
+}
+.save-state-label {
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.85);
+  font-weight: 500;
+}
+
+/* Center Search Box */
+.title-bar-center {
+  flex-grow: 1;
+  max-width: 440px;
+  margin: 0 20px;
+}
+.search-box {
+  background: rgba(255, 255, 255, 0.22);
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  padding: 4px 10px;
+  gap: 7px;
+  transition: background 0.2s ease;
+}
+.search-box:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+.search-icon { font-size: 12px; opacity: 0.85; }
+.search-input {
+  background: transparent;
+  border: none;
+  outline: none;
+  color: #ffffff;
+  font-size: 12.5px;
+  width: 100%;
+  font-family: inherit;
+  cursor: pointer;
+}
+.search-input::placeholder { color: rgba(255, 255, 255, 0.8); }
+
+/* Right Window Controls */
+.title-bar-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.btn-share {
+  background: rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  color: #ffffff;
+  padding: 4px 11px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+.btn-share:hover { background: rgba(255, 255, 255, 0.32); }
+
+.user-pill {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12.5px;
+  font-weight: 600;
+}
+.user-avatar {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: #ffffff;
+  color: var(--ppt-red);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.window-controls {
+  display: flex;
+  align-items: center;
+}
+.win-btn {
+  width: 32px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: none;
+  color: #ffffff;
+  font-size: 13px;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background 0.15s ease;
+}
+.win-btn:hover { background: rgba(255, 255, 255, 0.2); }
+.win-close:hover { background: #dc2626; }
+
+/* ==========================================================================
+   2. POWERPOINT FLUENT RIBBON TABS
+   ========================================================================== */
+.ppt-ribbon-tabs {
+  background: #f3f4f6;
+  border-bottom: 1px solid #d1d5db;
+  display: flex;
+  align-items: flex-end;
+  padding: 0 8px;
+  gap: 2px;
+  height: 31px;
+  flex-shrink: 0;
+}
+
+.ribbon-tab {
+  background: transparent;
+  border: 1px solid transparent;
+  border-bottom: none;
+  padding: 5px 14px;
+  font-size: 12.5px;
+  font-weight: 500;
+  color: #374151;
+  cursor: pointer;
+  border-radius: 4px 4px 0 0;
+  transition: all 0.12s ease;
+}
+.ribbon-tab:hover {
+  background: #e5e7eb;
+  color: #111827;
+}
+.ribbon-tab.active {
+  background: #ffffff;
+  color: var(--ppt-red);
+  font-weight: 700;
+  border-color: #d1d5db;
+  border-top: 2px solid var(--ppt-red);
+  margin-bottom: -1px;
+  padding-bottom: 6px;
+}
+
+/* File Tab (Iconic Solid Dark Red) */
+.ribbon-tab.tab-file {
+  background: var(--ppt-red-dark);
+  color: #ffffff;
+  font-weight: 700;
+  padding: 5px 16px;
+  border: none;
+  margin-right: 4px;
+}
+.ribbon-tab.tab-file:hover {
+  background: var(--ppt-accent);
+}
+
+/* ==========================================================================
+   3. RIBBON TOOLBAR CONTENT PANELS (OFFICE RIBBON)
+   ========================================================================== */
+.ppt-ribbon-content {
+  height: 98px;
+  background: #ffffff;
+  border-bottom: 1px solid #cbd5e1;
+  overflow-x: auto;
+  overflow-y: hidden;
+  flex-shrink: 0;
+  position: relative;
+  z-index: 100;
+}
+
+.ribbon-panel {
+  display: none;
+  height: 100%;
+  align-items: stretch;
+  padding: 4px 8px;
+  gap: 4px;
+}
+.ribbon-panel.active {
+  display: flex;
+}
+
+/* Ribbon Groups & Labels */
+.ribbon-group {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border-right: 1px solid #e5e7eb;
+  padding: 2px 8px;
+  flex-shrink: 0;
+}
+.ribbon-group:last-child { border-right: none; }
+
+.group-label {
+  font-size: 10.5px;
+  color: #6b7280;
+  text-align: center;
+  margin-top: 2px;
+  letter-spacing: 0.02em;
+  user-select: none;
+}
+
+.ribbon-chunk {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-grow: 1;
+}
+.ribbon-chunk.flex-column {
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 3px;
+}
+.ribbon-row {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+/* Buttons inside Ribbon */
+.ribbon-large-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  min-width: 50px;
+  height: 64px;
+  padding: 4px 6px;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+.ribbon-large-btn:hover {
+  background: #f3f4f6;
+  border-color: #d1d5db;
+}
+.ribbon-large-btn .chunk-icon { font-size: 24px; line-height: 1; }
+.ribbon-large-btn .chunk-text { font-size: 11px; font-weight: 500; color: #374151; white-space: nowrap; }
+
+.ribbon-stacked-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.ribbon-small-btn {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 3px 7px;
+  font-size: 11.5px;
+  color: #374151;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 3px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+.ribbon-small-btn:hover {
+  background: #f3f4f6;
+  border-color: #d1d5db;
+}
+
+.ppt-select, .ppt-select-sm {
+  height: 24px;
+  font-size: 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 3px;
+  background: #ffffff;
+  color: #111827;
+  padding: 0 4px;
+  outline: none;
+}
+.ppt-select-sm { width: 44px; }
+
+.ppt-icon-btn, .ppt-toggle-btn {
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 3px;
+  font-size: 12px;
+  color: #374151;
+  cursor: pointer;
+}
+.ppt-icon-btn:hover, .ppt-toggle-btn:hover {
+  background: #f3f4f6;
+  border-color: #d1d5db;
+}
+.ppt-toggle-btn.active {
+  background: #fee2e2;
+  border-color: #fca5a5;
+  color: var(--ppt-red);
+}
+
+.btn-group-flat {
+  display: flex;
+  align-items: center;
+  border: 1px solid #d1d5db;
+  border-radius: 3px;
+  overflow: hidden;
+}
+.btn-group-flat .ppt-toggle-btn {
+  border-radius: 0;
+  border: none;
+  border-right: 1px solid #e5e7eb;
+}
+.btn-group-flat .ppt-toggle-btn:last-child { border-right: none; }
+
+.color-picker-box {
+  display: flex;
+  align-items: center;
+  border: 1px solid #d1d5db;
+  border-radius: 3px;
+  padding: 0 4px;
+  height: 24px;
+  gap: 3px;
+  background: #ffffff;
+}
+.color-letter { font-size: 13px; font-weight: 700; }
+.color-input-flat {
+  width: 16px;
+  height: 16px;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  background: none;
+}
+
+/* Quick Shapes Carousel */
+.quick-shapes-carousel {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 3px;
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+  border-radius: 4px;
+  padding: 4px;
+}
+.shape-tile {
+  width: 26px;
+  height: 26px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+.shape-tile:hover {
+  background: #eef2ff;
+  border-color: #818cf8;
+  transform: scale(1.08);
+}
+
+.ppt-combo-button {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 2px 6px;
+  border: 1px solid #e5e7eb;
+  border-radius: 4px;
+  background: #ffffff;
+}
+.combo-icon { font-size: 14px; }
+.combo-title { font-size: 11px; font-weight: 600; color: #374151; }
+
+/* PowerPoint Layout Picker Dropdown */
+.layout-picker-menu {
+  width: 320px;
+  padding: 12px;
+  background: #ffffff;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+}
+.layout-picker-title {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #6b7280;
+  margin-bottom: 8px;
+}
+.layouts-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+.layout-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  padding: 6px;
+  border: 1px solid transparent;
+  border-radius: 4px;
+}
+.layout-card:hover {
+  background: #fef2f2;
+  border-color: var(--ppt-red);
+}
+.layout-card span { font-size: 10.5px; text-align: center; color: #374151; font-weight: 500; }
+
+.layout-thumb {
+  width: 72px;
+  height: 44px;
+  background: #ffffff;
+  border: 1px solid #94a3b8;
+  border-radius: 2px;
+  padding: 4px;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.08);
+}
+.thumb-line-thick { width: 80%; height: 6px; background: #cbd5e1; margin: 6px auto 3px; }
+.thumb-line-thin { width: 50%; height: 3px; background: #e2e8f0; margin: 0 auto; }
+.thumb-line-header { width: 85%; height: 4px; background: #94a3b8; margin-bottom: 4px; }
+.thumb-bullet-lines { font-size: 8px; line-height: 7px; color: #cbd5e1; }
+.split-cols { display: flex; gap: 4px; height: 26px; }
+.split-box { flex: 1; border: 1px dashed #cbd5e1; }
+
+/* Themes Gallery in Design Tab */
+.themes-gallery {
+  display: flex;
+  gap: 8px;
+}
+.theme-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  cursor: pointer;
+  padding: 3px;
+  border: 1px solid transparent;
+  border-radius: 4px;
+}
+.theme-card:hover { border-color: var(--ppt-red); background: #fef2f2; }
+.theme-card.active { border-color: var(--ppt-red); background: #fee2e2; }
+.theme-preview {
+  width: 52px;
+  height: 32px;
+  border-radius: 2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.theme-card span { font-size: 10px; color: #374151; font-weight: 600; }
+
+/* Transitions Gallery */
+.transitions-gallery {
+  display: flex;
+  gap: 6px;
+}
+.transition-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  padding: 6px 12px;
+  background: #ffffff;
+  border: 1px solid #d1d5db;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 11px;
+}
+.transition-card:hover { background: #f3f4f6; }
+.transition-card.active { border-color: var(--ppt-red); background: #fef2f2; font-weight: 700; color: var(--ppt-red); }
+
+/* Full Shapes Palette */
+.full-shapes-palette {
+  width: 240px;
+  padding: 10px;
+}
+.shape-category-title {
+  font-size: 10.5px;
+  font-weight: 700;
+  color: #6b7280;
+  margin: 6px 0 3px;
+}
+.shape-cat-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+/* ==========================================================================
+   4. WORKSPACE: LEFT THUMBNAILS + CENTER CANVAS
+   ========================================================================== */
+.ppt-workspace {
+  flex-grow: 1;
+  display: flex;
+  overflow: hidden;
+  position: relative;
+  background: #404040;
+}
+
+/* Left Slide Sidebar (Thumbnails) */
+.ppt-slide-sidebar {
+  width: 200px;
+  background: #f3f4f6;
+  border-right: 1px solid #d1d5db;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  padding: 12px 8px;
+  flex-shrink: 0;
+}
+
+.sidebar-top-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 4px 8px;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #6b7280;
+}
+.sidebar-add-btn {
+  background: var(--ppt-red);
+  color: #ffffff;
+  border: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 3px;
+  font-size: 14px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.slides-thumbnail-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.ppt-thumb-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+}
+.ppt-thumb-num {
+  font-size: 11.5px;
+  font-weight: 700;
+  color: #6b7280;
+  width: 14px;
+  text-align: right;
+}
+
+.ppt-thumb-wrapper {
+  flex-grow: 1;
+  aspect-ratio: 16 / 9;
+  background: #ffffff;
+  border: 1px solid #9ca3af;
+  border-radius: 2px;
+  overflow: hidden;
+  position: relative;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+  transition: all 0.15s ease;
+}
+.ppt-thumb-item:hover .ppt-thumb-wrapper {
+  border-color: #4b5563;
+}
+/* Iconic PowerPoint Active Slide Red Border */
+.ppt-thumb-item.active .ppt-thumb-wrapper {
+  border: 2px solid var(--ppt-red);
+  box-shadow: 0 0 0 1px var(--ppt-red);
+}
+
+.ppt-mini-stage {
+  width: 960px;
+  height: 540px;
+  transform-origin: top left;
+  pointer-events: none;
+  position: relative;
+}
+
+/* Center Stage Viewport */
+.ppt-stage-area {
+  flex-grow: 1;
+  background: #404040; /* PowerPoint Deep Slate canvas backdrop */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: auto;
+  padding: 40px;
+  position: relative;
+}
+
+.slide-stage-scaler {
+  position: relative;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+  border-radius: 2px;
+}
+
+/* Standard PowerPoint 16:9 Canvas (960px x 540px) */
+.ppt-slide-canvas {
+  width: 960px;
+  height: 540px;
+  background-color: #ffffff;
+  position: relative;
+  overflow: hidden;
+  transform-origin: center center;
+}
+
+/* Gridlines Overlay */
+.ppt-slide-canvas.show-grid::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: 
+    linear-gradient(to right, rgba(0,0,0,0.06) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(0,0,0,0.06) 1px, transparent 1px);
+  background-size: 20px 20px;
+  pointer-events: none;
+  z-index: 1000;
+}
+
+/* Inks Canvas (Drawing tool layer) */
+.ink-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 900;
+}
+.ink-canvas.active-drawing {
+  pointer-events: auto;
+  cursor: crosshair;
+}
+
+/* Slide Elements (Text, Image, Shape) */
+.slide-element {
+  position: absolute;
+  box-sizing: border-box;
+  cursor: move;
+  user-select: none;
+}
+
+/* PowerPoint Placeholder Dashed Border */
+.element-text.is-placeholder {
+  border: 1px dashed #94a3b8 !important;
+}
+
+.element-text {
+  padding: 4px 8px;
+  word-break: break-word;
+  outline: none;
+}
+.element-text.is-editing {
+  cursor: text;
+  user-select: text;
+  border: 1px dashed var(--ppt-red) !important;
+}
+
+.element-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+  pointer-events: none;
+}
+
+.element-shape {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.element-shape svg {
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+/* PowerPoint Selection Frame & Rotation Handle */
+.slide-element.is-selected {
+  outline: 1.5px solid var(--ppt-red) !important;
+}
+
+.ppt-handle {
+  position: absolute;
+  width: 9px;
+  height: 9px;
+  background: #ffffff;
+  border: 1px solid var(--ppt-red);
+  border-radius: 50%;
+  z-index: 100;
+  display: none;
+}
+.slide-element.is-selected .ppt-handle {
+  display: block;
+}
+
+.handle-nw { top: -5px; left: -5px; cursor: nwse-resize; }
+.handle-n  { top: -5px; left: calc(50% - 5px); cursor: ns-resize; }
+.handle-ne { top: -5px; right: -5px; cursor: nesw-resize; }
+.handle-e  { top: calc(50% - 5px); right: -5px; cursor: ew-resize; }
+.handle-se { bottom: -5px; right: -5px; cursor: nwse-resize; }
+.handle-s  { bottom: -5px; left: calc(50% - 5px); cursor: ns-resize; }
+.handle-sw { bottom: -5px; left: -5px; cursor: nesw-resize; }
+.handle-w  { top: calc(50% - 5px); left: -5px; cursor: ew-resize; }
+
+/* The Iconic PowerPoint Rotation Handle (Lollipop Stem) */
+.ppt-rot-stem {
+  position: absolute;
+  top: -24px;
+  left: 50%;
+  width: 1px;
+  height: 19px;
+  background: var(--ppt-red);
+  display: none;
+}
+.ppt-rot-handle {
+  position: absolute;
+  top: -30px;
+  left: calc(50% - 6px);
+  width: 12px;
+  height: 12px;
+  background: #ffffff;
+  border: 1.5px solid var(--ppt-red);
+  border-radius: 50%;
+  cursor: grab;
+  z-index: 101;
+  display: none;
+}
+.slide-element.is-selected .ppt-rot-stem,
+.slide-element.is-selected .ppt-rot-handle {
+  display: block;
+}
+
+/* ==========================================================================
+   5. SPEAKER NOTES PANE
+   ========================================================================== */
+.speaker-notes-pane {
+  height: 80px;
+  background: #ffffff;
+  border-top: 1px solid #cbd5e1;
+  display: flex;
+  flex-direction: column;
+  padding: 6px 16px;
+  flex-shrink: 0;
+  transition: height 0.2s ease;
+}
+.speaker-notes-pane.collapsed {
+  display: none;
+}
+.notes-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 11px;
+  font-weight: 700;
+  color: #6b7280;
+  margin-bottom: 4px;
+}
+.btn-notes-toggle {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #9ca3af;
+  font-size: 13px;
+}
+.btn-notes-toggle:hover { color: #111827; }
+
+#speaker-notes-input {
+  width: 100%;
+  height: 100%;
+  border: none;
+  outline: none;
+  resize: none;
+  font-family: inherit;
+  font-size: 13px;
+  color: #374151;
+}
+
+/* ==========================================================================
+   6. POWERPOINT STATUS BAR (OFFICE GRAY BOTTOM BAR)
+   ========================================================================== */
+.ppt-status-bar {
+  height: 28px;
+  background: var(--status-bar-bg);
+  border-top: 1px solid #d1d5db;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 12px;
+  font-size: 11.5px;
+  color: #374151;
+  flex-shrink: 0;
+  z-index: 1000;
+}
+
+.status-bar-left, .status-bar-right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.status-sep { color: #9ca3af; }
+.status-btn {
+  background: transparent;
+  border: none;
+  color: inherit;
+  font-size: inherit;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 2px 6px;
+  border-radius: 3px;
+}
+.status-btn:hover { background: #d1d5db; }
+
+.view-switchers {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+.view-btn {
+  width: 22px;
+  height: 22px;
+  border: none;
+  background: transparent;
+  color: #4b5563;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 3px;
+  cursor: pointer;
+}
+.view-btn:hover { background: #d1d5db; color: #111827; }
+.view-btn.active { background: #d1d5db; color: var(--ppt-red); }
+
+.zoom-controls {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.zoom-stepper {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-weight: 700;
+  color: #4b5563;
+  font-size: 14px;
+}
+.zoom-stepper:hover { color: #111827; }
+.zoom-range {
+  width: 80px;
+  height: 4px;
+  cursor: pointer;
+  accent-color: var(--ppt-red);
+}
+.zoom-val {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  min-width: 32px;
+  text-align: right;
+}
+.zoom-fit-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 13px;
+  color: #4b5563;
+}
+.zoom-fit-btn:hover { color: #111827; }
+
+/* ==========================================================================
+   7. FULLSCREEN SLIDE SHOW & PRESENTER TOOLS
+   ========================================================================== */
+.ppt-slideshow-overlay {
+  position: fixed;
+  inset: 0;
+  background: #000000;
+  z-index: 9999999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  cursor: none;
+}
+.ppt-slideshow-overlay.show-cursor {
+  cursor: default;
+}
+
+.slideshow-stage {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+
+.slideshow-slide {
+  width: 960px;
+  height: 540px;
+  background: #ffffff;
+  position: relative;
+  overflow: hidden;
+  transform-origin: center center;
+  box-shadow: 0 0 50px rgba(0, 0, 0, 0.9);
+  transition: opacity 0.25s ease, transform 0.25s ease;
+}
+
+/* Presenter Floating HUD in Bottom Left */
+.presenter-hud {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  background: rgba(20, 20, 20, 0.85);
+  backdrop-filter: blur(8px);
+  padding: 5px 12px;
+  border-radius: 9999px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  z-index: 10000000;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+.ppt-slideshow-overlay:hover .presenter-hud,
+.presenter-hud:hover {
+  opacity: 1;
+}
+
+.hud-tool {
+  background: transparent;
+  border: none;
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: 4px;
+}
+.hud-tool:hover { background: rgba(255, 255, 255, 0.2); }
+.hud-exit-btn { color: #f87171; }
+.hud-slide-idx { font-family: var(--font-mono); font-size: 11px; color: #cbd5e1; }
+
+/* Laser Pointer */
+.laser-pointer {
+  position: fixed;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #ff0000;
+  box-shadow: 0 0 12px #ff0000, 0 0 24px #ff0000;
+  pointer-events: none;
+  z-index: 10000001;
+  transform: translate(-50%, -50%);
+}
+
+/* ==========================================================================
+   8. BACKSTAGE VIEW (POWERPOINT "FILE" FULLSCREEN EXPERIENCE)
+   ========================================================================== */
+.backstage-overlay {
+  position: fixed;
+  inset: 0;
+  background: #ffffff;
+  z-index: 999999;
+  display: flex;
+  overflow: hidden;
+}
+
+.backstage-sidebar {
+  width: 240px;
+  background: var(--ppt-red);
+  color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+}
+.backstage-back-btn {
+  width: 44px;
+  height: 44px;
+  background: transparent;
+  border: none;
+  color: #ffffff;
+  font-size: 24px;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.15s ease;
+}
+.backstage-back-btn:hover { background: rgba(0, 0, 0, 0.15); }
+
+.backstage-menu {
+  display: flex;
+  flex-direction: column;
+  margin-top: 10px;
+}
+.bs-tab {
+  background: transparent;
+  border: none;
+  color: #ffffff;
+  text-align: left;
+  padding: 14px 24px;
+  font-size: 14.5px;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background 0.15s ease;
+}
+.bs-tab:hover { background: rgba(0, 0, 0, 0.15); }
+.bs-tab.active { background: #ffffff; color: var(--ppt-red); font-weight: 700; }
+.bs-exit { margin-top: auto; border-top: 1px solid rgba(255, 255, 255, 0.2); }
+
+.backstage-content {
+  flex-grow: 1;
+  overflow-y: auto;
+  padding: 40px 60px;
+  background: #ffffff;
+}
+.bs-view { display: none; }
+.bs-view.active { display: block; }
+.bs-view h1 { font-size: 28px; font-weight: 700; color: #111827; margin-bottom: 24px; }
+.bs-subtitle { color: #6b7280; font-size: 14px; margin-bottom: 24px; }
+
+.info-card-deck {
+  display: flex;
+  gap: 32px;
+}
+.info-card {
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  padding: 24px;
+  min-width: 320px;
+}
+.info-card h3 { font-size: 16px; margin-bottom: 14px; color: #111827; }
+.info-card p { font-size: 13.5px; color: #4b5563; margin-bottom: 8px; }
+
+.templates-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 24px;
+}
+.template-item {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  cursor: pointer;
+}
+.template-box {
+  aspect-ratio: 16 / 9;
+  border-radius: 6px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.template-item:hover .template-box {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 15px rgba(0,0,0,0.15);
+}
+.template-item span { font-size: 13px; font-weight: 600; color: #374151; }
+
+.export-options {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  max-width: 600px;
+}
+.export-card {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  padding: 20px;
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  cursor: pointer;
+  text-align: left;
+  transition: all 0.15s ease;
+}
+.export-card:hover {
+  background: #fef2f2;
+  border-color: var(--ppt-red);
+}
+.export-icon { font-size: 32px; }
+.export-card h3 { font-size: 16px; color: #111827; margin-bottom: 4px; }
+.export-card p { font-size: 13px; color: #6b7280; }
+
+/* Print Mode for PDF / Landscape 16:9 Slides */
+@media print {
+  body { background: #ffffff !important; overflow: visible !important; }
+  .ppt-title-bar, .ppt-ribbon-tabs, .ppt-ribbon-content, .ppt-slide-sidebar,
+  .speaker-notes-pane, .ppt-status-bar, .backstage-overlay, .presenter-hud {
+    display: none !important;
+  }
+  .ppt-stage-area { padding: 0 !important; background: transparent !important; }
+  .slide-stage-scaler { transform: none !important; box-shadow: none !important; page-break-after: always; }
+  .ppt-slide-canvas { width: 100vw !important; height: 56.25vw !important; }
+}
