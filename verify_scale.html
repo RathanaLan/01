@@ -1,0 +1,6 @@
+<!DOCTYPE html><html><body><script>
+const invalidCheck = CSS.supports('scale', '2s calc(1.4)');
+const validCheck = CSS.supports('scale', 'calc(1.4)');
+const transitionCheck = CSS.supports('transition', 'scale 2s');
+console.log('OUTPUT:' + JSON.stringify({invalidCheck, validCheck, transitionCheck}));
+</script></body></html>
