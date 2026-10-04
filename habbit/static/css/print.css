@@ -1,0 +1,67 @@
+/* Print Stylesheet for Habit Routine & Success Plan */
+@media print {
+  body {
+    background: #ffffff !important;
+    color: #000000 !important;
+    font-size: 11pt;
+  }
+
+  .ambient-glow,
+  .site-header,
+  .site-footer,
+  .btn-icon,
+  .btn-primary,
+  .btn-secondary,
+  .filter-tabs,
+  .pomodoro-card,
+  .calc-box,
+  #resetHabitsBtn,
+  #themeToggleBtn {
+    display: none !important;
+  }
+
+  .container {
+    max-width: 100% !important;
+    padding: 0 !important;
+  }
+
+  .card, 
+  .metric-card,
+  .meal-card,
+  .technique-card,
+  .weekly-goal-card,
+  .day-column {
+    background: transparent !important;
+    border: 1px solid #ddd !important;
+    box-shadow: none !important;
+    page-break-inside: avoid;
+    margin-bottom: 15px !important;
+  }
+
+  .schedule-table {
+    border: 1px solid #ccc !important;
+  }
+
+  .schedule-table th, 
+  .schedule-table td {
+    border: 1px solid #ddd !important;
+    padding: 8px !important;
+    color: #000 !important;
+  }
+
+  .tag-badge {
+    border: 1px solid #999 !important;
+    background: #f0f0f0 !important;
+    color: #000 !important;
+  }
+
+  .hero-title {
+    font-size: 18pt !important;
+    color: #000 !important;
+  }
+
+  .hero-subtitle {
+    font-size: 11pt !important;
+    color: #444 !important;
+  }
+}

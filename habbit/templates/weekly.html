@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>1-Week Success Plan & Budget Strategy</title>
+  <!-- Google Fonts: Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="../static/css/style.css">
+  <link rel="stylesheet" href="../static/css/print.css" media="print">
+</head>
+<body>
+
+  <div class="ambient-glow"></div>
+
+  <!-- Site Navigation -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="../index.html" class="brand-logo">
+        <div class="logo-badge">⚡</div>
+        <div>
+          <span>HabitCraft</span>
+          <span class="brand-tag">Success Blueprint</span>
+        </div>
+      </a>
+
+      <nav class="main-nav">
+        <a href="../index.html" class="nav-link">
+          <span>📅</span> Daily Routine
+        </a>
+        <a href="weekly.html" class="nav-link active">
+          <span>📊</span> Weekly Plan & Budget
+        </a>
+      </nav>
+
+      <div class="header-actions">
+        <!-- Supabase Cloud Sync Status Badge -->
+        <a href="../index.html#recordSection" class="sb-badge sb-badge-connected" title="Supabase Cloud Daily Tracking" style="text-decoration: none;">
+          <span class="sb-dot-green"></span> Supabase Cloud
+        </a>
+        <button id="printWeeklyBtn" class="btn-icon" title="Print Plan or Save as PDF">🖨️</button>
+        <button id="themeToggleBtn" class="btn-icon" title="Switch Theme">☀️</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <main class="container">
+    <section class="hero-section">
+      <div class="hero-pill">
+        <span class="dot"></span>
+        Comprehensive 7-Day Architecture & Financial Plan
+      </div>
+      <h1 class="hero-title">
+        The 1-Week <span class="text-gradient">Success & Budget Blueprint</span>
+      </h1>
+      <p class="hero-subtitle">
+        Turn daily habits into compound weekly results. Clear financial allocations, prioritized weekly goals, and structured daily pillars tailored for working professionals.
+      </p>
+    </section>
+
+    <!-- SECTION 1: WEEKLY BUDGET PLAN -->
+    <section class="card" style="margin-bottom: 36px;">
+      <div class="card-header">
+        <div class="card-title-group">
+          <span class="card-title-icon">💰</span>
+          <div>
+            <h2 class="card-title">Weekly Budget Breakdown (Simple Numbers)</h2>
+            <span class="card-subtitle">Strategic cashflow allocation for food, career growth, leisure, and future wealth</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Quick Executive Summary Cards -->
+      <div class="budget-hero">
+        
+        <!-- Food & Groceries -->
+        <div class="budget-card" style="border-top: 4px solid var(--accent-success);">
+          <div class="budget-category">🥗 Food & Groceries</div>
+          <div id="valFood" class="budget-amount">$140</div>
+          <div id="pctFood" class="budget-pct" style="color: var(--accent-success);">22% of weekly budget</div>
+          <p style="font-size: 0.82rem; color: var(--text-muted); margin-top: 8px;">
+            High-protein groceries, fresh vegetables, berries, meal prep staples. Eliminates expensive daily takeout.
+          </p>
+        </div>
+
+        <!-- Learning & Skills -->
+        <div class="budget-card" style="border-top: 4px solid var(--accent-primary);">
+          <div class="budget-category">📚 Learning & Growth</div>
+          <div id="valLearning" class="budget-amount">$40</div>
+          <div id="pctLearning" class="budget-pct" style="color: var(--accent-primary);">6% of weekly budget</div>
+          <p style="font-size: 0.82rem; color: var(--text-muted); margin-top: 8px;">
+            Books, online learning platforms (Coursera/Udemy), software subscriptions, professional certifications.
+          </p>
+        </div>
+
+        <!-- Leisure & Social -->
+        <div class="budget-card" style="border-top: 4px solid var(--accent-warning);">
+          <div class="budget-category">☕ Leisure & Social</div>
+          <div id="valLeisure" class="budget-amount">$75</div>
+          <div id="pctLeisure" class="budget-pct" style="color: var(--accent-warning);">12% of weekly budget</div>
+          <p style="font-size: 0.82rem; color: var(--text-muted); margin-top: 8px;">
+            Weekend coffee dates, dining out with friends, streaming services, hobbies. Guilt-free enjoyment.
+          </p>
+        </div>
+
+        <!-- Savings & Investments -->
+        <div class="budget-card" style="border-top: 4px solid var(--accent-purple);">
+          <div class="budget-category">📈 Savings & Wealth</div>
+          <div id="valSavings" class="budget-amount">$395</div>
+          <div id="pctSavings" class="budget-pct" style="color: var(--accent-purple);">60% of weekly budget</div>
+          <p style="font-size: 0.82rem; color: var(--text-muted); margin-top: 8px;">
+            Emergency runway, index funds, retirement accounts. Automatic weekly transfer on payday.
+          </p>
+        </div>
+
+      </div>
+
+      <!-- Interactive Budget Calculator Box -->
+      <div class="calc-box">
+        <h3 style="font-size: 1.15rem; margin-bottom: 14px; display: flex; align-items: center; gap: 8px;">
+          <span>🧮</span> Personalize Your Weekly Numbers
+        </h3>
+        <p style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: 20px;">
+          Enter your estimated weekly net earnings below to instantly recalculate your target budget categories.
+        </p>
+
+        <div class="calc-input-group">
+          <label for="calcIncomeInput">Your Weekly Income:</label>
+          <div style="display: flex; align-items: center; gap: 6px;">
+            <select id="calcCurrencySelect" style="background: var(--bg-primary); color: var(--text-main); border: 1px solid var(--border-subtle); padding: 9px 12px; border-radius: var(--radius-sm); font-weight: 700;">
+              <option value="$">$ (USD)</option>
+              <option value="€">€ (EUR)</option>
+              <option value="£">£ (GBP)</option>
+              <option value="Rp ">Rp (IDR)</option>
+            </select>
+            <input type="number" id="calcIncomeInput" class="calc-input" value="650" min="50" step="25">
+          </div>
+        </div>
+
+        <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
+          <span style="font-size: 0.88rem; font-weight: 600; color: var(--text-muted);">Strategy Preset:</span>
+          <button class="timer-mode-btn budget-preset-btn active" data-preset="standard">High Wealth Accumulator (60% Savings)</button>
+          <button class="timer-mode-btn budget-preset-btn" data-preset="balanced">Balanced Lifestyle (50% Savings)</button>
+          <button class="timer-mode-btn budget-preset-btn" data-preset="growth">Aggressive Career Learning (15% Skills)</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 2: WEEKLY GOALS CHECKLIST -->
+    <section class="card" style="margin-bottom: 36px;">
+      <div class="card-header">
+        <div class="card-title-group">
+          <span class="card-title-icon">🎯</span>
+          <div>
+            <h2 class="card-title">1-Week Target Goals Checklist</h2>
+            <span class="card-subtitle">Measurable, non-negotiable milestones across Fitness, Learning & Personal Growth</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Weekly Progress Meter -->
+      <div class="progress-wrapper">
+        <div class="progress-header">
+          <span>Weekly Objectives Scorecard</span>
+          <span id="weeklyGoalProgressText">0 / 12 Targets Reached (0%)</span>
+        </div>
+        <div class="progress-track">
+          <div id="weeklyGoalProgressFill" class="progress-fill"></div>
+        </div>
+      </div>
+
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 20px;">
+        
+        <!-- Pillar 1: Fitness & Health -->
+        <div class="weekly-goal-card" style="border-left: 4px solid var(--accent-success);">
+          <div class="weekly-goal-header">
+            <span class="goal-category-title"><span>💪</span> Physical Energy & Fitness</span>
+            <span class="tag-badge tag-health">4 Targets</span>
+          </div>
+          <div class="habit-list">
+            <div class="habit-item weekly-goal-item">
+              <div class="habit-left">
+                <div class="custom-checkbox"></div>
+                <div>
+                  <div class="habit-name">Complete 3x Strength Workouts</div>
+                  <div class="habit-streak">Mon, Wed, Fri (Chest/Back/Legs or Calisthenics)</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="habit-item weekly-goal-item">
+              <div class="habit-left">
+                <div class="custom-checkbox"></div>
+                <div>
+                  <div class="habit-name">2x Zone-2 Cardio Runs or Walks</div>
+                  <div class="habit-streak">Tue, Thu (30-40 min aerobic base)</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="habit-item weekly-goal-item">
+              <div class="habit-left">
+                <div class="custom-checkbox"></div>
+                <div>
+                  <div class="habit-name">Drink 2.5L Water Every Day</div>
+                  <div class="habit-streak">7 consecutive hydration days</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="habit-item weekly-goal-item">
+              <div class="habit-left">
+                <div class="custom-checkbox"></div>
+                <div>
+                  <div class="habit-name">Average 7.5+ Hours Sleep</div>
+                  <div class="habit-streak">In bed by 10:00 PM on worknights</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Pillar 2: Learning & Craft -->
+        <div class="weekly-goal-card" style="border-left: 4px solid var(--accent-primary);">
+          <div class="weekly-goal-header">
+            <span class="goal-category-title"><span>📚</span> Learning & Skill Building</span>
+            <span class="tag-badge tag-morning">4 Targets</span>
+          </div>
+          <div class="habit-list">
+            <div class="habit-item weekly-goal-item">
+              <div class="habit-left">
+                <div class="custom-checkbox"></div>
+                <div>
+                  <div class="habit-name">5 Hours of Dedicated Skill Study</div>
+                  <div class="habit-streak">Mon–Fri 7:15 PM skill sprints</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="habit-item weekly-goal-item">
+              <div class="habit-left">
+                <div class="custom-checkbox"></div>
+                <div>
+                  <div class="habit-name">Read 70+ Book Pages</div>
+                  <div class="habit-streak">10 pages morning + 10 pages night</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="habit-item weekly-goal-item">
+              <div class="habit-left">
+                <div class="custom-checkbox"></div>
+                <div>
+                  <div class="habit-name">Ship 1 Milestone or Code Feature</div>
+                  <div class="habit-streak">Tangible proof of work by Friday</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="habit-item weekly-goal-item">
+              <div class="habit-left">
+                <div class="custom-checkbox"></div>
+                <div>
+                  <div class="habit-name">Capture 5 Key Insights in Notes</div>
+                  <div class="habit-streak">Build your digital personal knowledge base</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Pillar 3: Personal Growth & Mindset -->
+        <div class="weekly-goal-card" style="border-left: 4px solid var(--accent-purple);">
+          <div class="weekly-goal-header">
+            <span class="goal-category-title"><span>🌱</span> Mindset & Life Balance</span>
+            <span class="tag-badge tag-winddown">4 Targets</span>
+          </div>
+          <div class="habit-list">
+            <div class="habit-item weekly-goal-item">
+              <div class="habit-left">
+                <div class="custom-checkbox"></div>
+                <div>
+                  <div class="habit-name">Daily Morning & Night Journaling</div>
+                  <div class="habit-streak">Gratitude + daily win logging</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="habit-item weekly-goal-item">
+              <div class="habit-left">
+                <div class="custom-checkbox"></div>
+                <div>
+                  <div class="habit-name">5 Clean Workday Shutdowns</div>
+                  <div class="habit-streak">Zero unresolved anxiety left open</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="habit-item weekly-goal-item">
+              <div class="habit-left">
+                <div class="custom-checkbox"></div>
+                <div>
+                  <div class="habit-name">1 Half-Day Digital Screen Detox</div>
+                  <div class="habit-streak">Weekend walk/hike/reading without phone</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="habit-item weekly-goal-item">
+              <div class="habit-left">
+                <div class="custom-checkbox"></div>
+                <div>
+                  <div class="habit-name">Sunday Weekly Review & Meal Prep</div>
+                  <div class="habit-streak">Plan the upcoming week in advance</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div style="margin-top: 16px; text-align: right;">
+        <button id="resetWeeklyGoalsBtn" class="btn-secondary" style="font-size: 0.8rem; padding: 6px 14px;">Reset Weekly Targets</button>
+      </div>
+    </section>
+
+    <!-- SECTION 3: 7-DAY PILLARS FOR FULL-TIME WORKERS -->
+    <section class="card" style="margin-bottom: 48px;">
+      <div class="card-header">
+        <div class="card-title-group">
+          <span class="card-title-icon">🗓️</span>
+          <div>
+            <h2 class="card-title">Day-by-Day Focus Themes (Mon – Sun)</h2>
+            <span class="card-subtitle">Designed around a 7:30 AM – 4:30 PM professional work week</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="day-columns-grid">
+        <!-- Monday -->
+        <div class="day-column">
+          <div class="day-column-header">
+            <span class="day-column-title">Monday</span>
+            <span class="day-focus-tag">Momentum & High Priority</span>
+          </div>
+          <p style="font-size: 0.86rem; color: var(--text-muted); margin-bottom: 12px;">
+            <strong>Workday:</strong> Attack the most challenging task of the entire week before 10:00 AM.<br>
+            <strong>Fitness:</strong> Full-body strength or upper body pull/push.<br>
+            <strong>Night Sprint:</strong> Outline your weekly skill milestones.
+          </p>
+        </div>
+
+        <!-- Tuesday -->
+        <div class="day-column">
+          <div class="day-column-header">
+            <span class="day-column-title">Tuesday</span>
+            <span class="day-focus-tag">Deep Flow & Technical Depth</span>
+          </div>
+          <p style="font-size: 0.86rem; color: var(--text-muted); margin-bottom: 12px;">
+            <strong>Workday:</strong> Protect your 8-10 AM deep work window. No meetings before lunch.<br>
+            <strong>Fitness:</strong> 30-min zone-2 cardio jog or fast walk.<br>
+            <strong>Night Sprint:</strong> 60 mins coding or core technical practice.
+          </p>
+        </div>
+
+        <!-- Wednesday -->
+        <div class="day-column">
+          <div class="day-column-header">
+            <span class="day-column-title">Wednesday</span>
+            <span class="day-focus-tag">Mid-Week Recalibration</span>
+          </div>
+          <p style="font-size: 0.86rem; color: var(--text-muted); margin-bottom: 12px;">
+            <strong>Workday:</strong> Clear blocking tickets, follow up with key collaborators.<br>
+            <strong>Fitness:</strong> Lower body & core training.<br>
+            <strong>Night Sprint:</strong> Reading session & conceptual notes review.
+          </p>
+        </div>
+
+        <!-- Thursday -->
+        <div class="day-column">
+          <div class="day-column-header">
+            <span class="day-column-title">Thursday</span>
+            <span class="day-focus-tag">Execution & Delivery Sprint</span>
+          </div>
+          <p style="font-size: 0.86rem; color: var(--text-muted); margin-bottom: 12px;">
+            <strong>Workday:</strong> Finalize major deliverables due by end-of-week.<br>
+            <strong>Fitness:</strong> Active recovery walk, yoga, or mobility stretches.<br>
+            <strong>Night Sprint:</strong> Build and test a functional project component.
+          </p>
+        </div>
+
+        <!-- Friday -->
+        <div class="day-column">
+          <div class="day-column-header">
+            <span class="day-column-title">Friday</span>
+            <span class="day-focus-tag">Wrap-Up & Weekend Transition</span>
+          </div>
+          <p style="font-size: 0.86rem; color: var(--text-muted); margin-bottom: 12px;">
+            <strong>Workday:</strong> Inbox Zero by 4:15 PM. Complete shutdown ritual.<br>
+            <strong>Fitness:</strong> High-energy HIIT or fun sporting activity.<br>
+            <strong>Night:</strong> Social dinner with friends or relaxing cinema night.
+          </p>
+        </div>
+
+        <!-- Saturday -->
+        <div class="day-column">
+          <div class="day-column-header">
+            <span class="day-column-title">Saturday</span>
+            <span class="day-focus-tag">Deep Learning & Recreation</span>
+          </div>
+          <p style="font-size: 0.86rem; color: var(--text-muted); margin-bottom: 12px;">
+            <strong>Morning:</strong> Sleep in gently (+45 mins max). 90-min passion project sprint.<br>
+            <strong>Afternoon:</strong> Outdoors, nature hike, social sports, leisure.<br>
+            <strong>Night:</strong> Casual unwind with zero work thoughts.
+          </p>
+        </div>
+
+        <!-- Sunday -->
+        <div class="day-column">
+          <div class="day-column-header">
+            <span class="day-column-title">Sunday</span>
+            <span class="day-focus-tag">Life Admin & Weekly Reset</span>
+          </div>
+          <p style="font-size: 0.86rem; color: var(--text-muted); margin-bottom: 12px;">
+            <strong>Morning:</strong> Grocery shopping & 90-minute meal prep for Mon-Wed.<br>
+            <strong>Afternoon:</strong> 30-min budget review & audit weekly habits scorecard.<br>
+            <strong>Night:</strong> Early wind-down at 9:00 PM; set out clothes for Monday.
+          </p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Site Footer -->
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div style="display: flex; align-items: center; gap: 8px;">
+        <span style="font-size: 1.2rem;">⚡</span>
+        <span><strong>HabitCraft</strong> • Success Habit Blueprint for Working Professionals</span>
+      </div>
+      <div>
+        <a href="../index.html" style="color: var(--accent-primary); text-decoration: none; font-weight: 600;">← Back to Daily Routine Schedule</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="../static/js/weekly.js"></script>
+</body>
+</html>

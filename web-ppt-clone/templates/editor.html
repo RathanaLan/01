@@ -1,839 +1,1109 @@
-{% extends "base.html" %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+    <title>{{ title }} - SlideCraft</title>
 
-{% block title %}{{ presentation.title }} - Microsoft PowerPoint{% endblock %}
-{% block body_class %}powerpoint-app{% endblock %}
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+      rel="stylesheet"
+    />
 
-{% block extra_css %}
-<link rel="stylesheet" href="{{ url_for('static', filename='css/editor.css') }}">
-{% endblock %}
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="/static/css/style.css" />
+    <link rel="stylesheet" href="/static/css/editor.css" />
 
-{% block content %}
-<div class="ppt-window" id="ppt-window">
-
-  <!-- ========================================================================
-       1. POWERPOINT TITLE BAR (ICONIC ORANGE-RED HEADER)
-       ======================================================================== -->
-  <header class="ppt-title-bar">
-    <div class="title-bar-left">
-      <!-- PowerPoint App Icon -->
-      <div class="ppt-brand-tile" title="Microsoft PowerPoint">
-        <span class="ppt-brand-letter">P</span>
-      </div>
-
-      <!-- Quick Access Toolbar -->
-      <div class="quick-access-toolbar">
-        <button type="button" class="qat-btn" id="qat-save" title="Save (Ctrl+S)">
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/>
-            <polyline points="17 21 17 13 7 13 7 21"/>
-            <polyline points="7 3 7 8 15 8"/>
-          </svg>
-        </button>
-        <button type="button" class="qat-btn" id="qat-undo" title="Undo (Ctrl+Z)">
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M3 7v6h6"/><path d="M21 17a9 9 0 00-9-9 9 9 0 00-6 2.3L3 13"/>
-          </svg>
-        </button>
-        <button type="button" class="qat-btn" id="qat-redo" title="Redo (Ctrl+Y)">
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M21 7v6h-6"/><path d="M3 17a9 9 0 019-9 9 9 0 016 2.3l3 2.7"/>
-          </svg>
-        </button>
-        <button type="button" class="qat-btn" id="qat-slideshow" title="Start From Beginning (F5)">
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor">
-            <polygon points="5 3 19 12 5 21 5 3"/>
-          </svg>
-        </button>
-      </div>
-
-      <div class="title-bar-sep"></div>
-
-      <!-- Deck Document Title -->
-      <div class="deck-title-wrapper">
-        <input 
-          type="text" 
-          id="deck-title-input" 
-          value="{{ presentation.title }}" 
-          class="deck-title-box"
-          title="Click to rename presentation"
-        >
-        <span class="save-state-label" id="save-status-text">Saved to Cloud</span>
-      </div>
-    </div>
-
-    <!-- Center Search Bar -->
-    <div class="title-bar-center">
-      <div class="search-box">
-        <span class="search-icon">🔍</span>
-        <input type="text" placeholder="Search (Alt + Q)" class="search-input" id="search-input" readonly>
-      </div>
-    </div>
-
-    <!-- Title Bar Right Controls -->
-    <div class="title-bar-right">
-      <button type="button" class="btn-share" id="btn-share-deck">
-        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
-          <circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/>
-          <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/>
-        </svg>
-        <span>Share</span>
-      </button>
-
-      <div class="user-pill" title="Logged in as {{ username }}">
-        <span class="user-avatar">{{ username[0]|upper }}</span>
-        <span class="user-name">{{ username }}</span>
-      </div>
-
-      <!-- Window controls (decorative desktop styling) -->
-      <div class="window-controls">
-        <a href="{{ url_for('dashboard') }}" class="win-btn win-minimize" title="Back to Dashboard">🗕</a>
-        <button type="button" class="win-btn win-maximize" id="win-maximize" title="Toggle Fullscreen">🗖</button>
-        <a href="{{ url_for('dashboard') }}" class="win-btn win-close" title="Close Presentation">✕</a>
-      </div>
-    </div>
-  </header>
-
-
-  <!-- ========================================================================
-       2. FLUENT RIBBON TABS
-       ======================================================================== -->
-  <div class="ppt-ribbon-tabs" role="tablist">
-    <button type="button" class="ribbon-tab tab-file" id="tab-file">File</button>
-    <button type="button" class="ribbon-tab active" data-tab="home">Home</button>
-    <button type="button" class="ribbon-tab" data-tab="insert">Insert</button>
-    <button type="button" class="ribbon-tab" data-tab="draw">Draw</button>
-    <button type="button" class="ribbon-tab" data-tab="design">Design</button>
-    <button type="button" class="ribbon-tab" data-tab="transitions">Transitions</button>
-    <button type="button" class="ribbon-tab" data-tab="animations">Animations</button>
-    <button type="button" class="ribbon-tab" data-tab="slideshow">Slide Show</button>
-    <button type="button" class="ribbon-tab" data-tab="view">View</button>
-  </div>
-
-
-  <!-- ========================================================================
-       3. RIBBON TOOLBAR PANELS
-       ======================================================================== -->
-  <div class="ppt-ribbon-content">
-
-    <!-- TAB PANEL: HOME -->
-    <div class="ribbon-panel active" id="panel-home">
-      
-      <!-- Group: Clipboard -->
-      <div class="ribbon-group">
-        <div class="ribbon-chunk">
-          <button type="button" class="ribbon-large-btn" id="btn-paste">
-            <span class="chunk-icon">📋</span>
-            <span class="chunk-text">Paste</span>
-          </button>
-          <div class="ribbon-stacked-buttons">
-            <button type="button" class="ribbon-small-btn" id="btn-cut" title="Cut (Ctrl+X)">✂ Cut</button>
-            <button type="button" class="ribbon-small-btn" id="btn-copy" title="Copy (Ctrl+C)">📑 Copy</button>
-            <button type="button" class="ribbon-small-btn" id="btn-duplicate-elem" title="Duplicate (Ctrl+D)">🗎 Duplicate</button>
-          </div>
+    <!-- Global Config -->
+    <script>
+      window.PRESENTATION_ID = {{ presentation_id }};
+      window.PRESENTATION_ID = "{{ presentation_id }}";
+    </script>
+  </head>
+  <body class="ppt-body">
+    <!-- 1. Title Bar -->
+    <header class="ppt-titlebar">
+      <div class="titlebar-left">
+        <div class="brand-tile">P</div>
+        <div class="quick-access">
+          <button id="btn-qa-save" title="Save (Ctrl+S)">💾</button>
+          <button id="btn-qa-undo" title="Undo (Ctrl+Z)">↶</button>
+          <button id="btn-qa-redo" title="Redo (Ctrl+Y)">↷</button>
+          <button id="btn-qa-slideshow" title="Start Slide Show (F5)">▶</button>
         </div>
-        <div class="group-label">Clipboard</div>
+        <input
+          type="text"
+          id="deck-title-input"
+          value="{{ title }}"
+          class="deck-title-input"
+        />
+        <span id="save-status" class="save-status">Saved to cloud</span>
       </div>
 
-      <!-- Group: Slides -->
-      <div class="ribbon-group">
-        <div class="ribbon-chunk">
-          <!-- New Slide Dropdown with Layout Picker -->
-          <div class="dropdown" id="dropdown-new-slide">
-            <button type="button" class="ribbon-large-btn" id="btn-new-slide-main">
-              <span class="chunk-icon">➕</span>
-              <span class="chunk-text">New Slide ▾</span>
+      <div class="titlebar-center">
+        <div class="search-bar">
+          <span class="material-symbols-outlined search-icon">search</span>
+          <input type="text" placeholder="Search" />
+        </div>
+      </div>
+
+      <div class="titlebar-right">
+        <button id="btn-share" class="btn-share">Share</button>
+        <div class="user-pill">
+          <span class="user-avatar">{{ username[0]|upper }}</span>
+          <span class="user-name">{{ username }}</span>
+        </div>
+        <div class="window-controls">
+          <a href="/dashboard" class="win-btn win-min" title="Minimize">─</a>
+          <button class="win-btn win-max" title="Maximize">□</button>
+          <a href="/dashboard" class="win-btn win-close" title="Close">✕</a>
+        </div>
+      </div>
+    </header>
+
+    <!-- 2. Ribbon Tabs Bar -->
+    <nav class="ppt-ribbon-tabs">
+      <button id="tab-file" class="ribbon-tab tab-file" data-tab="file">
+        File
+      </button>
+      <button class="ribbon-tab active" data-tab="home">Home</button>
+      <button class="ribbon-tab" data-tab="insert">Insert</button>
+      <button class="ribbon-tab" data-tab="draw">Draw</button>
+      <button class="ribbon-tab" data-tab="design">Design</button>
+      <button class="ribbon-tab" data-tab="transitions">Transitions</button>
+      <button class="ribbon-tab" data-tab="animations">Animations</button>
+      <button class="ribbon-tab" data-tab="slideshow">Slide Show</button>
+      <button class="ribbon-tab" data-tab="view">View</button>
+    </nav>
+
+    <!-- 3. Ribbon Content Area -->
+    <div class="ppt-ribbon-content">
+      <!-- HOME PANEL -->
+      <div class="ribbon-panel active" id="panel-home">
+        <div class="ribbon-group">
+          <div class="dropdown">
+            <button class="ribbon-btn dropbtn" id="btn-new-slide">
+              <span class="icon">📄</span>
+              <span class="label">New Slide</span>
             </button>
-            
-            <!-- PowerPoint Slide Layout Picker -->
-            <div class="dropdown-menu layout-picker-menu" id="menu-layouts">
-              <div class="layout-picker-title">Office Theme Layouts</div>
-              <div class="layouts-grid">
-                <div class="layout-card" data-layout="title">
-                  <div class="layout-thumb layout-thumb-title">
-                    <div class="thumb-line-thick"></div>
-                    <div class="thumb-line-thin"></div>
-                  </div>
-                  <span>Title Slide</span>
+            <div class="dropdown-content layout-picker">
+              <div class="layout-card" data-layout="title">
+                <div class="thumbnail">
+                  <div class="title-ph"></div>
+                  <div class="sub-ph"></div>
                 </div>
-                <div class="layout-card" data-layout="title_content">
-                  <div class="layout-thumb layout-thumb-content">
-                    <div class="thumb-line-header"></div>
-                    <div class="thumb-bullet-lines">
-                      <div>• &nbsp;</div><div>• &nbsp;</div><div>• &nbsp;</div>
-                    </div>
-                  </div>
-                  <span>Title and Content</span>
+                Title
+              </div>
+              <div class="layout-card" data-layout="title_content">
+                <div class="thumbnail">
+                  <div class="title-ph"></div>
+                  <div class="content-ph"></div>
                 </div>
-                <div class="layout-card" data-layout="section">
-                  <div class="layout-thumb layout-thumb-section">
-                    <div class="thumb-line-thick" style="margin-top: 15px;"></div>
-                  </div>
-                  <span>Section Header</span>
+                Title & Content
+              </div>
+              <div class="layout-card" data-layout="section">
+                <div class="thumbnail"><div class="section-ph"></div></div>
+                Section Header
+              </div>
+              <div class="layout-card" data-layout="two_content">
+                <div class="thumbnail">
+                  <div class="title-ph"></div>
+                  <div class="col-ph"></div>
+                  <div class="col-ph"></div>
                 </div>
-                <div class="layout-card" data-layout="two_content">
-                  <div class="layout-thumb layout-thumb-split">
-                    <div class="thumb-line-header"></div>
-                    <div class="split-cols">
-                      <div class="split-box"></div>
-                      <div class="split-box"></div>
-                    </div>
-                  </div>
-                  <span>Two Content</span>
-                </div>
-                <div class="layout-card" data-layout="title_only">
-                  <div class="layout-thumb layout-thumb-title-only">
-                    <div class="thumb-line-header"></div>
-                  </div>
-                  <span>Title Only</span>
-                </div>
-                <div class="layout-card" data-layout="blank">
-                  <div class="layout-thumb layout-thumb-blank"></div>
-                  <span>Blank</span>
-                </div>
+                Two Content
+              </div>
+              <div class="layout-card" data-layout="title_only">
+                <div class="thumbnail"><div class="title-ph"></div></div>
+                Title Only
+              </div>
+              <div class="layout-card" data-layout="blank">
+                <div class="thumbnail"></div>
+                Blank
               </div>
             </div>
           </div>
-
-          <div class="ribbon-stacked-buttons">
-            <button type="button" class="ribbon-small-btn" id="btn-duplicate-slide" title="Duplicate Slide">📋 Duplicate</button>
-            <button type="button" class="ribbon-small-btn text-danger" id="btn-delete-slide" title="Delete Slide">🗑 Delete</button>
-          </div>
+          <button class="ribbon-btn-small" id="btn-duplicate-slide">
+            Duplicate
+          </button>
+          <button class="ribbon-btn-small" id="btn-delete-slide">Delete</button>
+          <div class="group-label">Slides</div>
         </div>
-        <div class="group-label">Slides</div>
-      </div>
 
-      <!-- Group: Font -->
-      <div class="ribbon-group">
-        <div class="ribbon-chunk flex-column">
-          <!-- Row 1: Font Family & Size -->
+        <div class="ribbon-separator"></div>
+
+        <div class="ribbon-group">
+          <div class="ribbon-col">
+            <button class="ribbon-btn-small" id="btn-cut" title="Cut (Ctrl+X)">
+              ✂ Cut
+            </button>
+            <button
+              class="ribbon-btn-small"
+              id="btn-copy"
+              title="Copy (Ctrl+C)"
+            >
+              📋 Copy
+            </button>
+            <button
+              class="ribbon-btn-small"
+              id="btn-paste"
+              title="Paste (Ctrl+V)"
+            >
+              📌 Paste
+            </button>
+            <button
+              class="ribbon-btn-small"
+              id="btn-duplicate-element"
+              title="Duplicate (Ctrl+D)"
+            >
+              📄 Duplicate
+            </button>
+          </div>
+          <div class="group-label">Clipboard</div>
+        </div>
+
+        <div class="ribbon-separator"></div>
+
+        <div class="ribbon-group">
           <div class="ribbon-row">
-            <select id="fmt-font-family" class="ppt-select" title="Font Family">
+            <select id="font-family-select" class="ribbon-select">
               <option value="Calibri">Calibri</option>
               <option value="Arial">Arial</option>
               <option value="Segoe UI">Segoe UI</option>
-              <option value="Inter" selected>Inter</option>
+              <option value="Inter">Inter</option>
               <option value="Georgia">Georgia</option>
               <option value="Times New Roman">Times New Roman</option>
               <option value="Impact">Impact</option>
-              <option value="JetBrains Mono">Consolas</option>
+              <option value="Consolas">Consolas</option>
             </select>
-
-            <select id="fmt-font-size-select" class="ppt-select-sm" title="Font Size">
+            <select
+              id="font-size-select"
+              class="ribbon-select font-size-select"
+            >
+              <option value="8">8</option>
               <option value="12">12</option>
-              <option value="14">14</option>
               <option value="16">16</option>
-              <option value="18">18</option>
-              <option value="20">20</option>
               <option value="24" selected>24</option>
-              <option value="28">28</option>
               <option value="32">32</option>
-              <option value="36">36</option>
-              <option value="40">40</option>
-              <option value="44">44</option>
               <option value="48">48</option>
               <option value="60">60</option>
               <option value="72">72</option>
               <option value="96">96</option>
             </select>
-
-            <button type="button" class="ppt-icon-btn" id="btn-font-grow" title="Increase Font Size">A▲</button>
-            <button type="button" class="ppt-icon-btn" id="btn-font-shrink" title="Decrease Font Size">A▼</button>
-          </div>
-
-          <!-- Row 2: Formatting B, I, U, Color -->
-          <div class="ribbon-row">
-            <div class="btn-group-flat">
-              <button type="button" class="ppt-toggle-btn" id="fmt-bold" title="Bold (Ctrl+B)"><strong>B</strong></button>
-              <button type="button" class="ppt-toggle-btn" id="fmt-italic" title="Italic (Ctrl+I)"><em>I</em></button>
-              <button type="button" class="ppt-toggle-btn" id="fmt-underline" title="Underline (Ctrl+U)"><u>U</u></button>
-              <button type="button" class="ppt-toggle-btn" id="fmt-strike" title="Strikethrough"><s>ab</s></button>
-            </div>
-
-            <div class="color-picker-box" title="Font Color">
-              <span class="color-letter">A</span>
-              <input type="color" id="fmt-color" value="#0f172a" class="color-input-flat">
-            </div>
-
-            <div class="color-picker-box" title="Text Highlight Color">
-              <span class="color-letter" style="background:#fef08a; padding: 0 2px;">ab</span>
-              <input type="color" id="fmt-highlight" value="#fef08a" class="color-input-flat">
-            </div>
-          </div>
-        </div>
-        <div class="group-label">Font</div>
-      </div>
-
-      <!-- Group: Paragraph -->
-      <div class="ribbon-group">
-        <div class="ribbon-chunk flex-column">
-          <!-- Row 1: Bullets & Numbering -->
-          <div class="ribbon-row">
-            <button type="button" class="ppt-toggle-btn" id="btn-bullet-list" title="Bulleted List">⁝≡</button>
-            <button type="button" class="ppt-toggle-btn" id="btn-number-list" title="Numbered List">1≡</button>
-          </div>
-          <!-- Row 2: Alignment -->
-          <div class="ribbon-row">
-            <div class="btn-group-flat">
-              <button type="button" class="ppt-toggle-btn" id="fmt-align-left" title="Align Left">⯇</button>
-              <button type="button" class="ppt-toggle-btn" id="fmt-align-center" title="Align Center">☰</button>
-              <button type="button" class="ppt-toggle-btn" id="fmt-align-right" title="Align Right">⯈</button>
-              <button type="button" class="ppt-toggle-btn" id="fmt-align-justify" title="Justify">≡</button>
-            </div>
-          </div>
-        </div>
-        <div class="group-label">Paragraph</div>
-      </div>
-
-      <!-- Group: Drawing & Quick Shapes -->
-      <div class="ribbon-group">
-        <div class="ribbon-chunk">
-          <!-- Quick Shapes Carousel Palette -->
-          <div class="quick-shapes-carousel">
-            <button type="button" class="shape-tile" data-shape="rectangle" title="Rectangle"><svg width="18" height="18" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" fill="#3b82f6"/></svg></button>
-            <button type="button" class="shape-tile" data-shape="rounded" title="Rounded Rectangle"><svg width="18" height="18" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="5" fill="#3b82f6"/></svg></button>
-            <button type="button" class="shape-tile" data-shape="circle" title="Oval / Circle"><svg width="18" height="18" viewBox="0 0 24 24"><ellipse cx="12" cy="12" rx="9" ry="9" fill="#3b82f6"/></svg></button>
-            <button type="button" class="shape-tile" data-shape="triangle" title="Isosceles Triangle"><svg width="18" height="18" viewBox="0 0 24 24"><polygon points="12,3 21,21 3,21" fill="#3b82f6"/></svg></button>
-            <button type="button" class="shape-tile" data-shape="arrow" title="Right Arrow"><svg width="18" height="18" viewBox="0 0 24 24"><polygon points="3,9 14,9 14,4 21,12 14,20 14,15 3,15" fill="#10b981"/></svg></button>
-            <button type="button" class="shape-tile" data-shape="star" title="5-Point Star"><svg width="18" height="18" viewBox="0 0 24 24"><polygon points="12,2 15,9 22,9 17,14 19,21 12,17 5,21 7,14 2,9 9,9" fill="#f59e0b"/></svg></button>
-          </div>
-
-          <!-- Shape Fill & Outline -->
-          <div class="ribbon-stacked-buttons">
-            <div class="ppt-combo-button">
-              <span class="combo-icon">🎨</span>
-              <span class="combo-title">Shape Fill</span>
-              <input type="color" id="fmt-shape-fill" value="#3b82f6" class="color-input-flat">
-            </div>
-            <div class="ppt-combo-button">
-              <span class="combo-icon">✏️</span>
-              <span class="combo-title">Outline</span>
-              <input type="color" id="fmt-shape-outline" value="#1d4ed8" class="color-input-flat">
-            </div>
-          </div>
-
-          <!-- Arrange -->
-          <div class="ribbon-stacked-buttons">
-            <button type="button" class="ribbon-small-btn" id="btn-bring-front" title="Bring to Front">⬆ Bring Forward</button>
-            <button type="button" class="ribbon-small-btn" id="btn-send-back" title="Send to Back">⬇ Send Backward</button>
-            <button type="button" class="ribbon-small-btn text-danger" id="btn-delete-active-elem" title="Delete Element (Del)">🗑 Delete</button>
-          </div>
-        </div>
-        <div class="group-label">Drawing</div>
-      </div>
-
-    </div>
-
-
-    <!-- TAB PANEL: INSERT -->
-    <div class="ribbon-panel" id="panel-insert">
-      
-      <!-- Group: Text -->
-      <div class="ribbon-group">
-        <div class="ribbon-chunk">
-          <button type="button" class="ribbon-large-btn" id="btn-insert-textbox">
-            <span class="chunk-icon">📝</span>
-            <span class="chunk-text">Text Box</span>
-          </button>
-          <button type="button" class="ribbon-large-btn" id="btn-insert-wordart">
-            <span class="chunk-icon">🅰️</span>
-            <span class="chunk-text">WordArt</span>
-          </button>
-        </div>
-        <div class="group-label">Text</div>
-      </div>
-
-      <!-- Group: Images -->
-      <div class="ribbon-group">
-        <div class="ribbon-chunk">
-          <label class="ribbon-large-btn file-btn-label">
-            <span class="chunk-icon">🖼️</span>
-            <span class="chunk-text">This Device</span>
-            <input type="file" id="ppt-image-file" accept="image/*" style="display: none;">
-          </label>
-          <button type="button" class="ribbon-large-btn" id="btn-insert-online-pic">
-            <span class="chunk-icon">🌐</span>
-            <span class="chunk-text">Online Pictures</span>
-          </button>
-        </div>
-        <div class="group-label">Images</div>
-      </div>
-
-      <!-- Group: Illustrations -->
-      <div class="ribbon-group">
-        <div class="ribbon-chunk">
-          <div class="dropdown" id="dropdown-shapes-menu">
-            <button type="button" class="ribbon-large-btn" id="btn-shapes-dropdown">
-              <span class="chunk-icon">🔷</span>
-              <span class="chunk-text">Shapes ▾</span>
+            <button
+              class="ribbon-btn-icon"
+              id="btn-font-grow"
+              title="Increase Font Size"
+            >
+              A▲
             </button>
-            
-            <!-- Full Categorized Shapes Palette -->
-            <div class="dropdown-menu full-shapes-palette" id="menu-full-shapes">
-              <div class="shape-category-title">Lines &amp; Rectangles</div>
-              <div class="shape-cat-grid">
-                <button type="button" class="shape-tile" data-shape="rectangle">Rectangle</button>
-                <button type="button" class="shape-tile" data-shape="rounded">Rounded</button>
-              </div>
-              <div class="shape-category-title">Basic Shapes</div>
-              <div class="shape-cat-grid">
-                <button type="button" class="shape-tile" data-shape="circle">Oval / Circle</button>
-                <button type="button" class="shape-tile" data-shape="triangle">Triangle</button>
-                <button type="button" class="shape-tile" data-shape="diamond">Diamond</button>
-                <button type="button" class="shape-tile" data-shape="star">Star</button>
-              </div>
-              <div class="shape-category-title">Block Arrows &amp; Callouts</div>
-              <div class="shape-cat-grid">
-                <button type="button" class="shape-tile" data-shape="arrow">Right Arrow</button>
-                <button type="button" class="shape-tile" data-shape="arrow_left">Left Arrow</button>
-                <button type="button" class="shape-tile" data-shape="callout">Speech Bubble</button>
-              </div>
-            </div>
+            <button
+              class="ribbon-btn-icon"
+              id="btn-font-shrink"
+              title="Decrease Font Size"
+            >
+              A▼
+            </button>
           </div>
-
-          <button type="button" class="ribbon-large-btn" id="btn-insert-table">
-            <span class="chunk-icon">🗄️</span>
-            <span class="chunk-text">Table</span>
-          </button>
+          <div class="ribbon-row mt-2">
+            <button
+              class="ribbon-btn-icon"
+              id="btn-font-bold"
+              title="Bold (Ctrl+B)"
+            >
+              <b>B</b>
+            </button>
+            <button
+              class="ribbon-btn-icon"
+              id="btn-font-italic"
+              title="Italic (Ctrl+I)"
+            >
+              <i>I</i>
+            </button>
+            <button
+              class="ribbon-btn-icon"
+              id="btn-font-underline"
+              title="Underline (Ctrl+U)"
+            >
+              <u>U</u>
+            </button>
+            <button
+              class="ribbon-btn-icon"
+              id="btn-font-strikethrough"
+              title="Strikethrough"
+            >
+              <s>S̶</s>
+            </button>
+            <button
+              class="ribbon-btn-icon"
+              id="btn-font-shadow"
+              title="Text Shadow"
+            >
+              S
+            </button>
+            <input
+              type="color"
+              id="font-color-input"
+              class="color-picker-input"
+              title="Font Color"
+            />
+            <input
+              type="color"
+              id="highlight-color-input"
+              class="color-picker-input"
+              value="#ffff00"
+              title="Highlight Color"
+            />
+          </div>
+          <div class="group-label">Font</div>
         </div>
-        <div class="group-label">Illustrations</div>
-      </div>
 
-    </div>
+        <div class="ribbon-separator"></div>
 
-
-    <!-- TAB PANEL: DRAW -->
-    <div class="ribbon-panel" id="panel-draw">
-      <div class="ribbon-group">
-        <div class="ribbon-chunk">
-          <button type="button" class="ribbon-large-btn" id="tool-select-mode">
-            <span class="chunk-icon">👆</span>
-            <span class="chunk-text">Select</span>
-          </button>
-          <button type="button" class="ribbon-large-btn" id="tool-pen">
-            <span class="chunk-icon">🖊️</span>
-            <span class="chunk-text">Black Pen</span>
-          </button>
-          <button type="button" class="ribbon-large-btn" id="tool-highlighter">
-            <span class="chunk-icon">🖍️</span>
-            <span class="chunk-text">Highlighter</span>
-          </button>
-          <button type="button" class="ribbon-large-btn" id="tool-eraser">
-            <span class="chunk-icon">🧹</span>
-            <span class="chunk-text">Clear Inks</span>
-          </button>
-        </div>
-        <div class="group-label">Pens &amp; Drawing</div>
-      </div>
-    </div>
-
-
-    <!-- TAB PANEL: DESIGN -->
-    <div class="ribbon-panel" id="panel-design">
-      
-      <!-- Group: Themes -->
-      <div class="ribbon-group">
-        <div class="ribbon-chunk themes-gallery">
-          <div class="theme-card active" data-theme="office" title="Office Theme">
-            <div class="theme-preview" style="background: #ffffff; border: 1px solid #cbd5e1;">
-              <span style="color:#0f172a; font-weight:700; font-size:10px;">Aa</span>
-            </div>
-            <span>Office</span>
-          </div>
-          <div class="theme-card" data-theme="dark" title="Midnight Obsidian">
-            <div class="theme-preview" style="background: #0f172a; border: 1px solid #334155;">
-              <span style="color:#f8fafc; font-weight:700; font-size:10px;">Aa</span>
-            </div>
-            <span>Midnight</span>
-          </div>
-          <div class="theme-card" data-theme="indigo" title="Indigo Modern">
-            <div class="theme-preview" style="background: linear-gradient(135deg, #1e1b4b, #312e81);">
-              <span style="color:#a5b4fc; font-weight:700; font-size:10px;">Aa</span>
-            </div>
-            <span>Indigo</span>
-          </div>
-          <div class="theme-card" data-theme="emerald" title="Forest Emerald">
-            <div class="theme-preview" style="background: linear-gradient(135deg, #064e3b, #047857);">
-              <span style="color:#6ee7b7; font-weight:700; font-size:10px;">Aa</span>
-            </div>
-            <span>Emerald</span>
-          </div>
-          <div class="theme-card" data-theme="sunset" title="Coral Sunrise">
-            <div class="theme-preview" style="background: linear-gradient(135deg, #7c2d12, #ea580c);">
-              <span style="color:#fdba74; font-weight:700; font-size:10px;">Aa</span>
-            </div>
-            <span>Sunset</span>
-          </div>
-        </div>
-        <div class="group-label">Themes</div>
-      </div>
-
-      <!-- Group: Customize -->
-      <div class="ribbon-group">
-        <div class="ribbon-chunk">
-          <div class="ppt-combo-button">
-            <span class="combo-icon">📐</span>
-            <span class="combo-title">Slide Size</span>
-            <select id="slide-size-select" class="ppt-select-sm">
-              <option value="16:9" selected>Widescreen (16:9)</option>
-              <option value="4:3">Standard (4:3)</option>
+        <div class="ribbon-group">
+          <div class="ribbon-row">
+            <button
+              class="ribbon-btn-icon"
+              id="btn-list-bullets"
+              title="Bullets"
+            >
+              •
+            </button>
+            <button
+              class="ribbon-btn-icon"
+              id="btn-list-numbers"
+              title="Numbering"
+            >
+              1.
+            </button>
+            <div class="divider-vertical"></div>
+            <button
+              class="ribbon-btn-icon"
+              id="btn-align-left"
+              title="Align Left"
+            >
+              L
+            </button>
+            <button
+              class="ribbon-btn-icon"
+              id="btn-align-center"
+              title="Center"
+            >
+              C
+            </button>
+            <button
+              class="ribbon-btn-icon"
+              id="btn-align-right"
+              title="Align Right"
+            >
+              R
+            </button>
+            <button
+              class="ribbon-btn-icon"
+              id="btn-align-justify"
+              title="Justify"
+            >
+              J
+            </button>
+            <div class="divider-vertical"></div>
+            <select id="line-spacing-select" class="ribbon-select">
+              <option value="1.0">1.0</option>
+              <option value="1.5">1.5</option>
+              <option value="2.0">2.0</option>
             </select>
           </div>
+          <div class="group-label">Paragraph</div>
+        </div>
 
-          <div class="ppt-combo-button">
-            <span class="combo-icon">🎨</span>
-            <span class="combo-title">Format Background</span>
-            <input type="color" id="slide-bg-picker" value="#ffffff" class="color-input-flat">
+        <div class="ribbon-separator"></div>
+
+        <div class="ribbon-group">
+          <div class="ribbon-col">
+            <label class="ribbon-btn-small"
+              >Fill: <input type="color" id="shape-fill-color"
+            /></label>
+            <label class="ribbon-btn-small"
+              >Outline: <input type="color" id="shape-outline-color"
+            /></label>
+            <button class="ribbon-btn-small" id="btn-bring-forward">
+              Bring Forward
+            </button>
+            <button class="ribbon-btn-small" id="btn-send-backward">
+              Send Backward
+            </button>
+            <button class="ribbon-btn-small" id="btn-delete-element-draw">
+              Delete
+            </button>
+          </div>
+          <div class="group-label">Drawing</div>
+        </div>
+
+        <div class="ribbon-separator"></div>
+
+        <div class="ribbon-group">
+          <button class="ribbon-btn" id="btn-find-replace">
+            <span class="icon">🔍</span>
+            <span class="label">Find & Replace</span>
+          </button>
+          <div class="group-label">Editing</div>
+        </div>
+      </div>
+
+      <!-- INSERT PANEL -->
+      <div class="ribbon-panel" id="panel-insert">
+        <div class="ribbon-group">
+          <button class="ribbon-btn" id="btn-insert-textbox">
+            <span class="icon">A</span>
+            <span class="label">Text Box</span>
+          </button>
+          <button class="ribbon-btn" id="btn-insert-wordart">
+            <span class="icon">𝓐</span>
+            <span class="label">WordArt</span>
+          </button>
+          <div class="group-label">Text</div>
+        </div>
+
+        <div class="ribbon-separator"></div>
+
+        <div class="ribbon-group">
+          <label class="ribbon-btn">
+            <span class="icon">🖼️</span>
+            <span class="label">This Device</span>
+            <input
+              type="file"
+              id="file-insert-image"
+              accept="image/*"
+              style="display: none"
+            />
+          </label>
+          <button class="ribbon-btn" id="btn-online-pictures">
+            <span class="icon">🌐</span>
+            <span class="label">Online Pictures</span>
+          </button>
+          <div class="group-label">Images</div>
+        </div>
+
+        <div class="ribbon-separator"></div>
+
+        <div class="ribbon-group">
+          <div class="dropdown">
+            <button class="ribbon-btn dropbtn" id="btn-insert-shapes">
+              <span class="icon">⭐</span>
+              <span class="label">Shapes</span>
+            </button>
+            <div
+              class="dropdown-content shapes-palette"
+              style="min-width: 300px"
+            >
+              <div class="palette-category">Lines & Rectangles</div>
+              <div class="shape-grid">
+                <button
+                  class="shape-tile"
+                  data-shape="rectangle"
+                  title="Rectangle"
+                >
+                  ▭
+                </button>
+                <button
+                  class="shape-tile"
+                  data-shape="rounded"
+                  title="Rounded Rectangle"
+                >
+                  🏉
+                </button>
+              </div>
+              <div class="palette-category">Basic Shapes</div>
+              <div class="shape-grid">
+                <button class="shape-tile" data-shape="circle" title="Circle">
+                  ◯
+                </button>
+                <button
+                  class="shape-tile"
+                  data-shape="triangle"
+                  title="Triangle"
+                >
+                  △
+                </button>
+                <button class="shape-tile" data-shape="diamond" title="Diamond">
+                  ◇
+                </button>
+                <button
+                  class="shape-tile"
+                  data-shape="pentagon"
+                  title="Pentagon"
+                >
+                  ⬠
+                </button>
+                <button class="shape-tile" data-shape="hexagon" title="Hexagon">
+                  ⬡
+                </button>
+                <button class="shape-tile" data-shape="star" title="Star">
+                  ⭐
+                </button>
+                <button class="shape-tile" data-shape="heart" title="Heart">
+                  ❤️
+                </button>
+                <button class="shape-tile" data-shape="cross" title="Cross">
+                  ➕
+                </button>
+                <button
+                  class="shape-tile"
+                  data-shape="lightning"
+                  title="Lightning"
+                >
+                  ⚡
+                </button>
+              </div>
+              <div class="palette-category">Block Arrows</div>
+              <div class="shape-grid">
+                <button
+                  class="shape-tile"
+                  data-shape="arrow-right"
+                  title="Right Arrow"
+                >
+                  ➡️
+                </button>
+                <button
+                  class="shape-tile"
+                  data-shape="arrow-left"
+                  title="Left Arrow"
+                >
+                  ⬅️
+                </button>
+                <button
+                  class="shape-tile"
+                  data-shape="arrow-up"
+                  title="Up Arrow"
+                >
+                  ⬆️
+                </button>
+                <button
+                  class="shape-tile"
+                  data-shape="arrow-down"
+                  title="Down Arrow"
+                >
+                  ⬇️
+                </button>
+              </div>
+              <div class="palette-category">Callouts</div>
+              <div class="shape-grid">
+                <button
+                  class="shape-tile"
+                  data-shape="speech-bubble"
+                  title="Speech Bubble"
+                >
+                  💬
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="group-label">Illustrations</div>
+        </div>
+
+        <div class="ribbon-separator"></div>
+
+        <div class="ribbon-group">
+          <div class="dropdown">
+            <button class="ribbon-btn dropbtn" id="btn-insert-table">
+              <span class="icon">▦</span>
+              <span class="label">Table</span>
+            </button>
+            <div class="dropdown-content table-picker">
+              <div class="table-grid-selector" id="table-grid-selector">
+                <!-- JS populated 5x5 grid -->
+              </div>
+            </div>
+          </div>
+          <div class="group-label">Tables</div>
+        </div>
+
+        <div class="ribbon-separator"></div>
+
+        <div class="ribbon-group">
+          <button class="ribbon-btn" id="btn-insert-chart">
+            <span class="icon">📊</span>
+            <span class="label">Chart</span>
+          </button>
+          <div class="group-label">Charts</div>
+        </div>
+
+        <div class="ribbon-separator"></div>
+
+        <div class="ribbon-group">
+          <button class="ribbon-btn" id="btn-insert-media">
+            <span class="icon">🎬</span>
+            <span class="label">Media</span>
+          </button>
+          <button class="ribbon-btn" id="btn-insert-icon">
+            <span class="icon">😊</span>
+            <span class="label">Icons</span>
+          </button>
+          <div class="group-label">Media</div>
+        </div>
+
+        <div class="ribbon-separator"></div>
+
+        <div class="ribbon-group">
+          <button class="ribbon-btn-small" id="btn-slide-number">
+            Slide Number
+          </button>
+          <button class="ribbon-btn-small" id="btn-date-time">Date/Time</button>
+          <button class="ribbon-btn-small" id="btn-header-footer">
+            Header & Footer
+          </button>
+          <div class="group-label">Text 2</div>
+        </div>
+      </div>
+
+      <!-- DRAW PANEL -->
+      <div class="ribbon-panel" id="panel-draw">
+        <div class="ribbon-group">
+          <button class="ribbon-btn" id="btn-draw-select">
+            <span class="icon">👆</span>
+            <span class="label">Select</span>
+          </button>
+          <button class="ribbon-btn" id="btn-draw-pen">
+            <span class="icon">🖊️</span>
+            <span class="label">Pen</span>
+          </button>
+          <button class="ribbon-btn" id="btn-draw-highlighter">
+            <span class="icon">🖍️</span>
+            <span class="label">Highlighter</span>
+          </button>
+          <button class="ribbon-btn" id="btn-draw-eraser">
+            <span class="icon">🧹</span>
+            <span class="label">Eraser</span>
+          </button>
+          <div class="group-label">Drawing Tools</div>
+        </div>
+        <div class="ribbon-separator"></div>
+        <div class="ribbon-group">
+          <div class="ribbon-col">
+            <label
+              >Color:
+              <input type="color" id="draw-color-picker" value="#ff0000"
+            /></label>
+            <label
+              >Width:
+              <input
+                type="range"
+                id="draw-width-slider"
+                min="1"
+                max="20"
+                value="3"
+            /></label>
+            <label
+              >Opacity:
+              <input
+                type="range"
+                id="draw-opacity-slider"
+                min="0.1"
+                max="1.0"
+                step="0.1"
+                value="1.0"
+            /></label>
+          </div>
+          <div class="group-label">Options</div>
+        </div>
+      </div>
+
+      <!-- DESIGN PANEL -->
+      <div class="ribbon-panel" id="panel-design">
+        <div class="ribbon-group themes-gallery">
+          <div class="theme-card" data-theme="office">
+            <div
+              class="preview-box"
+              style="background: white; border: 1px solid #ccc"
+            ></div>
+            <div class="theme-label">Office</div>
+          </div>
+          <div class="theme-card" data-theme="dark">
+            <div class="preview-box" style="background: #0f172a"></div>
+            <div class="theme-label">Dark</div>
+          </div>
+          <div class="theme-card" data-theme="indigo">
+            <div class="preview-box" style="background: #1e1b4b"></div>
+            <div class="theme-label">Indigo</div>
+          </div>
+          <div class="theme-card" data-theme="emerald">
+            <div class="preview-box" style="background: #064e3b"></div>
+            <div class="theme-label">Emerald</div>
+          </div>
+          <div class="theme-card" data-theme="sunset">
+            <div class="preview-box" style="background: #7c2d12"></div>
+            <div class="theme-label">Sunset</div>
+          </div>
+          <div class="theme-card" data-theme="gradient">
+            <div
+              class="preview-box"
+              style="background: linear-gradient(135deg, #1e3a8a, #3b82f6)"
+            ></div>
+            <div class="theme-label">Gradient</div>
+          </div>
+          <div class="group-label">Themes</div>
+        </div>
+
+        <div class="ribbon-separator"></div>
+
+        <div class="ribbon-group">
+          <div class="ribbon-col">
+            <select id="slide-size-select" class="ribbon-select">
+              <option value="16:9">Widescreen (16:9)</option>
+              <option value="4:3">Standard (4:3)</option>
+            </select>
+            <label
+              >Bg Color:
+              <input type="color" id="bg-color-picker" value="#ffffff"
+            /></label>
+            <button class="ribbon-btn-small" id="btn-format-background">
+              Format Background
+            </button>
+            <div id="gradient-format-options" style="display: none">
+              <input type="color" id="grad-start" value="#ffffff" />
+              <input type="color" id="grad-end" value="#dddddd" />
+              <select id="grad-dir">
+                <option value="to bottom">To Bottom</option>
+                <option value="to right">To Right</option>
+                <option value="45deg">Diagonal</option>
+              </select>
+            </div>
+          </div>
+          <div class="group-label">Customize</div>
+        </div>
+      </div>
+
+      <!-- TRANSITIONS PANEL -->
+      <div class="ribbon-panel" id="panel-transitions">
+        <div class="ribbon-group transitions-gallery">
+          <div class="transition-card" data-transition="none">
+            <div class="icon">🚫</div>
+            <div class="label">None</div>
+          </div>
+          <div class="transition-card" data-transition="fade">
+            <div class="icon">🌫️</div>
+            <div class="label">Fade</div>
+          </div>
+          <div class="transition-card" data-transition="slide-left">
+            <div class="icon">⬅️</div>
+            <div class="label">Slide Left</div>
+          </div>
+          <div class="transition-card" data-transition="slide-right">
+            <div class="icon">➡️</div>
+            <div class="label">Slide Right</div>
+          </div>
+          <div class="transition-card" data-transition="zoom">
+            <div class="icon">🔍</div>
+            <div class="label">Zoom</div>
+          </div>
+          <div class="transition-card" data-transition="flip">
+            <div class="icon">🔄</div>
+            <div class="label">Flip</div>
+          </div>
+          <div class="transition-card" data-transition="push">
+            <div class="icon">⬆️</div>
+            <div class="label">Push</div>
+          </div>
+          <div class="group-label">Transition Gallery</div>
+        </div>
+
+        <div class="ribbon-separator"></div>
+
+        <div class="ribbon-group">
+          <div class="ribbon-col">
+            <label
+              >Duration:
+              <input
+                type="number"
+                id="transition-duration"
+                min="0.3"
+                max="3.0"
+                step="0.1"
+                value="1.0"
+              />
+              s</label
+            >
+            <button class="ribbon-btn-small" id="btn-apply-transition-all">
+              Apply To All
+            </button>
+            <button class="ribbon-btn-small" id="btn-preview-transition">
+              Preview
+            </button>
+          </div>
+          <div class="group-label">Timing</div>
+        </div>
+      </div>
+
+      <!-- ANIMATIONS PANEL -->
+      <div class="ribbon-panel" id="panel-animations">
+        <div class="ribbon-group">
+          <select id="animation-type-select" class="ribbon-select">
+            <option value="none">None</option>
+            <option value="fade-in">Fade In</option>
+            <option value="slide-in-left">Slide In Left</option>
+            <option value="slide-in-right">Slide In Right</option>
+            <option value="slide-in-up">Slide In Up</option>
+            <option value="zoom-in">Zoom In</option>
+            <option value="bounce">Bounce</option>
+            <option value="spin">Spin</option>
+            <option value="typewriter">Typewriter</option>
+          </select>
+          <div class="group-label">Animation Gallery</div>
+        </div>
+        <div class="ribbon-separator"></div>
+        <div class="ribbon-group">
+          <div class="ribbon-col">
+            <label
+              >Duration:
+              <input
+                type="number"
+                id="animation-duration"
+                min="0.1"
+                max="5.0"
+                step="0.1"
+                value="0.5"
+              />
+              s</label
+            >
+            <label
+              >Delay:
+              <input
+                type="number"
+                id="animation-delay"
+                min="0.0"
+                max="5.0"
+                step="0.1"
+                value="0.0"
+              />
+              s</label
+            >
+            <select id="animation-trigger" class="ribbon-select">
+              <option value="on-click">On Click</option>
+              <option value="after-previous">After Previous</option>
+              <option value="with-previous">With Previous</option>
+            </select>
+          </div>
+          <div class="group-label">Timing</div>
+        </div>
+        <div class="ribbon-separator"></div>
+        <div class="ribbon-group">
+          <button class="ribbon-btn" id="btn-preview-animation">
+            <span class="icon">▶️</span>
+            <span class="label">Preview</span>
+          </button>
+          <button class="ribbon-btn" id="btn-apply-animation">
+            <span class="icon">✨</span>
+            <span class="label">Apply</span>
+          </button>
+          <div class="group-label">Actions</div>
+        </div>
+        <div class="ribbon-separator"></div>
+        <div class="ribbon-group">
+          <ul id="animation-order-list" class="animation-list">
+            <!-- Sortable list showing element animations -->
+          </ul>
+          <div class="group-label">Animation Order</div>
+        </div>
+      </div>
+
+      <!-- SLIDE SHOW PANEL -->
+      <div class="ribbon-panel" id="panel-slideshow">
+        <div class="ribbon-group">
+          <button class="ribbon-btn" id="btn-slideshow-beginning">
+            <span class="icon">📺</span>
+            <span class="label">From Beginning</span>
+          </button>
+          <button class="ribbon-btn" id="btn-slideshow-current">
+            <span class="icon">📽️</span>
+            <span class="label">From Current</span>
+          </button>
+          <div class="group-label">Start Slide Show</div>
+        </div>
+        <div class="ribbon-separator"></div>
+        <div class="ribbon-group">
+          <button class="ribbon-btn" id="btn-rehearse-timings">
+            <span class="icon">⏱️</span>
+            <span class="label">Rehearse Timings</span>
+          </button>
+          <label
+            ><input type="checkbox" id="chk-show-slide-numbers" /> Show Slide
+            Numbers</label
+          >
+          <div class="group-label">Set Up</div>
+        </div>
+      </div>
+
+      <!-- VIEW PANEL -->
+      <div class="ribbon-panel" id="panel-view">
+        <div class="ribbon-group">
+          <button class="ribbon-btn" id="btn-view-normal">
+            <span class="icon">📄</span>
+            <span class="label">Normal</span>
+          </button>
+          <button class="ribbon-btn" id="btn-view-sorter">
+            <span class="icon">📊</span>
+            <span class="label">Slide Sorter</span>
+          </button>
+          <button class="ribbon-btn" id="btn-view-outline">
+            <span class="icon">📝</span>
+            <span class="label">Outline</span>
+          </button>
+          <div class="group-label">Presentation Views</div>
+        </div>
+        <div class="ribbon-separator"></div>
+        <div class="ribbon-group">
+          <div class="ribbon-col">
+            <label><input type="checkbox" id="chk-show-notes" /> Notes</label>
+            <label><input type="checkbox" id="chk-show-grid" /> Grid</label>
+            <label><input type="checkbox" id="chk-show-rulers" /> Rulers</label>
+            <label><input type="checkbox" id="chk-show-guides" /> Guides</label>
+          </div>
+          <div class="group-label">Show</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4. Backstage Overlay (File Menu) -->
+    <div id="backstage-overlay" class="backstage-overlay hidden">
+      <div class="backstage-sidebar">
+        <button class="backstage-back" id="btn-backstage-back">← Back</button>
+        <div class="backstage-tabs">
+          <button class="backstage-tab active" data-bpanel="info">Info</button>
+          <button class="backstage-tab" data-bpanel="new">New</button>
+          <button class="backstage-tab" data-bpanel="save">Save</button>
+          <button class="backstage-tab" data-bpanel="print">Print</button>
+          <button class="backstage-tab" data-bpanel="export">Export</button>
+          <button class="backstage-tab" id="btn-backstage-close">Close</button>
+        </div>
+      </div>
+      <div class="backstage-content">
+        <div class="backstage-panel active" id="bpanel-info">
+          <h2>Info</h2>
+          <div class="info-grid">
+            <div>Title:</div>
+            <div id="info-title">Presentation</div>
+            <div>Slides:</div>
+            <div id="info-slides-count">1</div>
+            <div>Created:</div>
+            <div id="info-created-date">-</div>
+            <div>Modified:</div>
+            <div id="info-modified-date">-</div>
+          </div>
+          <button class="btn-primary mt-4" id="btn-bpanel-save-now">
+            Save Now
+          </button>
+        </div>
+        <div class="backstage-panel" id="bpanel-new">
+          <h2>New</h2>
+          <button class="btn-primary" id="btn-bpanel-blank">
+            Blank Presentation
+          </button>
+          <div class="templates-grid mt-4">
+            <!-- Templates -->
           </div>
         </div>
-        <div class="group-label">Customize</div>
-      </div>
-
-    </div>
-
-
-    <!-- TAB PANEL: TRANSITIONS -->
-    <div class="ribbon-panel" id="panel-transitions">
-      <div class="ribbon-group">
-        <div class="ribbon-chunk transitions-gallery">
-          <button type="button" class="transition-card active" data-transition="none">
-            <span class="trans-icon">🚫</span>
-            <span>None</span>
+        <div class="backstage-panel" id="bpanel-save">
+          <h2>Save</h2>
+          <button class="btn-primary" id="btn-bpanel-save-cloud">
+            Save to Cloud
           </button>
-          <button type="button" class="transition-card" data-transition="fade">
-            <span class="trans-icon">🌫️</span>
-            <span>Fade</span>
+          <p id="bpanel-save-status" class="mt-2"></p>
+        </div>
+        <div class="backstage-panel" id="bpanel-print">
+          <h2>Print</h2>
+          <button class="btn-primary" id="btn-bpanel-print">Print</button>
+          <div class="print-options mt-4">
+            <!-- Options -->
+          </div>
+        </div>
+        <div class="backstage-panel" id="bpanel-export">
+          <h2>Export</h2>
+          <button class="btn-secondary" id="btn-bpanel-export-json">
+            Export JSON
           </button>
-          <button type="button" class="transition-card" data-transition="push">
-            <span class="trans-icon">➡️</span>
-            <span>Push</span>
-          </button>
-          <button type="button" class="transition-card" data-transition="wipe">
-            <span class="trans-icon">🧹</span>
-            <span>Wipe</span>
-          </button>
-          <button type="button" class="transition-card" data-transition="zoom">
-            <span class="trans-icon">🔍</span>
-            <span>Zoom</span>
+          <button class="btn-secondary mt-2" id="btn-bpanel-export-html">
+            Export HTML
           </button>
         </div>
-        <div class="group-label">Transition to This Slide</div>
-      </div>
-
-      <div class="ribbon-group">
-        <div class="ribbon-chunk">
-          <button type="button" class="ribbon-large-btn" id="btn-preview-transition">
-            <span class="chunk-icon">▶️</span>
-            <span class="chunk-text">Preview</span>
-          </button>
-          <button type="button" class="ribbon-small-btn" id="btn-apply-all-transitions">Apply To All</button>
-        </div>
-        <div class="group-label">Timing</div>
       </div>
     </div>
 
-
-    <!-- TAB PANEL: ANIMATIONS -->
-    <div class="ribbon-panel" id="panel-animations">
-      <div class="ribbon-group">
-        <div class="ribbon-chunk transitions-gallery">
-          <button type="button" class="transition-card active" data-anim="none">None</button>
-          <button type="button" class="transition-card" data-anim="appear">Appear</button>
-          <button type="button" class="transition-card" data-anim="fade">Fade In</button>
-          <button type="button" class="transition-card" data-anim="fly">Fly In</button>
-          <button type="button" class="transition-card" data-anim="zoom">Zoom</button>
-        </div>
-        <div class="group-label">Animation</div>
-      </div>
-    </div>
-
-
-    <!-- TAB PANEL: SLIDE SHOW -->
-    <div class="ribbon-panel" id="panel-slideshow">
-      <div class="ribbon-group">
-        <div class="ribbon-chunk">
-          <button type="button" class="ribbon-large-btn" id="btn-show-from-beginning">
-            <span class="chunk-icon">⏮️</span>
-            <span class="chunk-text">From Beginning (F5)</span>
-          </button>
-          <button type="button" class="ribbon-large-btn" id="btn-show-from-current">
-            <span class="chunk-icon">⏯️</span>
-            <span class="chunk-text">From Current Slide</span>
+    <!-- 5. Main Workspace -->
+    <main class="ppt-workspace">
+      <!-- Slide Sidebar -->
+      <aside id="slide-sidebar" class="slide-sidebar">
+        <div class="sidebar-header">
+          <span>SLIDES</span>
+          <button id="btn-sidebar-add" class="btn-icon" title="Add Slide">
+            +
           </button>
         </div>
-        <div class="group-label">Start Slide Show</div>
-      </div>
-    </div>
-
-
-    <!-- TAB PANEL: VIEW -->
-    <div class="ribbon-panel" id="panel-view">
-      <div class="ribbon-group">
-        <div class="ribbon-chunk">
-          <button type="button" class="ribbon-large-btn active" id="view-normal">
-            <span class="chunk-icon">🖼️</span>
-            <span class="chunk-text">Normal</span>
-          </button>
-          <button type="button" class="ribbon-large-btn" id="view-sorter">
-            <span class="chunk-icon">▦</span>
-            <span class="chunk-text">Slide Sorter</span>
-          </button>
+        <div id="slides-thumbnail-list" class="slides-thumbnail-list">
+          <!-- Thumbnails go here -->
         </div>
-        <div class="group-label">Presentation Views</div>
-      </div>
+      </aside>
 
-      <div class="ribbon-group">
-        <div class="ribbon-chunk">
-          <label class="ppt-checkbox-label">
-            <input type="checkbox" id="chk-show-notes" checked>
-            <span>Notes Pane</span>
-          </label>
-          <label class="ppt-checkbox-label">
-            <input type="checkbox" id="chk-show-grid">
-            <span>Gridlines</span>
-          </label>
-        </div>
-        <div class="group-label">Show</div>
-      </div>
-    </div>
-
-  </div>
-
-
-  <!-- ========================================================================
-       4. MAIN WORKSPACE: THUMBNAILS (LEFT) + CANVAS (CENTER) + NOTES (BOTTOM)
-       ======================================================================== -->
-  <div class="ppt-workspace" id="ppt-workspace">
-    
-    <!-- Left Slide Thumbnail Navigation Pane -->
-    <aside class="ppt-slide-sidebar" id="slide-sidebar">
-      <div class="sidebar-top-bar">
-        <span>Slides</span>
-        <button type="button" class="sidebar-add-btn" id="sidebar-add-slide-btn" title="Add Slide">+</button>
-      </div>
-
-      <div class="slides-thumbnail-list" id="slides-thumbnail-list">
-        <!-- Rendered dynamically -->
-      </div>
-    </aside>
-
-    <!-- Center Canvas Stage -->
-    <main class="ppt-stage-area" id="ppt-stage-area">
-      
-      <!-- Slide Stage Wrapper -->
-      <div class="slide-stage-scaler" id="slide-stage-scaler">
-        <div class="ppt-slide-canvas" id="ppt-slide-canvas" style="background-color: #ffffff;">
-          <!-- SVG Drawing Ink Canvas for Drawing tool -->
-          <svg class="ink-canvas" id="ink-canvas"></svg>
-
-          <!-- Slide elements injected dynamically -->
+      <!-- Stage Area -->
+      <div id="ppt-stage-area" class="ppt-stage-area">
+        <div id="slide-stage-scaler" class="slide-stage-scaler">
+          <div id="ppt-slide-canvas" class="ppt-slide-canvas">
+            <!-- Elements go here -->
+            <svg id="ink-canvas" class="ink-canvas"></svg>
+          </div>
         </div>
       </div>
 
+      <!-- Speaker Notes Pane -->
+      <div id="speaker-notes-pane" class="speaker-notes-pane collapsed">
+        <div class="notes-header">
+          <span>Speaker Notes</span>
+          <button id="btn-notes-close" class="btn-icon">✕</button>
+        </div>
+        <textarea
+          id="speaker-notes-input"
+          class="speaker-notes-input"
+          placeholder="Click to add notes..."
+        ></textarea>
+      </div>
     </main>
 
-  </div>
-
-
-  <!-- ========================================================================
-       5. SPEAKER NOTES PANE (COLLAPSIBLE)
-       ======================================================================== -->
-  <div class="speaker-notes-pane" id="speaker-notes-pane">
-    <div class="notes-header">
-      <span>Speaker Notes</span>
-      <button type="button" class="btn-notes-toggle" id="btn-notes-close" title="Close Notes">✕</button>
-    </div>
-    <textarea id="speaker-notes-input" placeholder="Click to add speaker notes for this slide..."></textarea>
-  </div>
-
-
-  <!-- ========================================================================
-       6. POWERPOINT STATUS BAR (OFFICE GRAY BOTTOM BAR)
-       ======================================================================== -->
-  <footer class="ppt-status-bar">
-    <div class="status-bar-left">
-      <span class="status-item" id="status-slide-counter">Slide 1 of 1</span>
-      <span class="status-sep">|</span>
-      <span class="status-item">English (United States)</span>
-      <span class="status-sep">|</span>
-      <button type="button" class="status-btn" id="btn-status-notes">
-        <span>📝 Notes</span>
-      </button>
-    </div>
-
-    <div class="status-bar-right">
-      <!-- PowerPoint View Switcher Icons -->
-      <div class="view-switchers">
-        <button type="button" class="view-btn active" id="btn-view-normal" title="Normal View">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M3 3h7v18H3zm9 0h9v8h-9zm0 10h9v8h-9z"/></svg>
-        </button>
-        <button type="button" class="view-btn" id="btn-view-sorter" title="Slide Sorter View">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M3 3h8v8H3zm10 0h8v8h-8zM3 13h8v8H3zm10 0h8v8h-8z"/></svg>
-        </button>
-        <button type="button" class="view-btn" id="btn-view-slideshow" title="Slide Show (F5)">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-        </button>
+    <!-- 6. Status Bar -->
+    <footer class="ppt-status-bar">
+      <div class="status-left">
+        <span id="status-slide-counter">Slide 1 of 1</span>
+        <span class="divider">|</span>
+        <span>English (United States)</span>
       </div>
-
-      <!-- Zoom Slider -->
-      <div class="zoom-controls">
-        <button type="button" class="zoom-stepper" id="btn-zoom-out">-</button>
-        <input type="range" id="zoom-slider" min="30" max="150" value="85" class="zoom-range">
-        <button type="button" class="zoom-stepper" id="btn-zoom-inc">+</button>
-        <span class="zoom-val" id="zoom-percentage">85%</span>
-        <button type="button" class="zoom-fit-btn" id="btn-zoom-fit" title="Fit slide to current window">⛶</button>
+      <div class="status-center">
+        <button id="btn-status-notes" title="Notes">📝 Notes</button>
       </div>
-    </div>
-  </footer>
+      <div class="status-right">
+        <button id="btn-status-view-normal" title="Normal">📄</button>
+        <button id="btn-status-view-sorter" title="Slide Sorter">📊</button>
+        <button id="btn-status-view-slideshow" title="Slide Show">▶</button>
+        <span class="divider">|</span>
+        <input type="range" id="zoom-slider" min="10" max="200" value="100" />
+        <span id="zoom-percentage">100%</span>
+        <button id="btn-zoom-fit" title="Fit to window">Fit</button>
+      </div>
+    </footer>
 
-
-  <!-- ========================================================================
-       7. POWERPOINT FULLSCREEN SLIDE SHOW OVERLAY (WITH PRESENTER TOOLS)
-       ======================================================================== -->
-  <div class="ppt-slideshow-overlay" id="ppt-slideshow-overlay" style="display: none;">
-    
-    <div class="slideshow-stage" id="slideshow-stage">
-      <div class="slideshow-slide" id="slideshow-slide">
-        <!-- Slide contents injected during presentation -->
+    <!-- 7. Presentation Mode Overlay -->
+    <div id="ppt-slideshow-overlay" class="ppt-slideshow-overlay hidden">
+      <div id="slideshow-slide" class="slideshow-slide">
+        <!-- Rendered slide content -->
+        <div id="laser-pointer" class="laser-pointer hidden"></div>
+      </div>
+      <div class="slideshow-hud">
+        <button id="btn-slideshow-prev" title="Previous">⏮</button>
+        <span id="slideshow-index-display">1 / 1</span>
+        <button id="btn-slideshow-next" title="Next">⏭</button>
+        <div class="divider-vertical"></div>
+        <button id="btn-slideshow-laser" title="Laser Pointer">🔴</button>
+        <button id="btn-slideshow-pen" title="Pen">🖊</button>
+        <button id="btn-slideshow-black" title="Black Screen">■</button>
+        <span id="slideshow-timer">00:00</span>
+        <button id="btn-slideshow-exit" title="End Show">✕</button>
       </div>
     </div>
 
-    <!-- Laser Pointer Dot -->
-    <div class="laser-pointer" id="laser-pointer" style="display: none;"></div>
-
-    <!-- On-screen Presenter HUD Tools (Appears in bottom-left on mouse movement) -->
-    <div class="presenter-hud" id="presenter-hud">
-      <button type="button" class="hud-tool" id="hud-prev" title="Previous Slide (PageUp / Left Arrow)">◀</button>
-      <button type="button" class="hud-tool" id="hud-next" title="Next Slide (PageDown / Right Arrow)">▶</button>
-      <span class="hud-slide-idx" id="hud-slide-idx">1 / 1</span>
-      
-      <button type="button" class="hud-tool" id="hud-laser" title="Laser Pointer (Ctrl+L)">🔴 Laser</button>
-      <button type="button" class="hud-tool" id="hud-black" title="Black Screen (B)">⬛ Black</button>
-      <button type="button" class="hud-tool hud-exit-btn" id="hud-exit" title="End Slide Show (Esc)">✕ End Show</button>
+    <!-- 8. Context Menu -->
+    <div id="context-menu" class="context-menu hidden">
+      <div class="context-item" id="cm-cut">Cut</div>
+      <div class="context-item" id="cm-copy">Copy</div>
+      <div class="context-item" id="cm-paste">Paste</div>
+      <div class="context-item" id="cm-duplicate">Duplicate</div>
+      <div class="context-separator"></div>
+      <div class="context-item" id="cm-delete">Delete</div>
+      <div class="context-separator"></div>
+      <div class="context-item" id="cm-bring-front">Bring to Front</div>
+      <div class="context-item" id="cm-send-back">Send to Back</div>
+      <div class="context-separator"></div>
+      <div class="context-item" id="cm-select-all">Select All</div>
+      <div class="context-separator"></div>
+      <div class="context-item" id="cm-add-textbox">Add Text Box</div>
+      <div class="context-item" id="cm-add-shape">Add Shape</div>
     </div>
 
-  </div>
+    <!-- 9. Dialogs -->
 
-
-  <!-- ========================================================================
-       8. BACKSTAGE VIEW (THE POWERPOINT "FILE" FULLSCREEN EXPERIENCE)
-       ======================================================================== -->
-  <div class="backstage-overlay" id="backstage-overlay" style="display: none;">
-    <div class="backstage-sidebar">
-      <button type="button" class="backstage-back-btn" id="backstage-close-btn" title="Back to presentation">
-        ←
-      </button>
-      <div class="backstage-menu">
-        <button type="button" class="bs-tab active" data-view="info">Info</button>
-        <button type="button" class="bs-tab" data-view="new">New</button>
-        <button type="button" class="bs-tab" data-view="save">Save As</button>
-        <button type="button" class="bs-tab" data-view="export">Export</button>
-        <a href="{{ url_for('dashboard') }}" class="bs-tab bs-exit">Close to Dashboard</a>
-      </div>
-    </div>
-
-    <div class="backstage-content">
-      
-      <!-- Backstage View: Info -->
-      <div class="bs-view active" id="bs-view-info">
-        <h1>Presentation Info</h1>
-        <div class="info-card-deck">
-          <div class="info-card">
-            <h3>Deck Properties</h3>
-            <p><strong>Title:</strong> <span id="bs-info-title">{{ presentation.title }}</span></p>
-            <p><strong>Slides Count:</strong> <span id="bs-info-slides">1</span></p>
-            <p><strong>Aspect Ratio:</strong> 16:9 Widescreen</p>
-            <p><strong>Cloud Status:</strong> Synced &amp; Saved</p>
-          </div>
-          <div class="info-actions">
-            <button type="button" class="btn btn-primary" id="bs-save-now">Save Presentation</button>
-            <button type="button" class="btn btn-secondary" onclick="window.print()">Print / Export PDF</button>
-          </div>
+    <!-- Online Image Modal -->
+    <div id="onlineImageModal" class="dialog-overlay hidden">
+      <div class="dialog-box">
+        <h3>Insert Online Picture</h3>
+        <input
+          type="text"
+          id="online-image-url"
+          placeholder="https://example.com/image.jpg"
+          class="dialog-input"
+        />
+        <div class="dialog-actions">
+          <button id="btn-online-img-insert" class="btn-primary">Insert</button>
+          <button id="btn-online-img-close" class="btn-secondary">Close</button>
         </div>
       </div>
+    </div>
 
-      <!-- Backstage View: New Presentation Gallery -->
-      <div class="bs-view" id="bs-view-new">
-        <h1>New Presentation</h1>
-        <p class="bs-subtitle">Choose a template to get started</p>
-        <div class="templates-grid">
-          <div class="template-item" onclick="window.location.href='{{ url_for('new_presentation', title='Blank Presentation') }}'">
-            <div class="template-box" style="background: #ffffff; border: 1px solid #cbd5e1;"></div>
-            <span>Blank Presentation</span>
-          </div>
-          <div class="template-item" onclick="window.location.href='{{ url_for('new_presentation', title='Executive Pitch Deck') }}'">
-            <div class="template-box" style="background: linear-gradient(135deg, #1e1b4b, #312e81);"></div>
-            <span>Executive Pitch Deck</span>
-          </div>
-          <div class="template-item" onclick="window.location.href='{{ url_for('new_presentation', title='Modern Minimalist') }}'">
-            <div class="template-box" style="background: #0f172a;"></div>
-            <span>Modern Minimalist</span>
-          </div>
-          <div class="template-item" onclick="window.location.href='{{ url_for('new_presentation', title='Nature Emerald') }}'">
-            <div class="template-box" style="background: linear-gradient(135deg, #064e3b, #047857);"></div>
-            <span>Nature Emerald</span>
-          </div>
+    <!-- Find & Replace Dialog -->
+    <div id="find-replace-dialog" class="dialog-overlay hidden">
+      <div class="dialog-box">
+        <h3>Find & Replace</h3>
+        <div class="form-group">
+          <label>Find what:</label>
+          <input type="text" id="find-input" class="dialog-input" />
+        </div>
+        <div class="form-group mt-2">
+          <label>Replace with:</label>
+          <input type="text" id="replace-input" class="dialog-input" />
+        </div>
+        <div class="dialog-actions mt-4">
+          <button id="btn-find-prev" class="btn-secondary">Find Prev</button>
+          <button id="btn-find-next" class="btn-secondary">Find Next</button>
+          <button id="btn-replace" class="btn-primary">Replace</button>
+          <button id="btn-replace-all" class="btn-primary">Replace All</button>
+          <button id="btn-fr-close" class="btn-secondary">Close</button>
         </div>
       </div>
+    </div>
 
-      <!-- Backstage View: Export -->
-      <div class="bs-view" id="bs-view-export">
-        <h1>Export Presentation</h1>
-        <div class="export-options">
-          <button type="button" class="export-card" id="btn-export-pdf" onclick="window.print()">
-            <span class="export-icon">📄</span>
-            <div>
-              <h3>Create PDF / Print Document</h3>
-              <p>Preserves layout, fonts, images, and formatting across 16:9 slides.</p>
-            </div>
-          </button>
-          <button type="button" class="export-card" id="btn-export-json">
-            <span class="export-icon">💾</span>
-            <div>
-              <h3>Download SlideCraft (.json) Deck</h3>
-              <p>Download the raw presentation JSON bundle for offline backup or sharing.</p>
-            </div>
-          </button>
+    <!-- Chart Dialog -->
+    <div id="chart-dialog" class="dialog-overlay hidden">
+      <div class="dialog-box">
+        <h3>Insert Chart</h3>
+        <div class="form-group">
+          <label>Chart Type:</label>
+          <select id="chart-type-select" class="dialog-input">
+            <option value="bar">Bar Chart</option>
+            <option value="line">Line Chart</option>
+            <option value="pie">Pie Chart</option>
+          </select>
+        </div>
+        <div class="form-group mt-2">
+          <label>Chart Data (JSON/CSV):</label>
+          <textarea
+            id="chart-data-input"
+            class="dialog-input"
+            rows="5"
+            placeholder='{"labels": ["A", "B"], "values": [10, 20]}'
+          ></textarea>
+        </div>
+        <div class="dialog-actions mt-4">
+          <button id="btn-chart-insert" class="btn-primary">Insert</button>
+          <button id="btn-chart-close" class="btn-secondary">Close</button>
         </div>
       </div>
-
     </div>
-  </div>
 
-
-  <!-- ========================================================================
-       9. MODAL: INSERT ONLINE IMAGE
-       ======================================================================== -->
-  <div class="modal-backdrop" id="onlineImageModal" style="display: none;">
-    <div class="modal-dialog">
-      <div class="modal-header">
-        <h2>Insert Online Picture</h2>
-        <button type="button" class="modal-close" onclick="closeOnlineImgModal()">&times;</button>
-      </div>
-      <div class="modal-body">
-        <label for="online-img-url">Paste Image URL (HTTPS)</label>
-        <input 
-          type="url" 
-          id="online-img-url" 
-          class="form-control" 
-          placeholder="https://images.unsplash.com/..." 
-          autocomplete="off"
-        >
-        <p class="modal-hint">Accepts high-res PNG, JPG, WebP, and SVG images.</p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" onclick="closeOnlineImgModal()">Cancel</button>
-        <button type="button" class="btn btn-primary" id="btn-confirm-online-img">Insert</button>
-      </div>
-    </div>
-  </div>
-
-</div>
-
-<script>
-  window.PRESENTATION_ID = {{ presentation.id }};
-</script>
-{% endblock %}
-
-{% block extra_js %}
-<script src="{{ url_for('static', filename='js/editor.js') }}"></script>
-{% endblock %}
+    <!-- 10. Script -->
+    <script src="/static/js/editor.js"></script>
+  </body>
+</html>

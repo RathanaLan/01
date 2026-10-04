@@ -52,6 +52,7 @@ create_res = client.get('/editor/new', follow_redirects=False)
 assert create_res.status_code in [302, 200], f"Create deck failed: {create_res.status_code}"
 location = create_res.headers.get('Location', '')
 match = re.search(r'/editor/(\d+)', location)
+match = re.search(r'/editor/([a-f0-9\-]+)', location)
 assert match, f"Could not find presentation ID in redirect location: {location}"
 pres_id = match.group(1)
 print(f"SUCCESS: Created presentation ID: {pres_id}")
@@ -110,6 +111,7 @@ print("SUCCESS: Persistence roundtrip verified in SQLite database")
 from io import BytesIO
 mock_img = BytesIO(b"\x89PNG\r\n\x1a\n\x00\x00\x00\rIHDR\x00\x00\x00\x01\x00\x00\x00\x01\x08\x06\x00\x00\x00\x1f\x15c4\x00\x00\x00\nIDATx\x9cc\x00\x01\x00\x00\x05\x00\x01\r\n-\xb4\x00\x00\x00\x00IEND\xaeB`\x82")
 upload_res = client.post('/api/upload-image', data={'image': (mock_img, 'test_unit.png')}, content_type='multipart/form-data')
+upload_res = client.post('/api/upload-image', data={'file': (mock_img, 'test_unit.png')}, content_type='multipart/form-data')
 assert upload_res.status_code == 200, f"Upload failed: {upload_res.status_code}"
 upload_data = upload_res.get_json()
 assert 'url' in upload_data, "No URL in image upload response"
