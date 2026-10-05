@@ -1,0 +1,730 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="A manufacturing Digital Transformation case study showing how Rathana Lan designed and developed a connected daily operations workflow using Microsoft Power Platform.">
+  <meta name="author" content="Rathana Lan">
+  <meta name="theme-color" content="#03060A">
+  <link rel="canonical" href="https://rathana-lan.portfolio/daily-job-management">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Daily Job Management Transformation | Rathana Lan">
+  <meta property="og:description" content="A manufacturing Digital Transformation case study showing how Rathana Lan designed and developed a connected daily operations workflow using Microsoft Power Platform at DENSO Cambodia.">
+  <meta property="og:site_name" content="Rathana Lan DX Portfolio">
+  <title>Daily Job Management Transformation | Rathana Lan</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%2307111B'/%3E%3Crect x='1.5' y='1.5' width='61' height='61' rx='14.5' fill='none' stroke='%2363E8FF' stroke-width='2' stroke-opacity='0.4'/%3E%3Ctext x='11' y='43' font-family='system-ui,sans-serif' font-weight='900' font-size='28' fill='%23F8FBFF' letter-spacing='-1'%3ERL%3C/text%3E%3Ccircle cx='51' cy='40' r='5' fill='%2364F4BD'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+  <div class="scroll-progress-bar" id="progressBar" aria-hidden="true"></div>
+  <div class="ambient-bg ambient-cyan" aria-hidden="true"></div>
+  <div class="ambient-bg ambient-mint" aria-hidden="true"></div>
+  <div class="ambient-bg ambient-rose" aria-hidden="true"></div>
+
+  <!-- Executive Sticky Header Navigation -->
+  <header class="nav-header">
+    <div class="container nav-container">
+      <div class="brand-group">
+        <a href="#hero" class="brand-mark" aria-label="Rathana Lan Transformation Case Study">
+          <div class="brand-badge">RL</div>
+          <span>Rathana Lan</span>
+        </a>
+        <div class="project-pill" title="Status: Live in Production 2026">
+          <span class="status-dot"></span>
+          <span>DENSO · Production 2026</span>
+        </div>
+      </div>
+
+      <nav aria-label="Main Navigation">
+        <ul class="nav-dock">
+          <li><a href="#before-dx" class="nav-link">Challenge</a></li>
+          <li><a href="#transformation" class="nav-link">Transformation</a></li>
+          <li><a href="#ecosystem" class="nav-link">Architecture</a></li>
+          <li><a href="#product-experience" class="nav-link">Product</a></li>
+          <li><a href="#business-impact" class="nav-link">Impact</a></li>
+        </ul>
+      </nav>
+
+      <div class="nav-actions">
+        <a href="../Aboutme/index.html" class="btn-portal" title="Return to Rathana Lan Executive Portfolio">
+          <span>Main Portfolio</span>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+        <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle navigation menu" aria-expanded="false">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <div class="mobile-drawer" id="mobileDrawer">
+      <div class="mobile-drawer-grid">
+        <a href="#before-dx" class="nav-link mobile-link">Challenge</a>
+        <a href="#transformation" class="nav-link mobile-link">Transformation</a>
+        <a href="#maturity" class="nav-link mobile-link">Maturity</a>
+        <a href="#ecosystem" class="nav-link mobile-link">Architecture</a>
+        <a href="#product-experience" class="nav-link mobile-link">Product</a>
+        <a href="#business-impact" class="nav-link mobile-link">Impact</a>
+        <a href="#leadership" class="nav-link mobile-link">Leadership</a>
+        <a href="#roadmap" class="nav-link mobile-link">Roadmap</a>
+      </div>
+      <a href="../Aboutme/index.html" class="btn-portal" title="Return to Rathana Lan Executive Portfolio">
+        <span>Main Portfolio</span>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+  </header>
+
+  <main id="main-content">
+    <!-- CHAPTER 01: TRANSFORMATION HERO -->
+    <section class="hero-section" id="hero">
+      <div class="container hero-grid">
+        <div class="hero-content reveal active">
+          <span class="eyebrow" id="heroCategory">Manufacturing Operations · Digital Transformation</span>
+          <h1 class="hero-primary hero-title">
+            <span class="outline-title">DIGITAL</span>
+            <span class="line-2">Daily Operations</span>
+            <span class="line-3">Transformation</span>
+          </h1>
+          <p class="hero-description" id="heroTagline">
+            A connected operating experience that converts daily manufacturing activity into structured execution, automated action, and management insight.
+          </p>
+
+          <div class="hero-kpi-bar" id="heroKpiContainer">
+            <div class="hero-kpi-item">
+              <span class="hero-kpi-val" data-target="120" data-suffix="+">120+</span>
+              <span class="hero-kpi-lbl">Active Users</span>
+            </div>
+            <div class="hero-kpi-item">
+              <span class="hero-kpi-val" data-target="8500" data-suffix="+">8,500+</span>
+              <span class="hero-kpi-lbl">Transactions</span>
+            </div>
+            <div class="hero-kpi-item">
+              <span class="hero-kpi-val" data-target="1250" data-suffix="+">1,250+</span>
+              <span class="hero-kpi-lbl">Hours Saved</span>
+            </div>
+            <div class="hero-kpi-item">
+              <span class="hero-kpi-val mint-val" data-target="83" data-suffix="%">83%</span>
+              <span class="hero-kpi-lbl">Faster Speed</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-visual-card reveal reveal-delay-1 active" aria-hidden="true">
+          <div class="floating-telemetry telemetry-1">
+            <span class="telemetry-badge"></span>
+            <div>
+              <strong style="font-size:12px;color:var(--cyan);display:block;">FLOW VELOCITY</strong>
+              <span style="font-size:11px;color:var(--text-muted);">Takt: 5m vs 30m</span>
+            </div>
+          </div>
+          <div class="floating-telemetry telemetry-2">
+            <span class="telemetry-badge" style="background:var(--cyan);box-shadow:0 0 10px var(--cyan);"></span>
+            <div>
+              <strong style="font-size:12px;color:var(--mint);display:block;">NODE SYNC</strong>
+              <span style="font-size:11px;color:var(--text-muted);">100% Digital Trace</span>
+            </div>
+          </div>
+
+          <svg class="hero-svg-canvas" viewBox="0 0 540 440" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="gridGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#63E8FF" stop-opacity="0.25"/>
+                <stop offset="100%" stop-color="#64F4BD" stop-opacity="0.05"/>
+              </linearGradient>
+              <linearGradient id="cyanLine" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stop-color="#63E8FF"/>
+                <stop offset="100%" stop-color="#64F4BD"/>
+              </linearGradient>
+              <pattern id="dotPattern" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
+                <circle cx="2" cy="2" r="1.5" fill="#63E8FF" fill-opacity="0.12"/>
+              </pattern>
+            </defs>
+            <rect width="540" height="440" fill="url(#dotPattern)"/>
+            <path d="M 60 380 L 270 300 L 480 380 L 270 420 Z" fill="url(#gridGrad)" stroke="#63E8FF" stroke-opacity="0.3" stroke-width="1.5"/>
+            <path d="M 60 260 L 270 180 L 480 260 L 270 340 Z" fill="url(#gridGrad)" stroke="#64F4BD" stroke-opacity="0.2" stroke-width="1.5"/>
+            <path d="M 120 350 L 270 290 L 420 350" stroke="url(#cyanLine)" stroke-width="2.5" stroke-dasharray="6 6">
+              <animate attributeName="stroke-dashoffset" from="40" to="0" dur="2s" repeatCount="indefinite"/>
+            </path>
+            <path d="M 120 230 L 270 170 L 420 230" stroke="#63E8FF" stroke-width="2" stroke-dasharray="4 4">
+              <animate attributeName="stroke-dashoffset" from="0" to="40" dur="2.5s" repeatCount="indefinite"/>
+            </path>
+            <line x1="120" y1="230" x2="120" y2="350" stroke="#697BFF" stroke-width="1.5" stroke-opacity="0.5"/>
+            <line x1="270" y1="170" x2="270" y2="290" stroke="#64F4BD" stroke-width="2" stroke-opacity="0.8"/>
+            <line x1="420" y1="230" x2="420" y2="350" stroke="#697BFF" stroke-width="1.5" stroke-opacity="0.5"/>
+            <g transform="translate(270, 150)">
+              <circle r="42" fill="#07111B" stroke="#64F4BD" stroke-width="2"/>
+              <circle r="52" fill="none" stroke="#63E8FF" stroke-width="1" stroke-dasharray="8 6" opacity="0.6">
+                <animateTransform attributeName="transform" type="rotate" from="0" to="360" dur="18s" repeatCount="indefinite"/>
+              </circle>
+              <path d="M -14 -6 L 0 -16 L 14 -6 L 0 16 Z" fill="none" stroke="#63E8FF" stroke-width="2.5"/>
+              <circle cx="0" cy="0" r="4" fill="#64F4BD"/>
+            </g>
+            <g transform="translate(120, 210)">
+              <circle r="22" fill="#07111B" stroke="#63E8FF" stroke-width="1.5"/>
+              <text x="0" y="4" text-anchor="middle" font-size="10" fill="#F8FBFF" font-weight="700">APP</text>
+            </g>
+            <g transform="translate(420, 210)">
+              <circle r="22" fill="#07111B" stroke="#64F4BD" stroke-width="1.5"/>
+              <text x="0" y="4" text-anchor="middle" font-size="10" fill="#F8FBFF" font-weight="700">FLOW</text>
+            </g>
+            <g transform="translate(180, 80)">
+              <circle r="18" fill="#07111B" stroke="#697BFF" stroke-width="1.5"/>
+              <text x="0" y="4" text-anchor="middle" font-size="9" fill="#B9CBE0" font-weight="700">DATA</text>
+            </g>
+            <g transform="translate(360, 80)">
+              <circle r="18" fill="#07111B" stroke="#FFE28A" stroke-width="1.5"/>
+              <text x="0" y="4" text-anchor="middle" font-size="9" fill="#FFE28A" font-weight="700">BI</text>
+            </g>
+            <path d="M 120 210 Q 180 130 270 150" stroke="#63E8FF" stroke-width="1.5" stroke-dasharray="3 3"/>
+            <path d="M 420 210 Q 360 130 270 150" stroke="#64F4BD" stroke-width="1.5" stroke-dasharray="3 3"/>
+            <path d="M 180 80 L 270 150" stroke="#697BFF" stroke-width="1.5"/>
+            <path d="M 360 80 L 270 150" stroke="#FFE28A" stroke-width="1.5"/>
+          </svg>
+        </div>
+      </div>
+    </section>
+
+    <!-- CHAPTER 02: FACTORY BEFORE DX -->
+    <section class="section-pad" id="before-dx">
+      <div class="container">
+        <div class="reveal">
+          <span class="eyebrow eyebrow-rose">Legacy Factory Reality</span>
+          <h2 class="section-title">Work moved. <span class="problem-text">Information did not.</span></h2>
+          <p class="section-subtitle">
+            Manufacturing lines operated with physical precision, but administrative processes were held back by paper checksheets, fragmented Excel files, and communication silos.
+          </p>
+        </div>
+
+        <div class="problem-matrix">
+          <div class="bottleneck-visual reveal reveal-delay-1" aria-hidden="true">
+            <svg class="bottleneck-svg" viewBox="0 0 500 360" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <g transform="translate(40, 50)">
+                <rect width="100" height="60" rx="8" fill="#140A10" stroke="#FF718D" stroke-width="1.5"/>
+                <text x="50" y="32" text-anchor="middle" font-size="12" fill="#F8FBFF" font-weight="700">1. Paper Form</text>
+                <text x="50" y="48" text-anchor="middle" font-size="10" fill="#FF718D">Manual Entry</text>
+              </g>
+              <path d="M 140 80 L 190 80" stroke="#FF718D" stroke-width="2" stroke-dasharray="4 4"/>
+              <circle cx="165" cy="80" r="9" fill="#FF718D" fill-opacity="0.2"/>
+              <text x="165" y="84" text-anchor="middle" font-size="12" fill="#FF718D" font-weight="900">✕</text>
+              <g transform="translate(190, 50)">
+                <rect width="100" height="60" rx="8" fill="#140A10" stroke="#FF718D" stroke-width="1.5"/>
+                <text x="50" y="32" text-anchor="middle" font-size="12" fill="#F8FBFF" font-weight="700">2. In-Tray Waiting</text>
+                <text x="50" y="48" text-anchor="middle" font-size="10" fill="#FF718D">Approval Lag</text>
+              </g>
+              <path d="M 290 80 L 340 80" stroke="#FF718D" stroke-width="2" stroke-dasharray="4 4"/>
+              <circle cx="315" cy="80" r="9" fill="#FF718D" fill-opacity="0.2"/>
+              <text x="315" y="84" text-anchor="middle" font-size="12" fill="#FF718D" font-weight="900">✕</text>
+              <g transform="translate(340, 50)">
+                <rect width="120" height="60" rx="8" fill="#140A10" stroke="#FF718D" stroke-width="1.5"/>
+                <text x="60" y="32" text-anchor="middle" font-size="12" fill="#F8FBFF" font-weight="700">3. Retrospective</text>
+                <text x="60" y="48" text-anchor="middle" font-size="10" fill="#FF718D">Manual Excel Entry</text>
+              </g>
+              <g transform="translate(40, 160)">
+                <rect width="420" height="150" rx="12" fill="#0A0608" stroke="#FF718D" stroke-opacity="0.3" stroke-width="1"/>
+                <circle cx="210" cy="210" r="32" fill="#FF718D" fill-opacity="0.1"/>
+                <path d="M 210 190 L 228 224 L 192 224 Z" fill="#FF718D"/>
+                <text x="210" y="218" text-anchor="middle" font-size="14" fill="#03060A" font-weight="900">!</text>
+                <text x="210" y="255" text-anchor="middle" font-size="14" fill="#F8FBFF" font-weight="800">25 MINUTES LOST WAITING</text>
+                <text x="210" y="275" text-anchor="middle" font-size="12" fill="#FF718D">No Live Status · Scattered Spreadsheets · Clerical Waste</text>
+              </g>
+            </svg>
+          </div>
+
+          <div class="problem-breakdown reveal reveal-delay-2">
+            <div class="problem-card">
+              <h3>
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+                Paper Forms & Excel Dependency
+              </h3>
+              <p>Shift teams recorded daily job tasks onto physical checksheets, then manually transcribed numbers into local Excel files, creating recurring typographical errors and discrepancies.</p>
+            </div>
+            <div class="problem-card">
+              <h3>
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                Manual Approval Handoffs
+              </h3>
+              <p>Paper requests sat on desks awaiting supervisor stamps. If a leader was on the shopfloor or in meetings, critical job requests were stalled for hours.</p>
+            </div>
+            <div class="problem-card">
+              <h3>
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                Low Operational Visibility
+              </h3>
+              <p>Management had zero real-time view into task bottlenecks or open jobs. Performance reports were compiled after the shift ended, rendering intervention purely reactive.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="trio-grid reveal">
+          <div class="trio-card">
+            <h4>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+              Frontline Pain
+            </h4>
+            <p>Repeated manual handoffs, verbal chasing of signatures, and duplicated administrative effort consumed up to 30 minutes of operator time every cycle.</p>
+          </div>
+          <div class="trio-card">
+            <h4>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+              Process Risk
+            </h4>
+            <p>Critical tasks could be delayed, missed entirely, recorded inconsistently, or lost in paper piles, risking line takt synchronization.</p>
+          </div>
+          <div class="trio-card">
+            <h4>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              Business Impact
+            </h4>
+            <p>Prolonged lead times, administrative waste across 120+ factory staff, and inability for management to make proactive, data-driven decisions.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CHAPTER 03: COST OF DOING NOTHING -->
+    <section class="cost-section" id="cost-of-nothing">
+      <div class="container cost-headline-box reveal">
+        <span class="eyebrow eyebrow-rose">The Hidden Friction</span>
+        <div class="giant-cost-number">30</div>
+        <span class="giant-cost-unit">Minutes per task cycle</span>
+        <p class="cost-quote">
+          “Thirty minutes of administrative processing for work that should take five.”
+        </p>
+
+        <div class="consequences-grid">
+          <div class="consequence-card">
+            <span class="tag-num">Consequence 01</span>
+            <h3>Repeated Data Entry</h3>
+            <p>Operators transcribed the same information multiple times onto forms, shift boards, and computer logs, generating needless overhead and fatigue.</p>
+          </div>
+          <div class="consequence-card">
+            <span class="tag-num">Consequence 02</span>
+            <h3>Approval Waiting</h3>
+            <p>Job execution stalled while paperwork was physically transported between buildings or sat in inboxes awaiting absent supervisors.</p>
+          </div>
+          <div class="consequence-card">
+            <span class="tag-num">Consequence 03</span>
+            <h3>Delayed Decisions</h3>
+            <p>By the time operational issues were spotted in spreadsheet rollups, shifts had already concluded, making root-cause containment costlier.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CHAPTER 04: TRANSFORMATION REVEAL -->
+    <section class="section-pad" id="transformation">
+      <div class="container">
+        <div class="reveal">
+          <span class="eyebrow eyebrow-mint">The Transformation Reveal</span>
+          <h2 class="section-title">One process. <span class="text-accent">Two different worlds.</span></h2>
+          <p class="section-subtitle">
+            Comparing the daily reality before and after implementing the Daily Job Management Application. From constrained paper queues to a connected digital flow.
+          </p>
+        </div>
+
+        <div class="compare-bridge-wrapper reveal reveal-delay-1">
+          <div class="compare-toggle-bar">
+            <div class="toggle-pill" role="tablist" aria-label="Transformation View Switch">
+              <button class="toggle-btn active" id="btnShowAll" role="tab" aria-selected="true">Side-by-Side Comparison</button>
+              <button class="toggle-btn" id="btnShowAfterOnly" role="tab" aria-selected="false">Modern Solution View</button>
+            </div>
+          </div>
+
+          <div class="compare-grid" id="compareGrid">
+            <div class="compare-side side-before" id="sideBefore">
+              <div class="side-header">
+                <h3 class="problem-text">Before DX · Fragmented</h3>
+                <span class="eyebrow eyebrow-rose" style="margin-bottom:0;">Legacy Baseline</span>
+              </div>
+              <ul class="compare-list" id="beforeProcessList"></ul>
+            </div>
+
+            <div class="compare-side side-after" id="sideAfter">
+              <div class="side-header">
+                <h3 class="success-text">After DX · Connected</h3>
+                <span class="eyebrow eyebrow-mint" style="margin-bottom:0;">Power Platform Solution</span>
+              </div>
+              <ul class="compare-list" id="afterProcessList"></ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CHAPTER 05: DX MATURITY JOURNEY -->
+    <section class="section-pad" id="maturity" style="background:#04090F;">
+      <div class="container">
+        <div class="reveal">
+          <span class="eyebrow">Transformation Strategy</span>
+          <h2 class="section-title">Not an app. <span class="text-accent">A step toward Smart Factory.</span></h2>
+          <p class="section-subtitle">
+            A structured five-tier evolutionary journey. The Daily Job Management solution establishes Level 3: Connected Workflow, creating the essential standardized data pipeline for AI and IoT.
+          </p>
+        </div>
+
+        <div class="maturity-wrapper reveal reveal-delay-1">
+          <div class="maturity-steps">
+            <div class="maturity-tier">
+              <span class="tier-badge badge-future">Level 05</span>
+              <div class="tier-title">Smart Factory Integration<small>Autonomous Operation</small></div>
+              <div class="tier-desc">Direct machine IoT telemetry, closed-loop MES synchronization, and self-balancing production line coordination.</div>
+              <div class="tier-status status-planned">Strategic Vision</div>
+            </div>
+            <div class="maturity-tier">
+              <span class="tier-badge badge-future">Level 04</span>
+              <div class="tier-title">AI Optimization<small>Predictive Intelligence</small></div>
+              <div class="tier-desc">Machine-learning job triage, predictive duration analysis, and automated exception mitigation recommendations.</div>
+              <div class="tier-status status-planned">Planned Phase</div>
+            </div>
+            <div class="maturity-tier active-foundation">
+              <span class="tier-badge badge-current">Level 03 ★</span>
+              <div class="tier-title" style="color:var(--mint);">Connected Workflow<small style="color:var(--text-primary);">Current Solution Foundation</small></div>
+              <div class="tier-desc" style="color:var(--text-primary);">Standardized Power Apps interfaces, automated Power Automate approvals, single-source SharePoint repository, and real-time Power BI insights.</div>
+              <div class="tier-status status-foundation">Active in Production</div>
+            </div>
+            <div class="maturity-tier">
+              <span class="tier-badge badge-past">Level 02</span>
+              <div class="tier-title">Excel & Spreadsheets<small>Siloed Digital Files</small></div>
+              <div class="tier-desc">Disconnected departmental workbooks, macro breakdowns, lack of multi-user sync, and retrospective reporting.</div>
+              <div class="tier-status status-completed">Superseded</div>
+            </div>
+            <div class="maturity-tier">
+              <span class="tier-badge badge-past">Level 01</span>
+              <div class="tier-title">Paper & Forms<small>Physical Clipboard Baseline</small></div>
+              <div class="tier-desc">Handwritten checksheets, physical desk stamps, high administrative loss, and zero real-time visibility.</div>
+              <div class="tier-status status-completed">Eliminated</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CHAPTER 06: DIGITAL ECOSYSTEM & ARCHITECTURE MAP -->
+    <section class="section-pad" id="ecosystem">
+      <div class="container">
+        <div class="reveal">
+          <span class="eyebrow">Enterprise Architecture</span>
+          <h2 class="section-title">Every signal. <span class="text-accent">One operating flow.</span></h2>
+          <p class="section-subtitle">
+            An enterprise-grade, connected Power Platform ecosystem engineered by Rathana Lan. Ensuring high-speed data capture on the shopfloor and instant visibility for executive leadership.
+          </p>
+        </div>
+
+        <div class="ecosystem-visual-banner reveal reveal-delay-1">
+          <img src="937ae6c081.png" alt="Connected Smart Factory and Power Platform ecosystem architecture diagram" class="ecosystem-img" loading="lazy" decoding="async" id="ecosystemImage" />
+        </div>
+
+        <div class="architecture-wrapper reveal reveal-delay-2">
+          <h3 style="font-size:20px;font-weight:800;margin-bottom:20px;display:flex;align-items:center;gap:10px;">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--cyan)" stroke-width="2.5"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
+            Interactive Data Pipeline (Click or hover any node)
+          </h3>
+
+          <div class="architecture-svg-wrap">
+            <svg class="arch-interactive-svg" viewBox="0 0 1100 240" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <linearGradient id="flowGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                  <stop offset="0%" stop-color="#63E8FF"/>
+                  <stop offset="50%" stop-color="#64F4BD"/>
+                  <stop offset="100%" stop-color="#FFE28A"/>
+                </linearGradient>
+              </defs>
+              <path d="M 80 120 L 230 120 L 380 120 L 530 120 L 680 120 L 830 120 L 980 120" stroke="url(#flowGrad)" stroke-width="3" stroke-dasharray="8 6">
+                <animate attributeName="stroke-dashoffset" from="100" to="0" dur="3s" repeatCount="indefinite"/>
+              </path>
+
+              <g class="arch-node" data-node="0" transform="translate(80, 120)" style="cursor:pointer;" tabindex="0" role="button" aria-label="Factory Users Node">
+                <circle r="36" fill="#07111B" stroke="#63E8FF" stroke-width="2"/>
+                <text x="0" y="4" text-anchor="middle" font-size="11" fill="#F8FBFF" font-weight="800">USERS</text>
+                <text x="0" y="55" text-anchor="middle" font-size="12" fill="#B9CBE0">Frontline Genba</text>
+              </g>
+              <g class="arch-node" data-node="1" transform="translate(230, 120)" style="cursor:pointer;" tabindex="0" role="button" aria-label="Power Apps Node">
+                <circle r="36" fill="#07111B" stroke="#697BFF" stroke-width="2"/>
+                <text x="0" y="4" text-anchor="middle" font-size="11" fill="#F8FBFF" font-weight="800">POWER APPS</text>
+                <text x="0" y="55" text-anchor="middle" font-size="12" fill="#B9CBE0">Mobile & Desk</text>
+              </g>
+              <g class="arch-node" data-node="2" transform="translate(380, 120)" style="cursor:pointer;" tabindex="0" role="button" aria-label="SharePoint Data Repository Node">
+                <circle r="36" fill="#07111B" stroke="#63E8FF" stroke-width="2"/>
+                <text x="0" y="4" text-anchor="middle" font-size="11" fill="#F8FBFF" font-weight="800">SHAREPOINT</text>
+                <text x="0" y="55" text-anchor="middle" font-size="12" fill="#B9CBE0">Single Store</text>
+              </g>
+              <g class="arch-node" data-node="3" transform="translate(530, 120)" style="cursor:pointer;" tabindex="0" role="button" aria-label="Power Automate Workflow Node">
+                <circle r="36" fill="#07111B" stroke="#64F4BD" stroke-width="2.5"/>
+                <text x="0" y="4" text-anchor="middle" font-size="11" fill="#64F4BD" font-weight="800">AUTOMATE</text>
+                <text x="0" y="55" text-anchor="middle" font-size="12" fill="#B9CBE0">Instant Push</text>
+              </g>
+              <g class="arch-node" data-node="4" transform="translate(680, 120)" style="cursor:pointer;" tabindex="0" role="button" aria-label="Power BI Analytics Node">
+                <circle r="36" fill="#07111B" stroke="#FFE28A" stroke-width="2"/>
+                <text x="0" y="4" text-anchor="middle" font-size="11" fill="#F8FBFF" font-weight="800">POWER BI</text>
+                <text x="0" y="55" text-anchor="middle" font-size="12" fill="#B9CBE0">Live Telemetry</text>
+              </g>
+              <g class="arch-node" data-node="5" transform="translate(830, 120)" style="cursor:pointer;" tabindex="0" role="button" aria-label="Management Insight Node">
+                <circle r="36" fill="#07111B" stroke="#63E8FF" stroke-width="2"/>
+                <text x="0" y="4" text-anchor="middle" font-size="11" fill="#F8FBFF" font-weight="800">INSIGHT</text>
+                <text x="0" y="55" text-anchor="middle" font-size="12" fill="#B9CBE0">Executive KPIs</text>
+              </g>
+              <g class="arch-node" data-node="6" transform="translate(980, 120)" style="cursor:pointer;" tabindex="0" role="button" aria-label="Teams and Email Notifications Node">
+                <circle r="36" fill="#07111B" stroke="#697BFF" stroke-width="2"/>
+                <text x="0" y="4" text-anchor="middle" font-size="11" fill="#F8FBFF" font-weight="800">ALERTS</text>
+                <text x="0" y="55" text-anchor="middle" font-size="12" fill="#B9CBE0">Teams/Email</text>
+              </g>
+            </svg>
+          </div>
+
+          <div class="arch-inspector-card" id="archInspector">
+            <div class="inspector-tech">
+              <span id="inspectTechName">Power Apps</span>
+              <small id="inspectTechRole">Ergonomic Front-End Layer</small>
+            </div>
+            <div class="inspector-field">
+              <label>Technical Implementation</label>
+              <p id="inspectTechImpl">Role-tailored responsive canvas interface equipped with offline caching and QR station scanning.</p>
+            </div>
+            <div class="inspector-field">
+              <label>Business Purpose & Value</label>
+              <p id="inspectTechPurpose">Zero-paper frontline data entry with error prevention, returning up to 25 minutes of productive time to shopfloor workers.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CHAPTER 07: PRODUCT EXPERIENCE -->
+    <section class="section-pad" id="product-experience">
+      <div class="container">
+        <div class="reveal">
+          <span class="eyebrow eyebrow-mint">Product Experience</span>
+          <h2 class="section-title">The product. <span class="text-accent">Engineered for the genba.</span></h2>
+          <p class="section-subtitle">
+            An intimate look at the core interfaces deployed at DENSO Cambodia. Designed with user ergonomics, strict data integrity, and executive clarity at its heart.
+          </p>
+        </div>
+        <div class="product-showcases" id="productShowcaseContainer"></div>
+      </div>
+    </section>
+
+    <!-- CHAPTER 08: BUSINESS IMPACT -->
+    <section class="section-pad impact-section" id="business-impact">
+      <div class="container">
+        <div class="reveal">
+          <span class="eyebrow eyebrow-mint">Operational Results</span>
+          <h2 class="section-title">The result, <span class="success-text">without the noise.</span></h2>
+          <p class="section-subtitle">
+            Measurable, bottom-line transformation across manufacturing lines. Documented metrics achieved through automated execution and centralized governance.
+          </p>
+        </div>
+
+        <div class="kpi-hero-card reveal reveal-delay-1">
+          <div class="kpi-hero-left">
+            <span class="highlight-lbl">Primary Transformation Metric</span>
+            <span class="hero-metric-val" data-target="83" data-suffix="%">83%</span>
+            <h4>Faster End-to-End Processing Time</h4>
+            <p>From initial job submission to multi-tier approval sign-off, reducing cycle time from 30 minutes down to just 5 minutes.</p>
+          </div>
+
+          <div class="time-delta-box">
+            <div class="delta-row before-row">
+              <span>Before DX Processing</span>
+              <strong>30 Minutes</strong>
+            </div>
+            <div class="delta-row after-row">
+              <span>After DX Processing</span>
+              <strong>5 Minutes</strong>
+            </div>
+            <div class="delta-progress-bar">
+              <div class="delta-progress-fill"></div>
+            </div>
+            <span style="font-size:12px;color:var(--text-muted);text-align:right;">25 Minutes saved every single cycle</span>
+          </div>
+        </div>
+
+        <div class="kpi-secondary-grid reveal reveal-delay-2" id="kpiSecondaryGrid"></div>
+
+        <div class="kpi-audit-disclaimer reveal">
+          <strong>Note on Operational Telemetry:</strong> All metrics displayed represent documented project parameters and internal rollout figures at DENSO Cambodia. These values serve as verified operational indicators and should be refreshed with finalized financial audits prior to external press publication.
+        </div>
+      </div>
+    </section>
+
+    <!-- CHAPTER 09: MANAGEMENT VALUE CHAIN -->
+    <section class="section-pad" id="value-chain" style="background:#04090F;">
+      <div class="container">
+        <div class="reveal">
+          <span class="eyebrow">Enterprise Cohesion</span>
+          <h2 class="section-title">Value at every level <span class="text-accent">of the factory.</span></h2>
+          <p class="section-subtitle">
+            Digital transformation succeeds when it delivers tangible relief to everyone from the machine operator to the Plant Director.
+          </p>
+        </div>
+        <div class="value-chain-track reveal reveal-delay-1" id="valueChainTrack"></div>
+      </div>
+    </section>
+
+    <!-- CHAPTER 10: LEADERSHIP AND OWNERSHIP -->
+    <section class="section-pad" id="leadership">
+      <div class="container">
+        <div class="reveal">
+          <span class="eyebrow eyebrow-gold">Leadership & Ownership</span>
+          <h2 class="section-title">Leadership. <span class="executive-text">End-to-End Solution Ownership.</span></h2>
+          <p class="section-subtitle">
+            Rathana Lan spearheaded the Daily Job Management transformation from initial shopfloor problem discovery to enterprise deployment, governance, and user adoption.
+          </p>
+        </div>
+
+        <div class="leadership-card reveal reveal-delay-1">
+          <div class="leader-profile-row">
+            <div class="leader-monogram-box">
+              <div class="monogram-ring" aria-hidden="true"></div>
+              <span class="monogram-text">RL</span>
+            </div>
+            <div class="leader-details">
+              <h3>Rathana Lan</h3>
+              <span class="leader-role-tag">Digital Transformation Supervisor</span>
+              <span class="leader-company">DENSO Cambodia (DNKH) · Manufacturing Division</span>
+            </div>
+            <div class="solution-owner-badge">
+              Full Solution Owner
+            </div>
+          </div>
+          <div class="responsibilities-grid" id="respGrid"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CHAPTER 11: DEVELOPMENT & CAREER JOURNEY -->
+    <section class="section-pad" id="journey" style="background:#04090F;">
+      <div class="container">
+        <div class="reveal">
+          <span class="eyebrow eyebrow-gold">Proven Experience</span>
+          <h2 class="section-title">The journey. <span class="executive-text">From genba to digital leadership.</span></h2>
+          <p class="section-subtitle">
+            True manufacturing digital transformation requires both intimate knowledge of shopfloor operations and technical mastery of modern cloud architectures.
+          </p>
+        </div>
+
+        <div class="journey-double-grid reveal reveal-delay-1">
+          <div class="timeline-container">
+            <h3 class="timeline-heading">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--cyan)" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 14 14"/></svg>
+              Project Lifecycle Methodology
+            </h3>
+            <div class="timeline-steps" id="projectTimeline"></div>
+          </div>
+
+          <div class="career-card">
+            <div>
+              <h3 class="timeline-heading">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="2.5"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                Professional Trajectory
+              </h3>
+              <div class="career-milestone-list">
+                <div class="milestone-item">
+                  <span class="milestone-date">27 July 2020</span>
+                  <div class="milestone-role">Production Team Leader</div>
+                  <span class="milestone-org">DENSO Cambodia (DNKH) · Frontline Operations</span>
+                  <p class="milestone-desc">
+                    Mastered the genba: takt time balancing, Toyota Production System (TPS) principles, daily 5S/safety routines, standard work, and frontline team leadership.
+                  </p>
+                </div>
+                <div class="milestone-item" style="border-color:var(--mint);">
+                  <span class="milestone-date" style="color:var(--mint);">2024 – Present</span>
+                  <div class="milestone-role">Digital Transformation Supervisor</div>
+                  <span class="milestone-org" style="color:var(--mint);">DENSO Cambodia (DNKH) · DX Section</span>
+                  <p class="milestone-desc">
+                    Entrusted to lead plant-wide digital transformation initiatives, architecting Power Platform ecosystems, automating non-value-added tasks, and bridging shopfloor reality with executive vision.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div style="margin-top:36px;padding:18px;background:rgba(3,6,10,0.6);border-radius:var(--radius-md);border:1px solid var(--surface-glass-border);">
+              <span style="font-size:12px;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:0.05em;display:block;margin-bottom:4px;">Core Philosophy</span>
+              <p style="font-size:13.5px;color:var(--text-secondary);line-height:1.5;">
+                “You cannot automate what you do not understand. Leading production teams at the genba gave me the exact foundation required to build tools that operators actually love using.”
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CHAPTER 12: SMART FACTORY ROADMAP -->
+    <section class="section-pad" id="roadmap">
+      <div class="container">
+        <div class="reveal">
+          <span class="eyebrow">Strategic Horizon</span>
+          <h2 class="section-title">The application is <span class="text-accent">only the beginning.</span></h2>
+          <p class="section-subtitle">
+            A clear four-phase evolution map. Distinguishing between completed capabilities, active optimizations, and the long-term Smart Factory vision.
+          </p>
+        </div>
+        <div class="roadmap-grid reveal reveal-delay-1" id="roadmapGrid"></div>
+      </div>
+    </section>
+
+    <!-- CHAPTER 13: CLOSING CALL TO ACTION & FOOTER -->
+    <section class="cta-section" id="cta">
+      <div class="container cta-box reveal">
+        <span class="eyebrow eyebrow-mint">Partnership & Leadership</span>
+        <h2>Build the future <span class="text-accent">from the factory floor.</span></h2>
+        <p>
+          Whether evaluating enterprise digital transformation, exploring Power Platform architectures, or reviewing production operational leadership, Rathana Lan brings end-to-end execution capability.
+        </p>
+
+        <div class="cta-actions">
+          <a href="https://t.me/loyeelrn" target="_blank" rel="noopener noreferrer" class="btn-cta-primary">
+            <span>Connect on Telegram</span>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
+          </a>
+          <a href="../Aboutme/index.html" class="btn-cta-secondary">
+            <span>Explore Full Portfolio</span>
+          </a>
+          <button class="btn-cta-secondary" onclick="window.print();" title="Print or save executive summary as PDF">
+            <span>Print Case Study</span>
+          </button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-content">
+      <div class="footer-left">
+        <strong style="color:var(--text-primary);font-size:15px;">Rathana Lan</strong>
+        <span>·</span>
+        <span>Digital Transformation Supervisor</span>
+        <span>·</span>
+        <span>DENSO Cambodia (DNKH)</span>
+      </div>
+      <ul class="footer-nav">
+        <li><a href="#hero">Overview</a></li>
+        <li><a href="#transformation">Transformation</a></li>
+        <li><a href="#business-impact">Results</a></li>
+        <li><a href="#leadership">Leadership</a></li>
+        <li><a href="../Aboutme/index.html">Main Portfolio</a></li>
+      </ul>
+      <div style="font-size:12px;color:var(--text-muted);">
+        © 2026 Rathana Lan. Engineered with pure HTML5, CSS & Vanilla JavaScript.
+      </div>
+    </div>
+  </footer>
+
+  <div class="image-modal-overlay" id="imageModal" role="dialog" aria-modal="true" aria-label="Expanded Image Preview">
+    <div class="modal-dialog">
+      <button class="modal-close-btn" id="modalCloseBtn" aria-label="Close modal">✕</button>
+      <img src="" alt="" class="modal-img-viewport" id="modalImg">
+      <div class="modal-caption">
+        <strong id="modalTitle" style="color:var(--text-primary);font-size:16px;">Preview</strong>
+        <span id="modalSub" style="color:var(--cyan);font-size:13px;">Daily Job Management System</span>
+      </div>
+    </div>
+  </div>
+
+  <button class="scroll-top-btn" id="scrollTopBtn" aria-label="Scroll to top of page">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 15l-6-6-6 6"/></svg>
+  </button>
+
+  <script src="js/main.js" defer></script>
+</body>
+</html>
