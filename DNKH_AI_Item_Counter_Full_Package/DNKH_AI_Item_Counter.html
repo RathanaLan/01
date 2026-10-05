@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DNKH AI Item Counter</title>
+  <meta name="theme-color" content="#060913"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><link rel="manifest" href="manifest.webmanifest"><link rel="apple-touch-icon" href="icon-192.png">
+  <script async id="opencvScript" src="https://docs.opencv.org/4.x/opencv.js"></script>
+  <style>
+    :root{--bg:#060913;--panel:#0d1324cc;--panel2:#111a31;--line:#233153;--text:#eef4ff;--muted:#93a4c5;--cyan:#20d7e6;--blue:#4b72ff;--green:#2ee6a6;--red:#ff637d;--amber:#ffbd59;--shadow:0 24px 70px #0009}
+    *{box-sizing:border-box} body{margin:0;min-height:100vh;color:var(--text);font-family:Inter,Segoe UI,Arial,sans-serif;background:radial-gradient(circle at 15% 10%,#123477 0,transparent 32%),radial-gradient(circle at 90% 15%,#053a46 0,transparent 28%),linear-gradient(145deg,#050811,#090f22 70%,#050811)}
+    body:before{content:"";position:fixed;inset:0;pointer-events:none;background-image:linear-gradient(#ffffff06 1px,transparent 1px),linear-gradient(90deg,#ffffff06 1px,transparent 1px);background-size:34px 34px;mask-image:linear-gradient(to bottom,#000,transparent)}
+    .app{width:min(1500px,96vw);margin:auto;padding:24px 0 34px}.top{display:flex;justify-content:space-between;gap:20px;align-items:center;margin-bottom:18px}.brand{display:flex;align-items:center;gap:13px}.logo{width:48px;height:48px;border-radius:16px;background:linear-gradient(135deg,var(--cyan),var(--blue));display:grid;place-items:center;box-shadow:0 0 35px #20d7e651;font-weight:900;color:#07101e}.brand h1{margin:0;font-size:22px}.brand p{margin:4px 0 0;color:var(--muted);font-size:13px}.status{border:1px solid var(--line);background:#0b1222bb;padding:10px 14px;border-radius:14px;color:var(--muted);font-size:13px}.dot{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--amber);margin-right:8px}.dot.ready{background:var(--green);box-shadow:0 0 12px var(--green)}
+    .dashboard{display:grid;grid-template-columns:310px minmax(0,1fr) 260px;gap:16px}.card{background:linear-gradient(180deg,#11192bd9,#0a1020e8);border:1px solid var(--line);border-radius:22px;box-shadow:var(--shadow);backdrop-filter:blur(18px)}.side{padding:18px}.section{padding:14px 0;border-bottom:1px solid #25304a}.section:first-child{padding-top:0}.section:last-child{border:0}.section h3{font-size:11px;letter-spacing:1.5px;color:#7f91b5;margin:0 0 12px}.drop{border:1.5px dashed #385181;border-radius:16px;padding:18px;text-align:center;background:#0c1730;cursor:pointer;transition:.25s}.drop:hover,.drop.drag{border-color:var(--cyan);background:#0e2137;transform:translateY(-2px)}.drop strong{display:block;margin:6px 0;font-size:14px}.drop span{font-size:12px;color:var(--muted)}input[type=file]{display:none}.btn{width:100%;padding:11px 12px;border-radius:12px;border:1px solid var(--line);background:#16203a;color:var(--text);font-weight:700;cursor:pointer;transition:.2s}.btn:hover{transform:translateY(-1px);border-color:#526995}.btn.primary{background:linear-gradient(135deg,var(--blue),#7557ff);border:0;box-shadow:0 10px 28px #4b72ff44}.btn.green{background:linear-gradient(135deg,#0c9970,var(--green));color:#06150f;border:0}.row{display:grid;grid-template-columns:1fr 1fr;gap:8px}.control{margin:12px 0}.control label{display:flex;justify-content:space-between;font-size:12px;color:#b7c3dc;margin-bottom:6px}.control output{color:var(--cyan);font-weight:800}.control input[type=range]{width:100%;accent-color:var(--cyan)}.toggle{display:flex;justify-content:space-between;align-items:center;font-size:13px}.toggle input{accent-color:var(--cyan);width:18px;height:18px}
+    .viewer{padding:12px;min-height:680px;display:flex;flex-direction:column}.viewer-head{display:flex;align-items:center;justify-content:space-between;padding:4px 6px 12px}.viewer-head h2{font-size:15px;margin:0}.mode{font-size:12px;color:var(--muted)}.stage{position:relative;flex:1;min-height:580px;border-radius:16px;overflow:hidden;background:#030711;display:grid;place-items:center;border:1px solid #1e2942}.stage canvas{display:block;max-width:100%;max-height:100%;cursor:crosshair}.empty{text-align:center;color:var(--muted);padding:30px}.empty .icon{font-size:54px;filter:grayscale(.3);margin-bottom:10px}.tip{padding:11px 7px 0;color:var(--muted);font-size:12px}.metrics{display:grid;gap:12px}.metric{padding:17px;border-radius:18px;border:1px solid var(--line);background:linear-gradient(145deg,#121d36,#0b1121)}.metric small{color:var(--muted);font-size:11px;text-transform:uppercase;letter-spacing:1px}.metric b{display:block;font-size:42px;margin-top:6px;line-height:1}.metric b.cyan{color:var(--cyan)}.metric p{font-size:12px;color:var(--muted);margin:8px 0 0}.list{max-height:255px;overflow:auto;margin-top:8px}.item{display:grid;grid-template-columns:30px 1fr auto;gap:8px;align-items:center;padding:8px 0;border-bottom:1px solid #202b43;font-size:12px}.badge{height:25px;border-radius:8px;background:#172441;display:grid;place-items:center;color:var(--cyan);font-weight:800}.remove{border:0;background:#ff637d20;color:var(--red);border-radius:7px;cursor:pointer;padding:4px 7px}.footer-note{font-size:11px;color:#7182a5;line-height:1.55}.camera{display:none;width:100%;max-height:170px;object-fit:cover;border-radius:12px;margin-top:10px;background:#000}.camera-actions{display:none;margin-top:8px}.camera-options{display:none;gap:8px;margin-top:8px}.camera-options label{display:grid;gap:5px;color:var(--muted);font-size:11px}.camera-options select{width:100%;background:#111b32;color:var(--text);border:1px solid var(--line);border-radius:9px;padding:8px}.header-actions{display:flex;align-items:center;gap:10px}.mini-btn{border:1px solid #36517c;background:#13213b;color:#dffaff;border-radius:10px;padding:9px 12px;font-weight:700;cursor:pointer}.toast{position:fixed;right:25px;bottom:25px;padding:12px 16px;background:#10182c;border:1px solid var(--line);border-radius:12px;box-shadow:var(--shadow);opacity:0;transform:translateY(15px);transition:.25s;pointer-events:none}.toast.show{opacity:1;transform:none}@media(max-width:1050px){.dashboard{grid-template-columns:280px 1fr}.metrics{grid-column:1/-1;grid-template-columns:repeat(3,1fr)}.listCard{grid-column:1/-1}}@media(max-width:720px){body{padding-bottom:env(safe-area-inset-bottom)}.app{width:100%;padding:12px}.dashboard{grid-template-columns:1fr}.metrics{grid-template-columns:1fr}.top{align-items:stretch;flex-direction:column}.header-actions{align-items:stretch;flex-direction:column}.status{text-align:center}.viewer{min-height:460px;order:-1}.stage{min-height:380px}.side{padding:14px}.brand h1{font-size:19px}.brand p{font-size:12px}.metric b{font-size:34px}.camera{max-height:220px}.btn{min-height:44px}.control input[type=range]{height:28px}}@media(max-width:430px){.app{padding:8px}.card{border-radius:16px}.viewer{padding:8px;min-height:420px}.stage{min-height:330px}.row{grid-template-columns:1fr}.camera-options{grid-template-columns:1fr}.top{margin-bottom:10px}.logo{width:42px;height:42px}}@media(orientation:landscape) and (max-height:600px){.dashboard{grid-template-columns:280px minmax(0,1fr) 240px}.viewer{order:0;min-height:500px}.stage{min-height:410px}.metrics{grid-column:auto;grid-template-columns:1fr}}
+  </style>
+</head>
+<body>
+<div class="app">
+  <header class="top"><div class="brand"><div class="logo">AI</div><div><h1>DNKH AI Item Counter</h1><p>Local visual counting for trays, parts, boxes and production items</p></div></div><div class="header-actions"><button id="installBtn" class="mini-btn" hidden>Install app</button><div class="status"><i id="netDot" class="dot ready"></i><span id="netState">Online</span> · <i id="engineDot" class="dot"></i><span id="engineState">Loading vision engine…</span></div></div></header>
+  <main class="dashboard">
+    <aside class="card side">
+      <div class="section"><h3>IMAGE SOURCE</h3><label class="drop" id="dropZone" for="fileInput"><div style="font-size:28px">▣</div><strong>Upload or drop an image</strong><span>PNG, JPG or camera photo</span></label><input id="fileInput" type="file" accept="image/*"><div class="row" style="margin-top:9px"><button id="cameraBtn" class="btn green">Start live camera</button><button id="demoBtn" class="btn">Demo image</button></div><video id="video" class="camera" autoplay muted playsinline></video><div class="row camera-actions" id="cameraActions"><button id="captureBtn" class="btn">Capture frame</button><button id="switchBtn" class="btn">Switch camera</button></div><div class="camera-options" id="cameraOptions"><label>Camera<select id="cameraSelect"></select></label><label>Resolution<select id="resolutionSelect"><option value="640x480">640 × 480</option><option value="1280x720" selected>1280 × 720</option><option value="1920x1080">1920 × 1080</option></select></label><button id="torchBtn" class="btn" hidden>Flashlight</button></div></div>
+      <div class="section"><h3>DETECTION SETTINGS</h3><div class="control"><label>Threshold <output id="thresholdOut">145</output></label><input id="threshold" type="range" min="0" max="255" value="145"></div><div class="control"><label>Minimum area <output id="minAreaOut">180</output></label><input id="minArea" type="range" min="10" max="5000" value="180"></div><div class="control"><label>Maximum area <output id="maxAreaOut">50000</output></label><input id="maxArea" type="range" min="500" max="150000" value="50000"></div><div class="control"><label>Blur strength <output id="blurOut">3</output></label><input id="blur" type="range" min="1" max="15" step="2" value="3"></div><div class="control"><label>Roundness filter <output id="roundOut">0.10</output></label><input id="roundness" type="range" min="0" max="0.95" step="0.05" value="0.10"></div><div class="toggle"><span>Invert foreground</span><input id="invert" type="checkbox"></div><div class="toggle" style="margin-top:10px"><span>Show binary view</span><input id="binary" type="checkbox"></div><div class="toggle" style="margin-top:10px"><span>Stabilize live count</span><input id="stabilize" type="checkbox" checked></div><div class="control"><label>Live speed <output id="speedOut">3 FPS</output></label><input id="speed" type="range" min="1" max="10" value="3"></div><button id="autoTuneBtn" class="btn">Auto-tune threshold</button></div>
+      <div class="section"><button id="analyzeBtn" class="btn primary">Analyze & Count</button><div class="row" style="margin-top:8px"><button id="resetBtn" class="btn">Reset</button><button id="downloadBtn" class="btn">Save result</button></div></div>
+      <div class="footer-note">Best results: use even lighting, a simple background, visible gaps between items and a camera positioned directly above the objects.</div>
+    </aside>
+
+    <section class="card viewer"><div class="viewer-head"><h2>Detection Workspace</h2><span class="mode" id="modeLabel">No image loaded</span></div><div class="stage" id="stage"><div class="empty" id="empty"><div class="icon">◎</div><strong>Ready to count</strong><p>Upload a production image to begin.</p></div><canvas id="canvas"></canvas></div><div class="tip">Manual correction: click an existing marker to remove it, or click an empty area to add a counted item.</div></section>
+
+    <aside class="metrics">
+      <div class="metric"><small>Total quantity</small><b class="cyan" id="count">0</b><p>Detected and manually adjusted items</p></div>
+      <div class="metric"><small>Average area</small><b id="avgArea" style="font-size:25px">0 px²</b><p>Useful for tuning minimum and maximum area</p></div>
+      <div class="metric"><small>Confidence guide</small><b id="quality" style="font-size:25px;color:var(--green)">Waiting</b><p id="qualityNote">Load an image for analysis</p></div>
+      <div class="card side listCard"><h3 style="margin-top:0">DETECTED ITEMS</h3><div class="list" id="itemList"><div class="footer-note">No items detected yet.</div></div><button id="csvBtn" class="btn green" style="margin-top:12px">Export CSV report</button><button id="saveSessionBtn" class="btn" style="margin-top:8px">Save count session</button><h3 style="margin-top:18px">RECENT SESSIONS</h3><div class="list" id="historyList"><div class="footer-note">No saved sessions.</div></div></div>
+    </aside>
+  </main>
+</div>
+<div id="toast" class="toast"></div>
+<script>
+const $=id=>document.getElementById(id);
+const canvas=$('canvas'),ctx=canvas.getContext('2d');
+let original=null,detections=[],stream=null,live=false,liveTimer=null,processing=false,facingMode='environment',selectedDeviceId='',torchOn=false,countBuffer=[];
+
+function toast(msg){$('toast').textContent=msg;$('toast').classList.add('show');setTimeout(()=>$('toast').classList.remove('show'),2200)}
+function setEngine(text,ok=false){$('engineState').textContent=text;$('engineDot').classList.toggle('ready',ok)}
+function waitForOpenCv(){
+  if(typeof cv==='undefined'){setTimeout(waitForOpenCv,250);return}
+  if(cv.Mat){window.cvReady=true;setEngine('Vision engine ready',true);return}
+  cv.onRuntimeInitialized=()=>{window.cvReady=true;setEngine('Vision engine ready',true)};
+}
+waitForOpenCv();
+
+const outputMap={threshold:'thresholdOut',minArea:'minAreaOut',maxArea:'maxAreaOut',blur:'blurOut',roundness:'roundOut',speed:'speedOut'};
+Object.keys(outputMap).forEach(id=>{$(id).oninput=()=>{$(outputMap[id]).value=id==='roundness'?Number($(id).value).toFixed(2):(id==='speed'?$(id).value+' FPS':$(id).value);if(original&&!live) analyzeImage()}});
+$('invert').onchange=$('binary').onchange=()=>{if(original&&!live)analyzeImage()};
+
+function setCanvasSize(w,h){const maxW=1280,maxH=800,s=Math.min(1,maxW/w,maxH/h);canvas.width=Math.max(1,Math.round(w*s));canvas.height=Math.max(1,Math.round(h*s));$('empty').style.display='none'}
+function drawOriginal(){if(!original)return;setCanvasSize(original.width,original.height);ctx.drawImage(original,0,0,canvas.width,canvas.height)}
+function loadFile(file){if(!file)return;stopCamera(false);const r=new FileReader();r.onload=e=>{const im=new Image();im.onload=()=>{original=im;drawOriginal();detections=[];updateUI();$('modeLabel').textContent=`Image: ${im.width} × ${im.height}`;setTimeout(analyzeImage,80)};im.src=e.target.result};r.readAsDataURL(file)}
+$('fileInput').onchange=e=>loadFile(e.target.files[0]);
+const dz=$('dropZone');['dragenter','dragover'].forEach(x=>dz.addEventListener(x,e=>{e.preventDefault();dz.classList.add('drag')}));['dragleave','drop'].forEach(x=>dz.addEventListener(x,e=>{e.preventDefault();dz.classList.remove('drag')}));dz.addEventListener('drop',e=>loadFile(e.dataTransfer.files[0]));
+
+function detectFromCanvas(redrawSource){
+  if(!window.cvReady||typeof cv==='undefined'||!cv.Mat||processing)return false;
+  processing=true;
+  let src,gray,blurred,bin,contours,hierarchy,kernel;
+  try{
+    src=cv.imread(canvas);gray=new cv.Mat();blurred=new cv.Mat();bin=new cv.Mat();contours=new cv.MatVector();hierarchy=new cv.Mat();
+    cv.cvtColor(src,gray,cv.COLOR_RGBA2GRAY);
+    const b=Number($('blur').value);cv.GaussianBlur(gray,blurred,new cv.Size(b,b),0,0,cv.BORDER_DEFAULT);
+    const type=$('invert').checked?cv.THRESH_BINARY_INV:cv.THRESH_BINARY;
+    cv.threshold(blurred,bin,Number($('threshold').value),255,type);
+    kernel=cv.getStructuringElement(cv.MORPH_ELLIPSE,new cv.Size(3,3));
+    cv.morphologyEx(bin,bin,cv.MORPH_OPEN,kernel);cv.morphologyEx(bin,bin,cv.MORPH_CLOSE,kernel);
+    cv.findContours(bin,contours,hierarchy,cv.RETR_EXTERNAL,cv.CHAIN_APPROX_SIMPLE);
+    const next=[],minA=+$('minArea').value,maxA=+$('maxArea').value,minR=+$('roundness').value;
+    for(let i=0;i<contours.size();i++){
+      const c=contours.get(i),area=cv.contourArea(c),per=cv.arcLength(c,true),round=per?4*Math.PI*area/(per*per):0;
+      if(area>=minA&&area<=maxA&&round>=minR){const m=cv.moments(c),r=cv.boundingRect(c);next.push({x:m.m00?m.m10/m.m00:r.x+r.width/2,y:m.m00?m.m01/m.m00:r.y+r.height/2,area:Math.round(area),round:Number(round.toFixed(2)),manual:false})}
+      c.delete();
+    }
+    let sorted=next.sort((a,b)=>a.y-b.y||a.x-b.x);if(live&&$('stabilize').checked){countBuffer.push(sorted.length);if(countBuffer.length>7)countBuffer.shift();const freq={};countBuffer.forEach(n=>freq[n]=(freq[n]||0)+1);const stable=Number(Object.keys(freq).sort((a,b)=>freq[b]-freq[a])[0]);if(sorted.length!==stable){if(detections.length===stable)sorted=detections;}}detections=sorted;
+    if($('binary').checked)cv.imshow(canvas,bin);else{redrawSource();drawMarkers()}
+    updateUI();return true;
+  }catch(err){console.error(err);toast('Detection error. Try changing settings.');return false}
+  finally{[src,gray,blurred,bin,hierarchy,kernel].forEach(x=>x&&x.delete&&x.delete());contours&&contours.delete();processing=false}
+}
+function analyzeImage(){if(!original)return toast('Load an image first');drawOriginal();if(!detectFromCanvas(drawOriginal))toast('Vision engine is still loading')}
+
+async function refreshCameras(){
+  if(!navigator.mediaDevices?.enumerateDevices)return;
+  const devices=(await navigator.mediaDevices.enumerateDevices()).filter(d=>d.kind==='videoinput');
+  const sel=$('cameraSelect'),current=selectedDeviceId;sel.innerHTML='';
+  devices.forEach((d,i)=>{const o=document.createElement('option');o.value=d.deviceId;o.textContent=d.label||`Camera ${i+1}`;sel.appendChild(o)});
+  if(current&&devices.some(d=>d.deviceId===current))sel.value=current;else if(devices[0])selectedDeviceId=sel.value=devices[0].deviceId;
+}
+function getResolution(){const [w,h]=$('resolutionSelect').value.split('x').map(Number);return {w,h}}
+async function autoTune(){
+  if(!original&&!live)return toast('Load an image or start camera first');
+  if(!window.cvReady)return toast('Vision engine is still loading');
+  if(original)drawOriginal();else if(live){const v=$('video');ctx.drawImage(v,0,0,canvas.width,canvas.height)}
+  let src=cv.imread(canvas),g=new cv.Mat();cv.cvtColor(src,g,cv.COLOR_RGBA2GRAY);const mean=cv.mean(g)[0];$('threshold').value=Math.max(30,Math.min(225,Math.round(mean)));$('thresholdOut').value=$('threshold').value;src.delete();g.delete();toast('Threshold auto-tuned');if(live)return;analyzeImage()
+}
+function saveHistory(){
+  if(!detections.length)return toast('No count to save');
+  const list=JSON.parse(localStorage.getItem('dnkhCountHistory')||'[]');list.unshift({time:new Date().toLocaleString(),count:detections.length,avg:$('avgArea').textContent,source:live?'Live camera':(original?'Image':'Unknown')});localStorage.setItem('dnkhCountHistory',JSON.stringify(list.slice(0,20)));renderHistory();toast('Count session saved locally')
+}
+function renderHistory(){const list=JSON.parse(localStorage.getItem('dnkhCountHistory')||'[]');$('historyList').innerHTML=list.length?list.map(x=>`<div class="item"><div class="badge">${x.count}</div><div>${x.source}<br><span style="color:#7182a5">${x.time}</span></div></div>`).join(''):'<div class="footer-note">No saved sessions.</div>'}
+async function startCamera(){
+  if(!navigator.mediaDevices?.getUserMedia){toast('Camera requires localhost or HTTPS');return}
+  if(!window.isSecureContext){toast('Open with localhost launcher. Camera is blocked on this page.');return}
+  try{
+    stopCamera(false);
+    const {w,h}=getResolution();const videoConstraints=selectedDeviceId?{deviceId:{exact:selectedDeviceId},width:{ideal:w},height:{ideal:h}}:{facingMode:{ideal:facingMode},width:{ideal:w},height:{ideal:h}};stream=await navigator.mediaDevices.getUserMedia({audio:false,video:videoConstraints});
+    const video=$('video');video.srcObject=stream;await video.play();
+    await new Promise(r=>{if(video.readyState>=2)r();else video.onloadedmetadata=()=>r()});selectedDeviceId=stream.getVideoTracks()[0].getSettings().deviceId||selectedDeviceId;await refreshCameras();const caps=stream.getVideoTracks()[0].getCapabilities?.()||{};$('torchBtn').hidden=!caps.torch;$('cameraOptions').style.display='grid';
+    live=true;original=null;detections=[];$('cameraBtn').textContent='Stop live camera';$('cameraBtn').classList.remove('green');$('cameraBtn').style.background='#ff637d22';
+    $('video').style.display='block';$('cameraActions').style.display='grid';$('modeLabel').textContent='● LIVE CAMERA COUNT';$('modeLabel').style.color='#2ee6a6';
+    setCanvasSize(video.videoWidth||1280,video.videoHeight||720);liveLoop();toast('Camera connected. Live counting started.')
+  }catch(err){console.error(err);toast(err.name==='NotAllowedError'?'Camera permission was denied':'Camera not available or already in use');stopCamera(false)}
+}
+function liveLoop(){
+  if(!live)return;const video=$('video');
+  if(video.readyState>=2&&!processing){ctx.drawImage(video,0,0,canvas.width,canvas.height);detectFromCanvas(()=>ctx.drawImage(video,0,0,canvas.width,canvas.height))}
+  liveTimer=setTimeout(liveLoop,Math.round(1000/Number($('speed').value)));
+}
+function stopCamera(show=true){live=false;if(liveTimer)clearTimeout(liveTimer);liveTimer=null;if(stream)stream.getTracks().forEach(t=>t.stop());stream=null;const v=$('video');if(v)v.srcObject=null;if($('video'))$('video').style.display='none';if($('cameraActions'))$('cameraActions').style.display='none';if($('cameraOptions'))$('cameraOptions').style.display='none';if($('cameraBtn')){$('cameraBtn').textContent='Start live camera';$('cameraBtn').classList.add('green');$('cameraBtn').style.background=''}if($('modeLabel')){$('modeLabel').style.color='';if(show)$('modeLabel').textContent='Camera stopped'}if(show)toast('Live camera stopped')}
+$('cameraBtn').onclick=()=>live?stopCamera():startCamera();
+$('cameraSelect').onchange=async e=>{selectedDeviceId=e.target.value;if(live)await startCamera()};
+$('resolutionSelect').onchange=async()=>{if(live)await startCamera()};
+$('torchBtn').onclick=async()=>{try{const track=stream?.getVideoTracks()[0],caps=track?.getCapabilities?.()||{};if(!caps.torch)return;torchOn=!torchOn;await track.applyConstraints({advanced:[{torch:torchOn}]});$('torchBtn').textContent=torchOn?'Turn flashlight off':'Turn flashlight on'}catch(e){toast('Flashlight control is not supported')}};
+$('autoTuneBtn').onclick=autoTune;$('saveSessionBtn').onclick=saveHistory;
+
+$('switchBtn').onclick=async()=>{facingMode=facingMode==='environment'?'user':'environment';await startCamera()};
+$('captureBtn').onclick=()=>{if(!live)return;const data=canvas.toDataURL('image/png');const im=new Image();im.onload=()=>{stopCamera(false);original=im;drawOriginal();detectFromCanvas(drawOriginal);$('modeLabel').textContent='Captured camera frame';toast('Frame captured for review')};im.src=data};
+
+function drawMarkers(){ctx.save();detections.forEach((d,i)=>{ctx.beginPath();ctx.arc(d.x,d.y,15,0,Math.PI*2);ctx.fillStyle=d.manual?'#ffbd59dd':'#20d7e6dd';ctx.fill();ctx.strokeStyle='#06101e';ctx.lineWidth=2;ctx.stroke();ctx.fillStyle='#06101e';ctx.font='bold 11px Segoe UI';ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText(i+1,d.x,d.y)});ctx.restore()}
+function updateUI(){const n=detections.length;$('count').textContent=n;const avg=n?Math.round(detections.reduce((a,d)=>a+d.area,0)/n):0;$('avgArea').textContent=avg.toLocaleString()+' px²';$('quality').textContent=n===0?'Waiting':n<3?'Review':'Good';$('qualityNote').textContent=live?'Live result updates every 0.35 seconds':n===0?'Load or tune an image':n<3?'Check settings and markers':'Review markers before saving';$('itemList').innerHTML=n?detections.map((d,i)=>`<div class="item"><div class="badge">${i+1}</div><div>Area: ${d.area.toLocaleString()} px²<br><span style="color:#7182a5">Roundness: ${d.round}${d.manual?' • manual':''}</span></div><button class="remove" onclick="removeItem(${i})">×</button></div>`).join(''):'<div class="footer-note">No items detected yet.</div>'}
+window.removeItem=i=>{if(live)return toast('Capture the frame before manual editing');detections.splice(i,1);drawOriginal();drawMarkers();updateUI()};
+canvas.onclick=e=>{if(live)return toast('Capture the frame before manual correction');if(!original)return;const r=canvas.getBoundingClientRect(),x=(e.clientX-r.left)*canvas.width/r.width,y=(e.clientY-r.top)*canvas.height/r.height;const idx=detections.findIndex(d=>Math.hypot(d.x-x,d.y-y)<22);if(idx>=0)detections.splice(idx,1);else detections.push({x,y,area:0,round:1,manual:true});drawOriginal();drawMarkers();updateUI()};
+$('analyzeBtn').onclick=()=>live?toast('Live counting is already active'):analyzeImage();
+$('resetBtn').onclick=()=>{stopCamera(false);if(original){drawOriginal();detections=[];updateUI();$('modeLabel').textContent='Image reset'}else{ctx.clearRect(0,0,canvas.width,canvas.height);detections=[];updateUI();$('empty').style.display='block';$('modeLabel').textContent='No image loaded'}};
+$('downloadBtn').onclick=()=>{if(!original&& !live)return toast('Load an image or start camera');const a=document.createElement('a');a.download='item-count-result.png';a.href=canvas.toDataURL('image/png');a.click()};
+$('csvBtn').onclick=()=>{if(!detections.length)return toast('No detected items to export');const rows=['Item,X,Y,Area_px2,Roundness,Source',...detections.map((d,i)=>`${i+1},${d.x.toFixed(1)},${d.y.toFixed(1)},${d.area},${d.round},${d.manual?'Manual':'Vision'}`)];const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([rows.join('
+')],{type:'text/csv'}));a.download='item-count-report.csv';a.click()};
+$('demoBtn').onclick=()=>{stopCamera(false);const c=document.createElement('canvas');c.width=900;c.height=600;const g=c.getContext('2d');g.fillStyle='#e8edf5';g.fillRect(0,0,c.width,c.height);for(let y=90;y<550;y+=115)for(let x=90;x<850;x+=115){g.beginPath();g.arc(x+(y%2?10:0),y,33,0,Math.PI*2);g.fillStyle='#2364d8';g.fill();g.strokeStyle='#0b2a61';g.lineWidth=5;g.stroke()}const im=new Image();im.onload=()=>{original=im;drawOriginal();$('invert').checked=true;setTimeout(analyzeImage,80)};im.src=c.toDataURL()};
+let deferredPrompt=null;
+window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();deferredPrompt=e;$('installBtn').hidden=false});
+$('installBtn').onclick=async()=>{if(!deferredPrompt)return;deferredPrompt.prompt();await deferredPrompt.userChoice;deferredPrompt=null;$('installBtn').hidden=true};
+function netState(){const on=navigator.onLine;$('netState').textContent=on?'Online':'Offline';$('netDot').classList.toggle('ready',on)}
+window.addEventListener('online',netState);window.addEventListener('offline',netState);netState();
+if('serviceWorker'in navigator&&location.protocol!=='file:')navigator.serviceWorker.register('./sw.js').catch(console.warn);
+renderHistory();
+window.addEventListener('beforeunload',()=>stopCamera(false));
+</script>
+</body></html>
