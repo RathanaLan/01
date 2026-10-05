@@ -9,6 +9,9 @@
 :root {
   color-scheme: light;
   
+  /* Typography Stack */
+  --font-stack: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+
   /* Primary & Accent Palettes */
   --accent: #059669;              /* Emerald 600 */
   --accent-light: #10b981;        /* Emerald 500 */
@@ -110,15 +113,19 @@ html {
   scroll-behavior: smooth;
   scroll-padding-top: 90px;
   -webkit-text-size-adjust: 100%;
+  font-family: var(--font-stack);
 }
 
 body {
   background-color: var(--bg);
   color: var(--text);
-  font-family: "DM Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  font-size: 16px;
-  line-height: 1.65;
-  letter-spacing: -0.01em;
+  font-family: var(--font-stack);
+  font-size: 15.5px;
+  line-height: 1.6;
+  letter-spacing: -0.012em;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
   overflow-x: hidden;
   transition: background-color 0.3s ease, color 0.3s ease;
   position: relative;
@@ -241,10 +248,10 @@ header.site-header {
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  font-family: "Manrope", sans-serif;
-  font-weight: 800;
-  font-size: 22px;
-  letter-spacing: -0.04em;
+  font-family: var(--font-stack);
+  font-weight: 850;
+  font-size: 21px;
+  letter-spacing: -0.035em;
   color: var(--text);
 }
 
@@ -604,10 +611,10 @@ nav.main-nav a[aria-current="location"]::after {
 }
 
 .hero-content h1 {
-  font-family: "Manrope", sans-serif;
+  font-family: var(--font-stack);
   font-size: clamp(38px, 5.5vw, 64px);
-  line-height: 1.1;
-  font-weight: 800;
+  line-height: 1.08;
+  font-weight: 850;
   letter-spacing: -0.04em;
   margin-bottom: 16px;
   color: var(--text);
@@ -617,8 +624,8 @@ nav.main-nav a[aria-current="location"]::after {
   font-style: normal;
   display: block;
   font-size: clamp(22px, 3.2vw, 36px);
-  font-weight: 600;
-  letter-spacing: -0.02em;
+  font-weight: 700;
+  letter-spacing: -0.025em;
   color: var(--accent);
   margin-top: 6px;
 }
@@ -862,7 +869,7 @@ nav.main-nav a[aria-current="location"]::after {
 }
 
 .resume-year {
-  font-family: "Manrope", sans-serif;
+  font-family: var(--font-stack);
   font-size: 13px;
   font-weight: 800;
   color: var(--accent);
@@ -950,7 +957,7 @@ section {
 }
 
 h2 {
-  font-family: "Manrope", sans-serif;
+  font-family: var(--font-stack);
   font-size: clamp(28px, 4vw, 42px);
   font-weight: 800;
   letter-spacing: -0.035em;
@@ -996,9 +1003,10 @@ blockquote {
 }
 
 .competencies-panel h3 {
-  font-family: "Manrope", sans-serif;
+  font-family: var(--font-stack);
   font-size: 20px;
-  font-weight: 700;
+  font-weight: 800;
+  letter-spacing: -0.025em;
   margin-bottom: 20px;
   color: var(--text);
 }
@@ -1064,9 +1072,9 @@ blockquote {
 }
 
 .metric strong {
-  font-family: "Manrope", sans-serif;
+  font-family: var(--font-stack);
   font-size: 38px;
-  font-weight: 800;
+  font-weight: 850;
   color: var(--accent);
   letter-spacing: -0.04em;
 }
@@ -1295,7 +1303,7 @@ blockquote {
 }
 
 .rhythm-tab-no {
-  font-family: "Manrope", sans-serif;
+  font-family: var(--font-stack);
   font-size: 11px;
   font-weight: 800;
   color: var(--accent);
@@ -1318,18 +1326,20 @@ blockquote {
 }
 
 .rhythm-index {
-  font-family: "Manrope", sans-serif;
+  font-family: var(--font-stack);
   font-size: clamp(54px, 7vw, 84px);
   font-weight: 850;
+  letter-spacing: -0.04em;
   line-height: 1;
   color: var(--accent);
   opacity: 0.85;
 }
 
 .rhythm-panel-content h3 {
-  font-family: "Manrope", sans-serif;
+  font-family: var(--font-stack);
   font-size: clamp(22px, 3vw, 28px);
   font-weight: 800;
+  letter-spacing: -0.025em;
   margin: 6px 0 10px;
   color: var(--text);
 }
@@ -1479,9 +1489,10 @@ blockquote {
 }
 
 .project h3 {
-  font-family: "Manrope", sans-serif;
+  font-family: var(--font-stack);
   font-size: 22px;
   font-weight: 800;
+  letter-spacing: -0.025em;
   color: var(--text);
   margin-bottom: 10px;
 }
@@ -1843,9 +1854,10 @@ details p {
 }
 
 .comments-head h3 {
-  font-family: "Manrope", sans-serif;
+  font-family: var(--font-stack);
   font-size: clamp(22px, 2.5vw, 30px);
   font-weight: 800;
+  letter-spacing: -0.025em;
   color: var(--text);
   margin-top: 4px;
 }
@@ -1969,9 +1981,9 @@ details p {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-family: "Manrope", sans-serif;
+  font-family: var(--font-stack);
   font-size: 13px;
-  font-weight: 800;
+  font-weight: 850;
   flex-shrink: 0;
 }
 
@@ -2175,14 +2187,14 @@ html[lang="km"] button,
 html[lang="km"] input,
 html[lang="km"] textarea,
 html[lang="km"] select {
-  font-family: "Noto Sans Khmer", "DM Sans", sans-serif !important;
+  font-family: "Noto Sans Khmer", var(--font-stack) !important;
 }
 
 html[lang="km"] h1,
 html[lang="km"] h2,
 html[lang="km"] h3,
 html[lang="km"] .brand {
-  font-family: "Noto Sans Khmer", "Manrope", sans-serif !important;
+  font-family: "Noto Sans Khmer", var(--font-stack) !important;
   line-height: 1.4;
 }
 
