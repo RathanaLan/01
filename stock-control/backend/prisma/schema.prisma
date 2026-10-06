@@ -1,0 +1,90 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        Int      @id @default(autoincrement())
+  email     String   @unique
+  password  String
+  role      String   @default("USER")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Product {
+  id            Int             @id @default(autoincrement())
+  name          String
+  sku           String          @unique
+  description   String?
+  price         Float
+  quantity      Int             @default(0)
+  createdAt     DateTime        @default(now())
+  updatedAt     DateTime        @updatedAt
+  movements     StockMovement[]
+  purchaseItems PurchaseItem[]
+  saleItems     SaleItem[]
+}
+
+model Supplier {
+  id        Int             @id @default(autoincrement())
+  name      String
+  contact   String?
+  email     String?
+  phone     String?
+  address   String?
+  createdAt DateTime        @default(now())
+  updatedAt DateTime        @updatedAt
+  purchases PurchaseOrder[]
+}
+
+model PurchaseOrder {
+  id         Int            @id @default(autoincrement())
+  supplier   Supplier       @relation(fields: [supplierId], references: [id])
+  supplierId Int
+  status     String         @default("PENDING")
+  createdAt  DateTime       @default(now())
+  updatedAt  DateTime       @updatedAt
+  items      PurchaseItem[]
+}
+
+model PurchaseItem {
+  id              Int           @id @default(autoincrement())
+  purchaseOrder   PurchaseOrder @relation(fields: [purchaseOrderId], references: [id])
+  purchaseOrderId Int
+  product         Product       @relation(fields: [productId], references: [id])
+  productId       Int
+  quantity        Int
+  unitPrice       Float
+}
+
+model Sale {
+  id        Int        @id @default(autoincrement())
+  total     Float
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+  items     SaleItem[]
+}
+
+model SaleItem {
+  id        Int     @id @default(autoincrement())
+  sale      Sale    @relation(fields: [saleId], references: [id])
+  saleId    Int
+  product   Product @relation(fields: [productId], references: [id])
+  productId Int
+  quantity  Int
+  unitPrice Float
+}
+
+model StockMovement {
+  id        Int      @id @default(autoincrement())
+  product   Product  @relation(fields: [productId], references: [id])
+  productId Int
+  quantity  Int
+  type      String
+  createdAt DateTime @default(now())
+}
