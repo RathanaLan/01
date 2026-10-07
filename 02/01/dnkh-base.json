@@ -1,0 +1,1246 @@
+{
+  "dnkhSections": [
+    {
+      "id": "sec-qa",
+      "code": "QA",
+      "name": "Quality Assurance",
+      "icon": "fa-shield-halved",
+      "color": "#e60012",
+      "objective": "Ensure zero-defect quality culture, customer trust, customer claim prevention, and IATF/ISO quality management compliance across all vehicle product lines.",
+      "head": "Kenji Nomura (QA Senior Director)",
+      "windowPersons": [
+        "Pitchaya Siriporn (Quality Specialist)",
+        "Somchai Prasert (Lead Auditor)"
+      ],
+      "reviewers": [
+        "Kenji Nomura",
+        "Pitchaya Siriporn",
+        "Kittipong Sakul"
+      ],
+      "approvers": [
+        "Kenji Nomura",
+        "Executive Committee"
+      ],
+      "categories": [
+        "Quality Management System",
+        "Customer Claims & Warranty",
+        "Internal & External Audits",
+        "Quality Risk & FMEA",
+        "Recurrence Prevention (Yokoten)"
+      ],
+      "functions": [
+        "Quality System Governance",
+        "Customer Quality Claim Defense",
+        "Supplier Quality Assurance",
+        "Quality Audit & Compliance"
+      ],
+      "processes": [
+        "Customer Claim Investigation",
+        "Pre-Launch Quality Buy-off",
+        "IATF 16949 Auditing",
+        "Recurrence Prevention (Yokoten) Cascade"
+      ],
+      "starterTopics": [
+        "Quality-management system",
+        "Customer requirements",
+        "Customer claims",
+        "Quality assurance",
+        "Q-Innovation and planning",
+        "Early-stage control",
+        "Internal and external audits",
+        "ISO / IATF knowledge",
+        "Quality manuals",
+        "Supplier quality",
+        "Quality risk management",
+        "Quality troubleshooting",
+        "FTA",
+        "5 Why",
+        "Fishbone analysis",
+        "5M1E analysis",
+        "Temporary containment",
+        "Permanent countermeasure",
+        "Recurrence prevention",
+        "Horizontal deployment"
+      ],
+      "displayOrder": 1,
+      "isActive": true,
+      "reviewFrequency": "12 Months"
+    },
+    {
+      "id": "sec-qa1",
+      "code": "QA1",
+      "name": "Quality Assurance 1 (Body & Powertrain Components)",
+      "icon": "fa-car-side",
+      "color": "#dc2626",
+      "objective": "Assure functional reliability, welding integrity, leak prevention, and durability of body, chassis, and heavy powertrain assemblies.",
+      "head": "Kittisak Prasert (QA1 Senior Lead)",
+      "windowPersons": [
+        "Chatchai Promsak (QA1 Specialist)",
+        "Wanida Sornchai (Quality Auditor)"
+      ],
+      "reviewers": [
+        "Kittisak Prasert",
+        "Kenji Nomura"
+      ],
+      "approvers": [
+        "Kittisak Prasert"
+      ],
+      "categories": [
+        "Body Component Integrity",
+        "Powertrain Assembly Verification",
+        "Helium Leak Testing",
+        "Weld Penetration Assurance"
+      ],
+      "functions": [
+        "Chassis Quality Buy-off",
+        "Weld Macro-etch Auditing",
+        "High-Pressure Seal Verification"
+      ],
+      "processes": [
+        "Helium Sniffer Testing",
+        "Destructive Weld Peel Audits",
+        "Thermal Shock Environmental Testing"
+      ],
+      "starterTopics": [
+        "Customer Requirements",
+        "Quality Assurance",
+        "Early-Stage Control",
+        "Internal Quality Issues",
+        "Weld Quality Assurance",
+        "Helium Leak Detection",
+        "5 Why",
+        "Fishbone",
+        "5M1E",
+        "Temporary Containment",
+        "Root-Cause Analysis",
+        "Permanent Countermeasure",
+        "Horizontal Deployment"
+      ],
+      "displayOrder": 2,
+      "isActive": true,
+      "reviewFrequency": "12 Months"
+    },
+    {
+      "id": "sec-qa2",
+      "code": "QA2",
+      "name": "Quality Assurance 2 (Electronics & Vehicle Systems)",
+      "icon": "fa-microchip",
+      "color": "#b91c1c",
+      "objective": "Govern electronic component reliability, SMT solder void standards, firmware flashing integrity, and high-voltage electrical safety.",
+      "head": "Viroj Tantrakul (QA2 Technical Lead)",
+      "windowPersons": [
+        "Narisara Boonsri (QA2 Specialist)",
+        "Thaksin Chai (SMT Reliability Inspector)"
+      ],
+      "reviewers": [
+        "Viroj Tantrakul",
+        "Kenji Nomura"
+      ],
+      "approvers": [
+        "Viroj Tantrakul"
+      ],
+      "categories": [
+        "SMT & PCBA Quality",
+        "Firmware Flash Integrity",
+        "Electrical Insulation Safety",
+        "EMC / ESD Compliance"
+      ],
+      "functions": [
+        "Electronics Buy-off",
+        "AOI / AXI Defect Prevention",
+        "High-Voltage Safety Governance"
+      ],
+      "processes": [
+        "Solder Paste Inspection (SPI)",
+        "In-Circuit Testing (ICT)",
+        "Thermal Cycling Burn-in"
+      ],
+      "starterTopics": [
+        "Customer Requirements",
+        "Quality Assurance",
+        "Customer Claims",
+        "Warranty Claims",
+        "PCBA Soldering Standards",
+        "Electrical Insulation Resistance",
+        "5 Why",
+        "FTA",
+        "Fishbone",
+        "Root-Cause Analysis",
+        "Permanent Countermeasure",
+        "Horizontal Deployment"
+      ],
+      "displayOrder": 3,
+      "isActive": true,
+      "reviewFrequency": "12 Months"
+    },
+    {
+      "id": "sec-qc",
+      "code": "QC",
+      "name": "Quality Control",
+      "icon": "fa-microscope",
+      "color": "#0284c7",
+      "objective": "Execute high-precision Genba inspections, incoming material verification, dimensional measurement, defect standard enforcement, and abnormality escalations.",
+      "head": "Wichai Thongchai (QC Manager)",
+      "windowPersons": [
+        "Kittipong Sakul (QC Chief)",
+        "Narisara Boonsri (Inspection Lead)"
+      ],
+      "reviewers": [
+        "Wichai Thongchai",
+        "Kittipong Sakul"
+      ],
+      "approvers": [
+        "Wichai Thongchai"
+      ],
+      "categories": [
+        "Incoming Material Inspection",
+        "In-Process Quality Gates",
+        "Final Product Audit",
+        "Precision Measurement & Calibration",
+        "Abnormality Handling & Escalation"
+      ],
+      "functions": [
+        "Incoming Receiving Inspection",
+        "Line Boundary Judgement",
+        "Tool Calibration & Metrology",
+        "Quality Abnormality Escalation"
+      ],
+      "processes": [
+        "CMM Coordinate Measuring",
+        "Optical Comparator Inspection",
+        "Gauge R&R Calibration",
+        "Red/Yellow Card Hold Protocol"
+      ],
+      "starterTopics": [
+        "Receiving Inspection",
+        "In-Process Inspection",
+        "Final Inspection",
+        "Measurement Methods",
+        "Calibration",
+        "Defect Standards",
+        "OK / NG Judgment",
+        "Inspection Evidence",
+        "Quality Checkpoints",
+        "Yellow Card",
+        "Red Card",
+        "Abnormality Reporting",
+        "Defect Escalation",
+        "Quality Data Analysis",
+        "Inspection Troubleshooting"
+      ],
+      "displayOrder": 4,
+      "isActive": true,
+      "reviewFrequency": "12 Months"
+    },
+    {
+      "id": "sec-pd",
+      "code": "PD",
+      "name": "Production",
+      "icon": "fa-industry",
+      "color": "#10b981",
+      "objective": "Drive shopfloor manufacturing excellence, standardized work adherence, cycle time stability, change-point management, and line operator safety.",
+      "head": "Boonterm Jaidee (Plant Operations Director)",
+      "windowPersons": [
+        "Supatra Maneerat (Production Section Head)",
+        "Kitti Raksasook (Assembly Team Leader)"
+      ],
+      "reviewers": [
+        "Boonterm Jaidee",
+        "Supatra Maneerat"
+      ],
+      "approvers": [
+        "Boonterm Jaidee"
+      ],
+      "categories": [
+        "Standardized Work",
+        "Team Leader Supervision",
+        "Change-Point Management (4M)",
+        "Line Balancing & Cycle Time",
+        "Shift Daily Management"
+      ],
+      "functions": [
+        "Cellular Line Assembly",
+        "Operator Standard Work Execution",
+        "Daily Genba Management",
+        "4M Change-Point Control"
+      ],
+      "processes": [
+        "Torque Tightening Sequence",
+        "Poka-Yoke Verification",
+        "Hourly Output Tracking",
+        "Andon Abnormality Response"
+      ],
+      "starterTopics": [
+        "Production Process",
+        "Product Knowledge",
+        "Standard Work",
+        "Work Instruction",
+        "Machine Operation",
+        "Jig Operation",
+        "Team Leader Fundamentals",
+        "Daily Management",
+        "Line Management",
+        "Production Planning",
+        "Productivity",
+        "Line Balancing",
+        "Change-Point Control",
+        "Abnormality Handling",
+        "Safety Checkpoints",
+        "Quality Checkpoints",
+        "Capacity and Manpower",
+        "Risk Management"
+      ],
+      "displayOrder": 5,
+      "isActive": true,
+      "reviewFrequency": "12 Months"
+    },
+    {
+      "id": "sec-pc",
+      "code": "PC",
+      "name": "Production Control",
+      "icon": "fa-calendar-days",
+      "color": "#f59e0b",
+      "objective": "Synchronize production scheduling, Heijunka leveling, delivery on-time rate, material shortage prevention, and customer order management.",
+      "head": "Chaleow Petchdee (PC General Manager)",
+      "windowPersons": [
+        "Thanawat Rung (Logistics & Scheduling Lead)",
+        "Kanchana Duangjai (PC Coordinator)"
+      ],
+      "reviewers": [
+        "Chaleow Petchdee",
+        "Thanawat Rung"
+      ],
+      "approvers": [
+        "Chaleow Petchdee"
+      ],
+      "categories": [
+        "Master Production Scheduling",
+        "Heijunka Leveled Planning",
+        "Material Shortage Recovery",
+        "Customer Order & Delivery Control",
+        "Capacity vs Demand Balancing"
+      ],
+      "functions": [
+        "Master Production Scheduling",
+        "Supply Chain Synchronization",
+        "Customer Order Management",
+        "Emergency Shortage Recovery"
+      ],
+      "processes": [
+        "Daily Kanban Calculation",
+        "Heijunka Box Loading",
+        "Milk-run Supplier Dispatch",
+        "Buffer Inventory Sizing"
+      ],
+      "starterTopics": [
+        "Customer Order Control",
+        "Demand Planning",
+        "Production Planning",
+        "Planning Versus Capacity",
+        "Production Scheduling",
+        "Material-Shortage Recovery",
+        "Inventory Optimization",
+        "Delivery Control",
+        "Production Progress Control",
+        "Heijunka",
+        "Demand and Supply Coordination",
+        "Production Recovery",
+        "Operational Risk Management"
+      ],
+      "displayOrder": 6,
+      "isActive": true,
+      "reviewFrequency": "12 Months"
+    },
+    {
+      "id": "sec-wh",
+      "code": "WH",
+      "name": "Warehouse & Logistics",
+      "icon": "fa-boxes-stacked",
+      "color": "#8b5cf6",
+      "objective": "Manage receiving, parts storage, strict FIFO rotation, inventory accuracy, line material supply, shipping documents, and logistics safety.",
+      "head": "Prasert Suksom (Warehouse Manager)",
+      "windowPersons": [
+        "Somsak Chaiyapruk (Inventory Supervisor)",
+        "Voranat Thavee (Logistics Coordinator)"
+      ],
+      "reviewers": [
+        "Prasert Suksom",
+        "Somsak Chaiyapruk"
+      ],
+      "approvers": [
+        "Prasert Suksom"
+      ],
+      "categories": [
+        "Parts Receiving & Verification",
+        "Storage Location & FIFO",
+        "Shopfloor Line Supply (Mizusumashi)",
+        "Shipping & Customs Compliance",
+        "Warehouse Safety & 5S"
+      ],
+      "functions": [
+        "Material Receiving & Unloading",
+        "High-Bay Rack Location Management",
+        "Mizusumashi Line Feeding",
+        "Customs & Export Manifest"
+      ],
+      "processes": [
+        "Barcode Lot Ingestion",
+        "Automated FIFO Gatekeeper",
+        "Sequential Parts Kitting",
+        "Dock Dispatch & Lashing Check"
+      ],
+      "starterTopics": [
+        "Receiving",
+        "Storage",
+        "Location Management",
+        "FIFO",
+        "Inventory Accuracy",
+        "Stock Minimum and Maximum",
+        "Picking",
+        "Material Supply",
+        "Shipping",
+        "Shipping Documents",
+        "Transportation",
+        "Customs Regulations",
+        "Freight Management",
+        "Border and Delivery Risks",
+        "FTA Utilization",
+        "Warehouse Layout",
+        "Warehouse Automation",
+        "CIGMA",
+        "Nexus",
+        "GPMS"
+      ],
+      "displayOrder": 7,
+      "isActive": true,
+      "reviewFrequency": "12 Months"
+    },
+    {
+      "id": "sec-pe",
+      "code": "PE",
+      "name": "Production Engineering",
+      "icon": "fa-gears",
+      "color": "#06b6d4",
+      "objective": "Pioneer advanced manufacturing processes, equipment specifications, tooling/die commissioning, engineering change management, and line automation.",
+      "head": "Chaiwat Pongpanich (Chief Production Engineer)",
+      "windowPersons": [
+        "Nutthapol Varin (Tooling & Machine Specialist)",
+        "Sarunporn K. (Process Engineer)"
+      ],
+      "reviewers": [
+        "Chaiwat Pongpanich",
+        "Nutthapol Varin"
+      ],
+      "approvers": [
+        "Chaiwat Pongpanich"
+      ],
+      "categories": [
+        "Manufacturing Process Design",
+        "Equipment Specification & Buy-Off",
+        "Jig & Tooling Engineering",
+        "Trial & Process Capability (Cpk)",
+        "Engineering Change Management"
+      ],
+      "functions": [
+        "Process Architecture & Line Design",
+        "Machine Specification Authoring",
+        "Die Trial & Process Capability",
+        "Engineering Change Order (ECO) Implementation"
+      ],
+      "processes": [
+        "Cpk Capability Study",
+        "Machine Installation & Leveling",
+        "Poka-Yoke Interlock Design",
+        "Pre-Production Line Buy-off"
+      ],
+      "starterTopics": [
+        "Process Design",
+        "Equipment Specification",
+        "Equipment Installation",
+        "Jig and Tooling",
+        "Mold and Die",
+        "Trial",
+        "Validation",
+        "Process Capability",
+        "Engineering Change",
+        "Machine Troubleshooting",
+        "Jig Troubleshooting",
+        "Mold and Die Troubleshooting",
+        "Repair Manual",
+        "Drawing Control",
+        "Project Management",
+        "Kaizen Implementation",
+        "Lessons Learned"
+      ],
+      "displayOrder": 8,
+      "isActive": true,
+      "reviewFrequency": "12 Months"
+    },
+    {
+      "id": "sec-tpm",
+      "code": "TPM",
+      "name": "Maintenance & TPM",
+      "icon": "fa-wrench",
+      "color": "#d97706",
+      "objective": "Eliminate machine breakdowns, execute planned/preventive/predictive maintenance, autonomous maintenance coaching, and spare parts reliability.",
+      "head": "Somkid Chanthara (Maintenance Senior Manager)",
+      "windowPersons": [
+        "Tawan Phromdee (Senior Mechanical Specialist)",
+        "Preecha Kaewkla (Electrical Maintenance Lead)"
+      ],
+      "reviewers": [
+        "Somkid Chanthara",
+        "Tawan Phromdee"
+      ],
+      "approvers": [
+        "Somkid Chanthara"
+      ],
+      "categories": [
+        "Breakdown Troubleshooting",
+        "Preventive Maintenance Standards",
+        "Predictive Telemetry & Vibration",
+        "Autonomous Maintenance (Jishu Hozen)",
+        "Spare Parts Inventory & SLA"
+      ],
+      "functions": [
+        "Emergency Breakdown Response",
+        "Periodic Overhaul Execution",
+        "Vibration & Thermography Analysis",
+        "Jishu Hozen Coaching"
+      ],
+      "processes": [
+        "Spindle Bearing Replacement",
+        "Hydraulic Filter Servicing",
+        "PLC Backup & Ladder Recovery",
+        "Critical Spare Replenishment"
+      ],
+      "starterTopics": [
+        "Autonomous Maintenance",
+        "Planned Maintenance",
+        "Preventive Maintenance",
+        "Predictive Maintenance",
+        "Breakdown Maintenance",
+        "Machine Troubleshooting",
+        "Equipment Inspection",
+        "Root-Cause Analysis",
+        "Maintenance Standards",
+        "Equipment History",
+        "Spare-Parts Control",
+        "Equipment Reliability",
+        "Daily Maintenance",
+        "Repair Manual",
+        "Maintenance Safety",
+        "Maintenance Checklists"
+      ],
+      "displayOrder": 9,
+      "isActive": true,
+      "reviewFrequency": "12 Months"
+    },
+    {
+      "id": "sec-jmd",
+      "code": "JMD",
+      "name": "Jig, Mold & Die",
+      "icon": "fa-screwdriver-wrench",
+      "color": "#ec4899",
+      "objective": "Design, repair, calibrate, and maintain high-precision stamping dies, injection molds, welding jigs, and inspection fixtures.",
+      "head": "Arun Thepprasit (JMD Technical Director)",
+      "windowPersons": [
+        "Mongkol Boonmee (Senior Die Maker)",
+        "Chatchai V. (Jig Design Lead)"
+      ],
+      "reviewers": [
+        "Arun Thepprasit",
+        "Mongkol Boonmee"
+      ],
+      "approvers": [
+        "Arun Thepprasit"
+      ],
+      "categories": [
+        "Die Wear Analysis & Repair",
+        "Jig Precision Maintenance",
+        "Tool Life Tracking",
+        "Mold Inspection Standards",
+        "Tooling Design Kaizen"
+      ],
+      "functions": [
+        "Progressive Die Overhaul",
+        "Plastic Injection Mold Tuning",
+        "Robotic Welding Fixture Calibration",
+        "Tool Steel Heat Treatment"
+      ],
+      "processes": [
+        "EDM Wire Cut Resharpening",
+        "Die Clearance Shimming",
+        "Cavity Polish & Texture Restoration",
+        "Fixture Zero-Point Calibration"
+      ],
+      "starterTopics": [
+        "Jig Knowledge",
+        "Mold Knowledge",
+        "Die Knowledge",
+        "Tool Knowledge",
+        "Tool Inspection",
+        "Jig Troubleshooting",
+        "Mold and Die Troubleshooting",
+        "Tool Repair",
+        "Preventive Maintenance",
+        "Tooling History",
+        "Drawing",
+        "Design Change",
+        "Standardization",
+        "Lessons Learned"
+      ],
+      "displayOrder": 10,
+      "isActive": true,
+      "reviewFrequency": "12 Months"
+    },
+    {
+      "id": "sec-tie",
+      "code": "TIE",
+      "name": "Total Industrial Engineering",
+      "icon": "fa-stopwatch-20",
+      "color": "#3b82f6",
+      "objective": "Optimize plant productivity, standard time setting, Karakuri low-cost automation, line balancing, and Muda elimination across all value streams.",
+      "head": "Manas Pradab (TIE Section Head)",
+      "windowPersons": [
+        "Siriporn Lertchai (Senior IE Specialist)",
+        "Teerapat S. (Karakuri Engineer)"
+      ],
+      "reviewers": [
+        "Manas Pradab",
+        "Siriporn Lertchai"
+      ],
+      "approvers": [
+        "Manas Pradab"
+      ],
+      "categories": [
+        "Standard Time (ST) Setting",
+        "Line Balancing & Bottle-necking",
+        "Karakuri & Low Cost Automation",
+        "Material & Information Flow (MIFD)",
+        "Genba Ergonomics & Kaizen"
+      ],
+      "functions": [
+        "Standard Time Measurement (MOST/MTM)",
+        "Line Balancing Efficiency",
+        "Karakuri Mechanical Design",
+        "Value Stream Mapping (MIFD)"
+      ],
+      "processes": [
+        "Video Motion Cycle Analysis",
+        "Pitch Time Balancing Chart",
+        "Gravity Chute Prototyping",
+        "Operator Ergonomic Assessment"
+      ],
+      "starterTopics": [
+        "Basic TIE Knowledge",
+        "Production System Kaizen",
+        "Supply Chain Kaizen",
+        "KCA",
+        "Karakuri",
+        "MIFD",
+        "Standardized Work",
+        "Line Balancing",
+        "Productivity Improvement",
+        "Standard-Time Setting",
+        "Standard-Ratio Setting",
+        "Productivity Target Setting",
+        "Manpower Calculation",
+        "Small-Group Kaizen",
+        "Project Management",
+        "Problem-Solving",
+        "Lessons Learned"
+      ],
+      "displayOrder": 11,
+      "isActive": true,
+      "reviewFrequency": "12 Months"
+    },
+    {
+      "id": "sec-dx",
+      "code": "DX",
+      "name": "Digital Transformation",
+      "icon": "fa-microchip",
+      "color": "#6366f1",
+      "objective": "Accelerate DNKH Smart Factory 2030, Citizen Development governance, Power Platform solutions, IoT edge telemetry, and Copilot AI adoption.",
+      "head": "Somchai Prasert (Lead Solution Architect & DX Consultant)",
+      "windowPersons": [
+        "Ananya Kasem (DX Specialist & Citizen Dev Lead)",
+        "Nattapong V. (Smart Factory Engineer)"
+      ],
+      "reviewers": [
+        "Somchai Prasert",
+        "Ananya Kasem"
+      ],
+      "approvers": [
+        "Somchai Prasert",
+        "Executive Committee"
+      ],
+      "categories": [
+        "Power Platform & Citizen Dev",
+        "SharePoint & M365 Architecture",
+        "Power BI & Operational Analytics",
+        "AI & Copilot Studio Agents",
+        "IoT Edge Telemetry & Smart Factory"
+      ],
+      "functions": [
+        "Enterprise Solution Architecture",
+        "Citizen Developer COE Governance",
+        "Shopfloor IoT Edge Data Acquisition",
+        "Business Process Automation"
+      ],
+      "processes": [
+        "Power Apps Delegation Tuning",
+        "MQTT to OPC-UA Gateway Mapping",
+        "Dataverse Relational Modeling",
+        "Copilot Agent Grounding & Verification"
+      ],
+      "starterTopics": [
+        "Power Apps",
+        "Power Automate",
+        "SharePoint",
+        "Power BI",
+        "Microsoft Forms",
+        "Excel VBA",
+        "AI",
+        "Copilot",
+        "Data Integration",
+        "REST API",
+        "Microsoft Graph",
+        "OData",
+        "SQL",
+        "Python",
+        "Application Governance",
+        "Solution Architecture",
+        "Cybersecurity Awareness",
+        "IoT Architecture",
+        "Sensors",
+        "Gateways",
+        "MQTT",
+        "OPC UA",
+        "Device-Data Collection",
+        "Application Support",
+        "User Consultation",
+        "Requirement Analysis",
+        "Digital Project Management",
+        "Lessons Learned"
+      ],
+      "displayOrder": 12,
+      "isActive": true,
+      "reviewFrequency": "12 Months"
+    },
+    {
+      "id": "sec-facility",
+      "code": "FAC",
+      "name": "Facility Engineering",
+      "icon": "fa-bolt",
+      "color": "#14b8a6",
+      "objective": "Ensure resilient plant electrical infrastructure, high-pressure compressed air, cooling water systems, HVAC cleanrooms, and energy decarbonization.",
+      "head": "Thavorn Suksan (Facility Chief Engineer)",
+      "windowPersons": [
+        "Chatchawal S. (Senior Electrical Engineer)",
+        "Narongchai P. (HVAC & Utilities Lead)"
+      ],
+      "reviewers": [
+        "Thavorn Suksan",
+        "Chatchawal S."
+      ],
+      "approvers": [
+        "Thavorn Suksan"
+      ],
+      "categories": [
+        "Electrical Power & Substation",
+        "Compressed Air System Stability",
+        "Industrial Water & HVAC",
+        "Energy Management & Carbon Neutral",
+        "Emergency Utility BCP"
+      ],
+      "functions": [
+        "Substation High-Voltage Switching",
+        "Compressor Room Dew-Point Control",
+        "Cleanroom HVAC Balancing",
+        "Energy Decarbonization Roadmap"
+      ],
+      "processes": [
+        "Transformer Oil Dissolved Gas Analysis",
+        "Desiccant Dryer Auto-switching",
+        "Cooling Tower Chemical Water Treatment",
+        "Peak Power Shaving"
+      ],
+      "starterTopics": [
+        "Electrical Systems",
+        "Compressed Air",
+        "Water Systems",
+        "HVAC",
+        "Utility Systems",
+        "Facility Inspection",
+        "Energy Management",
+        "Preventive Maintenance",
+        "Emergency Utility Response",
+        "Facility Troubleshooting",
+        "Equipment History",
+        "Environmental Requirements",
+        "Facility Safety"
+      ],
+      "displayOrder": 13,
+      "isActive": true,
+      "reviewFrequency": "12 Months"
+    },
+    {
+      "id": "sec-safety",
+      "code": "SHE",
+      "name": "Safety & Environment",
+      "icon": "fa-person-falling",
+      "color": "#ef4444",
+      "objective": "Cultivate zero-accident safety culture, hazard identification, chemical management, safety patrols, emergency drills, and ISO 14001 / ISO 45001 compliance.",
+      "head": "Kanokporn Meesuk (SHE Manager)",
+      "windowPersons": [
+        "Panuwat Charoen (Safety Officer Professional Level)",
+        "Siriwan K. (Environmental Specialist)"
+      ],
+      "reviewers": [
+        "Kanokporn Meesuk",
+        "Panuwat Charoen"
+      ],
+      "approvers": [
+        "Kanokporn Meesuk"
+      ],
+      "categories": [
+        "KYT & Hazard Identification",
+        "Machine Safety & Interlock Systems",
+        "Chemical Handling & SDS",
+        "Emergency Response & Evacuation",
+        "Environmental Compliance (ISO14001)"
+      ],
+      "functions": [
+        "Zero-Accident Safety Governance",
+        "Machine Safeguarding Certification",
+        "Chemical Hazard Control",
+        "Emergency Evacuation Preparedness"
+      ],
+      "processes": [
+        "Point-and-Call KYT Drills",
+        "LOTO Zero Energy Verification",
+        "Workplace Safety Patrols",
+        "Hazardous Waste Manifest Auditing"
+      ],
+      "starterTopics": [
+        "Hazard Identification",
+        "Risk Assessment",
+        "PPE",
+        "Emergency Response",
+        "Incident Reporting",
+        "Near-Miss Reporting",
+        "Machine Safety",
+        "Chemical Safety",
+        "Safety Patrol",
+        "Legal Requirements",
+        "Internal Safety Requirements",
+        "Corrective Action",
+        "Recurrence Prevention",
+        "Safety Training",
+        "Emergency Drills"
+      ],
+      "displayOrder": 14,
+      "isActive": true,
+      "reviewFrequency": "12 Months"
+    },
+    {
+      "id": "sec-hr",
+      "code": "HR",
+      "name": "Human Resources",
+      "icon": "fa-users",
+      "color": "#a855f7",
+      "objective": "Drive employee competency development, onboarding programs, technical skills training, employee welfare, and organizational engagement.",
+      "head": "Sureerat Vongvit (HR Director)",
+      "windowPersons": [
+        "Supaporn Thongdee (Training & Competency Specialist)",
+        "Pichai R. (Talent Acquisition Lead)"
+      ],
+      "reviewers": [
+        "Sureerat Vongvit",
+        "Supaporn Thongdee"
+      ],
+      "approvers": [
+        "Sureerat Vongvit"
+      ],
+      "categories": [
+        "New Associate Onboarding",
+        "Competency Assessment & Training",
+        "Labor Compliance & Policy",
+        "Succession Planning",
+        "Employee Well-being"
+      ],
+      "functions": [
+        "Competency Matrix Governance",
+        "Technical Dojo Operations",
+        "Associate Performance Development",
+        "Organizational Learning Policy"
+      ],
+      "processes": [
+        "90-Day Dojo Skill Verification",
+        "Annual Training Plan Consolidation",
+        "Skill Transfer Tracking",
+        "Associate Career Counseling"
+      ],
+      "starterTopics": [
+        "Recruitment",
+        "Onboarding",
+        "Training Administration",
+        "Competency Management",
+        "Employee Services",
+        "Attendance",
+        "Leave Administration",
+        "General Affairs",
+        "Document Control",
+        "Workplace Support",
+        "HR Policies",
+        "HR Procedures",
+        "Asset and Workplace Administration"
+      ],
+      "displayOrder": 15,
+      "isActive": true,
+      "reviewFrequency": "12 Months"
+    },
+    {
+      "id": "sec-ga",
+      "code": "GA",
+      "name": "General Affairs",
+      "icon": "fa-building-shield",
+      "color": "#7c3aed",
+      "objective": "Administer plantwide physical facilities, company transportation, cafeteria services, asset security, visitor protocol, and statutory licensing.",
+      "head": "Somkiat Boonserm (General Affairs Manager)",
+      "windowPersons": [
+        "Jiraporn S. (General Affairs Lead)",
+        "Kittisak N. (Facility Services Supervisor)"
+      ],
+      "reviewers": [
+        "Somkiat Boonserm",
+        "Jiraporn S."
+      ],
+      "approvers": [
+        "Somkiat Boonserm"
+      ],
+      "categories": [
+        "Workplace Services & Facilities",
+        "Plant Security & Access Control",
+        "Company Transport & Shuttle",
+        "Statutory Permits & Licensing"
+      ],
+      "functions": [
+        "Physical Plant Security",
+        "Statutory License Compliance",
+        "Employee Canteen & Welfare",
+        "Emergency Crisis Management"
+      ],
+      "processes": [
+        "Visitor Badging & Screening",
+        "Company Vehicle Fleet Dispatch",
+        "Canteen Hygiene Auditing",
+        "Office Space Planning"
+      ],
+      "starterTopics": [
+        "General Affairs",
+        "Document Control",
+        "Workplace Support",
+        "Asset and Workplace Administration",
+        "Facility Services",
+        "Security Gate Control",
+        "Emergency Crisis Planning",
+        "Contractor Management"
+      ],
+      "displayOrder": 16,
+      "isActive": true,
+      "reviewFrequency": "12 Months"
+    },
+    {
+      "id": "sec-purchasing",
+      "code": "PUR",
+      "name": "Purchasing",
+      "icon": "fa-cart-shopping",
+      "color": "#0ea5e9",
+      "objective": "Procure high-quality direct materials, production parts, indirect equipment, supplier performance governance, and total cost optimization.",
+      "head": "Kitti Rojanaporn (Purchasing General Manager)",
+      "windowPersons": [
+        "Apinya S. (Senior Procurement Specialist)",
+        "Vichit M. (Supplier Quality Liaison)"
+      ],
+      "reviewers": [
+        "Kitti Rojanaporn",
+        "Apinya S."
+      ],
+      "approvers": [
+        "Kitti Rojanaporn"
+      ],
+      "categories": [
+        "Supplier Audit & Selection",
+        "Purchase Requisition & PO Workflow",
+        "Cost Down & Negotiation Standards",
+        "Supply Chain Risk Mitigation",
+        "Supplier Quality Development"
+      ],
+      "functions": [
+        "Direct Material Procurement",
+        "Supplier Dual-Sourcing Governance",
+        "Annual Price Negotiation",
+        "Vendor BCP Risk Auditing"
+      ],
+      "processes": [
+        "Supplier Capability Scoring",
+        "Purchase Order Dispatch & SLA",
+        "Raw Material Cost Escalation Indexing",
+        "Single-Source Contingency Planning"
+      ],
+      "starterTopics": [
+        "Supplier Selection",
+        "Purchase Requests",
+        "Purchase Orders",
+        "Supplier Evaluation",
+        "Cost Management",
+        "Contract Control",
+        "Delivery Follow-Up",
+        "Purchasing Risk",
+        "Escalation",
+        "Compliance"
+      ],
+      "displayOrder": 17,
+      "isActive": true,
+      "reviewFrequency": "12 Months"
+    },
+    {
+      "id": "sec-accounting",
+      "code": "ACC",
+      "name": "Accounting & Finance",
+      "icon": "fa-coins",
+      "color": "#84cc16",
+      "objective": "Safeguard corporate financial governance, budget control, manufacturing cost accounting, fixed asset auditing, and compliance reporting.",
+      "head": "Rattana Chotivichit (Finance Director)",
+      "windowPersons": [
+        "Prapasiri W. (Manufacturing Cost Accountant)",
+        "Chaiwat T. (Fixed Asset Specialist)"
+      ],
+      "reviewers": [
+        "Rattana Chotivichit",
+        "Prapasiri W."
+      ],
+      "approvers": [
+        "Rattana Chotivichit"
+      ],
+      "categories": [
+        "Manufacturing Cost Accounting",
+        "Capital Investment & Fixed Assets",
+        "Budget Planning & Variance Analysis",
+        "Tax & Compliance Auditing",
+        "Payment & Approval Controls"
+      ],
+      "functions": [
+        "Manufacturing Product Costing",
+        "CAPEX Payback Verification",
+        "Annual Budget Consolidation",
+        "Fixed Asset Physical Auditing"
+      ],
+      "processes": [
+        "Standard Hour Cost Variance Calculation",
+        "Fixed Asset Tagging & Barcoding",
+        "Vendor Payment Voucher Vetting",
+        "Internal Control Self-Assessment"
+      ],
+      "starterTopics": [
+        "Budget Control",
+        "Cost Calculation",
+        "Payment Process",
+        "Financial Reporting",
+        "Asset Control",
+        "Investment Tracking",
+        "Internal Controls",
+        "Audit Evidence",
+        "Approval Workflow"
+      ],
+      "displayOrder": 18,
+      "isActive": true,
+      "reviewFrequency": "12 Months"
+    },
+    {
+      "id": "sec-mgmt",
+      "code": "MGMT",
+      "name": "Management & Governance",
+      "icon": "fa-award",
+      "color": "#059669",
+      "objective": "Lead DNKH plant strategic direction, Monozukuri Hoshin Kanri cascade, cross-sectional Kaizen synergy, and business continuity governance.",
+      "head": "Hiroshi Tanaka (Managing Director)",
+      "windowPersons": [
+        "Narongkorn Chaisiri (Plant Operations GM)",
+        "Kenji Nomura (Executive VP)"
+      ],
+      "reviewers": [
+        "Hiroshi Tanaka",
+        "Kenji Nomura"
+      ],
+      "approvers": [
+        "Hiroshi Tanaka"
+      ],
+      "categories": [
+        "Hoshin Kanri Strategic Policy",
+        "Plantwide KPI Cascade",
+        "Cross-Section Synergy & Kaizen",
+        "Business Continuity & Risk Governance"
+      ],
+      "functions": [
+        "Strategic Annual Target Deployment",
+        "Executive Monozukuri Reviews",
+        "Plant Operational Governance",
+        "Crisis Management Command"
+      ],
+      "processes": [
+        "Mid-Term Business Planning",
+        "Monthly Executive Operations Review",
+        "Horizontal Yokoten Steering",
+        "Executive Gemba Walk"
+      ],
+      "starterTopics": [
+        "Hoshin Kanri Policy",
+        "Annual Target Cascade",
+        "Organizational Knowledge Governance",
+        "Cross-Section Kaizen",
+        "Risk-Based Thinking",
+        "Operational Sustainability",
+        "Horizontal Deployment Governance",
+        "Crisis Management"
+      ],
+      "displayOrder": 19,
+      "isActive": true,
+      "reviewFrequency": "12 Months"
+    }
+  ],
+  "dnkhRecordTypes": [
+    {
+      "id": "rt-knowledge",
+      "name": "Knowledge",
+      "icon": "fa-book-open",
+      "desc": "Technical understanding, principles, formulas, and operational guides."
+    },
+    {
+      "id": "rt-skill",
+      "name": "Skill Guide",
+      "icon": "fa-person-running",
+      "desc": "Practical step-by-step execution guidelines and standard work methods."
+    },
+    {
+      "id": "rt-experience",
+      "name": "Experience",
+      "icon": "fa-briefcase",
+      "desc": "Real work applied in projects, challenges solved, and operational execution."
+    },
+    {
+      "id": "rt-troubleshooting",
+      "name": "Troubleshooting (8D)",
+      "icon": "fa-wrench",
+      "desc": "Structured problem-solving, root cause analysis, containment, and permanent actions."
+    },
+    {
+      "id": "rt-lesson",
+      "name": "Lesson Learned",
+      "icon": "fa-lightbulb",
+      "desc": "What worked, what failed, critical advice, and horizontal deployment advice."
+    },
+    {
+      "id": "rt-standard",
+      "name": "Standard / Procedure",
+      "icon": "fa-file-shield",
+      "desc": "Mandatory work instructions, SOPs, and engineering specifications."
+    },
+    {
+      "id": "rt-manual",
+      "name": "Manual",
+      "icon": "fa-file-lines",
+      "desc": "Equipment operation, tooling setup, and software user manuals."
+    },
+    {
+      "id": "rt-project",
+      "name": "Project",
+      "icon": "fa-diagram-project",
+      "desc": "Cross-functional initiatives, DX delivery, Kaizen projects, and plant launches."
+    },
+    {
+      "id": "rt-training",
+      "name": "Training Material",
+      "icon": "fa-chalkboard-user",
+      "desc": "Slides, video SOPs, onboarding quizzes, and training handouts."
+    },
+    {
+      "id": "rt-assessment",
+      "name": "Assessment & Kaizen",
+      "icon": "fa-chart-simple",
+      "desc": "Skill check, competency rubric, and observable evidence rubrics."
+    },
+    {
+      "id": "rt-best-practice",
+      "name": "Best Practice",
+      "icon": "fa-trophy",
+      "desc": "Proven high-efficiency methods validated for horizontal replication."
+    },
+    {
+      "id": "rt-risk",
+      "name": "Risk and Countermeasure",
+      "icon": "fa-triangle-exclamation",
+      "desc": "Proactive FMEA modes, safety hazards, and containment protocols."
+    },
+    {
+      "id": "rt-reference",
+      "name": "FAQ & Reference",
+      "icon": "fa-link",
+      "desc": "Frequently answered questions, external norms, OEM specs, and standards."
+    }
+  ],
+  "dnkhCapabilityLevels": [
+    {
+      "level": 0,
+      "code": "L0",
+      "title": "Not Yet Learned",
+      "shortTitle": "Not Started",
+      "definition": "No demonstrated understanding or observable evidence.",
+      "evidenceRequired": "None.",
+      "badgeClass": "lvl-0",
+      "color": "#64748b"
+    },
+    {
+      "level": 1,
+      "code": "L1",
+      "title": "Knowledge",
+      "shortTitle": "Understands",
+      "definition": "Understands concept, terminology, purpose, principles, and standard procedure.",
+      "evidenceRequired": "Learning record, training completion, quiz, or observed understanding.",
+      "badgeClass": "lvl-1",
+      "color": "#3b82f6"
+    },
+    {
+      "level": 2,
+      "code": "L2",
+      "title": "Skill",
+      "shortTitle": "Performs Guided",
+      "definition": "Can perform the task hands-on under guidance or by following a standard.",
+      "evidenceRequired": "Practice output, guided task completion, demonstration.",
+      "badgeClass": "lvl-2",
+      "color": "#06b6d4"
+    },
+    {
+      "level": 3,
+      "code": "L3",
+      "title": "Experience",
+      "shortTitle": "Applies Independently",
+      "definition": "Has applied capability independently in a real project or operational problem.",
+      "evidenceRequired": "Deployed solution, completed troubleshooting case, user feedback.",
+      "badgeClass": "lvl-3",
+      "color": "#10b981"
+    },
+    {
+      "level": 4,
+      "code": "L4",
+      "title": "Knowledge Sharing",
+      "shortTitle": "Standardizes & Mentors",
+      "definition": "Can standardize, teach, mentor, improve, and create reusable organizational knowledge.",
+      "evidenceRequired": "Approved standard, SOP, training material, mentoring log, or approved article.",
+      "badgeClass": "lvl-4",
+      "color": "#f59e0b"
+    }
+  ]
+}

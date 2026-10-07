@@ -1,0 +1,53 @@
+# ========================================================
+# DNKH DNA MATRIX - AZURE DEVOPS CI/CD PIPELINE
+# "Connecting Knowledge. Driving Excellence."
+# ========================================================
+
+trigger:
+  branches:
+    include:
+      - main
+      - release/*
+
+pr:
+  branches:
+    include:
+      - main
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+stages:
+  - stage: QualityVerification
+    displayName: 'Automated Quality Verification'
+    jobs:
+      - job: TestSuite
+        displayName: 'Run Enterprise Test Suite'
+        steps:
+          - task: NodeTool@0
+            inputs:
+              versionSpec: '20.x'
+            displayName: 'Install Node.js 20'
+
+          - script: |
+              node verify_enterprise_test.js
+            displayName: 'Execute verify_enterprise_test.js'
+
+  - stage: DeployToAzure
+    displayName: 'Deploy to Azure Static Web Apps'
+    dependsOn: QualityVerification
+    condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/main'))
+    jobs:
+      - job: DeployJob
+        displayName: 'Deploy Static Web App'
+        steps:
+          - checkout: self
+            submodules: true
+
+          - task: AzureStaticWebApp@0
+            inputs:
+              azure_static_web_apps_api_token: $(AZURE_STATIC_WEB_APPS_API_TOKEN)
+              app_location: '/'
+              output_location: '/'
+            displayName: 'Deploy to Azure Static Web Apps'
+
