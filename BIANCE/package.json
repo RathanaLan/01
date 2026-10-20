@@ -1,0 +1,22 @@
+{
+  "name": "binance-trading-dashboard",
+  "version": "1.0.0",
+  "description": "Full-stack Binance Algorithmic Trading Dashboard",
+  "scripts": {
+    "backend": "cd backend && npm run dev",
+    "frontend": "cd frontend && npm run dev",
+    "start": "node backend/server.js",
+    "build": "cd frontend && npm run build"
+  },
+  "keywords": [
+    "binance",
+    "cryptocurrency",
+    "trading",
+    "algorithmic-trading",
+    "technical-analysis",
+    "rsi",
+    "macd"
+  ],
+  "author": "",
+  "license": "MIT"
+}
