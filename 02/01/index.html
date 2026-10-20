@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DNKH DNA MATRIX - Connecting Knowledge. Driving Excellence. | DENSO</title>
+  
+  <!-- Font Awesome 6.5.1 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  
+  <!-- Google Fonts: Inter, Noto Sans Khmer, Noto Sans JP, Noto Sans SC, JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@500;700&family=Noto+Sans+Khmer:wght@400;600;700&family=Noto+Sans+JP:wght@400;500;700&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+  
+  <!-- Chart.js for Manufacturing & Capability Dashboards -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="dnkh-platform.css">
+</head>
+<body class="dnkh-enterprise-body">
+
+  <!-- ========================================================
+       TOP GLOBAL HEADER & CONTROLLER
+       ======================================================== -->
+  <header class="dnkh-header" role="banner" aria-label="Global Header">
+    <!-- Header Left: Sidebar Toggle & Brand -->
+    <div class="dnkh-header-left">
+      <button type="button" class="btn-sidebar-toggle" id="btn-sidebar-toggle" title="Toggle Navigation Menu" aria-label="Toggle Sidebar">
+        <i class="fa-solid fa-bars"></i>
+      </button>
+
+      <div class="dnkh-brand-logo" onclick="window.DNKH_APP.switchView('home')" title="DNKH DNA MATRIX">
+        <div class="dnkh-logo-icon">
+          <i class="fa-solid fa-dna"></i>
+        </div>
+        <div class="dnkh-brand-text">
+          <div class="dnkh-brand-title">
+            <span>DNKH DNA MATRIX</span>
+            <span class="dnkh-brand-badge">DENSO</span>
+          </div>
+          <span class="dnkh-brand-motto" data-i18n="app_subtitle">Connecting Knowledge. Driving Excellence.</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Header Center: Global Search -->
+    <div class="dnkh-header-center">
+      <div class="dnkh-search-box">
+        <i class="fa-solid fa-magnifying-glass"></i>
+        <input type="text" id="dnkh-header-search-input" class="dnkh-search-input" placeholder="Search topics, defects, root causes, 5-Why, experts, standards..." data-i18n-placeholder="search_placeholder" aria-label="Search Knowledge">
+        <span class="dnkh-search-shortcut">Ctrl+K</span>
+      </div>
+    </div>
+
+    <!-- Header Right: Context Selectors & Actions -->
+    <div class="dnkh-header-right">
+      <!-- Section Switcher Dropdown -->
+      <div class="dnkh-section-selector-wrap" title="Switch Section Context">
+        <select id="dnkh-header-section-select" aria-label="Select Section">
+          <option value="all">All DNKH Sections</option>
+        </select>
+      </div>
+
+      <!-- Language Switcher (EN, KM, JA, ZH) -->
+      <div class="dnkh-lang-selector-wrap" title="Change Language">
+        <select id="dnkh-header-lang-select" aria-label="Select Language">
+          <option value="en">English (EN)</option>
+          <option value="km">ភាសាខ្មែរ (KM)</option>
+          <option value="ja">日本語 (JA)</option>
+          <option value="zh">中文 (ZH)</option>
+        </select>
+      </div>
+
+      <!-- Theme Switcher (Dark / Light) -->
+      <button type="button" class="btn-header-icon" id="btn-header-theme" title="Toggle Dark / Light Theme" aria-label="Toggle Theme">
+        <i class="fa-solid fa-sun"></i>
+      </button>
+
+      <!-- Bookmarks Drawer Button -->
+      <button type="button" class="btn-header-icon" id="btn-header-bookmarks" title="Saved Records / Bookmarks" aria-label="Saved Bookmarks">
+        <i class="fa-solid fa-bookmark"></i>
+      </button>
+
+      <!-- Notifications Bell Button -->
+      <button type="button" class="btn-header-icon" id="btn-header-notifications" title="System Notifications" aria-label="Notifications">
+        <i class="fa-solid fa-bell"></i>
+        <span class="header-badge-count" id="header-notif-count">4</span>
+      </button>
+
+      <!-- Prototype Role Switcher -->
+      <div class="dnkh-role-selector-wrap" title="Prototype Role Switcher">
+        <select id="dnkh-header-role-select" aria-label="Select Prototype Role">
+          <option value="viewer">Role: Viewer</option>
+          <option value="contributor">Role: Contributor</option>
+          <option value="window_person">Role: Window Person</option>
+          <option value="reviewer">Role: Reviewer / SME</option>
+          <option value="approver">Role: Head Section / Approver</option>
+          <option value="admin" selected>Role: Administrator</option>
+          <option value="management">Role: Management</option>
+        </select>
+      </div>
+
+      <!-- User Profile Chip -->
+      <div class="user-profile-chip" title="Active User Profile">
+        <div class="user-avatar-badge">DN</div>
+        <span class="user-role-label">Associate</span>
+      </div>
+
+      <!-- Create Record CTA Button -->
+      <button type="button" class="btn-header-cta" id="btn-header-create-record">
+        <i class="fa-solid fa-circle-plus"></i>
+        <span data-i18n="btn_create_record">Create Record</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- ========================================================
+       MAIN APP SHELL (SIDEBAR + CONTENT STAGE)
+       ======================================================== -->
+  <div class="dnkh-app-body">
+    
+    <!-- LEFT SIDEBAR NAVIGATION -->
+    <aside class="dnkh-sidebar" id="dnkh-sidebar" aria-label="Main Navigation">
+      <ul class="sidebar-nav-list">
+        
+        <li class="sidebar-category-header">Knowledge & Experience</li>
+        
+        <li class="sidebar-nav-item active">
+          <button type="button" data-view="home">
+            <i class="fa-solid fa-house"></i>
+            <span class="sidebar-item-label" data-i18n="nav_home">Home</span>
+          </button>
+        </li>
+
+        <li class="sidebar-nav-item">
+          <button type="button" data-view="sections">
+            <i class="fa-solid fa-building-user"></i>
+            <span class="sidebar-item-label" data-i18n="nav_all_sections">All Sections</span>
+            <span class="sidebar-item-badge">15</span>
+          </button>
+        </li>
+
+        <li class="sidebar-nav-item">
+          <button type="button" data-view="knowledge">
+            <i class="fa-solid fa-book-open"></i>
+            <span class="sidebar-item-label" data-i18n="nav_knowledge">Knowledge Library</span>
+          </button>
+        </li>
+
+        <li class="sidebar-nav-item">
+          <button type="button" data-view="troubleshooting">
+            <i class="fa-solid fa-wrench"></i>
+            <span class="sidebar-item-label" data-i18n="nav_troubleshooting">Troubleshooting (8D)</span>
+            <span class="sidebar-item-badge">3</span>
+          </button>
+        </li>
+
+        <li class="sidebar-nav-item">
+          <button type="button" data-view="experience">
+            <i class="fa-solid fa-briefcase"></i>
+            <span class="sidebar-item-label" data-i18n="nav_experience">Experience & Projects</span>
+          </button>
+        </li>
+
+        <li class="sidebar-nav-item">
+          <button type="button" data-view="lessons">
+            <i class="fa-solid fa-lightbulb"></i>
+            <span class="sidebar-item-label" data-i18n="nav_lessons">Lessons Learned</span>
+          </button>
+        </li>
+
+        <li class="sidebar-nav-item">
+          <button type="button" data-view="documents">
+            <i class="fa-solid fa-file-shield"></i>
+            <span class="sidebar-item-label" data-i18n="nav_documents">Documents & Standards</span>
+          </button>
+        </li>
+
+        <li class="sidebar-category-header">Capabilities & Growth</li>
+
+        <li class="sidebar-nav-item">
+          <button type="button" data-view="experts">
+            <i class="fa-solid fa-user-tie"></i>
+            <span class="sidebar-item-label" data-i18n="nav_experts">Expert Directory</span>
+            <span class="sidebar-item-badge">7</span>
+          </button>
+        </li>
+
+        <li class="sidebar-nav-item">
+          <button type="button" data-view="capability">
+            <i class="fa-solid fa-chart-simple"></i>
+            <span class="sidebar-item-label" data-i18n="nav_capability">Capability Matrix</span>
+          </button>
+        </li>
+
+        <li class="sidebar-nav-item">
+          <button type="button" data-view="learning">
+            <i class="fa-solid fa-chalkboard-user"></i>
+            <span class="sidebar-item-label" data-i18n="nav_learning">Learning & Assessments</span>
+            <span class="sidebar-item-badge">6</span>
+          </button>
+        </li>
+
+        <li class="sidebar-category-header">Workflow & Management</li>
+
+        <li class="sidebar-nav-item">
+          <button type="button" data-view="workspace">
+            <i class="fa-solid fa-user-gear"></i>
+            <span class="sidebar-item-label" data-i18n="nav_workspace">My Workspace</span>
+          </button>
+        </li>
+
+        <li class="sidebar-nav-item">
+          <button type="button" data-view="reviews">
+            <i class="fa-solid fa-clipboard-check"></i>
+            <span class="sidebar-item-label" data-i18n="nav_reviews">Review Center</span>
+            <span class="sidebar-item-badge">4</span>
+          </button>
+        </li>
+
+        <li class="sidebar-nav-item">
+          <button type="button" data-view="dashboards">
+            <i class="fa-solid fa-chart-line"></i>
+            <span class="sidebar-item-label" data-i18n="nav_dashboards">Dashboards</span>
+          </button>
+        </li>
+
+        <li class="sidebar-nav-item">
+          <button type="button" data-view="admin">
+            <i class="fa-solid fa-gears"></i>
+            <span class="sidebar-item-label" data-i18n="nav_admin">Administration</span>
+          </button>
+        </li>
+
+        <li class="sidebar-nav-item">
+          <button type="button" data-view="help">
+            <i class="fa-solid fa-circle-question"></i>
+            <span class="sidebar-item-label" data-i18n="nav_help">Help & User Guide</span>
+          </button>
+        </li>
+
+      </ul>
+    </aside>
+
+    <!-- MAIN DYNAMIC CONTENT CONTAINER -->
+    <main class="dnkh-main-container" id="dnkh-main-container" role="main">
+      
+      <!-- 15 Dynamic View Stages -->
+      <section id="view-home" class="dnkh-view-stage active" aria-label="Home View"></section>
+      <section id="view-sections" class="dnkh-view-stage" aria-label="Sections View"></section>
+      <section id="view-knowledge" class="dnkh-view-stage" aria-label="Knowledge Library View"></section>
+      <section id="view-troubleshooting" class="dnkh-view-stage" aria-label="Troubleshooting View"></section>
+      <section id="view-experience" class="dnkh-view-stage" aria-label="Experience View"></section>
+      <section id="view-lessons" class="dnkh-view-stage" aria-label="Lessons Learned View"></section>
+      <section id="view-documents" class="dnkh-view-stage" aria-label="Documents View"></section>
+      <section id="view-experts" class="dnkh-view-stage" aria-label="Experts View"></section>
+      <section id="view-capability" class="dnkh-view-stage" aria-label="Capability Matrix View"></section>
+      <section id="view-learning" class="dnkh-view-stage" aria-label="Learning View"></section>
+      <section id="view-workspace" class="dnkh-view-stage" aria-label="My Workspace View"></section>
+      <section id="view-reviews" class="dnkh-view-stage" aria-label="Review Center View"></section>
+      <section id="view-dashboards" class="dnkh-view-stage" aria-label="Dashboards View"></section>
+      <section id="view-admin" class="dnkh-view-stage" aria-label="Administration View"></section>
+      <section id="view-help" class="dnkh-view-stage" aria-label="Help View"></section>
+
+    </main>
+  </div>
+
+  <!-- ========================================================
+       MODALS & DIALOGS
+       ======================================================== -->
+  
+  <!-- Guided 6-Step Record Creation Wizard -->
+  <div class="dnkh-modal-backdrop" id="modal-create-record" role="dialog" aria-modal="true">
+    <div class="dnkh-modal-container">
+      <div class="dnkh-modal-header">
+        <h3 class="dnkh-modal-title"><i class="fa-solid fa-file-circle-plus text-red"></i> Guided Record Creation Wizard</h3>
+        <button type="button" class="btn-modal-close" onclick="window.DNKH_APP.closeModal('modal-create-record')"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+      <div class="wizard-progress-bar-wrap">
+        <div class="wizard-progress-bar-fill" id="wizard-progress-bar-fill" style="width: 16.6%;"></div>
+      </div>
+      <div class="wizard-steps-nav" id="wizard-steps-nav">
+        <div class="wizard-step-pill active" data-step="1" onclick="window.DNKH_APP.goToWizardStep(1)">1. Classification</div>
+        <div class="wizard-step-pill" data-step="2" onclick="window.DNKH_APP.goToWizardStep(2)">2. Knowledge Details</div>
+        <div class="wizard-step-pill" data-step="3" onclick="window.DNKH_APP.goToWizardStep(3)">3. Practical Application</div>
+        <div class="wizard-step-pill" data-step="4" onclick="window.DNKH_APP.goToWizardStep(4)">4. Experience</div>
+        <div class="wizard-step-pill" data-step="5" onclick="window.DNKH_APP.goToWizardStep(5)">5. Evidence</div>
+        <div class="wizard-step-pill" data-step="6" onclick="window.DNKH_APP.goToWizardStep(6)">6. Ownership & Review</div>
+      </div>
+      <div class="dnkh-modal-body"></div>
+      <div class="dnkh-modal-footer">
+        <button type="button" class="btn-dnkh secondary" id="btn-wz-back" onclick="window.DNKH_APP.prevWizardStep()">Back</button>
+        <button type="button" class="btn-dnkh secondary" id="btn-wz-draft" onclick="window.DNKH_APP.saveWizardDraft()"><i class="fa-solid fa-floppy-disk"></i> Save Draft</button>
+        <button type="button" class="btn-dnkh secondary" id="btn-wz-preview" onclick="window.DNKH_APP.previewWizardDraft()"><i class="fa-solid fa-eye"></i> Preview</button>
+        <button type="button" class="btn-dnkh primary" id="btn-wz-next" onclick="window.DNKH_APP.nextWizardStep()">Continue</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Record Detail Modal -->
+  <div class="dnkh-modal-backdrop" id="modal-record-detail" role="dialog" aria-modal="true">
+    <div class="dnkh-modal-container">
+      <div class="dnkh-modal-header">
+        <h3 class="dnkh-modal-title">Record Details</h3>
+        <button type="button" class="btn-modal-close" onclick="window.DNKH_APP.closeModal('modal-record-detail')"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+      <div class="dnkh-modal-body"></div>
+      <div class="dnkh-modal-footer">
+        <button type="button" class="btn-dnkh secondary" onclick="window.DNKH_APP.closeModal('modal-record-detail')">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 8D Troubleshooting Detail Modal -->
+  <div class="dnkh-modal-backdrop" id="modal-troubleshooting-detail" role="dialog" aria-modal="true">
+    <div class="dnkh-modal-container" style="max-width: 960px;">
+      <div class="dnkh-modal-header">
+        <h3 class="dnkh-modal-title">8D Case Investigation</h3>
+        <button type="button" class="btn-modal-close" onclick="window.DNKH_APP.closeModal('modal-troubleshooting-detail')"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+      <div class="dnkh-modal-body"></div>
+      <div class="dnkh-modal-footer">
+        <button type="button" class="btn-dnkh secondary" onclick="window.DNKH_APP.closeModal('modal-troubleshooting-detail')">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bulk CSV Import Modal -->
+  <div class="dnkh-modal-backdrop" id="modal-bulk-import" role="dialog" aria-modal="true">
+    <div class="dnkh-modal-container">
+      <div class="dnkh-modal-header">
+        <h3 class="dnkh-modal-title"><i class="fa-solid fa-file-import text-cyan"></i> Bulk CSV / Excel Import</h3>
+        <button type="button" class="btn-modal-close" onclick="window.DNKH_APP.closeModal('modal-bulk-import')"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+      <div class="dnkh-modal-body">
+        <p style="font-size: 0.85rem; color: var(--dn-text-secondary);">Upload standard CSV templates to import new knowledge records or section topics with duplicate detection.</p>
+        <div style="border: 2px dashed var(--dn-border); border-radius: 8px; padding: 2.5rem; text-align: center; background: var(--dn-surface);">
+          <i class="fa-solid fa-cloud-arrow-up" style="font-size: 2.5rem; color: var(--dn-cyan); margin-bottom: 0.75rem;"></i>
+          <p style="margin: 0 0 0.5rem 0;">Drag and drop your <strong>.csv</strong> or <strong>.xlsx</strong> template here</p>
+          <button type="button" class="btn-dnkh secondary">Browse Files</button>
+        </div>
+      </div>
+      <div class="dnkh-modal-footer">
+        <button type="button" class="btn-dnkh secondary" onclick="window.DNKH_APP.closeModal('modal-bulk-import')">Cancel</button>
+        <button type="button" class="btn-dnkh primary" onclick="alert('Template validated with 0 duplicate errors. Ready to import.'); window.DNKH_APP.closeModal('modal-bulk-import');">Validate & Import</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Admin Add/Edit Section Modal -->
+  <div class="dnkh-modal-backdrop" id="modal-admin-section" role="dialog" aria-modal="true">
+    <div class="dnkh-modal-container">
+      <div class="dnkh-modal-header">
+        <h3 class="dnkh-modal-title"><i class="fa-solid fa-building-circle-check text-green"></i> Add / Edit Section Master</h3>
+        <button type="button" class="btn-modal-close" onclick="window.DNKH_APP.closeModal('modal-admin-section')"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+      <div class="dnkh-modal-body">
+        <div class="dnkh-form-group">
+          <label class="dnkh-form-label">Section Name *</label>
+          <input type="text" class="dnkh-form-input" placeholder="e.g., Die Casting & Foundry">
+        </div>
+        <div class="dnkh-form-group">
+          <label class="dnkh-form-label">Section Code (2-4 chars) *</label>
+          <input type="text" class="dnkh-form-input" placeholder="e.g., DCF">
+        </div>
+        <div class="dnkh-form-group">
+          <label class="dnkh-form-label">Section Head *</label>
+          <input type="text" class="dnkh-form-input" placeholder="Name and Title">
+        </div>
+        <div class="dnkh-form-group">
+          <label class="dnkh-form-label">Theme Color</label>
+          <input type="color" class="dnkh-form-input" value="#e60012" style="height: 40px; padding: 4px;">
+        </div>
+      </div>
+      <div class="dnkh-modal-footer">
+        <button type="button" class="btn-dnkh secondary" onclick="window.DNKH_APP.closeModal('modal-admin-section')">Cancel</button>
+        <button type="button" class="btn-dnkh primary" onclick="alert('Section configuration saved successfully!'); window.DNKH_APP.closeModal('modal-admin-section');">Save Section</button>
+      </div>
+    </div>
+  </div>
+
+  
+  <!-- Knowledge Relationship Graph Modal -->
+  <div class="dnkh-modal-backdrop" id="modal-knowledge-graph" role="dialog" aria-modal="true">
+    <div class="dnkh-modal-container" style="max-width: 1020px; width: 95vw;">
+      <div class="dnkh-modal-header">
+        <h3 class="dnkh-modal-title"><i class="fa-solid fa-diagram-project text-cyan"></i> DNKH Knowledge Relationship Graph</h3>
+        <button type="button" class="btn-modal-close" onclick="window.DNKH_APP.closeModal('modal-knowledge-graph')"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+      <div class="dnkh-modal-body" style="padding: 0;">
+        <div class="dnkh-knowledge-graph-wrap">
+          <div class="graph-toolbar">
+            <div class="graph-filter-chips" id="graph-filter-chips">
+              <span class="graph-filter-chip active" data-type="all">All Connected Entities</span>
+              <span class="graph-filter-chip" data-type="section">Sections</span>
+              <span class="graph-filter-chip" data-type="topic">DNA Topics</span>
+              <span class="graph-filter-chip" data-type="record">Knowledge Records</span>
+              <span class="graph-filter-chip" data-type="case">8D Cases</span>
+              <span class="graph-filter-chip" data-type="expert">Experts (SMEs)</span>
+              <span class="graph-filter-chip" data-type="standard">Standards</span>
+            </div>
+            <div style="display: flex; gap: 0.35rem;">
+              <button type="button" class="btn-dnkh secondary" style="padding: 0.25rem 0.6rem; font-size: 0.75rem;" onclick="window.DNKH_APP.zoomGraph(1.1)"><i class="fa-solid fa-magnifying-glass-plus"></i></button>
+              <button type="button" class="btn-dnkh secondary" style="padding: 0.25rem 0.6rem; font-size: 0.75rem;" onclick="window.DNKH_APP.zoomGraph(0.9)"><i class="fa-solid fa-magnifying-glass-minus"></i></button>
+              <button type="button" class="btn-dnkh secondary" style="padding: 0.25rem 0.6rem; font-size: 0.75rem;" onclick="window.DNKH_APP.resetGraph()"><i class="fa-solid fa-arrows-rotate"></i> Reset</button>
+            </div>
+          </div>
+          <div class="graph-canvas-stage" id="graph-canvas-stage">
+            <svg id="dnkh-graph-svg" width="100%" height="100%" style="display: block;"></svg>
+          </div>
+          <div class="graph-info-overlay" id="graph-info-overlay">
+            <div>
+              <strong id="graph-info-title">Interactive Relationship Engine</strong>
+              <div id="graph-info-desc" style="font-size: 0.75rem; color: var(--dn-text-secondary); margin-top: 2px;">Click any node to inspect interconnections across sections, topics, cases, and standards.</div>
+            </div>
+            <button type="button" class="btn-dnkh primary" id="btn-graph-open-node" style="display: none; padding: 0.25rem 0.75rem; font-size: 0.75rem;">Open Details</button>
+          </div>
+        </div>
+      </div>
+      <div class="dnkh-modal-footer">
+        <button type="button" class="btn-dnkh secondary" onclick="window.DNKH_APP.closeModal('modal-knowledge-graph')">Close Graph</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Evidence-Based Expert Profile Modal -->
+  <div class="dnkh-modal-backdrop" id="modal-expert-profile" role="dialog" aria-modal="true">
+    <div class="dnkh-modal-container" style="max-width: 860px;">
+      <div class="dnkh-modal-header">
+        <h3 class="dnkh-modal-title"><i class="fa-solid fa-id-badge text-cyan"></i> Verified Subject-Matter Expert Profile</h3>
+        <button type="button" class="btn-modal-close" onclick="window.DNKH_APP.closeModal('modal-expert-profile')"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+      <div class="dnkh-modal-body" id="expert-profile-modal-body"></div>
+      <div class="dnkh-modal-footer">
+        <button type="button" class="btn-dnkh secondary" onclick="window.DNKH_APP.closeModal('modal-expert-profile')">Close</button>
+        <button type="button" class="btn-dnkh primary" id="btn-modal-req-consultation" onclick="window.DNKH_APP.openRequestConsultationModal()"><i class="fa-solid fa-comments"></i> Request Technical Consultation</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Request Consultation Modal -->
+  <div class="dnkh-modal-backdrop" id="modal-request-consultation" role="dialog" aria-modal="true">
+    <div class="dnkh-modal-container">
+      <div class="dnkh-modal-header">
+        <h3 class="dnkh-modal-title"><i class="fa-solid fa-handshake-angle text-red"></i> Request Technical Consultation</h3>
+        <button type="button" class="btn-modal-close" onclick="window.DNKH_APP.closeModal('modal-request-consultation')"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+      <div class="dnkh-modal-body">
+        <div class="dnkh-form-group">
+          <label class="dnkh-form-label">Consulting Expert</label>
+          <input type="text" id="consult-expert-name" class="dnkh-form-input" readonly>
+        </div>
+        <div class="dnkh-form-group">
+          <label class="dnkh-form-label">Consultation Topic / Problem Category *</label>
+          <input type="text" id="consult-topic" class="dnkh-form-input" placeholder="e.g., Stator coil insulation resistance abnormality in humid weather">
+        </div>
+        <div class="dnkh-form-group">
+          <label class="dnkh-form-label">Urgency & Production Impact</label>
+          <select id="consult-urgency" class="dnkh-form-select">
+            <option value="Normal">Normal - Capability Development / Standard Review</option>
+            <option value="High">High - Impending Trial / Tooling Buy-off</option>
+            <option value="Critical">Critical - Active Genba Abnormality / Customer Risk</option>
+          </select>
+        </div>
+        <div class="dnkh-form-group">
+          <label class="dnkh-form-label">Problem Description & Genba Context *</label>
+          <textarea id="consult-description" class="dnkh-form-textarea" rows="4" placeholder="Briefly describe what happened, process station, part number, and what advice you are requesting."></textarea>
+        </div>
+        <div class="dnkh-form-group">
+          <label class="dnkh-form-label">Target Completion Date</label>
+          <input type="date" id="consult-date" class="dnkh-form-input">
+        </div>
+      </div>
+      <div class="dnkh-modal-footer">
+        <button type="button" class="btn-dnkh secondary" onclick="window.DNKH_APP.closeModal('modal-request-consultation')">Cancel</button>
+        <button type="button" class="btn-dnkh primary" onclick="window.DNKH_APP.submitConsultationRequest()"><i class="fa-solid fa-paper-plane"></i> Send Consultation Request</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Verify Expertise Modal -->
+  <div class="dnkh-modal-backdrop" id="modal-verify-expertise" role="dialog" aria-modal="true">
+    <div class="dnkh-modal-container">
+      <div class="dnkh-modal-header">
+        <h3 class="dnkh-modal-title"><i class="fa-solid fa-stamp text-green"></i> Technical Reviewer - Verify SME Evidence</h3>
+        <button type="button" class="btn-modal-close" onclick="window.DNKH_APP.closeModal('modal-verify-expertise')"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+      <div class="dnkh-modal-body">
+        <div style="background: var(--dn-surface); border: 1px solid var(--dn-border); border-radius: 6px; padding: 1rem; margin-bottom: 1rem; font-size: 0.82rem;">
+          <p style="margin: 0 0 0.25rem 0;"><strong>Candidate:</strong> <span id="verify-expert-name"></span></p>
+          <p style="margin: 0 0 0.25rem 0;"><strong>Discipline:</strong> <span id="verify-expert-area"></span></p>
+          <p style="margin: 0;"><strong>Submitted Evidence:</strong> <span id="verify-expert-evidence"></span></p>
+        </div>
+        <div class="dnkh-form-group">
+          <label class="dnkh-form-label">Reviewer Verification Action *</label>
+          <select id="verify-action" class="dnkh-form-select">
+            <option value="Verified">Confirm Verification (Evidence Confirmed in Genba)</option>
+            <option value="Revision Required">Request Additional Real Evidence (Practical Application Incomplete)</option>
+            <option value="Expired">Mark as Expired (Re-certification Needed)</option>
+          </select>
+        </div>
+        <div class="dnkh-form-group">
+          <label class="dnkh-form-label">Reviewer Technical Evaluation & Notes *</label>
+          <textarea id="verify-notes" class="dnkh-form-textarea" rows="3" placeholder="Confirm real application, standards created, or reasons for requesting revision."></textarea>
+        </div>
+        <div class="dnkh-form-group">
+          <label class="dnkh-form-label">Next Revalidation Date</label>
+          <input type="date" id="verify-next-date" class="dnkh-form-input">
+        </div>
+      </div>
+      <div class="dnkh-modal-footer">
+        <button type="button" class="btn-dnkh secondary" onclick="window.DNKH_APP.closeModal('modal-verify-expertise')">Cancel</button>
+        <button type="button" class="btn-dnkh primary" onclick="window.DNKH_APP.submitExpertiseVerification()"><i class="fa-solid fa-check-double"></i> Save Verification Result</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Capability Self-Assessment & Review Modal -->
+  <div class="dnkh-modal-backdrop" id="modal-capability-assessment" role="dialog" aria-modal="true">
+    <div class="dnkh-modal-container">
+      <div class="dnkh-modal-header">
+        <h3 class="dnkh-modal-title"><i class="fa-solid fa-chart-line text-cyan"></i> Evidence-Based Capability Assessment</h3>
+        <button type="button" class="btn-modal-close" onclick="window.DNKH_APP.closeModal('modal-capability-assessment')"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+      <div class="dnkh-modal-body">
+        <div class="dnkh-form-group">
+          <label class="dnkh-form-label">Associate Name *</label>
+          <input type="text" id="asm-emp-name" class="dnkh-form-input" value="Associate (Contributor)">
+        </div>
+        <div class="dnkh-form-group">
+          <label class="dnkh-form-label">Section & Topic *</label>
+          <select id="asm-topic-select" class="dnkh-form-select"></select>
+        </div>
+        <div class="dnkh-form-group">
+          <label class="dnkh-form-label">Target Capability Level *</label>
+          <select id="asm-level-select" class="dnkh-form-select">
+            <option value="1">Level 1: Knowledge (Understands concept, terminology, purpose)</option>
+            <option value="2">Level 2: Skill (Can execute under guidance or standard work)</option>
+            <option value="3">Level 3: Experience (Applied in real operational project or case)</option>
+            <option value="4">Level 4: Knowledge Sharing (Can standardize, mentor and teach)</option>
+          </select>
+        </div>
+        <div class="dnkh-form-group">
+          <label class="dnkh-form-label">Observable Evidence Summary *</label>
+          <textarea id="asm-evidence-text" class="dnkh-form-textarea" rows="3" placeholder="Cite specific deployed output, 8D case ID, training log, or standard authored. (Observable evidence required)"></textarea>
+        </div>
+        <div class="dnkh-form-group">
+          <label class="dnkh-form-label">Development Action Goal</label>
+          <input type="text" id="asm-dev-action" class="dnkh-form-input" placeholder="e.g., Coach newly appointed team leaders on 4M change control">
+        </div>
+      </div>
+      <div class="dnkh-modal-footer">
+        <button type="button" class="btn-dnkh secondary" onclick="window.DNKH_APP.closeModal('modal-capability-assessment')">Cancel</button>
+        <button type="button" class="btn-dnkh primary" onclick="window.DNKH_APP.submitCapabilityAssessment()"><i class="fa-solid fa-check"></i> Submit Assessment</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Live Record Draft Preview Modal -->
+  <div class="dnkh-modal-backdrop" id="modal-preview-record" role="dialog" aria-modal="true">
+    <div class="dnkh-modal-container">
+      <div class="dnkh-modal-header">
+        <h3 class="dnkh-modal-title"><i class="fa-solid fa-eye text-cyan"></i> Draft Knowledge Record Preview</h3>
+        <button type="button" class="btn-modal-close" onclick="window.DNKH_APP.closeModal('modal-preview-record')"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+      <div class="dnkh-modal-body" id="preview-record-modal-body"></div>
+      <div class="dnkh-modal-footer">
+        <button type="button" class="btn-dnkh secondary" onclick="window.DNKH_APP.closeModal('modal-preview-record')">Close Preview</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Review Center Action Modal -->
+  <div class="dnkh-modal-backdrop" id="modal-review-action" role="dialog" aria-modal="true">
+    <div class="dnkh-modal-container">
+      <div class="dnkh-modal-header">
+        <h3 class="dnkh-modal-title"><i class="fa-solid fa-clipboard-check text-green"></i> Review & Approval Decision</h3>
+        <button type="button" class="btn-modal-close" onclick="window.DNKH_APP.closeModal('modal-review-action')"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+      <div class="dnkh-modal-body">
+        <div style="background: var(--dn-surface); border: 1px solid var(--dn-border); border-radius: 6px; padding: 1rem; margin-bottom: 1rem; font-size: 0.82rem;">
+          <p style="margin: 0 0 0.25rem 0;"><strong>Record:</strong> <span id="rev-modal-record-title"></span></p>
+          <p style="margin: 0 0 0.25rem 0;"><strong>Current Stage:</strong> <span id="rev-modal-record-step"></span></p>
+          <p style="margin: 0;"><strong>Submitted By:</strong> <span id="rev-modal-record-author"></span></p>
+        </div>
+        <div class="dnkh-form-group">
+          <label class="dnkh-form-label">Decision Action *</label>
+          <select id="rev-modal-decision-select" class="dnkh-form-select">
+            <option value="Initial Check Pass">Pass Initial Check (Completeness Verified)</option>
+            <option value="Technical Review Pass">Pass Technical Review (Technical Accuracy & Evidence Verified)</option>
+            <option value="Revision Required">Request Revision (Feedback Required)</option>
+            <option value="Final Approved">Final Head Section Approval & Authorize Publication</option>
+            <option value="Rejected">Reject Record</option>
+          </select>
+        </div>
+        <div class="dnkh-form-group">
+          <label class="dnkh-form-label">Reviewer / Approver Comments *</label>
+          <textarea id="rev-modal-comments" class="dnkh-form-textarea" rows="3" placeholder="Enter technical feedback, evidence verification remarks, or required corrections."></textarea>
+        </div>
+      </div>
+      <div class="dnkh-modal-footer">
+        <button type="button" class="btn-dnkh secondary" onclick="window.DNKH_APP.closeModal('modal-review-action')">Cancel</button>
+        <button type="button" class="btn-dnkh primary" onclick="window.DNKH_APP.confirmReviewDecision()"><i class="fa-solid fa-check"></i> Submit Decision</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Interactive Guided Tour Modal -->
+  <div class="dnkh-modal-backdrop" id="modal-guided-tour" role="dialog" aria-modal="true">
+    <div class="dnkh-modal-container">
+      <div class="dnkh-modal-header">
+        <h3 class="dnkh-modal-title"><i class="fa-solid fa-wand-magic-sparkles text-red"></i> Welcome to DNKH DNA Matrix</h3>
+        <button type="button" class="btn-modal-close" onclick="window.DNKH_APP.closeModal('modal-guided-tour')"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+      <div class="dnkh-modal-body">
+        <div style="text-align: center; padding: 1.5rem 0;">
+          <div class="dnkh-logo-icon" style="width: 56px; height: 56px; font-size: 2rem; margin: 0 auto 1rem auto;">
+            <i class="fa-solid fa-dna"></i>
+          </div>
+          <h2 style="margin: 0 0 0.5rem 0;">“Connecting Knowledge. Driving Excellence.”</h2>
+          <p style="color: var(--dn-text-secondary); max-width: 550px; margin: 0 auto 1.5rem auto; line-height: 1.6;">
+            This enterprise platform preserves manufacturing experience, enables cross-section problem solving, standardizes 8D troubleshooting, and guides employee capability development.
+          </p>
+        </div>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; font-size: 0.82rem;">
+          <div style="background: var(--dn-surface); padding: 1rem; border-radius: 6px;">
+            <strong style="color: var(--dn-cyan);"><i class="fa-solid fa-compass"></i> Step 1: Explore Sections</strong>
+            <p style="margin: 4px 0 0 0; color: var(--dn-text-secondary);">Use the top section switcher or click any section card to enter its specialized microsite.</p>
+          </div>
+          <div style="background: var(--dn-surface); padding: 1rem; border-radius: 6px;">
+            <strong style="color: var(--dn-red);"><i class="fa-solid fa-wrench"></i> Step 2: 8D Troubleshooting</strong>
+            <p style="margin: 4px 0 0 0; color: var(--dn-text-secondary);">Access real 5-Why and Fishbone analyses to prevent recurrence across brother plants.</p>
+          </div>
+          <div style="background: var(--dn-surface); padding: 1rem; border-radius: 6px;">
+            <strong style="color: var(--dn-green);"><i class="fa-solid fa-chart-simple"></i> Step 3: Capability Growth</strong>
+            <p style="margin: 4px 0 0 0; color: var(--dn-text-secondary);">Track Level 0 to Level 4 observable evidence without harmful rankings.</p>
+          </div>
+          <div style="background: var(--dn-surface); padding: 1rem; border-radius: 6px;">
+            <strong style="color: var(--dn-amber);"><i class="fa-solid fa-language"></i> Step 4: Multilingual Support</strong>
+            <p style="margin: 4px 0 0 0; color: var(--dn-text-secondary);">Switch instantly between English, Khmer, Japanese, and Chinese.</p>
+          </div>
+        </div>
+      </div>
+      <div class="dnkh-modal-footer">
+        <button type="button" class="btn-dnkh primary" onclick="window.DNKH_APP.closeModal('modal-guided-tour')">Start Exploring Platform</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE-OVER DRAWERS -->
+  <aside class="dnkh-drawer" id="drawer-notifications" role="dialog" aria-label="Notifications Drawer">
+    <div id="drawer-notifications-list"></div>
+  </aside>
+
+  <aside class="dnkh-drawer" id="drawer-bookmarks" role="dialog" aria-label="Bookmarks Drawer">
+    <div id="drawer-bookmarks-list"></div>
+  </aside>
+
+  <!-- TOAST NOTIFICATION CONTAINER -->
+  <div class="dnkh-toast-container" id="dnkh-toast-container" role="status" aria-live="polite"></div>
+
+  <!-- SCRIPTS -->
+  <script src="dnkh-i18n.js"></script>
+  <script src="dnkh-data.js"></script>
+  <script src="dnkh-app.js"></script>
+</body>
+</html>
