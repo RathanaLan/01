@@ -116,6 +116,7 @@ const state = {
   isMasked: false,
   language: 'KM', // 'KM' or 'EN'
   activePassbookPage: 1, // 1 or 2
+  mobilePassbookMode: 'booklet', // 'booklet' or 'cards'
   currentFlexibleView: 'dashboard', // 'dashboard', 'passbook', 'projection', 'insights'
   simSettings: {
     monthlyDeposit: 700000,
@@ -484,6 +485,13 @@ const dom = {
   chartTooltip: document.getElementById('chartTooltip'),
   viewFullPassbookLink: document.getElementById('viewFullPassbookLink'),
 
+  // Mobile Passbook Controls
+  mobilePassbookCardsContainer: document.getElementById('mobilePassbookCardsContainer'),
+  passbookBookletScrollArea: document.getElementById('passbookBookletScrollArea'),
+  btnPassbookModeBooklet: document.getElementById('btnPassbookModeBooklet'),
+  btnPassbookModeCards: document.getElementById('btnPassbookModeCards'),
+  passbookSwipeHint: document.getElementById('passbookSwipeHint'),
+
   // Simulator
   simDepositInput: document.getElementById('simDepositInput'),
   simDepositDisplay: document.getElementById('simDepositDisplay'),
@@ -784,13 +792,147 @@ function renderPassbook() {
   dom.pageSwitcherBtns.querySelectorAll('.page-tab').forEach(btn => {
     const p = parseInt(btn.dataset.page, 10);
     if (p === state.activePassbookPage) {
-      btn.className = 'page-tab active px-4 py-1.5 rounded-lg text-xs font-bold transition bg-amber-500 text-slate-950';
+      btn.className = 'page-tab active px-3 sm:px-4 py-1.5 rounded-lg text-xs font-bold transition bg-amber-500 text-slate-950 flex-1 sm:flex-initial text-center';
     } else {
-      btn.className = 'page-tab px-4 py-1.5 rounded-lg text-xs font-bold text-slate-400 hover:text-white transition';
+      btn.className = 'page-tab px-3 sm:px-4 py-1.5 rounded-lg text-xs font-bold text-slate-400 hover:text-white transition flex-1 sm:flex-initial text-center';
     }
   });
 
+  renderMobilePassbookCards();
   applyMaskState();
+}
+
+
+// --- Mobile Passbook Functions ---
+function setMobilePassbookMode(mode) {
+  state.mobilePassbookMode = mode;
+  if (!dom.btnPassbookModeBooklet || !dom.btnPassbookModeCards) return;
+
+  if (mode === 'cards') {
+    dom.btnPassbookModeCards.className = 'px-2.5 py-1 rounded-md font-bold text-[11px] bg-amber-500 text-slate-950 transition flex items-center space-x-1';
+    dom.btnPassbookModeBooklet.className = 'px-2.5 py-1 rounded-md font-bold text-[11px] text-slate-300 hover:text-white transition flex items-center space-x-1';
+    dom.passbookBookletScrollArea?.classList.add('hidden');
+    dom.passbookSwipeHint?.classList.add('hidden');
+    dom.mobilePassbookCardsContainer?.classList.remove('hidden');
+    renderMobilePassbookCards();
+  } else {
+    dom.btnPassbookModeBooklet.className = 'px-2.5 py-1 rounded-md font-bold text-[11px] bg-amber-500 text-slate-950 transition flex items-center space-x-1';
+    dom.btnPassbookModeCards.className = 'px-2.5 py-1 rounded-md font-bold text-[11px] text-slate-300 hover:text-white transition flex items-center space-x-1';
+    dom.passbookBookletScrollArea?.classList.remove('hidden');
+    dom.passbookSwipeHint?.classList.remove('hidden');
+    dom.mobilePassbookCardsContainer?.classList.add('hidden');
+  }
+}
+
+function renderMobilePassbookCards() {
+  const container = dom.mobilePassbookCardsContainer;
+  if (!container) return;
+  container.innerHTML = '';
+
+  const page = state.activePassbookPage || 1;
+  const startIndex = (page - 1) * 12;
+  const pageRows = state.flexibleData.slice(startIndex, startIndex + 12);
+
+  if (pageRows.length === 0) {
+    container.innerHTML = `
+      <div class="bg-brand-surface border border-brand-border rounded-2xl p-6 text-center text-slate-400 text-xs">
+        <p>មិនទាន់មានទិន្នន័យសម្រាប់ទំព័រទី ${toKhmerNum(page)} នៅឡើយទេ។</p>
+        <button class="mt-3 px-4 py-2 bg-amber-500 text-slate-950 font-bold rounded-xl text-xs" onclick="openAddModal()">
+          + បញ្ចូលទិន្នន័យខែថ្មី
+        </button>
+      </div>
+    `;
+    return;
+  }
+
+  pageRows.forEach((row, i) => {
+    const globalIdx = startIndex + i;
+    const card = document.createElement('div');
+    card.className = "mobile-passbook-card bg-[#fbfbf8] text-[#1c1d1f] rounded-2xl p-4 shadow-lg border border-[#e2e1d7] relative transition hover:border-amber-400 cursor-pointer";
+    
+    card.innerHTML = `
+      <!-- Card Header -->
+      <div class="flex items-center justify-between pb-2.5 border-b border-[#e5e7eb] mb-3">
+        <div class="flex items-center space-x-2">
+          <span class="w-7 h-7 rounded-lg bg-[#1a382c] text-white flex items-center justify-center font-bold text-xs font-khmer">
+            ${toKhmerNum(row.seq)}
+          </span>
+          <div>
+            <div class="text-xs font-bold text-[#111827] font-mono">${row.date}</div>
+            <div class="text-[10px] text-slate-500 font-khmer">ខែទី ${toKhmerNum(row.seq)} (អត្រា ${row.rate}%)</div>
+          </div>
+        </div>
+        <div class="flex items-center space-x-1.5">
+          <span class="text-[10px] bg-emerald-100 text-emerald-800 font-bold px-2 py-0.5 rounded-full border border-emerald-300">
+            ✓ ផ្ទៀងផ្ទាត់
+          </span>
+          <button class="p-1.5 text-slate-500 hover:text-[#1a382c] transition" title="កែប្រែ" aria-label="Edit record">
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Financial Metrics Grid -->
+      <div class="grid grid-cols-2 gap-2 text-xs mb-3">
+        <div class="bg-[#f0f2eb] rounded-xl p-2">
+          <span class="text-[10px] text-slate-500 block font-khmer">ប្រាក់ដើមខែ:</span>
+          <span class="font-mono font-semibold text-[#111827] maskable">${formatMoney(row.opening)}</span>
+        </div>
+        <div class="bg-emerald-50 rounded-xl p-2 border border-emerald-100">
+          <span class="text-[10px] text-emerald-700 block font-khmer">ការប្រាក់ (+${row.rate}%):</span>
+          <span class="font-mono font-bold text-[#065f46] maskable">+${formatMoney(row.interest)}</span>
+        </div>
+        <div class="bg-blue-50 rounded-xl p-2 border border-blue-100">
+          <span class="text-[10px] text-blue-700 block font-khmer">ប្រាក់សន្សំថ្មី:</span>
+          <span class="font-mono font-bold text-[#1e40af] maskable">${row.deposit > 0 ? '+' + formatMoney(row.deposit) : '--'}</span>
+        </div>
+        <div class="bg-amber-50 rounded-xl p-2 border border-amber-200">
+          <span class="text-[10px] text-amber-800 block font-khmer font-bold">ប្រាក់សរុបចុងខែ:</span>
+          <span class="font-mono font-extrabold text-[#92400e] text-sm maskable">${formatMoney(row.closing)}</span>
+        </div>
+      </div>
+
+      ${row.withdrawal > 0 ? `
+        <div class="text-[11px] text-red-600 font-mono bg-red-50 p-1.5 rounded-lg mb-2">
+          ប្រាក់ដក: -${formatMoney(row.withdrawal)}
+        </div>
+      ` : ''}
+
+      <!-- Officer Signature Replica -->
+      <div class="flex items-center justify-between pt-2 border-t border-[#f3f4f6] text-[10px] text-slate-500 font-khmer">
+        <span>ហត្ថលេខាបេឡាធិការ៖</span>
+        <div class="w-16 h-6">
+          <svg viewBox="0 0 100 45" class="w-full h-full signature-ink">
+            <path d="M10 28 C 25 10, 35 38, 48 20 C 55 12, 65 35, 85 18 C 92 14, 75 40, 95 38" />
+            <path d="M30 32 C 45 32, 60 30, 80 32" stroke-width="1.5" />
+          </svg>
+        </div>
+      </div>
+    `;
+
+    card.addEventListener('click', () => openEditModal(globalIdx));
+    container.appendChild(card);
+  });
+
+  // Next month quick action card if on this page
+  const nextSeq = state.flexibleData.length + 1;
+  const isNextOnThisPage = (nextSeq > startIndex && nextSeq <= startIndex + 12);
+  if (isNextOnThisPage) {
+    const nextCard = document.createElement('div');
+    nextCard.className = "border-2 border-dashed border-brand-border hover:border-amber-400 bg-brand-surface/60 rounded-2xl p-4 text-center cursor-pointer transition";
+    nextCard.innerHTML = `
+      <div class="flex items-center justify-center space-x-2 text-amber-400 font-bold text-xs font-khmer">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 4v16m8-8H4" />
+        </svg>
+        <span>+ បញ្ចូលទិន្នន័យខែទី ${toKhmerNum(nextSeq)}</span>
+      </div>
+    `;
+    nextCard.addEventListener('click', openAddModal);
+    container.appendChild(nextCard);
+  }
 }
 
 // --- Canvas Growth Chart ---
@@ -813,9 +955,15 @@ function renderGrowthChart() {
 
   if (state.flexibleData.length < 2) return;
 
-  const padding = { top: 30, right: 30, bottom: 40, left: 70 };
-  const chartWidth = width - padding.left - padding.right;
-  const chartHeight = height - padding.top - padding.bottom;
+  const isMobile = width < 480;
+  const padding = { 
+    top: 25, 
+    right: isMobile ? 12 : 30, 
+    bottom: 35, 
+    left: isMobile ? 48 : 70 
+  };
+  const chartWidth = Math.max(10, width - padding.left - padding.right);
+  const chartHeight = Math.max(10, height - padding.top - padding.bottom);
 
   const balances = state.flexibleData.map(d => d.closing);
   const minBal = Math.min(...balances) * 0.9;
@@ -828,7 +976,7 @@ function renderGrowthChart() {
   ctx.strokeStyle = 'rgba(42, 59, 102, 0.4)';
   ctx.lineWidth = 1;
   ctx.fillStyle = '#64748b';
-  ctx.font = '10px "Plus Jakarta Sans", sans-serif';
+  ctx.font = isMobile ? '9px "Plus Jakarta Sans", sans-serif' : '10px "Plus Jakarta Sans", sans-serif';
   ctx.textAlign = 'right';
 
   const gridCount = 5;
@@ -896,10 +1044,11 @@ function renderGrowthChart() {
     ctx.strokeStyle = '#fbbf24';
     ctx.stroke();
 
-    if (idx % 3 === 0 || idx === state.flexibleData.length - 1) {
+    const labelInterval = isMobile ? 4 : 3;
+    if (idx % labelInterval === 0 || idx === state.flexibleData.length - 1) {
       ctx.fillStyle = '#94a3b8';
-      ctx.font = '10px monospace';
-      ctx.fillText(row.date, x, height - padding.bottom + 16);
+      ctx.font = isMobile ? '8.5px monospace' : '10px monospace';
+      ctx.fillText(row.date, x, height - padding.bottom + 14);
     }
   });
 
@@ -910,23 +1059,25 @@ function renderGrowthChart() {
   }));
 }
 
-// Chart Tooltip
+// Chart Tooltip & Pointer / Touch Interactivity
 function setupChartInteractivity() {
   const canvas = dom.growthChartCanvas;
   const tooltip = dom.chartTooltip;
   if (!canvas || !tooltip) return;
 
-  canvas.addEventListener('mousemove', (e) => {
-    if (!canvas._points) return;
+  let hideTimer = null;
+
+  const handlePointer = (clientX, clientY, isTouch = false) => {
+    if (!canvas._points || canvas._points.length === 0) return;
     const rect = canvas.getBoundingClientRect();
-    const mouseX = e.clientX - rect.left;
-    const mouseY = e.clientY - rect.top;
+    const pointerX = clientX - rect.left;
+    const pointerY = clientY - rect.top;
 
     let nearest = null;
-    let minDistance = 25;
+    let minDistance = isTouch ? 40 : 25; // wider touch radius for fingertip
 
     canvas._points.forEach(pt => {
-      const dist = Math.hypot(pt.x - mouseX, pt.y - mouseY);
+      const dist = Math.hypot(pt.x - pointerX, pt.y - pointerY);
       if (dist < minDistance) {
         minDistance = dist;
         nearest = pt;
@@ -934,22 +1085,68 @@ function setupChartInteractivity() {
     });
 
     if (nearest) {
+      clearTimeout(hideTimer);
       const d = nearest.data;
-      tooltip.style.left = `${nearest.x + 10}px`;
-      tooltip.style.top = `${nearest.y - 40}px`;
+      
+      // Calculate responsive tooltip positioning clamped inside canvas bounds
+      const tooltipApproxWidth = 165;
+      let left = nearest.x + 10;
+      if (left + tooltipApproxWidth > rect.width) {
+        left = nearest.x - tooltipApproxWidth - 10;
+      }
+      if (left < 6) left = 6;
+
+      let top = nearest.y - 48;
+      if (top < 10) {
+        top = nearest.y + 15;
+      }
+
+      tooltip.style.left = `${left}px`;
+      tooltip.style.top = `${top}px`;
       tooltip.classList.remove('hidden');
       tooltip.innerHTML = `
-        <div class="font-bold text-amber-400 font-mono">${d.date} (ខែ #${d.seq})</div>
-        <div class="text-white font-extrabold text-sm mt-0.5">${formatMoney(d.closing)}</div>
-        <div class="text-emerald-400 text-[11px] font-semibold mt-0.5">ការប្រាក់: +${formatMoney(d.interest)}</div>
-        <div class="text-blue-400 text-[11px]">ប្រាក់សន្សំ: +${formatMoney(d.deposit)}</div>
+        <div class="font-bold text-amber-400 font-mono text-xs">${d.date} (ខែ #${toKhmerNum(d.seq)})</div>
+        <div class="text-white font-extrabold text-sm mt-0.5 maskable">${formatMoney(d.closing)}</div>
+        <div class="text-emerald-400 text-[11px] font-semibold mt-0.5 maskable">ការប្រាក់: +${formatMoney(d.interest)}</div>
+        <div class="text-blue-400 text-[11px] maskable">ប្រាក់សន្សំ: +${formatMoney(d.deposit)}</div>
       `;
     } else {
-      tooltip.classList.add('hidden');
+      if (!isTouch) {
+        tooltip.classList.add('hidden');
+      }
     }
+  };
+
+  // Mouse cursor events
+  canvas.addEventListener('mousemove', (e) => {
+    handlePointer(e.clientX, e.clientY, false);
   });
 
   canvas.addEventListener('mouseleave', () => {
+    tooltip.classList.add('hidden');
+  });
+
+  // Touch screen events for all mobile & tablet devices
+  canvas.addEventListener('touchstart', (e) => {
+    if (e.touches && e.touches.length > 0) {
+      handlePointer(e.touches[0].clientX, e.touches[0].clientY, true);
+    }
+  }, { passive: true });
+
+  canvas.addEventListener('touchmove', (e) => {
+    if (e.touches && e.touches.length > 0) {
+      handlePointer(e.touches[0].clientX, e.touches[0].clientY, true);
+    }
+  }, { passive: true });
+
+  canvas.addEventListener('touchend', () => {
+    clearTimeout(hideTimer);
+    hideTimer = setTimeout(() => {
+      tooltip.classList.add('hidden');
+    }, 2000);
+  });
+
+  canvas.addEventListener('touchcancel', () => {
     tooltip.classList.add('hidden');
   });
 }
@@ -1566,13 +1763,31 @@ function initEvents() {
     inp.addEventListener('input', runSimulation);
   });
 
+  // Mobile Passbook View Mode Toggle
+  if (dom.btnPassbookModeBooklet && dom.btnPassbookModeCards) {
+    dom.btnPassbookModeBooklet.addEventListener('click', () => setMobilePassbookMode('booklet'));
+    dom.btnPassbookModeCards.addEventListener('click', () => setMobilePassbookMode('cards'));
+  }
+
   setupChartInteractivity();
 
-  window.addEventListener('resize', () => {
-    if (state.currentMode === 'flexible' && state.currentFlexibleView === 'dashboard') {
-      renderGrowthChart();
-    }
-  });
+  // Debounced window resize and orientation change handler for all devices
+  let resizeDebounceTimer = null;
+  const handleViewportResize = () => {
+    clearTimeout(resizeDebounceTimer);
+    resizeDebounceTimer = setTimeout(() => {
+      if (state.currentMode === 'flexible') {
+        if (state.currentFlexibleView === 'dashboard') {
+          renderGrowthChart();
+        } else if (state.currentFlexibleView === 'passbook') {
+          renderPassbook();
+        }
+      }
+    }, 120);
+  };
+
+  window.addEventListener('resize', handleViewportResize);
+  window.addEventListener('orientationchange', handleViewportResize);
 }
 
 // --- App Initialization ---

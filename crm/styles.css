@@ -13,11 +13,21 @@
   --passbook-header-bg: #dcdfd8;
 }
 
-/* Base Font Enhancements */
+/* Base Font & Global Responsive Enhancements */
+html {
+  -webkit-text-size-adjust: 100%;
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+}
+
 body {
   font-family: var(--font-khmer);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+  width: 100%;
+  min-height: 100%;
+  padding-bottom: max(1rem, env(safe-area-inset-bottom));
 }
 
 .font-moul {
@@ -31,6 +41,20 @@ body {
 
 .font-sans {
   font-family: var(--font-sans);
+}
+
+/* Smooth Touch & Horizontal Scroll */
+.touch-scroll {
+  -webkit-overflow-scrolling: touch;
+  touch-action: pan-x pan-y;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 
 /* Subtle Shimmer & Animations */
@@ -52,7 +76,7 @@ body {
 
 /* ==========================================================================
    Authentic Physical Passbook Booklet Styles
-   ========================================================================== */
+   ========================================================================= */
 .passbook-booklet-paper {
   background-color: var(--passbook-paper);
   color: #1f2937;
@@ -86,7 +110,7 @@ body {
   stroke-width: 2;
   fill: none;
   stroke-linecap: round;
-  stroke-linejoin="round";
+  stroke-linejoin: round;
   opacity: 0.88;
   filter: drop-shadow(0px 1px 1px rgba(30, 58, 138, 0.2));
 }
@@ -95,6 +119,14 @@ body {
   color: #9ca3af;
   font-style: italic;
   font-size: 11px;
+}
+
+/* Mobile Passbook Cards */
+.mobile-passbook-card {
+  transition: transform 0.15s ease, border-color 0.15s ease;
+}
+.mobile-passbook-card:active {
+  transform: scale(0.98);
 }
 
 /* ==========================================================================
@@ -110,12 +142,54 @@ body {
   outline-offset: -10px;
 }
 
-/* Custom Sliders */
+@media (max-width: 640px) {
+  .certificate-guilloche {
+    border-width: 3px !important;
+    outline-width: 1.5px !important;
+    outline-offset: -5px !important;
+  }
+}
+
+/* Custom Touch-Friendly Sliders */
 input[type="range"] {
-  height: 6px;
+  height: 8px;
   background: #1e293b;
   border-radius: 9999px;
   outline: none;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: #f59e0b;
+  cursor: pointer;
+  border: 2px solid #ffffff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+  transition: transform 0.1s ease;
+}
+
+input[type="range"]::-webkit-slider-thumb:active {
+  transform: scale(1.15);
+}
+
+input[type="range"]::-moz-range-thumb {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: #f59e0b;
+  cursor: pointer;
+  border: 2px solid #ffffff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+}
+
+/* Touch Canvas Interactivity */
+canvas.touch-none {
+  touch-action: none;
 }
 
 /* Toast Messages */
@@ -126,6 +200,29 @@ input[type="range"] {
 @keyframes slideInRight {
   from { opacity: 0; transform: translateX(20px); }
   to { opacity: 1; transform: translateX(0); }
+}
+
+/* Mobile-Friendly Dialogs / Bottom Sheets */
+@media (max-width: 640px) {
+  .modal-sheet-mobile {
+    align-items: flex-end !important;
+    padding: 0 !important;
+  }
+  .modal-sheet-mobile > div {
+    border-bottom-left-radius: 0 !important;
+    border-bottom-right-radius: 0 !important;
+    max-height: 90vh !important;
+  }
+
+  /* Prevent iOS Safari auto-zoom on input focus */
+  input[type="text"],
+  input[type="number"],
+  input[type="date"],
+  input[type="month"],
+  select,
+  textarea {
+    font-size: 16px !important;
+  }
 }
 
 /* ==========================================================================
@@ -145,6 +242,8 @@ input[type="range"] {
   #viewInsights, 
   .no-print, 
   #pageSwitcherBtns, 
+  #passbookViewModeToggle,
+  #mobilePassbookCardsContainer,
   #addNewRowFromPassbookBtn, 
   #viewOriginalScanBtn,
   #toastContainer,

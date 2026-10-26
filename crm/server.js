@@ -1,15 +1,16 @@
 /**
  * Chamroeun Nheat Saving Cooperative - Local Dev & Web Control Server
  * Built with native Node.js (zero external dependencies required)
+ * Configured to serve across local network for cross-device testing
  */
 
 const http = require('http');
 const fs = require('fs');
 const path = require('path');
-const { exec } = require('child_process');
+const os = require('os');
 
 const PORT = process.env.PORT || 3000;
-const BASE_DIR = __dirname;
+const BASE_DIR = path.resolve(__dirname);
 
 const MIME_TYPES = {
   '.html': 'text/html; charset=utf-8',
@@ -24,17 +25,18 @@ const MIME_TYPES = {
 };
 
 const server = http.createServer((req, res) => {
-  // Normalize URL
-  let safePath = path.normalize(decodeURI(req.url.split('?')[0]));
-  if (safePath === '/' || safePath === '\\') {
-    safePath = '/index.html';
+  // Normalize URL and remove leading slashes to prevent Windows drive-root jumping
+  let parsedUrl = req.url.split('?')[0];
+  let safePath = path.normalize(decodeURI(parsedUrl)).replace(/^[/\\]+/, '');
+  if (!safePath || safePath === '.' || safePath === './') {
+    safePath = 'index.html';
   }
 
-  const filePath = path.join(BASE_DIR, safePath);
+  const filePath = path.resolve(BASE_DIR, safePath);
 
-  // Security check: ensure path is within BASE_DIR
+  // Security check: ensure path is strictly within BASE_DIR
   if (!filePath.startsWith(BASE_DIR)) {
-    res.writeHead(403, { 'Content-Type': 'text/plain' });
+    res.writeHead(403, { 'Content-Type': 'text/plain; charset=utf-8' });
     res.end('403 Forbidden');
     return;
   }
@@ -60,12 +62,22 @@ const server = http.createServer((req, res) => {
   });
 });
 
-server.listen(PORT, () => {
-  const url = `http://localhost:${PORT}`;
+// Bind to 0.0.0.0 so phones, tablets, and computers on the local network can access
+server.listen(PORT, '0.0.0.0', () => {
   console.log(`=======================================================`);
   console.log(`🚀 Chamroeun Nheat Saving Cooperative Web Control`);
-  console.log(`📍 Web Control Server running at: ${url}`);
-  console.log(`✨ Open your web browser to view the passbook and dashboard`);
+  console.log(`📍 Local:   http://localhost:${PORT}`);
+
+  // Display LAN IPv4 addresses for cross-device testing
+  const interfaces = os.networkInterfaces();
+  for (const name of Object.keys(interfaces)) {
+    for (const iface of interfaces[name]) {
+      if (iface.family === 'IPv4' && !iface.internal) {
+        console.log(`📱 Network: http://${iface.address}:${PORT}`);
+      }
+    }
+  }
+
+  console.log(`✨ Open on any phone, tablet, or PC to view and play`);
   console.log(`=======================================================`);
 });
-
