@@ -1,0 +1,897 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Daily Habit Routine & Success Plan</title>
+  <!-- Google Fonts: Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="../static/css/style.css">
+  <link rel="stylesheet" href="../static/css/print.css" media="print">
+</head>
+<body>
+
+  <div class="ambient-glow"></div>
+
+  <!-- Site Navigation -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="daily.html" class="brand-logo">
+        <div class="logo-badge">⚡</div>
+        <div>
+          <span>HabitCraft</span>
+          <span class="brand-tag">Success Blueprint</span>
+        </div>
+      </a>
+
+      <nav class="main-nav">
+        <a href="daily.html" class="nav-link active">
+          <span>📅</span> Daily Routine
+        </a>
+        <a href="weekly.html" class="nav-link">
+          <span>📊</span> Weekly Plan & Budget
+        </a>
+        <a href="#recordSection" class="nav-link">
+          <span>🎙️</span> Record & Logs
+        </a>
+      </nav>
+
+      <div class="header-actions">
+        <!-- Supabase Cloud Sync Status Badge -->
+        <button id="openSupabaseModalBtn" class="sb-badge sb-badge-local" title="Configure Supabase Cloud Sync">
+          <span id="supabaseStatusBadge"><span class="sb-dot-yellow"></span> Supabase Sync</span>
+        </button>
+        <button id="printScheduleBtn" class="btn-icon" title="Print Routine or Save as PDF">🖨️</button>
+        <button id="themeToggleBtn" class="btn-icon" title="Switch Theme">☀️</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Container -->
+  <main class="container">
+
+    <!-- Top View Switcher & 5-Second Auto-Transition Notification -->
+    <div class="top-switch-wrapper">
+      <div class="view-switch-controls">
+        <button id="btnShowHero" class="view-pill-btn active" title="Show Blueprint Overview (From Image)">
+          <span>✨</span> Overview Blueprint
+        </button>
+        <button id="btnShowSchedule" class="view-pill-btn" title="Show Hour-by-Hour Master Schedule below header">
+          <span>⏱️</span> Master Schedule
+        </button>
+      </div>
+
+      <!-- 5-Second Auto Switch Timer Banner -->
+      <div id="autoSwitchBanner" class="auto-switch-banner">
+        <div class="auto-switch-info">
+          <span class="pulsing-switch-dot"></span>
+          <span>Showing Blueprint Intro • Auto-switching to Master Schedule in <strong id="autoSwitchCountdown">5s</strong></span>
+        </div>
+        <div class="auto-switch-actions">
+          <button id="btnPauseAutoSwitch" class="btn-switch-action" title="Stay on Blueprint Overview">Stay Here</button>
+          <button id="btnSkipAutoSwitch" class="btn-switch-action btn-switch-action-primary" title="Switch to Schedule Now">Switch Now ➔</button>
+        </div>
+        <div class="auto-switch-progress-bar">
+          <div id="autoSwitchProgressFill" class="auto-switch-progress-fill"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- VIEW 1: HERO OVERVIEW (THE ITEM IN THE USER IMAGE) -->
+    <div id="heroViewContainer">
+      <section class="hero-section">
+        <div class="hero-pill">
+          <span class="dot"></span>
+          Full-Time Professional Routine (7:30 AM – 4:30 PM)
+        </div>
+        <h1 class="hero-title">
+          The High-Performer <span class="text-gradient">Daily Habit Blueprint</span>
+        </h1>
+        <p class="hero-subtitle">
+          A realistic, science-backed schedule designed for busy professionals. Build morning momentum, dominate focused work hours, accelerate personal skills, and recharge with deep sleep.
+        </p>
+
+        <!-- Quick Metrics Bar -->
+        <div class="metrics-row">
+          <div class="metric-card">
+            <div class="metric-icon">🌅</div>
+            <div class="metric-info">
+              <h4>5:30 AM</h4>
+              <p>Wake-Up & Movement</p>
+            </div>
+          </div>
+
+          <div class="metric-card">
+            <div class="metric-icon">💼</div>
+            <div class="metric-info">
+              <h4>7:30 – 4:30</h4>
+              <p>Workday Schedule</p>
+            </div>
+          </div>
+
+          <div class="metric-card">
+            <div class="metric-icon">🚀</div>
+            <div class="metric-info">
+              <h4>60 Mins</h4>
+              <p>Daily Skill Learning</p>
+            </div>
+          </div>
+
+          <div class="metric-card">
+            <div class="metric-icon">🌙</div>
+            <div class="metric-info">
+              <h4>7.5 Hrs</h4>
+              <p>Restorative Sleep</p>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- VIEW 2: MASTER SCHEDULE DIRECTLY BELOW HEADER -->
+    <div id="masterScheduleTopContainer" style="display: none; margin-bottom: 28px;">
+      <div class="card" style="margin-bottom: 0;">
+        <div class="live-current-status-banner">
+          <div>
+            <span>🕒 Current Local Time: </span>
+            <strong id="liveClockDisplay" class="live-clock-text">--:--:--</strong>
+          </div>
+          <div>
+            <span>Active Routine Phase: </span>
+            <strong id="currentPhaseText" style="color: var(--accent-primary);">Detecting...</strong>
+          </div>
+        </div>
+
+        <div class="card-header">
+          <div class="card-title-group">
+            <span class="card-title-icon">⏱️</span>
+            <div>
+              <h2 class="card-title">Hour-by-Hour Master Schedule</h2>
+                <span class="card-subtitle">Realistic time blocking from wake-up to lights out</span>
+              </div>
+            </div>
+
+            <!-- Filter Tabs -->
+            <div class="filter-tabs">
+              <button class="filter-tab active" data-filter="all">All Day</button>
+              <button class="filter-tab" data-filter="morning">Morning</button>
+              <button class="filter-tab" data-filter="work">Work Hours</button>
+              <button class="filter-tab" data-filter="evening">Evening</button>
+              <button class="filter-tab" data-filter="winddown">Wind-Down</button>
+            </div>
+          </div>
+
+          <!-- Schedule Table -->
+          <div class="schedule-table-wrap">
+            <table class="schedule-table">
+              <thead>
+                <tr>
+                  <th style="width: 140px;">Time Block</th>
+                  <th style="width: 130px;">Phase</th>
+                  <th>Core Activity & Habits</th>
+                  <th>Key Focus / Protocol</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr data-phase="morning" data-start-min="330" data-end-min="360">
+                  <td class="time-cell">05:30 – 06:00 AM</td>
+                  <td><span class="tag-badge tag-morning">Morning Fuel</span></td>
+                  <td>
+                    <span class="action-cell-title">Wake-Up, Hydration & Cold Light</span>
+                    <span class="action-cell-desc">Drink 500ml water with pinch of sea salt/lemon. Open blinds or step outside for natural morning light. No smartphone scrolling.</span>
+                  </td>
+                  <td>Circadian rhythm sync & adrenal reset</td>
+                </tr>
+
+                <tr data-phase="morning" data-start-min="360" data-end-min="400">
+                  <td class="time-cell">06:00 – 06:40 AM</td>
+                  <td><span class="tag-badge tag-health">Movement</span></td>
+                  <td>
+                    <span class="action-cell-title">Morning Workout / Cardio / Mobility</span>
+                    <span class="action-cell-desc">Rotate: Mon/Wed/Fri (Strength / Calisthenics), Tue/Thu (Cardio jog or brisk walk + mobility stretches).</span>
+                  </td>
+                  <td>Boost endorphins & metabolic rate</td>
+                </tr>
+
+                <tr data-phase="morning" data-start-min="400" data-end-min="420">
+                  <td class="time-cell">06:40 – 07:00 AM</td>
+                  <td><span class="tag-badge tag-morning">Mindset</span></td>
+                  <td>
+                    <span class="action-cell-title">Shower, Grooming & 5-Min Journaling</span>
+                    <span class="action-cell-desc">Quick cold finish shower. Journal: 3 things grateful for + define today’s Top 3 Most Important Tasks (MITs).</span>
+                  </td>
+                  <td>Intentional mental clarity</td>
+                </tr>
+
+                <tr data-phase="morning" data-start-min="420" data-end-min="450">
+                  <td class="time-cell">07:00 – 07:30 AM</td>
+                  <td><span class="tag-badge tag-morning">Nutrition</span></td>
+                  <td>
+                    <span class="action-cell-title">Energizing Breakfast & Commute / Transition</span>
+                    <span class="action-cell-desc">High-protein breakfast (e.g. Greek yogurt + berries + chia, or 3 scrambled eggs). Listen to audio book / educational podcast en route.</span>
+                  </td>
+                  <td>Sustained blood sugar; zero spike</td>
+                </tr>
+
+                <tr data-phase="work" data-start-min="450" data-end-min="480">
+                  <td class="time-cell">07:30 – 08:00 AM</td>
+                  <td><span class="tag-badge tag-work">Work Start</span></td>
+                  <td>
+                    <span class="action-cell-title">Workplace Arrival & Daily Triage</span>
+                    <span class="action-cell-desc">Sip green tea or black coffee. Review calendar, prioritize emails, write down the single key victory needed today.</span>
+                  </td>
+                  <td>Clear desk, clear mind</td>
+                </tr>
+
+                <tr data-phase="work" data-start-min="480" data-end-min="600">
+                  <td class="time-cell">08:00 – 10:00 AM</td>
+                  <td><span class="tag-badge tag-deepwork">Deep Work 1</span></td>
+                  <td>
+                    <span class="action-cell-title">Deep Work Block 1 (High Leverage Project)</span>
+                    <span class="action-cell-desc">Pomodoro intervals (50m work / 10m pause). Slack/Email notifications paused. Tackle your toughest, most valuable deliverable.</span>
+                  </td>
+                  <td>Cal Newport Deep Work protocol</td>
+                </tr>
+
+                <tr data-phase="work" data-start-min="600" data-end-min="615">
+                  <td class="time-cell">10:00 – 10:15 AM</td>
+                  <td><span class="tag-badge tag-health">Refresh</span></td>
+                  <td>
+                    <span class="action-cell-title">Hydration & Brain Fuel Snack</span>
+                    <span class="action-cell-desc">Handful of raw almonds + green tea. Stand up, 2-minute posture stretch, refocus eye fatigue looking outside.</span>
+                  </td>
+                  <td>Physical and mental reset</td>
+                </tr>
+
+                <tr data-phase="work" data-start-min="615" data-end-min="720">
+                  <td class="time-cell">10:15 – 12:00 PM</td>
+                  <td><span class="tag-badge tag-work">Collaboration</span></td>
+                  <td>
+                    <span class="action-cell-title">Meetings, Team Syncs & Communications</span>
+                    <span class="action-cell-desc">Batch communication time: reply to emails, attend team standups, coordinate tasks, unblock coworkers.</span>
+                  </td>
+                  <td>Batched communication efficiency</td>
+                </tr>
+
+                <tr data-phase="work" data-start-min="720" data-end-min="780">
+                  <td class="time-cell">12:00 – 01:00 PM</td>
+                  <td><span class="tag-badge tag-health">Lunch</span></td>
+                  <td>
+                    <span class="action-cell-title">Balanced Lunch & 15-Minute Sunlight Walk</span>
+                    <span class="action-cell-desc">Healthy meal (grilled chicken salad, quinoa bowl, or whole grain wrap). 15-min walk outside away from desk and screens.</span>
+                  </td>
+                  <td>Aids digestion; prevents 2 PM slump</td>
+                </tr>
+
+                <tr data-phase="work" data-start-min="780" data-end-min="900">
+                  <td class="time-cell">01:00 – 03:00 PM</td>
+                  <td><span class="tag-badge tag-deepwork">Deep Work 2</span></td>
+                  <td>
+                    <span class="action-cell-title">Deep Work Block 2 (Execution Sprint)</span>
+                    <span class="action-cell-desc">Focus block for core operations, problem solving, code reviews, writing, analysis, or strategic deliverables.</span>
+                  </td>
+                  <td>Two 50-minute sprints</td>
+                </tr>
+
+                <tr data-phase="work" data-start-min="900" data-end-min="915">
+                  <td class="time-cell">03:00 – 03:15 PM</td>
+                  <td><span class="tag-badge tag-health">Break</span></td>
+                  <td>
+                    <span class="action-cell-title">Afternoon Refreshment & Screen Detach</span>
+                    <span class="action-cell-desc">Hydrate with cold water. Light fruit or dark chocolate (85%+). Quick 5-minute deep breathing exercises.</span>
+                  </td>
+                  <td>Combat fatigue naturally</td>
+                </tr>
+
+                <tr data-phase="work" data-start-min="915" data-end-min="975">
+                  <td class="time-cell">03:15 – 04:15 PM</td>
+                  <td><span class="tag-badge tag-work">Admin Wrap</span></td>
+                  <td>
+                    <span class="action-cell-title">Secondary Tasks & Admin Triage</span>
+                    <span class="action-cell-desc">Final follow-ups, approving tickets, clearing urgent inquiries, archiving resolved emails.</span>
+                  </td>
+                  <td>Low-cognitive-load processing</td>
+                </tr>
+
+                <tr data-phase="work" data-start-min="975" data-end-min="990">
+                  <td class="time-cell">04:15 – 04:30 PM</td>
+                  <td><span class="tag-badge tag-work">Shutdown</span></td>
+                  <td>
+                    <span class="action-cell-title">Workplace Shutdown Ritual</span>
+                    <span class="action-cell-desc">Write tomorrow’s 3 priority tasks. Close work browser tabs. Say mental trigger: "Workday Complete." Clean desk.</span>
+                  </td>
+                  <td>Separates work from personal life</td>
+                </tr>
+
+                <tr data-phase="evening" data-start-min="990" data-end-min="1035">
+                  <td class="time-cell">04:30 – 05:15 PM</td>
+                  <td><span class="tag-badge tag-evening">Transition</span></td>
+                  <td>
+                    <span class="action-cell-title">Commute Home & Cognitive Decompression</span>
+                    <span class="action-cell-desc">Listen to upbeat playlist or relaxing podcast. Shed work tension before walking through your front door.</span>
+                  </td>
+                  <td>Smooth psychological boundary</td>
+                </tr>
+
+                <tr data-phase="evening" data-start-min="1035" data-end-min="1095">
+                  <td class="time-cell">05:15 – 06:15 PM</td>
+                  <td><span class="tag-badge tag-health">Conditioning</span></td>
+                  <td>
+                    <span class="action-cell-title">Outdoor Exercise / Gym / Active Recovery</span>
+                    <span class="action-cell-desc">45-minute gym session, outdoor running, or brisk neighborhood walk. Shake off daytime sedentary fatigue.</span>
+                  </td>
+                  <td>Cardiovascular health & stress relief</td>
+                </tr>
+
+                <tr data-phase="evening" data-start-min="1095" data-end-min="1155">
+                  <td class="time-cell">06:15 – 07:15 PM</td>
+                  <td><span class="tag-badge tag-evening">Dinner</span></td>
+                  <td>
+                    <span class="action-cell-title">Nourishing Dinner & Family / Mindful Meal</span>
+                    <span class="action-cell-desc">Whole food dinner (e.g. baked salmon/tofu, roasted vegetables, brown rice or sweet potato). Eat mindfully away from phone.</span>
+                  </td>
+                  <td>Nutrient absorption & relaxation</td>
+                </tr>
+
+                <tr data-phase="evening" data-start-min="1155" data-end-min="1215">
+                  <td class="time-cell">07:15 – 08:15 PM</td>
+                  <td><span class="tag-badge tag-deepwork">Skill Sprint</span></td>
+                  <td>
+                    <span class="action-cell-title">Dedicated 60-Minute Skill Learning</span>
+                    <span class="action-cell-desc">Deliberate practice on high-value skills: programming, AI tools, language acquisition, certifications, or finance.</span>
+                  </td>
+                  <td>Compounding career capital</td>
+                </tr>
+
+                <tr data-phase="evening" data-start-min="1215" data-end-min="1260">
+                  <td class="time-cell">08:15 – 09:00 PM</td>
+                  <td><span class="tag-badge tag-evening">Leisure</span></td>
+                  <td>
+                    <span class="action-cell-title">Social Connection, Hobbies & Free Leisure</span>
+                    <span class="action-cell-desc">Call friends or family, listen to music, play an instrument, light gaming, or casual reading. Zero guilt downtime.</span>
+                  </td>
+                  <td>Emotional resilience & joy</td>
+                </tr>
+
+                <tr data-phase="winddown" data-start-min="1260" data-end-min="1290">
+                  <td class="time-cell">09:00 – 09:30 PM</td>
+                  <td><span class="tag-badge tag-winddown">Digital Sunset</span></td>
+                  <td>
+                    <span class="action-cell-title">Screens Off, Warm Shower & Chamomile Tea</span>
+                    <span class="action-cell-desc">Turn off laptop & TV. Dim home lights. Warm shower drops core body temperature, triggering natural melatonin release.</span>
+                  </td>
+                  <td>Biological sleep signal priming</td>
+                </tr>
+
+                <tr data-phase="winddown" data-start-min="1290" data-end-min="1320">
+                  <td class="time-cell">09:30 – 10:00 PM</td>
+                  <td><span class="tag-badge tag-winddown">Reflection</span></td>
+                  <td>
+                    <span class="action-cell-title">Evening Reflection Journal & Paper Reading</span>
+                    <span class="action-cell-desc">Journal 3 daily wins + 1 lesson learned. Read 15 pages of physical book or non-backlit e-reader. Set phone on Do-Not-Disturb across the room.</span>
+                  </td>
+                  <td>Calms sympathetic nervous system</td>
+                </tr>
+
+                <tr data-phase="winddown" data-start-min="1320" data-end-min="1440">
+                  <td class="time-cell">10:00 PM – 05:30 AM</td>
+                  <td><span class="tag-badge tag-winddown">Deep Sleep</span></td>
+                  <td>
+                    <span class="action-cell-title">Lights Out: 7.5 Hours of Restorative Sleep</span>
+                    <span class="action-cell-desc">Cool room (65-68°F / 18-20°C). Pitch black. Wake up refreshed at 5:30 AM without sleep inertia.</span>
+                  </td>
+                  <td>Full 5 x 90-min sleep cycles</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Main Dashboard Grid -->
+    <div class="dashboard-grid">
+      
+      <!-- Left Column: Meals & Productivity -->
+      <div class="grid-col-main">
+
+        <!-- Healthy Meal Suggestions Section -->
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title-group">
+              <span class="card-title-icon">🥗</span>
+              <div>
+                <h2 class="card-title">Healthy Meal Architecture</h2>
+                <span class="card-subtitle">Designed for steady energy, zero brain fog, and simple batch prep</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="meal-grid">
+            <div class="meal-card">
+              <div class="meal-header">
+                <span class="meal-icon">🍳</span>
+                <div>
+                  <h3 class="meal-title">Breakfast</h3>
+                  <span class="meal-time">07:00 – 07:30 AM</span>
+                </div>
+              </div>
+              <ul class="meal-menu">
+                <li><strong>Option A:</strong> Greek yogurt bowl with chia seeds, blueberries, raw walnuts & honey drizzle.</li>
+                <li><strong>Option B:</strong> 3 eggs scrambled with spinach & avocado on whole grain sourdough toast.</li>
+                <li><strong>Option C (Quick):</strong> Whey/plant protein shake with oats, banana & unsweetened almond milk.</li>
+              </ul>
+              <span class="meal-macro-pill">High Protein • Slow-Burn Carbs • Brain Fats</span>
+            </div>
+
+            <div class="meal-card">
+              <div class="meal-header">
+                <span class="meal-icon">🥙</span>
+                <div>
+                  <h3 class="meal-title">Lunch</h3>
+                  <span class="meal-time">12:00 – 01:00 PM</span>
+                </div>
+              </div>
+              <ul class="meal-menu">
+                <li><strong>Option A:</strong> Mediterranean quinoa bowl with grilled chicken or tofu, cucumbers, feta & olive oil.</li>
+                <li><strong>Option B:</strong> Baked salmon or lentil salad with roasted sweet potatoes & dark leafy greens.</li>
+                <li><strong>Option C:</strong> Whole wheat wrap with roasted turkey, hummus, spinach & bell peppers.</li>
+              </ul>
+              <span class="meal-macro-pill">Clean Digestion • Low Glycemic • Anti-Slump</span>
+            </div>
+
+            <div class="meal-card">
+              <div class="meal-header">
+                <span class="meal-icon">🍲</span>
+                <div>
+                  <h3 class="meal-title">Dinner</h3>
+                  <span class="meal-time">06:15 – 07:15 PM</span>
+                </div>
+              </div>
+              <ul class="meal-menu">
+                <li><strong>Option A:</strong> Pan-seared white fish or tempeh with steamed asparagus & herb brown rice.</li>
+                <li><strong>Option B:</strong> Lean turkey or grass-fed beef chili packed with kidney beans & zucchini.</li>
+                <li><strong>Option C:</strong> Colorful veggie stir-fry with edamame, broccoli, mushrooms & sesame garlic sauce.</li>
+              </ul>
+              <span class="meal-macro-pill">High Micronutrients • Lean Protein • Easy Recovery</span>
+            </div>
+
+            <div class="meal-card">
+              <div class="meal-header">
+                <span class="meal-icon">🍎</span>
+                <div>
+                  <h3 class="meal-title">Smart Snacks</h3>
+                  <span class="meal-time">10:00 AM & 03:00 PM</span>
+                </div>
+              </div>
+              <ul class="meal-menu">
+                <li>Crisp green apple or banana paired with 1 tbsp unsweetened almond butter.</li>
+                <li>Handful of raw almonds, cashews or pumpkin seeds with 2 squares 85% dark chocolate.</li>
+                <li>Steamed edamame sprinkled with sea salt or low-fat string cheese.</li>
+              </ul>
+              <span class="meal-macro-pill">Zero Refined Sugar • Fast Satiety • Magnesium</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Productivity Techniques Toolkit -->
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title-group">
+              <span class="card-title-icon">🧠</span>
+              <div>
+                <h2 class="card-title">High-Leverage Productivity Playbook</h2>
+                <span class="card-subtitle">Battle-tested mental models to execute your day effortlessly</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="technique-grid">
+            <div class="technique-card">
+              <h4><span>🍅</span> Pomodoro Technique</h4>
+              <p>Work with intense single-minded focus for 25 or 50 minutes, followed by an immediate 5 to 10 minute screen-free break. Prevents mental fatigue and eliminates task procrastination.</p>
+            </div>
+
+            <div class="technique-card">
+              <h4><span>🎯</span> Deep Work (Cal Newport)</h4>
+              <p>Schedule your hardest intellectual challenges when willpower is peaked (8:00–10:00 AM). Treat this time like a doctor's surgery: zero phone, zero Slack, zero background tabs.</p>
+            </div>
+
+            <div class="technique-card">
+              <h4><span>🧱</span> Time-Blocking & Batching</h4>
+              <p>Group shallow tasks (emails, Slack replies, invoice checks) into dedicated 45-minute communication windows instead of reacting to notification pings every 3 minutes.</p>
+            </div>
+
+            <div class="technique-card">
+              <h4><span>⚡</span> 2-Minute Rule & Habit Stacks</h4>
+              <p>Stack new habits onto established triggers: <em>"After I brew morning tea, I will journal 3 priorities."</em> If a small task takes less than 2 minutes, execute it immediately.</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Right Column: Interactive Widgets & Checklists -->
+      <div class="grid-col-side">
+
+        <!-- Interactive Pomodoro Widget -->
+        <div class="card pomodoro-card">
+          <div class="card-title-group" style="justify-content: center; margin-bottom: 16px;">
+            <span class="card-title-icon">⏱️</span>
+            <h3 class="card-title">Focus Sprint Timer</h3>
+          </div>
+
+          <div class="timer-modes">
+            <button class="timer-mode-btn active" data-mode="pomodoro">Focus (25m)</button>
+            <button class="timer-mode-btn" data-mode="shortBreak">Break (5m)</button>
+            <button class="timer-mode-btn" data-mode="longBreak">Long (15m)</button>
+          </div>
+
+          <div id="timerDisplay" class="timer-display">25:00</div>
+
+          <div class="timer-controls">
+            <button id="timerStartBtn" class="btn-primary">
+              <span>▶</span> Start
+            </button>
+            <button id="timerResetBtn" class="btn-secondary">
+              <span>↺</span> Reset
+            </button>
+          </div>
+        </div>
+
+        <!-- Daily Habits Checklist -->
+        <div class="card">
+          <div class="card-header" style="margin-bottom: 14px;">
+            <div class="card-title-group">
+              <span class="card-title-icon">✅</span>
+              <div>
+                <h3 class="card-title">Today's Habit Stack</h3>
+                <span class="card-subtitle">Click item to complete (Auto-saves)</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Progress Bar -->
+          <div class="progress-wrapper">
+            <div class="progress-header">
+              <span>Daily Completion</span>
+              <span id="habitProgressText">0 / 8 Completed (0%)</span>
+            </div>
+            <div class="progress-track">
+              <div id="habitProgressFill" class="progress-fill"></div>
+            </div>
+          </div>
+
+          <!-- Habit List -->
+          <div class="habit-list">
+            <div class="habit-item">
+              <div class="habit-left">
+                <div class="custom-checkbox"></div>
+                <div>
+                  <div class="habit-name">5:30 AM Wake & 500ml Water</div>
+                  <div class="habit-streak">⚡ Hydrate & Natural Light</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="habit-item">
+              <div class="habit-left">
+                <div class="custom-checkbox"></div>
+                <div>
+                  <div class="habit-name">30 Min Morning Workout</div>
+                  <div class="habit-streak">🔥 Strength / Cardio Jog</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="habit-item">
+              <div class="habit-left">
+                <div class="custom-checkbox"></div>
+                <div>
+                  <div class="habit-name">Morning Journal & 3 Priorities</div>
+                  <div class="habit-streak">📝 Mindset & Intentions</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="habit-item">
+              <div class="habit-left">
+                <div class="custom-checkbox"></div>
+                <div>
+                  <div class="habit-name">Deep Work Block 1 (8-10 AM)</div>
+                  <div class="habit-streak">🎯 Zero Distraction Sprint</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="habit-item">
+              <div class="habit-left">
+                <div class="custom-checkbox"></div>
+                <div>
+                  <div class="habit-name">Healthy Lunch & 15m Walk</div>
+                  <div class="habit-streak">🚶 Outdoor Sunlight Reset</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="habit-item">
+              <div class="habit-left">
+                <div class="custom-checkbox"></div>
+                <div>
+                  <div class="habit-name">4:15 PM Work Shutdown Ritual</div>
+                  <div class="habit-streak">🛡️ Boundaries Protected</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="habit-item">
+              <div class="habit-left">
+                <div class="custom-checkbox"></div>
+                <div>
+                  <div class="habit-name">60m Dedicated Skill Learning</div>
+                  <div class="habit-streak">📚 Coding / AI / Career Growth</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="habit-item">
+              <div class="habit-left">
+                <div class="custom-checkbox"></div>
+                <div>
+                  <div class="habit-name">9:00 PM Digital Sunset & Sleep</div>
+                  <div class="habit-streak">🌙 7.5h Restorative Sleep</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div style="margin-top: 16px; text-align: right;">
+            <button id="resetHabitsBtn" class="btn-secondary" style="font-size: 0.8rem; padding: 6px 14px;">Reset Today's Habits</button>
+          </div>
+        </div>
+
+        <!-- Evening Wind-Down Routine Card -->
+        <div class="card" style="border-left: 4px solid var(--accent-purple);">
+          <div class="card-header" style="margin-bottom: 12px;">
+            <div class="card-title-group">
+              <span class="card-title-icon">🌙</span>
+              <div>
+                <h3 class="card-title">Evening Sleep Architecture</h3>
+                <span class="card-subtitle">The 10-3-2-1-0 Rule for Deep Sleep</span>
+              </div>
+            </div>
+          </div>
+
+          <ul style="list-style: none; display: flex; flex-direction: column; gap: 10px; font-size: 0.88rem; color: var(--text-muted);">
+            <li><strong>10 hours before bed:</strong> No more caffeine (after 12:00 PM).</li>
+            <li><strong>3 hours before bed:</strong> No large heavy meals or alcohol (finished by 7:00 PM).</li>
+            <li><strong>2 hours before bed:</strong> Cease stressful work tasks and heavy planning.</li>
+            <li><strong>1 hour before bed:</strong> Screen curfew. Dim lights; read physical book or journal.</li>
+            <li><strong>0:</strong> The number of times you hit snooze tomorrow morning.</li>
+          </ul>
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- SECTION: Daily Habit Log & Voice Reflection Recorder -->
+    <section id="recordSection" class="card" style="margin-top: 10px; margin-bottom: 48px; border-top: 4px solid var(--accent-rose);">
+      <div class="card-header">
+        <div class="card-title-group">
+          <span class="card-title-icon">🎙️</span>
+          <div>
+            <h2 class="card-title">Daily Recording Hub & Reflection Logs</h2>
+            <span class="card-subtitle">Record your daily reflections, track energy & habit scores, or capture audio memos</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Recorder Navigation Tabs -->
+      <div class="record-tabs-nav">
+        <button class="record-tab-btn active" data-tab="tabDailyLog">📝 Record Daily Log & Journal</button>
+        <button class="record-tab-btn" data-tab="tabVoiceMemo">🎙️ Record Voice Reflection</button>
+        <button class="record-tab-btn" data-tab="tabHistoryLogs">📜 Recorded History & Insights</button>
+      </div>
+
+      <!-- TAB 1: DAILY LOG & JOURNAL -->
+      <div id="tabDailyLog" class="record-tab-panel active">
+        <!-- Mood Selector -->
+        <div style="margin-bottom: 12px;">
+          <span style="font-size: 0.85rem; font-weight: 600; color: var(--text-muted); display: block; margin-bottom: 8px;">HOW WAS YOUR ENERGY & FOCUS TODAY?</span>
+          <div class="mood-selector">
+            <button class="mood-pill active" data-mood="🔥 Peak Energy">🔥 Peak Energy</button>
+            <button class="mood-pill" data-mood="⚡ Sharp Focus">⚡ Sharp Focus</button>
+            <button class="mood-pill" data-mood="😊 Steady & Balanced">😊 Steady & Balanced</button>
+            <button class="mood-pill" data-mood="😴 Tired / Recovery Needed">😴 Tired / Recovery Needed</button>
+          </div>
+        </div>
+
+        <!-- Metrics Row -->
+        <div class="record-form-grid">
+          <div class="record-input-field">
+            <label for="logDateInput">Log Date</label>
+            <input type="date" id="logDateInput" class="record-text-input">
+          </div>
+
+          <div class="record-input-field">
+            <label for="logSleepInput">Sleep Duration (Hours)</label>
+            <input type="number" id="logSleepInput" class="record-text-input" value="7.5" step="0.5" min="4" max="14">
+          </div>
+
+          <div class="record-input-field">
+            <label for="logWaterInput">Water Intake (Liters)</label>
+            <input type="number" id="logWaterInput" class="record-text-input" value="2.5" step="0.25" min="0.5" max="6">
+          </div>
+        </div>
+
+        <!-- Text Reflection Fields -->
+        <div class="record-form-grid" style="grid-template-columns: 1fr 1fr;">
+          <div class="record-input-field">
+            <label for="logMorningText">🌅 Morning Intentions & Top 3 Priorities</label>
+            <textarea id="logMorningText" class="record-text-input record-textarea" placeholder="1. Finish high-priority deliverable&#10;2. 45m workout&#10;3. Gratitude for a productive start"></textarea>
+          </div>
+
+          <div class="record-input-field">
+            <label for="logEveningText">🌙 Evening Wins & Lessons Learned</label>
+            <textarea id="logEveningText" class="record-text-input record-textarea" placeholder="Today's wins: Completed Deep Work Block 1 without distraction!&#10;Lesson learned: Shutdown ritual prevented evening work stress."></textarea>
+          </div>
+        </div>
+
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 14px; flex-wrap: wrap; gap: 12px;">
+          <span style="font-size: 0.85rem; color: var(--text-muted);">
+            💡 Habit completion score from today's checklist will be automatically attached.
+          </span>
+          <button id="saveDailyLogBtn" class="btn-primary" style="padding: 12px 28px;">
+            <span>💾</span> Record Daily Log
+          </button>
+        </div>
+      </div>
+
+      <!-- TAB 2: VOICE REFLECTION & AUDIO MEMO -->
+      <div id="tabVoiceMemo" class="record-tab-panel">
+        <div class="voice-recorder-box">
+          <p style="font-size: 0.95rem; color: var(--text-muted); margin-bottom: 20px;">
+            Speak your morning intention, daily debrief, or stream-of-consciousness reflection using your microphone.
+          </p>
+
+          <div style="display: flex; justify-content: center; align-items: center; gap: 16px;">
+            <button id="recordVoiceBtn" class="mic-button" title="Start Recording Audio">
+              <span>🎙️</span>
+            </button>
+            <button id="stopVoiceBtn" class="mic-button" style="display: none; background: #e11d48;" title="Stop & Save Recording">
+              <span>⏹️</span>
+            </button>
+          </div>
+
+          <!-- Pulsing Soundwave Indicator -->
+          <div id="voiceWavePulse" class="voice-wave-container">
+            <div class="voice-wave-bar"></div>
+            <div class="voice-wave-bar"></div>
+            <div class="voice-wave-bar"></div>
+            <div class="voice-wave-bar"></div>
+            <div class="voice-wave-bar"></div>
+          </div>
+
+          <div id="voiceTimerDisplay" class="voice-timer">00:00</div>
+          <span style="font-size: 0.82rem; color: var(--text-subtle);">Click microphone icon to start recording</span>
+        </div>
+
+        <!-- Latest Audio Preview Player -->
+        <div id="audioPreviewContainer"></div>
+
+        <!-- Saved Voice Memos Archive -->
+        <div style="margin-top: 24px;">
+          <h4 style="font-size: 1rem; margin-bottom: 12px; display: flex; align-items: center; gap: 8px;">
+            <span>📁</span> Saved Voice Memos
+          </h4>
+          <div id="voiceMemosList"></div>
+        </div>
+      </div>
+
+      <!-- TAB 3: RECORDED HISTORY & INSIGHTS -->
+      <div id="tabHistoryLogs" class="record-tab-panel">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 18px; flex-wrap: wrap; gap: 10px;">
+          <h4 style="font-size: 1.05rem;">Chronological Journal Records</h4>
+          <div style="display: flex; gap: 8px;">
+            <button id="exportLogsBtn" class="btn-secondary" style="font-size: 0.82rem; padding: 6px 14px;">📥 Export JSON</button>
+            <button id="clearAllLogsBtn" class="btn-secondary" style="font-size: 0.82rem; padding: 6px 14px; color: var(--accent-rose);">🗑️ Clear History</button>
+          </div>
+        </div>
+
+        <div id="recordsHistoryList" class="records-history-list"></div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Site Footer -->
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div style="display: flex; align-items: center; gap: 8px;">
+        <span style="font-size: 1.2rem;">⚡</span>
+        <span><strong>HabitCraft</strong> • Success Habit Blueprint for Working Professionals</span>
+      </div>
+      <div>
+        <a href="weekly.html" style="color: var(--accent-primary); text-decoration: none; font-weight: 600;">Go to 1-Week Success Plan & Budget →</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Supabase Cloud Sync Settings Modal -->
+  <div id="supabaseModal" class="sb-modal-overlay">
+    <div class="sb-modal-card">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 18px;">
+        <h3 style="font-size: 1.25rem; display: flex; align-items: center; gap: 8px;">
+          <span>⚡</span> Supabase Daily Tracking Cloud Sync
+        </h3>
+        <button id="closeSupabaseModalBtn" class="btn-icon" style="border: none;">✕</button>
+      </div>
+
+      <p style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: 20px;">
+        HabitCraft securely syncs your daily reflections, habit scores, mood, sleep, and water intake directly to your Supabase PostgreSQL database table (<code>daily_habit_tracking</code>).
+      </p>
+
+      <div class="record-input-field" style="margin-bottom: 14px;">
+        <label for="sbConfigUrl">Supabase Project URL</label>
+        <input type="text" id="sbConfigUrl" class="record-text-input" placeholder="https://xyzcompany.supabase.co">
+      </div>
+
+      <div class="record-input-field" style="margin-bottom: 18px;">
+        <label for="sbConfigKey">Supabase Publishable / Anon Key</label>
+        <input type="password" id="sbConfigKey" class="record-text-input" placeholder="sb_publishable_... or eyJhbGci...">
+      </div>
+
+      <div style="display: flex; gap: 10px; margin-bottom: 18px; flex-wrap: wrap;">
+        <button id="saveSupabaseConfigBtn" class="btn-primary" style="padding: 8px 18px; font-size: 0.88rem;">
+          Save Credentials
+        </button>
+        <button id="testSupabaseConnBtn" class="btn-secondary" style="padding: 8px 18px; font-size: 0.88rem;">
+          Test Connection
+        </button>
+        <button id="syncSupabaseNowBtn" class="btn-secondary" style="padding: 8px 18px; font-size: 0.88rem;">
+          <span>☁️</span> Sync Local & Cloud Records
+        </button>
+      </div>
+
+      <div id="sbTestResult" style="display: none; padding: 12px; border-radius: var(--radius-sm); background: var(--bg-secondary); border: 1px solid var(--border-subtle); font-size: 0.85rem; margin-bottom: 18px;"></div>
+
+      <details style="margin-top: 14px;">
+        <summary style="font-size: 0.85rem; font-weight: 600; color: var(--accent-primary); cursor: pointer;">
+          📋 View SQL Schema for Supabase SQL Editor
+        </summary>
+        <div class="sb-sql-box">create table if not exists public.daily_habit_tracking (
+  id text primary key,
+  log_date date not null unique,
+  created_at timestamptz default now(),
+  updated_at timestamptz default now(),
+  user_email text default 'anonymous',
+  mood text,
+  sleep_hours numeric(3, 1) default 7.5,
+  water_liters numeric(3, 2) default 2.5,
+  morning_reflection text,
+  evening_reflection text,
+  habit_score text,
+  completed_habits jsonb default '[]'::jsonb,
+  raw_data jsonb default '{}'::jsonb
+);
+
+alter table public.daily_habit_tracking enable row level security;
+create policy "Allow all daily habit tracking" on public.daily_habit_tracking for all using (true) with check (true);</div>
+      </details>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <!-- Supabase JS Client v2 CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.42.0/dist/umd/supabase.min.js"></script>
+  <script src="../static/js/supabase-config.js"></script>
+  <script src="../static/js/supabase-sync.js"></script>
+  <script src="../static/js/app.js"></script>
+  <script src="../static/js/pomodoro.js"></script>
+  <script src="../static/js/recorder.js"></script>
+</body>
+</html>

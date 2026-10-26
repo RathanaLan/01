@@ -1,0 +1,14 @@
+{
+  "name": "3d-site-plancraft",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "2D to 3D Floor Plan Converter and Studio",
+  "scripts": {
+    "start": "python -m http.server 3000"
+  },
+  "dependencies": {
+    "jszip": "^3.10.2",
+    "pdfjs-dist": "^3.11.174",
+    "three": "^0.160.0"
+  }
+}

@@ -1,0 +1,183 @@
+# Project Knowledge Base: My_PortFolio
+
+> **Purpose**: This living document stores knowledge, architectural details, configurations, conventions, and discovered patterns for the `My_PortFolio` project. It is automatically updated as new features, fixes, or requirements emerge.
+
+---
+
+## 1. Project Overview & Identity
+- **Owner**: Rathana Lan
+- **Role**: Digital Transformation (DX) Supervisor & Smart Factory Architect
+- **Focus Areas**: Manufacturing Digital Transformation, DX Strategy & Governance, Power Platform, Smart Factory Readiness.
+- **Tech Stack**:
+  - **Frontend**: Vanilla HTML5, Modern CSS (Custom Properties, responsive design, dark/light theme), JavaScript (ES6+).
+  - **CSS Framework**: Tailwind CSS (used in `homework/01.html`).
+  - **Backend / BaaS**: Supabase (PostgreSQL, Auth, Storage, Edge Functions).
+  - **Icons & Fonts**: Google Fonts (*DM Sans*, *Manrope*, *Noto Sans Khmer*, *Inter*), Lucide Icons.
+  - **Desktop / AI Experiment**: Python with CustomTkinter & Ollama (`codellama`).
+
+---
+
+## 2. Directory & Architecture Map
+
+| Path | Purpose |
+| :--- | :--- |
+| `index.html` | Animated landing / 404 canvas page (particle water droplet trails) redirecting to `/Aboutme`. |
+| `Aboutme/index.html` | Main professional portfolio website with multilingual toggle (EN, KM, JA, ZH), theme switch, timeline, and project highlights. |
+| `login.html` & `profile.html` | Authentication and user profile management pages powered by Supabase. |
+| `assets/css/` | Core styles: `styles.css` (portfolio theme & typography), `login.css`, `profile.css`. |
+| `assets/js/` | Client scripts: `theme.js` (dark/light toggle), `supabase-config.js` (credentials), `login.js`, `profile.js`, `app.js`. |
+| `homework/01.html` | "User Record Directory" — Full-featured admin/user management CRUD dashboard using Tailwind CSS and Supabase. |
+| `homework/index.html` | Sandbox / homework page with scroll-to-top interaction. |
+| `homework/supabaseConfig.js` | ES Module exporting Supabase credentials for homework exercises. |
+| `supabase/` | Database migrations (`202609290001_profiles.sql`) and Edge Functions (`delete-account`). |
+| `chatbot.py` | Local desktop AI assistant GUI running via Ollama. |
+
+---
+
+## 3. Backend & Supabase Configuration
+
+### Environment & Endpoints
+- **Supabase URL**: `https://dgehlxhbggqxiznsryrv.supabase.co`
+- **Publishable Key**: `sb_publishable_0r0SqqjiXg8KGQVqQZM0TQ_KuCheFqj`
+- **Config locations**:
+  - Global browser window: `assets/js/supabase-config.js` (`window.PORTFOLIO_SUPABASE_CONFIG`)
+  - ES Module import: `homework/supabaseConfig.js`
+
+### Database Schema & Policies
+- **Table `public.profiles`**:
+  - Fields: `id` (uuid, references `auth.users`), `display_name` (text <= 100), `job_title` (text <= 120), `location` (text <= 120), `bio` (text <= 1200), `website` (text <= 300), `avatar_path` (text), `updated_at` (timestamptz).
+  - **Row Level Security (RLS)**: Enabled. Users can only select, insert, or update their own profile matching `auth.uid() = id`.
+  - **Triggers**: `on_auth_user_created_profile` automatically creates a profile row upon signup via `create_profile_for_new_user()`.
+- **Table `public."User_Request"`**:
+  - Fields: `id` (int8, primary key), `created_at` (timestamptz), `User_Name` (text), `User_Sbuject` (text), `User_Message` (text), `User_Like_Count` (int8, default 0).
+  - **Purpose**: Stores contact requests, direct inquiries, public guestbook comments, and live like counts from the portfolio.
+  - **Policies Needed**: Requires public `anon` INSERT, SELECT, and UPDATE policies so portfolio visitors can submit, read, and like messages (see migration `supabase/migrations/202609300001_user_request.sql`).
+  - **Realtime**: Added to `supabase_realtime` publication for instant live comment and like count sync.
+- **Storage Buckets**:
+  - `profile-photos`: Private bucket (5MB limit; jpg, png, webp).
+
+---
+
+## 4. Design System & Conventions
+- **Theming**:
+  - Handled via `assets/js/theme.js` using `data-theme="dark"` or `"light"` attribute on the `<html>` root.
+  - Preference saved in `localStorage.getItem("theme")`.
+- **Responsive Layout**:
+  - Mobile-first to desktop breakpoints using standard CSS grid and flexbox.
+  - Multi-language support in `Aboutme/index.html` configured for English, Khmer (`Noto Sans Khmer`), Japanese, and Chinese.
+
+---
+
+## 5. Discovered Patterns & Update Log
+*Whenever new workflows, quirks, or features are added or discovered, record them here:*
+
+- **2026-09-30**: Initial knowledge base established. Root `index.html` identified as a stylized redirect/404 canvas screen pointing to `/Aboutme`. Supabase authentication and homework CRUD systems mapped.
+- **2026-09-30 (Modernization Update)**:
+  - **Path Fixes**: `Aboutme/index.html` had broken relative script reference to `assets/js/app.js` and relative links to `login.html` and `profile.html`. Fixed to `../assets/js/app.js`, `../login.html`, `../profile.html`, plus added link to `../homework/01.html`.
+  - **Modern 2026 UI Architecture**: Refactored `assets/css/styles.css` into a clean, unified, high-performance design system with design tokens, glassmorphic sticky header, ambient gradients, mobile hamburger drawer, responsive bento grids, and print stylesheet.
+  - **Interactive Features**: Added click-to-copy email button with visual feedback, floating back-to-top button, radar availability ping badge, and enhanced project category filter tabs.
+- **2026-09-30 (Direct Supabase Contact & Realtime Comments Feed)**:
+  - Connected the contact form directly to Supabase table `User_Request` via `@supabase/supabase-js@2`.
+  - Removed all legacy `mailto:` listeners that triggered OS/browser email popups; submissions now send 100% directly from the webpage.
+  - Added cache-buster `?v=20260930_v2` to prevent stale script execution in the browser.
+  - Added public visitor inquiries and live comments feed below the contact form with instant realtime updates using `supabase.channel(...)`.
+- **2026-09-30 (Multi-Layer Realtime Sync Architecture)**:
+  - Upgraded `assets/js/app.js` with a 4-tier sync strategy:
+    1. **Instant UI Prepend**: Immediate optimistic rendering with highlight-flash on submission.
+    2. **Smart Diffing**: Server re-fetch checks for unrendered `id`s to avoid list wiping.
+    3. **Background Auto-Poll (3.5s)**: Guaranteed live sync across all tabs and devices even if WebSocket publications are restricted.
+    4. **WebSocket Channel**: Supabase Realtime channel (`event: '*'`) for millisecond push events.
+    5. **Manual Refresh Trigger**: Added interactive `↻` button in `.live-status-pill`.
+- **2026-09-30 (Live Database Likes System - User_Like_Count)**:
+  - **Feature**: Connected the heart like button on every comment card directly to column `User_Like_Count` in Supabase `public."User_Request"`.
+  - **Functionality**:
+    1. **Real Count Display**: Cards read and display the actual numeric count from `item.User_Like_Count` (defaults to 0 if null).
+    2. **Direct Database Persistence**: Clicking like sends a `PATCH` / `.update()` directly to Supabase (`persistLikeCountToSupabase()`), incrementing or decrementing the persisted count.
+    3. **Multi-User Realtime Sync**:
+       - Supabase Realtime channel listens for `postgres_changes` with `eventType === 'UPDATE'` and updates the DOM count instantaneously without re-rendering the whole card (`updateCommentLikeCountUI()`).
+       - Periodic background auto-poll (3.5s) syncs like counts across tabs and visitors.
+    4. **Client-Side State**: `localStorage` records liked comment IDs (`dx_portfolio_liked_comments`) so the current visitor's heart toggle (`❤️ / 🤍`) persists across page reloads.
+- **2026-09-30 (Mobile Responsiveness Overhaul - Header & Footer)**:
+  - **Issues Identified on Phones (<= 768px & <= 480px)**:
+    1. **Header Horizontal Overflow**: The theme toggle displayed full text `"Dark mode"` (120px) alongside language selector and hamburger, overflowing narrow phone screens (360px-414px) and pushing elements off-screen.
+    2. **Mobile Nav Drawer Offsets**: `nav.main-nav` was positioned absolutely inside `.wrap` (which had a fixed margin and relative positioning), causing it to cut off or float awkwardly with uneven side gutters instead of spanning the full viewport edge-to-edge.
+    3. **Hamburger Animation & Accessibility**: Lacked open/close state animations and touch targets were unoptimized for fingers.
+    4. **Footer Wrapping Disorder**: `.footer-container` lacked centered column rules for mobile, causing two long lines of copyright and organization text to wrap unevenly against the screen edges.
+  - **Fixes Applied**:
+    1. **Header Actions Optimization**: On mobile, `#theme-label` text is hidden so `.theme-toggle` becomes a sleek 36px icon button (`◐`); reduced `.language-select` footprint and header gap. Header now fits comfortably even on 320px screens with zero horizontal overflow.
+    2. **Fixed Edge-to-Edge Mobile Drawer**: Configured `nav.main-nav` to `position: fixed; top: 60px; left: 0; right: 0; width: 100%; max-height: calc(100vh - 60px); overflow-y: auto;` with smooth slide-down animation and 44px+ tap targets.
+    3. **Animated Hamburger 'X'**: Added CSS keyframe transitions turning 3 hamburger lines into a crisp 'X' close icon when opened (`.is-active`), with background scroll locking and outside-click/Escape dismissal in `app.js`.
+    4. **Centered Mobile Footer**: Added media query rules converting `.footer-container` into a centered vertical flex column with balanced margins and comfortable line spacing.
+- **2026-09-30 (Root index.html 2026 Executive Portal Upgrade)**:
+  - **Replaced Legacy 404 Splash Screen**: Replaced the outdated 404 error page at root `index.html` with a modern 2026 **Executive Gateway Portal** connecting all facets of Rathana Lan's digital ecosystem.
+  - **Key Capabilities**:
+    1. **Bento Portal Architecture**: Features a primary destination card (`Aboutme/index.html`), smart factory project shortcut (`Aboutme/index.html#projects`), and academic research hub (`homework/index.html`).
+    2. **Interactive Constellation Canvas**: High-DPI hardware-accelerated particle network with dynamic node connections and pointer attraction for both desktop mouse and mobile touchscreens.
+    3. **Time-Aware Greeting**: Automatically renders localized greetings (*"Good morning"*, *"Good afternoon"*, *"Good evening"*).
+    4. **Smart Auto-Redirect**: Automatically carries visitors to `Aboutme/index.html` after 7 seconds, with an instant "Stay Here" pause button and "Enter Now" bypass.
+    5. **Universal Responsiveness & Accessibility**: 100% responsive down to 320px screens with viewport metadata, reduced motion compatibility, and semantic landmarks.
+- **2026-09-30 (homework/index.html Mobile Responsiveness Overhaul)**:
+  - **Identified Responsiveness Flaws**:
+    1. Fixed `width: 500px; height: 730px;` on `.content-user` card caused horizontal layout breakages on phone screens.
+    2. `.div-form` had hardcoded `margin: 50px;`, subtracting 100px from mobile screens.
+    3. Body had hardcoded `height: 2500px;` and invalid `-ms-inline-grid`.
+    4. Fixed `padding: 50px; border: 2px solid blue;` on research essay overflowed narrow screens.
+    5. Header navigation buttons overflowed horizontally off-screen on mobile.
+  - **Applied Improvements**:
+    1. Replaced fixed dimensional styles with fluid constraints (`width: min(520px, 100%)` for cards and `width: min(880px, 100%)` for the research essay).
+    2. Mobile-responsive sticky header with horizontally scrollable pill buttons and direct links back to Gateway (`../index.html`), Portfolio (`../Aboutme/index.html`), Projects, and Homework #01 (`01.html`).
+    3. Modern inputs and touch targets (48px height) with focus rings and smooth transitions.
+    4. Beautiful typography stack using `Manrope` and `DM Sans`.
+    5. Floating Back-to-Top button with smooth scrolling.
+- **2026-09-30 (Supabase Authentication & Profile Architecture Upgrade)**:
+  - **Identified Deficiencies**:
+    1. `login.html` exclusively relied on email OTP codes (`signInWithOtp`), which easily hit free-tier rate limits (3/hour) or failed when email confirmation was pending, with no password fields or sign-in toggles.
+    2. `login.css` had an unclosed nested duplication causing malformed rules.
+    3. `profile.js` completely halted rendering if `public.profiles` query failed or had strict RLS, rather than gracefully displaying account metadata.
+  - **Architecture Improvements Applied**:
+    1. **Dual-Mode Authentication (`login.html` & `login.js`)**:
+       - **Email + Password (Primary & Most Reliable)**: Added `#password` and `#password-confirm` with show/hide password toggle, invoking `supabase.auth.signInWithPassword()` and `supabase.auth.signUp()`.
+       - **Email One-Time Code (Alternative/Passwordless)**: User can toggle seamlessly to "Email code" tab to receive and verify 6-digit OTP codes via `supabase.auth.signInWithOtp()` and `supabase.auth.verifyOtp()`.
+       - **Forgot Password**: Added direct self-service password reset request via `supabase.auth.resetPasswordForEmail()`.
+       - **Instant Session Detection**: Automatically detects existing Supabase auth sessions on load and redirects logged-in users directly to `profile.html`.
+    2. **Resilient Profile Management (`profile.html` & `profile.js`)**:
+       - **Dual-Layer Persistence**: Saves profile updates to `public.profiles` via `.upsert()` AND synchronizes `user_metadata` in Supabase Auth via `supabase.auth.updateUser()`.
+       - **Non-Blocking Fault Tolerance**: If database tables or RLS are unavailable or undergoing migration, profile form falls back instantly to `currentUser.user_metadata` so the user never sees a blank or broken screen.
+       - **Live Avatar & Card Preview**: Dynamic initials placeholder fallback and instant client preview for uploaded images.
+       - **Storage Policies & Clean Sign Out**: Folder-isolated uploads in `profile-photos` storage bucket, auto-refresh token handling, and clean `signOut()` with session invalidation.
+    4. **Supabase Email Redirection & OTP Token Resolution**:
+       - **Why `localhost:3000` Occurred**: Supabase projects ship by default with **Site URL** set to `http://localhost:3000` and default Magic Link email templates containing only `<a href="{{ .ConfirmationURL }}">Log In</a>` without printing `{{ .Token }}`. Clicking the email link redirects to `localhost:3000`, causing connection refused errors.
+       - **Client-Side Mitigations**: Passed `emailRedirectTo: window.location.origin + .../profile.html` in `signInWithOtp()`, added `#switch-to-password-btn` quick switch, and added hash detection for `#access_token=` callbacks.
+       - **Dashboard Configuration**: User must set **Site URL** and **Redirect URLs** in Supabase Auth -> URL Configuration to match their web origin (e.g. `http://localhost:5500` or production domain), and insert `{{ .Token }}` into Auth -> Email Templates -> Magic Link to display the 6-digit code in the email body.
+    5. **Profile Photo Storage & Guaranteed Fallback**:
+       - **Why Photos Didn't Save**: Supabase requires a Storage bucket named `profile-photos` to be manually created in the dashboard. If uncreated, `upload()` failed silently and reverted `avatar_path` to null.
+       - **Dual Fallback Strategy**: `profile.js` now compresses selected photos to a lightweight Base64 data URL (< 35KB) via HTML5 Canvas. If the Supabase `profile-photos` bucket is missing or blocked, the photo automatically falls back to saving directly in `public.profiles.avatar_path`, `user_metadata.avatar_path`, and `localStorage`. If the bucket exists, it uploads to Supabase storage. Either way, photos persist across reloads.
+    6. **Brand Favicon Across All Pages (Replaced Default Browser Globe)**:
+       - **Created Brand Favicon Asset**: Created [favicon.svg](file:///d:/My_PortFolio/favicon.svg) and [assets/img/favicon.svg](file:///d:/My_PortFolio/assets/img/favicon.svg) featuring the signature dark squircle `#14231e` base, bold white **RL** typography, and vibrant coral `#f1724d` accent dot matching the header identity.
+       - **Dual Embedding for High Compatibility**: Inlined an SVG Data URI `<link rel="icon" ...>` alongside the external SVG file across all 6 HTML pages (`login.html`, `profile.html`, `Aboutme/index.html`, `index.html`, `homework/index.html`, `homework/01.html`). Guarantees crisp high-DPI rendering across Chrome, Edge, Safari, Firefox, and local `file:///` protocols without generic fallback globe icons.
+    7. **Duplicate Account Prevention & Eye-Catching Alert Modal**:
+       - **Dual Detection**: In Supabase Auth, existing users return either a direct error (`already registered` / 422) or, when enumeration protection is active, an empty identities array (`data.user.identities.length === 0`).
+       - **High-Aesthetic Eye-Catching Modal (`#account-exists-modal`)**:
+         - Completely replaced generic `window.alert()` with a custom, glassmorphic modal popup tailored to the portfolio's executive design system.
+         - **Visual Design**: Deep dark forest card (`#182a24`) with glowing top gradient accent bar (`#f1724d` to `#d8f36a`), double-drop shadow, and a pulsating coral radar ring badge (`modal-radar-pulse`) surrounding a floating warning icon.
+         - **Dynamic Email Display**: Highlights the duplicate address within a lime-accented monospace chip (`#modal-email-display`).
+         - **Action Buttons**:
+           1. *"Sign In with Password →"* (Primary lime button): Closes modal, immediately switches form to Sign In with password method, auto-fills the email, clears and focuses the password field.
+           2. *"Reset Password"* (Secondary glass button): Closes modal, populates the email, and triggers self-service password reset email instructions.
+         - **Accessibility & UX**: Backdrop click dismissal, `Escape` key shortcut, close button `✕`, focus trapping, and smooth scale/fade entry transitions (`is-open`).
+
+    8. **Full 2026 Executive Design System Harmonization Across All Pages**:
+       - **[profile.html](file:///d:/My_PortFolio/profile.html) & [assets/css/profile.css](file:///d:/My_PortFolio/assets/css/profile.css)**: Completely redesigned with frosted glassmorphism, ambient backdrop glow mesh, interactive theme toggle switch (dark/light), camera badge icon over avatar wrap, 2026 rounded inputs with focus glow, character counter pill, and refined coral Danger Zone card.
+       - **[homework/01.html](file:///d:/My_PortFolio/homework/01.html)**: Integrated a sticky executive top navigation header with `RL.` brand mark, breadcrumb tag, and pill links back to Homework Hub, Portfolio, and Member Profile.
+       - **[homework/index.html](file:///d:/My_PortFolio/homework/index.html)**: Upgraded top sticky navigation bar with `RL.` brand mark and unified navigation links to Gateway, Portfolio, Homework #01, My Profile, and Sign In.
+       - **[Aboutme/index.html](file:///d:/My_PortFolio/Aboutme/index.html)**: Harmonized navigation pill links to point directly to the Homework Hub (`../homework/index.html`), Sign In (`../login.html`), and My Profile (`../profile.html`).
+       - **[index.html](file:///d:/My_PortFolio/index.html)**: Full interactive constellation portal with time-based dynamic greeting, enlarged auto-redirect indicator, bento gateway grid, and high-performance canvas layer.
+    9. **Direct Support Routing (Telegram Integration)**:
+       - **Unified Support Link**: All "Support", "Contact support", and assistance buttons across every page now direct directly to the portfolio owner's Telegram channel/profile: [https://t.me/loyeelrn](https://t.me/loyeelrn) (`target="_blank"` with `rel="noopener noreferrer"`).
+       - **Updated Files**:
+         - [login.html](file:///d:/My_PortFolio/login.html): Footer "Contact support" link.
+         - [profile.html](file:///d:/My_PortFolio/profile.html): Footer "Contact Support" link.
+         - [Aboutme/index.html](file:///d:/My_PortFolio/Aboutme/index.html): Direct Telegram contact method card button and site footer link.
+         - [index.html](file:///d:/My_PortFolio/index.html): Gateway footer "Support" link.
+         - [homework/index.html](file:///d:/My_PortFolio/homework/index.html): Sticky navigation "Support" link and coursework auth auxiliary "Contact Support" link.
+         - [homework/01.html](file:///d:/My_PortFolio/homework/01.html): Top navigation "Support" pill button with Lucide icon.

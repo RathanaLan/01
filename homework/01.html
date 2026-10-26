@@ -1,0 +1,741 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>User Record Directory</title>
+    <link
+      rel="icon"
+      type="image/svg+xml"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='b' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' stop-color='%2314231e'/%3E%3Cstop offset='100%25' stop-color='%230b1512'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='64' height='64' rx='15' fill='url(%23b)'/%3E%3Crect x='1' y='1' width='62' height='62' rx='14' fill='none' stroke='%23253a31' stroke-width='1.5'/%3E%3Ctext x='12' y='44' font-family='system-ui,sans-serif' font-weight='800' font-size='28' fill='%23f5f7f1' letter-spacing='-1'%3ERL%3C/text%3E%3Ccircle cx='51' cy='41' r='4.5' fill='%23f1724d'/%3E%3C/svg%3E"
+    />
+    <link rel="alternate icon" type="image/svg+xml" href="../favicon.svg" />
+
+    <!-- Google Font: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ["Inter", "sans-serif"],
+            },
+          },
+        },
+      };
+    </script>
+
+    <!-- Lucide Icons CDN -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+      /* Custom scrollbar styling */
+      ::-webkit-scrollbar {
+        width: 6px;
+      }
+      ::-webkit-scrollbar-track {
+        background: transparent;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: #cbd5e1;
+        border-radius: 9999px;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: #94a3b8;
+      }
+
+      /* Flash highlight animation for new/updated items */
+      @keyframes highlight-flash {
+        0% {
+          background-color: rgba(
+            99,
+            102,
+            241,
+            0.1
+          ); /* indigo-500 with low opacity */
+          border-color: rgb(129, 140, 248); /* indigo-400 */
+          transform: scale(1.015);
+          box-shadow: 0 4px 6px -1px rgba(99, 102, 241, 0.2);
+        }
+        100% {
+          background-color: rgba(255, 255, 255, 0.7); /* translucent white */
+          border-color: rgba(226, 232, 240, 0.8); /* slate-200 */
+          transform: scale(1);
+          box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+        }
+      }
+
+      .row-highlight {
+        animation: highlight-flash 2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      }
+
+      /* Smooth exit animation for deleted items */
+      .row-deleting {
+        transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+        opacity: 0 !important;
+        transform: translateX(24px) scale(0.95) !important;
+        max-height: 0px !important;
+        padding-top: 0px !important;
+        padding-bottom: 0px !important;
+        margin-bottom: 0px !important;
+        border-color: transparent !important;
+        overflow: hidden;
+      }
+    </style>
+  </head>
+  <body
+    class="bg-gradient-to-br from-slate-100 to-slate-200 text-slate-800 antialiased min-h-screen flex flex-col items-center justify-center p-4 sm:p-6 lg:p-8 relative overflow-hidden"
+  >
+    <!-- Background decorative elements for modern feel -->
+    <div
+      class="absolute top-0 left-1/4 w-96 h-96 bg-indigo-300 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-blob pointer-events-none"
+    ></div>
+    <div
+      class="absolute top-0 right-1/4 w-96 h-96 bg-emerald-300 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-blob animation-delay-2000 pointer-events-none"
+    ></div>
+
+    <!-- Top Executive Navigation Bar -->
+    <header class="w-full max-w-xl mb-4 flex items-center justify-between px-2 relative z-10">
+      <a href="../index.html" class="flex items-center gap-1 font-bold text-slate-900 hover:text-indigo-600 transition-colors tracking-tight text-lg">
+        <span class="font-extrabold font-['Manrope']">RL</span>
+        <span class="w-2 h-2 rounded-full bg-orange-500 inline-block shadow-sm"></span>
+        <span class="text-xs uppercase tracking-widest text-slate-400 font-semibold ml-2 hidden sm:inline-block">Homework #01</span>
+      </a>
+      <nav class="flex items-center gap-2">
+        <a href="index.html" class="inline-flex items-center gap-1 text-xs font-semibold px-3 py-1.5 rounded-full bg-white/70 hover:bg-white text-slate-700 shadow-sm border border-slate-200/60 backdrop-blur-md transition-all hover:-translate-y-0.5">
+          <i data-lucide="arrow-left" class="w-3.5 h-3.5"></i>
+          <span>Hub</span>
+        </a>
+        <a href="../Aboutme/index.html" class="inline-flex items-center gap-1 text-xs font-semibold px-3 py-1.5 rounded-full bg-white/70 hover:bg-white text-slate-700 shadow-sm border border-slate-200/60 backdrop-blur-md transition-all hover:-translate-y-0.5">
+          <span>Portfolio</span>
+        </a>
+        <a href="../profile.html" class="inline-flex items-center gap-1 text-xs font-semibold px-3 py-1.5 rounded-full bg-slate-900 hover:bg-slate-800 text-white shadow-sm transition-all hover:-translate-y-0.5">
+          <i data-lucide="user" class="w-3.5 h-3.5"></i>
+          <span>Profile</span>
+        </a>
+        <a href="https://t.me/loyeelrn" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 text-xs font-semibold px-3 py-1.5 rounded-full bg-white/70 hover:bg-white text-slate-700 shadow-sm border border-slate-200/60 backdrop-blur-md transition-all hover:-translate-y-0.5">
+          <i data-lucide="help-circle" class="w-3.5 h-3.5 text-indigo-500"></i>
+          <span>Support</span>
+        </a>
+      </nav>
+    </header>
+
+    <main
+      class="w-full max-w-xl bg-white/70 backdrop-blur-xl rounded-2xl shadow-xl shadow-slate-200/50 border border-white/50 overflow-hidden transition-all relative z-10"
+    >
+      <!-- Header Section -->
+      <header
+        class="px-6 sm:px-8 pt-7 pb-6 border-b border-white/40 bg-white/40 flex items-center justify-between"
+      >
+        <div class="flex items-center space-x-3.5">
+          <div
+            class="w-10 h-10 rounded-xl bg-gradient-to-tr from-indigo-600 to-indigo-500 flex items-center justify-center text-white shadow-md shadow-indigo-200"
+          >
+            <i data-lucide="users" class="w-5 h-5"></i>
+          </div>
+          <div>
+            <h1
+              class="text-lg sm:text-xl font-bold text-slate-900 tracking-tight leading-tight"
+            >
+              User Records
+            </h1>
+            <p class="text-xs text-slate-500 mt-0.5 font-medium">
+              Real-time collaborative directory
+            </p>
+          </div>
+        </div>
+
+        <!-- Real-time Live Connection Badge -->
+        <div
+          id="liveBadge"
+          class="flex items-center gap-1.5 px-3 py-1 bg-emerald-100/50 text-emerald-700 border border-emerald-200/50 rounded-full text-xs font-semibold select-none shadow-sm transition-colors duration-300"
+        >
+          <span
+            class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"
+          ></span>
+          <span id="liveBadgeText">Live Sync</span>
+        </div>
+      </header>
+
+      <div class="p-6 sm:p-8 space-y-6">
+        <!-- Add User Form -->
+        <form id="nameForm" class="space-y-2.5">
+          <div class="flex items-center justify-between">
+            <label
+              for="nameInput"
+              class="block text-xs font-bold uppercase tracking-wider text-slate-500"
+            >
+              Add New Member
+            </label>
+            <span id="recordCount" class="text-xs font-medium text-slate-400"
+              >0 records</span
+            >
+          </div>
+
+          <div class="flex gap-2.5 flex-col sm:flex-row">
+            <div class="relative flex-1 group">
+              <div
+                class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400 group-focus-within:text-indigo-500 transition-colors"
+              >
+                <i data-lucide="user-plus" class="w-4 h-4"></i>
+              </div>
+              <input
+                type="text"
+                id="nameInput"
+                placeholder="e.g. Maya Lin"
+                required
+                autocomplete="off"
+                class="w-full pl-10 pr-4 py-2.5 bg-white/60 border border-slate-200/80 rounded-xl text-sm font-medium text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-400 focus:bg-white transition-all duration-200 shadow-sm"
+              />
+            </div>
+            <button
+              type="submit"
+              id="submitBtn"
+              class="inline-flex items-center justify-center px-5 py-2.5 bg-slate-900 hover:bg-slate-800 active:scale-[0.98] text-white text-sm font-semibold rounded-xl shadow-md hover:shadow-lg transition-all duration-150 gap-2 shrink-0 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              <i data-lucide="plus" class="w-4 h-4 text-slate-300"></i>
+              <span>Add User</span>
+            </button>
+          </div>
+        </form>
+
+        <div>
+          <div class="flex items-center justify-between mb-3">
+            <h2
+              class="text-xs font-bold uppercase tracking-wider text-slate-500"
+            >
+              Stored Records
+            </h2>
+            <button
+              id="refreshBtn"
+              type="button"
+              title="Manual sync with database"
+              class="text-xs font-medium text-slate-500 hover:text-slate-800 px-2 py-1 rounded-lg hover:bg-white/60 transition-colors flex items-center gap-1.5 cursor-pointer"
+            >
+              <i data-lucide="refresh-cw" class="w-3.5 h-3.5"></i>
+              <span>Refresh</span>
+            </button>
+          </div>
+
+          <!-- Scrollable Dynamic List -->
+          <ul id="nameList" class="space-y-2 max-h-80 overflow-y-auto pr-1">
+            <!-- Populated dynamically via JS -->
+            <li
+              class="py-10 text-center flex flex-col items-center justify-center text-slate-400"
+            >
+              <i
+                data-lucide="loader-2"
+                class="w-8 h-8 animate-spin mb-3 text-indigo-400"
+              ></i>
+              <span class="text-sm font-medium text-slate-500"
+                >Connecting to database...</span
+              >
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <footer
+        class="px-6 sm:px-8 py-3.5 bg-white/30 border-t border-white/40 flex items-center justify-between text-xs text-slate-500 backdrop-blur-md"
+      >
+        <span class="flex items-center gap-1.5">
+          <span class="w-1.5 h-1.5 rounded-full bg-indigo-500"></span>
+          Table:
+          <code
+            class="font-mono text-slate-700 bg-white/60 border border-slate-200/60 px-1.5 py-0.5 rounded text-[11px] shadow-sm"
+            >User_Record</code
+          >
+        </span>
+        <span
+          class="text-[11px] font-medium text-slate-400 hidden sm:inline-block"
+          >Supabase Realtime Channel</span
+        >
+      </footer>
+    </main>
+
+    <!-- Delete Confirmation Modal -->
+    <div
+      id="deleteModal"
+      class="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/20 backdrop-blur-sm opacity-0 pointer-events-none transition-opacity duration-200 p-4"
+    >
+      <div
+        id="deleteModalDialog"
+        class="bg-white/90 backdrop-blur-xl rounded-2xl max-w-sm w-full p-6 shadow-2xl border border-white/50 transform scale-95 transition-transform duration-200"
+      >
+        <div
+          class="w-12 h-12 rounded-full bg-rose-100 text-rose-600 flex items-center justify-center mx-auto mb-4 border border-rose-200 shadow-sm"
+        >
+          <i data-lucide="alert-triangle" class="w-6 h-6"></i>
+        </div>
+        <h3 class="text-base font-bold text-slate-900 text-center">
+          Delete Record
+        </h3>
+        <p
+          class="text-sm text-slate-500 text-center mt-1.5 mb-6 leading-relaxed font-medium"
+        >
+          Are you sure you want to remove this record? This change will
+          synchronize instantly for everyone.
+        </p>
+        <div class="flex gap-3">
+          <button
+            type="button"
+            id="cancelDelete"
+            class="flex-1 px-4 py-2.5 border-2 border-slate-200 rounded-xl text-sm font-bold text-slate-600 hover:bg-slate-50 hover:border-slate-300 active:bg-slate-100 transition-colors cursor-pointer"
+          >
+            Cancel
+          </button>
+          <button
+            type="button"
+            id="confirmDelete"
+            class="flex-1 px-4 py-2.5 bg-rose-600 hover:bg-rose-700 active:bg-rose-800 rounded-xl text-sm font-bold text-white shadow-md shadow-rose-200 transition-all cursor-pointer"
+          >
+            Delete
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Notification Toast Container -->
+    <div
+      id="toastContainer"
+      class="fixed bottom-5 right-5 z-50 flex flex-col gap-3 pointer-events-none"
+    ></div>
+
+    <script type="module">
+      import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm";
+
+      // Import credentials from local config file
+      import { supabaseUrl, supabaseKey } from "./supabaseConfig.js";
+
+      // Initialize Supabase Client
+      const supabase = createClient(supabaseUrl, supabaseKey);
+
+      // DOM Elements
+      const form = document.getElementById("nameForm");
+      const input = document.getElementById("nameInput");
+      const submitBtn = document.getElementById("submitBtn");
+      const list = document.getElementById("nameList");
+      const recordCount = document.getElementById("recordCount");
+      const refreshBtn = document.getElementById("refreshBtn");
+
+      const deleteModal = document.getElementById("deleteModal");
+      const deleteModalDialog = document.getElementById("deleteModalDialog");
+      const confirmDeleteBtn = document.getElementById("confirmDelete");
+      const cancelDeleteBtn = document.getElementById("cancelDelete");
+
+      const toastContainer = document.getElementById("toastContainer");
+      const liveBadge = document.getElementById("liveBadge");
+      const liveBadgeText = document.getElementById("liveBadgeText");
+
+      let deleteTargetId = null;
+
+      function showToast(message, type = "info") {
+        const toast = document.createElement("div");
+
+        const config = {
+          success: {
+            border: "border-emerald-200/60",
+            bg: "bg-emerald-50/90",
+            text: "text-emerald-800",
+            icon: "check-circle-2",
+            shadow: "shadow-emerald-100",
+          },
+          error: {
+            border: "border-rose-200/60",
+            bg: "bg-rose-50/90",
+            text: "text-rose-800",
+            icon: "alert-circle",
+            shadow: "shadow-rose-100",
+          },
+          info: {
+            border: "border-slate-200/60",
+            bg: "bg-white/90",
+            text: "text-slate-800",
+            icon: "info",
+            shadow: "shadow-slate-100",
+          },
+        }[type] || {
+          border: "border-slate-200",
+          bg: "bg-white",
+          text: "text-slate-800",
+          icon: "info",
+          shadow: "",
+        };
+
+        toast.className = `flex items-center gap-3 px-4 py-3.5 rounded-xl shadow-lg border backdrop-blur-md text-sm font-semibold pointer-events-auto transition-all duration-300 transform translate-y-4 opacity-0 ${config.bg} ${config.border} ${config.text} ${config.shadow}`;
+        toast.innerHTML = `
+        <i data-lucide="${config.icon}" class="w-4 h-4 shrink-0"></i>
+        <span>${message}</span>
+      `;
+
+        toastContainer.appendChild(toast);
+        lucide.createIcons({ root: toast });
+
+        requestAnimationFrame(() => {
+          toast.classList.remove("translate-y-4", "opacity-0");
+        });
+
+        setTimeout(() => {
+          toast.classList.add("translate-y-4", "opacity-0");
+          setTimeout(() => toast.remove(), 300);
+        }, 4000);
+      }
+
+      function openDeleteModal(id) {
+        deleteTargetId = id;
+        deleteModal.classList.remove("opacity-0", "pointer-events-none");
+        deleteModalDialog.classList.remove("scale-95");
+        deleteModalDialog.classList.add("scale-100");
+      }
+
+      function closeDeleteModal() {
+        deleteTargetId = null;
+        deleteModal.classList.add("opacity-0", "pointer-events-none");
+        deleteModalDialog.classList.remove("scale-100");
+        deleteModalDialog.classList.add("scale-95");
+      }
+
+      // Helper: Generate clean 2-letter initials for avatar badge
+      function getInitials(name) {
+        if (!name) return "U";
+        const parts = name.trim().split(/\s+/);
+        return parts.length >= 2
+          ? (parts[0][0] + parts[1][0]).toUpperCase()
+          : name.slice(0, 2).toUpperCase();
+      }
+
+      form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        const val = input.value.trim();
+        if (!val) return;
+
+        submitBtn.disabled = true;
+        const originalHtml = submitBtn.innerHTML;
+        submitBtn.innerHTML = `<i data-lucide="loader-2" class="w-4 h-4 animate-spin text-slate-400"></i><span>Adding...</span>`;
+        lucide.createIcons({ root: submitBtn });
+
+        try {
+          const { data, error } = await supabase
+            .from("User_Record")
+            .insert([{ User_Name: val }])
+            .select();
+
+          if (error) throw error;
+
+          input.value = "";
+          showToast("User added to directory", "success");
+          // Realtime handles DOM update globally, but we pass ID to trigger flash locally
+          const newId = data && data[0] ? data[0].id : null;
+          if (newId) loadNames(newId);
+        } catch (err) {
+          showToast(err.message, "error");
+        } finally {
+          submitBtn.disabled = false;
+          submitBtn.innerHTML = originalHtml;
+          lucide.createIcons({ root: submitBtn });
+        }
+      });
+
+      async function loadNames(highlightId = null) {
+        // Prevent UI wipe if user is currently typing in an inline edit field
+        const activeInput = document.querySelector(
+          "#nameList input[type='text']",
+        );
+        if (activeInput) return;
+
+        try {
+          const { data, error } = await supabase
+            .from("User_Record")
+            .select("id, User_Name")
+            .order("id", { ascending: true });
+
+          if (error) throw error;
+
+          list.innerHTML = "";
+          const count = data ? data.length : 0;
+          recordCount.textContent = `${count} ${count === 1 ? "record" : "records"}`;
+
+          if (!data || data.length === 0) {
+            list.innerHTML = `
+            <li class="py-12 text-center flex flex-col items-center justify-center bg-slate-50/50 rounded-xl border border-dashed border-slate-200 shadow-sm">
+              <div class="w-12 h-12 rounded-full bg-slate-100 flex items-center justify-center text-slate-400 mb-3 border border-slate-200">
+                <i data-lucide="inbox" class="w-6 h-6"></i>
+              </div>
+              <p class="text-sm font-bold text-slate-700">No records found</p>
+              <p class="text-xs font-medium text-slate-500 mt-1">Add a new user using the field above</p>
+            </li>
+          `;
+            lucide.createIcons({ root: list });
+            return;
+          }
+
+          data.forEach((row) => {
+            const li = document.createElement("li");
+            li.dataset.id = row.id;
+
+            const isHighlighted =
+              highlightId && String(row.id) === String(highlightId);
+
+            li.className = `group flex items-center justify-between p-3.5 rounded-xl border transition-all duration-200 gap-3 shadow-sm ${
+              isHighlighted
+                ? "row-highlight border-indigo-400 z-10 relative"
+                : "border-white/80 bg-white/70 backdrop-blur-md hover:border-slate-300 hover:shadow-md hover:bg-white"
+            }`;
+
+            // Content section (Avatar + Name)
+            const contentContainer = document.createElement("div");
+            contentContainer.className =
+              "flex items-center gap-3.5 flex-1 min-w-0";
+
+            const avatar = document.createElement("div");
+            avatar.className =
+              "w-9 h-9 rounded-full bg-gradient-to-br from-indigo-50 to-slate-100 border border-indigo-100/60 text-indigo-700 flex items-center justify-center font-bold text-xs shrink-0 select-none shadow-sm";
+            avatar.textContent = getInitials(row.User_Name);
+
+            const nameSpan = document.createElement("span");
+            nameSpan.className =
+              "text-sm font-semibold text-slate-700 truncate select-all";
+            nameSpan.textContent = row.User_Name;
+
+            contentContainer.appendChild(avatar);
+            contentContainer.appendChild(nameSpan);
+
+            // Action buttons (Edit & Delete)
+            const actions = document.createElement("div");
+            actions.className =
+              "flex items-center gap-1.5 shrink-0 opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity duration-200";
+
+            // Inline Edit Action setup
+            const editBtn = document.createElement("button");
+            editBtn.type = "button";
+            editBtn.className =
+              "p-2 text-slate-400 hover:text-indigo-600 hover:bg-indigo-50 rounded-lg transition-colors cursor-pointer focus:outline-none focus:ring-2 focus:ring-indigo-500/20";
+            editBtn.title = "Edit record";
+            editBtn.innerHTML = `<i data-lucide="pencil" class="w-4 h-4"></i>`;
+
+            editBtn.onclick = () => {
+              const editWrapper = document.createElement("div");
+              editWrapper.className =
+                "flex items-center gap-2.5 flex-1 min-w-0";
+
+              const editInput = document.createElement("input");
+              editInput.type = "text";
+              editInput.value = row.User_Name;
+              editInput.className =
+                "flex-1 px-3 py-1.5 text-sm bg-white border-2 border-indigo-400 rounded-lg focus:outline-none focus:ring-4 focus:ring-indigo-500/10 font-bold text-slate-800 shadow-inner";
+
+              const saveBtn = document.createElement("button");
+              saveBtn.type = "button";
+              saveBtn.className =
+                "p-2 text-emerald-600 hover:bg-emerald-50 rounded-lg transition-colors cursor-pointer focus:outline-none focus:ring-2 focus:ring-emerald-500/20 bg-white shadow-sm border border-slate-100";
+              saveBtn.title = "Save (Enter)";
+              saveBtn.innerHTML = `<i data-lucide="check" class="w-4 h-4"></i>`;
+
+              const cancelBtn = document.createElement("button");
+              cancelBtn.type = "button";
+              cancelBtn.className =
+                "p-2 text-slate-500 hover:text-slate-700 hover:bg-slate-100 rounded-lg transition-colors cursor-pointer focus:outline-none focus:ring-2 focus:ring-slate-500/20 bg-white shadow-sm border border-slate-100";
+              cancelBtn.title = "Cancel (Esc)";
+              cancelBtn.innerHTML = `<i data-lucide="x" class="w-4 h-4"></i>`;
+
+              const handleSave = async () => {
+                const trimmed = editInput.value.trim();
+                if (!trimmed) {
+                  showToast("Name cannot be empty", "error");
+                  editInput.focus();
+                  return;
+                }
+                if (trimmed === row.User_Name) {
+                  loadNames(); // Reset if no change
+                  return;
+                }
+
+                saveBtn.disabled = true;
+                editInput.disabled = true;
+                try {
+                  const { error: updateError } = await supabase
+                    .from("User_Record")
+                    .update({ User_Name: trimmed })
+                    .eq("id", row.id);
+
+                  if (updateError) throw updateError;
+
+                  showToast("Record updated successfully", "success");
+                  loadNames(row.id); // Trigger flash highlight on success
+                } catch (updateError) {
+                  showToast(updateError.message, "error");
+                  saveBtn.disabled = false;
+                  editInput.disabled = false;
+                  editInput.focus();
+                }
+              };
+
+              saveBtn.onclick = handleSave;
+              cancelBtn.onclick = () => loadNames(); // Reloading resets DOM state
+
+              editInput.addEventListener("keydown", (e) => {
+                if (e.key === "Enter") handleSave();
+                if (e.key === "Escape") loadNames();
+              });
+
+              // Replace content with input
+              editWrapper.appendChild(avatar.cloneNode(true));
+              editWrapper.appendChild(editInput);
+              li.replaceChild(editWrapper, contentContainer);
+
+              // Swap action buttons
+              actions.innerHTML = "";
+              actions.className =
+                "flex items-center gap-1.5 shrink-0 opacity-100"; // keep visible while editing
+              actions.appendChild(saveBtn);
+              actions.appendChild(cancelBtn);
+              lucide.createIcons({ root: li });
+
+              editInput.focus();
+              editInput.select();
+            };
+
+            // Delete Action setup
+            const delBtn = document.createElement("button");
+            delBtn.type = "button";
+            delBtn.className =
+              "p-2 text-slate-400 hover:text-rose-600 hover:bg-rose-50 rounded-lg transition-colors cursor-pointer focus:outline-none focus:ring-2 focus:ring-rose-500/20";
+            delBtn.title = "Delete record";
+            delBtn.innerHTML = `<i data-lucide="trash-2" class="w-4 h-4"></i>`;
+            delBtn.onclick = () => openDeleteModal(row.id);
+
+            actions.appendChild(editBtn);
+            actions.appendChild(delBtn);
+
+            li.appendChild(contentContainer);
+            li.appendChild(actions);
+            list.appendChild(li);
+          });
+
+          lucide.createIcons({ root: list });
+        } catch (err) {
+          showToast(err.message || "Failed to load directory", "error");
+          list.innerHTML = `
+          <li class="p-4 bg-rose-50/80 border border-rose-200/80 rounded-xl text-xs text-rose-700 text-center font-semibold">
+            ${err.message || "Failed to communicate with database. Verify configuration."}
+          </li>
+        `;
+          recordCount.textContent = `0 records`;
+        }
+      }
+
+      confirmDeleteBtn.onclick = async () => {
+        if (deleteTargetId) {
+          confirmDeleteBtn.disabled = true;
+          const originalHtml = confirmDeleteBtn.innerHTML;
+          confirmDeleteBtn.innerHTML = `<i data-lucide="loader-2" class="w-4 h-4 animate-spin mx-auto"></i>`;
+          lucide.createIcons({ root: confirmDeleteBtn });
+
+          const idToDelete = deleteTargetId;
+
+          try {
+            const { error } = await supabase
+              .from("User_Record")
+              .delete()
+              .eq("id", idToDelete);
+
+            if (error) throw error;
+
+            showToast("Record removed", "info");
+
+            // Smooth slide-out removal on the client
+            const targetLi = document.querySelector(
+              `li[data-id="${idToDelete}"]`,
+            );
+            if (targetLi) {
+              targetLi.classList.add("row-deleting");
+              setTimeout(() => loadNames(), 350); // wait for animation
+            } else {
+              loadNames();
+            }
+          } catch (error) {
+            showToast(error.message, "error");
+          } finally {
+            confirmDeleteBtn.disabled = false;
+            confirmDeleteBtn.innerHTML = originalHtml;
+            closeDeleteModal();
+          }
+        }
+      };
+
+      cancelDeleteBtn.onclick = closeDeleteModal;
+
+      // Close Modal on Outside Click
+      deleteModal.addEventListener("mousedown", (e) => {
+        if (e.target === deleteModal) closeDeleteModal();
+      });
+
+      // Manual Refresh
+      refreshBtn.addEventListener("click", () => {
+        loadNames();
+        showToast("Directory synced", "info");
+      });
+
+      supabase
+        .channel("public:User_Record")
+        .on(
+          "postgres_changes",
+          { event: "*", schema: "public", table: "User_Record" },
+          (payload) => {
+            // If the user is currently editing an item inline, do not disrupt typing
+            const isActivelyEditing = document.querySelector(
+              "#nameList input[type='text']",
+            );
+            if (isActivelyEditing) return;
+
+            if (payload.eventType === "DELETE") {
+              const deletedId = payload.old ? payload.old.id : null;
+              const rowElem = document.querySelector(
+                `li[data-id="${deletedId}"]`,
+              );
+              if (rowElem) {
+                rowElem.classList.add("row-deleting");
+                setTimeout(() => loadNames(), 350);
+              } else {
+                loadNames();
+              }
+            } else if (payload.eventType === "INSERT") {
+              const newId = payload.new ? payload.new.id : null;
+              loadNames(newId);
+            } else if (payload.eventType === "UPDATE") {
+              const updatedId = payload.new ? payload.new.id : null;
+              loadNames(updatedId);
+            }
+          },
+        )
+        .subscribe((status) => {
+          // Update connection badge based on realtime socket status
+          if (status === "SUBSCRIBED") {
+            liveBadge.className =
+              "flex items-center gap-1.5 px-3 py-1 bg-emerald-100/70 text-emerald-700 border border-emerald-200/50 rounded-full text-xs font-semibold select-none shadow-sm transition-colors duration-300";
+            liveBadge.querySelector("span").className =
+              "w-2 h-2 rounded-full bg-emerald-500 animate-pulse";
+            liveBadgeText.textContent = "Live Sync";
+          } else if (status === "CHANNEL_ERROR" || status === "TIMED_OUT") {
+            liveBadge.className =
+              "flex items-center gap-1.5 px-3 py-1 bg-amber-100/70 text-amber-700 border border-amber-200/50 rounded-full text-xs font-semibold select-none shadow-sm transition-colors duration-300";
+            liveBadge.querySelector("span").className =
+              "w-2 h-2 rounded-full bg-amber-500";
+            liveBadgeText.textContent = "Reconnecting...";
+          }
+        });
+
+      // Initialize generic Lucide Icons and Load initial data
+      lucide.createIcons();
+      loadNames();
+    </script>
+  </body>
+</html>

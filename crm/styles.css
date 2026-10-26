@@ -1,0 +1,204 @@
+/* ==========================================================================
+   Chamroeun Nheat Saving Cooperative - Specialized Passbook & Certificate Styles
+   (Powered by Tailwind CSS CDN + Google Khmer Typography)
+   ========================================================================== */
+
+:root {
+  --font-moul: 'Moul', serif;
+  --font-khmer: 'Kantumruy Pro', 'Battambang', system-ui, sans-serif;
+  --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  --passbook-green: #1a382c;
+  --passbook-paper: #fbfbf8;
+  --passbook-border: #9ca3af;
+  --passbook-header-bg: #dcdfd8;
+}
+
+/* Base Font Enhancements */
+body {
+  font-family: var(--font-khmer);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.font-moul {
+  font-family: var(--font-moul);
+  letter-spacing: 0.03em;
+}
+
+.font-khmer {
+  font-family: var(--font-khmer);
+}
+
+.font-sans {
+  font-family: var(--font-sans);
+}
+
+/* Subtle Shimmer & Animations */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Privacy Masking (Eye Toggle) */
+.maskable.masked {
+  filter: blur(8px);
+  user-select: none;
+  transition: filter 0.2s ease;
+}
+
+/* ==========================================================================
+   Authentic Physical Passbook Booklet Styles
+   ========================================================================== */
+.passbook-booklet-paper {
+  background-color: var(--passbook-paper);
+  color: #1f2937;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(0, 0, 0, 0.05);
+  position: relative;
+}
+
+.passbook-booklet-paper::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 14px;
+  background: linear-gradient(90deg, rgba(0,0,0,0.12) 0%, rgba(0,0,0,0.03) 60%, transparent 100%);
+  pointer-events-none;
+  z-index: 5;
+}
+
+/* Signature Stamp Replica */
+.officer-signature-stamp {
+  display: inline-block;
+  position: relative;
+  width: 84px;
+  height: 38px;
+  margin: 0 auto;
+}
+
+.signature-ink {
+  stroke: #1e3a8a;
+  stroke-width: 2;
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin="round";
+  opacity: 0.88;
+  filter: drop-shadow(0px 1px 1px rgba(30, 58, 138, 0.2));
+}
+
+.empty-signature-cell {
+  color: #9ca3af;
+  font-style: italic;
+  font-size: 11px;
+}
+
+/* ==========================================================================
+   Certificate of Fixed Term Deposit Security Guilloche Border
+   ========================================================================== */
+.certificate-guilloche {
+  background-image: radial-gradient(rgba(26, 56, 44, 0.04) 1px, transparent 1px);
+  background-size: 12px 12px;
+  border-style: double;
+  border-width: 6px;
+  border-color: #1a382c;
+  outline: 2px solid #b45309;
+  outline-offset: -10px;
+}
+
+/* Custom Sliders */
+input[type="range"] {
+  height: 6px;
+  background: #1e293b;
+  border-radius: 9999px;
+  outline: none;
+}
+
+/* Toast Messages */
+.toast-msg {
+  animation: slideInRight 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes slideInRight {
+  from { opacity: 0; transform: translateX(20px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+/* ==========================================================================
+   Print Stylesheet (Passbook & Certificate Print Optimization)
+   ========================================================================== */
+@media print {
+  body {
+    background-color: #ffffff !important;
+    color: #000000 !important;
+  }
+
+  header, 
+  nav, 
+  #flexibleSubTabsBar,
+  #viewDashboard, 
+  #viewProjection, 
+  #viewInsights, 
+  .no-print, 
+  #pageSwitcherBtns, 
+  #addNewRowFromPassbookBtn, 
+  #viewOriginalScanBtn,
+  #toastContainer,
+  #recordModal,
+  #newFixedModal,
+  #supabaseModal,
+  #photoScanModal {
+    display: none !important;
+  }
+
+  /* When printing Passbook */
+  #flexibleModeContainer, #viewPassbook {
+    display: block !important;
+  }
+
+  .passbook-booklet-paper {
+    box-shadow: none !important;
+    border: 2px solid #000 !important;
+    margin: 0 !important;
+    padding: 15px !important;
+    width: 100% !important;
+    background: #ffffff !important;
+  }
+
+  table {
+    border-color: #000000 !important;
+  }
+
+  th, td {
+    border-color: #000000 !important;
+    color: #000000 !important;
+  }
+
+  thead {
+    background-color: #f3f4f6 !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .maskable.masked {
+    filter: none !important;
+  }
+
+  /* When printing Certificate */
+  #certificateModal {
+    position: static !important;
+    display: block !important;
+    background: transparent !important;
+    padding: 0 !important;
+  }
+
+  .certificate-guilloche {
+    box-shadow: none !important;
+    margin: 0 auto !important;
+    page-break-inside: avoid;
+  }
+}

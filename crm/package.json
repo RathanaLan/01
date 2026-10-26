@@ -1,0 +1,21 @@
+{
+  "name": "chamroeun-nheat-saving-control",
+  "version": "1.0.0",
+  "description": "Chamroeun Nheat Saving Cooperative - Digital Passbook & Web Control System",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "serve": "node server.js"
+  },
+  "keywords": [
+    "savings",
+    "cooperative",
+    "passbook",
+    "microfinance",
+    "cambodia",
+    "riel"
+  ],
+  "author": "Antigravity",
+  "license": "MIT"
+}
+
