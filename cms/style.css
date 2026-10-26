@@ -1,0 +1,266 @@
+@import url('https://fonts.googleapis.com/css2?family=Battambang:wght@400;700;900&family=Kantumruy+Pro:wght@400;500;600;700;800&family=Moul&family=Noto+Sans+Khmer:wght@400;500;600;700;800;900&family=Outfit:wght@500;600;700;800;900&display=swap');
+
+/* កំណត់ Font ឱ្យដូច index.php */
+body {
+    font-family: 'Noto Sans Khmer', 'Battambang', 'Kantumruy Pro', 'Khmer OS Battambang', 'Siemreap', sans-serif;
+    background-color: #f0f2f5;
+    margin: 0;
+}
+
+.header-home {
+    text-align: center;
+    padding: 60px 20px;
+    background: linear-gradient(135deg, var(--primary-color), #8e44ad);
+    color: white;
+            clip-path: ellipse(150% 100% at 50% 0%); /* បង្កើតរាងកោងខាងក្រោម */
+            margin-bottom: 40px;
+        }
+
+/* ចានទម្រង់ចុះឈ្មោះ */
+.register-card {
+    position: relative;
+    background: white;
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    width: 100%;
+    max-width: 95%;
+    margin: 0 auto;
+}
+
+/* ការរៀបជួរ Input */
+.row-group {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 15px;
+}
+
+.input-control, .button-control {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+/* ស្ទីល Label */
+label {
+    font-weight: 700;
+    margin-bottom: 8px;
+    color: #651199; /* ពណ៌ Primary */
+    font-size: 0.95rem;
+}
+
+label i {
+    margin-right: 5px;
+    color: #bb8d1a; /* ពណ៌ Secondary */
+}
+
+/* ស្ទីល Input */
+select,
+input[type="text"],
+input[type="tel"],
+input[type="email"],
+input[type="password"],
+input[type="date"]{
+    padding: 12px 15px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    font-family: 'Noto Sans Khmer', 'Battambang', 'Kantumruy Pro', 'Khmer OS Battambang', 'Siemreap', sans-serif;
+    font-size: 1rem;
+    transition: all 0.3s;
+    background-color: #fcfcfc;
+}
+
+input:focus {
+    border-color: #651199;
+    outline: none;
+    box-shadow: 0 0 8px rgba(101, 17, 153, 0.2);
+    background-color: white;
+}
+
+/* ប៊ូតុងចុះឈ្មោះ */
+.action-buttons {
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    align-items: center;
+}
+
+.btn-submit {
+    background: linear-gradient(135deg, #651199, #8e44ad);
+    color: white;
+    padding: 15px 40px;
+    border: none;
+    border-radius: 12px;
+    font-size: 1.1rem;
+    font-weight: 700;
+    cursor: pointer;
+    width: 100%;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.btn-submit:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(101, 17, 153, 0.3);
+}
+
+/* Link ទៅកាន់ទំព័រ Login */
+.link-login {
+    text-decoration: none;
+    color: #bb8d1a;
+    font-weight: 400;
+    font-size: 0.9rem;
+    transition: color 0.2s;
+}
+
+.link-login:hover {
+    color: #651199;
+    text-decoration: underline;
+}
+
+.footer {
+   display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+.footer p{
+    text-align: center;
+}
+
+/* ការរៀបចំសម្រាប់ទូរស័ព្ទ */
+@media screen and (max-width: 768px) {
+    .row-group {
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+    .register-card {
+        padding: 25px 20px;
+    }
+    
+    .dashboard-container {
+        width: 95%;
+        margin-top: -40px;
+    }
+}
+
+/* កំណត់ឱ្យ Container របស់ Password រត់ពេញទទឹង */
+.password-wrapper {
+    position: relative;
+    width: 100%;
+    display: flex;
+    align-items: center;
+}
+
+/* កំណត់ឱ្យ Input Password រត់ពេញទទឹងដូច Input Tel */
+.password-wrapper input[type="password"],
+.password-wrapper input[type="text"] {
+    width: 100%;
+    padding-right: 45px; /* ទុកចន្លោះខាងស្តាំសម្រាប់ដាក់ Icon ភ្នែក */
+    box-sizing: border-box; /* ធានាថា Padding មិនធ្វើឱ្យ Input រីកធំជាងមុន */
+}
+
+/* កំណត់ទីតាំង Icon ភ្នែកឱ្យនៅខាងស្តាំដៃ ក្នុង Input */
+.toggle-password {
+    position: absolute;
+    right: 10px;
+    cursor: pointer;
+    user-select: none;
+    color: #666;
+    font-size: 18px;
+    z-index: 10;
+}
+.password-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+/* កំណត់ឱ្យ Input មានគម្លាតខាងស្តាំដើម្បីកុំឱ្យជាន់រូបភ្នែក */
+.password-container input {
+    width: 100%;
+    padding-right: 35px; /* បង្កើនគម្លាតខាងស្តាំ */
+}
+/* បន្ថែមស្ទីលឱ្យប៊ូតុង "ចូលប្រព័ន្ធ" ឱ្យមើលទៅស្អាតដូចក្នុង Register */
+button[name="teacher-login"] {
+    background: linear-gradient(135deg, #651199, #8e44ad);
+    color: white;
+    padding: 12px;
+    border: none;
+    border-radius: 10px;
+    font-family: 'Noto Sans Khmer', 'Battambang', 'Kantumruy Pro', 'Khmer OS Battambang', 'Siemreap', sans-serif;
+    font-weight: 700;
+    cursor: pointer;
+    width: 100%;
+    transition: 0.3s;
+}
+
+/* បន្ថែមស្ទីលសម្រាប់ប្រឡោះបង្ហាញរូបភាព */
+        .photo-preview-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+        .image-holder {
+            width: 150px;
+            height: 180px;
+            border: 2px dashed #651199;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            background-color: #f8f9fa;
+            cursor: pointer;
+            position: relative;
+            transition: var(--transition);
+        }
+        .image-holder:hover {
+            border-color: var(--secondary-color);
+            background-color: #f0e6f7;
+        }
+        .image-holder img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: none; /* លាក់រូបភាពសិន បើមិនទាន់រើស */
+        }
+        .image-holder i {
+            font-size: 3rem;
+            color: #ccc;
+        }
+        .upload-label {
+            margin-top: 10px;
+            font-size: 0.9rem;
+            color: #651199;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+.photo-preview-container {
+    text-align: center;
+    margin-bottom: 20px;
+}
+.image-holder {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    border: 2px dashed #ddd;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    cursor: pointer;
+    background-color: #f9f9f9;
+}
+.image-holder img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}

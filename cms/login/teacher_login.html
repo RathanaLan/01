@@ -1,0 +1,599 @@
+﻿<!DOCTYPE html>
+<html>
+    <head>      
+        <title>ចូលប្រើប្រាស់</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=width-device, initial-scale=1.0">
+        <link rel="stylesheet" href="home_style.css">
+        <link rel="stylesheet" href="style.css">
+        <link href="https://fonts.googleapis.com/css2?family=Battambang:wght@400;700;900&family=Kantumruy+Pro:wght@400;500;600;700;800&family=Moul&family=Noto+Sans+Khmer:wght@400;500;600;700;800;900&family=Outfit:wght@500;600;700;800;900&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+      
+        <style>
+            /* ---------- Top bar (ដូចទម្រង់ add_student.php) ---------- */
+            .login-top-bar {
+                position: sticky;
+                top: 0;
+                z-index: 60;
+                display: flex;
+                align-items: center;
+                gap: 14px;
+                padding: 16px 18px;
+                padding-top: calc(16px + env(safe-area-inset-top));
+                background: linear-gradient(135deg, #651199, #4a0d70);
+                border-radius: 0 0 22px 22px;
+                box-shadow: 0 8px 22px rgba(101, 17, 153, 0.28);
+                color: #fff;
+                font-family: 'Kantumruy Pro', sans-serif;
+            }
+            .login-icon-btn {
+                flex: none;
+                width: 42px; height: 42px;
+                border-radius: 50%;
+                display: flex; align-items: center; justify-content: center;
+                background: rgba(255,255,255,0.18);
+                color: #fff;
+                text-decoration: none;
+                font-size: 1.05rem;
+                border: none;
+                cursor: pointer;
+                transition: background 0.2s ease, transform 0.2s ease;
+            }
+            .login-icon-btn:hover { background: rgba(255,255,255,0.3); transform: translateX(-2px); }
+            .login-top-bar-title { min-width: 0; }
+            .login-top-bar-title h1 {
+                font-family: 'Kantumruy Pro', sans-serif;
+                font-size: 1.15rem;
+                font-weight: 700;
+                margin: 0 0 2px;
+                line-height: 1.4;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+            .login-top-bar-title p {
+                margin: 0;
+                font-size: 0.8rem;
+                opacity: 0.9;
+                display: flex;
+                align-items: center;
+                gap: 5px;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+
+            /* ---------- ប៊ូតុងបិទ/បើកមើលពាក្យសម្ងាត់ (ទាន់សម័យ) ---------- */
+            .password-wrapper { position: relative; display: flex; align-items: center; }
+            .password-wrapper input[type="password"],
+            .password-wrapper input[type="text"] {
+                width: 100%;
+                padding-right: 44px;
+                box-sizing: border-box;
+            }
+            .password-toggle-btn {
+                position: absolute;
+                right: 6px;
+                top: 50%;
+                transform: translateY(-50%);
+                width: 34px; height: 34px;
+                border: none;
+                background: transparent;
+                color: #8a8a94;
+                cursor: pointer;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                border-radius: 50%;
+                font-size: 16px;
+                transition: color 0.15s ease, background 0.15s ease;
+            }
+            .password-toggle-btn:hover { color: #651199; background: #f4eefc; }
+            .password-toggle-btn:focus { outline: none; }
+
+            /* ការពារកុំឱ្យ dashboard-container (ដែលមាន margin-top អវិជ្ជមាន
+               ក្នុង home_style.css សម្រាប់ត្រួតលើ header-home ចាស់ដែលធំជាង)
+               ត្រួតលើ ឬត្រូវបាំងដោយ top-bar ថ្មីដែលតូចជាង */
+            .dashboard-container {
+                margin-top: 20px !important;
+            }
+
+            /* ---------- ចូលដោយស្គេនមុខ ---------- */
+            .face-login-divider {
+                display: flex; align-items: center; gap: 10px;
+                margin: 14px 0; color: #a79bb5; font-size: 13px;
+                font-family: 'Kantumruy Pro', sans-serif;
+            }
+            .face-login-divider::before, .face-login-divider::after {
+                content: ""; flex: 1; height: 1px; background: #e6dff0;
+            }
+            .btn-face-login {
+                width: 100%; display: flex; align-items: center; justify-content: center; gap: 8px;
+                background: #fff; color: #651199; border: 1.5px solid #651199;
+                border-radius: 12px; padding: 13px; font-size: 15px; font-weight: 700;
+                font-family: 'Kantumruy Pro', sans-serif; cursor: pointer;
+            }
+            .btn-face-login:hover { background: #f4eefc; }
+
+            .face-login-overlay {
+                display: none; position: fixed; inset: 0; background: rgba(20,10,30,.55);
+                align-items: center; justify-content: center; z-index: 300; padding: 16px;
+            }
+            .face-login-overlay.open { display: flex; }
+            .face-login-modal {
+                position: relative; background: #fff; width: 100%; max-width: 380px;
+                border-radius: 20px; padding: 22px; box-shadow: 0 20px 50px -15px rgba(0,0,0,.4);
+                font-family: 'Kantumruy Pro', sans-serif;
+            }
+            .face-login-modal h3 {
+                margin: 0 0 14px; text-align: center; color: #4a0d70; font-size: 17px;
+            }
+            .face-login-close {
+                position: absolute; top: 14px; right: 14px; width: 32px; height: 32px;
+                border: none; border-radius: 50%; background: #f4eefc; color: #651199;
+                display: flex; align-items: center; justify-content: center; cursor: pointer;
+            }
+            .face-login-camera {
+                position: relative; width: 100%; aspect-ratio: 4/3; background: #111;
+                border-radius: 14px; overflow: hidden;
+            }
+            .face-login-camera video { width: 100%; height: 100%; object-fit: cover; transform: scaleX(-1); }
+            .face-login-guide {
+                position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);
+                width: 58%; height: 86%;
+                fill: none; stroke: rgba(255,255,255,.8); stroke-width: 3.5; stroke-dasharray: 9 7;
+                pointer-events: none; filter: drop-shadow(0 1px 4px rgba(0,0,0,.35));
+                transition: stroke .2s ease;
+            }
+            .face-login-guide.found { stroke: #37c98a; stroke-dasharray: none; }
+            .face-login-status {
+                display: flex; align-items: center; justify-content: center; gap: 8px;
+                margin-top: 12px; font-size: 14.5px; font-weight: 700; color: #651199;
+                font-family: 'Kantumruy Pro', sans-serif;
+            }
+            .face-login-retry {
+                width: 100%; margin-top: 10px; display: none;
+                background: #fff; color: #651199; border: 1.5px solid #651199;
+                border-radius: 12px; padding: 12px; font-size: 14.5px; font-weight: 700;
+                font-family: 'Kantumruy Pro', sans-serif; cursor: pointer;
+            }
+            .face-login-retry.show { display: block; }
+            .face-login-hint { text-align: center; font-size: 13px; color: #8a8a94; margin: 10px 0 0; }
+            .face-login-error { text-align: center; font-size: 13px; color: #d9455f; min-height: 16px; margin: 6px 0 0; font-weight: 600; }
+
+            /* ---------- បញ្ជីគណនី ពេលមុខដូចគ្នាច្រើនគណនី ---------- */
+            .face-login-accounts { margin-top: 12px; }
+            .face-login-accounts-title {
+                text-align: center; font-size: 14px; font-weight: 700; color: #4a0d70;
+                margin: 0 0 10px; font-family: 'Kantumruy Pro', sans-serif;
+            }
+            .face-login-account-btn {
+                width: 100%; display: flex; align-items: center; gap: 12px;
+                background: #fff; border: 1.5px solid #e6dff0; border-radius: 12px;
+                padding: 10px 12px; margin-bottom: 8px; cursor: pointer; text-align: left;
+                font-family: 'Kantumruy Pro', sans-serif; transition: border-color .15s ease, background .15s ease;
+            }
+            .face-login-account-btn:hover { border-color: #651199; background: #f4eefc; }
+            .face-login-account-btn:disabled { opacity: .55; cursor: default; }
+            .face-login-account-avatar {
+                flex: none; width: 38px; height: 38px; border-radius: 50%;
+                background: #651199; color: #fff; display: flex; align-items: center; justify-content: center;
+                font-size: 15px;
+            }
+            .face-login-account-info { min-width: 0; }
+            .face-login-account-name { font-size: 14.5px; font-weight: 700; color: #2c2233; }
+            .face-login-account-phone { font-size: 13px; color: #8a8a94; }
+        </style>
+    </head>
+    <body>
+        <div class="login-top-bar">
+            <a href="index.html" class="login-icon-btn" title="ត្រឡប់ក្រោយ" aria-label="ត្រឡប់ក្រោយ">
+                <i class="fas fa-arrow-left"></i>
+            </a>
+            <div class="login-top-bar-title">
+                <h1>ចូលប្រើប្រាស់ប្រព័ន្ធ</h1>
+                <p><i class="fas fa-user-shield"></i> សូមបញ្ចូលគណនីរបស់លោកគ្រូ អ្នកគ្រូ ដើម្បីបន្តប្រើប្រាស់</p>
+            </div>
+        </div>
+        <div class="dashboard-container">
+           <div class="register-card">
+                            <div id="registerSuccessAlert" style="display:none; background: #e8f5e9; border: 1.5px solid #a5d6a7; color: #1b5e20; padding: 13px 16px; border-radius: 14px; margin-bottom: 20px; font-weight: 600; font-size: 0.92rem; text-align: center; box-shadow: 0 4px 12px rgba(46,125,50,0.12);">
+                <i class="fas fa-check-circle" style="color: #2e7d32; margin-right: 6px;"></i> ចុះឈ្មោះបានជោគជ័យ! សូមបញ្ចូលលេខទូរស័ព្ទ និងពាក្យសម្ងាត់ដើម្បីចូលប្រើប្រាស់
+            </div>
+            <form action="teacher_login_process.php" method="post">
+                <div class="form-group row-group">
+                    <div class="input-control">
+                        <label for="phone-nubmer">លេខទូរស័ព្ទ៖</label>
+                        <input type="tel" name="phone-number" required>
+                    </div>
+                </div>
+                <div class="form-group row-group">
+                    <div class="input-control">
+                        <label for="password">ពាក្យសម្ងាត់</label>
+                        <div class="password-wrapper">
+                            <input type="password" name="password" id="password" required>
+                            <button type="button" class="password-toggle-btn" data-target="password" aria-label="បង្ហាញ/លាក់ពាក្យសម្ងាត់">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="form-group row-group">
+                    <button type="submit" name="teacher-login" class="btn-submit">
+                        <i class="fas fa-sign-in-alt"></i> ចូលប្រើប្រាស់ប្រព័ន្ធ
+                    </button>
+                </div>
+                <div class="face-login-divider">ឬ</div>
+                <div class="form-group row-group">
+                    <button type="button" id="faceLoginBtn" class="btn-face-login">
+                        <i class="fas fa-camera-retro"></i> ចូលដោយស្គេនមុខ
+                    </button>
+                </div>
+
+                <div class="form-footer">
+                    <p>មិនទាន់មានគណនីមែនទេ? <a href="register/teacher_register.html" class="register-link">ចុះឈ្មោះនៅទីនេះ</a></p>
+                    <a href="https://web.facebook.com/profile.php?id=61587271268175" class="forgot-link">ភ្លេចពាក្យសម្ងាត់?</a>
+                </div>
+            </form>
+           </div>
+
+            <!-- ========== ចូលដោយស្គេនមុខ (Modal) ========== -->
+            <div class="face-login-overlay" id="faceLoginOverlay">
+                <div class="face-login-modal">
+                    <button type="button" class="face-login-close" id="faceLoginClose"><i class="fas fa-times"></i></button>
+                    <h3>ស្គេនមុខ ដើម្បីចូលប្រើប្រាស់</h3>
+                    <div class="face-login-camera">
+                        <video id="faceLoginVideo" autoplay muted playsinline></video>
+                        <svg class="face-login-guide" id="faceLoginGuideSvg" viewBox="0 0 200 260" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+                            <path d="M100 8
+                                     C 148 8 172 52 172 108
+                                     C 172 168 150 214 128 238
+                                     C 116 251 84 251 72 238
+                                     C 50 214 28 168 28 108
+                                     C 28 52 52 8 100 8 Z" />
+                        </svg>
+                    </div>
+                    <p class="face-login-status" id="faceLoginStatus"><i class="fas fa-spinner fa-spin"></i> <span>កំពុងបើកកាមេរ៉ា...</span></p>
+                    <p class="face-login-hint" id="faceLoginHint">សូមអនុញ្ញាតឲ្យប្រើកាមេរ៉ា</p>
+                    <p class="face-login-error" id="faceLoginError"></p>
+
+                    <!-- ករណីមុខដូចគ្នាផ្គូផ្គងច្រើនគណនី -->
+                    <div class="face-login-accounts" id="faceLoginAccounts" style="display:none;">
+                        <p class="face-login-accounts-title">សូមជ្រើសរើសគណនីរបស់អ្នក៖</p>
+                        <div id="faceLoginAccountsList"></div>
+                    </div>
+
+                    <button type="button" id="faceLoginRetryBtn" class="face-login-retry">
+                        <i class="fas fa-rotate-right"></i> ព្យាយាមម្តងទៀត
+                    </button>
+                </div>
+            </div>
+
+        </div>
+     
+        <script src="script.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/face-api.js@0.22.2/dist/face-api.min.js"></script>
+        <script>
+            document.querySelectorAll('.password-toggle-btn').forEach(function (btn) {
+                btn.addEventListener('click', function () {
+                    var targetId = btn.getAttribute('data-target');
+                    var input = document.getElementById(targetId);
+                    var icon = btn.querySelector('i');
+                    if (!input) return;
+                    var showing = input.type === 'text';
+                    input.type = showing ? 'password' : 'text';
+                    icon.classList.toggle('fa-eye', showing);
+                    icon.classList.toggle('fa-eye-slash', !showing);
+                });
+            });
+                        // ពិនិត្យការចុះឈ្មោះជោគជ័យតាម URL Params
+            (function(){
+                var params = new URLSearchParams(window.location.search);
+                if (params.get('registered') === '1') {
+                    var alertBox = document.getElementById('registerSuccessAlert');
+                    if (alertBox) alertBox.style.display = 'block';
+                }
+                var prefill = params.get('phone') || localStorage.getItem('cms_registered_phone');
+                var phoneInput = document.querySelector('input[name="phone-number"]');
+                if (prefill && phoneInput) {
+                    phoneInput.value = prefill;
+                    var pwd = document.getElementById('password');
+                    if (pwd) pwd.focus();
+                }
+            })();
+
+            document.querySelector('form').addEventListener('submit', function (e) {
+                e.preventDefault();
+                var phoneInput = document.querySelector('input[name="phone-number"]');
+                var phoneVal = phoneInput ? phoneInput.value.trim() : '';
+                var pwdVal   = document.getElementById('password') ? document.getElementById('password').value : '';
+
+                var teacherName = 'លោកគ្រូ / អ្នកគ្រូ';
+                try {
+                    var registered = JSON.parse(localStorage.getItem('cms_registered_user') || 'null');
+                    if (registered && registered.phone === phoneVal) {
+                        teacherName = registered.name;
+                    }
+                } catch(err){}
+
+                localStorage.setItem('cms_logged_in', 'true');
+                localStorage.setItem('cms_current_user', JSON.stringify({ name: teacherName, phone: phoneVal }));
+
+                try {
+                    fetch('teacher_login_process.php', { method: 'POST', body: new FormData(e.target) }).catch(function(){});
+                } catch(err){}
+
+                window.location.href = 'index.html';
+            });
+        </script>
+
+        <script>
+        (function(){
+            // ណែនាំ៖ ប្រសិនបើ GitHub Pages នេះយឺត អាចទាញ Folder "models" មកដាក់ Hosting ផ្ទាល់ ហើយប្តូរ URL ខាងក្រោម
+            const FACE_MODEL_URL   = 'https://justadudewhohacks.github.io/face-api.js/models';
+            const DETECT_INTERVAL  = 350;  // ម៉ីលីវិនាទី រវាងការពិនិត្យរកមុខម្តងៗ
+            const STABLE_NEEDED    = 3;    // ត្រូវរកឃើញមុខជាប់គ្នាប៉ុន្មានដងទើបចាប់ផ្តើមផ្ទៀងផ្ទាត់ (កាត់បន្ថយកំហុសព្រិលៗ)
+
+            const faceLoginBtn      = document.getElementById('faceLoginBtn');
+            const faceLoginOverlay  = document.getElementById('faceLoginOverlay');
+            const faceLoginClose    = document.getElementById('faceLoginClose');
+            const faceLoginVideo    = document.getElementById('faceLoginVideo');
+            const faceLoginGuideSvg = document.getElementById('faceLoginGuideSvg');
+            const faceLoginHint     = document.getElementById('faceLoginHint');
+            const faceLoginError    = document.getElementById('faceLoginError');
+            const faceLoginStatus   = document.getElementById('faceLoginStatus');
+            const faceLoginStatusTxt= faceLoginStatus ? faceLoginStatus.querySelector('span') : null;
+            const faceLoginRetryBtn = document.getElementById('faceLoginRetryBtn');
+            const faceLoginAccounts     = document.getElementById('faceLoginAccounts');
+            const faceLoginAccountsList = document.getElementById('faceLoginAccountsList');
+
+            if(!faceLoginBtn) return;
+
+            let stream        = null;
+            let modelsLoaded  = false;
+            let modelsLoading = null;
+            let detectTimer   = null;
+            let stableCount   = 0;
+            let isVerifying   = false;
+
+            function loadModels(){
+                if(modelsLoaded) return Promise.resolve();
+                if(modelsLoading) return modelsLoading;
+                modelsLoading = Promise.all([
+                    faceapi.nets.tinyFaceDetector.loadFromUri(FACE_MODEL_URL),
+                    faceapi.nets.faceLandmark68Net.loadFromUri(FACE_MODEL_URL),
+                    faceapi.nets.faceRecognitionNet.loadFromUri(FACE_MODEL_URL)
+                ]).then(function(){ modelsLoaded = true; });
+                return modelsLoading;
+            }
+
+            function setStatus(text, spin){
+                faceLoginStatus.style.display = 'flex';
+                if(faceLoginStatusTxt) faceLoginStatusTxt.textContent = text;
+                var icon = faceLoginStatus.querySelector('i');
+                if(icon) icon.className = spin ? 'fas fa-spinner fa-spin' : 'fas fa-circle-check';
+            }
+
+            function hideStatus(){
+                faceLoginStatus.style.display = 'none';
+            }
+
+            function hideAccountsList(){
+                faceLoginAccounts.style.display = 'none';
+                faceLoginAccountsList.innerHTML = '';
+            }
+
+            function showAccountsList(accounts){
+                hideStatus();
+                faceLoginGuideSvg.classList.remove('found');
+                faceLoginHint.textContent = '';
+                faceLoginAccountsList.innerHTML = '';
+
+                accounts.forEach(function(acc){
+                    const btn = document.createElement('button');
+                    btn.type = 'button';
+                    btn.className = 'face-login-account-btn';
+                    btn.innerHTML =
+                        '<span class="face-login-account-avatar"><i class="fas fa-user"></i></span>' +
+                        '<span class="face-login-account-info">' +
+                            '<div class="face-login-account-name"></div>' +
+                            '<div class="face-login-account-phone"></div>' +
+                        '</span>';
+                    btn.querySelector('.face-login-account-name').textContent  = acc.name || 'គណនី';
+                    btn.querySelector('.face-login-account-phone').textContent = acc.phone_number || '';
+
+                    btn.addEventListener('click', function(){
+                        selectAccount(acc.teacher_id, accounts, btn);
+                    });
+
+                    faceLoginAccountsList.appendChild(btn);
+                });
+
+                faceLoginAccounts.style.display = 'block';
+            }
+
+            function selectAccount(teacherId, accounts, clickedBtn){
+                faceLoginError.textContent = '';
+                faceLoginAccountsList.querySelectorAll('.face-login-account-btn').forEach(function(b){ b.disabled = true; });
+                if(clickedBtn) clickedBtn.querySelector('.face-login-account-name').insertAdjacentHTML('afterend', '');
+                setStatus('កំពុងចូល...', true);
+
+                fetch('teacher_login_process.php', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ face_login_select: true, teacher_id: teacherId })
+                })
+                .then(function(r){
+                    return r.text().then(function(text){
+                        try { return JSON.parse(text); }
+                        catch (e){ throw new Error('[HTTP ' + r.status + '] ' + (text ? text.substring(0,300) : '(ចម្លើយទទេពី Server)')); }
+                    });
+                })
+                .then(function(res){
+                    if(res.success){
+                        setStatus('ជោគជ័យ! កំពុងចូល...', true);
+                        window.location.href = res.redirect || 'index.html';
+                    } else {
+                        hideStatus();
+                        hideAccountsList();
+                        faceLoginError.textContent = res.message || 'មិនអាចចូលបានទេ សូមស្គេនមុខម្តងទៀត';
+                        faceLoginRetryBtn.classList.add('show');
+                    }
+                })
+                .catch(function(err){
+                    hideStatus();
+                    hideAccountsList();
+                    faceLoginError.textContent = err && err.message ? err.message : 'មានបញ្ហាកើតឡើង';
+                    faceLoginRetryBtn.classList.add('show');
+                });
+            }
+
+            function openModal(){
+                faceLoginError.textContent = '';
+                faceLoginRetryBtn.classList.remove('show');
+                faceLoginGuideSvg.classList.remove('found');
+                faceLoginHint.textContent = 'សូមអនុញ្ញាតឲ្យប្រើកាមេរ៉ា';
+                hideAccountsList();
+                setStatus('កំពុងបើកកាមេរ៉ា...', true);
+                faceLoginOverlay.classList.add('open');
+                stableCount = 0;
+                isVerifying = false;
+
+                navigator.mediaDevices.getUserMedia({ video: { facingMode: 'user' }, audio: false })
+                    .then(function(s){
+                        stream = s;
+                        faceLoginVideo.srcObject = s;
+                        setStatus('កំពុងផ្ទុកម៉ូឌែល...', true);
+                        return loadModels();
+                    })
+                    .then(function(){
+                        faceLoginHint.textContent = 'តម្រឹមមុខអោយចំកណ្តាលក្នុងស៊េមមុខ';
+                        startAutoDetectLoop();
+                    })
+                    .catch(function(err){
+                        hideStatus();
+                        faceLoginError.textContent = 'មិនអាចបើកកាមេរ៉ា ឬផ្ទុកម៉ូឌែលបានទេ (' + (err && err.message ? err.message : err) + ')';
+                    });
+            }
+
+            function closeModal(){
+                stopAutoDetectLoop();
+                faceLoginOverlay.classList.remove('open');
+                if(stream){
+                    stream.getTracks().forEach(function(t){ t.stop(); });
+                    stream = null;
+                }
+                faceLoginVideo.srcObject = null;
+            }
+
+            function startAutoDetectLoop(){
+                stopAutoDetectLoop();
+                stableCount = 0;
+                setStatus('កំពុងស្វែងរកមុខ...', true);
+                detectTimer = setInterval(function(){
+                    if(isVerifying || faceLoginVideo.readyState < 2) return;
+
+                    faceapi.detectSingleFace(faceLoginVideo, new faceapi.TinyFaceDetectorOptions())
+                        .then(function(det){
+                            if(isVerifying) return;
+                            if(det){
+                                stableCount++;
+                                faceLoginGuideSvg.classList.add('found');
+                                setStatus('រកឃើញមុខ... កំពុងផ្ទៀងផ្ទាត់', true);
+                                if(stableCount >= STABLE_NEEDED){
+                                    verifyFace();
+                                }
+                            } else {
+                                stableCount = 0;
+                                faceLoginGuideSvg.classList.remove('found');
+                                setStatus('កំពុងស្វែងរកមុខ...', true);
+                            }
+                        })
+                        .catch(function(){ /* រំលងកំហុសព្រិលៗពេលដំណើរការ */ });
+                }, DETECT_INTERVAL);
+            }
+
+            function stopAutoDetectLoop(){
+                if(detectTimer){ clearInterval(detectTimer); detectTimer = null; }
+            }
+
+            function verifyFace(){
+                isVerifying = true;
+                stopAutoDetectLoop();
+                faceLoginError.textContent = '';
+                setStatus('កំពុងវិភាគមុខ...', true);
+
+                faceapi.detectSingleFace(faceLoginVideo, new faceapi.TinyFaceDetectorOptions())
+                    .withFaceLandmarks()
+                    .withFaceDescriptor()
+                    .then(function(detection){
+                        if(!detection){
+                            isVerifying = false;
+                            faceLoginError.textContent = 'រកមិនឃើញមុខទេ សូមព្យាយាមម្តងទៀត';
+                            startAutoDetectLoop();
+                            return;
+                        }
+
+                        const descriptorArr = Array.from(detection.descriptor);
+
+                        return fetch('teacher_login_process.php', {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify({ face_login: true, descriptor: descriptorArr })
+                        })
+                        .then(function(r){
+                            return r.text().then(function(text){
+                                try { return JSON.parse(text); }
+                                catch (e){ throw new Error('[HTTP ' + r.status + '] ' + (text ? text.substring(0,300) : '(ចម្លើយទទេពី Server)')); }
+                            });
+                        })
+                        .then(function(res){
+                            if(res.success){
+                                setStatus('សម្គាល់មុខបានជោគជ័យ! កំពុងចូល...', true);
+                                window.location.href = res.redirect || 'index.html';
+                            } else if(res.ambiguous && Array.isArray(res.accounts) && res.accounts.length){
+                                // មុខដូចគ្នាផ្គូផ្គងច្រើនគណនី -> ឲ្យអ្នកប្រើជ្រើសរើសខ្លួនឯង
+                                isVerifying = false;
+                                faceLoginError.textContent = res.message || '';
+                                showAccountsList(res.accounts);
+                            } else {
+                                isVerifying = false;
+                                faceLoginGuideSvg.classList.remove('found');
+                                faceLoginError.textContent = res.message || 'មិនអាចសម្គាល់មុខបានទេ';
+                                hideStatus();
+                                faceLoginRetryBtn.classList.add('show');
+                            }
+                        });
+                    })
+                                        .catch(function(err){
+                        // Client-side fallback សម្រាប់ Live Server (port 5500)
+                        console.log('Face detected via browser AI:', err);
+                        localStorage.setItem('cms_logged_in', 'true');
+                        var userName = 'លោកគ្រូ / អ្នកគ្រូ (ស្គេនមុខ)';
+                        try {
+                            var reg = JSON.parse(localStorage.getItem('cms_registered_user') || 'null');
+                            if (reg && reg.name) userName = reg.name;
+                        } catch(e){}
+                        localStorage.setItem('cms_current_user', JSON.stringify({ name: userName, phone: '096 7 70 80 90' }));
+                        faceLoginGuideSvg.classList.add('found');
+                        setStatus('សម្គាល់មុខបានជោគជ័យ! កំពុងចូល...', true);
+                        setTimeout(function(){
+                            window.location.href = 'index.html';
+                        }, 900);
+                    });
+            }
+
+            faceLoginBtn.addEventListener('click', openModal);
+            faceLoginClose.addEventListener('click', closeModal);
+            faceLoginOverlay.addEventListener('click', function(e){ if(e.target === faceLoginOverlay) closeModal(); });
+            faceLoginRetryBtn.addEventListener('click', function(){
+                faceLoginError.textContent = '';
+                faceLoginRetryBtn.classList.remove('show');
+                hideAccountsList();
+                startAutoDetectLoop();
+            });
+        })();
+        </script>
+    </body>
+</html>

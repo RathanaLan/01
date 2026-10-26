@@ -1,0 +1,447 @@
+﻿<!DOCTYPE html>
+<html lang="km">
+<head>
+<meta charset="UTF-8">
+<title>ចុះឈ្មោះគ្រូបង្រៀន - ប្រព័ន្ធគ្រប់គ្រងថ្នាក់រៀន</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Battambang:wght@400;700;900&family=Kantumruy+Pro:wght@400;500;600;700;800&family=Moul&family=Noto+Sans+Khmer:wght@400;500;600;700;800;900&family=Outfit:wght@500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+  :root{
+    --purple-900:#2E0854;
+    --purple-700:#5B1596;
+    --purple-600:#7C2DBE;
+    --purple-050:#F6F1FC;
+    --bg:#F1ECF9;
+    --surface:#FFFFFF;
+    --ink:#241536;
+    --ink-muted:#726A85;
+    --border:#E6DEF3;
+    --border-focus:#9B5DD6;
+    --danger:#D6455B;
+    --radius-lg:20px;
+    --radius-md:12px;
+    --shadow-card:0 20px 45px -20px rgba(46,8,84,0.28);
+  }
+
+  *{ box-sizing:border-box; }
+
+  body{
+    margin:0;
+    min-height:100vh;
+    background:
+      radial-gradient(720px 420px at 100% -10%, rgba(124,45,190,0.16), transparent 60%),
+      var(--bg);
+    font-family:'Kantumruy Pro', sans-serif;
+    color:var(--ink);
+    -webkit-font-smoothing:antialiased;
+  }
+
+  /* ---------- Top bar ---------- */
+  .register-top-bar{
+    position:sticky;
+    top:0;
+    z-index:60;
+    display:flex;
+    align-items:center;
+    gap:14px;
+    padding:18px 20px;
+    padding-top:calc(18px + env(safe-area-inset-top));
+    background:linear-gradient(135deg, var(--purple-700), var(--purple-900));
+    border-radius:0 0 24px 24px;
+    box-shadow:0 12px 28px -10px rgba(46,8,84,0.45);
+    color:#fff;
+  }
+  .register-icon-btn{
+    flex:none;
+    width:42px; height:42px;
+    border-radius:50%;
+    display:flex; align-items:center; justify-content:center;
+    background:rgba(255,255,255,0.16);
+    color:#fff;
+    text-decoration:none;
+    font-size:1rem;
+    border:none;
+    cursor:pointer;
+    transition:background .2s ease, transform .2s ease;
+  }
+  .register-icon-btn:hover{ background:rgba(255,255,255,0.28); transform:translateX(-2px); }
+  .register-icon-btn:focus-visible{ outline:2px solid #fff; outline-offset:2px; }
+  .register-top-bar-title{ min-width:0; }
+  .register-top-bar-title h1{
+    font-size:1.15rem;
+    font-weight:700;
+    margin:0 0 2px;
+    line-height:1.4;
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+  }
+  .register-top-bar-title p{
+    margin:0;
+    font-size:.8rem;
+    opacity:.85;
+    display:flex;
+    align-items:center;
+    gap:6px;
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+  }
+
+  /* ---------- Page shell ---------- */
+  .page{
+    max-width:720px;
+    margin:0 auto;
+    padding:28px 18px 56px;
+  }
+
+  .register-card{
+    background:var(--surface);
+    border-radius:var(--radius-lg);
+    box-shadow:var(--shadow-card);
+    padding:36px 34px;
+    border:1px solid rgba(46,8,84,0.05);
+  }
+
+  /* ---------- Sections ---------- */
+  .form-section{
+    padding-block:22px;
+    border-bottom:1px solid var(--border);
+  }
+  .form-section:last-of-type{ border-bottom:none; padding-bottom:6px; }
+  .section-heading{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    margin:0 0 16px;
+    font-size:.98rem;
+    font-weight:700;
+    color:var(--purple-900);
+  }
+  .section-heading i{
+    width:30px; height:30px;
+    border-radius:9px;
+    background:var(--purple-050);
+    color:var(--purple-700);
+    display:flex; align-items:center; justify-content:center;
+    font-size:.85rem;
+  }
+
+  .row-group{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:16px;
+  }
+  .form-group + .form-group{ margin-top:16px; }
+
+  .input-control{ display:flex; flex-direction:column; gap:6px; }
+  .input-control label{
+    font-size:.82rem;
+    font-weight:600;
+    color:var(--ink-muted);
+  }
+  .input-control input[type="text"],
+  .input-control input[type="tel"],
+  .input-control input[type="email"],
+  .input-control input[type="password"],
+  .input-control select{
+    font-family:inherit;
+    font-size:.95rem;
+    color:var(--ink);
+    padding:12px 14px;
+    border-radius:var(--radius-md);
+    border:1.5px solid var(--border);
+    background:#fff;
+    width:100%;
+    transition:border-color .15s ease, box-shadow .15s ease;
+  }
+  .input-control select{
+    appearance:none;
+    background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='14' height='9' viewBox='0 0 14 9'><path d='M1 1l6 6 6-6' stroke='%235B1596' stroke-width='2' fill='none' stroke-linecap='round' stroke-linejoin='round'/></svg>");
+    background-repeat:no-repeat;
+    background-position:right 14px center;
+    padding-inline-end:36px;
+  }
+  .input-control input:focus,
+  .input-control select:focus{
+    outline:none;
+    border-color:var(--border-focus);
+    box-shadow:0 0 0 4px rgba(124,45,190,0.14);
+  }
+  .input-control input::placeholder{ color:#B4ACC4; }
+
+  /* Gender as pill toggle */
+  .gender-pills{ display:flex; gap:10px; }
+  .gender-pills input{ position:absolute; opacity:0; pointer-events:none; }
+  .gender-pills label{
+    flex:1;
+    display:flex; align-items:center; justify-content:center; gap:8px;
+    padding:11px 10px;
+    border-radius:var(--radius-md);
+    border:1.5px solid var(--border);
+    font-size:.92rem;
+    font-weight:600;
+    color:var(--ink-muted);
+    cursor:pointer;
+    transition:all .15s ease;
+  }
+  .gender-pills input:checked + label{
+    border-color:var(--purple-700);
+    background:var(--purple-050);
+    color:var(--purple-900);
+  }
+  .gender-pills input:focus-visible + label{
+    outline:2px solid var(--border-focus);
+    outline-offset:2px;
+  }
+
+  /* Password field with toggle */
+  .password-wrapper{ position:relative; display:flex; align-items:center; }
+  .password-wrapper input{ padding-inline-end:44px; }
+  .password-toggle-btn{
+    position:absolute;
+    inset-inline-end:6px;
+    width:34px; height:34px;
+    border:none;
+    background:transparent;
+    color:#9A93AA;
+    cursor:pointer;
+    display:flex; align-items:center; justify-content:center;
+    border-radius:50%;
+    font-size:15px;
+    transition:color .15s ease, background .15s ease;
+  }
+  .password-toggle-btn:hover{ color:var(--purple-700); background:var(--purple-050); }
+  .password-toggle-btn:focus-visible{ outline:2px solid var(--border-focus); }
+  .password-hint{
+    font-size:.75rem;
+    color:var(--ink-muted);
+    margin:2px 2px 0;
+  }
+
+  /* ---------- Actions ---------- */
+  .action-buttons{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:14px;
+    margin-top:8px;
+  }
+  .btn-submit{
+    width:100%;
+    display:flex; align-items:center; justify-content:center; gap:10px;
+    background:linear-gradient(135deg, var(--purple-600), var(--purple-900));
+    color:#fff;
+    font-family:inherit;
+    font-size:1rem;
+    font-weight:700;
+    border:none;
+    border-radius:var(--radius-md);
+    padding:15px 20px;
+    cursor:pointer;
+    box-shadow:0 14px 26px -12px rgba(91,21,150,0.55);
+    transition:transform .15s ease, box-shadow .15s ease;
+  }
+  .btn-submit:hover{ transform:translateY(-1px); box-shadow:0 18px 30px -12px rgba(91,21,150,0.6); }
+  .btn-submit:active{ transform:translateY(0); }
+  .btn-submit:focus-visible{ outline:2px solid var(--purple-900); outline-offset:3px; }
+
+  .link-login{
+    font-size:.88rem;
+    color:var(--ink-muted);
+    text-decoration:none;
+  }
+  .link-login:hover{ color:var(--purple-700); text-decoration:underline; }
+
+  /* ---------- Responsive ---------- */
+  @media (max-width:600px){
+    .page{ padding:18px 12px 40px; }
+    .register-card{ padding:24px 18px; border-radius:18px; }
+    .row-group{ grid-template-columns:1fr; gap:14px; }
+    .register-top-bar-title h1{ font-size:1.05rem; }
+  }
+
+  @media (prefers-reduced-motion:reduce){
+    *{ transition:none !important; }
+  }
+</style>
+</head>
+<body>
+
+  <div class="register-top-bar">
+    <a href="login/teacher_login.html" class="register-icon-btn" title="ត្រឡប់ក្រោយ" aria-label="ត្រឡប់ក្រោយ">
+      <i class="fas fa-arrow-left"></i>
+    </a>
+    <div class="register-top-bar-title">
+      <h1>ចុះឈ្មោះគ្រូបង្រៀន</h1>
+      <p><i class="fas fa-user-edit"></i> បង្កើតគណនីថ្មីសម្រាប់លោកគ្រូ អ្នកគ្រូ</p>
+    </div>
+  </div>
+
+  <div class="page">
+    <div class="register-card">
+      <form action="teacher_register_process.php" method="post">
+
+        <div class="form-section">
+          <h2 class="section-heading"><i class="fas fa-id-card"></i> ព័ត៌មានផ្ទាល់ខ្លួន</h2>
+
+          <div class="form-group row-group">
+            <div class="input-control">
+              <label for="first-name">ត្រកូល*</label>
+              <input type="text" id="first-name" name="first-name" required placeholder="បញ្ចូលត្រកូល">
+            </div>
+            <div class="input-control">
+              <label for="last-name">ឈ្មោះ*</label>
+              <input type="text" id="last-name" name="last-name" required placeholder="បញ្ចូលឈ្មោះ">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="input-control">
+              <label>ភេទ*</label>
+              <div class="gender-pills">
+                <input type="radio" id="gender-m" name="gender" value="ប" required>
+                <label for="gender-m"><i class="fas fa-mars"></i> ប្រុស</label>
+                <input type="radio" id="gender-f" name="gender" value="ស" required>
+                <label for="gender-f"><i class="fas fa-venus"></i> ស្រី</label>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group row-group">
+            <div class="input-control">
+              <label for="school-unit">អង្គភាព/សាលារៀន*</label>
+              <input type="text" id="school-unit" name="school-unit" required placeholder="ឧ.ច្រកទៀក">
+            </div>
+            <div class="input-control">
+              <label for="school-type">គ្រូបង្រៀនកម្រិត*</label>
+              <select id="school-type" name="school-type" required>
+                <option value="" disabled selected>-- សូមជ្រើសរើសកម្រិត --</option>
+                <option value="បឋមសិក្សា">បឋមសិក្សា</option>
+                <option value="អនុវិទ្យាល័យ">អនុវិទ្យាល័យ</option>
+                <option value="វិទ្យាល័យ">វិទ្យាល័យ</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-section">
+          <h2 class="section-heading"><i class="fas fa-address-book"></i> ព័ត៌មានទំនាក់ទំនង</h2>
+          <div class="form-group row-group">
+            <div class="input-control">
+              <label for="tel">លេខទូរស័ព្ទ*</label>
+              <input type="tel" id="tel" name="tel" required placeholder="ឧ.012 345 678">
+            </div>
+            <div class="input-control">
+              <label for="email">អ៊ីមែល (បើមាន)</label>
+              <input type="email" id="email" name="email" placeholder="ឧ.example@email.com">
+            </div>
+          </div>
+        </div>
+
+        <div class="form-section">
+          <h2 class="section-heading"><i class="fas fa-lock"></i> សុវត្ថិភាពគណនី</h2>
+          <div class="form-group row-group">
+            <div class="input-control">
+              <label for="password">ពាក្យសម្ងាត់*</label>
+              <div class="password-wrapper">
+                <input type="password" name="password" id="password" required minlength="6" placeholder="យ៉ាងតិច ៦ ខ្ទង់">
+                <button type="button" class="password-toggle-btn" data-target="password" aria-label="បង្ហាញ/លាក់ពាក្យសម្ងាត់">
+                  <i class="fas fa-eye"></i>
+                </button>
+              </div>
+            </div>
+            <div class="input-control">
+              <label for="confirm-password">បញ្ជាក់ពាក្យសម្ងាត់*</label>
+              <div class="password-wrapper">
+                <input type="password" name="confirm-password" id="confirm-password" required placeholder="បញ្ចូលពាក្យសម្ងាត់ម្តងទៀត">
+                <button type="button" class="password-toggle-btn" data-target="confirm-password" aria-label="បង្ហាញ/លាក់ពាក្យសម្ងាត់">
+                  <i class="fas fa-eye"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+          <p class="password-hint">ប្រើអក្សរ លេខ ចម្រុះគ្នា ដើម្បីសុវត្ថិភាពខ្ពស់</p>
+        </div>
+
+        <div class="action-buttons">
+          <button type="submit" name="teacher-register" class="btn-submit">
+            <i class="fas fa-check-circle"></i> ចុះឈ្មោះឥឡូវនេះ
+          </button>
+          <a href="login/teacher_login.html" class="link-login">មានគណនីរួចហើយ? ចូលប្រើប្រាស់</a>
+        </div>
+
+      </form>
+    </div>
+  </div>
+
+<script>
+  document.querySelectorAll('.password-toggle-btn').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var targetId = btn.getAttribute('data-target');
+      var input = document.getElementById(targetId);
+      var icon = btn.querySelector('i');
+      if (!input) return;
+      var showing = input.type === 'text';
+      input.type = showing ? 'password' : 'text';
+      icon.classList.toggle('fa-eye', showing);
+      icon.classList.toggle('fa-eye-slash', !showing);
+    });
+  });
+
+    // ការធានាថាពាក្យសម្ងាត់ដូចគ្នា និងរក្សាទុកទិន្នន័យ (គាំទ្រទាំង Live Server និង PHP)
+  document.querySelector('form').addEventListener('submit', function(e){
+    e.preventDefault();
+    var pw = document.getElementById('password').value;
+    var cpw = document.getElementById('confirm-password').value;
+    if (pw !== cpw) {
+      alert('ពាក្យសម្ងាត់ និង ការបញ្ជាក់ពាក្យសម្ងាត់ មិនត្រូវគ្នាទេ!');
+      return;
+    }
+
+    var firstName = document.getElementById('first-name').value.trim();
+    var lastName  = document.getElementById('last-name').value.trim();
+    var genderEl  = document.querySelector('input[name="gender"]:checked');
+    var gender    = genderEl ? genderEl.value : 'ប';
+    var schoolUnit= document.getElementById('school-unit').value.trim();
+    var schoolType= document.getElementById('school-type').value;
+    var tel       = document.getElementById('tel').value.trim();
+    var email     = document.getElementById('email').value.trim();
+
+    var userData = {
+      name: firstName + ' ' + lastName,
+      firstName: firstName,
+      lastName: lastName,
+      gender: gender,
+      schoolUnit: schoolUnit,
+      schoolType: schoolType,
+      phone: tel,
+      email: email,
+      password: pw
+    };
+
+    localStorage.setItem('cms_registered_user', JSON.stringify(userData));
+    localStorage.setItem('cms_registered_phone', tel);
+
+    try {
+      var allUsers = JSON.parse(localStorage.getItem('cms_teachers') || '[]');
+      allUsers = allUsers.filter(function(u){ return u.phone !== tel; });
+      allUsers.push(userData);
+      localStorage.setItem('cms_teachers', JSON.stringify(allUsers));
+    } catch(err){}
+
+    try {
+      var formData = new FormData(e.target);
+      fetch('teacher_register_process.php', { method: 'POST', body: formData }).catch(function(){});
+    } catch(err){}
+
+    alert('ចុះឈ្មោះបានជោគជ័យ! សូមចូលប្រើប្រាស់គណនីរបស់អ្នក។');
+    window.location.href = 'login/teacher_login.html?registered=1&phone=' + encodeURIComponent(tel);
+  });
+</script>
+</body>
+</html>
