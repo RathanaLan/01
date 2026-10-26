@@ -4,9 +4,9 @@
    ========================================================================== */
 
 :root {
-  --font-moul: 'Moul', serif;
-  --font-khmer: 'Kantumruy Pro', 'Battambang', system-ui, sans-serif;
-  --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  --font-moul: 'Moul', 'Kantumruy Pro', serif;
+  --font-khmer: 'Kantumruy Pro', 'Battambang', system-ui, -apple-system, sans-serif;
+  --font-sans: 'Plus Jakarta Sans', 'Kantumruy Pro', 'Battambang', system-ui, sans-serif;
   --passbook-green: #1a382c;
   --passbook-paper: #fbfbf8;
   --passbook-border: #9ca3af;
@@ -24,23 +24,57 @@ body {
   font-family: var(--font-khmer);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
   overflow-x: hidden;
   width: 100%;
   min-height: 100%;
+  line-height: 1.65;
+  letter-spacing: normal !important;
   padding-bottom: max(1rem, env(safe-area-inset-bottom));
 }
 
+/* ==========================================================================
+   Khmer Typography Golden Rules:
+   1. Absolutely ZERO letter-spacing on Khmer text (tracking breaks Khmer glyph clusters,
+      subscripts/coeng ជើង, and vowels).
+   2. Generous line-height (1.5 to 1.7) so subscripts and top vowels never collide.
+   ========================================================================== */
 .font-moul {
   font-family: var(--font-moul);
-  letter-spacing: 0.03em;
+  letter-spacing: normal !important;
+  line-height: 1.5 !important;
 }
 
 .font-khmer {
   font-family: var(--font-khmer);
+  letter-spacing: normal !important;
+  line-height: 1.65 !important;
 }
 
 .font-sans {
   font-family: var(--font-sans);
+}
+
+/* Force remove letter-spacing when Tailwind tracking classes are present on Khmer text */
+.font-moul[class*="tracking-"],
+.font-khmer[class*="tracking-"],
+h1[class*="tracking-"],
+h2[class*="tracking-"],
+h3[class*="tracking-"],
+p[class*="tracking-"],
+span[class*="tracking-"],
+button[class*="tracking-"] {
+  letter-spacing: normal !important;
+}
+
+/* Proper line-height to avoid vertical diacritic smashing */
+h1, h2, h3, h4, h5, h6 {
+  line-height: 1.45;
+  letter-spacing: normal;
+}
+
+p, span, label, input, button, select, textarea {
+  letter-spacing: normal;
 }
 
 /* Smooth Touch & Horizontal Scroll */
