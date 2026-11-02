@@ -1,0 +1,1505 @@
+<!DOCTYPE html>
+<html lang="en" translate="no" class="notranslate">
+<head>
+  <meta name="google" content="notranslate">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Power Apps Foundation — Day 7: From Real Problem to App Opportunity</title>
+  
+    <!-- Famous & Universally Loved Khmer Fonts (Moul for Formal Titles, Siemreap & Battambang for Easy Reading) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=Moul&family=Kantumruy+Pro:ital,wght@0,400..700;1,400..700&family=Battambang:wght@300;400;700;900&family=Koh+Santepheap:wght@300;400;700&family=Koulen&family=Siemreap&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="../shared/design-system.css">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="fluent-dark-theme">
+
+  <!-- Main Presentation Stage Container (16:9 Viewport Constrained) -->
+  <div id="presentation-container" class="presentation-container">
+
+    <!-- Top Status Bar: Branding, Segment Indicator, Timer & Controls -->
+    <!-- Presentation Header removed to match Day 25 Standard -->
+
+    <!-- Presentation Visual Stage (16:9 Canvas) -->
+    <main id="stage" class="stage" role="region" aria-label="Slide Presentation Stage">
+
+      <!-- =================================================================== -->
+      <!-- SLIDE 1: Title & Mental Model Anchor                                -->
+      <!-- =================================================================== -->
+      <section class="slide active" id="slide-1" 
+        data-title="Day 7: From Real Problem to App Opportunity" 
+        data-segment="Part 1: Welcome &amp; Spiral Recall (00:00 - 10:00)"
+        data-notes="TRAINER SPEAKING SCRIPT:
+'Welcome to Day 7 of Microsoft Power Apps Foundation!
+Today marks a major milestone: We officially enter Phase 3: Business Thinking!
+Over the first 6 days, you mastered the engine components: inputs, sequences, data types, conditions, single IF decisions, and compound gates.
+You know how the engine works!
+Now comes the multi-million-dollar question:
+WHAT ARE WE BUILDING, AND WHY?
+Too many beginners open Power Apps, drag buttons onto a screen, and build an app that nobody ever uses!
+Why? Because they never diagnosed the real human problem!
+Today, we master the 5-Part Opportunity Framework:
+Current Problem ➔ Desired Result ➔ People ➔ Information ➔ Rules.
+Before you write a single line of Power Fx, you must understand what needs to change and for whom.
+Let's begin!'">
+        <div class="slide-content">
+          <div class="hero-layout">
+            <div class="hero-pill-group">
+              <span class="hero-pill">Phase 3: Business Thinking</span>
+              <span class="hero-pill teal-pill">Day 7 of 27</span>
+              <span class="hero-pill blue-pill">90 Minutes</span>
+            </div>
+            <h1 class="hero-title">
+              <span class="gradient-text">From Real Problem to App Opportunity</span><br>
+              How to Scope What Should Change and for Whom Before Building
+            </h1>
+            <p class="hero-subtitle">
+              In Days 1–6, you mastered data, conditions, and logic gates. Today, we step back to understand where those requirements come from. An app is not just buttons on a screen—it is an operational tool designed to solve a specific human friction point.
+            </p>
+
+            <div class="title-feature-grid">
+              <div class="feature-item">
+                <span class="feature-icon">&#128300;</span>
+                <div class="feature-info">
+                  <h4>1. Problem Diagnosis</h4>
+                  <p>Identify real workplace friction, wasted labor, and paper bottlenecks before touching software.</p>
+                </div>
+              </div>
+              <div class="feature-item">
+                <span class="feature-icon">&#128101;</span>
+                <div class="feature-info">
+                  <h4>2. People &amp; Roles</h4>
+                  <p>Map the three essential stakeholders: Requester, Worker/Actor, and Supervisor/Viewer.</p>
+                </div>
+              </div>
+              <div class="feature-item">
+                <span class="feature-icon">&#9878;</span>
+                <div class="feature-info">
+                  <h4>3. Data &amp; Rule Scoping</h4>
+                  <p>Extract the essential 4–5 facts and business rules that govern actions, ignoring fluff.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- =================================================================== -->
+      <!-- SLIDE 2: 5-Minute Concept-Map Recap (Master Mental Model)            -->
+      <!-- =================================================================== -->
+      <section class="slide" id="slide-2" 
+        data-title="Master Curriculum Concept Map" 
+        data-segment="Part 1: Welcome &amp; Spiral Recall (00:00 - 10:00)"
+        data-notes="TRAINER SPEAKING SCRIPT:
+'Look at our Master Mental Model map on screen.
+Notice where we stand today on Day 7!
+In Days 1 & 2, we learned that apps follow sequenced steps.
+In Days 3 & 4, we learned that steps manipulate typed data and ask True/False questions.
+In Days 5 & 6, we learned how IF and AND/OR/NOT make decisions.
+Now look at Phase 3: Business Thinking!
+Today on Day 7, we ask: WHERE DOES THE DATA AND LOGIC COME FROM?
+It comes from a REAL PROBLEM!
+If you don't know the problem, you don't know what data to capture or what rules to write.
+And look at tomorrow on Day 8: We take today's scoped opportunity and map it into a step-by-step process and wireframe screens!'">
+        <div class="slide-content">
+          <div class="slide-header">
+            <span class="slide-badge purple-badge">Curriculum Architecture</span>
+            <h2 class="slide-title">Where Today Fits in the 27-Day Master Mental Model</h2>
+            <p class="slide-lead">We never teach isolated technical features. Today bridges technical logic into real-world business architecture.</p>
+          </div>
+
+          <div class="mental-model-chain">
+            <div class="chain-step step-completed">
+              <span class="step-num">Days 1-2</span>
+              <span class="step-name">Problem &amp; Sequence</span>
+              <span class="step-status">&#10003; Foundation</span>
+            </div>
+            <span class="chain-arrow">&#8594;</span>
+            <div class="chain-step step-completed">
+              <span class="step-num">Days 3-4</span>
+              <span class="step-name">Data &amp; Conditions</span>
+              <span class="step-status">&#10003; True / False</span>
+            </div>
+            <span class="chain-arrow">&#8594;</span>
+            <div class="chain-step step-completed">
+              <span class="step-num">Days 5-6</span>
+              <span class="step-name">Logic &amp; Decisions</span>
+              <span class="step-status">&#10003; IF / AND / OR</span>
+            </div>
+            <span class="chain-arrow">&#8594;</span>
+            <div class="chain-step step-active-day5">
+              <span class="step-num">TODAY (Day 7)</span>
+              <span class="step-name">App Opportunity</span>
+              <span class="step-status">&#9733; Phase 3 Start</span>
+            </div>
+            <span class="chain-arrow">&#8594;</span>
+            <div class="chain-step step-future">
+              <span class="step-num">Days 8-27</span>
+              <span class="step-name">Process ➔ UI ➔ Deploy</span>
+              <span class="step-status">Ahead</span>
+            </div>
+          </div>
+
+          <div class="grid-2-col" style="margin-top: 1.25rem;">
+            <div class="info-card border-blue">
+              <div class="card-header-icon">&#128260; How Days 1–6 Connect to Day 7</div>
+              <p>In Days 1–6, we learned how to store values, ask comparison questions, and write <code>If()</code> branches. Today, we discover how to identify which real workplace bottlenecks actually need those data fields and decision branches.</p>
+            </div>
+            <div class="info-card border-purple">
+              <div class="card-header-icon">&#128301; Why Day 8 Requires Day 7</div>
+              <p>Tomorrow on Day 8, we build visual process maps and wireframe user interface screens. You cannot design screens or user steps until you have scoped who the users are, what data they enter, and what outcome they expect.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- =================================================================== -->
+      <!-- SLIDE 3: Prerequisite Active Recall Check                           -->
+      <!-- =================================================================== -->
+      <section class="slide" id="slide-3" 
+        data-title="Prerequisite Retrieval Check" 
+        data-segment="Part 1: Welcome &amp; Spiral Recall (00:00 - 10:00)"
+        data-notes="TRAINER SPEAKING SCRIPT:
+'Let's test our active memory with 3 quick retrieval questions from Days 3, 5, & 6!
+Question 1: In Day 6, why did we need compound gates (&& and ||) instead of a single condition?
+(Learner: Because real-world rules depend on multiple factors, like high pressure AND low coolant!)
+Question 2: From Day 3, why is choosing the correct Data Type (Text, Number, Date, Boolean) essential?
+(Learner: Because apps store them differently in memory; math and threshold logic require numbers, not text!)
+Question 3: What is the fundamental difference between an Input and an Action?
+(Learner: Input is data captured from a human; Action is the work performed by the app, like sending an alert or writing to storage!)
+Excellent recall! Now let's connect inputs, logic, and actions to real workplace problems.'">
+        <div class="slide-content">
+          <div class="slide-header">
+            <span class="slide-badge blue-badge">Spiral Active Recall</span>
+            <h2 class="slide-title">Testing Prior Knowledge: Core Logic &amp; Data Recall</h2>
+            <p class="slide-lead">Retrieve the fundamental concepts of inputs, types, and logic gates before we apply them to business opportunity scoping.</p>
+          </div>
+
+          <div class="grid-3-col">
+            <div class="retrieval-card">
+              <div class="retrieval-num">01</div>
+              <h4>From Day 6: Compound Gates</h4>
+              <p class="retrieval-q">Why do real business rules require <code>&amp;&amp;</code> and <code>||</code>?</p>
+              <div class="retrieval-answer">
+                <strong>Answer:</strong> Because workplace reality involves interdependent checks—like requiring both pressure AND coolant for machine safety.
+              </div>
+            </div>
+            <div class="retrieval-card">
+              <div class="retrieval-num">02</div>
+              <h4>From Day 3: Data Types</h4>
+              <p class="retrieval-q">Why must we define whether data is Text, Number, or Boolean?</p>
+              <div class="retrieval-answer">
+                <strong>Answer:</strong> Because computers store them differently; mathematical comparisons and logic require strict typing (e.g. <code>Value()</code>).
+              </div>
+            </div>
+            <div class="retrieval-card">
+              <div class="retrieval-num">03</div>
+              <h4>From Days 1-2: Input vs Action</h4>
+              <p class="retrieval-q">What separates an Input from an Action in an app?</p>
+              <div class="retrieval-answer">
+                <strong>Answer:</strong> An <strong>Input</strong> is information entered by a person; an <strong>Action</strong> is the work performed by the app in response.
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- =================================================================== -->
+      <!-- SLIDE 4: Measurable Learning Objectives                             -->
+      <!-- =================================================================== -->
+      <section class="slide" id="slide-4" 
+        data-title="Measurable Learning Objectives" 
+        data-segment="Part 1: Welcome &amp; Spiral Recall (00:00 - 10:00)"
+        data-notes="TRAINER SPEAKING SCRIPT:
+'Here are our 4 measurable learning targets for Day 7.
+By 90:00 today, you will independently:
+1. Differentiate a genuine Power Apps Opportunity from a non-app issue across 6 industrial scenarios with 100% accuracy.
+2. Map the 3 core stakeholder roles (Requester, Worker, Supervisor) and identify the minimum required data fields.
+3. Convert vague workplace complaints into concrete business rules ready for logic gates.
+4. Author a complete 5-part App Opportunity Blueprint for the Apex Plastics Tooling Die bottleneck.'">
+        <div class="slide-content">
+          <div class="slide-header">
+            <span class="slide-badge green-badge">Target Competencies</span>
+            <h2 class="slide-title">4 Measurable Learning Objectives for Day 7</h2>
+            <p class="slide-lead">By the end of this 90-minute session, you will independently demonstrate these four practical competencies:</p>
+          </div>
+
+          <div class="grid-2-col">
+            <div class="objective-card">
+              <div class="obj-badge">OBJ 1 • Diagnosis</div>
+              <h3>Identify True App Opportunities</h3>
+              <p>Distinguish between repetitive operational bottlenecks that warrant a custom app versus non-app issues (policy changes, static bulletins, physical adjustments).</p>
+              <div class="obj-outcome">&#10004; Evaluated via 6-Scenario Feasibility Simulator</div>
+            </div>
+
+            <div class="objective-card">
+              <div class="obj-badge">OBJ 2 • Stakeholder Mapping</div>
+              <h3>Map the 3 Workplace User Roles</h3>
+              <p>Identify the distinct needs and interaction points for the <strong>Requester</strong>, the <strong>Worker/Actor</strong>, and the <strong>Supervisor/Viewer</strong>.</p>
+              <div class="obj-outcome">&#10004; Evaluated via Role-to-Screen Mapping Blueprint</div>
+            </div>
+
+            <div class="objective-card">
+              <div class="obj-badge">OBJ 3 • Rule Extraction</div>
+              <h3>Extract Structured Business Rules</h3>
+              <p>Transform vague complaints (<em>"handle leaks faster"</em>) into actionable logic conditions: <code>Condition (If) ➔ Action (Then) ➔ Fallback (Else)</code>.</p>
+              <div class="obj-outcome">&#10004; Evaluated via Business Rule Extraction Audit</div>
+            </div>
+
+            <div class="objective-card">
+              <div class="obj-badge">OBJ 4 • Architecture</div>
+              <h3>Author the 5-Part Opportunity Blueprint</h3>
+              <p>Synthesize Current Pain, Desired Result, Users, Captured Data, and Business Rules into a 1-page operational blueprint ready for wireframing.</p>
+              <div class="obj-outcome">&#10004; Evaluated via Apex Tooling Die Capstone Challenge</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- =================================================================== -->
+      <!-- SLIDE 5: 90-Minute Timed Agenda                                     -->
+      <!-- =================================================================== -->
+      <section class="slide" id="slide-5" 
+        data-title="90-Minute Timed Agenda" 
+        data-segment="Part 1: Welcome &amp; Spiral Recall (00:00 - 10:00)"
+        data-notes="TRAINER SPEAKING SCRIPT:
+'Here is our disciplined 90-minute roadmap for today:
+Part 1 (00:00–10:00): Recall, connection, and objectives.
+Part 2 (10:00–25:00): The $32,000 Clipboard Graveyard at Apex Plastics and our two physical analogies: The Doctor and The Architect.
+Part 3 (25:00–45:00): The 5-Part Opportunity Framework and the 4 App Litmus Tests.
+Part 4 (45:00–60:00): Mid-session pulse reset, followed by my live demonstration of the Interactive Opportunity Discovery Canvas.
+Part 5 (60:00–75:00): Guided practice with the 6-Scenario Opportunity Simulator and auditing 4 beginner misconceptions.
+Part 6 (75:00–90:00): 5-question quiz, Capstone Challenge, rubric, and bridge to Day 8 Process Mapping!'">
+        <div class="slide-content">
+          <div class="slide-header">
+            <span class="slide-badge purple-badge">Lesson Structure</span>
+            <h2 class="slide-title">Master 90-Minute Spiral Agenda</h2>
+            <p class="slide-lead">A balanced pedagogical progression from workplace operational pain to structured app opportunity scoping.</p>
+          </div>
+
+          <div class="agenda-timeline-grid">
+            <div class="agenda-row">
+              <div class="agenda-time">00:00 - 10:00 (10m)</div>
+              <div class="agenda-topic">
+                <strong>Part 1: Welcome &amp; Spiral Recall</strong>
+                <span>Master mental model anchor, active retrieval of Days 1–6, 4 measurable learning objectives.</span>
+              </div>
+              <div class="agenda-milestone">Milestone: Mental Anchor</div>
+            </div>
+            <div class="agenda-row">
+              <div class="agenda-time">10:00 - 25:00 (15m)</div>
+              <div class="agenda-topic">
+                <strong>Part 2: Why Problem Scoping Exists &amp; Analogies</strong>
+                <span>The $32,000 Clipboard Graveyard disaster, Doctor's Diagnosis analogy, Architect's Blueprint analogy.</span>
+              </div>
+              <div class="agenda-milestone">Milestone: Problem Clarity</div>
+            </div>
+            <div class="agenda-row">
+              <div class="agenda-time">25:00 - 45:00 (20m)</div>
+              <div class="agenda-topic">
+                <strong>Part 3: The 5-Part Opportunity Framework &amp; Litmus Test</strong>
+                <span>Pillars: Problem ➔ Result ➔ People ➔ Info ➔ Rules; The 4 App Feasibility Litmus Tests.</span>
+              </div>
+              <div class="agenda-milestone">Milestone: Scoping Grammar</div>
+            </div>
+            <div class="agenda-row">
+              <div class="agenda-time">45:00 - 60:00 (15m)</div>
+              <div class="agenda-topic">
+                <strong>Part 4: Trainer Demonstration &amp; Discovery Canvas Lab</strong>
+                <span>Mid-session pulse reset; Interactive Opportunity Discovery Canvas with live viability scoring.</span>
+              </div>
+              <div class="agenda-milestone">Milestone: Visual Modeling</div>
+            </div>
+            <div class="agenda-row">
+              <div class="agenda-time">60:00 - 75:00 (15m)</div>
+              <div class="agenda-topic">
+                <strong>Part 5: Guided Learner Practice &amp; Simulator</strong>
+                <span>Deconstructing Extruder Line 4 mold requests; hands-on 6-Scenario Opportunity vs Non-App Simulator.</span>
+              </div>
+              <div class="agenda-milestone">Milestone: Independent Practice</div>
+            </div>
+            <div class="agenda-row">
+              <div class="agenda-time">75:00 - 90:00 (15m)</div>
+              <div class="agenda-topic">
+                <strong>Part 6: Knowledge Check, Capstone &amp; Forward Bridge</strong>
+                <span>5-question quiz, Apex Tooling Die Capstone Challenge, rubric, homework &amp; bridge to Day 8 Process Mapping.</span>
+              </div>
+              <div class="agenda-milestone">Milestone: Master Assessment</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- =================================================================== -->
+      <!-- SLIDE 6: Workplace Problem: The $32,000 Clipboard Graveyard         -->
+      <!-- =================================================================== -->
+      <section class="slide" id="slide-6" 
+        data-title="Workplace Problem: $32,000 Disaster" 
+        data-segment="Part 2: Why Problem Scoping Exists (10:00 - 25:00)"
+        data-notes="TRAINER SPEAKING SCRIPT:
+'Let's step into Extruder Hall #4 at Apex Plastics.
+Maintenance requests used to be logged on paper clipboards hanging on the machine rails.
+At 01:15 AM, operator Dara noticed pump #3 leaking oil and wrote: 'Pump 3 leaking fluid, sounds bad.'
+During shift change, oil overspray soaked the paper.
+The clipboard hung there unread for 14 hours!
+At 03:30 PM, the pump seized, a line burst, and 400 liters of hot oil flooded the floor.
+Total loss: $32,000!
+Then, an enthusiastic junior developer tried to fix it:
+He built a 14-screen app with 45 required fields, asking for manufacturer codes and serial numbers!
+Floor operators wearing heavy work gloves took 12 minutes to log one ticket!
+Within 4 days, they threw the tablets in a drawer and went back to sticky notes!
+Why did the app fail? Because the developer never scoped the real problem!'">
+        <div class="slide-content">
+          <div class="slide-header">
+            <span class="slide-badge red-badge">Workplace Case Study</span>
+            <h2 class="slide-title">Apex Plastics: The $32,000 "Clipboard Graveyard" Disaster</h2>
+            <p class="slide-lead">How unread paper logs flooded a factory floor, and why a bloated 14-screen app was abandoned within four days.</p>
+          </div>
+
+          <div class="story-case-box">
+            <div class="story-header">
+              <span class="warning-icon">&#9888;</span>
+              <div>
+                <h3 style="margin:0; color:#fb7185;">INCIDENT REPORT: Line #4 Hydraulic Freeze &amp; Failed App Rollout</h3>
+                <span style="font-size:0.85rem; color:#cbd5e1;">Apex Plastics Manufacturing • Extruder Line #4 Maintenance Log</span>
+              </div>
+            </div>
+
+            <div class="story-grid">
+              <div class="story-panel">
+                <h4>What Happened (Paper &amp; Unscoped App Failures):</h4>
+                <div class="math-card math-actual">
+                  <span>Paper Log: Soaked in oil mist &bull; Sat unread for <strong>14 hours</strong></span>
+                  <span>Catastrophe: Seized pump, burst line, 400L oil spill, 18h downtime</span>
+                  <span>Failed Fix: 14-screen app with 45 fields &bull; Took 12 mins to submit</span>
+                  <div class="calc-divider"></div>
+                  <span class="result-line-fail">Result: <strong>$32,000 Disaster • Tablets Abandoned in 4 Days</strong></span>
+                </div>
+              </div>
+
+              <div class="story-panel">
+                <h4>What True Problem Scoping Achieves (The Opportunity):</h4>
+                <div class="math-card math-expected">
+                  <span>Real Human Need: 4 taps in &lt; 60 seconds on a rugged floor tablet</span>
+                  <span>Automated Routing: Push alert directly to on-duty technician mobile</span>
+                  <span>Visible Accountability: Live line status dashboard for shift supervisor</span>
+                  <div class="calc-divider"></div>
+                  <span class="result-line">Result: <strong>Repair Time Dropped from 14h to 18m • $0 Lost Oil</strong></span>
+                </div>
+              </div>
+            </div>
+
+            <div class="story-footer">
+              <strong>Root Cause:</strong> An app is not a success just because it compiles without errors. If an app does not solve the <strong>exact human friction point</strong> of the front-line worker, it will be rejected immediately.
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- =================================================================== -->
+      <!-- SLIDE 7: Plain Concept: What is an "App Opportunity"?               -->
+      <!-- =================================================================== -->
+      <section class="slide" id="slide-7" 
+        data-title="Plain Concept: What is an App Opportunity?" 
+        data-segment="Part 2: Why Problem Scoping Exists (10:00 - 25:00)"
+        data-notes="TRAINER SPEAKING SCRIPT:
+'What is an App Opportunity in plain language?
+It is NOT just any random idea that pops into your head.
+An App Opportunity is a specific, repetitive, broken human activity that can be dramatically improved by replacing lost paper, slow emails, or chaotic phone calls with a streamlined tool on a phone, tablet, or PC!
+Ask yourself these 3 questions:
+1. Is it repetitive? Does it happen daily or weekly?
+2. Is there a clear hand-off? Person A enters data, Person B takes action!
+3. Are there rules and tracking? Does management need visibility?
+If the answer is yes, you have found an App Opportunity!'">
+        <div class="slide-content">
+          <div class="slide-header">
+            <span class="slide-badge blue-badge">Core Mental Model</span>
+            <h2 class="slide-title">Plain Language: What is an "App Opportunity"?</h2>
+            <p class="slide-lead">Understanding when a workplace friction point warrants an application before touching software.</p>
+          </div>
+
+          <div class="grid-2-col" style="gap: 1.5rem;">
+            <div class="concept-card">
+              <div class="concept-badge red-badge">&#10060; What is NOT an App Opportunity</div>
+              <h3>False Leads &amp; Wasteful App Projects</h3>
+              <p>Problems that do not need custom software and are better handled through communication or existing tools.</p>
+              <div class="concept-examples">
+                <div class="example-item">One-time tasks (e.g. voting on the annual holiday party venue).</div>
+                <div class="example-item">Static information (e.g. posting the weekly cafeteria lunch menu).</div>
+                <div class="example-item">Management policy issues (e.g. workers arriving late to shift meetings).</div>
+              </div>
+            </div>
+
+            <div class="concept-card">
+              <div class="concept-badge green-badge">&#10004; What IS an App Opportunity</div>
+              <h3>Prime Candidates for Power Apps</h3>
+              <p>Repetitive operational hand-offs where lost data, delayed approvals, or lack of visibility causes business loss.</p>
+              <div class="concept-examples">
+                <div class="example-item">&#10004; <strong>Repetitive Hand-off:</strong> Person A requests; Person B acts.</div>
+                <div class="example-item">&#10004; <strong>Mobile Data Capture:</strong> Floor inspections, audits, work tickets.</div>
+                <div class="example-item">&#10004; <strong>Automated Logic &amp; SLA:</strong> Urgent issues alert managers automatically.</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="takeaway-banner">
+            <strong>Key Insight:</strong> <em>"Automating a broken process just gives you an automated mess."</em> Always diagnose and fix the human hand-off before building the digital tool!
+          </div>
+        </div>
+      </section>
+
+      <!-- =================================================================== -->
+      <!-- SLIDE 8: Everyday Analogy 1: The Doctor's Diagnosis Before Surgery   -->
+      <!-- =================================================================== -->
+      <section class="slide" id="slide-8" 
+        data-title="Everyday Analogy: Doctor's Diagnosis" 
+        data-segment="Part 2: Why Problem Scoping Exists (10:00 - 25:00)"
+        data-notes="TRAINER SPEAKING SCRIPT:
+'To understand why scoping comes first, think of going to a hospital doctor.
+Imagine walking into a clinic and the surgeon rushes you into an operating room, grabs a scalpel, and starts cutting into your stomach!
+You would scream: 'Stop! You didn't even ask where it hurts!'
+A doctor always follows a disciplined sequence:
+1. Listens to symptoms (Current Pain).
+2. Measures vital signs and tests (Data/Information).
+3. Identifies the illness (Diagnosis).
+4. Determines the criteria (Rules).
+5. Only then prescribes medicine or surgery (Action)!
+Building an app before diagnosing the problem is performing surgery on the wrong organ!'">
+        <div class="slide-content">
+          <div class="slide-header">
+            <span class="slide-badge gold-badge">Everyday Metaphor 1</span>
+            <h2 class="slide-title">Analogy 1: The Doctor's Diagnosis Before Surgery</h2>
+            <p class="slide-lead">A surgeon never operates before diagnosing the patient's symptoms. An app builder must never write formulas before understanding the business pain.</p>
+          </div>
+
+          <div class="railway-switch-box">
+            <div class="train-origin">
+              <span class="rail-icon">&#129658;</span>
+              <strong>Patient Symptoms</strong>
+              <p>What hurts? Where?</p>
+            </div>
+
+            <div class="switch-lever">
+              <div class="lever-indicator">&#128269;</div>
+              <span class="lever-label">THE CLINICAL DIAGNOSIS</span>
+              <code>Examine Before Treating</code>
+            </div>
+
+            <div class="track-branches">
+              <div class="track-branch branch-true">
+                <span class="branch-pill pill-true">DIAGNOSED FIRST</span>
+                <strong>Targeted Treatment (Cure)</strong>
+                <p>Identifies exact cause: Prescribes correct medicine or procedure.</p>
+              </div>
+
+              <div class="track-branch branch-false">
+                <span class="branch-pill pill-false">RUSHED TO SCALPEL</span>
+                <strong>Malpractice (Catastrophe)</strong>
+                <p>Cuts blindly: Operates on healthy tissue while illness spreads.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- =================================================================== -->
+      <!-- SLIDE 9: Everyday Analogy 2: The Architect's Blueprint               -->
+      <!-- =================================================================== -->
+      <section class="slide" id="slide-9" 
+        data-title="Everyday Analogy: Architect's Blueprint" 
+        data-segment="Part 2: Why Problem Scoping Exists (10:00 - 25:00)"
+        data-notes="TRAINER SPEAKING SCRIPT:
+'Here is our second physical analogy: The Architect's Blueprint.
+You would never order 10,000 bricks, dump them in a muddy field, and tell workers to start stacking walls without a plan!
+Who is living in the house? How many people? Where are the doors? Where do the water pipes run?
+In Power Apps:
+Buttons, text boxes, and galleries are your bricks!
+Problem Scoping is your architectural blueprint!
+If you build without a blueprint, your walls will collapse, and you'll have to tear down the entire building!'">
+        <div class="slide-content">
+          <div class="slide-header">
+            <span class="slide-badge gold-badge">Everyday Metaphor 2</span>
+            <h2 class="slide-title">Analogy 2: The Architect's Blueprint Before Laying Bricks</h2>
+            <p class="slide-lead">Buttons, galleries, and text inputs are construction bricks. Scoping the problem is the architectural blueprint that gives them purpose.</p>
+          </div>
+
+          <div class="railway-switch-box">
+            <div class="train-origin">
+              <span class="rail-icon">&#127959;</span>
+              <strong>Client Needs</strong>
+              <p>Who lives here? Space?</p>
+            </div>
+
+            <div class="switch-lever">
+              <div class="lever-indicator">&#128208;</div>
+              <span class="lever-label">ARCHITECTURAL BLUEPRINT</span>
+              <code>Pipes &bull; Wiring &bull; Layout</code>
+            </div>
+
+            <div class="track-branches">
+              <div class="track-branch branch-true">
+                <span class="branch-pill pill-true">BUILT TO BLUEPRINT</span>
+                <strong>Functional Home (Long-Lasting)</strong>
+                <p>Rooms fit residents: Electrical and plumbing integrate seamlessly.</p>
+              </div>
+
+              <div class="track-branch branch-false">
+                <span class="branch-pill pill-false">STACKING BRICKS BLINDLY</span>
+                <strong>Structural Collapse (Wasted Money)</strong>
+                <p>Walls block hallways: No pipes connected, building must be demolished.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- =================================================================== -->
+      <!-- SLIDE 10: The 5-Part Opportunity Framework                          -->
+      <!-- =================================================================== -->
+      <section class="slide" id="slide-10" 
+        data-title="The 5-Part Opportunity Framework" 
+        data-segment="Part 3: Opportunity Framework &amp; Litmus Test (25:00 - 45:00)"
+        data-notes="TRAINER SPEAKING SCRIPT:
+'Now let's examine the 5 Pillars of the App Opportunity Framework.
+Every successful app on earth can be scoped using these 5 pillars:
+1. CURRENT PROBLEM: What hurts right now? (Lost paper, unread tickets, downtime).
+2. DESIRED RESULT: What does perfect success look like? (Repair in < 20 mins, instant mobile alert).
+3. PEOPLE: Who are the stakeholders? (Operator logs, Tech fixes, Lead monitors).
+4. INFORMATION: What 4 or 5 facts are strictly needed? (Machine #, Issue type, Urgency, Photo).
+5. RULES: What criteria guide decisions? (If Urgent, sound alarm and alert Tech Lead immediately).
+Memorize this sequence: Problem ➔ Result ➔ People ➔ Info ➔ Rules!'">
+        <div class="slide-content">
+          <div class="slide-header">
+            <span class="slide-badge purple-badge">Scoping Methodology</span>
+            <h2 class="slide-title">The 5-Part App Opportunity Framework</h2>
+            <p class="slide-lead">The universal five-step discovery sequence required before creating screens or writing Power Fx formulas.</p>
+          </div>
+
+          <div class="pantry-grid" style="grid-template-columns: repeat(5, 1fr);">
+            <div class="pantry-jar border-blue">
+              <div class="jar-icon">&#128308;</div>
+              <h4>1. Problem</h4>
+              <span class="jar-substance">What Hurts?</span>
+              <p>Lost paper logs, delayed repairs, zero accountability.</p>
+              <div class="jar-example"><code>Pain Point</code></div>
+            </div>
+
+            <div class="pantry-jar border-num">
+              <div class="jar-icon">&#127919;</div>
+              <h4>2. Result</h4>
+              <span class="jar-substance">Desired Goal</span>
+              <p>&lt; 60s ticket logging, instant technician dispatch.</p>
+              <div class="jar-example"><code>Target KPI</code></div>
+            </div>
+
+            <div class="pantry-jar border-date">
+              <div class="jar-icon">&#128101;</div>
+              <h4>3. People</h4>
+              <span class="jar-substance">User Roles</span>
+              <p>Line Operator, Maintenance Tech, Shift Lead.</p>
+              <div class="jar-example"><code>Stakeholders</code></div>
+            </div>
+
+            <div class="pantry-jar border-bool">
+              <div class="jar-icon">&#128196;</div>
+              <h4>4. Info</h4>
+              <span class="jar-substance">Data Fields</span>
+              <p>Machine #, Fault type, Urgency, Notes, Photo.</p>
+              <div class="jar-example"><code>Data Inputs</code></div>
+            </div>
+
+            <div class="pantry-jar border-blue">
+              <div class="jar-icon">&#9878;</div>
+              <h4>5. Rules</h4>
+              <span class="jar-substance">Logic Gates</span>
+              <p>If Critical ➔ Alert Lead; If Minor ➔ Queue.</p>
+              <div class="jar-example"><code>Business Logic</code></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- =================================================================== -->
+      <!-- SLIDE 11: Visual Cause-and-Effect Pipeline                          -->
+      <!-- =================================================================== -->
+      <section class="slide" id="slide-11" 
+        data-title="Visual Cause-and-Effect Flow" 
+        data-segment="Part 3: Opportunity Framework &amp; Litmus Test (25:00 - 45:00)"
+        data-notes="TRAINER SPEAKING SCRIPT:
+'Look at the visual cause-and-effect flow on screen.
+Watch how the messy human problem transforms into clean software architecture:
+Level 1: Chaos on the floor (Lost clipboards, unread notes, $32,000 oil flood).
+Level 2: The 5-Part Opportunity Canvas extracts structure from chaos.
+Level 3: That structure directly dictates the Power Apps screens!
+Notice: The Operator role becomes Screen 1 (Simple Kiosk Form).
+The Technician role becomes Screen 2 (Queue List with Accept Button).
+The Supervisor role becomes Screen 3 (Live Status Dashboard).
+And the business rules become the Power Fx If() formulas!
+This is how citizen developers build software with purpose!'">
+        <div class="slide-content">
+          <div class="slide-header">
+            <span class="slide-badge blue-badge">Logical Flow Architecture</span>
+            <h2 class="slide-title">Visual Cause &amp; Effect: From Floor Chaos to App Screens</h2>
+            <p class="slide-lead">Tracing how messy operational friction transforms systematically into structured application architecture.</p>
+          </div>
+
+          <div class="branching-diagram-container">
+            <div class="diagram-root">
+              <span class="root-badge">OPERATIONAL FRICTION</span>
+              <code>Paper Clipboard Lost &bull; 14h Delayed Response &bull; $32,000 Loss</code>
+            </div>
+
+            <div class="diagram-stem">&#10142;</div>
+
+            <div class="diagram-decision-diamond">
+              <span class="diamond-tag">5-PART OPPORTUNITY CANVAS</span>
+              <strong>Problem ➔ Result ➔ People ➔ Info ➔ Rules</strong>
+              <div class="diamond-result">Clean Technical Specification</div>
+            </div>
+
+            <div class="diagram-fork-branches">
+              <div class="fork-path path-active">
+                <span class="fork-tag tag-true">&#10004; SCREEN &amp; LOGIC BLUEPRINT</span>
+                <h4>Structured App Delivery (Day 8 Wireframes)</h4>
+                <p>Screen 1: Kiosk Form (Operator) &bull; Screen 2: Task Queue (Tech) &bull; Screen 3: KPI Board (Lead).</p>
+              </div>
+
+              <div class="fork-path path-dormant">
+                <span class="fork-tag tag-false">&#10060; UNSCOPED RANDOM GUESSWORK</span>
+                <h4>Bloated 14-Screen Failure (Abandoned)</h4>
+                <p>45 mandatory technical fields, confused workers, software thrown away within four days.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- =================================================================== -->
+      <!-- SLIDE 12: Trainer Demo: Interactive Opportunity Discovery Canvas    -->
+      <!-- =================================================================== -->
+      <section class="slide" id="slide-12" 
+        data-title="Trainer Demo: Discovery Canvas" 
+        data-segment="Part 4: Trainer Demonstration (45:00 - 60:00)"
+        data-notes="TRAINER SPEAKING SCRIPT:
+'Now let's open our live Interactive App Opportunity Discovery Canvas!
+Watch as I interact with the canvas on screen:
+I can choose between different workplace scenarios:
+1. Machine Breakdown Logging (Apex Plastics)
+2. Tool Die Changeover Request
+3. Forklift Daily Safety Inspection
+Watch how the 5 Pillars dynamically update:
+The Pain Point, the Target Goal, the 3 Roles, the Data Fields, and the Business Rules!
+Look at the Opportunity Viability Meter on the right:
+It evaluates the project against our 4 Litmus Tests:
+Is it frequent? Yes! Does it involve a hand-off? Yes! Does it need rules? Yes!
+The meter glows RADIANT GREEN with a 95% High App Opportunity Score!
+This is how professional consultants evaluate projects before writing code!'">
+        <div class="slide-content">
+          <div class="slide-header">
+            <span class="slide-badge blue-badge">Interactive Simulation</span>
+            <h2 class="slide-title">Trainer Demonstration: App Opportunity Discovery Canvas</h2>
+            <p class="slide-lead">Select different workplace bottlenecks below to see how the 5 Pillars dynamically construct an app scope with live viability scoring.</p>
+          </div>
+
+          <div class="workbench-grid">
+            <div class="workbench-inputs">
+              <h4>Select Workplace Case Study:</h4>
+              <div class="input-control-row">
+                <label>Operational Bottleneck Scenario:</label>
+                <select id="canvas-scenario-select" class="fluent-text-input">
+                  <option value="maintenance">Case A: Machine Breakdown Ticket (Extruder #4)</option>
+                  <option value="die-change">Case B: Tooling Die Changeover (Molding Shop)</option>
+                  <option value="forklift">Case C: Forklift Pre-Shift OSHA Inspection</option>
+                  <option value="cafeteria">Case D: Cafeteria Lunch Menu Bulletin</option>
+                </select>
+              </div>
+
+              <div class="input-control-row">
+                <label>Operational Frequency:</label>
+                <input type="text" id="canvas-freq-val" class="fluent-text-input" value="Daily (10-15 times per shift)" readonly>
+              </div>
+
+              <div class="input-control-row">
+                <label>Primary Business Risk:</label>
+                <input type="text" id="canvas-risk-val" class="fluent-text-input" value="$32,000 Unplanned Line Downtime" readonly>
+              </div>
+
+              <div class="input-control-row">
+                <label>Is Mobile Data Capture Required?</label>
+                <button type="button" id="canvas-mobile-btn" class="workbench-toggle-btn">
+                  <span class="toggle-indicator on"></span> Mobile Tablets: YES
+                </button>
+              </div>
+            </div>
+
+            <div class="workbench-evaluations">
+              <h4>Live Opportunity Viability Assessment</h4>
+              
+              <div class="decision-result-card status-routine" id="canvas-result-card">
+                <span class="branch-label" id="canvas-opportunity-badge">HIGH APP OPPORTUNITY (SCORE: 95%)</span>
+                <h4 id="canvas-opportunity-title" style="color: #4ade80;">&#10004; Prime Power Apps Candidate</h4>
+                <p id="canvas-opportunity-desc">High frequency, urgent human hand-off, mobile floor capture, automated supervisor escalation.</p>
+              </div>
+
+              <div class="submit-state-demo">
+                <label>The 5 Pillars Extraction:</label>
+                <div id="canvas-summary-box" style="font-size:0.84rem; line-height:1.5; color:#cbd5e1;">
+                  <strong>Roles:</strong> Operator ➔ Technician ➔ Shift Lead<br>
+                  <strong>Data:</strong> Machine #, Fault Type, Urgency, Notes, Photo<br>
+                  <strong>Rule:</strong> If Urgency = "Critical" ➔ Alert Lead Immediately
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- =================================================================== -->
+      <!-- SLIDE 13: Mid-Session Pulse Checkpoint & Hydration                  -->
+      <!-- =================================================================== -->
+      <section class="slide" id="slide-13" 
+        data-title="Mid-Session Pulse Check" 
+        data-segment="Part 4: Trainer Demonstration (45:00 - 60:00)"
+        data-notes="TRAINER SPEAKING SCRIPT:
+'We have hit the 45-minute mark! Halfway through Day 7!
+Let's pause for a 60-second breathing, posture reset, and hydration.
+Take a sip of water.
+Quick pulse check:
+Thumbs UP if you clearly see why jumping straight to building screens without scoping the problem produces useless apps!
+Thumbs SIDEWAYS if you want to see how to distinguish when to build a Power App vs when to just send an email or use Microsoft Forms.
+Remember our rule:
+Software is a tool to solve a human bottleneck. If there is no bottleneck, don't build an app!'">
+        <div class="slide-content">
+          <div class="checkpoint-card">
+            <div class="checkpoint-icon">&#9749;</div>
+            <h2 class="checkpoint-title">Mid-Session Pulse Checkpoint (45:00 Elapsed)</h2>
+            <p class="checkpoint-subtitle">Take a breath, hydrate, and verify your problem-first mental foundation before we practice scoping opportunities.</p>
+
+            <div class="checkpoint-grid">
+              <div class="check-item">
+                <div class="check-icon">&#128077;</div>
+                <h4>Thumbs Up: Clear</h4>
+                <p>I know the sequence: <code>Problem ➔ Result ➔ People ➔ Info ➔ Rules</code> before touching screens or writing Power Fx.</p>
+              </div>
+              <div class="check-item">
+                <div class="check-icon">&#9995;</div>
+                <h4>Thumbs Sideways: Unsure</h4>
+                <p>I understand the 5 pillars, but I want to practice testing when a problem truly needs a Power App vs a simple form.</p>
+              </div>
+              <div class="check-item">
+                <div class="check-icon">&#128161;</div>
+                <h4>The Golden Rule Remembered</h4>
+                <p><em>"Never build an app for a problem that hasn't been diagnosed. Design flows from human need to software, never backwards."</em></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- =================================================================== -->
+      <!-- SLIDE 14: Deconstructing the 3 Stakeholder Roles                    -->
+      <!-- =================================================================== -->
+      <section class="slide" id="slide-14" 
+        data-title="Deconstructing Stakeholder Roles" 
+        data-segment="Part 5: Guided Learner Practice (60:00 - 75:00)"
+        data-notes="TRAINER SPEAKING SCRIPT:
+'Every business app in the world serves 3 fundamental roles.
+Look closely at this slide:
+Role 1: The Requester (The Creator).
+This person is on the floor, under stress, trying to do their job. They need a simple, fast screen with big touch buttons.
+Role 2: The Worker / Actor (The Fixer).
+This person receives the ticket, drives to the machine, replaces the seal, and marks it 'Done'. They need a clean queue and an 'Accept' button.
+Role 3: The Supervisor / Viewer (The Monitor).
+This person sits in an office or walks the floor. They don't want detail; they want big numbers: How many machines down? How long has Line 4 waited?
+When you scope an app, you must design for all three!'">
+        <div class="slide-content">
+          <div class="slide-header">
+            <span class="slide-badge teal-badge">Stakeholder Architecture</span>
+            <h2 class="slide-title">Deconstructing the Three Essential Workplace User Roles</h2>
+            <p class="slide-lead">Every operational application coordinates three distinct human roles, each requiring a tailored screen experience.</p>
+          </div>
+
+          <div class="grid-3-col">
+            <div class="retrieval-card" style="border-top: 4px solid var(--fluent-blue-light);">
+              <div class="retrieval-num">&#128104;&#8205;&#128295;</div>
+              <h4>1. The Requester (Creator)</h4>
+              <p class="retrieval-q">Line Operator / Factory Floor</p>
+              <div class="retrieval-answer">
+                <strong>Needs:</strong> Ultra-fast input (&lt; 60s), large touch buttons for work gloves, auto-captured time and machine defaults.
+              </div>
+            </div>
+
+            <div class="retrieval-card" style="border-top: 4px solid var(--fluent-yellow);">
+              <div class="retrieval-num">&#129520;</div>
+              <h4>2. The Worker (Actor)</h4>
+              <p class="retrieval-q">Maintenance Tech / Toolmaker</p>
+              <div class="retrieval-answer">
+                <strong>Needs:</strong> Mobile push notifications, clear list of open tickets sorted by urgency, 1-tap "Accept" and "Complete" buttons.
+              </div>
+            </div>
+
+            <div class="retrieval-card" style="border-top: 4px solid var(--fluent-green-light);">
+              <div class="retrieval-num">&#128202;</div>
+              <h4>3. The Supervisor (Viewer)</h4>
+              <p class="retrieval-q">Plant Manager / Shift Lead</p>
+              <div class="retrieval-answer">
+                <strong>Needs:</strong> High-level visual KPI dashboard, overdue SLA warnings, mean time to repair, exportable historical records.
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- =================================================================== -->
+      <!-- SLIDE 15: The App Feasibility Litmus Test                           -->
+      <!-- =================================================================== -->
+      <section class="slide" id="slide-15" 
+        data-title="The App Feasibility Litmus Test" 
+        data-segment="Part 5: Guided Learner Practice (60:00 - 75:00)"
+        data-notes="TRAINER SPEAKING SCRIPT:
+'How do you know if a problem needs Power Apps, Microsoft Forms, Excel, or just an email?
+Use the 4 Feasibility Litmus Tests on screen:
+Test 1: Frequency & Volume. Does it happen multiple times a day or week? If once a year ➔ No app!
+Test 2: Mobile / Location. Do workers enter data while standing on a plant floor, warehouse aisle, or truck? If yes ➔ Power Apps!
+Test 3: Logic & Dynamic Decisions. Does the form need validation, calculations, or conditional branching? If yes ➔ Power Apps!
+Test 4: Workflow Hand-off. Does person A create a record that person B must approve or update? If yes ➔ Power Apps!
+If all 4 are true, building a Power App will save thousands of dollars!'">
+        <div class="slide-content">
+          <div class="slide-header">
+            <span class="slide-badge purple-badge">Feasibility Evaluation</span>
+            <h2 class="slide-title">The 4-Point App Feasibility Litmus Test</h2>
+            <p class="slide-lead">A systematic rubric to decide whether to build a custom Power App or use a simpler alternative tool.</p>
+          </div>
+
+          <div class="grid-2-col">
+            <div class="code-card">
+              <div class="code-header">The 4 Power Apps Litmus Tests</div>
+              <div style="padding:16px; display:flex; flex-direction:column; gap:12px; font-size:0.9rem;">
+                <div>&#128197; <strong>1. High Frequency:</strong> Occurs daily or weekly, generating recurring operational friction.</div>
+                <div>&#128241; <strong>2. Mobility &amp; Floor Capture:</strong> Used away from desks (tablets, barcode scanners, cameras).</div>
+                <div>&#9881; <strong>3. Logic &amp; Formulas:</strong> Needs dynamic validation, required fields, and conditional warnings.</div>
+                <div>&#128257; <strong>4. Multi-Stage Hand-off:</strong> Person A logs ➔ Person B acts ➔ Person C monitors status.</div>
+              </div>
+            </div>
+
+            <div class="code-card">
+              <div class="code-header">When to Use Other Microsoft 365 Tools</div>
+              <div style="padding:16px; display:flex; flex-direction:column; gap:12px; font-size:0.9rem;">
+                <div>&#128231; <strong>Simple Email / Teams:</strong> One-off question or casual notification between two colleagues.</div>
+                <div>&#128203; <strong>Microsoft Forms:</strong> Simple survey or poll with zero logic, zero editing, and no hand-offs.</div>
+                <div>&#128202; <strong>Excel / SharePoint List:</strong> Standalone data tracking managed by a single person at a desk.</div>
+                <div>&#128736; <strong>Physical Work:</strong> Adjusting the room temperature or fixing broken equipment directly.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- =================================================================== -->
+      <!-- SLIDE 16: Extracting Concrete Business Rules                        -->
+      <!-- =================================================================== -->
+      <section class="slide" id="slide-16" 
+        data-title="Extracting Concrete Business Rules" 
+        data-segment="Part 5: Guided Learner Practice (60:00 - 75:00)"
+        data-notes="TRAINER SPEAKING SCRIPT:
+'Business stakeholders speak in vague, emotional sentences.
+They say: 'We need urgent leaks dealt with immediately!'
+Or: 'People shouldn't be able to submit tickets without giving details!'
+As a citizen developer, your job is to translate that vague emotion into strict, predictable logic:
+Look at the table on screen:
+Vague human: 'Urgent leaks need fast alerts!'
+Technical rule: If(Urgency = 'Critical' && FaultType = 'Hydraulic Leak', SoundAlarm() & NotifyLead(), QueueStandard()).
+Vague human: 'Don't let them submit blank forms!'
+Technical rule: btnSubmit.DisplayMode = If(!IsBlank(Machine) && !IsBlank(Fault), Edit, Disabled).
+Notice: This connects directly to Days 4, 5, and 6!'">
+        <div class="slide-content">
+          <div class="slide-header">
+            <span class="slide-badge blue-badge">Logic Translation</span>
+            <h2 class="slide-title">Extracting Concrete Business Rules from Human Speech</h2>
+            <p class="slide-lead">Bridging informal workplace desires into structured condition-verdict-action logic gates.</p>
+          </div>
+
+          <div class="conversion-bridge-grid">
+            <div class="bridge-card bridge-to-num">
+              <div class="bridge-direction">
+                <span class="type-pill pill-text">Human Speech</span>
+                <span class="bridge-arrow">&#10142;</span>
+                <span class="type-pill pill-bool">Structured Rule</span>
+              </div>
+              <h3>"Handle critical leaks immediately!"</h3>
+              <p>Vague emotion translated into an exact compound condition and automated action.</p>
+              <div class="code-box">
+                <code>If(Urgency = "Critical" &amp;&amp; Type = "Leak", SoundBeacon(), Queue())</code>
+              </div>
+              <div class="bridge-note">&#10004; Evaluates both factors before triggering plant-wide alarm.</div>
+            </div>
+
+            <div class="bridge-card bridge-to-text">
+              <div class="bridge-direction">
+                <span class="type-pill pill-text">Human Speech</span>
+                <span class="bridge-arrow">&#10142;</span>
+                <span class="type-pill pill-date">UI Interlock</span>
+              </div>
+              <h3>"Don't let them submit half-empty tickets!"</h3>
+              <p>Translates into button DisplayMode validation ensuring complete data capture.</p>
+              <div class="code-box">
+                <code>If(!IsBlank(ddMachine.Value) &amp;&amp; !IsBlank(txtNotes.Text), Edit, Disabled)</code>
+              </div>
+              <div class="bridge-note">&#9888; Prevents corrupted database records before submission!</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- =================================================================== -->
+      <!-- SLIDE 17: Guided Practice Brief: Apex Tooling Die Changeover        -->
+      <!-- =================================================================== -->
+      <section class="slide" id="slide-17" 
+        data-title="Guided Practice Brief" 
+        data-segment="Part 5: Guided Learner Practice (60:00 - 75:00)"
+        data-notes="TRAINER SPEAKING SCRIPT:
+'Now let's examine our guided practice scenario:
+Apex Plastics Tooling Die Changeover.
+Every time an extrusion line finishes a run, the heavy steel die mold must be swapped.
+Currently, operators write die change requests on a whiteboard at the end of the hall.
+Tooling technicians in the die shop 200 meters away don't see the whiteboard until their coffee break!
+Result: Lines sit idle for 35 to 45 minutes on every mold change!
+On the next slide, we will test whether this and other workplace scenarios qualify as true App Opportunities!'">
+        <div class="slide-content">
+          <div class="slide-header">
+            <span class="slide-badge teal-badge">Guided Challenge Brief</span>
+            <h2 class="slide-title">Guided Practice: Apex Tooling Die Changeover Bottleneck</h2>
+            <p class="slide-lead">Analyze the operational breakdown below before practicing scenario evaluation on our interactive board.</p>
+          </div>
+
+          <div class="parts-brief-grid">
+            <div class="brief-item">
+              <span class="brief-num">1</span>
+              <div>
+                <strong>The Current Pain</strong>
+                <p>Operators write mold swap requests on a hallway whiteboard. Toolmakers 200m away don't see it for 45 minutes.</p>
+              </div>
+            </div>
+            <div class="brief-item">
+              <span class="brief-num">2</span>
+              <div>
+                <strong>The Financial Toll</strong>
+                <p>3 mold changes per day &bull; 40 minutes idle time each &bull; $140/hour machine cost = $840 wasted daily ($210,000/year).</p>
+              </div>
+            </div>
+            <div class="brief-item">
+              <span class="brief-num">3</span>
+              <div>
+                <strong>The Key Stakeholders</strong>
+                <p>Line Operator (Logs completion) &bull; Tooling Tech (Preps &amp; installs mold) &bull; Production Scheduler (Tracks downtime).</p>
+              </div>
+            </div>
+            <div class="brief-item">
+              <span class="brief-num">4</span>
+              <div>
+                <strong>Essential Data Fields</strong>
+                <p>Machine # (1–12), Finished Mold ID, New Mold ID, Crane Required (True/False), Ready Timestamp.</p>
+              </div>
+            </div>
+            <div class="brief-item">
+              <span class="brief-num">5</span>
+              <div>
+                <strong>Critical Business Rule</strong>
+                <p>If Crane Required is True ➔ Alert Overhead Rigging Crew simultaneously with Toolroom.</p>
+              </div>
+            </div>
+            <div class="brief-item">
+              <span class="brief-num">6</span>
+              <div>
+                <strong>The Desired Target Result</strong>
+                <p>Tooling crew pre-stages new mold 15 minutes before the run ends. Idle changeover time drops from 40m to 8m.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- =================================================================== -->
+      <!-- SLIDE 18: Interactive Practice: 6-Scenario Opportunity Simulator    -->
+      <!-- =================================================================== -->
+      <section class="slide" id="slide-18" 
+        data-title="Interactive Opportunity Simulator" 
+        data-segment="Part 5: Guided Learner Practice (60:00 - 75:00)"
+        data-notes="TRAINER SPEAKING SCRIPT:
+'Here is your live Opportunity Evaluator Simulator!
+You have 6 realistic workplace scenarios from Apex Plastics.
+For each scenario, evaluate whether it is a TRUE POWER APP OPPORTUNITY (Path A) or a NON-APP PROBLEM that should use Forms, Email, or Physical Action (Path B)!
+Let's see if you can achieve a perfect 6 out of 6 score!'">
+        <div class="slide-content">
+          <div class="slide-header">
+            <span class="slide-badge green-badge">Hands-On Practice</span>
+            <h2 class="slide-title">Interactive 6-Scenario "App Opportunity or False Lead?" Simulator</h2>
+            <p class="slide-lead">Evaluate each workplace problem below. Decide if it warrants a custom Power App or an alternative solution.</p>
+          </div>
+
+          <div class="evaluator-grid-container" id="opportunity-simulator-widget">
+            <div class="evaluator-card" data-scenario="s1" data-correct="path-a">
+              <div class="cond-title">1. Mold Swap Bottleneck (Idle Line)</div>
+              <div class="cond-btn-pair">
+                <button class="cond-btn" data-choice="path-a">Path A: Build Power App</button>
+                <button class="cond-btn" data-choice="path-b">Path B: Other Tool / No App</button>
+              </div>
+              <div class="cond-status-text">Select Path A or Path B</div>
+            </div>
+
+            <div class="evaluator-card" data-scenario="s2" data-correct="path-b">
+              <div class="cond-title">2. Announcing Employee of the Month</div>
+              <div class="cond-btn-pair">
+                <button class="cond-btn" data-choice="path-a">Path A: Build Power App</button>
+                <button class="cond-btn" data-choice="path-b">Path B: Other Tool / No App</button>
+              </div>
+              <div class="cond-status-text">Select Path A or Path B</div>
+            </div>
+
+            <div class="evaluator-card" data-scenario="s3" data-correct="path-a">
+              <div class="cond-title">3. Forklift OSHA Pre-Shift Checklist</div>
+              <div class="cond-btn-pair">
+                <button class="cond-btn" data-choice="path-a">Path A: Build Power App</button>
+                <button class="cond-btn" data-choice="path-b">Path B: Other Tool / No App</button>
+              </div>
+              <div class="cond-status-text">Select Path A or Path B</div>
+            </div>
+
+            <div class="evaluator-card" data-scenario="s4" data-correct="path-b">
+              <div class="cond-title">4. Office Breakroom Air Conditioner Setting</div>
+              <div class="cond-btn-pair">
+                <button class="cond-btn" data-choice="path-a">Path A: Build Power App</button>
+                <button class="cond-btn" data-choice="path-b">Path B: Other Tool / No App</button>
+              </div>
+              <div class="cond-status-text">Select Path A or Path B</div>
+            </div>
+
+            <div class="evaluator-card" data-scenario="s5" data-correct="path-a">
+              <div class="cond-title">5. Hazmat Chemical Waste Manifest Approval</div>
+              <div class="cond-btn-pair">
+                <button class="cond-btn" data-choice="path-a">Path A: Build Power App</button>
+                <button class="cond-btn" data-choice="path-b">Path B: Other Tool / No App</button>
+              </div>
+              <div class="cond-status-text">Select Path A or Path B</div>
+            </div>
+
+            <div class="evaluator-card" data-scenario="s6" data-correct="path-b">
+              <div class="cond-title">6. Voting on Pizza vs Burgers for Lunch</div>
+              <div class="cond-btn-pair">
+                <button class="cond-btn" data-choice="path-a">Path A: Build Power App</button>
+                <button class="cond-btn" data-choice="path-b">Path B: Other Tool / No App</button>
+              </div>
+              <div class="cond-status-text">Select Path A or Path B</div>
+            </div>
+          </div>
+
+          <div class="evaluator-footer-bar">
+            <span>Score: <strong id="sim-score">0</strong> / 6 Correct</span>
+            <span id="sim-feedback">Evaluate all 6 workplace scenarios above to test your opportunity diagnosis.</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- =================================================================== -->
+      <!-- SLIDE 19: 4 Common Beginner Misconceptions & Corrections            -->
+      <!-- =================================================================== -->
+      <section class="slide" id="slide-19" 
+        data-title="Common Beginner Misconceptions" 
+        data-segment="Part 6: Assessment &amp; Forward Bridge (75:00 - 90:00)"
+        data-notes="TRAINER SPEAKING SCRIPT:
+'Let's examine 4 dangerous misconceptions beginners make when starting in Power Apps:
+Misconception 1: 'Power Apps is for building any cool idea I have!'
+Correction: An app without a business problem is wasted time. Always start with: What hurts, who loses money, and who uses it?
+Misconception 2: 'More input fields make my app look professional!'
+Correction: The opposite! Every extra field increases the chance workers will abandon your app. Capture only what drives an action!
+Misconception 3: 'I should start by making the prettiest screen first!'
+Correction: Never design screens before knowing your data and users. Design flows from Problem ➔ Process ➔ Data ➔ Screen!
+Misconception 4: 'If our paper process is chaotic, putting it in an app will fix it!'
+Correction: Automating chaos gives you automated chaos! Clarify human responsibilities first!'">
+        <div class="slide-content">
+          <div class="slide-header">
+            <span class="slide-badge red-badge">Mental Model Corrections</span>
+            <h2 class="slide-title">4 Common Beginner Misconceptions &amp; Trainer Fixes</h2>
+            <p class="slide-lead">Correcting plausible but dangerous wrong mental models before they lead to abandoned app projects.</p>
+          </div>
+
+          <div class="grid-2-col">
+            <div class="misconception-card">
+              <div class="misc-bad">&#10060; Wrong Mental Model #1</div>
+              <h4>"Power Apps is for any cool idea I have in my head."</h4>
+              <p class="misc-fix"><strong>Trainer Correction:</strong> Software must serve an operational purpose. If there is no real pain, no clear user, and no lost money, nobody will use the app.</p>
+            </div>
+
+            <div class="misconception-card">
+              <div class="misc-bad">&#10060; Wrong Mental Model #2</div>
+              <h4>"The more input fields on the screen, the better the app."</h4>
+              <p class="misc-fix"><strong>Trainer Correction:</strong> Floor operators wearing gloves will abandon forms with 30 text boxes. Capture the absolute minimum data needed to take action.</p>
+            </div>
+
+            <div class="misconception-card">
+              <div class="misc-bad">&#10060; Wrong Mental Model #3</div>
+              <h4>"I should start by drawing the buttons and screens first."</h4>
+              <p class="misc-fix"><strong>Trainer Correction:</strong> Design always flows forward: <em>Problem ➔ Process ➔ Data ➔ Screen</em>. Designing screens first guarantees rework.</p>
+            </div>
+
+            <div class="misconception-card">
+              <div class="misc-bad">&#10060; Wrong Mental Model #4</div>
+              <h4>"Digitizing a broken paper process will fix the bottleneck."</h4>
+              <p class="misc-fix"><strong>Trainer Correction:</strong> If workers don't know who is responsible on paper, an app will just produce digital confusion. Fix the human workflow first.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- =================================================================== -->
+      <!-- SLIDE 20: 5-Question Knowledge Check (Interactive Quiz)             -->
+      <!-- =================================================================== -->
+      <section class="slide" id="slide-20" 
+        data-title="5-Question Knowledge Check" 
+        data-segment="Part 6: Assessment &amp; Forward Bridge (75:00 - 90:00)"
+        data-notes="TRAINER SPEAKING SCRIPT:
+'Time for our 5-Question Knowledge Check!
+Notice questions 2, 3, and 4 ask 'Why' and 'What happens if'.
+Take your time, select the best answer for each question, and let's review the rationale together.'">
+        <div class="slide-content">
+          <div class="slide-header">
+            <span class="slide-badge blue-badge">Knowledge Verification</span>
+            <h2 class="slide-title">Day 7 Evaluative Knowledge Check</h2>
+            <p class="slide-lead">Answer all 5 questions to verify your mastery of problem diagnosis, user roles, data scoping, and app feasibility.</p>
+          </div>
+
+          <div class="quiz-container" id="quiz-widget">
+            <div class="quiz-header-bar">
+              <span id="quiz-question-counter">Question 1 of 5</span>
+              <span id="quiz-score-display">Score: 0 / 5</span>
+            </div>
+
+            <div class="quiz-body" id="quiz-body">
+              <!-- Dynamically rendered via script.js -->
+            </div>
+
+            <div class="quiz-navigation">
+              <button class="btn-subtle" id="quiz-prev-btn" disabled>&#8592; Previous</button>
+              <button class="btn-primary" id="quiz-next-btn">Next Question &#8594;</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- =================================================================== -->
+      <!-- SLIDE 21: Final Challenge: Apex Tooling Die Changeover Blueprint    -->
+      <!-- =================================================================== -->
+      <section class="slide" id="slide-21" 
+        data-title="Final Challenge: Opportunity Blueprint" 
+        data-segment="Part 6: Assessment &amp; Forward Bridge (75:00 - 90:00)"
+        data-notes="TRAINER SPEAKING SCRIPT:
+'Here is your Day 7 Capstone Challenge:
+You are the automation architect at Apex Plastics.
+The plant manager asks you to scope the Tooling Die Mold Changeover bottleneck.
+On your worksheet or paper, fill out the 5 Pillars:
+1. What is the Current Problem?
+2. What is the Desired Result?
+3. Who are the 3 People/Roles?
+4. What are the 4-5 Data Fields to capture?
+5. What is the Core Business Rule?
+Author your blueprint now!'">
+        <div class="slide-content">
+          <div class="slide-header">
+            <span class="slide-badge purple-badge">Independent Capstone</span>
+            <h2 class="slide-title">Final Challenge: Apex Tooling Die Changeover Opportunity Blueprint</h2>
+            <p class="slide-lead">Author the complete 5-part scoping specification for the mold swap bottleneck before building tomorrow's process map.</p>
+          </div>
+
+          <div class="challenge-table-wrapper">
+            <table class="challenge-table">
+              <thead>
+                <tr>
+                  <th>Pillar #</th>
+                  <th>Framework Component</th>
+                  <th>Scoping Guiding Question</th>
+                  <th>Your Operational Specification</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td>1</td><td>Current Problem</td><td>What exact human friction causes delays or lost money?</td><td>Hallway whiteboard requests sit unread for 45 mins; lines idle.</td></tr>
+                <tr><td>2</td><td>Desired Result</td><td>What does perfect measurable operational success look like?</td><td>Die shop notified 15m before run finishes; idle time &lt; 8 mins.</td></tr>
+                <tr><td>3</td><td>People &amp; Roles</td><td>Who requests? Who performs the work? Who tracks KPI?</td><td>Line Operator ➔ Tooling Technician ➔ Production Scheduler.</td></tr>
+                <tr><td>4</td><td>Information</td><td>What 4–5 facts must be collected without adding fluff?</td><td>Machine #, Old Mold ID, New Mold ID, Crane Required, Time.</td></tr>
+                <tr><td>5</td><td>Business Rules</td><td>What automated logic guides routing or emergency alerts?</td><td>If Crane Required = True ➔ Notify Rigging Crew + Toolroom.</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- =================================================================== -->
+      <!-- SLIDE 22: Challenge Solution Reveal & Evaluation Rubric              -->
+      <!-- =================================================================== -->
+      <section class="slide" id="slide-22" 
+        data-title="Challenge Solution &amp; Rubric" 
+        data-segment="Part 6: Assessment &amp; Forward Bridge (75:00 - 90:00)"
+        data-notes="TRAINER SPEAKING SCRIPT:
+'Let's reveal the benchmark exemplar solution!
+Click 'Reveal Solution' to verify your 5 Pillars.
+Check your specification against our 4-level evaluation rubric:
+Level 4 Mastery means all 5 pillars are concrete, practical, free of fluff, and ready for tomorrow's process mapping!'">
+        <div class="slide-content">
+          <div class="slide-header">
+            <span class="slide-badge green-badge">Exemplar &amp; Rubric</span>
+            <h2 class="slide-title">Final Challenge Solution &amp; 4-Level Evaluation Rubric</h2>
+            <p class="slide-lead">Compare your opportunity specification against the production benchmark and assess your readiness for wireframing.</p>
+          </div>
+
+          <div class="grid-2-col">
+            <div class="solution-card">
+              <div class="solution-header">
+                <h4>Exemplar 5-Part Opportunity Blueprint</h4>
+                <button class="btn-reveal" id="btn-reveal-solution">Reveal Solution</button>
+              </div>
+              <div class="solution-body collapsed" id="solution-content">
+                <ul class="solution-list">
+                  <li><strong>1. Problem:</strong> Whiteboard requests 200m away cause 40 mins idle time per mold change ($210,000/yr loss).</li>
+                  <li><strong>2. Result:</strong> Instant mobile alert to die room; pre-stage molds 15 mins prior; changeover &le; 8 mins.</li>
+                  <li><strong>3. Roles:</strong> Operator (Logs run completion), Toolmaker (Installs mold), Scheduler (Tracks downtime).</li>
+                  <li><strong>4. Data:</strong> <code>MachineID</code> (Number), <code>CurrentMold</code> (Text), <code>NextMold</code> (Text), <code>CraneNeeded</code> (Boolean), <code>RunEndTime</code> (DateTime).</li>
+                  <li><strong>5. Rules:</strong> <code>If(CraneNeeded, AlertCraneCrew() &amp; AlertToolroom(), AlertToolroomOnly())</code>.</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="rubric-card">
+              <h4>Evaluation Rubric (4 Performance Levels)</h4>
+              <div class="rubric-levels">
+                <div class="level-item level-4">
+                  <span class="lvl-title">Level 4: Mastery (100%)</span>
+                  <p>All 5 pillars clearly defined with measurable pain, quantified goal, concise data fields, and structured logic.</p>
+                </div>
+                <div class="level-item level-3">
+                  <span class="lvl-title">Level 3: Proficient (75-99%)</span>
+                  <p>4 pillars complete; minor ambiguity in role hand-off or missing one essential data field.</p>
+                </div>
+                <div class="level-item level-2">
+                  <span class="lvl-title">Level 2: Developing (50-74%)</span>
+                  <p>Confounded problem with solution; included 20+ bloated fields; vague business rules.</p>
+                </div>
+                <div class="level-item level-1">
+                  <span class="lvl-title">Level 1: Novice (&lt;50%)</span>
+                  <p>Jumped straight to describing screen buttons without analyzing human friction or user roles.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- =================================================================== -->
+      <!-- SLIDE 23: The Connection Map (Before -> Today -> Next)              -->
+      <!-- =================================================================== -->
+      <section class="slide" id="slide-23" 
+        data-title="Curriculum Connection Map" 
+        data-segment="Part 6: Assessment &amp; Forward Bridge (75:00 - 90:00)"
+        data-notes="TRAINER SPEAKING SCRIPT:
+'Look at our 3-part Connection Map.
+BEFORE in Days 1–6: We mastered the technical building blocks: inputs, sequences, data types, conditions, single IF, and compound gates (&&, ||, !).
+TODAY on Day 7: We learned how to discover and scope real workplace opportunities using the 5 Pillars (Problem, Result, People, Info, Rules).
+TOMORROW on Day 8: We take today's scoped opportunity and map it into a step-by-step business process flow and wireframe clean user interface screens!
+Every single lesson builds on the last!'">
+        <div class="slide-content">
+          <div class="slide-header">
+            <span class="slide-badge purple-badge">Curriculum Bridge</span>
+            <h2 class="slide-title">The Three-Phase Connection Map</h2>
+            <p class="slide-lead">How earlier technical logic, today's business opportunity scoping, and tomorrow's process wireframing form a continuous thread.</p>
+          </div>
+
+          <div class="bridge-three-col">
+            <div class="bridge-col before-col">
+              <span class="bridge-time-tag">BEFORE (Days 1–6)</span>
+              <h3>Technical Logic &amp; Gates</h3>
+              <div class="bridge-summary">
+                Learned how apps store typed data, evaluate True/False conditions, and execute branching actions with <code>If()</code>, <code>&amp;&amp;</code>, <code>||</code>, and <code>!</code>.
+              </div>
+              <div class="bridge-flow-arrow">&#10142; Applied to...</div>
+            </div>
+
+            <div class="bridge-col today-col">
+              <span class="bridge-time-tag">TODAY (Day 7)</span>
+              <h3>From Problem to Opportunity</h3>
+              <div class="bridge-summary">
+                Phase 3 Begins: Scoping operational friction into the 5 Pillars (Problem ➔ Result ➔ People ➔ Info ➔ Rules) before touching software.
+              </div>
+              <div class="bridge-flow-arrow">&#10142; Mapped into...</div>
+            </div>
+
+            <div class="bridge-col next-col">
+              <span class="bridge-time-tag">TOMORROW (Day 8)</span>
+              <h3>Process Mapping &amp; Wireframes</h3>
+              <div class="bridge-summary">
+                Transforming the scoped opportunity into visual step-by-step flowcharts and prototyping 3 clean user screens.
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- =================================================================== -->
+      <!-- SLIDE 24: Homework, Bilingual Glossary & Session Wrap-Up            -->
+      <!-- =================================================================== -->
+      <section class="slide" id="slide-24" 
+        data-title="Homework &amp; Glossary" 
+        data-segment="Part 6: Assessment &amp; Forward Bridge (75:00 - 90:00)"
+        data-notes="TRAINER SPEAKING SCRIPT:
+'Congratulations on completing Day 7! You now possess the strategic mindset of a citizen developer architect!
+Here is your 15-minute homework: 'The Workplace Pain Hunter'.
+Find ONE real bottleneck in your daily routine:
+1. What hurts?
+2. What would perfect success look like?
+3. Who are the 3 people involved?
+4. What are the 4 data fields?
+5. What is one business rule?
+Write it down and bring it tomorrow to turn into a wireframe!
+Thank you for your fantastic focus today!'">
+        <div class="slide-content">
+          <div class="slide-header">
+            <span class="slide-badge blue-badge">Session Wrap-Up</span>
+            <h2 class="slide-title">15-Minute Homework &amp; Bilingual Glossary</h2>
+            <p class="slide-lead">Practice hunting operational friction in your workplace and master the architectural vocabulary.</p>
+          </div>
+
+          <div class="grid-2-col">
+            <div class="homework-card">
+              <div class="hw-icon">&#128269;</div>
+              <div class="hw-content">
+                <h4>Homework: "The Workplace Pain Hunter" (&le; 15 Mins)</h4>
+                <p>1. Identify <strong>ONE real friction point</strong> at your workplace or home (lost tools, slow approvals, paper logs).</p>
+                <p>2. Draft the <strong>5 Pillars</strong>: Problem &bull; Result &bull; People &bull; Information &bull; Rules.</p>
+                <p>3. Bring your 1-page draft to class tomorrow for Day 8, where we will turn it into a <strong>Process Map &amp; Screen Wireframe</strong>!</p>
+                <div class="hw-outcome">Expected Deliverable: 1 completed 5-Pillar Blueprint ready for wireframing!</div>
+              </div>
+            </div>
+
+            <div class="glossary-card">
+              <h4>Bilingual Technical Glossary (Day 7)</h4>
+              <div class="glossary-list">
+                <div class="gloss-item">
+                  <span class="en-term">App Opportunity</span>
+                  <span class="kh-term">ឱកាសបង្កើតកម្មវិធី / ដំណោះស្រាយបញ្ហា</span>
+                </div>
+                <div class="gloss-item">
+                  <span class="en-term">Operational Bottleneck</span>
+                  <span class="kh-term">ចំណុចស្ទះនៃប្រតិបត្តិការការងារ</span>
+                </div>
+                <div class="gloss-item">
+                  <span class="en-term">Requester (Creator)</span>
+                  <span class="kh-term">អ្នកស្នើសុំ (អ្នកបង្កើតទិន្នន័យ)</span>
+                </div>
+                <div class="gloss-item">
+                  <span class="en-term">Actor / Worker (Fixer)</span>
+                  <span class="kh-term">អ្នកអនុវត្តសកម្មភាព (អ្នកដោះស្រាយ)</span>
+                </div>
+                <div class="gloss-item">
+                  <span class="en-term">Feasibility Litmus Test</span>
+                  <span class="kh-term">វិញ្ញាសាវាយតម្លៃលទ្ធភាពជោគជ័យ</span>
+                </div>
+                <div class="gloss-item">
+                  <span class="en-term">Business Rule</span>
+                  <span class="kh-term">វិធានការអាជីវកម្ម / តក្កវិជ្ជានាំផ្លូវ</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- Bottom Navigation Bar & Slide Footer -->
+        <footer id="bottom-hud">
+      <div id="progress-bar-container">
+        <div id="progress-bar"></div>
+      </div>
+
+      <div class="hud-left">
+        <button class="hud-btn" id="btn-prev" onclick="prevSlide()" title="Previous Slide (Left Arrow)">&#8592; Prev</button>
+        <button class="hud-btn" id="btn-next" onclick="nextSlide()" title="Next Slide (Right Arrow / Space)">Next &#8594;</button>
+        <span id="slide-counter">Slide <span id="slide-current-num">1</span> / <span id="slide-total-count">24</span></span>
+      </div>
+
+      <div class="hud-right">
+        <button class="hud-btn" id="btn-lang" onclick="toggleLanguage()" title="Toggle Language (L)">
+          🌐 <span id="lang-label">KH</span>
+        </button>
+        <button class="hud-btn active" id="btn-laser" onclick="toggleLaser()" title="Presenter Laser Pointer (P)">
+          🔴 Laser
+        </button>
+        <button class="hud-btn" id="btn-notes" onclick="toggleNotes()" title="Trainer Notes Drawer (N)">
+          📝 Notes
+        </button>
+        <button class="hud-btn" id="btn-overview" onclick="toggleOverview()" title="Slide Overview Modal (O)">
+          🗂️ Overview
+        </button>
+        <button class="hud-btn" id="btn-timer" onclick="toggleTimer()" title="90-Min Countdown (T)">
+          ⏱️ <span id="timer-display">90:00</span>
+        </button>
+        <button class="hud-btn" id="btn-fullscreen" onclick="toggleFullscreen()" title="Fullscreen (F)">
+          ⛶
+        </button>
+        <a href="../index.html" class="hud-btn hub-btn" title="Return to Master Curriculum Hub (ត្រឡប់ទៅទំព័រដើម)" style="text-decoration: none; display: inline-flex; align-items: center; gap: 4px; color: #fcd34d; font-weight: 600;"><span>🏠</span><span>Hub</span></a>
+      </div>
+    </footer>
+
+  </div>
+
+  <!-- Presenter Script Notes Drawer Panel (Press N) -->
+  <aside id="presenter-notes-panel" class="presenter-notes-panel hidden" aria-hidden="true" role="complementary" aria-label="Trainer Speaking Notes">
+    <div class="notes-header">
+      <div class="notes-title">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M2.5 1A1.5 1.5 0 0 0 1 2.5v11A1.5 1.5 0 0 0 2.5 15h6.086a1.5 1.5 0 0 0 1.06-.44l4.915-4.914A1.5 1.5 0 0 0 15 8.586V2.5A1.5 1.5 0 0 0 13.5 1h-11zM2 2.5a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 .5.5v6H9.5A1.5 1.5 0 0 0 8 10v4.5H2.5a.5.5 0 0 1-.5-.5v-11zm7 7.5v4.379L13.379 10H9z"/></svg>
+        <span>Trainer Speaking Script &amp; Pedagogical Guidance</span>
+      </div>
+      <button id="btn-close-notes" class="icon-btn-close" aria-label="Close Notes">&times;</button>
+    </div>
+    <div class="notes-body" id="notes-body">
+      <!-- Injected dynamically by script.js -->
+    </div>
+  </aside>
+
+  <!-- Slide Grid Overview Modal (Press O) -->
+  <div id="overview-modal" class="overview-modal hidden" aria-hidden="true" role="dialog" aria-label="Slide Navigation Grid">
+    <div class="overview-backdrop" id="overview-backdrop"></div>
+    <div class="overview-dialog">
+      <div class="overview-header">
+        <h3>Lesson Slide Grid Navigator (24 Slides)</h3>
+        <button id="btn-close-overview" class="icon-btn-close" aria-label="Close Overview">&times;</button>
+      </div>
+      <div class="overview-grid" id="overview-grid">
+        <!-- Dynamically rendered by script.js -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Presentation Engine & Bilingual Logic -->
+  <script src="script.js"></script>
+
+    <!-- Presenter Laser Focus Pointer & Click Ripple Elements -->
+    <div id="presenter-pointer" class="presenter-laser-dot">
+      <div class="laser-halo"></div>
+    </div>
+    <div id="pointer-click-ripple" class="pointer-click-ripple"></div>
+  <script>
+if (window.self !== window.top) {
+  document.documentElement.classList.add('in-iframe');
+  function hideHub() { document.querySelectorAll('.hub-btn, .back-to-hub-pill').forEach(e => e.style.display = 'none'); }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', hideHub);
+  } else {
+    hideHub();
+  }
+}
+</script>
+<style>
+.in-iframe .hub-btn, .in-iframe .back-to-hub-pill { display: none !important; }
+</style>
+</body>
+</html>

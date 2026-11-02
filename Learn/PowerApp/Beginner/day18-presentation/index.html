@@ -1,0 +1,1637 @@
+<!DOCTYPE html>
+<html lang="en" translate="no" class="notranslate">
+<head>
+  <meta name="google" content="notranslate">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Day 18: Variables: Let the App Remember | Microsoft Power Apps Foundation</title>
+  <link rel="stylesheet" href="../shared/design-system.css">
+  <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=Moul&family=Kantumruy+Pro:ital,wght@0,400..700;1,400..700&family=Battambang:wght@300;400;700;900&family=Koh+Santepheap:wght@300;400;700&family=Koulen&family=Siemreap&display=swap" rel="stylesheet">
+  <style>
+    /* Strict Speaker Notes Lock: Never render on slide stage under any circumstance */
+    aside.trainer-notes,
+    .trainer-notes,
+    .slide aside {
+      display: none !important;
+      visibility: hidden !important;
+      height: 0 !important;
+      width: 0 !important;
+      overflow: hidden !important;
+      opacity: 0 !important;
+      pointer-events: none !important;
+      margin: 0 !important;
+      padding: 0 !important;
+      border: none !important;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Presentation Stage Wrapper (Lesson 14 Architecture) -->
+  <div id="presentation-stage">
+    
+    <!-- Ambient Aurora Orbs (60fps backdrop) -->
+    <div class="aurora-orb orb-1"></div>
+    <div class="aurora-orb orb-2"></div>
+    <div class="aurora-orb orb-3"></div>
+
+    <!-- Presenter Laser Pointer & Shockwave Click Ripple -->
+    <div id="presenter-laser"></div>
+    <div id="pointer-ripple" class="pointer-click-ripple"></div>
+
+    <!-- Viewport for 24 Slides -->
+    <main id="slides-viewport">
+
+      <!-- Slide 1: Hero -->
+      <section class="slide active" id="slide-1" data-slide-index="0" data-title="Variables: Let the App Remember" data-segment="Phase 6: Power Fx Fundamentals">
+        <div class="slide-content hero-content">
+          <div class="hero-badge">
+            <span>Microsoft Power Apps Professional Foundation</span>
+            <span>&bull;</span>
+            <span>Day 18 of 27</span>
+          </div>
+          <h1 class="hero-title">Variables: Let the App Remember</h1>
+          <p class="hero-subtitle">
+            Give your Power Apps short-term memory! Discover how variables capture values from user actions, hold them securely in temporary memory, and reuse them across screens and calculations.
+          </p>
+
+          <div class="model-chain">
+            <span class="chain-item">Real Problem</span>
+            <span class="chain-arrow">&rarr;</span>
+            <span class="chain-item">Process</span>
+            <span class="chain-arrow">&rarr;</span>
+            <span class="chain-item">Data</span>
+            <span class="chain-arrow">&rarr;</span>
+            <span class="chain-item">UI / Screen</span>
+            <span class="chain-arrow">&rarr;</span>
+            <span class="chain-item">Logic / Decision</span>
+            <span class="chain-arrow">&rarr;</span>
+            <span class="chain-item active">Action (Set)</span>
+            <span class="chain-arrow">&rarr;</span>
+            <span class="chain-item active">App Memory</span>
+            <span class="chain-arrow">&rarr;</span>
+            <span class="chain-item">Storage</span>
+            <span class="chain-arrow">&rarr;</span>
+            <span class="chain-item">Feedback</span>
+            <span class="chain-arrow">&rarr;</span>
+            <span class="chain-item">Test</span>
+          </div>
+        </div>
+
+        <aside class="trainer-notes" style="display: none !important;">
+          <h4>Trainer Speaking Script & Pedagogical Cues:</h4>
+          <p><strong>Opening Hook (2 min):</strong> "Welcome to Day 18! Up until now, your app was smart enough to talk like a spreadsheet (Day 16) and make decisions like a security guard (Day 17). But your app had one major flaw: it suffered from total amnesia!"</p>
+          <p><strong>The Core Concept:</strong> "The moment you navigate from Screen 1 to Screen 2, the app forgets who you are and what you clicked. Today, we give our apps a BRAIN and a SCRATCHPAD using Variables."</p>
+          <p><strong>Connection Chain:</strong> Emphasize: <code>event &rarr; Set(variable, value) &rarr; remembered value &rarr; reuse</code>. Remind beginners: a variable is just a named sticky note in computer memory!</p>
+        </aside>
+      </section>
+
+      <!-- Slide 2: 90-Min Agenda & Objectives -->
+      <section class="slide" id="slide-2" data-slide-index="1" data-title="90-Minute Agenda & Measurable Objectives" data-segment="Part 1: Objectives & Structure">
+        <header class="slide-header">
+          <div class="section-tag">Part 1 &bull; Objectives &amp; Structure</div>
+          <h2>90-Minute Agenda &amp; Measurable Objectives</h2>
+          <p class="subtitle">Spiral learning path: Empowering apps with temporary memory through hands-on milestones.</p>
+        </header>
+
+        <div class="slide-content grid-2">
+          <div class="card">
+            <h3 class="card-title">4 Measurable Learning Objectives</h3>
+            <div class="objective-item">
+              <span class="obj-num">1</span>
+              <div>
+                <strong>Define Variables in Plain Language:</strong>
+                <p>Explain why apps need short-term scratchpads rather than losing user selections whenever they change screens.</p>
+              </div>
+            </div>
+            <div class="objective-item">
+              <span class="obj-num">2</span>
+              <div>
+                <strong>Write Global Variable Formulas with <code>Set()</code>:</strong>
+                <p>Construct bulletproof <code>Set(VariableName, Value)</code> expressions to capture text, numbers, and user states without syntax errors.</p>
+              </div>
+            </div>
+            <div class="objective-item">
+              <span class="obj-num">3</span>
+              <div>
+                <strong>Read &amp; Display Remembered Values Across Screens:</strong>
+                <p>Pass stored variables into labels, headers, and dynamic formulas across different screens seamlessly.</p>
+              </div>
+            </div>
+            <div class="objective-item">
+              <span class="obj-num">4</span>
+              <div>
+                <strong>Apply Professional <code>var</code> Naming Standards:</strong>
+                <p>Implement clean industry conventions (e.g. <code>varCurrentShift</code>, <code>varOperatorName</code>) to distinguish variables from screen controls.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <h3 class="card-title">Strict 90-Minute Timed Schedule</h3>
+            <div class="agenda-timeline">
+              <div class="agenda-block">
+                <span class="agenda-time">00 - 10m</span>
+                <span class="agenda-name">1. Recall &amp; Concept Map</span>
+                <span class="agenda-desc">Connecting Days 4-6, 16, &amp; 17 to Day 18</span>
+              </div>
+              <div class="agenda-block">
+                <span class="agenda-time">10 - 20m</span>
+                <span class="agenda-name">2. The "Why This Exists" Problem</span>
+                <span class="agenda-desc">The Amnesia App Crisis at Apex Plastics</span>
+              </div>
+              <div class="agenda-block">
+                <span class="agenda-time">20 - 35m</span>
+                <span class="agenda-name">3. Core Concepts &amp; Mental Models</span>
+                <span class="agenda-desc">Sticky note circuit &amp; Waiter analogy</span>
+              </div>
+              <div class="agenda-block">
+                <span class="agenda-time">35 - 50m</span>
+                <span class="agenda-name">4. Power Fx Syntax Dissection</span>
+                <span class="agenda-desc">Deconstructing Set(), naming, &amp; scopes</span>
+              </div>
+              <div class="agenda-block">
+                <span class="agenda-time">50 - 65m</span>
+                <span class="agenda-name">5. Trainer Demo &amp; Guided Practice</span>
+                <span class="agenda-desc">Building the Operator Shift Badge</span>
+              </div>
+              <div class="agenda-block">
+                <span class="agenda-time">65 - 78m</span>
+                <span class="agenda-name">6. Interactive Lab &amp; Misconceptions</span>
+                <span class="agenda-desc">Multi-screen memory simulator &amp; trap fixes</span>
+              </div>
+              <div class="agenda-block">
+                <span class="agenda-time">78 - 86m</span>
+                <span class="agenda-name">7. Knowledge Checks (5 Quizzes)</span>
+                <span class="agenda-desc">Interactive checks with live explanations</span>
+              </div>
+              <div class="agenda-block">
+                <span class="agenda-time">86 - 90m</span>
+                <span class="agenda-name">8. Capstone Challenge &amp; Forward Bridge</span>
+                <span class="agenda-desc">100-pt rubric &amp; preview of Day 19 (Storage)</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <aside class="trainer-notes" style="display: none !important;">
+          <h4>Trainer Speaking Script & Pedagogical Cues:</h4>
+          <p><strong>Set Clear Expectations:</strong> Walk through the 4 objectives. Emphasize that by minute 65, every student will have built a live multi-screen app that remembers the user's shift without re-asking.</p>
+          <p><strong>Pacing Tip:</strong> Keep the first two recall sections brisk (10 min). Focus energy on the syntax dissection of <code>Set()</code> and the cross-screen guided practice.</p>
+        </aside>
+      </section>
+
+      <!-- Slide 3: Concept Map Recap -->
+      <section class="slide" id="slide-3" data-slide-index="2" data-title="5-Minute Concept-Map: The Spiral Curriculum" data-segment="Part 1: Recall & Connection">
+        <header class="slide-header">
+          <div class="section-tag">Part 1 &bull; Spiral Connection</div>
+          <h2>5-Minute Concept-Map: The Spiral Curriculum</h2>
+          <p class="subtitle">Every new lesson stands directly on the shoulders of concepts you already mastered.</p>
+        </header>
+
+        <div class="slide-content grid-3">
+          <div class="card">
+            <div class="card-badge" style="background: rgba(59, 130, 246, 0.2); color: #93c5fd;">Days 14 - 16: Properties &amp; Controls</div>
+            <h3 class="card-title">Live Screen Values</h3>
+            <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 1rem;">
+              You learned how controls hold data right now on the active screen using the Dot Operator (<code>txtDept.Text</code>).
+            </p>
+            <ul style="color: var(--text-muted); font-size: 0.88rem; padding-left: 1.2rem; line-height: 1.7;">
+              <li>Controls capture immediate input.</li>
+              <li>Formulas calculate reactive results.</li>
+              <li><em>Limitation:</em> Trapped on that one screen!</li>
+            </ul>
+          </div>
+
+          <div class="card">
+            <div class="card-badge" style="background: rgba(16, 185, 129, 0.2); color: #86efac;">Day 17: Validation Logic</div>
+            <h3 class="card-title">Decision Gatekeepers</h3>
+            <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 1rem;">
+              Yesterday you built the intelligent shield using <code>If()</code>, <code>IsBlank()</code>, and <code>Notify()</code> to halt bad submissions.
+            </p>
+            <ul style="color: var(--text-muted); font-size: 0.88rem; padding-left: 1.2rem; line-height: 1.7;">
+              <li>Conditions evaluate to True/False.</li>
+              <li><code>If()</code> routes actions.</li>
+              <li>Toast banners give user feedback.</li>
+            </ul>
+          </div>
+
+          <div class="card" style="border-color: var(--color-memory); box-shadow: 0 0 25px rgba(245, 158, 11, 0.2);">
+            <div class="card-badge" style="background: rgba(245, 158, 11, 0.2); color: #fde68a;">Today (Day 18): App Memory</div>
+            <h3 class="card-title">Variables Remember</h3>
+            <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 1rem;">
+              We now give the app a scratchpad! When an action occurs, we store the value in memory so ALL screens can reuse it.
+            </p>
+            <ul style="color: #fde68a; font-size: 0.88rem; padding-left: 1.2rem; line-height: 1.7;">
+              <li>Store: <code>Set(varShift, "Shift B")</code></li>
+              <li>Hold: Value stays alive in RAM.</li>
+              <li>Reuse: Screen 2 &amp; 3 read <code>varShift</code>!</li>
+            </ul>
+          </div>
+        </div>
+
+        <aside class="trainer-notes" style="display: none !important;">
+          <h4>Trainer Speaking Script & Pedagogical Cues:</h4>
+          <p><strong>Reinforce Continuity:</strong> "Notice how our app is growing like a human brain. First, it had eyes and ears (controls on Day 14-15). Then it could calculate (Day 16). Then it could judge right from wrong (Day 17). Today, we give it MEMORY so it can remember who you are!"</p>
+        </aside>
+      </section>
+
+      <!-- Slide 4: Prerequisite Retrieval (Interactive 3D Flip Cards) -->
+      <section class="slide" id="slide-4" data-slide-index="3" data-title="Prerequisite Retrieval: 4 Memory Checks" data-segment="Part 1: Prerequisite Retrieval">
+        <header class="slide-header">
+          <div class="section-tag">Part 1 &bull; Knowledge Retrieval</div>
+          <h2>Prerequisite Retrieval: 4 Memory Checks</h2>
+          <p class="subtitle">Click each card to flip and verify your understanding of core concepts before we build today's formulas.</p>
+        </header>
+
+        <div class="slide-content grid-4">
+          <!-- Flip Card 1 -->
+          <div class="flip-card" onclick="this.classList.toggle('flipped')">
+            <div class="flip-inner">
+              <div class="flip-front">
+                <span class="card-badge" style="background: rgba(245, 158, 11, 0.2); color: #fde68a;">Question 1</span>
+                <h4 style="color: var(--text-main); margin-top: 1rem; font-size: 1.05rem;">What triggers an action formula in Power Apps?</h4>
+                <p style="color: var(--text-muted); font-size: 0.85rem; margin-top: 0.5rem;">Think back to Day 15 &amp; 17 button actions...</p>
+                <span class="flip-prompt">Click to reveal answer &rarr;</span>
+              </div>
+              <div class="flip-back">
+                <span class="card-badge" style="background: rgba(16, 185, 129, 0.2); color: #86efac;">Answer 1</span>
+                <p style="color: #ecfdf5; font-size: 0.95rem; margin-top: 0.8rem; line-height: 1.6;">
+                  An <strong>Event</strong>! Most commonly the <code>OnSelect</code> event when a user taps a button or icon.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Flip Card 2 -->
+          <div class="flip-card" onclick="this.classList.toggle('flipped')">
+            <div class="flip-inner">
+              <div class="flip-front">
+                <span class="card-badge" style="background: rgba(245, 158, 11, 0.2); color: #fde68a;">Question 2</span>
+                <h4 style="color: var(--text-main); margin-top: 1rem; font-size: 1.05rem;">What happens to a TextInput value when you leave the screen?</h4>
+                <p style="color: var(--text-muted); font-size: 0.85rem; margin-top: 0.5rem;">Controls vs screen lifecycle...</p>
+                <span class="flip-prompt">Click to reveal answer &rarr;</span>
+              </div>
+              <div class="flip-back">
+                <span class="card-badge" style="background: rgba(16, 185, 129, 0.2); color: #86efac;">Answer 2</span>
+                <p style="color: #ecfdf5; font-size: 0.95rem; margin-top: 0.8rem; line-height: 1.6;">
+                  It stays on that specific screen, but other screens cannot easily use it, and resetting the screen wipes it out completely!
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Flip Card 3 -->
+          <div class="flip-card" onclick="this.classList.toggle('flipped')">
+            <div class="flip-inner">
+              <div class="flip-front">
+                <span class="card-badge" style="background: rgba(245, 158, 11, 0.2); color: #fde68a;">Question 3</span>
+                <h4 style="color: var(--text-main); margin-top: 1rem; font-size: 1.05rem;">How do you join text with a dynamic value in Power Fx?</h4>
+                <p style="color: var(--text-muted); font-size: 0.85rem; margin-top: 0.5rem;">Recall Day 16 text formulas...</p>
+                <span class="flip-prompt">Click to reveal answer &rarr;</span>
+              </div>
+              <div class="flip-back">
+                <span class="card-badge" style="background: rgba(16, 185, 129, 0.2); color: #86efac;">Answer 3</span>
+                <p style="color: #ecfdf5; font-size: 0.95rem; margin-top: 0.8rem; line-height: 1.6;">
+                  Using the <strong>Ampersand (<code>&amp;</code>)</strong> concatenation operator! (e.g. <code>"Active Shift: " &amp; varShift</code>).
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Flip Card 4 -->
+          <div class="flip-card" onclick="this.classList.toggle('flipped')">
+            <div class="flip-inner">
+              <div class="flip-front">
+                <span class="card-badge" style="background: rgba(245, 158, 11, 0.2); color: #fde68a;">Question 4</span>
+                <h4 style="color: var(--text-main); margin-top: 1rem; font-size: 1.05rem;">Does Notify() remember data for later calculations?</h4>
+                <p style="color: var(--text-muted); font-size: 0.85rem; margin-top: 0.5rem;">Day 17 Notify engine review...</p>
+                <span class="flip-prompt">Click to reveal answer &rarr;</span>
+              </div>
+              <div class="flip-back">
+                <span class="card-badge" style="background: rgba(16, 185, 129, 0.2); color: #86efac;">Answer 4</span>
+                <p style="color: #ecfdf5; font-size: 0.95rem; margin-top: 0.8rem; line-height: 1.6;">
+                  <strong>No!</strong> <code>Notify()</code> only flashes a temporary banner for human eyes. It does not store or remember any value for your app to reuse.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <aside class="trainer-notes" style="display: none !important;">
+          <h4>Trainer Speaking Script & Pedagogical Cues:</h4>
+          <p><strong>Interactive Cold Calling:</strong> Click the cards one by one. Highlight Question 4: "Remember yesterday's lesson: Notify is just a loudspeaker. It has no memory. Today, we meet the app's real memory bank!"</p>
+        </aside>
+      </section>
+
+      <!-- Slide 5: The "Why This Exists" Problem -->
+      <section class="slide" id="slide-5" data-slide-index="4" data-title="The 'Why This Exists' Problem: The Amnesia App Crisis" data-segment="Part 2: The Workplace Crisis">
+        <header class="slide-header">
+          <div class="section-tag">Part 2 &bull; Workplace Crisis</div>
+          <h2>The "Why This Exists" Problem: The Amnesia App Crisis</h2>
+          <p class="subtitle">What happens when a factory app has total short-term memory loss across screens?</p>
+        </header>
+
+        <div class="slide-content grid-2">
+          <div class="card">
+            <div class="crisis-banner">
+              <span class="crisis-icon">&iexcl;</span>
+              <div>
+                <strong style="color: #fca5a5; font-size: 1.1rem;">Incident Report: Apex Plastics Shift Changeover</strong>
+                <p style="color: #fecaca; font-size: 0.88rem; margin: 0.25rem 0 0 0;">Line 4 Extruder Bay &bull; Operator Tablet Workflow</p>
+              </div>
+            </div>
+
+            <p style="color: var(--text-main); font-size: 0.98rem; line-height: 1.7; margin-bottom: 1rem;">
+              At Apex Plastics, machine operators start their day on the <strong>Welcome Screen</strong>. They log in and tap their assigned area: <em>"Line 4 - Extruder Bay"</em> and their shift: <em>"Shift B - Evening"</em>.
+            </p>
+
+            <p style="color: var(--text-muted); font-size: 0.92rem; line-height: 1.7;">
+              Then they tap <strong style="color: var(--color-memory);">Go to Maintenance Form</strong>. But horror strikes: Screen 2 has completely forgotten who they are! It asks them to choose their Line and Shift all over again. When they move to the Safety Checklist, it asks them a third time!
+            </p>
+          </div>
+
+          <div class="card">
+            <h3 class="card-title" style="color: #fca5a5;">The Frustration &amp; Productivity Toll</h3>
+            
+            <div class="consequence-row">
+              <span class="consequence-badge">Amnesia</span>
+              <div>
+                <strong style="color: var(--text-main); font-size: 0.9rem;">"Why Doesn't This App Remember Anything?":</strong>
+                <p style="color: var(--text-muted); font-size: 0.84rem; margin: 0.15rem 0 0 0;">Operators felt insulted having to re-enter their department and shift on every single screen, leading some to bypass the app entirely.</p>
+              </div>
+            </div>
+
+            <div class="consequence-row">
+              <span class="consequence-badge">Cost &dollar;34k</span>
+              <div>
+                <strong style="color: var(--text-main); font-size: 0.9rem;">$34,000 in Wasted Labor Hours Annually:</strong>
+                <p style="color: var(--text-muted); font-size: 0.84rem; margin: 0.15rem 0 0 0;">35 operators spending 14 minutes per day re-selecting repetitive metadata across 4 app screens wasted hundreds of production hours.</p>
+              </div>
+            </div>
+
+            <div class="consequence-row">
+              <span class="consequence-badge">Solution</span>
+              <div>
+                <strong style="color: var(--text-main); font-size: 0.9rem;">Store Once, Reuse Everywhere:</strong>
+                <p style="color: var(--text-muted); font-size: 0.84rem; margin: 0.15rem 0 0 0;">The app needed a temporary memory bank that captures their shift once and broadcasts it to every screen in the system.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <aside class="trainer-notes" style="display: none !important;">
+          <h4>Trainer Speaking Script & Pedagogical Cues:</h4>
+          <p><strong>Create Empathy:</strong> "Imagine if every time you walked into a different room of your house, your family asked 'Who are you and what do you do here?' That's what an app without variables feels like! Variables are how apps show respect for the user's time."</p>
+        </aside>
+      </section>
+
+      <!-- Slide 6: Visual Cause-and-Effect Diagram -->
+      <section class="slide" id="slide-6" data-slide-index="5" data-title="Visual Cause-and-Effect: The Sticky Note Memory Circuit" data-segment="Part 3: Mental Models">
+        <header class="slide-header">
+          <div class="section-tag">Part 3 &bull; Mental Models</div>
+          <h2>Visual Cause-and-Effect: The Sticky Note Memory Circuit</h2>
+          <p class="subtitle">How a single button event writes a value into RAM that downstream screens can read effortlessly.</p>
+        </header>
+
+        <div class="slide-content">
+          <!-- Flow Circuit -->
+          <div class="memory-flow">
+            <div class="memory-step-box">
+              <span style="font-size: 0.75rem; text-transform: uppercase; color: var(--color-cyan); font-weight: 700;">Step 1: Event Action</span>
+              <strong style="color: var(--text-main); margin-top: 0.35rem; font-size: 1rem;">Operator Taps "Shift B"</strong>
+              <span style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.2rem;"><code>btnShiftB.OnSelect</code> fires</span>
+            </div>
+
+            <div class="memory-arrow-indicator">&rarr;</div>
+
+            <div class="memory-step-box" style="border-color: var(--color-memory);">
+              <span style="font-size: 0.75rem; text-transform: uppercase; color: var(--color-memory); font-weight: 700;">Step 2: Memory Command</span>
+              <strong style="color: #fbbf24; margin-top: 0.35rem; font-size: 1rem;"><code>Set(varCurrentShift, "Shift B")</code></strong>
+              <span style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.2rem;">Writes value to RAM scratchpad</span>
+            </div>
+
+            <div class="memory-arrow-indicator">&rarr;</div>
+
+            <div class="memory-step-box" style="border-color: var(--color-success);">
+              <span style="font-size: 0.75rem; text-transform: uppercase; color: #86efac; font-weight: 700;">Step 3: Stored Memory</span>
+              <strong style="color: #86efac; margin-top: 0.35rem; font-size: 1rem;"><code>varCurrentShift</code> = "Shift B"</strong>
+              <span style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.2rem;">Value is safely held in memory</span>
+            </div>
+          </div>
+
+          <!-- Downstream Reusability Cards -->
+          <div class="grid-2" style="margin-top: 0.5rem;">
+            <div class="card" style="border-color: rgba(59, 130, 246, 0.4);">
+              <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.5rem;">
+                <strong style="color: #93c5fd; font-size: 1rem;">Screen 2: Incident Reporting Screen</strong>
+                <span class="card-badge" style="background: rgba(59, 130, 246, 0.2); color: #93c5fd;">REUSE 1</span>
+              </div>
+              <p style="color: var(--text-main); font-size: 0.9rem; margin-bottom: 0.5rem;">
+                The screen header label automatically displays the active shift without asking:
+              </p>
+              <div style="background: #070a12; padding: 0.75rem; border-radius: 0.5rem; font-family: var(--font-code); color: #93c5fd; font-size: 0.85rem;">
+                lblHeader.Text = "Logging Incident for: " &amp; varCurrentShift
+              </div>
+            </div>
+
+            <div class="card" style="border-color: rgba(16, 185, 129, 0.4);">
+              <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.5rem;">
+                <strong style="color: #86efac; font-size: 1rem;">Screen 3: Ticket Review &amp; Submit</strong>
+                <span class="card-badge" style="background: rgba(16, 185, 129, 0.2); color: #86efac;">REUSE 2</span>
+              </div>
+              <p style="color: var(--text-main); font-size: 0.9rem; margin-bottom: 0.5rem;">
+                When the ticket is packaged, <code>varCurrentShift</code> attaches automatically to the database payload:
+              </p>
+              <div style="background: #070a12; padding: 0.75rem; border-radius: 0.5rem; font-family: var(--font-code); color: #86efac; font-size: 0.85rem;">
+                Patch(SharePointList, Defaults(...), { Shift: varCurrentShift, ... })
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <aside class="trainer-notes" style="display: none !important;">
+          <h4>Trainer Speaking Script & Pedagogical Cues:</h4>
+          <p><strong>Trace the Circuit:</strong> Turn on your presenter laser (<kbd>P</kbd>). Trace from Step 1 (the click) to Step 2 (the Set command) to Step 3 (the memory holding the value). Then point down to Screen 2 and Screen 3.</p>
+          <p><strong>Crucial takeaway:</strong> "Notice that the user clicked ONCE on Screen 1, but we used that answer on Screen 2 AND Screen 3. That is the superpower of variables!"</p>
+        </aside>
+      </section>
+
+      <!-- Slide 7: Everyday Analogy: The Waiter's Notepad & Bulletin Board -->
+      <section class="slide" id="slide-7" data-slide-index="6" data-title="Everyday Analogy: The Waiter's Notepad & Bulletin Board" data-segment="Part 3: Real-World Analogies">
+        <header class="slide-header">
+          <div class="section-tag">Part 3 &bull; Real-World Analogies</div>
+          <h2>Everyday Analogy: The Waiter's Notepad &amp; Bulletin Board</h2>
+          <p class="subtitle">Connecting abstract computer memory to physical scratchpads and sticky notes.</p>
+        </header>
+
+        <div class="slide-content grid-2">
+          <div class="card">
+            <div class="card-badge" style="background: rgba(245, 158, 11, 0.2); color: #fde68a;">Analogy 1 &bull; The Restaurant Waiter</div>
+            <h3 class="card-title">The Waiter's Pocket Notepad</h3>
+            <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 1rem;">
+              You sit at Table 4. You tell the waiter: <em>"I want a double espresso with oat milk."</em>
+            </p>
+
+            <div class="sticky-note-box" style="margin-bottom: 1rem;">
+              <strong>Pocket Notepad (Variable):</strong><br>
+              Table: 4<br>
+              Drink: Double Espresso (Oat Milk)
+            </div>
+
+            <ul style="color: var(--text-muted); font-size: 0.88rem; padding-left: 1.2rem; line-height: 1.7;">
+              <li>When the waiter walks into the kitchen (Screen 2), they don't walk back to ask you again.</li>
+              <li>They pull out the notepad, read your order, and hand it to the barista.</li>
+              <li>Once you finish your meal and leave the restaurant (close the app), the waiter tears off that page and throws it in the trash!</li>
+            </ul>
+          </div>
+
+          <div class="card">
+            <div class="card-badge" style="background: rgba(59, 130, 246, 0.2); color: #93c5fd;">Analogy 2 &bull; Factory Notice Board</div>
+            <h3 class="card-title">Sticky Note vs. Steel Filing Cabinet</h3>
+            <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 1rem;">
+              Why do we have both Variables and Databases (SharePoint)?
+            </p>
+
+            <div style="background: rgba(15, 23, 42, 0.7); border-radius: 0.5rem; padding: 1rem; border: 1px solid var(--border-subtle); margin-bottom: 1rem;">
+              <div style="display: flex; gap: 0.75rem; margin-bottom: 0.75rem;">
+                <span style="color: #fbbf24; font-weight: bold;">Yellow Sticky Note (Variable):</span>
+                <span style="color: var(--text-muted); font-size: 0.88rem;">Quick, temporary scratchpad. Forgets when app closes. Cheap and fast in RAM.</span>
+              </div>
+              <div style="display: flex; gap: 0.75rem;">
+                <span style="color: #60a5fa; font-weight: bold;">Steel Filing Cabinet (SharePoint):</span>
+                <span style="color: var(--text-muted); font-size: 0.88rem;">Permanent records. Safe forever. Shared across everyone's computers (Day 19!).</span>
+              </div>
+            </div>
+
+            <p style="color: var(--text-muted); font-size: 0.88rem; line-height: 1.6;">
+              <strong>The Golden Rule:</strong> Variables are for the active session right now; Databases are for permanent history tomorrow.
+            </p>
+          </div>
+        </div>
+
+        <aside class="trainer-notes" style="display: none !important;">
+          <h4>Trainer Speaking Script & Pedagogical Cues:</h4>
+          <p><strong>Contrast is King:</strong> Make sure students understand the difference between temporary RAM and permanent storage. "If the power cuts off or you close your phone, sticky notes fall off the desk. Filing cabinets stay locked. Today we learn sticky notes; tomorrow we learn filing cabinets."</p>
+        </aside>
+      </section>
+
+      <!-- Slide 8: Plain-Language to Power Fx Translation Ladder -->
+      <section class="slide" id="slide-8" data-slide-index="7" data-title="Plain-Language to Power Fx Translation Ladder" data-segment="Part 3: Translation Ladder">
+        <header class="slide-header">
+          <div class="section-tag">Part 3 &bull; Translation Ladder</div>
+          <h2>Plain-Language to Power Fx Translation Ladder</h2>
+          <p class="subtitle">Translating a human thought about remembering into the exact Set() formula.</p>
+        </header>
+
+        <div class="slide-content grid-2">
+          <div class="card">
+            <h3 class="card-title">The 5-Rung Translation Ladder</h3>
+
+            <div style="display: flex; flex-direction: column; gap: 0.75rem;">
+              <div style="background: rgba(15, 23, 42, 0.7); border-left: 4px solid #3b82f6; padding: 0.65rem 1rem; border-radius: 0.4rem;">
+                <span style="font-size: 0.72rem; text-transform: uppercase; color: #93c5fd; font-weight: 700;">Rung 1: Business Requirement</span>
+                <p style="color: var(--text-main); font-size: 0.88rem; margin: 0.2rem 0 0 0;">"Remember the operator's chosen shift across all app screens."</p>
+              </div>
+
+              <div style="background: rgba(15, 23, 42, 0.7); border-left: 4px solid #06b6d4; padding: 0.65rem 1rem; border-radius: 0.4rem;">
+                <span style="font-size: 0.72rem; text-transform: uppercase; color: #67e8f9; font-weight: 700;">Rung 2: Plain-English Thought</span>
+                <p style="color: var(--text-main); font-size: 0.88rem; margin: 0.2rem 0 0 0;">"Grab a sticky note labeled 'Current Shift' and write 'Shift B' on it."</p>
+              </div>
+
+              <div style="background: rgba(15, 23, 42, 0.7); border-left: 4px solid #f59e0b; padding: 0.65rem 1rem; border-radius: 0.4rem;">
+                <span style="font-size: 0.72rem; text-transform: uppercase; color: #fde68a; font-weight: 700;">Rung 3: Function Selection</span>
+                <p style="color: var(--text-main); font-family: var(--font-code); font-size: 0.88rem; margin: 0.2rem 0 0 0;">Set(...) &larr; Power Fx global memory command</p>
+              </div>
+
+              <div style="background: rgba(15, 23, 42, 0.7); border-left: 4px solid #a855f7; padding: 0.65rem 1rem; border-radius: 0.4rem;">
+                <span style="font-size: 0.72rem; text-transform: uppercase; color: #d8b4fe; font-weight: 700;">Rung 4: Variable Naming</span>
+                <p style="color: var(--text-main); font-family: var(--font-code); font-size: 0.88rem; margin: 0.2rem 0 0 0;">varCurrentShift</p>
+              </div>
+
+              <div style="background: rgba(15, 23, 42, 0.7); border-left: 4px solid #10b981; padding: 0.65rem 1rem; border-radius: 0.4rem;">
+                <span style="font-size: 0.72rem; text-transform: uppercase; color: #86efac; font-weight: 700;">Rung 5: Complete Formula</span>
+                <p style="color: var(--text-main); font-family: var(--font-code); font-size: 0.85rem; margin: 0.2rem 0 0 0;">Set(varCurrentShift, "Shift B")</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <h3 class="card-title">How To Think About Arguments</h3>
+            <div style="background: rgba(245, 158, 11, 0.1); border: 1px solid rgba(245, 158, 11, 0.3); border-radius: 0.75rem; padding: 1.25rem; margin-bottom: 1.25rem;">
+              <strong style="color: #fde68a; font-size: 1.05rem;">"Where do I put it, and What do I put in it?"</strong>
+              <p style="color: var(--text-muted); font-size: 0.9rem; line-height: 1.7; margin-top: 0.5rem;">
+                Every time you write <code>Set()</code>, you are answering two simple questions separated by a comma:
+              </p>
+              <ul style="color: var(--text-main); font-size: 0.88rem; padding-left: 1.2rem; margin-top: 0.5rem; line-height: 1.7;">
+                <li><strong>Argument 1:</strong> What is the name of my storage box? (<code>varCurrentShift</code>)</li>
+                <li><strong>Argument 2:</strong> What item am I placing inside the box? (<code>"Shift B"</code>)</li>
+              </ul>
+            </div>
+
+            <div style="background: rgba(59, 130, 246, 0.1); border: 1px solid rgba(59, 130, 246, 0.3); border-radius: 0.75rem; padding: 1rem;">
+              <strong style="color: #93c5fd; font-size: 0.9rem;">Clean &amp; Reusable:</strong>
+              <p style="color: var(--text-muted); font-size: 0.85rem; margin-top: 0.25rem;">
+                Whenever you want to update the value, just call <code>Set()</code> again with the same variable name and a new value!
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <aside class="trainer-notes" style="display: none !important;">
+          <h4>Trainer Speaking Script & Pedagogical Cues:</h4>
+          <p><strong>Two Arguments:</strong> "Look at Rung 5. Set has only two arguments: The Box Name and The Content. Say it out loud with me: <code>Set( TheBox , TheContent )</code>."</p>
+        </aside>
+      </section>
+
+      <!-- Slide 9: Syntax Dissection 1: Anatomy of Set() -->
+      <section class="slide" id="slide-9" data-slide-index="8" data-title="Syntax Dissection 1: Anatomy of Set()" data-segment="Part 4: Syntax Dissection">
+        <header class="slide-header">
+          <div class="section-tag">Part 4 &bull; Syntax Dissection</div>
+          <h2>Syntax Dissection 1: Anatomy of <code>Set()</code></h2>
+          <p class="subtitle">Deconstructing the formula that creates and updates global app memory.</p>
+        </header>
+
+        <div class="slide-content">
+          <div class="syntax-dissection-grid">
+            <div class="syntax-visual-chain">
+              <div class="syntax-token-pill token-set">
+                <span>Set</span>
+                <span class="token-desc">Command: Remember!</span>
+              </div>
+              <span style="font-size: 1.8rem; color: #94a3b8; font-weight: 300;">(</span>
+              <div class="syntax-token-pill token-varname">
+                <span>varSelectedBay</span>
+                <span class="token-desc">Arg 1: Variable Name</span>
+              </div>
+              <span style="font-size: 1.8rem; color: #94a3b8; font-weight: 700;">,</span>
+              <div class="syntax-token-pill token-val">
+                <span>"Extruder Bay 4"</span>
+                <span class="token-desc">Arg 2: Value to Store</span>
+              </div>
+              <span style="font-size: 1.8rem; color: #94a3b8; font-weight: 300;">)</span>
+            </div>
+
+            <div class="grid-3" style="margin-top: 0.5rem;">
+              <div class="card" style="padding: 1.15rem; border-color: rgba(245, 158, 11, 0.4);">
+                <strong style="color: #fbbf24; font-size: 0.95rem;">1. The <code>Set</code> Function</strong>
+                <p style="color: var(--text-muted); font-size: 0.85rem; line-height: 1.6; margin-top: 0.4rem;">
+                  Tells Power Apps: <em>"Reserve space in global memory and assign this value right now."</em> It is an action function used in events.
+                </p>
+              </div>
+
+              <div class="card" style="padding: 1.15rem; border-color: rgba(59, 130, 246, 0.4);">
+                <strong style="color: #93c5fd; font-size: 0.95rem;">2. NO Quotes on Variable Name</strong>
+                <p style="color: var(--text-muted); font-size: 0.85rem; line-height: 1.6; margin-top: 0.4rem;">
+                  Notice <code>varSelectedBay</code> has NO double quotes! It is an identifier (the name of the box). If you put quotes, Power Apps gets confused.
+                </p>
+              </div>
+
+              <div class="card" style="padding: 1.15rem; border-color: rgba(16, 185, 129, 0.4);">
+                <strong style="color: #86efac; font-size: 0.95rem;">3. Quotes on Raw Text Value</strong>
+                <p style="color: var(--text-muted); font-size: 0.85rem; line-height: 1.6; margin-top: 0.4rem;">
+                  The value <code>"Extruder Bay 4"</code> DOES have double quotes because it is a raw text string. Numbers (e.g. <code>42</code>) do not need quotes.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <aside class="trainer-notes" style="display: none !important;">
+          <h4>Trainer Speaking Script & Pedagogical Cues:</h4>
+          <p><strong>Crucial Rule for Beginners:</strong> "Why no quotes around <code>varSelectedBay</code>? Because you are naming the container! You don't put quotation marks on the label of a physical jar in your kitchen. You write the name directly on the jar."</p>
+        </aside>
+      </section>
+
+      <!-- Slide 10: Syntax Dissection 2: Professional Naming Conventions -->
+      <section class="slide" id="slide-10" data-slide-index="9" data-title="Syntax Dissection 2: Professional Naming Conventions" data-segment="Part 4: Naming Conventions">
+        <header class="slide-header">
+          <div class="section-tag">Part 4 &bull; Professional Standards</div>
+          <h2>Syntax Dissection 2: Professional Naming Conventions</h2>
+          <p class="subtitle">Why enterprise Power Apps developers always prefix global variables with <code>var</code>.</p>
+        </header>
+
+        <div class="slide-content grid-2">
+          <div class="card">
+            <h3 class="card-title">The Chaos of Bad Naming</h3>
+            <p style="color: var(--text-muted); font-size: 0.95rem; line-height: 1.6; margin-bottom: 1rem;">
+              Imagine you have a text box where someone types their department. You also create a variable to remember it.
+            </p>
+
+            <div style="background: rgba(239, 68, 68, 0.1); border: 1px solid rgba(239, 68, 68, 0.3); border-radius: 0.65rem; padding: 1rem; margin-bottom: 1rem;">
+              <strong style="color: #fca5a5; font-size: 0.95rem;">The Confusion:</strong><br>
+              <code style="color: #fca5a5; font-size: 0.88rem;">Department</code> &larr; Is this a screen control? A SharePoint column? Or a variable?!
+            </div>
+
+            <p style="color: var(--text-muted); font-size: 0.88rem; line-height: 1.6;">
+              When code gets large, guessing what an identifier means causes bugs, accidental overwrites, and headaches!
+            </p>
+          </div>
+
+          <div class="card">
+            <h3 class="card-title">The Clean <code>var</code> Standard</h3>
+            <p style="color: var(--text-muted); font-size: 0.95rem; line-height: 1.6; margin-bottom: 0.75rem;">
+              Always prefix global variables with lower-case <strong><code>var</code></strong> followed by CamelCase:
+            </p>
+
+            <div style="display: flex; flex-direction: column; gap: 0.6rem;">
+              <div style="background: rgba(15, 23, 42, 0.7); padding: 0.65rem 1rem; border-radius: 0.4rem; border-left: 3px solid #f59e0b;">
+                <code style="color: #fbbf24; font-size: 0.9rem;">varCurrentShift</code>
+                <span style="color: var(--text-muted); font-size: 0.82rem; margin-left: 0.75rem;">Holds text: e.g. "Shift A"</span>
+              </div>
+
+              <div style="background: rgba(15, 23, 42, 0.7); padding: 0.65rem 1rem; border-radius: 0.4rem; border-left: 3px solid #3b82f6;">
+                <code style="color: #93c5fd; font-size: 0.9rem;">varOperatorId</code>
+                <span style="color: var(--text-muted); font-size: 0.82rem; margin-left: 0.75rem;">Holds text/number: e.g. "EMP-9021"</span>
+              </div>
+
+              <div style="background: rgba(15, 23, 42, 0.7); padding: 0.65rem 1rem; border-radius: 0.4rem; border-left: 3px solid #10b981;">
+                <code style="color: #86efac; font-size: 0.9rem;">varIsEmergency</code>
+                <span style="color: var(--text-muted); font-size: 0.82rem; margin-left: 0.75rem;">Holds boolean: true or false</span>
+              </div>
+            </div>
+
+            <p style="color: #86efac; font-size: 0.85rem; margin-top: 1rem;">
+              &check; Whenever you see <code>var...</code> in a formula, you instantly know: <em>"That is a variable stored in global memory!"</em>
+            </p>
+          </div>
+        </div>
+
+        <aside class="trainer-notes" style="display: none !important;">
+          <h4>Trainer Speaking Script & Pedagogical Cues:</h4>
+          <p><strong>Clean Architecture:</strong> "Tell your students: Professional developers don't write clever code; they write CLEAR code. When someone looks at <code>varCurrentShift</code>, there is zero ambiguity."</p>
+        </aside>
+      </section>
+
+      <!-- Slide 11: Set vs. UpdateContext (Global vs Local) -->
+      <section class="slide" id="slide-11" data-slide-index="10" data-title="Syntax Dissection 3: Global vs. Context Variables" data-segment="Part 4: Variable Scopes">
+        <header class="slide-header">
+          <div class="section-tag">Part 4 &bull; Variable Scopes</div>
+          <h2>Syntax Dissection 3: Global (<code>Set</code>) vs. Context (<code>UpdateContext</code>)</h2>
+          <p class="subtitle">Understanding the difference between the central bulletin board and your private clipboard.</p>
+        </header>
+
+        <div class="slide-content grid-2">
+          <div class="card" style="border-color: rgba(245, 158, 11, 0.4);">
+            <div class="card-badge" style="background: rgba(245, 158, 11, 0.2); color: #fde68a;">GLOBAL VARIABLE &bull; OUR FOCUS TODAY</div>
+            <h3 class="card-title"><code>Set(varName, value)</code></h3>
+            <p style="color: var(--text-main); font-size: 0.92rem; line-height: 1.6; margin-bottom: 0.75rem;">
+              <strong>Scope:</strong> The entire application! Available on Screen 1, Screen 2, Screen 3, and everywhere else.
+            </p>
+            <div style="background: #070a12; padding: 0.75rem; border-radius: 0.5rem; font-family: var(--font-code); color: #fbbf24; font-size: 0.85rem; margin-bottom: 0.75rem;">
+              Set(varCurrentShift, "Shift B")
+            </div>
+            <ul style="color: var(--text-muted); font-size: 0.82rem; padding-left: 1.2rem; line-height: 1.6;">
+              <li>Best for user logins, active departments, global settings.</li>
+              <li>Analogy: The company bulletin board.</li>
+              <li>Simple 2-argument syntax.</li>
+            </ul>
+          </div>
+
+          <div class="card" style="border-color: rgba(139, 92, 246, 0.4);">
+            <div class="card-badge" style="background: rgba(139, 92, 246, 0.2); color: #c4b5fd;">CONTEXT VARIABLE &bull; SCREEN LOCAL</div>
+            <h3 class="card-title"><code>UpdateContext({locName: value})</code></h3>
+            <p style="color: var(--text-main); font-size: 0.92rem; line-height: 1.6; margin-bottom: 0.75rem;">
+              <strong>Scope:</strong> Current screen ONLY! The moment you navigate to another screen, it cannot be read.
+            </p>
+            <div style="background: #070a12; padding: 0.75rem; border-radius: 0.5rem; font-family: var(--font-code); color: #c4b5fd; font-size: 0.85rem; margin-bottom: 0.75rem;">
+              UpdateContext({locShowPopup: true})
+            </div>
+            <ul style="color: var(--text-muted); font-size: 0.82rem; padding-left: 1.2rem; line-height: 1.6;">
+              <li>Best for screen-specific popups, dialog toggles.</li>
+              <li>Requires curly braces <code>{ ... }</code> syntax.</li>
+              <li>Prefix with <code>loc</code> (local).</li>
+            </ul>
+          </div>
+        </div>
+
+        <aside class="trainer-notes" style="display: none !important;">
+          <h4>Trainer Speaking Script & Pedagogical Cues:</h4>
+          <p><strong>Beginner Guardrail:</strong> "Don't get overwhelmed by having two types! For beginners, <code>Set()</code> is your best friend because it works everywhere. We use <code>Set()</code> for 90% of beginner workflows."</p>
+        </aside>
+      </section>
+
+      <!-- Slide 12: Reusing Variables Across Screens -->
+      <section class="slide" id="slide-12" data-slide-index="11" data-title="Reusing Variables Across Screens" data-segment="Part 4: Multi-Screen Reusability">
+        <header class="slide-header">
+          <div class="section-tag">Part 4 &bull; Multi-Screen Flow</div>
+          <h2>Reusing Variables Across Screens</h2>
+          <p class="subtitle">How a variable created on Screen 1 seamlessly powers Screen 2 and Screen 3.</p>
+        </header>
+
+        <div class="slide-content grid-3">
+          <div class="card">
+            <span class="card-badge" style="background: rgba(59, 130, 246, 0.2); color: #93c5fd;">Screen 1: Welcome</span>
+            <h4 style="color: var(--text-main); margin-top: 0.5rem;">User Selects Department</h4>
+            <p style="color: var(--text-muted); font-size: 0.85rem; line-height: 1.6; margin: 0.5rem 0;">
+              User types "Molding Line 3" and clicks Start Shift button.
+            </p>
+            <div style="background: #070a12; padding: 0.75rem; border-radius: 0.5rem; font-family: var(--font-code); font-size: 0.8rem; color: #93c5fd; margin-top: auto;">
+              Set(varDept, txtInput.Text);<br>
+              Navigate(Screen2)
+            </div>
+          </div>
+
+          <div class="card" style="border-color: var(--color-memory);">
+            <span class="card-badge" style="background: rgba(245, 158, 11, 0.2); color: #fde68a;">Screen 2: Incident Form</span>
+            <h4 style="color: var(--text-main); margin-top: 0.5rem;">Header Automatically Personalizes</h4>
+            <p style="color: var(--text-muted); font-size: 0.85rem; line-height: 1.6; margin: 0.5rem 0;">
+              Label greets operator without re-asking what department they belong to.
+            </p>
+            <div style="background: #070a12; padding: 0.75rem; border-radius: 0.5rem; font-family: var(--font-code); font-size: 0.8rem; color: #fde68a; margin-top: auto;">
+              lblHeader.Text =<br>
+              "Active Area: " &amp; varDept
+            </div>
+          </div>
+
+          <div class="card" style="border-color: var(--color-success);">
+            <span class="card-badge" style="background: rgba(16, 185, 129, 0.2); color: #86efac;">Screen 3: Summary</span>
+            <h4 style="color: var(--text-main); margin-top: 0.5rem;">Saved into Storage</h4>
+            <p style="color: var(--text-muted); font-size: 0.85rem; line-height: 1.6; margin: 0.5rem 0;">
+              When the final report is saved, the variable is passed to the database automatically.
+            </p>
+            <div style="background: #070a12; padding: 0.75rem; border-radius: 0.5rem; font-family: var(--font-code); font-size: 0.8rem; color: #86efac; margin-top: auto;">
+              Department: varDept,<br>
+              Status: "Pending"
+            </div>
+          </div>
+        </div>
+
+        <aside class="trainer-notes" style="display: none !important;">
+          <h4>Trainer Speaking Script & Pedagogical Cues:</h4>
+          <p><strong>Highlight the Semicolon:</strong> Point out the semicolon <code>;</code> on Screen 1: <code>Set(...); Navigate(...)</code>. Explain that semicolons let you chain actions: first remember the value, then jump to the next screen!</p>
+        </aside>
+      </section>
+
+      <!-- Slide 13: Interactive Widget 1: Variable Memory Bank Inspector -->
+      <section class="slide" id="slide-13" data-slide-index="12" data-title="Interactive Widget 1: Variable Memory Bank Inspector" data-segment="Part 4: Interactive Memory Bank">
+        <header class="slide-header">
+          <div class="section-tag">Part 4 &bull; Interactive Memory Bank</div>
+          <h2>Interactive Widget 1: Variable Memory Bank Inspector</h2>
+          <p class="subtitle">Click buttons to execute Set() formulas and watch the RAM memory table update live.</p>
+        </header>
+
+        <div class="slide-content">
+          <div class="widget-stage">
+            <!-- Selector Tabs -->
+            <div class="inspector-menu">
+              <div class="inspector-tab active" data-action="set-shift-a" onclick="selectMemoryAction('set-shift-a')">
+                <span style="font-size: 1.2rem; color: #f59e0b;">&#128394;</span>
+                <div>
+                  <strong style="font-size: 0.88rem; color: var(--text-main);">Action 1: Set Shift A</strong>
+                  <p style="font-size: 0.75rem; color: var(--text-muted); margin: 0;">Set(varShift, "Morning")</p>
+                </div>
+              </div>
+
+              <div class="inspector-tab" data-action="set-shift-b" onclick="selectMemoryAction('set-shift-b')">
+                <span style="font-size: 1.2rem; color: #3b82f6;">&#128394;</span>
+                <div>
+                  <strong style="font-size: 0.88rem; color: var(--text-main);">Action 2: Set Shift B</strong>
+                  <p style="font-size: 0.75rem; color: var(--text-muted); margin: 0;">Set(varShift, "Evening")</p>
+                </div>
+              </div>
+
+              <div class="inspector-tab" data-action="set-counter" onclick="selectMemoryAction('set-counter')">
+                <span style="font-size: 1.2rem; color: #10b981;">&#43;</span>
+                <div>
+                  <strong style="font-size: 0.88rem; color: var(--text-main);">Action 3: Increment Counter</strong>
+                  <p style="font-size: 0.75rem; color: var(--text-muted); margin: 0;">Set(varCount, varCount + 1)</p>
+                </div>
+              </div>
+
+              <div class="inspector-tab" data-action="clear-memory" onclick="selectMemoryAction('clear-memory')">
+                <span style="font-size: 1.2rem; color: #ef4444;">&#10006;</span>
+                <div>
+                  <strong style="font-size: 0.88rem; color: var(--text-main);">Action 4: Reset Memory</strong>
+                  <p style="font-size: 0.75rem; color: var(--text-muted); margin: 0;">Set(varShift, Blank())</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Memory Display Panel -->
+            <div class="inspector-display">
+              <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem;">
+                <h4 style="color: var(--color-memory); margin: 0;" id="mem-inspector-title">Active Formula: Set(varShift, "Morning")</h4>
+                <span class="card-badge" id="mem-status-badge" style="background: rgba(245, 158, 11, 0.2); color: #fde68a;">RAM UPDATED</span>
+              </div>
+
+              <!-- Live Formula View -->
+              <div style="background: #070a12; border-radius: 0.65rem; padding: 1.15rem; font-family: var(--font-code); font-size: 0.9rem; line-height: 1.6; margin-bottom: 1.2rem;" id="mem-code-display">
+                <span style="color: #fbbf24;">Set</span>( <span style="color: #93c5fd;">varShift</span>, <span style="color: #86efac;">"Morning"</span> )
+              </div>
+
+              <!-- Simulated Studio Variables Table -->
+              <strong style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.5rem;">Power Apps Studio &bull; Variables Memory Bank:</strong>
+              <table style="width: 100%; border-collapse: collapse; font-size: 0.85rem; background: rgba(7, 10, 18, 0.6); border-radius: 0.5rem; overflow: hidden;">
+                <thead>
+                  <tr style="border-bottom: 1px solid var(--border-subtle); color: #94a3b8; text-align: left;">
+                    <th style="padding: 0.6rem 0.85rem;">Variable Name</th>
+                    <th style="padding: 0.6rem 0.85rem;">Type</th>
+                    <th style="padding: 0.6rem 0.85rem;">Current Value in RAM</th>
+                  </tr>
+                </thead>
+                <tbody id="mem-table-body">
+                  <tr style="border-bottom: 1px solid rgba(255, 255, 255, 0.04);">
+                    <td style="padding: 0.6rem 0.85rem; font-family: var(--font-code); color: #93c5fd;">varShift</td>
+                    <td style="padding: 0.6rem 0.85rem; color: var(--text-dim);">Text</td>
+                    <td style="padding: 0.6rem 0.85rem; font-family: var(--font-code); color: #86efac;" id="val-shift">"Morning"</td>
+                  </tr>
+                  <tr>
+                    <td style="padding: 0.6rem 0.85rem; font-family: var(--font-code); color: #93c5fd;">varCount</td>
+                    <td style="padding: 0.6rem 0.85rem; color: var(--text-dim);">Number</td>
+                    <td style="padding: 0.6rem 0.85rem; font-family: var(--font-code); color: #86efac;" id="val-count">0</td>
+                  </tr>
+                </tbody>
+              </table>
+
+              <p style="color: var(--text-muted); font-size: 0.85rem; margin-top: auto; line-height: 1.6;" id="mem-explanation">
+                Executing <code>Set(varShift, "Morning")</code> instantly updates the slot in memory. Any label or formula referencing <code>varShift</code> across the entire app recalculates immediately.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <aside class="trainer-notes" style="display: none !important;">
+          <h4>Trainer Speaking Script & Pedagogical Cues:</h4>
+          <p><strong>Click Action 3 Multiple Times:</strong> Click "Increment Counter" 3 or 4 times. Watch <code>varCount</code> tick from 0 to 1, 2, 3! Point out: "Look how a variable can remember numbers and count things, like tracking failed attempts!"</p>
+        </aside>
+      </section>
+
+      <!-- Slide 14: Trainer Demonstration: Creating varSelectedDept -->
+      <section class="slide" id="slide-14" data-slide-index="13" data-title="Trainer Demonstration: Creating varSelectedDept" data-segment="Part 5: Trainer Demonstration">
+        <header class="slide-header">
+          <div class="section-tag">Part 5 &bull; Trainer Demonstration</div>
+          <h2>Trainer Demonstration: Creating <code>varSelectedDept</code></h2>
+          <p class="subtitle">Watch step-by-step as the trainer wires a department button to memory in Power Apps Studio.</p>
+        </header>
+
+        <div class="slide-content grid-2">
+          <div class="card">
+            <h3 class="card-title">The 5 Demonstration Steps</h3>
+
+            <div style="display: flex; flex-direction: column; gap: 0.8rem;">
+              <div style="display: flex; gap: 0.85rem; align-items: flex-start;">
+                <span class="obj-num">1</span>
+                <div>
+                  <strong style="color: var(--text-main); font-size: 0.9rem;">Insert Button &amp; Name it <code>btnExtruder</code>:</strong>
+                  <p style="color: var(--text-muted); font-size: 0.82rem; margin: 0.15rem 0 0 0;">Set its text property to <em>"Line 4 - Extruder Bay"</em>.</p>
+                </div>
+              </div>
+
+              <div style="display: flex; gap: 0.85rem; align-items: flex-start;">
+                <span class="obj-num">2</span>
+                <div>
+                  <strong style="color: var(--text-main); font-size: 0.9rem;">Select Property <code>OnSelect</code>:</strong>
+                  <p style="color: var(--text-muted); font-size: 0.82rem; margin: 0.15rem 0 0 0;">Target the button's click event in the top-left formula dropdown.</p>
+                </div>
+              </div>
+
+              <div style="display: flex; gap: 0.85rem; align-items: flex-start;">
+                <span class="obj-num">3</span>
+                <div>
+                  <strong style="color: var(--text-main); font-size: 0.9rem;">Write the Memory Formula:</strong>
+                  <p style="color: var(--text-muted); font-size: 0.82rem; margin: 0.15rem 0 0 0;">Type <code>Set(varSelectedDept, "Line 4 - Extruder")</code>.</p>
+                </div>
+              </div>
+
+              <div style="display: flex; gap: 0.85rem; align-items: flex-start;">
+                <span class="obj-num">4</span>
+                <div>
+                  <strong style="color: var(--text-main); font-size: 0.9rem;">Add a Label to Read the Memory:</strong>
+                  <p style="color: var(--text-muted); font-size: 0.82rem; margin: 0.15rem 0 0 0;">Insert a label and set its <code>Text</code> to <code>"Active: " &amp; varSelectedDept</code>.</p>
+                </div>
+              </div>
+
+              <div style="display: flex; gap: 0.85rem; align-items: flex-start;">
+                <span class="obj-num">5</span>
+                <div>
+                  <strong style="color: var(--text-main); font-size: 0.9rem;">Hold <kbd style="background: #1e293b; padding: 2px 6px; border-radius: 4px; border: 1px solid #475569;">Alt</kbd> &amp; Click the Button:</strong>
+                  <p style="color: var(--text-muted); font-size: 0.82rem; margin: 0.15rem 0 0 0;">Watch the label instantly display the newly remembered value!</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <h3 class="card-title">Formula Bar &amp; Studio Variables Panel</h3>
+
+            <div style="background: #0f172a; border: 1px solid var(--border-subtle); border-radius: 0.75rem; padding: 1rem; margin-bottom: 1rem;">
+              <div style="display: flex; align-items: center; gap: 0.75rem; border-bottom: 1px solid rgba(255, 255, 255, 0.08); padding-bottom: 0.5rem; margin-bottom: 0.75rem;">
+                <span style="font-size: 0.8rem; font-weight: 700; color: var(--color-memory);">Property:</span>
+                <span style="font-family: var(--font-code); font-size: 0.85rem; color: #fbbf24;">OnSelect</span>
+              </div>
+              <pre style="margin: 0; font-family: var(--font-code); font-size: 0.85rem; color: #e2e8f0; line-height: 1.6;"><code>Set(
+  varSelectedDept,
+  "Line 4 - Extruder"
+);
+Notify(
+  "Department stored in memory!",
+  NotificationType.Information
+)</code></pre>
+            </div>
+
+            <div style="background: rgba(245, 158, 11, 0.1); border-radius: 0.5rem; padding: 0.75rem; border: 1px solid rgba(245, 158, 11, 0.25);">
+              <strong style="color: #fbbf24; font-size: 0.85rem;">Where to Find Variables in Studio:</strong>
+              <p style="color: var(--text-muted); font-size: 0.8rem; margin: 0.2rem 0 0 0;">
+                Click the <strong>Variables icon ( {x} )</strong> on the left sidebar in Power Apps Studio. You will see every variable listed with its live runtime value!
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <aside class="trainer-notes" style="display: none !important;">
+          <h4>Trainer Speaking Script & Pedagogical Cues:</h4>
+          <p><strong>Show the Left Sidebar:</strong> Point out the <code>{x}</code> icon in Power Apps Studio. Students love seeing their variable physically listed in the Studio inspector. It makes memory tangible.</p>
+        </aside>
+      </section>
+
+      <!-- Slide 15: Guided Practice: Building the Operator Shift Badge -->
+      <section class="slide" id="slide-15" data-slide-index="14" data-title="Guided Practice: Building the Operator Shift Badge" data-segment="Part 5: Guided Practice">
+        <header class="slide-header">
+          <div class="section-tag">Part 5 &bull; Guided Practice</div>
+          <h2>Guided Practice: Building the Operator Shift Badge</h2>
+          <p class="subtitle">Now open your Power Apps canvas and code along with the trainer step-by-step.</p>
+        </header>
+
+        <div class="slide-content grid-2">
+          <div class="card">
+            <h3 class="card-title">Your Task Instructions</h3>
+            <p style="color: var(--text-muted); font-size: 0.92rem; line-height: 1.6; margin-bottom: 1rem;">
+              Build a dynamic shift selector badge for the Apex Plastics tablet:
+            </p>
+
+            <div style="display: flex; flex-direction: column; gap: 0.75rem;">
+              <div style="background: rgba(15, 23, 42, 0.7); padding: 0.75rem; border-radius: 0.5rem; border: 1px solid var(--border-subtle);">
+                <strong style="color: var(--text-main); font-size: 0.88rem;">Step 1: Add Two Shift Buttons</strong>
+                <p style="color: var(--text-muted); font-size: 0.82rem; margin: 0.15rem 0 0 0;">Name them <code>btnMorning</code> and <code>btnNight</code>.</p>
+              </div>
+
+              <div style="background: rgba(15, 23, 42, 0.7); padding: 0.75rem; border-radius: 0.5rem; border: 1px solid var(--border-subtle);">
+                <strong style="color: var(--text-main); font-size: 0.88rem;">Step 2: Wire the Set() Formulas</strong>
+                <p style="color: var(--text-muted); font-size: 0.82rem; margin: 0.15rem 0 0 0;">Morning button sets <code>"Shift A - Morning"</code>; Night button sets <code>"Shift B - Night"</code>.</p>
+              </div>
+
+              <div style="background: rgba(15, 23, 42, 0.7); padding: 0.75rem; border-radius: 0.5rem; border: 1px solid var(--border-subtle);">
+                <strong style="color: var(--text-main); font-size: 0.88rem;">Step 3: Add a Display Badge Label</strong>
+                <p style="color: var(--text-muted); font-size: 0.82rem; margin: 0.15rem 0 0 0;">Display the variable dynamically using the ampersand <code>&amp;</code>.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <h3 class="card-title">Target Formulas to Implement</h3>
+
+            <div style="background: #070a12; border: 1px solid rgba(245, 158, 11, 0.35); border-radius: 0.75rem; padding: 1rem; font-family: var(--font-code); font-size: 0.82rem; line-height: 1.6; margin-bottom: 0.75rem;">
+              <span style="color: #64748b;">// btnMorning.OnSelect:</span><br>
+              <span style="color: #fbbf24;">Set(varCurrentShift, "Shift A - Morning")</span><br><br>
+              <span style="color: #64748b;">// btnNight.OnSelect:</span><br>
+              <span style="color: #fbbf24;">Set(varCurrentShift, "Shift B - Night")</span><br><br>
+              <span style="color: #64748b;">// lblActiveBadge.Text:</span><br>
+              <span style="color: #86efac;">"Active Shift: " &amp; varCurrentShift</span>
+            </div>
+
+            <div style="background: rgba(16, 185, 129, 0.1); border-radius: 0.5rem; padding: 0.75rem; border: 1px solid rgba(16, 185, 129, 0.25);">
+              <strong style="color: #86efac; font-size: 0.85rem;">Verification Checklist:</strong>
+              <p style="color: var(--text-muted); font-size: 0.8rem; margin: 0.2rem 0 0 0;">
+                Click "Morning" &rarr; does the label update to "Active Shift: Shift A - Morning"? Click "Night" &rarr; does it toggle immediately? If yes, you have mastered app memory!
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <aside class="trainer-notes" style="display: none !important;">
+          <h4>Trainer Speaking Script & Pedagogical Cues:</h4>
+          <p><strong>Watch for Quotes Mistake:</strong> Look out for students writing <code>Set("varCurrentShift", ...)</code>. Remind them: no quotes around the variable name!</p>
+        </aside>
+      </section>
+
+      <!-- Slide 16: Interactive Widget 2: Live Multi-Screen Memory Simulator -->
+      <section class="slide" id="slide-16" data-slide-index="15" data-title="Interactive Widget 2: Multi-Screen Memory Simulator" data-segment="Part 6: Interactive Lab">
+        <header class="slide-header">
+          <div class="section-tag">Part 6 &bull; Interactive Lab</div>
+          <h2>Interactive Widget 2: Multi-Screen Memory Simulator</h2>
+          <p class="subtitle">Experience how a variable transfers state between two screens in real time.</p>
+        </header>
+
+        <div class="slide-content">
+          <div class="mock-screens-stage">
+            <!-- Screen 1: Shift Selector -->
+            <div class="mock-screen active-focus" id="sim-screen-1">
+              <div class="mock-screen-header">
+                <span style="font-size: 0.8rem; font-weight: 700; color: #fbbf24;">Screen 1: Shift Login</span>
+                <span style="font-size: 0.7rem; color: var(--text-dim);">Apex Plastics App</span>
+              </div>
+              <div class="mock-screen-body">
+                <p style="font-size: 0.85rem; color: var(--text-muted); margin: 0;">Select your active shift to store in memory:</p>
+
+                <button type="button" class="sample-button-control" onclick="setSimShift('Shift A (Day)', 'Line 1')">
+                  Select Shift A (Day)
+                </button>
+                <button type="button" class="sample-button-control" style="background: linear-gradient(135deg, #2563eb, #1d4ed8);" onclick="setSimShift('Shift B (Night)', 'Line 4')">
+                  Select Shift B (Night)
+                </button>
+                <button type="button" class="sample-button-control" style="background: linear-gradient(135deg, #059669, #047857);" onclick="setSimShift('Weekend Crew', 'Line 2')">
+                  Select Weekend Crew
+                </button>
+              </div>
+            </div>
+
+            <!-- Memory Tunnel Connector -->
+            <div class="memory-tunnel-arrow">
+              <span>&rarr;</span>
+              <span style="font-size: 0.65rem; color: #fbbf24; text-transform: uppercase; writing-mode: vertical-rl; letter-spacing: 2px; margin-top: 0.5rem;">RAM Memory</span>
+            </div>
+
+            <!-- Screen 2: Work Orders -->
+            <div class="mock-screen" id="sim-screen-2">
+              <div class="mock-screen-header">
+                <span style="font-size: 0.8rem; font-weight: 700; color: #60a5fa;">Screen 2: Work Orders</span>
+                <span class="card-badge" id="sim-mem-badge" style="background: rgba(245, 158, 11, 0.2); color: #fde68a; margin: 0; padding: 2px 8px; font-size: 0.7rem;">varShift: NONE</span>
+              </div>
+              <div class="mock-screen-body">
+                <div style="background: rgba(15, 23, 42, 0.8); border: 1px solid var(--border-subtle); border-radius: 0.5rem; padding: 0.85rem;">
+                  <strong style="color: var(--text-main); font-size: 0.9rem;" id="sim-screen2-header">Welcome! No Shift Selected.</strong>
+                  <p style="color: var(--text-muted); font-size: 0.8rem; margin: 0.25rem 0 0 0;" id="sim-screen2-desc">
+                    Assigned Area: Please select shift on Screen 1 first.
+                  </p>
+                </div>
+
+                <div style="background: #070a12; border-radius: 0.5rem; padding: 0.75rem; border: 1px solid var(--border-subtle); font-family: var(--font-code); font-size: 0.75rem; color: #94a3b8; flex: 1;">
+                  <p style="color: var(--color-memory); margin: 0 0 4px 0;">[Live Screen 2 Reactivity Log]</p>
+                  <p style="margin: 0;" id="sim-screen2-log">&bull; Awaiting variable update from Screen 1...</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <aside class="trainer-notes" style="display: none !important;">
+          <h4>Trainer Speaking Script & Pedagogical Cues:</h4>
+          <p><strong>Demonstrate Live Coupling:</strong> Click "Shift B (Night)". Show how Screen 2's header, badge, and log update simultaneously without ever navigating or typing on Screen 2. That is true cross-screen state sharing!</p>
+        </aside>
+      </section>
+
+      <!-- Slide 17: 5 Dangerous Misconceptions vs Power Fx Reality -->
+      <section class="slide" id="slide-17" data-slide-index="16" data-title="5 Dangerous Misconceptions vs Power Fx Reality" data-segment="Part 6: Misconceptions">
+        <header class="slide-header">
+          <div class="section-tag">Part 6 &bull; Misconceptions</div>
+          <h2>5 Dangerous Misconceptions vs Power Fx Reality</h2>
+          <p class="subtitle">Avoid these 5 common beginner traps before they cause data loss or bugs.</p>
+        </header>
+
+        <div class="slide-content grid-2">
+          <div class="card">
+            <div style="display: flex; flex-direction: column; gap: 0.85rem;">
+              <div style="background: rgba(239, 68, 68, 0.08); border-left: 3px solid #ef4444; padding: 0.75rem; border-radius: 0.4rem;">
+                <strong style="color: #fca5a5; font-size: 0.88rem;">Misconception 1: "Variables save permanently to SharePoint."</strong>
+                <p style="color: var(--text-muted); font-size: 0.82rem; margin: 0.2rem 0 0 0;">
+                  <strong>Reality:</strong> False! Variables live only in device RAM. When the user closes the app or refreshes, variables reset to blank!
+                </p>
+              </div>
+
+              <div style="background: rgba(239, 68, 68, 0.08); border-left: 3px solid #ef4444; padding: 0.75rem; border-radius: 0.4rem;">
+                <strong style="color: #fca5a5; font-size: 0.88rem;">Misconception 2: "Variable names need quotes like Set(\"varX\", 10)."</strong>
+                <p style="color: var(--text-muted); font-size: 0.82rem; margin: 0.2rem 0 0 0;">
+                  <strong>Reality:</strong> Never put quotes on the variable name! It is an identifier, not a text string. Write <code>Set(varX, 10)</code>.
+                </p>
+              </div>
+
+              <div style="background: rgba(239, 68, 68, 0.08); border-left: 3px solid #ef4444; padding: 0.75rem; border-radius: 0.4rem;">
+                <strong style="color: #fca5a5; font-size: 0.88rem;">Misconception 3: "You have to declare variables before using them."</strong>
+                <p style="color: var(--text-muted); font-size: 0.82rem; margin: 0.2rem 0 0 0;">
+                  <strong>Reality:</strong> In Power Apps, you do NOT declare variables in advance. The moment Power Fx encounters <code>Set(varNew, 1)</code>, it creates it automatically!
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div style="display: flex; flex-direction: column; gap: 0.85rem;">
+              <div style="background: rgba(239, 68, 68, 0.08); border-left: 3px solid #ef4444; padding: 0.75rem; border-radius: 0.4rem;">
+                <strong style="color: #fca5a5; font-size: 0.88rem;">Misconception 4: "A variable can only hold simple text."</strong>
+                <p style="color: var(--text-muted); font-size: 0.82rem; margin: 0.2rem 0 0 0;">
+                  <strong>Reality:</strong> Variables can hold Text, Numbers, Booleans (True/False), Dates, entire Records, and complete Tables!
+                </p>
+              </div>
+
+              <div style="background: rgba(239, 68, 68, 0.08); border-left: 3px solid #ef4444; padding: 0.75rem; border-radius: 0.4rem;">
+                <strong style="color: #fca5a5; font-size: 0.88rem;">Misconception 5: "Other users on other phones can see my variables."</strong>
+                <p style="color: var(--text-muted); font-size: 0.82rem; margin: 0.2rem 0 0 0;">
+                  <strong>Reality:</strong> Variables are 100% private to the active user's running device session. They are never shared across users (that's what SharePoint is for!).
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <aside class="trainer-notes" style="display: none !important;">
+          <h4>Trainer Speaking Script & Pedagogical Cues:</h4>
+          <p><strong>Emphasize Misconception 1 &amp; 5:</strong> Make sure no student thinks variables replace databases. Variables are private, temporary scratchpads. Tomorrow on Day 19, we learn permanent shared databases.</p>
+        </aside>
+      </section>
+
+      <!-- Slide 18: Knowledge Check 1 -->
+      <section class="slide" id="slide-18" data-slide-index="17" data-title="Knowledge Check 1: Primary Purpose of Variables" data-segment="Part 7: Knowledge Checks">
+        <header class="slide-header">
+          <div class="section-tag">Part 7 &bull; Knowledge Check 1 of 5</div>
+          <h2>Knowledge Check: What is the primary purpose of a variable?</h2>
+          <p class="subtitle">Test your fundamental understanding of application memory.</p>
+        </header>
+
+        <div class="slide-content">
+          <div class="quiz-container">
+            <div class="quiz-card">
+              <span class="card-badge" style="background: rgba(245, 158, 11, 0.2); color: #fde68a;">Question 1</span>
+              <p style="color: var(--text-main); font-size: 1.05rem; line-height: 1.6; margin-top: 0.5rem;">
+                Why do we use a variable in Microsoft Power Apps instead of relying solely on control properties?
+              </p>
+
+              <div class="quiz-options">
+                <button class="quiz-option-btn" onclick="handleQuizAnswer(1, 'A', false, this)">
+                  <strong>A.</strong> <span>To permanently archive historical records for years in the cloud</span>
+                </button>
+                <button class="quiz-option-btn" onclick="handleQuizAnswer(1, 'B', true, this)">
+                  <strong>B.</strong> <span>To temporarily remember a value in RAM so other screens and formulas can reuse it</span>
+                </button>
+                <button class="quiz-option-btn" onclick="handleQuizAnswer(1, 'C', false, this)">
+                  <strong>C.</strong> <span>To automatically translate text from English into Khmer</span>
+                </button>
+                <button class="quiz-option-btn" onclick="handleQuizAnswer(1, 'D', false, this)">
+                  <strong>D.</strong> <span>To change the physical battery charge of the operator's tablet</span>
+                </button>
+              </div>
+            </div>
+
+            <div class="quiz-feedback" id="quiz-feedback-1">
+              <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem;">
+                <span class="card-badge" id="quiz-badge-1" style="background: rgba(16, 185, 129, 0.2); color: #86efac;">Correct!</span>
+                <strong style="color: var(--text-main);" id="quiz-status-1">Great Job!</strong>
+              </div>
+              <p style="color: var(--text-muted); font-size: 0.88rem; line-height: 1.6;">
+                Variables act as the app's temporary memory bank in RAM. They allow different screens, formulas, and actions to share and reuse values without having to ask the user repeatedly.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <aside class="trainer-notes" style="display: none !important;">
+          <h4>Trainer Speaking Script & Pedagogical Cues:</h4>
+          <p><strong>Confirm Core Concept:</strong> Validate that the class understands temporary RAM vs permanent database.</p>
+        </aside>
+      </section>
+
+      <!-- Slide 19: Knowledge Check 2 (Why Question) -->
+      <section class="slide" id="slide-19" data-slide-index="18" data-title="Knowledge Check 2: The 'Why' of var Prefix" data-segment="Part 7: Knowledge Checks">
+        <header class="slide-header">
+          <div class="section-tag">Part 7 &bull; Knowledge Check 2 of 5</div>
+          <h2>Knowledge Check: Why prefix variables with <code>var</code>?</h2>
+          <p class="subtitle">Evaluating professional architectural standards and code readability.</p>
+        </header>
+
+        <div class="slide-content">
+          <div class="quiz-container">
+            <div class="quiz-card">
+              <span class="card-badge" style="background: rgba(245, 158, 11, 0.2); color: #fde68a;">Question 2 &bull; Architectural 'Why'</span>
+              <p style="color: var(--text-main); font-size: 1.05rem; line-height: 1.6; margin-top: 0.5rem;">
+                Why do professional Power Apps architects always prefix global variables with <code>var</code> (e.g. <code>varCurrentShift</code>)?
+              </p>
+
+              <div class="quiz-options">
+                <button class="quiz-option-btn" onclick="handleQuizAnswer(2, 'A', false, this)">
+                  <strong>A.</strong> <span>Because Power Apps will throw a syntax crash if a variable doesn't start with 'var'</span>
+                </button>
+                <button class="quiz-option-btn" onclick="handleQuizAnswer(2, 'B', true, this)">
+                  <strong>B.</strong> <span>To instantly distinguish variables from controls and database columns, preventing confusion</span>
+                </button>
+                <button class="quiz-option-btn" onclick="handleQuizAnswer(2, 'C', false, this)">
+                  <strong>C.</strong> <span>Because it makes the app load 50% faster on 4G networks</span>
+                </button>
+                <button class="quiz-option-btn" onclick="handleQuizAnswer(2, 'D', false, this)">
+                  <strong>D.</strong> <span>To hide the variable from Microsoft audit logs</span>
+                </button>
+              </div>
+            </div>
+
+            <div class="quiz-feedback" id="quiz-feedback-2">
+              <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem;">
+                <span class="card-badge" id="quiz-badge-2" style="background: rgba(16, 185, 129, 0.2); color: #86efac;">Correct!</span>
+                <strong style="color: var(--text-main);" id="quiz-status-2">Clean Architecture Confirmed!</strong>
+              </div>
+              <p style="color: var(--text-muted); font-size: 0.88rem; line-height: 1.6;">
+                Clarity is king! The <code>var</code> prefix is a universal naming standard that guarantees any developer reading your formulas immediately knows: <em>"This is a global variable, not a button, text box, or SharePoint field."</em>
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <aside class="trainer-notes" style="display: none !important;">
+          <h4>Trainer Speaking Script & Pedagogical Cues:</h4>
+          <p><strong>Emphasize Clean Code:</strong> Remind them that Power Apps doesn't strictly force 'var', but professional developers always do it to maintain sanity.</p>
+        </aside>
+      </section>
+
+      <!-- Slide 20: Knowledge Check 3 -->
+      <section class="slide" id="slide-20" data-slide-index="19" data-title="Knowledge Check 3: Global Variable Function" data-segment="Part 7: Knowledge Checks">
+        <header class="slide-header">
+          <div class="section-tag">Part 7 &bull; Knowledge Check 3 of 5</div>
+          <h2>Knowledge Check: Which function creates a Global Variable?</h2>
+          <p class="subtitle">Verifying your mastery of Power Fx memory function syntax.</p>
+        </header>
+
+        <div class="slide-content">
+          <div class="quiz-container">
+            <div class="quiz-card">
+              <span class="card-badge" style="background: rgba(245, 158, 11, 0.2); color: #fde68a;">Question 3</span>
+              <p style="color: var(--text-main); font-size: 1.05rem; line-height: 1.6; margin-top: 0.5rem;">
+                Which Power Fx function is used to create and update a Global Variable that is accessible across all screens?
+              </p>
+
+              <div class="quiz-options">
+                <button class="quiz-option-btn" onclick="handleQuizAnswer(3, 'A', true, this)">
+                  <strong>A.</strong> <span><code>Set(VariableName, Value)</code></span>
+                </button>
+                <button class="quiz-option-btn" onclick="handleQuizAnswer(3, 'B', false, this)">
+                  <strong>B.</strong> <span><code>Notify(VariableName, Value)</code></span>
+                </button>
+                <button class="quiz-option-btn" onclick="handleQuizAnswer(3, 'C', false, this)">
+                  <strong>C.</strong> <span><code>IsBlank(VariableName, Value)</code></span>
+                </button>
+                <button class="quiz-option-btn" onclick="handleQuizAnswer(3, 'D', false, this)">
+                  <strong>D.</strong> <span><code>SaveMemory(VariableName, Value)</code></span>
+                </button>
+              </div>
+            </div>
+
+            <div class="quiz-feedback" id="quiz-feedback-3">
+              <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem;">
+                <span class="card-badge" id="quiz-badge-3" style="background: rgba(16, 185, 129, 0.2); color: #86efac;">Correct!</span>
+                <strong style="color: var(--text-main);" id="quiz-status-3">Syntax Mastered!</strong>
+              </div>
+              <p style="color: var(--text-muted); font-size: 0.88rem; line-height: 1.6;">
+                The <code>Set()</code> function is the official Power Fx command for global variables. It takes two arguments: the variable identifier and the value you want to assign to it.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <aside class="trainer-notes" style="display: none !important;">
+          <h4>Trainer Speaking Script & Pedagogical Cues:</h4>
+          <p><strong>Reinforce:</strong> <code>Set</code> is short, clean, and memorable.</p>
+        </aside>
+      </section>
+
+      <!-- Slide 21: Knowledge Check 4 (What Happens If) -->
+      <section class="slide" id="slide-21" data-slide-index="20" data-title="Knowledge Check 4: What Happens When App Closes?" data-segment="Part 7: Knowledge Checks">
+        <header class="slide-header">
+          <div class="section-tag">Part 7 &bull; Knowledge Check 4 of 5</div>
+          <h2>Knowledge Check: What happens when the user closes the app?</h2>
+          <p class="subtitle">Investigating runtime memory lifecycle vs permanent database persistence.</p>
+        </header>
+
+        <div class="slide-content">
+          <div class="quiz-container">
+            <div class="quiz-card">
+              <span class="card-badge" style="background: rgba(245, 158, 11, 0.2); color: #fde68a;">Question 4 &bull; 'What Happens If'</span>
+              <p style="color: var(--text-main); font-size: 1.05rem; line-height: 1.6; margin-top: 0.5rem;">
+                An operator selects "Shift B" and sets <code>varShift</code>. Then they completely close Power Apps and go home. Tomorrow morning, when they re-open the app, what is the value of <code>varShift</code>?
+              </p>
+
+              <div class="quiz-options">
+                <button class="quiz-option-btn" onclick="handleQuizAnswer(4, 'A', false, this)">
+                  <strong>A.</strong> <span>Still "Shift B", because variables are automatically saved to SharePoint</span>
+                </button>
+                <button class="quiz-option-btn" onclick="handleQuizAnswer(4, 'B', false, this)">
+                  <strong>B.</strong> <span>It becomes an error because the variable expired overnight</span>
+                </button>
+                <button class="quiz-option-btn" onclick="handleQuizAnswer(4, 'C', true, this)">
+                  <strong>C.</strong> <span>It is <strong>Blank()</strong> (empty), because variables reset when the app session ends</span>
+                </button>
+                <button class="quiz-option-btn" onclick="handleQuizAnswer(4, 'D', false, this)">
+                  <strong>D.</strong> <span>Power Apps sends an email asking what the variable was</span>
+                </button>
+              </div>
+            </div>
+
+            <div class="quiz-feedback" id="quiz-feedback-4">
+              <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem;">
+                <span class="card-badge" id="quiz-badge-4" style="background: rgba(16, 185, 129, 0.2); color: #86efac;">Correct!</span>
+                <strong style="color: var(--text-main);" id="quiz-status-4">Deep Architecture Insight!</strong>
+              </div>
+              <p style="color: var(--text-muted); font-size: 0.88rem; line-height: 1.6;">
+                Variables live in volatile temporary RAM! When the app session closes, the sticky note is shredded. If you need data to survive until tomorrow, you MUST save it to a database like SharePoint (tomorrow's Day 19 topic!).
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <aside class="trainer-notes" style="display: none !important;">
+          <h4>Trainer Speaking Script & Pedagogical Cues:</h4>
+          <p><strong>Perfect Forward Bridge:</strong> "Notice how Question 4 perfectly sets up tomorrow's lesson. If variables disappear overnight, how do we keep annual records? Stay tuned for Day 19!"</p>
+        </aside>
+      </section>
+
+      <!-- Slide 22: Knowledge Check 5 -->
+      <section class="slide" id="slide-22" data-slide-index="21" data-title="Knowledge Check 5: Syntax Accuracy" data-segment="Part 7: Knowledge Checks">
+        <header class="slide-header">
+          <div class="section-tag">Part 7 &bull; Knowledge Check 5 of 5</div>
+          <h2>Knowledge Check: Which formula correctly stores the department?</h2>
+          <p class="subtitle">Checking your syntax accuracy for quotation marks and identifiers.</p>
+        </header>
+
+        <div class="slide-content">
+          <div class="quiz-container">
+            <div class="quiz-card">
+              <span class="card-badge" style="background: rgba(245, 158, 11, 0.2); color: #fde68a;">Question 5</span>
+              <p style="color: var(--text-main); font-size: 1.05rem; line-height: 1.6; margin-top: 0.5rem;">
+                Which of the following lines of Power Fx correctly stores the text "Extruder 4" into a variable named <code>varDept</code>?
+              </p>
+
+              <div class="quiz-options">
+                <button class="quiz-option-btn" onclick="handleQuizAnswer(5, 'A', false, this)">
+                  <strong>A.</strong> <span><code>Set("varDept", "Extruder 4")</code></span>
+                </button>
+                <button class="quiz-option-btn" onclick="handleQuizAnswer(5, 'B', false, this)">
+                  <strong>B.</strong> <span><code>varDept = "Extruder 4"</code></span>
+                </button>
+                <button class="quiz-option-btn" onclick="handleQuizAnswer(5, 'C', true, this)">
+                  <strong>C.</strong> <span><code>Set(varDept, "Extruder 4")</code></span>
+                </button>
+                <button class="quiz-option-btn" onclick="handleQuizAnswer(5, 'D', false, this)">
+                  <strong>D.</strong> <span><code>UpdateVariable(varDept: "Extruder 4")</code></span>
+                </button>
+              </div>
+            </div>
+
+            <div class="quiz-feedback" id="quiz-feedback-5">
+              <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem;">
+                <span class="card-badge" id="quiz-badge-5" style="background: rgba(16, 185, 129, 0.2); color: #86efac;">Correct!</span>
+                <strong style="color: var(--text-main);" id="quiz-status-5">Mastery Achieved!</strong>
+              </div>
+              <p style="color: var(--text-muted); font-size: 0.88rem; line-height: 1.6;">
+                Option C is correct! The function is <code>Set()</code>, the variable name <code>varDept</code> has no quotes, and the text string <code>"Extruder 4"</code> is wrapped in double quotes.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <aside class="trainer-notes" style="display: none !important;">
+          <h4>Trainer Speaking Script & Pedagogical Cues:</h4>
+          <p><strong>Congratulate the Class:</strong> Celebrate answering all 5 checks. Remind them that Option B (<code>varDept = ...</code>) is a common mistake for programmers from Python or JavaScript, but in Power Fx we always use <code>Set()</code>.</p>
+        </aside>
+      </section>
+
+      <!-- Slide 23: Final Capstone Challenge with 100-pt Rubric & Homework -->
+      <section class="slide" id="slide-23" data-slide-index="22" data-title="Final Challenge: Shift Handoff Badge System" data-segment="Part 8: Capstone & Rubric">
+        <header class="slide-header">
+          <div class="section-tag">Part 8 &bull; Capstone Challenge</div>
+          <h2>Final Challenge: Shift Handoff Badge System</h2>
+          <p class="subtitle">Prove your skills by building a cross-screen shift and machine badge system for Apex Plastics.</p>
+        </header>
+
+        <div class="slide-content grid-2">
+          <div class="card">
+            <h3 class="card-title">Challenge Mission Brief</h3>
+            <p style="color: var(--text-muted); font-size: 0.92rem; line-height: 1.6; margin-bottom: 0.75rem;">
+              You are building the Shift Handoff Badge on the tablet for incoming machine operators at Apex Plastics.
+            </p>
+
+            <div style="background: rgba(15, 23, 42, 0.7); border-radius: 0.5rem; padding: 0.85rem; border: 1px solid var(--border-subtle); margin-bottom: 0.75rem;">
+              <strong style="color: var(--color-memory); font-size: 0.88rem;">Requirements:</strong>
+              <ul style="color: var(--text-muted); font-size: 0.82rem; padding-left: 1.2rem; margin-top: 0.35rem; line-height: 1.6;">
+                <li>Create 2 buttons on Screen 1: <em>"Day Shift"</em> and <em>"Night Shift"</em>.</li>
+                <li>Each button sets <code>varActiveShift</code> to its respective name and navigates to Screen 2.</li>
+                <li>On Screen 2, add a header banner reading: <code>"Logged in as: " &amp; varActiveShift</code>.</li>
+                <li>Add a "Switch Shift" button on Screen 2 that navigates back to Screen 1.</li>
+              </ul>
+            </div>
+
+            <div style="background: rgba(245, 158, 11, 0.1); border-radius: 0.5rem; padding: 0.75rem; border: 1px solid rgba(245, 158, 11, 0.25);">
+              <strong style="color: #fbbf24; font-size: 0.85rem;">Optional Homework (&le; 15 mins):</strong>
+              <p style="color: var(--text-muted); font-size: 0.8rem; margin: 0.2rem 0 0 0;">
+                Add a second variable: <code>varMachineBay</code>. Let the operator select between Bay 1, Bay 2, and Bay 3. Display both variables joined on Screen 2!
+              </p>
+            </div>
+          </div>
+
+          <div class="card">
+            <h3 class="card-title">100-Point Assessment Rubric</h3>
+            
+            <table style="width: 100%; font-size: 0.82rem; border-collapse: collapse; margin-top: 0.25rem;">
+              <thead>
+                <tr style="border-bottom: 1px solid rgba(255, 255, 255, 0.15); text-align: left; color: #fde68a;">
+                  <th style="padding: 0.5rem 0.25rem;">Criteria</th>
+                  <th style="padding: 0.5rem 0.25rem;">Points</th>
+                  <th style="padding: 0.5rem 0.25rem;">Expected Standard</th>
+                </tr>
+              </thead>
+              <tbody style="color: var(--text-muted); line-height: 1.5;">
+                <tr style="border-bottom: 1px solid rgba(255, 255, 255, 0.06);">
+                  <td style="padding: 0.5rem 0.25rem; color: var(--text-main); font-weight: 600;">Set() Formula Accuracy</td>
+                  <td style="padding: 0.5rem 0.25rem; font-family: var(--font-code); color: var(--color-memory);">30 pts</td>
+                  <td style="padding: 0.5rem 0.25rem;">Correct use of <code>Set(varActiveShift, "...")</code> with no quotes on variable name.</td>
+                </tr>
+                <tr style="border-bottom: 1px solid rgba(255, 255, 255, 0.06);">
+                  <td style="padding: 0.5rem 0.25rem; color: var(--text-main); font-weight: 600;">Cross-Screen Navigation</td>
+                  <td style="padding: 0.5rem 0.25rem; font-family: var(--font-code); color: var(--color-memory);">30 pts</td>
+                  <td style="padding: 0.5rem 0.25rem;">Chaining with semicolon <code>; Navigate(Screen2)</code> works seamlessly on both buttons.</td>
+                </tr>
+                <tr style="border-bottom: 1px solid rgba(255, 255, 255, 0.06);">
+                  <td style="padding: 0.5rem 0.25rem; color: var(--text-main); font-weight: 600;">Dynamic Label Reading</td>
+                  <td style="padding: 0.5rem 0.25rem; font-family: var(--font-code); color: var(--color-memory);">20 pts</td>
+                  <td style="padding: 0.5rem 0.25rem;">Screen 2 header correctly references <code>varActiveShift</code> using ampersand <code>&amp;</code>.</td>
+                </tr>
+                <tr>
+                  <td style="padding: 0.5rem 0.25rem; color: var(--text-main); font-weight: 600;">Naming Standards</td>
+                  <td style="padding: 0.5rem 0.25rem; font-family: var(--font-code); color: var(--color-memory);">20 pts</td>
+                  <td style="padding: 0.5rem 0.25rem;">Follows clean <code>var...</code> prefix naming standard throughout the app.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <aside class="trainer-notes" style="display: none !important;">
+          <h4>Trainer Speaking Script & Pedagogical Cues:</h4>
+          <p><strong>Clarity of Success:</strong> "Walk students through the 4 grading rows. When they test their app, if they can click Day Shift and see it immediately show up on Screen 2, they earned 100%!"</p>
+        </aside>
+      </section>
+
+      <!-- Slide 24: Curriculum Connection Map -->
+      <section class="slide" id="slide-24" data-slide-index="23" data-title="Curriculum Connection Map: Past, Present, Future" data-segment="Part 8: Bridge Forward">
+        <header class="slide-header">
+          <div class="section-tag">Part 8 &bull; Bridge Forward</div>
+          <h2>Curriculum Connection Map: Past, Present, Future</h2>
+          <p class="subtitle">Where we came from, what we conquered today, and where we journey tomorrow.</p>
+        </header>
+
+        <div class="slide-content grid-3">
+          <div class="card">
+            <div class="card-badge" style="background: rgba(59, 130, 246, 0.2); color: #93c5fd;">BEFORE (Day 17)</div>
+            <h3 class="card-title">Validation Guards</h3>
+            <p style="color: var(--text-muted); font-size: 0.92rem; line-height: 1.6; margin-bottom: 0.75rem;">
+              You mastered decision making with <code>If()</code>, truth inspection with <code>IsBlank()</code>, and visual toasts with <code>Notify()</code>.
+            </p>
+            <ul style="color: var(--text-muted); font-size: 0.82rem; padding-left: 1.2rem; line-height: 1.6;">
+              <li>True/False decision forks.</li>
+              <li>Halting empty submissions.</li>
+              <li>User feedback toasts.</li>
+            </ul>
+          </div>
+
+          <div class="card" style="border-color: var(--color-memory); box-shadow: 0 0 25px rgba(245, 158, 11, 0.2);">
+            <div class="card-badge" style="background: rgba(245, 158, 11, 0.2); color: #fde68a;">TODAY (Day 18)</div>
+            <h3 class="card-title">App Memory (Variables)</h3>
+            <p style="color: var(--text-muted); font-size: 0.92rem; line-height: 1.6; margin-bottom: 0.75rem;">
+              You cured the app's amnesia! You learned how to write temporary values to RAM with <code>Set()</code> and reuse them across screens.
+            </p>
+            <ul style="color: #fde68a; font-size: 0.82rem; padding-left: 1.2rem; line-height: 1.6;">
+              <li><code>Set(varName, value)</code> memory.</li>
+              <li>Cross-screen state sharing.</li>
+              <li><code>var</code> clean naming standards.</li>
+              <li>Temporary session scratchpad.</li>
+            </ul>
+          </div>
+
+          <div class="card" style="border-color: var(--color-cyan); box-shadow: 0 0 25px rgba(6, 182, 212, 0.2);">
+            <div class="card-badge" style="background: rgba(6, 182, 212, 0.2); color: #67e8f9;">NEXT: DAY 19</div>
+            <h3 class="card-title">Permanent Storage: Data Sources</h3>
+            <p style="color: var(--text-muted); font-size: 0.92rem; line-height: 1.6; margin-bottom: 0.75rem;">
+              Variables disappear when the app closes. Tomorrow, we connect our app to permanent business databases in SharePoint!
+            </p>
+            <ul style="color: #67e8f9; font-size: 0.82rem; padding-left: 1.2rem; line-height: 1.6;">
+              <li>Connecting to SharePoint lists.</li>
+              <li>Permanent historical records.</li>
+              <li>Data sources that never forget.</li>
+              <li>Saving business records forever!</li>
+            </ul>
+          </div>
+        </div>
+
+        <aside class="trainer-notes" style="display: none !important;">
+          <h4>Trainer Speaking Script & Pedagogical Cues:</h4>
+          <p><strong>Closing Words (1 min):</strong> "Congratulations on conquering Day 18! Today your app learned how to REMEMBER. Tomorrow on Day 19, we take the final giant leap in Phase 6: connecting your app to permanent SharePoint databases so your data lasts forever. See you all tomorrow!"</p>
+        </aside>
+      </section>
+
+    </main>
+
+    <!-- Bottom HUD & Navigation Controls -->
+        <footer id="bottom-hud">
+      <div id="progress-bar-container">
+        <div id="progress-bar"></div>
+      </div>
+
+      <div class="hud-left">
+        <button class="hud-btn" id="btn-prev" onclick="prevSlide()" title="Previous Slide (Left Arrow)">&#8592; Prev</button>
+        <button class="hud-btn" id="btn-next" onclick="nextSlide()" title="Next Slide (Right Arrow / Space)">Next &#8594;</button>
+        <span id="slide-counter">Slide <span id="slide-current-num">1</span> / <span id="slide-total-count">24</span></span>
+      </div>
+
+      <div class="hud-right">
+        <button class="hud-btn" id="btn-lang" onclick="toggleLanguage()" title="Toggle Language (L)">
+          🌐 <span id="lang-label">KH</span>
+        </button>
+        <button class="hud-btn active" id="btn-laser" onclick="toggleLaser()" title="Presenter Laser Pointer (P)">
+          🔴 Laser
+        </button>
+        <button class="hud-btn" id="btn-notes" onclick="toggleNotes()" title="Trainer Notes Drawer (N)">
+          📝 Notes
+        </button>
+        <button class="hud-btn" id="btn-overview" onclick="toggleOverview()" title="Slide Overview Modal (O)">
+          🗂️ Overview
+        </button>
+        <button class="hud-btn" id="btn-timer" onclick="toggleTimer()" title="90-Min Countdown (T)">
+          ⏱️ <span id="timer-display">90:00</span>
+        </button>
+        <button class="hud-btn" id="btn-fullscreen" onclick="toggleFullscreen()" title="Fullscreen (F)">
+          ⛶
+        </button>
+        <a href="../index.html" class="hud-btn hub-btn" title="Return to Master Curriculum Hub (ត្រឡប់ទៅទំព័រដើម)" style="text-decoration: none; display: inline-flex; align-items: center; gap: 4px; color: #fcd34d; font-weight: 600;"><span>🏠</span><span>Hub</span></a>
+      </div>
+    </footer>
+
+    <!-- Slide-Out Trainer Notes Drawer (Hotkey: N) -->
+    <div id="notes-drawer">
+      <div class="notes-header">
+        <h3 style="margin: 0;">Trainer Notes &bull; <span id="notes-slide-title" style="color: var(--color-memory);">Day 18</span></h3>
+        <button id="notes-close-btn" class="notes-close-btn" onclick="toggleNotes()">&times;</button>
+      </div>
+      <div class="notes-body" id="notes-body-content">
+        <!-- Injected dynamically from active slide aside.trainer-notes -->
+      </div>
+    </div>
+
+    <!-- Slide Grid Overview Modal (Hotkey: O) -->
+    <div id="overview-modal">
+      <div class="overview-header">
+        <h2 style="margin: 0; color: var(--text-main);">Slide Grid Overview &bull; Day 18 (24 Slides)</h2>
+        <button id="overview-close-btn" class="hud-btn" onclick="toggleOverview()">Close (Esc / O)</button>
+      </div>
+      <div class="overview-grid" id="overview-grid-container">
+        <!-- Rendered dynamically by script.js -->
+      </div>
+    </div>
+
+  </div>
+
+  <script src="script.js"></script>
+<script>
+if (window.self !== window.top) {
+  document.documentElement.classList.add('in-iframe');
+  function hideHub() { document.querySelectorAll('.hub-btn, .back-to-hub-pill').forEach(e => e.style.display = 'none'); }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', hideHub);
+  } else {
+    hideHub();
+  }
+}
+</script>
+<style>
+.in-iframe .hub-btn, .in-iframe .back-to-hub-pill { display: none !important; }
+</style>
+</body>
+</html>
+

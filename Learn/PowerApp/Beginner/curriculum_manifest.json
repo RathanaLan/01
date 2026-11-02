@@ -1,0 +1,541 @@
+[
+  {
+    "day": 1,
+    "phase": 1,
+    "phaseName": "Phase 1: Foundations of Logic & Problem Solving",
+    "phaseNameKh": "ដំណាក់កាលទី ១ ៖ មូលដ្ឋានគ្រឹះនៃតក្កវិជ្ជានិងការដោះស្រាយបញ្ហា",
+    "title": "How Apps Solve Problems",
+    "titleKh": "របៀបដែលកម្មវិធីដោះស្រាយបញ្ហាជាក់ស្តែង",
+    "mentalModel": "Real Problem ➔ Input ➔ Process ➔ Output",
+    "mentalModelKh": "បញ្ហាជាក់ស្តែង ➔ បញ្ចូលទិន្នន័យ ➔ ដំណើរការ ➔ បង្ហាញលទ្ធផល",
+    "stageKey": "PROBLEM",
+    "summary": "Discover why software exists: replacing manual paper logs and human error with automated digital workflows.",
+    "summaryKh": "ស្វែងយល់ពីមូលហេតុដែលកម្មវិធីកុំព្យូទ័រត្រូវបានបង្កើតឡើង ៖ ការជំនួសក្រដាសកត់ត្រា និងកំហុសមនុស្សដោយប្រព័ន្ធឌីជីថលស្វ័យប្រវត្តិ។",
+    "tools": [
+      "Input / Output",
+      "Process Flow",
+      "Digital Transformation"
+    ],
+    "storyline": "Apex Plastics shift paper handoffs causing injection molding downtime."
+  },
+  {
+    "day": 2,
+    "phase": 1,
+    "phaseName": "Phase 1: Foundations of Logic & Problem Solving",
+    "phaseNameKh": "ដំណាក់កាលទី ១ ៖ មូលដ្ឋានគ្រឹះនៃតក្កវិជ្ជានិងការដោះស្រាយបញ្ហា",
+    "title": "Instructions & Sequence",
+    "titleKh": "ការណែនាំ និងលំដាប់លំដោយនៃការប្រតិបត្តិ",
+    "mentalModel": "Process ➔ Sequence ➔ Step-by-Step Logic",
+    "mentalModelKh": "ដំណើរការ ➔ លំដាប់លំដោយ ➔ តក្កវិជ្ជាជាជំហានៗ",
+    "stageKey": "PROCESS",
+    "summary": "Understand that computers execute commands sequentially. Why order of operations determines software success or failure.",
+    "summaryKh": "យល់ដឹងថាកុំព្យូទ័រដំណើរការតាមលំដាប់លំដោយ។ មូលហេតុដែលលំដាប់នៃជំហានកំណត់ភាពជោគជ័យឬបរាជ័យនៃកម្មវិធី។",
+    "tools": [
+      "Sequential Execution",
+      "Algorithms",
+      "Order of Operations"
+    ],
+    "storyline": "Machine startup sequence: safety check must happen BEFORE motor starts."
+  },
+  {
+    "day": 3,
+    "phase": 1,
+    "phaseName": "Phase 1: Foundations of Logic & Problem Solving",
+    "phaseNameKh": "ដំណាក់កាលទី ១ ៖ មូលដ្ឋានគ្រឹះនៃតក្កវិជ្ជានិងការដោះស្រាយបញ្ហា",
+    "title": "Data: What an App Knows & Remembers",
+    "titleKh": "ទិន្នន័យ ៖ អ្វីដែលកម្មវិធីដឹង និងចងចាំ",
+    "mentalModel": "Data Types ➔ Text, Number, Boolean, Date",
+    "mentalModelKh": "ប្រភេទទិន្នន័យ ➔ អក្សរ, លេខ, ប៊ូលីន, កាលបរិច្ឆេទ",
+    "stageKey": "DATA",
+    "summary": "Master data types: text labels vs numbers vs dates vs true/false. Why typing data correctly is the foundation of logic.",
+    "summaryKh": "យល់ច្បាស់ពីប្រភេទទិន្នន័យ ៖ អក្សរ (Text) ទល់នឹង លេខ (Number) ទល់នឹង True/False។ មូលហេតុដែលប្រភេទទិន្នន័យជាគ្រឹះនៃតក្កវិជ្ជា។",
+    "tools": [
+      "Text",
+      "Number",
+      "Date",
+      "Boolean"
+    ],
+    "storyline": "Logging mold temperature (Number) vs Operator Name (Text) vs Safety Pass (Boolean)."
+  },
+  {
+    "day": 4,
+    "phase": 1,
+    "phaseName": "Phase 1: Foundations of Logic & Problem Solving",
+    "phaseNameKh": "ដំណាក់កាលទី ១ ៖ មូលដ្ឋានគ្រឹះនៃតក្កវិជ្ជានិងការដោះស្រាយបញ្ហា",
+    "title": "Questions, Conditions, True & False",
+    "titleKh": "សំណួរ លក្ខខណ្ឌ និងតម្លៃពិត/មិនពិត (True & False)",
+    "mentalModel": "Data ➔ Question ➔ Comparison ➔ True / False",
+    "mentalModelKh": "ទិន្នន័យ ➔ សំណួរ ➔ ការប្រៀបធៀប ➔ ពិត / មិនពិត",
+    "stageKey": "LOGIC",
+    "summary": "Learn how apps ask questions: comparing data using =, >, <, <>. A condition always evaluates to a single True or False answer.",
+    "summaryKh": "របៀបដែលកម្មវិធីសួរសំណួរ ៖ ប្រៀបធៀបទិន្នន័យដោយប្រើ =, >, <។ លក្ខខណ្ឌតែងតែផ្តល់ចម្លើយតែមួយគត់គឺ True ឬ False។",
+    "tools": [
+      "Comparison Operators",
+      "=",
+      ">",
+      "<",
+      "<>",
+      "Conditions"
+    ],
+    "storyline": "Is temperature > 220°C? True triggers cooling; False keeps heating."
+  },
+  {
+    "day": 5,
+    "phase": 1,
+    "phaseName": "Phase 1: Foundations of Logic & Problem Solving",
+    "phaseNameKh": "ដំណាក់កាលទី ១ ៖ មូលដ្ឋានគ្រឹះនៃតក្កវិជ្ជានិងការដោះស្រាយបញ្ហា",
+    "title": "Decisions (IF / THEN / ELSE)",
+    "titleKh": "ការធ្វើសេចក្តីសម្រេច (IF / THEN / ELSE)",
+    "mentalModel": "Condition ➔ True/False ➔ IF ➔ Action A / Action B",
+    "mentalModelKh": "លក្ខខណ្ឌ ➔ True/False ➔ IF ➔ សកម្មភាព ក / សកម្មភាព ខ",
+    "stageKey": "DECISION",
+    "summary": "Branching execution: if the condition is True, do Action A; otherwise do Action B. The universal brain of software.",
+    "summaryKh": "ការបំបែកផ្លូវសម្រេចចិត្ត ៖ ប្រសិនបើលក្ខខណ្ឌពិត (True) ធ្វើសកម្មភាព ក; បើមិនពិត (False) ធ្វើសកម្មភាព ខ។",
+    "tools": [
+      "If()",
+      "Branching",
+      "True Path",
+      "False Path"
+    ],
+    "storyline": "If machine status is 'Fault', halt conveyor; Else allow next production cycle."
+  },
+  {
+    "day": 6,
+    "phase": 1,
+    "phaseName": "Phase 1: Foundations of Logic & Problem Solving",
+    "phaseNameKh": "ដំណាក់កាលទី ១ ៖ មូលដ្ឋានគ្រឹះនៃតក្កវិជ្ជានិងការដោះស្រាយបញ្ហា",
+    "title": "Combining Conditions (AND / OR / NOT)",
+    "titleKh": "ការរួមបញ្ចូលគ្នានៃលក្ខខណ្ឌ (AND / OR / NOT)",
+    "mentalModel": "Multi-Conditions ➔ && (AND) ➔ || (OR) ➔ ! (NOT)",
+    "mentalModelKh": "ពហុលក្ខខណ្ឌ ➔ && (AND) ➔ || (OR) ➔ ! (NOT)",
+    "stageKey": "LOGIC",
+    "summary": "Master complex real-world logic gates: both conditions must be true (AND), or either can be true (OR).",
+    "summaryKh": "ជំនាញច្រកទ្វារតក្កវិជ្ជាជាក់ស្តែង ៖ លក្ខខណ្ឌទាំងពីរត្រូវតែពិត (AND) ឬមួយណាក៏បានពិត (OR)។",
+    "tools": [
+      "And() / &&",
+      "Or() / ||",
+      "Not() / !",
+      "Logic Gates"
+    ],
+    "storyline": "Both Operator Badge valid AND Safety Shield closed before press cycle starts."
+  },
+  {
+    "day": 7,
+    "phase": 2,
+    "phaseName": "Phase 2: Business Process & Wireframing",
+    "phaseNameKh": "ដំណាក់កាលទី ២ ៖ ដំណើរការអាជីវកម្ម និងប្លង់គំរូអេក្រង់",
+    "title": "From Real Problem to App Opportunity",
+    "titleKh": "ពីបញ្ហាជាក់ស្តែង ទៅជាឱកាសបង្កើតកម្មវិធី",
+    "mentalModel": "Pain Point ➔ Value Proposition ➔ Digital Solution",
+    "mentalModelKh": "បញ្ហាឈឺចាប់ ➔ តម្លៃអាជីវកម្ម ➔ ដំណោះស្រាយឌីជីថល",
+    "stageKey": "PROBLEM",
+    "summary": "Analyze messy workplace workflows. Translate human complaints, delays, and wasted scrap into concrete app requirements.",
+    "summaryKh": "វិភាគលំហូរការងាររញ៉េរញ៉ៃក្នុងរោងចក្រ។ បម្លែងការត្អូញត្អែរ ការយឺតយ៉ាវ និងការខាតបង់ ឱ្យទៅជាតម្រូវការកម្មវិធី។",
+    "tools": [
+      "Problem Scoping",
+      "User Stories",
+      "DX ROI Analysis"
+    ],
+    "storyline": "Apex Maintenance crew losing 14 hours/week looking for paper clipboards."
+  },
+  {
+    "day": 8,
+    "phase": 2,
+    "phaseName": "Phase 2: Business Process & Wireframing",
+    "phaseNameKh": "ដំណាក់កាលទី ២ ៖ ដំណើរការអាជីវកម្ម និងប្លង់គំរូអេក្រង់",
+    "title": "Process, Workflow, Status & Decision",
+    "titleKh": "ដំណើរការ លំហូរការងារ ស្ថានភាព និងការសម្រេចចិត្ត",
+    "mentalModel": "Status Lifecycle: New ➔ In Progress ➔ Approved ➔ Closed",
+    "mentalModelKh": "វដ្តជីវិតស្ថានភាព ៖ ថ្មី ➔ កំពុងដំណើរការ ➔ អនុម័ត ➔ បញ្ចប់",
+    "stageKey": "PROCESS",
+    "summary": "Map the lifecycle of a work order through clear status states. Understand who changes status and when.",
+    "summaryKh": "គូសប្លង់វដ្តជីវិតនៃសំណើសុំតាមរយៈស្ថានភាពច្បាស់លាស់។ យល់ដឹងថាអ្នកណាជាអ្នកផ្លាស់ប្តូរស្ថានភាព និងពេលណា។",
+    "tools": [
+      "Status State Machine",
+      "Workflow Transitions",
+      "Role Responsibilities"
+    ],
+    "storyline": "Support request transitions from Submitted ➔ Assigned ➔ Parts Ordered ➔ Resolved."
+  },
+  {
+    "day": 9,
+    "phase": 2,
+    "phaseName": "Phase 2: Business Process & Wireframing",
+    "phaseNameKh": "ដំណាក់កាលទី ២ ៖ ដំណើរការអាជីវកម្ម និងប្លង់គំរូអេក្រង់",
+    "title": "Model a Complete Business Flow",
+    "titleKh": "ការបង្កើតគំរូលំហូរការងារអាជីវកម្មពេញលេញ",
+    "mentalModel": "Swimlane Mapping ➔ Operator ➔ Supervisor ➔ Technician",
+    "mentalModelKh": "ប្លង់គន្លងហែលទឹក ➔ ប្រតិបត្តិករ ➔ ប្រធានផ្នែក ➔ ជាងបច្ចេកទេស",
+    "stageKey": "PROCESS",
+    "summary": "Build cross-functional swimlane diagrams. Track handoffs, decision checkpoints, bottlenecks, and automated triggers.",
+    "summaryKh": "បង្កើតដ្យាក្រាម Swimlane តភ្ជាប់គ្រប់តួអង្គ។ តាមដានការផ្ទេរការងារ ចំណុចសម្រេចចិត្ត និងស្ទះការងារ។",
+    "tools": [
+      "Swimlane Flowcharts",
+      "Hand-off Protocols",
+      "Bottleneck Elimination"
+    ],
+    "storyline": "CNC technician triage workflow across Day Shift, Night Shift, and Warehouse Parts Room."
+  },
+  {
+    "day": 10,
+    "phase": 3,
+    "phaseName": "Phase 3: Data Architecture & Tables",
+    "phaseNameKh": "ដំណាក់កាលទី ៣ ៖ ស្ថាបត្យកម្មទិន្នន័យ និងតារាងផ្ទុក",
+    "title": "Records and Tables: Storing Many Cases",
+    "titleKh": "កំណត់ត្រា និងតារាង ៖ ការផ្ទុកទិន្នន័យច្រើនករណី",
+    "mentalModel": "Table = Collection of Rows | Row = Single Record | Column = Property",
+    "mentalModelKh": "តារាង = បណ្តុំជួរដេក | ជួរដេក = កំណត់ត្រាមួយ | ជួរឈរ = លក្ខណៈសម្បត្តិ",
+    "stageKey": "DATA",
+    "summary": "Shift from single values to structured tables: columns represent fields; rows represent individual real-world incidents.",
+    "summaryKh": "ផ្លាស់ប្តូរពីតម្លៃទោល ទៅជាតារាងមានរចនាសម្ព័ន្ធ ៖ ជួរឈរជាព័ត៌មានលម្អិត; ជួរដេកជាករណីនីមួយៗក្នុងពិភពពិត។",
+    "tools": [
+      "Tables",
+      "Records / Rows",
+      "Columns / Fields",
+      "Primary Keys"
+    ],
+    "storyline": "Creating the MaintenanceLog table: ID, EquipmentID, ReportedDate, IssueDescription."
+  },
+  {
+    "day": 11,
+    "phase": 3,
+    "phaseName": "Phase 3: Data Architecture & Tables",
+    "phaseNameKh": "ដំណាក់កាលទី ៣ ៖ ស្ថាបត្យកម្មទិន្នន័យ និងតារាងផ្ទុក",
+    "title": "Design Data from the Process",
+    "titleKh": "ការរចនាទម្រង់ទិន្នន័យចេញពីដំណើរការអាជីវកម្ម",
+    "mentalModel": "Process Step ➔ Required Data Field ➔ Column Type",
+    "mentalModelKh": "ជំហានការងារ ➔ ព័ត៌មានដែលត្រូវការ ➔ ប្រភេទជួរឈរ",
+    "stageKey": "DATA",
+    "summary": "Derive your data dictionary directly from the workflow steps. Prevent missing fields before drawing a single screen.",
+    "summaryKh": "ទាញយកវចនានុក្រមទិន្នន័យដោយផ្ទាល់ពីជំហានការងារ។ ការពារកុំឱ្យខ្វះទិន្នន័យ មុននឹងចាប់ផ្តើមគូសអេក្រង់។",
+    "tools": [
+      "Data Dictionary",
+      "Choice Columns",
+      "Required Fields",
+      "Schema Normalization"
+    ],
+    "storyline": "Adding Urgency (Choice: Low/Medium/High/Critical) and DowntimeHours (Number)."
+  },
+  {
+    "day": 12,
+    "phase": 3,
+    "phaseName": "Phase 3: Data Architecture & Tables",
+    "phaseNameKh": "ដំណាក់កាលទី ៣ ៖ ស្ថាបត្យកម្មទិន្នន័យ និងតារាងផ្ទុក",
+    "title": "From Process + Data to App Screens",
+    "titleKh": "ពីដំណើរការ + ទិន្នន័យ ទៅជាអេក្រង់កម្មវិធី",
+    "mentalModel": "Process + Data Schema ➔ Screen Wireframes (List, Form, Details)",
+    "mentalModelKh": "ដំណើរការ + ទម្រង់ទិន្នន័យ ➔ ប្លង់អេក្រង់ (បញ្ជី, ទម្រង់, លម្អិត)",
+    "stageKey": "UI",
+    "summary": "Bridge data schema into user interface screens: browse screen (Gallery), new entry screen (Form), and details screen.",
+    "summaryKh": "ផ្សារភ្ជាប់ទម្រង់ទិន្នន័យទៅជាអេក្រង់អ្នកប្រើប្រាស់ ៖ អេក្រង់មើលបញ្ជី (Gallery) អេក្រង់បញ្ចូលទិន្នន័យ (Form) និងអេក្រង់លម្អិត។",
+    "tools": [
+      "Screen Architecture",
+      "Low-Fidelity Wireframing",
+      "UI Hierarchy"
+    ],
+    "storyline": "Wireframing the 3 primary screens for factory floor mobile tablets."
+  },
+  {
+    "day": 13,
+    "phase": 4,
+    "phaseName": "Phase 4: Power Apps Studio & UI Architecture",
+    "phaseNameKh": "ដំណាក់កាលទី ៤ ៖ Power Apps Studio និងការរៀបចំ UI",
+    "title": "Power Apps Studio: Map Design to Controls",
+    "titleKh": "Power Apps Studio ៖ បម្លែងប្លង់រចនាទៅជាឧបករណ៍បញ្ជា (Controls)",
+    "mentalModel": "Studio Canvas ➔ Tree View ➔ Properties ➔ Formula Bar",
+    "mentalModelKh": "ផ្ទៃផ្ទាំងក្រណាត់ ➔ មែកធាងគ្រប់គ្រង ➔ បន្ទះលក្ខណៈ ➔ របាររូបមន្ត",
+    "stageKey": "UI",
+    "summary": "Master the Power Apps Studio environment. Understand the Tree View hierarchy, naming conventions, and layout positioning.",
+    "summaryKh": "ស្ទាត់ជំនាញក្នុងកម្មវិធី Power Apps Studio។ យល់ដឹងពីមែកធាង Tree View ការដាក់ឈ្មោះត្រឹមត្រូវ និងការតម្រៀបប្លង់។",
+    "tools": [
+      "Tree View",
+      "Formula Bar",
+      "Properties Panel",
+      "Naming Standards"
+    ],
+    "storyline": "Standardizing control names: btnSubmit, txtEquipmentID, lblErrorMsg."
+  },
+  {
+    "day": 14,
+    "phase": 4,
+    "phaseName": "Phase 4: Power Apps Studio & UI Architecture",
+    "phaseNameKh": "ដំណាក់កាលទី ៤ ៖ Power Apps Studio និងការរៀបចំ UI",
+    "title": "Controls: Input, Action, Output",
+    "titleKh": "ឧបករណ៍បញ្ជា ៖ ការបញ្ចូល សកម្មភាព និងការបង្ហាញលទ្ធផល",
+    "mentalModel": "Input (Text/Dropdown) ➔ Action (Button) ➔ Output (Label/Gallery)",
+    "mentalModelKh": "ការបញ្ចូល (Text/Dropdown) ➔ សកម្មភាព (ប៊ូតុង) ➔ ការបង្ហាញ (Label/Gallery)",
+    "stageKey": "UI",
+    "summary": "Work with core interactive controls: TextInput for user typing, Dropdown for validated choices, Button for triggering logic.",
+    "summaryKh": "ប្រើប្រាស់ឧបករណ៍បញ្ជាស្នូល ៖ TextInput សម្រាប់វាយបញ្ចូល, Dropdown សម្រាប់ជ្រើសរើសជម្រើស, Button សម្រាប់ដំណើរការតក្កវិជ្ជា។",
+    "tools": [
+      "TextInput",
+      "Dropdown",
+      "Button",
+      "Label",
+      "Icons"
+    ],
+    "storyline": "Configuring touch-friendly 60px buttons for factory operators wearing gloves."
+  },
+  {
+    "day": 15,
+    "phase": 4,
+    "phaseName": "Phase 4: Power Apps Studio & UI Architecture",
+    "phaseNameKh": "ដំណាក់កាលទី ៤ ៖ Power Apps Studio និងការរៀបចំ UI",
+    "title": "Navigation: Connect Screens into a Flow",
+    "titleKh": "ការរុករក ៖ ការតភ្ជាប់អេក្រង់ទាំងអស់ទៅជាលំហូរតែមួយ",
+    "mentalModel": "Screen A ➔ Navigate(ScreenB, ScreenTransition) ➔ Back()",
+    "mentalModelKh": "អេក្រង់ ក ➔ Navigate(អេក្រង់ ខ) ➔ Back() ថយក្រោយ",
+    "stageKey": "ACTION",
+    "summary": "Connect isolated screens into a coherent user journey. Use Navigate() with transitions and Back() to return.",
+    "summaryKh": "តភ្ជាប់អេក្រង់ដាច់ដោយឡែកឱ្យក្លាយជាលំហូរការងាររលូន។ ប្រើប្រាស់រូបមន្ត Navigate() និង Back() ត្រឡប់ក្រោយ។",
+    "tools": [
+      "Navigate()",
+      "Back()",
+      "ScreenTransition.Fade",
+      "Header Components"
+    ],
+    "storyline": "Navigating between scr_Home, scr_NewOrder, and scr_OrderHistory."
+  },
+  {
+    "day": 16,
+    "phase": 5,
+    "phaseName": "Phase 5: Power Fx Logic & Variables",
+    "phaseNameKh": "ដំណាក់កាលទី ៥ ៖ តក្កវិជ្ជា Power Fx និងអថេរចងចាំ",
+    "title": "Properties & Formulas: How Controls Behave",
+    "titleKh": "លក្ខណៈសម្បត្តិ និងរូបមន្ត ៖ របៀបដែលឧបករណ៍បញ្ជាឆ្លើយតប",
+    "mentalModel": "Control.Property = Power Fx Formula (Dynamic Behavior)",
+    "mentalModelKh": "ឧបករណ៍.លក្ខណៈសម្បត្តិ = រូបមន្ត Power Fx (ការផ្លាស់ប្តូរតាមស្ថានភាព)",
+    "stageKey": "LOGIC",
+    "summary": "Turn static mockups into living software. Control Color, Visible, DisplayMode, and Text using real-time formulas.",
+    "summaryKh": "ប្រែក្លាយផ្ទាំងរូបភាពស្ងៀមស្ងាត់ ឱ្យទៅជាសូហ្វវែរមានជីវិត។ គ្រប់គ្រងពណ៌ ភាពមើលឃើញ និងអត្ថបទដោយរូបមន្តពេលវេលាពិត។",
+    "tools": [
+      "Dot Notation",
+      "Visible",
+      "DisplayMode",
+      "Color / Fill",
+      "Text"
+    ],
+    "storyline": "Making urgent tickets glow Red (Color.Red) automatically when severity is Critical."
+  },
+  {
+    "day": 17,
+    "phase": 5,
+    "phaseName": "Phase 5: Power Fx Logic & Variables",
+    "phaseNameKh": "ដំណាក់កាលទី ៥ ៖ តក្កវិជ្ជា Power Fx និងអថេរចងចាំ",
+    "title": "Conditions + IF in Power Fx: Validation",
+    "titleKh": "លក្ខខណ្ឌ + IF ក្នុង Power Fx ៖ ការផ្ទៀងផ្ទាត់ទិន្នន័យ (Validation)",
+    "mentalModel": "If(IsBlank(txtInput.Text), DisplayMode.Disabled, DisplayMode.Edit)",
+    "mentalModelKh": "If(IsBlank(txtInput.Text), DisplayMode.Disabled, DisplayMode.Edit)",
+    "stageKey": "DECISION",
+    "summary": "Build bulletproof input validation gates. Prevent submission of incomplete tickets by disabling the submit button.",
+    "summaryKh": "បង្កើតច្រកទ្វារការពារទិន្នន័យខុស។ បិទមិនឱ្យចុចប៊ូតុង Submit (Disabled) ដរាបណាព័ត៌មានចាំបាច់មិនទាន់បំពេញគ្រប់។",
+    "tools": [
+      "If()",
+      "IsBlank()",
+      "DisplayMode.Disabled",
+      "Validation Gates"
+    ],
+    "storyline": "Stopping operators from submitting maintenance tickets with empty Machine ID."
+  },
+  {
+    "day": 18,
+    "phase": 5,
+    "phaseName": "Phase 5: Power Fx Logic & Variables",
+    "phaseNameKh": "ដំណាក់កាលទី ៥ ៖ តក្កវិជ្ជា Power Fx និងអថេរចងចាំ",
+    "title": "Variables: Let the App Remember",
+    "titleKh": "អថេរ (Variables) ៖ ឱ្យកម្មវិធីចងចាំទិន្នន័យក្នុងពេលប្រើប្រាស់",
+    "mentalModel": "Set(gblUser, User().FullName) | UpdateContext({locStep: 2})",
+    "mentalModelKh": "Set(gblUser, User().FullName) | UpdateContext({locStep: 2})",
+    "stageKey": "DATA",
+    "summary": "Teach the app short-term memory. Use Set() for global state across screens and UpdateContext() for single-screen wizard dialogs.",
+    "summaryKh": "បង្រៀនកម្មវិធីឱ្យចេះចងចាំព័ត៌មានបណ្តោះអាសន្ន។ ប្រើ Set() សម្រាប់ទូទាំងកម្មវិធី និង UpdateContext() សម្រាប់តែមួយអេក្រង់។",
+    "tools": [
+      "Set() (Global)",
+      "UpdateContext() (Context)",
+      "User()",
+      "App State"
+    ],
+    "storyline": "Remembering logged-in operator credentials and multi-step modal dialogs."
+  },
+  {
+    "day": 19,
+    "phase": 6,
+    "phaseName": "Phase 6: Enterprise Storage & SharePoint CRUD",
+    "phaseNameKh": "ដំណាក់កាលទី ៦ ៖ មូលដ្ឋានទិន្នន័យ SharePoint និង CRUD",
+    "title": "SharePoint List: Persistent Business Data",
+    "titleKh": "បញ្ជី SharePoint ៖ ការផ្ទុកទិន្នន័យអាជីវកម្មអចិន្ត្រៃយ៍លើ Cloud",
+    "mentalModel": "Cloud Database ➔ Permanent Rows ➔ Audit History ➔ Multi-User",
+    "mentalModelKh": "មូលដ្ឋានទិន្នន័យ Cloud ➔ ជួរដេកអចិន្ត្រៃយ៍ ➔ កំណត់ត្រាប្រវត្តិ ➔ អ្នកប្រើច្រើននាក់",
+    "stageKey": "STORAGE",
+    "summary": "Why Excel fails for apps: file locks, corruption, and sync lag. Configure SharePoint lists with enterprise cloud integrity.",
+    "summaryKh": "មូលហេតុដែល Excel បរាជ័យក្នុងកម្មវិធីធំៗ ៖ ការចាក់សោឯកសារ និងបាត់ទិន្នន័យ។ បង្កើតបញ្ជី SharePoint លើ Cloud យ៉ាងត្រឹមត្រូវ។",
+    "tools": [
+      "SharePoint Lists",
+      "Cloud Tables",
+      "Concurrency",
+      "Data Integrity"
+    ],
+    "storyline": "Creating the MaintenanceRequests list in SharePoint to replace shared Excel workbook."
+  },
+  {
+    "day": 20,
+    "phase": 6,
+    "phaseName": "Phase 6: Enterprise Storage & SharePoint CRUD",
+    "phaseNameKh": "ដំណាក់កាលទី ៦ ៖ មូលដ្ឋានទិន្នន័យ SharePoint និង CRUD",
+    "title": "Connect Power Apps to SharePoint",
+    "titleKh": "ការតភ្ជាប់ Power Apps ទៅកាន់បញ្ជី SharePoint",
+    "mentalModel": "Power Apps Canvas ➔ Cloud Connector ➔ SharePoint Data Source",
+    "mentalModelKh": "ផ្ទាំង Power Apps ➔ ឧបករណ៍តភ្ជាប់ Cloud ➔ ប្រភពទិន្នន័យ SharePoint",
+    "stageKey": "STORAGE",
+    "summary": "Bridge your frontend app to cloud storage. Add connectors, authenticate data sources, and understand delegation fundamentals.",
+    "summaryKh": "ភ្ជាប់ផ្ទាំងបញ្ជាខាងមុខ ទៅកាន់ធុងផ្ទុកទិន្នន័យខាងក្រោយ។ បន្ថែម Connector និងស្វែងយល់ពីមូលដ្ឋានគ្រឹះនៃ Delegation។",
+    "tools": [
+      "Data Connectors",
+      "SharePoint Connection",
+      "Delegation Basics",
+      "Authentication"
+    ],
+    "storyline": "Connecting tablet app to the live SharePoint site with zero code."
+  },
+  {
+    "day": 21,
+    "phase": 6,
+    "phaseName": "Phase 6: Enterprise Storage & SharePoint CRUD",
+    "phaseNameKh": "ដំណាក់កាលទី ៦ ៖ មូលដ្ឋានទិន្នន័យ SharePoint និង CRUD",
+    "title": "Gallery: Read and Select Records",
+    "titleKh": "ផ្ទាំង Gallery ៖ ការអាន និងជ្រើសរើសកំណត់ត្រាទិន្នន័យ",
+    "mentalModel": "Gallery.Items = Table ➔ Template Item (ThisItem) ➔ gal.Selected",
+    "mentalModelKh": "Gallery.Items = តារាង ➔ គំរូជួរដេក (ThisItem) ➔ gal.Selected",
+    "stageKey": "UI",
+    "summary": "Display repeated rows dynamically. Use ThisItem to bind record columns and gal.Selected to hand data to detail screens.",
+    "summaryKh": "បង្ហាញជួរដេកទិន្នន័យជាច្រើនដោយស្វ័យប្រវត្តិ។ ប្រើ ThisItem ដើម្បីទាញព័ត៌មាន និង gal.Selected ដើម្បីបញ្ជូនទិន្នន័យទៅអេក្រង់បន្ទាប់។",
+    "tools": [
+      "Gallery Control",
+      "Items Property",
+      "ThisItem",
+      "gal.Selected"
+    ],
+    "storyline": "Building the live work order dashboard for shift supervisors to monitor open repairs."
+  },
+  {
+    "day": 22,
+    "phase": 6,
+    "phaseName": "Phase 6: Enterprise Storage & SharePoint CRUD",
+    "phaseNameKh": "ដំណាក់កាលទី ៦ ៖ មូលដ្ឋានទិន្នន័យ SharePoint និង CRUD",
+    "title": "Forms: One Record, Many Fields",
+    "titleKh": "ទម្រង់ Form ៖ កំណត់ត្រាមួយ ផ្ទុកព័ត៌មានច្រើនជួរឈរ",
+    "mentalModel": "Form.DataSource = Table | Form.Item = gal.Selected | DataCard",
+    "mentalModelKh": "Form.DataSource = តារាង | Form.Item = gal.Selected | DataCard",
+    "stageKey": "UI",
+    "summary": "Render structured cards for every column. Master EditForm vs ViewForm and bind Form.Item to the selected gallery record.",
+    "summaryKh": "បង្ហាញកាតទិន្នន័យតាមជួរឈរនីមួយៗ។ យល់ច្បាស់ពី EditForm ទល់នឹង ViewForm និងភ្ជាប់ Form.Item ជាមួយកំណត់ត្រាដែលបានជ្រើស។",
+    "tools": [
+      "EditForm",
+      "ViewForm",
+      "DataCard",
+      "Form.Item",
+      "DataSource"
+    ],
+    "storyline": "Detailed inspection form showing Machine Name, Technician notes, and Status."
+  },
+  {
+    "day": 23,
+    "phase": 6,
+    "phaseName": "Phase 6: Enterprise Storage & SharePoint CRUD",
+    "phaseNameKh": "ដំណាក់កាលទី ៦ ៖ មូលដ្ឋានទិន្នន័យ SharePoint និង CRUD",
+    "title": "Create Records: From Input to Saved Data",
+    "titleKh": "ការបង្កើតកំណត់ត្រាថ្មី ៖ ពីការវាយបញ្ចូល រហូតដល់រក្សាទុកលើ Cloud",
+    "mentalModel": "NewForm(frm) ➔ User Fills Fields ➔ SubmitForm(frm) ➔ OnSuccess",
+    "mentalModelKh": "NewForm(frm) ➔ បំពេញទិន្នន័យ ➔ SubmitForm(frm) ➔ OnSuccess",
+    "stageKey": "ACTION",
+    "summary": "Write new business transactions to the cloud. Reset form state with NewForm(), commit with SubmitForm(), and handle OnSuccess feedback.",
+    "summaryKh": "កត់ត្រាប្រតិបត្តិការអាជីវកម្មថ្មីចូលទៅក្នុង Cloud។ បើកទម្រង់ទទេដោយ NewForm(), រក្សាទុកដោយ SubmitForm(), និងជូនដំណឹង OnSuccess។",
+    "tools": [
+      "NewForm()",
+      "SubmitForm()",
+      "OnSuccess",
+      "Notify()",
+      "ResetForm()"
+    ],
+    "storyline": "Operator logs a broken conveyor belt; record committed to SharePoint in 300ms."
+  },
+  {
+    "day": 24,
+    "phase": 6,
+    "phaseName": "Phase 6: Enterprise Storage & SharePoint CRUD",
+    "phaseNameKh": "ដំណាក់កាលទី ៦ ៖ មូលដ្ឋានទិន្នន័យ SharePoint និង CRUD",
+    "title": "Read & Update: Complete Record Lifecycle",
+    "titleKh": "ការអាន និងកែប្រែទិន្នន័យ ៖ បំពេញវដ្តជីវិតទិន្នន័យទាំងស្រុង",
+    "mentalModel": "gal.Selected ➔ EditForm(frm) ➔ SubmitForm(frm) ➔ Updated Record",
+    "mentalModelKh": "gal.Selected ➔ EditForm(frm) ➔ SubmitForm(frm) ➔ ទិន្នន័យកែប្រែថ្មី",
+    "stageKey": "STORAGE",
+    "summary": "Close the loop on data: switch existing records into edit mode, update statuses, patch fields, and handle server confirmation.",
+    "summaryKh": "បំពេញវដ្តជីវិតទិន្នន័យ ៖ បើកកំណត់ត្រាចាស់មកកែប្រែ (EditForm), ផ្លាស់ប្តូរស្ថានភាពការងារ, និងរក្សាទុកការកែប្រែដោយជោគជ័យ។",
+    "tools": [
+      "EditForm()",
+      "ViewForm()",
+      "Record Lifecycle",
+      "Update Confirmation"
+    ],
+    "storyline": "Technician opens open repair order, marks parts replaced, and updates status to Closed."
+  },
+  {
+    "day": 25,
+    "phase": 7,
+    "phaseName": "Phase 7: End-to-End System Integration & Cloud Flows",
+    "phaseNameKh": "ដំណាក់កាលទី ៧ ៖ ការធ្វើសមាហរណកម្មប្រព័ន្ធពេញលេញ និងស្វ័យប្រវត្តិកម្ម Cloud",
+    "title": "Architecture: Problem ➔ Process ➔ Data ➔ UI ➔ Logic",
+    "titleKh": "ស្ថាបត្យកម្មប្រព័ន្ធ ៖ បញ្ហា ➔ ដំណើរការ ➔ ទិន្នន័យ ➔ អេក្រង់ ➔ តក្កវិជ្ជា",
+    "mentalModel": "Complete 3-Tier Multi-Screen Architecture Blueprint",
+    "mentalModelKh": "ប្លង់មេស្ថាបត្យកម្មប្រព័ន្ធ ៣ កម្រិត និងពហុអេក្រង់ពេញលេញ",
+    "stageKey": "ARCHITECTURE",
+    "summary": "Step back and see the entire machine: integrate all technical components into a unified, maintainable production architecture.",
+    "summaryKh": "ឈានទៅមើលរូបភាពធំនៃប្រព័ន្ធទាំងមូល ៖ រួមបញ្ចូលគ្រប់សមាសធាតុបច្ចេកវិទ្យា ឱ្យទៅជាស្ថាបត្យកម្មសូហ្វវែររឹងមាំសម្រាប់សហគ្រាស។",
+    "tools": [
+      "Full System Architecture",
+      "Data Flow Blueprint",
+      "Production Hardening"
+    ],
+    "storyline": "Architecting the unified Plant Maintenance Portal connecting 4 shop floor screens."
+  },
+  {
+    "day": 26,
+    "phase": 7,
+    "phaseName": "Phase 7: End-to-End System Integration & Cloud Flows",
+    "phaseNameKh": "ដំណាក់កាលទី ៧ ៖ ការធ្វើសមាហរណកម្មប្រព័ន្ធពេញលេញ និងស្វ័យប្រវត្តិកម្ម Cloud",
+    "title": "Build the Complete Connected App + Power Automate",
+    "titleKh": "ការកសាងកម្មវិធីតភ្ជាប់ពេញលេញ + ស្វ័យប្រវត្តិកម្ម Power Automate",
+    "mentalModel": "App ➔ SharePoint ➔ When an item is created ➔ Send an email (V2)",
+    "mentalModelKh": "កម្មវិធី ➔ SharePoint ➔ ពេលមានធាតុថ្មី ➔ ផ្ញើអ៊ីមែលជូនដំណឹង (V2)",
+    "stageKey": "FLOW",
+    "summary": "Integrate Power Apps with Power Automate. Trigger automated cloud notifications to supervisors the instant a record is saved.",
+    "summaryKh": "តភ្ជាប់ Power Apps ជាមួយ Power Automate។ ដំណើរការការជូនដំណឹងតាមអ៊ីមែលលើ Cloud ដោយស្វ័យប្រវត្តិ ភ្លាមៗពេលមានទិន្នន័យរក្សាទុក។",
+    "tools": [
+      "Power Automate",
+      "When an item is created",
+      "Send an email (V2)",
+      "Cloud Triggers"
+    ],
+    "storyline": "Automatic email notification with work order details dispatched to maintenance lead."
+  },
+  {
+    "day": 27,
+    "phase": 8,
+    "phaseName": "Phase 8: Capstone Transfer & Graduation",
+    "phaseNameKh": "ដំណាក់កាលទី ៨ ៖ ការវាយតម្លៃបញ្ចប់ការសិក្សា (Capstone)",
+    "title": "Final Transfer Challenge: Explain Why It Works",
+    "titleKh": "ការប្រឡងផ្ទេរចំណេះដឹងបញ្ចប់ ៖ ពន្យល់ពីមូលហេតុដែលប្រព័ន្ធដំណើរការ",
+    "mentalModel": "New Problem ➔ Independently Model ➔ Build ➔ Test ➔ Explain Why",
+    "mentalModelKh": "បញ្ហាថ្មី ➔ បង្កើតគំរូដោយខ្លួនឯង ➔ កសាង ➔ តេស្ត ➔ ពន្យល់ហេតុផល",
+    "stageKey": "CAPSTONE",
+    "summary": "The graduation test: independently architect a Plant Safety Hazard Tracker from scratch. Defend decisions and master 3-Tier troubleshooting.",
+    "summaryKh": "ការប្រឡងបញ្ចប់ការសិក្សា ៖ កសាងប្រព័ន្ធតាមដានគ្រោះថ្នាក់ការងារពីបាតដៃទទេ។ ពន្យល់ពីស្ថាបត្យកម្ម និងជំនាញដោះស្រាយបញ្ហា ៣ កម្រិត។",
+    "tools": [
+      "First Principles",
+      "3-Tier Troubleshooting",
+      "Architectural Defense",
+      "Graduation"
+    ],
+    "storyline": "Plant Safety & Near-Miss Hazard Tracker with instant emergency alerts."
+  }
+]

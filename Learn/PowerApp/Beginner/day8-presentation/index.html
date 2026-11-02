@@ -1,0 +1,1361 @@
+<!DOCTYPE html>
+<html lang="en" translate="no" class="notranslate">
+<head>
+  <meta name="google" content="notranslate">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Power Apps Foundation — Day 8: Process, Workflow, Status &amp; Decision</title>
+  
+    <!-- Famous & Universally Loved Khmer Fonts (Moul for Formal Titles, Siemreap & Battambang for Easy Reading) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=Moul&family=Kantumruy+Pro:ital,wght@0,400..700;1,400..700&family=Battambang:wght@300;400;700;900&family=Koh+Santepheap:wght@300;400;700&family=Koulen&family=Siemreap&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="../shared/design-system.css">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="fluent-dark-theme">
+
+  <!-- Main Presentation Stage Container (16:9 Viewport Constrained) -->
+  <div id="presentation-container" class="presentation-container">
+
+    <!-- Top Status Bar: Branding, Segment Indicator, Timer & Controls -->
+    <!-- Presentation Header removed to match Day 25 Standard -->
+
+    <!-- Slide Deck Presentation Canvas -->
+    <main class="slides-viewport" id="slides-viewport" tabindex="0" aria-label="Presentation Slide Deck">
+
+      <!-- ======================================================================
+           SLIDE 1: Title & Session Orientation (Part 1: 00:00 - 10:00)
+           ====================================================================== -->
+      <section class="slide active" id="slide-1" data-slide-index="0" data-title="Title & Orientation" data-segment="Part 1: Welcome & Spiral Recall (00:00 - 10:00)"
+               data-notes="Welcome learners to Day 8! Celebrate completing Phase 2 (Logic). Today we advance into Phase 3: Business Thinking. Ask: 'How do all our screens, buttons, and rules connect into a real work journey?' Introduce the central chain: Start -> Steps -> Status -> Decision -> Finish.">
+        <div class="slide-content title-slide-layout">
+          <div class="title-badge-row">
+            <span class="pill pill-purple">Phase 3: Business Thinking</span>
+            <span class="pill pill-teal">Day 8 of 27</span>
+            <span class="pill pill-blue">Duration: 90 Minutes</span>
+          </div>
+          
+          <h1 class="hero-title">Process, Workflow, Status &amp; Decision</h1>
+          <p class="hero-subtitle">Connecting Actions and Decisions Across People and States in Microsoft Power Apps</p>
+
+          <div class="connection-chain-banner">
+            <span class="chain-node active">1. Start / Trigger</span>
+            <span class="chain-arrow">➔</span>
+            <span class="chain-node active">2. Sequential Steps</span>
+            <span class="chain-arrow">➔</span>
+            <span class="chain-node active">3. Current Status</span>
+            <span class="chain-arrow">➔</span>
+            <span class="chain-node active">4. Decision Gate</span>
+            <span class="chain-arrow">➔</span>
+            <span class="chain-node active">5. Finish / Archive</span>
+          </div>
+
+          <div class="title-footer-meta">
+            <div class="meta-item">
+              <span class="meta-label">Central Mental Model:</span>
+              <span class="meta-val">REAL PROBLEM ➔ PROCESS ➔ DATA ➔ UI ➔ LOGIC ➔ ACTION ➔ STORAGE</span>
+            </div>
+            <div class="meta-item">
+              <span class="meta-label">Audience:</span>
+              <span class="meta-val">Absolute Zero Beginners • Manufacturing &amp; Office DX</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ======================================================================
+           SLIDE 2: Master Curriculum Arc & Connection Map
+           ====================================================================== -->
+      <section class="slide" id="slide-2" data-slide-index="1" data-title="Curriculum Arc & Connection Map" data-segment="Part 1: Welcome & Spiral Recall (00:00 - 10:00)"
+               data-notes="Point out where we stand today. Days 1-6 taught us how individual instructions, data types, and logic gates work. Day 7 diagnosed the opportunity. Today (Day 8), we connect them into a LIVING PROCESS. Tomorrow on Day 9, this process will dictate our data tables.">
+        <div class="slide-content">
+          <div class="slide-header">
+            <span class="section-tag">Curriculum Progression</span>
+            <h2>Where We Stand in the 27-Day Journey</h2>
+            <p class="subtitle">An app is not a random collection of buttons; it is a structured journey connecting people and states.</p>
+          </div>
+
+          <div class="roadmap-grid">
+            <div class="roadmap-card past">
+              <div class="card-phase">Phase 1 &amp; 2 • Days 1–6</div>
+              <div class="card-title">Foundations &amp; Logic Gates</div>
+              <ul class="roadmap-list">
+                <li><span class="icon-check">✓</span> Day 1–2: Problems &amp; Instructions</li>
+                <li><span class="icon-check">✓</span> Day 3: Data &amp; Storage Types</li>
+                <li><span class="icon-check">✓</span> Day 4: Conditions &amp; True/False</li>
+                <li><span class="icon-check">✓</span> Day 5–6: IF Decisions &amp; AND/OR Gates</li>
+              </ul>
+              <div class="card-footer-tag">Mastered Building Blocks</div>
+            </div>
+
+            <div class="roadmap-card current">
+              <div class="card-phase">Phase 3 • Day 7 &amp; Day 8 (Today!)</div>
+              <div class="card-title">Business Thinking &amp; Workflow</div>
+              <ul class="roadmap-list">
+                <li><span class="icon-check">✓</span> Day 7: Real Problem to Opportunity</li>
+                <li><span class="icon-current">★</span> <strong>Day 8: Process, Workflow &amp; Status</strong></li>
+                <li><span class="icon-future">➔</span> The 5 Workflow Building Blocks</li>
+                <li><span class="icon-future">➔</span> Status Machine &amp; UI Interlocks</li>
+              </ul>
+              <div class="card-footer-tag current-tag">Active Focus Today</div>
+            </div>
+
+            <div class="roadmap-card future">
+              <div class="card-phase">Phase 4 • Days 9–12</div>
+              <div class="card-title">Relational Tables &amp; Screens</div>
+              <ul class="roadmap-list">
+                <li><span class="icon-future">➔</span> Day 9: Data Storage &amp; Tables</li>
+                <li><span class="icon-future">➔</span> Day 10: Screens, Galleries &amp; Forms</li>
+                <li><span class="icon-future">➔</span> Day 11: Real-time Feedback &amp; Alerts</li>
+                <li><span class="icon-future">➔</span> Day 12: End-to-End Integration Test</li>
+              </ul>
+              <div class="card-footer-tag future-tag">Coming Up Next</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ======================================================================
+           SLIDE 3: Prerequisite Retrieval Questions
+           ====================================================================== -->
+      <section class="slide" id="slide-3" data-slide-index="2" data-title="Prerequisite Retrieval" data-segment="Part 1: Welcome & Spiral Recall (00:00 - 10:00)"
+               data-notes="Conduct active oral recall! Ask learners these 3 questions before revealing answers. Emphasize that Status is a Choice data type from Day 3, and decisions rely on Day 5 IF gates.">
+        <div class="slide-content">
+          <div class="slide-header">
+            <span class="section-tag">Spiral Knowledge Check</span>
+            <h2>Prerequisite Retrieval: Testing Past Foundations</h2>
+            <p class="subtitle">Quick check: Recall concepts from Days 3, 5, 6, and 7 that power today's workflow engine.</p>
+          </div>
+
+          <div class="retrieval-cards-container">
+            <div class="retrieval-card">
+              <div class="retrieval-badge">Question 1 (Day 7)</div>
+              <h3>What are the 5 Pillars of the App Opportunity Framework?</h3>
+              <p class="retrieval-hint">Think of the diagnostic checklist before writing any code.</p>
+              <div class="retrieval-answer">
+                <strong>Answer:</strong> 1) Current Problem, 2) Desired Result, 3) People (Roles), 4) Information (Data), and 5) Rules (Decisions).
+              </div>
+            </div>
+
+            <div class="retrieval-card">
+              <div class="retrieval-badge">Question 2 (Days 5 &amp; 6)</div>
+              <h3>What decides which path an app takes at a fork in the road?</h3>
+              <p class="retrieval-hint">How does an app choose between Path A and Path B?</p>
+              <div class="retrieval-answer">
+                <strong>Answer:</strong> A <strong>Condition Gate</strong>. It asks a question that produces <code>True</code> or <code>False</code>; an <code>If()</code> decision runs Action A on True, or Action B on False.
+              </div>
+            </div>
+
+            <div class="retrieval-card">
+              <div class="retrieval-badge">Question 3 (Day 3)</div>
+              <h3>Why should a "Status" field be a Choice type rather than free text?</h3>
+              <p class="retrieval-hint">What happens if users type "done", "Done", or "finished"?</p>
+              <div class="retrieval-answer">
+                <strong>Answer:</strong> A <strong>Choice</strong> guarantees exact, predefined values. Typos break logic rules like <code>If(Status = "Closed", ...)</code>.
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ======================================================================
+           SLIDE 4: 4 Measurable Learning Objectives
+           ====================================================================== -->
+      <section class="slide" id="slide-4" data-slide-index="3" data-title="Learning Objectives" data-segment="Part 1: Welcome & Spiral Recall (00:00 - 10:00)"
+               data-notes="Review the 4 measurable objectives with students. Emphasize that by minute 90, each person will be able to author a complete workflow matrix with valid state transitions.">
+        <div class="slide-content">
+          <div class="slide-header">
+            <span class="section-tag">Bloom's Taxonomy Roadmap</span>
+            <h2>Four Measurable Learning Objectives for Today</h2>
+            <p class="subtitle">By minute 90, you will independently demonstrate these four practical competencies:</p>
+          </div>
+
+          <div class="objectives-grid">
+            <div class="obj-card">
+              <div class="obj-icon-pill obj-analyze">Bloom Level 4: Analyze</div>
+              <h3>1. Deconstruct Any Workplace Workflow</h3>
+              <p>Break down any messy manual task into the 5 universal building blocks: <strong>Trigger</strong>, <strong>Steps</strong>, <strong>Status</strong>, <strong>Decision Gate</strong>, and <strong>Finish</strong>.</p>
+            </div>
+
+            <div class="obj-card">
+              <div class="obj-icon-pill obj-apply">Bloom Level 3: Apply</div>
+              <h3>2. Model States &amp; Prevent Illegal Jumps</h3>
+              <p>Define discrete, mutually exclusive <strong>Status Values</strong> and map the strict triggers that allow transitioning from one state to the next without skipping steps.</p>
+            </div>
+
+            <div class="obj-card">
+              <div class="obj-icon-pill obj-apply">Bloom Level 3: Apply</div>
+              <h3>3. Bind Status to Power Apps UI Interlocks</h3>
+              <p>Write beginner Power Fx rules connecting the current status to screen controls (e.g., locking forms via <code>DisplayMode.View</code> and revealing buttons with <code>Visible</code>).</p>
+            </div>
+
+            <div class="obj-card">
+              <div class="obj-icon-pill obj-create">Bloom Level 5: Synthesize</div>
+              <h3>4. Author the Complete Apex Maintenance Matrix</h3>
+              <p>Author a complete 5-stage production workflow specification for Tooling Die #2, defining who acts, what data changes, and which decision gates govern the repair.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ======================================================================
+           SLIDE 5: The "Why This Exists" Disaster (Part 2: 10:00 - 25:00)
+           ====================================================================== -->
+      <section class="slide" id="slide-5" data-slide-index="4" data-title="The $45,000 Ghost Work Order" data-segment="Part 2: Discover — The Why (10:00 - 25:00)"
+               data-notes="Tell the dramatic story of Apex Plastics! Dave was working hard repairing the mold, but nobody could see the state of the work. Lack of status visibility caused a $45,000 emergency replacement order!">
+        <div class="slide-content">
+          <div class="slide-header">
+            <span class="section-tag section-alert">Workplace Catastrophe Case Study</span>
+            <h2>The $45,000 "Ghost Work Order" at Apex Plastics</h2>
+            <p class="subtitle">What happens when hard work happens in the real world, but the status is invisible?</p>
+          </div>
+
+          <div class="case-study-split">
+            <div class="case-box disaster-timeline">
+              <div class="case-box-header">
+                <span class="timeline-badge">The Timeline of Confusion</span>
+              </div>
+              <ul class="timeline-list">
+                <li>
+                  <span class="time-stamp">02:15 PM</span>
+                  <div class="time-content">
+                    <strong>Line 4 Shuts Down:</strong> Tooling Die #2 suffers micro-fractures. Operator Sothea writes a note on paper and puts it on a clipboard.
+                  </div>
+                </li>
+                <li>
+                  <span class="time-stamp">02:45 PM</span>
+                  <div class="time-content">
+                    <strong>Dave Takes the Die:</strong> Technician Dave picks up Die #2 and takes it into the CNC shop to weld and re-polish it. He tells no one.
+                  </div>
+                </li>
+                <li>
+                  <span class="time-stamp">03:30 PM</span>
+                  <div class="time-content">
+                    <strong>Night Supervisor Arrives:</strong> Mara finds Line 4 stopped and Die #2 missing. No status update exists anywhere. Dave's phone is off.
+                  </div>
+                </li>
+                <li>
+                  <span class="time-stamp">05:00 PM</span>
+                  <div class="time-content disaster-callout">
+                    <strong>$45,000 Panic Order:</strong> Assuming the die was destroyed and lost, Mara orders an emergency replacement from Germany with priority air freight!
+                  </div>
+                </li>
+              </ul>
+            </div>
+
+            <div class="case-box disaster-summary">
+              <div class="cost-stat-card">
+                <span class="stat-number">$45,000</span>
+                <span class="stat-label">Emergency Tooling Die Air-Freight Order</span>
+              </div>
+              <div class="cost-stat-card secondary">
+                <span class="stat-number">24 Hours</span>
+                <span class="stat-label">Unnecessary Assembly Line Downtime ($18,000 loss)</span>
+              </div>
+              <div class="pain-summary-pill">
+                <strong>The True Cause:</strong> Dave was doing the right work, but <em>the system had no status visibility</em>. To the rest of the company, the die vanished into thin air!
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ======================================================================
+           SLIDE 6: Root Cause Breakdown: Process Blackout
+           ====================================================================== -->
+      <section class="slide" id="slide-6" data-slide-index="5" data-title="Root Cause: Process Blackout" data-segment="Part 2: Discover — The Why (10:00 - 25:00)"
+               data-notes="Emphasize that the issue was not lack of effort. People worked hard. The failure was a PROCESS BLACKOUT: no status, no handoff record, and no shared single source of truth.">
+        <div class="slide-content">
+          <div class="slide-header">
+            <span class="section-tag">Anatomy of Failure</span>
+            <h2>Why Did Apex Lose $45,000? The "Process Blackout"</h2>
+            <p class="subtitle">When work is not tracked by status, three deadly operational failures occur:</p>
+          </div>
+
+          <div class="trio-cards">
+            <div class="feature-card red-border">
+              <div class="card-icon">🕳️</div>
+              <h3>1. The Black Hole Effect</h3>
+              <p>Between physical paper hand-offs, work falls into a void. Nobody knows who holds the ball, whether repair has started, or if parts are ordered.</p>
+              <div class="card-quote">"I thought someone else was handling it."</div>
+            </div>
+
+            <div class="feature-card orange-border">
+              <div class="card-icon">⚡</div>
+              <h3>2. Conflicting Actions</h3>
+              <p>Without a single shared status, two well-meaning managers make opposite decisions at the same time: one repairs the old mold, the other buys a new one!</p>
+              <div class="card-quote">"If I knew Dave had it, I wouldn't have spent $45,000."</div>
+            </div>
+
+            <div class="feature-card yellow-border">
+              <div class="card-icon">🛑</div>
+              <h3>3. No Quality Interlocks</h3>
+              <p>Paper slips let people skip steps. A machine can be turned back on before safety inspection, risking catastrophic injuries and scrap parts.</p>
+              <div class="card-quote">"Nobody signed off on the dimensional tolerance check."</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ======================================================================
+           SLIDE 7: Everyday Analogy: The Food Delivery Tracker
+           ====================================================================== -->
+      <section class="slide" id="slide-7" data-slide-index="6" data-title="Everyday Analogy: Food Delivery" data-segment="Part 2: Discover — The Why (10:00 - 25:00)"
+               data-notes="Connect to everyday life: When you order food on Grab or DoorDash, how do you know what's happening? You look at the progress bar! The status controls what actions you can take.">
+        <div class="slide-content">
+          <div class="slide-header">
+            <span class="section-tag">Everyday Physical Metaphor</span>
+            <h2>The Food Delivery Tracker: A Living State Machine</h2>
+            <p class="subtitle">You already understand workflows because you use them every day on your smartphone.</p>
+          </div>
+
+          <div class="delivery-tracker-container">
+            <div class="tracker-steps">
+              <div class="tracker-node done">
+                <div class="node-circle">1</div>
+                <div class="node-text">
+                  <strong>Order Placed</strong>
+                  <span>Customer payment confirmed</span>
+                </div>
+              </div>
+              <div class="tracker-line done"></div>
+
+              <div class="tracker-node done">
+                <div class="node-circle">2</div>
+                <div class="node-text">
+                  <strong>Preparing</strong>
+                  <span>Kitchen cooking food</span>
+                </div>
+              </div>
+              <div class="tracker-line done"></div>
+
+              <div class="tracker-node current">
+                <div class="node-circle">3</div>
+                <div class="node-text">
+                  <strong>Driver Picked Up</strong>
+                  <span>Courier en route to store</span>
+                </div>
+              </div>
+              <div class="tracker-line pending"></div>
+
+              <div class="tracker-node pending">
+                <div class="node-circle">4</div>
+                <div class="node-text">
+                  <strong>Delivered</strong>
+                  <span>Handed to customer</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="tracker-insights-grid">
+              <div class="insight-box">
+                <span class="insight-badge">Rule 1: Shared Visibility</span>
+                <p>Customer, restaurant, and driver all see the exact same stage. Nobody has to call asking, "Are you cooking?"</p>
+              </div>
+              <div class="insight-box">
+                <span class="insight-badge">Rule 2: Action Interlocks</span>
+                <p>You can click "Cancel Order" during <em>Order Placed</em>, but that button is disabled once status is <em>Driver Picked Up</em>!</p>
+              </div>
+              <div class="insight-box">
+                <span class="insight-badge">Rule 3: Structured Handoffs</span>
+                <p>The driver only receives the delivery dispatch notification when the kitchen taps <em>Food Ready</em>.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ======================================================================
+           SLIDE 8: What is a Workflow? Plain Language Bridge
+           ====================================================================== -->
+      <section class="slide" id="slide-8" data-slide-index="7" data-title="Plain-Language Workflow Definition" data-segment="Part 2: Discover — The Why (10:00 - 25:00)"
+               data-notes="Give the absolute plain-language explanation before showing syntax or technical architecture. A workflow is simply a path where work travels, changing state along the way.">
+        <div class="slide-content">
+          <div class="slide-header">
+            <span class="section-tag">Concept Bridge</span>
+            <h2>Plain Language: What is a Workflow &amp; Status?</h2>
+            <p class="subtitle">Strip away all software jargon. What does an app workflow actually do?</p>
+          </div>
+
+          <div class="plain-concept-grid">
+            <div class="concept-card highlight-card">
+              <div class="concept-icon">🔄</div>
+              <h3>A Workflow is a Relayed Journey</h3>
+              <p>A workflow is the agreed-upon <strong>step-by-step path</strong> that a piece of work travels from the moment someone asks for it until it is completely resolved.</p>
+              <div class="concept-footer">Like a baton in a relay race passing smoothly from runner to runner.</div>
+            </div>
+
+            <div class="concept-card highlight-card">
+              <div class="concept-icon">🏷️</div>
+              <h3>A Status is the Live Tag on the Baton</h3>
+              <p>A status is the <strong>single keyword</strong> that tells everyone in the company where that baton is right now, who is currently holding it, and what happens next.</p>
+              <div class="concept-footer">Example: "Submitted", "Under Review", "In Repair", "Closed".</div>
+            </div>
+
+            <div class="concept-card highlight-card">
+              <div class="concept-icon">⚖️</div>
+              <h3>A Decision is the Fork in the Road</h3>
+              <p>A decision is where business rules ask a question (<code>If</code>) about the request data to choose which corridor the work should follow next.</p>
+              <div class="concept-footer">Example: If repair cost > $1,000, divert to Plant Manager for signature.</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ======================================================================
+           SLIDE 9: The 5 Elements of Every Workflow (Part 3: 25:00 - 45:00)
+           ====================================================================== -->
+      <section class="slide" id="slide-8" data-slide-index="8" data-title="The 5 Workflow Building Blocks" data-segment="Part 3: Deep Dive Theory (25:00 - 45:00)"
+               data-notes="Walk through the 5 universal building blocks: Trigger, Steps, Status, Decision, Finish. Every business process on earth, whether simple or complex, is constructed from these five parts.">
+        <div class="slide-content">
+          <div class="slide-header">
+            <span class="section-tag">Universal Architecture</span>
+            <h2>The 5 Universal Building Blocks of Every Workflow</h2>
+            <p class="subtitle">Every process in Microsoft Power Apps is built from these five fundamental components:</p>
+          </div>
+
+          <div class="five-blocks-flex">
+            <div class="workflow-block block-trigger">
+              <div class="block-num">1</div>
+              <div class="block-tag">TRIGGER</div>
+              <h4>The Starting Gun</h4>
+              <p>The real-world event that creates the record.</p>
+              <span class="block-example">e.g., Mold cracks on Line 4</span>
+            </div>
+
+            <div class="block-connector">➔</div>
+
+            <div class="workflow-block block-step">
+              <div class="block-num">2</div>
+              <div class="block-tag">ACTION / STEPS</div>
+              <h4>Human Tasks</h4>
+              <p>Concrete actions taken by specific roles.</p>
+              <span class="block-example">e.g., Operator logs details</span>
+            </div>
+
+            <div class="block-connector">➔</div>
+
+            <div class="workflow-block block-status">
+              <div class="block-num">3</div>
+              <div class="block-tag">STATUS</div>
+              <h4>Current State</h4>
+              <p>The single label describing the record now.</p>
+              <span class="block-example">e.g., Status = "Submitted"</span>
+            </div>
+
+            <div class="block-connector">➔</div>
+
+            <div class="workflow-block block-decision">
+              <div class="block-num">4</div>
+              <div class="block-tag">DECISION</div>
+              <h4>Rule Gate</h4>
+              <p>A condition question that splits the flow.</p>
+              <span class="block-example">e.g., Cost &gt; $1,000?</span>
+            </div>
+
+            <div class="block-connector">➔</div>
+
+            <div class="workflow-block block-finish">
+              <div class="block-num">5</div>
+              <div class="block-tag">FINISH</div>
+              <h4>Terminal State</h4>
+              <p>Archived record; all inputs locked.</p>
+              <span class="block-example">e.g., Status = "Closed"</span>
+            </div>
+          </div>
+
+          <div class="workflow-summary-banner">
+            <strong>Key Citizen Developer Takeaway:</strong> Before opening Power Apps Studio, draw these 5 boxes on paper. If you don't know the Status, you cannot build the app!
+          </div>
+        </div>
+      </section>
+
+      <!-- ======================================================================
+           SLIDE 10: The State Machine: Valid Transitions vs Illegal Jumps
+           ====================================================================== -->
+      <section class="slide" id="slide-10" data-slide-index="9" data-title="The State Machine: Valid vs Illegal" data-segment="Part 3: Deep Dive Theory (25:00 - 45:00)"
+               data-notes="Introduce the term 'State Machine' in plain terms: It simply means a record can only jump to authorized next steps. You cannot teleport from New to Closed without doing the repair!">
+        <div class="slide-content">
+          <div class="slide-header">
+            <span class="section-tag">Integrity &amp; Guardrails</span>
+            <h2>The State Machine: Valid Transitions vs. Illegal Jumps</h2>
+            <p class="subtitle">An app must enforce valid paths. A record cannot teleport across states without proper triggers.</p>
+          </div>
+
+          <div class="transition-comparison-grid">
+            <div class="transition-card valid-card">
+              <div class="transition-card-header">
+                <span class="badge badge-green">✓ Valid Business Transition</span>
+              </div>
+              <div class="transition-flow">
+                <span class="flow-pill">Submitted</span>
+                <span class="flow-arrow">➔</span>
+                <span class="flow-action">[Supervisor Approves]</span>
+                <span class="flow-arrow">➔</span>
+                <span class="flow-pill">Approved</span>
+              </div>
+              <ul class="transition-rules">
+                <li><strong>Trigger:</strong> Supervisor clicks "Approve" button.</li>
+                <li><strong>Verification:</strong> Supervisor is authenticated.</li>
+                <li><strong>Result:</strong> Unlocks "Start Repair" button for technician.</li>
+              </ul>
+            </div>
+
+            <div class="transition-card illegal-card">
+              <div class="transition-card-header">
+                <span class="badge badge-red">❌ Illegal Direct Jump</span>
+              </div>
+              <div class="transition-flow">
+                <span class="flow-pill">Submitted</span>
+                <span class="flow-arrow flow-danger">⚡ ILLEGAL JUMP ⚡</span>
+                <span class="flow-pill">Closed</span>
+              </div>
+              <ul class="transition-rules">
+                <li><strong>Danger:</strong> Bypasses triage, budget approval, and physical repair!</li>
+                <li><strong>Consequence:</strong> Machine restarts broken; danger of fire or injury.</li>
+                <li><strong>App Fix:</strong> Disable the "Close" button when Status != "Inspected".</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="state-rule-footer">
+            <span class="rule-icon">🛡️</span>
+            <span><strong>Rule of State Machines:</strong> A record can only move to a new status when its preconditions have evaluated to <code>True</code>!</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- ======================================================================
+           SLIDE 11: Decision Gates (Diamond Forks) & Routing
+           ====================================================================== -->
+      <section class="slide" id="slide-11" data-slide-index="10" data-title="Decision Gates & Routing" data-segment="Part 3: Deep Dive Theory (25:00 - 45:00)"
+               data-notes="Show the decision diamond. This is where Days 4, 5, and 6 come alive! The diamond asks: Is estimated cost > $1,000? If True, it routes to Plant Manager. If False, Supervisor can approve directly.">
+        <div class="slide-content">
+          <div class="slide-header">
+            <span class="section-tag">Visual Flowchart Anatomy</span>
+            <h2>Decision Gates: The Diamond Fork in the Road</h2>
+            <p class="subtitle">Where Days 4, 5, and 6 logic gates route work down different operational corridors.</p>
+          </div>
+
+          <div class="decision-gate-diagram">
+            <div class="gate-incoming">
+              <span class="node-badge">Incoming Request</span>
+              <strong>Status = "Submitted"</strong>
+              <span>Estimated Cost Calculated</span>
+            </div>
+
+            <div class="gate-diamond-container">
+              <div class="diamond-box">
+                <span class="diamond-label">CONDITION</span>
+                <strong>Cost &gt; $1,000?</strong>
+              </div>
+            </div>
+
+            <div class="gate-branches">
+              <div class="branch-card branch-true-card">
+                <div class="branch-tag tag-true">TRUE PATH (High Cost)</div>
+                <h4>Plant Manager Approval Required</h4>
+                <p>Status updates to: <code>Pending Plant Mgr</code></p>
+                <div class="branch-rule">Extra financial review required before spending money.</div>
+              </div>
+
+              <div class="branch-card branch-false-card">
+                <div class="branch-tag tag-false">FALSE PATH (Routine)</div>
+                <h4>Shift Supervisor Fast-Track</h4>
+                <p>Status updates to: <code>Approved</code></p>
+                <div class="branch-rule">Routine maintenance proceeds immediately to avoid idle downtime.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ======================================================================
+           SLIDE 12: Interactive Workbench: Process Status Navigator
+           ====================================================================== -->
+      <section class="slide" id="slide-12" data-slide-index="11" data-title="Interactive Process Navigator" data-segment="Part 3: Deep Dive Theory (25:00 - 45:00)"
+               data-notes="Trainer Live Demonstration! Click each status button across the top (Draft, Submitted, Approved, In Progress, Closed). Watch how the UI interlocks adapt in real time!">
+        <div class="slide-content">
+          <div class="slide-header">
+            <span class="section-tag section-lab">Interactive Trainer Workbench</span>
+            <h2>Process Status Navigator: Live State Interlock Lab</h2>
+            <p class="subtitle">Click each status stage below to see how the app UI, buttons, and permissions dynamically change.</p>
+          </div>
+
+          <div class="workbench-container">
+            <!-- Stage Stepper Buttons -->
+            <div class="status-stepper-bar">
+              <button class="step-btn active" data-status="Draft">1. Draft</button>
+              <button class="step-btn" data-status="Submitted">2. Submitted</button>
+              <button class="step-btn" data-status="Approved">3. Approved</button>
+              <button class="step-btn" data-status="InProgress">4. In Progress</button>
+              <button class="step-btn" data-status="Closed">5. Closed</button>
+            </div>
+
+            <!-- Simulated Power App Screen Preview -->
+            <div class="simulated-app-window">
+              <div class="app-header-bar">
+                <span class="app-title">Apex Maintenance App • Die #2 Ticket</span>
+                <span class="app-status-badge badge-draft" id="wb-status-badge">Status: Draft</span>
+              </div>
+
+              <div class="app-body-content">
+                <div class="app-field-row">
+                  <label>Machine / Tooling ID:</label>
+                  <input type="text" id="wb-machine-input" value="Injection Molder Line 4 - Die #2" class="fluent-input">
+                </div>
+
+                <div class="app-field-row">
+                  <label>Problem Description:</label>
+                  <textarea id="wb-desc-input" class="fluent-input" rows="2">Micro-fracture detected on mold cavity B during 500-unit cycle run.</textarea>
+                </div>
+
+                <div class="app-field-row">
+                  <label>Estimated Repair Cost ($):</label>
+                  <input type="number" id="wb-cost-input" value="1450" class="fluent-input">
+                </div>
+
+                <!-- Dynamic Action Buttons -->
+                <div class="app-actions-footer">
+                  <button id="wb-btn-submit" class="fluent-btn-primary">Submit Request ➔</button>
+                  <button id="wb-btn-approve" class="fluent-btn-success" style="display: none;">Approve Request ✓</button>
+                  <button id="wb-btn-start" class="fluent-btn-accent" style="display: none;">Start CNC Repair ⚙</button>
+                  <button id="wb-btn-close" class="fluent-btn-success" style="display: none;">Pass Inspection &amp; Close 🔒</button>
+                </div>
+              </div>
+
+              <!-- Live Power Fx Inspection Drawer -->
+              <div class="powerfx-live-inspector">
+                <span class="inspector-label">Active Power Fx UI Interlock:</span>
+                <code id="wb-powerfx-display">frmTicket.DisplayMode = DisplayMode.Edit</code>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ======================================================================
+           SLIDE 13: Mid-Session Pulse Check (Part 4: 45:00 - 60:00)
+           ====================================================================== -->
+      <section class="slide" id="slide-13" data-slide-index="12" data-title="Mid-Session Pulse Check" data-segment="Part 4: Demonstrate &amp; Lab (45:00 - 60:00)"
+               data-notes="45:00 minute milestone! Have students stand up, roll their shoulders, and take a sip of water. Ask: 'Why is an app without a status like driving with your eyes closed?'">
+        <div class="slide-content">
+          <div class="slide-header">
+            <span class="section-tag section-pulse">Minute 45:00 • Mid-Session Checkpoint</span>
+            <h2>Mid-Session Pulse Check, Stretch &amp; Hydration</h2>
+            <p class="subtitle">Take 60 seconds to reset your focus before we connect status to Power Fx code.</p>
+          </div>
+
+          <div class="pulse-grid">
+            <div class="pulse-card">
+              <div class="pulse-icon">🧘‍♂️</div>
+              <h3>Physical Reset</h3>
+              <p>Stand up, roll shoulders backward, loosen wrists, and take three deep breaths.</p>
+            </div>
+
+            <div class="pulse-card">
+              <div class="pulse-icon">💧</div>
+              <h3>Hydration Check</h3>
+              <p>Drink a glass of water. Brains process state machines much faster when hydrated!</p>
+            </div>
+
+            <div class="pulse-card">
+              <div class="pulse-icon">💡</div>
+              <h3>Rapid Oral Question</h3>
+              <p><strong>"Why can't Dave just fix the die without updating the app?"</strong></p>
+              <span class="pulse-answer">Because without the status update, the rest of the company assumes it's broken and wastes $45,000!</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ======================================================================
+           SLIDE 14: Connecting Status to Power Fx Properties
+           ====================================================================== -->
+      <section class="slide" id="slide-14" data-slide-index="13" data-title="Status in Power Fx Properties" data-segment="Part 4: Demonstrate &amp; Lab (45:00 - 60:00)"
+               data-notes="Show the three key UI properties controlled by Status: DisplayMode, Visible, and Fill. Explain that in Power Apps, you don't write 100 different screens; you change property values based on Status!">
+        <div class="slide-content">
+          <div class="slide-header">
+            <span class="section-tag">Power Fx Integration</span>
+            <h2>How the Status Field Controls the User Interface</h2>
+            <p class="subtitle">Instead of building 10 different screens, Power Apps uses the Status field to adapt one screen dynamically!</p>
+          </div>
+
+          <div class="property-trio-grid">
+            <div class="prop-card">
+              <div class="prop-badge">1. DisplayMode (Locking)</div>
+              <h3>Lock Past Records</h3>
+              <p>Prevent tampering once work is complete.</p>
+              <div class="code-box">
+                <code>frmDetails.DisplayMode =<br>If(Status = "Closed",<br>&nbsp;&nbsp;DisplayMode.View,<br>&nbsp;&nbsp;DisplayMode.Edit)</code>
+              </div>
+              <span class="prop-expl">If Closed ➔ Read-only; Else ➔ Editable</span>
+            </div>
+
+            <div class="prop-card">
+              <div class="prop-badge">2. Visible (Role Interlock)</div>
+              <h3>Reveal Action Buttons</h3>
+              <p>Only show buttons when allowed by status.</p>
+              <div class="code-box">
+                <code>btnApprove.Visible =<br>(Status = "Submitted") &amp;&amp;<br>(UserRole = "Supervisor")</code>
+              </div>
+              <span class="prop-expl">Appears only when both conditions are True!</span>
+            </div>
+
+            <div class="prop-card">
+              <div class="prop-badge">3. Fill / Color (Badging)</div>
+              <h3>Color-Coded Urgency</h3>
+              <p>Give users instant visual feedback on progress.</p>
+              <div class="code-box">
+                <code>lblBadge.Fill =<br>Switch(Status,<br>&nbsp;&nbsp;"Closed", Color.Green,<br>&nbsp;&nbsp;"InProgress", Color.Blue,<br>&nbsp;&nbsp;Color.Orange)</code>
+              </div>
+              <span class="prop-expl">Green for Closed, Blue for Progress, Orange for New</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ======================================================================
+           SLIDE 15: Step-by-Step Code Walkthrough
+           ====================================================================== -->
+      <section class="slide" id="slide-15" data-slide-index="14" data-title="Code Walkthrough: Step-by-Step" data-segment="Part 4: Demonstrate &amp; Lab (45:00 - 60:00)"
+               data-notes="Walk through every single argument. Explain that DisplayMode.View means the user can read the text but cannot click inside or change it. Explain that DisplayMode.Edit means full typing access.">
+        <div class="slide-content">
+          <div class="slide-header">
+            <span class="section-tag">Grammar Breakdown</span>
+            <h2>Step-by-Step Anatomy of a Status Interlock Rule</h2>
+            <p class="subtitle">Never memorize code blindly. Understand how the question directs the property behavior.</p>
+          </div>
+
+          <div class="syntax-breakdown-card">
+            <div class="business-statement">
+              <span class="statement-label">Business Requirement:</span>
+              <p>"Once the quality inspection is signed off and the ticket is Closed, lock the form so that machine hours and parts cannot be altered."</p>
+            </div>
+
+            <div class="fx-large-display">
+              <span class="fx-target">frmMaintenance.DisplayMode</span>
+              <span class="fx-equals">=</span>
+              <span class="fx-func">If</span>
+              <span class="fx-paren">(</span>
+              <span class="fx-arg1" title="The Condition Question">Status = "Closed"</span>
+              <span class="fx-comma">,</span>
+              <span class="fx-arg2" title="True Result">DisplayMode.View</span>
+              <span class="fx-comma">,</span>
+              <span class="fx-arg3" title="False Result">DisplayMode.Edit</span>
+              <span class="fx-paren">)</span>
+            </div>
+
+            <div class="arg-expl-grid">
+              <div class="arg-item">
+                <span class="arg-tag tag-cond">Status = "Closed"</span>
+                <strong>The Condition Question</strong>
+                <p>Compares the text stored in the record's Status field against the exact string "Closed". Produces True or False.</p>
+              </div>
+
+              <div class="arg-item">
+                <span class="arg-tag tag-true">DisplayMode.View</span>
+                <strong>True Action (Locked)</strong>
+                <p>If the answer is True, switches the form into view-only mode. Input boxes become grayed out and cannot be edited.</p>
+              </div>
+
+              <div class="arg-item">
+                <span class="arg-tag tag-false">DisplayMode.Edit</span>
+                <strong>False Action (Editable)</strong>
+                <p>If the answer is False (the ticket is still New, Approved, or In Progress), keeps the input boxes fully editable.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ======================================================================
+           SLIDE 16: Apex Plastics Maintenance Workflow Diagram (Part 5: 60:00 - 75:00)
+           ====================================================================== -->
+      <section class="slide" id="slide-16" data-slide-index="15" data-title="Apex Workflow Diagram" data-segment="Part 5: Guided Practice (60:00 - 75:00)"
+               data-notes="Show the full 5-stage blueprint for Apex Plastics. Point out the actors across the top: Operator -> Supervisor -> Lead -> Technician -> QC. Notice how each stage hands off to the next.">
+        <div class="slide-content">
+          <div class="slide-header">
+            <span class="section-tag">Manufacturing Case Blueprint</span>
+            <h2>The Apex Plastics Die Maintenance Workflow</h2>
+            <p class="subtitle">The complete 5-stage blueprint that solves the $45,000 Ghost Work Order problem forever:</p>
+          </div>
+
+          <div class="swimlane-container">
+            <div class="lane-col">
+              <div class="lane-header">1. INITIATION</div>
+              <div class="lane-role">Actor: Operator</div>
+              <div class="lane-card">
+                <span class="card-status">Status: Submitted</span>
+                <p>Reports cracked die, logs machine #, and attaches defect photo.</p>
+              </div>
+            </div>
+
+            <div class="lane-arrow">➔</div>
+
+            <div class="lane-col">
+              <div class="lane-header">2. TRIAGE &amp; APPROVAL</div>
+              <div class="lane-role">Actor: Supervisor</div>
+              <div class="lane-card">
+                <span class="card-status status-decision">Decision Diamond</span>
+                <p>Checks estimated cost: If &gt; $1,000 ➔ Plant Mgr; Else ➔ Supervisor.</p>
+              </div>
+            </div>
+
+            <div class="lane-arrow">➔</div>
+
+            <div class="lane-col">
+              <div class="lane-header">3. DISPATCH</div>
+              <div class="lane-role">Actor: Maint. Lead</div>
+              <div class="lane-card">
+                <span class="card-status">Status: Assigned</span>
+                <p>Assigns specialist technician (Dave) and schedules repair slot.</p>
+              </div>
+            </div>
+
+            <div class="lane-arrow">➔</div>
+
+            <div class="lane-col">
+              <div class="lane-header">4. EXECUTION</div>
+              <div class="lane-role">Actor: Technician</div>
+              <div class="lane-card">
+                <span class="card-status">Status: In Progress</span>
+                <p>Welds and CNC polishes mold. Logs hours spent and parts used.</p>
+              </div>
+            </div>
+
+            <div class="lane-arrow">➔</div>
+
+            <div class="lane-col">
+              <div class="lane-header">5. VERIFICATION</div>
+              <div class="lane-role">Actor: QC Inspector</div>
+              <div class="lane-card">
+                <span class="card-status status-closed">Status: Closed</span>
+                <p>Tests tolerance. If Pass ➔ Closed &amp; Ready for Line 4!</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ======================================================================
+           SLIDE 17: 4 Critical Beginner Misconceptions
+           ====================================================================== -->
+      <section class="slide" id="slide-17" data-slide-index="16" data-title="Common Misconceptions" data-segment="Part 5: Guided Practice (60:00 - 75:00)"
+               data-notes="Warn students about these 4 classic traps. Many beginners think a workflow is just a drawing, or they let users type status as free text. Address each trap explicitly.">
+        <div class="slide-content">
+          <div class="slide-header">
+            <span class="section-tag section-alert">Pitfalls &amp; Traps</span>
+            <h2>Four Critical Beginner Workflow Misconceptions</h2>
+            <p class="subtitle">Avoid these four costly mental model mistakes before writing your first Power Fx rule:</p>
+          </div>
+
+          <div class="traps-grid">
+            <div class="trap-card">
+              <div class="trap-header">
+                <span class="trap-badge">Trap 1</span>
+                <h4>"A workflow is just an artistic drawing."</h4>
+              </div>
+              <div class="trap-body">
+                <p class="wrong-model"><strong>Wrong Model:</strong> "I drew a flowchart in PowerPoint, so my job as a designer is done."</p>
+                <p class="correct-model"><strong>Trainer Correction:</strong> Every box in your drawing must become a <strong>Stored Status Value</strong> in your table; every arrow must become a <strong>Button with Power Fx</strong>!</p>
+              </div>
+            </div>
+
+            <div class="trap-card">
+              <div class="trap-header">
+                <span class="trap-badge">Trap 2</span>
+                <h4>"Users can type the status into a text box."</h4>
+              </div>
+              <div class="trap-body">
+                <p class="wrong-model"><strong>Wrong Model:</strong> Let people type "done", "Finished", or "Fixed" in a text field.</p>
+                <p class="correct-model"><strong>Trainer Correction:</strong> Free typing invites typos! If the formula checks for <code>"Closed"</code>, typing <code>"done"</code> fails the condition and locks the process forever.</p>
+              </div>
+            </div>
+
+            <div class="trap-card">
+              <div class="trap-header">
+                <span class="trap-badge">Trap 3</span>
+                <h4>"An approval is just sending an email."</h4>
+              </div>
+              <div class="trap-body">
+                <p class="wrong-model"><strong>Wrong Model:</strong> "I sent an email to the boss, so the app knows it's approved."</p>
+                <p class="correct-model"><strong>Trainer Correction:</strong> An email leaves database records unchanged! An approval must be an <strong>in-app action</strong> that updates <code>Status = "Approved"</code>.</p>
+              </div>
+            </div>
+
+            <div class="trap-card">
+              <div class="trap-header">
+                <span class="trap-badge">Trap 4</span>
+                <h4>"Delete completed requests to save space."</h4>
+              </div>
+              <div class="trap-body">
+                <p class="wrong-model"><strong>Wrong Model:</strong> When work is finished, delete the record from the database.</p>
+                <p class="correct-model"><strong>Trainer Correction:</strong> Factory audits and maintenance histories require full traceability! Move records to a terminal state (<code>Closed</code>) and lock them.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ======================================================================
+           SLIDE 18: 6-Scenario Workflow & Status Transition Simulator
+           ====================================================================== -->
+      <section class="slide" id="slide-18" data-slide-index="17" data-title="6-Scenario Simulator" data-segment="Part 5: Guided Practice (60:00 - 75:00)"
+               data-notes="Interactive Simulator! Call on learners to evaluate each of the 6 industrial scenarios. Are these state jumps VALID or ILLEGAL? Watch the score counter update live!">
+        <div class="slide-content">
+          <div class="slide-header">
+            <span class="section-tag section-lab">Hands-on Simulator</span>
+            <h2>Workflow Evaluator: Valid Transition or Illegal Jump?</h2>
+            <p class="subtitle">Evaluate these 6 shop-floor scenarios against state machine rules. Score: <span id="sim-score-counter">0 / 6</span></p>
+          </div>
+
+          <div class="simulator-grid" id="sim-grid">
+            <!-- Scenario 1 -->
+            <div class="sim-card" data-sim-id="1" data-correct="illegal">
+              <div class="sim-card-top">
+                <span class="sim-id">Scenario 1</span>
+                <h4>Operator clicks "Mark Closed" immediately after logging defect.</h4>
+              </div>
+              <p class="sim-desc">Operator Sothea reports crack on Die #2 and immediately taps "Close Ticket".</p>
+              <div class="sim-btn-row">
+                <button class="sim-btn sim-valid" data-choice="valid">Valid Transition</button>
+                <button class="sim-btn sim-illegal" data-choice="illegal">Illegal Jump ❌</button>
+              </div>
+              <div class="sim-feedback"></div>
+            </div>
+
+            <!-- Scenario 2 -->
+            <div class="sim-card" data-sim-id="2" data-correct="valid">
+              <div class="sim-card-top">
+                <span class="sim-id">Scenario 2</span>
+                <h4>Supervisor reviews "Submitted" ticket and clicks "Approve".</h4>
+              </div>
+              <p class="sim-desc">Shift Supervisor Mara verifies defect photo and advances status to "Approved".</p>
+              <div class="sim-btn-row">
+                <button class="sim-btn sim-valid" data-choice="valid">Valid Transition ✓</button>
+                <button class="sim-btn sim-illegal" data-choice="illegal">Illegal Jump</button>
+              </div>
+              <div class="sim-feedback"></div>
+            </div>
+
+            <!-- Scenario 3 -->
+            <div class="sim-card" data-sim-id="3" data-correct="illegal">
+              <div class="sim-card-top">
+                <span class="sim-id">Scenario 3</span>
+                <h4>Technician starts machining a ticket with status "Rejected".</h4>
+              </div>
+              <p class="sim-desc">Technician Dave starts welding Die #4 even though supervisor rejected the budget.</p>
+              <div class="sim-btn-row">
+                <button class="sim-btn sim-valid" data-choice="valid">Valid Transition</button>
+                <button class="sim-btn sim-illegal" data-choice="illegal">Illegal Jump ❌</button>
+              </div>
+              <div class="sim-feedback"></div>
+            </div>
+
+            <!-- Scenario 4 -->
+            <div class="sim-card" data-sim-id="4" data-correct="valid">
+              <div class="sim-card-top">
+                <span class="sim-id">Scenario 4</span>
+                <h4>Technician finishes weld and sets status to "Under Inspection".</h4>
+              </div>
+              <p class="sim-desc">Dave completes CNC polishing and hands mold off to Quality Control.</p>
+              <div class="sim-btn-row">
+                <button class="sim-btn sim-valid" data-choice="valid">Valid Transition ✓</button>
+                <button class="sim-btn sim-illegal" data-choice="illegal">Illegal Jump</button>
+              </div>
+              <div class="sim-feedback"></div>
+            </div>
+
+            <!-- Scenario 5 -->
+            <div class="sim-card" data-sim-id="5" data-correct="valid">
+              <div class="sim-card-top">
+                <span class="sim-id">Scenario 5</span>
+                <h4>QC finds defect and sends ticket back to "In Progress" with notes.</h4>
+              </div>
+              <p class="sim-desc">QC Inspector fails tolerance test and triggers a rework loop back to the tech.</p>
+              <div class="sim-btn-row">
+                <button class="sim-btn sim-valid" data-choice="valid">Valid Transition ✓</button>
+                <button class="sim-btn sim-illegal" data-choice="illegal">Illegal Jump</button>
+              </div>
+              <div class="sim-feedback"></div>
+            </div>
+
+            <!-- Scenario 6 -->
+            <div class="sim-card" data-sim-id="6" data-correct="illegal">
+              <div class="sim-card-top">
+                <span class="sim-id">Scenario 6</span>
+                <h4>Night supervisor marks "Closed" while die is still dismantled in shop.</h4>
+              </div>
+              <p class="sim-desc">Supervisor forces ticket to Closed to meet daily metrics while machine is still apart.</p>
+              <div class="sim-btn-row">
+                <button class="sim-btn sim-valid" data-choice="valid">Valid Transition</button>
+                <button class="sim-btn sim-illegal" data-choice="illegal">Illegal Jump ❌</button>
+              </div>
+              <div class="sim-feedback"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ======================================================================
+           SLIDE 19: Capstone Challenge Introduction (Part 6: 75:00 - 90:00)
+           ====================================================================== -->
+      <section class="slide" id="slide-19" data-slide-index="18" data-title="Capstone Challenge Intro" data-segment="Part 6: Assess &amp; Bridge (75:00 - 90:00)"
+               data-notes="Introduce the Capstone Challenge! The student must formulate the complete 5-stage workflow table for Apex Tooling Die #2. Before the capstone, we will run the 5-question knowledge check.">
+        <div class="slide-content">
+          <div class="slide-header">
+            <span class="section-tag section-capstone">Capstone Challenge</span>
+            <h2>Independent Synthesis: The Apex Maintenance Matrix</h2>
+            <p class="subtitle">Put all pieces together: map actors, actions, data inputs, and status states from Trigger to Finish.</p>
+          </div>
+
+          <div class="capstone-brief-grid">
+            <div class="brief-box">
+              <h3>The Scenario</h3>
+              <p>Apex Plastics Line 4 operates at 500 automotive parts per hour. When Tooling Die #2 cracks, production halts at a cost of $750 per hour. You must engineer the complete 5-stage workflow that prevents another $45,000 Ghost Work Order.</p>
+            </div>
+
+            <div class="brief-box">
+              <h3>Your Deliverables</h3>
+              <ul class="brief-list">
+                <li>Map the <strong>5 Sequential Stages</strong> from Trigger to Archival.</li>
+                <li>Assign the <strong>Authorized Role</strong> for each stage.</li>
+                <li>Define the exact <strong>Status Value</strong> written to the table.</li>
+                <li>Write the <strong>Decision Gate</strong> for expenses exceeding $1,000.</li>
+                <li>Formulate the <strong>Power Fx Interlock</strong> to lock the closed ticket.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ======================================================================
+           SLIDE 20: 5-Question Evaluative Knowledge Check
+           ====================================================================== -->
+      <section class="slide" id="slide-20" data-slide-index="19" data-title="5-Question Knowledge Check" data-segment="Part 6: Assess &amp; Bridge (75:00 - 90:00)"
+               data-notes="Interactive Quiz! Have students answer each question. Review the explanations. Note the two 'why/what happens if' questions designed to test deep reasoning.">
+        <div class="slide-content">
+          <div class="slide-header">
+            <span class="section-tag section-quiz">Formative Assessment</span>
+            <h2>5-Question Evaluative Knowledge Check</h2>
+            <p class="subtitle">Test your understanding of workflows, status machines, and Power Fx UI interlocks.</p>
+          </div>
+
+          <div class="quiz-wrapper">
+            <div class="quiz-status-header">
+              <span id="quiz-question-counter">Question 1 of 5</span>
+              <span id="quiz-score-display">Score: 0 / 5</span>
+            </div>
+
+            <div class="quiz-card" id="quiz-card">
+              <h3 id="quiz-question-text" class="quiz-question-title">1. What is the primary function of a "Status" field in a business app?</h3>
+              <div class="quiz-options-grid" id="quiz-options-container">
+                <!-- Dynamically populated via JS -->
+              </div>
+              <div class="quiz-feedback-box" id="quiz-feedback-box" style="display: none;"></div>
+            </div>
+
+            <div class="quiz-nav-row">
+              <button id="quiz-prev-btn" class="fluent-btn-secondary" disabled>← Previous</button>
+              <button id="quiz-next-btn" class="fluent-btn-primary" disabled>Next Question →</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ======================================================================
+           SLIDE 21: Capstone Specification Table
+           ====================================================================== -->
+      <section class="slide" id="slide-21" data-slide-index="20" data-title="Capstone Specification Table" data-segment="Part 6: Assess &amp; Bridge (75:00 - 90:00)"
+               data-notes="Display the Capstone challenge table. Have students review the 5 rows. Encourage them to verify that each stage has a distinct role and a mutually exclusive status.">
+        <div class="slide-content">
+          <div class="slide-header">
+            <span class="section-tag section-capstone">Capstone Challenge</span>
+            <h2>Apex Tooling Die Maintenance: 5-Stage Workflow Blueprint</h2>
+            <p class="subtitle">Review the blueprint table below. Formulate your solution before revealing the master benchmark.</p>
+          </div>
+
+          <div class="table-container">
+            <table class="capstone-table">
+              <thead>
+                <tr>
+                  <th>Stage #</th>
+                  <th>Stage Name</th>
+                  <th>Actor (Role)</th>
+                  <th>Action / Task</th>
+                  <th>Status Value</th>
+                  <th>Gate / Logic Rule</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>1</strong></td>
+                  <td>Initiation</td>
+                  <td>Operator</td>
+                  <td>Log crack, capture defect photo</td>
+                  <td><code>"Submitted"</code></td>
+                  <td>Trigger: Machine downtime event</td>
+                </tr>
+                <tr>
+                  <td><strong>2</strong></td>
+                  <td>Triage &amp; Review</td>
+                  <td>Supervisor</td>
+                  <td>Estimate repair cost &amp; downtime</td>
+                  <td><code>"Approved"</code></td>
+                  <td>If Cost &gt; $1,000 ➔ Route to Plant Mgr</td>
+                </tr>
+                <tr>
+                  <td><strong>3</strong></td>
+                  <td>Dispatch</td>
+                  <td>Maint. Lead</td>
+                  <td>Assign specialist technician</td>
+                  <td><code>"Assigned"</code></td>
+                  <td>Unlocks ticket on technician tablet</td>
+                </tr>
+                <tr>
+                  <td><strong>4</strong></td>
+                  <td>Execution</td>
+                  <td>Technician</td>
+                  <td>Weld, CNC polish, log hours</td>
+                  <td><code>"In Progress"</code></td>
+                  <td>Updates to <code>"Under Inspection"</code> on finish</td>
+                </tr>
+                <tr>
+                  <td><strong>5</strong></td>
+                  <td>Verification</td>
+                  <td>QC Inspector</td>
+                  <td>Tolerance check &amp; final sign-off</td>
+                  <td><code>"Closed"</code></td>
+                  <td>Form locks: <code>DisplayMode.View</code></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- ======================================================================
+           SLIDE 22: Capstone Benchmark Solution & 4-Level Rubric
+           ====================================================================== -->
+      <section class="slide" id="slide-22" data-slide-index="21" data-title="Solution & Rubric" data-segment="Part 6: Assess &amp; Bridge (75:00 - 90:00)"
+               data-notes="Click the button to reveal the collapsible benchmark solution! Then walk through the 4-level evaluation rubric with students so they can self-assess their mastery.">
+        <div class="slide-content">
+          <div class="slide-header">
+            <span class="section-tag section-capstone">Benchmark &amp; Assessment</span>
+            <h2>Master Solution Reveal &amp; 4-Level Evaluation Rubric</h2>
+            <p class="subtitle">Compare your architecture against the certified Microsoft Citizen Developer standard:</p>
+          </div>
+
+          <div class="solution-reveal-wrapper">
+            <button id="btn-reveal-solution" class="fluent-btn-primary btn-reveal">
+              👁️ Click to Reveal Master Solution &amp; Rubric
+            </button>
+
+            <div id="solution-drawer" class="solution-drawer collapsed">
+              <div class="rubric-grid">
+                <div class="rubric-col mastery">
+                  <div class="rubric-badge">Level 4: Mastery (100%)</div>
+                  <h4>Flawless Architecture</h4>
+                  <p>All 5 stages identified; statuses mutually exclusive; decision diamond splits properly on $1,000 threshold; exact Power Fx <code>DisplayMode.View</code> interlock written.</p>
+                </div>
+
+                <div class="rubric-col proficient">
+                  <div class="rubric-badge">Level 3: Proficient (75–99%)</div>
+                  <h4>Solid Business Flow</h4>
+                  <p>5 stages mapped; status values clear; minor omission in role verification or slight syntax typo in Power Fx formula.</p>
+                </div>
+
+                <div class="rubric-col developing">
+                  <div class="rubric-badge">Level 2: Developing (50–74%)</div>
+                  <h4>Partial State Logic</h4>
+                  <p>Identified steps but treats status as free-form text; allows illegal skips or missing QC inspection phase.</p>
+                </div>
+
+                <div class="rubric-col novice">
+                  <div class="rubric-badge">Level 1: Novice (&lt;50%)</div>
+                  <h4>Unstructured Thinking</h4>
+                  <p>Cannot distinguish a sequential workflow from a static task list; missing roles, status values, and decision gates.</p>
+                </div>
+              </div>
+
+              <div class="solution-code-banner">
+                <strong>Certified Power Fx Interlock:</strong>
+                <code>frmMaintenance.DisplayMode = If(Status = "Closed", DisplayMode.View, DisplayMode.Edit)</code>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ======================================================================
+           SLIDE 23: 15-Minute Daily Homework & Active Review
+           ====================================================================== -->
+      <section class="slide" id="slide-23" data-slide-index="22" data-title="Daily Homework" data-segment="Part 6: Assess &amp; Bridge (75:00 - 90:00)"
+               data-notes="Assign the 15-minute homework! Ask each learner to pick one real approval process in their own department (vacation, PPE, scrap parts) and map its 4 statuses and 1 decision gate.">
+        <div class="slide-content">
+          <div class="slide-header">
+            <span class="section-tag">Practice Beyond the Classroom</span>
+            <h2>15-Minute Daily Homework: Workplace Workflow Discovery</h2>
+            <p class="subtitle">Take 15 minutes tonight to map one real-world process in your own department on a single sheet of paper:</p>
+          </div>
+
+          <div class="homework-grid">
+            <div class="hw-card">
+              <div class="hw-step">Step 1</div>
+              <h4>Choose a Real Process</h4>
+              <p>Pick one repetitive workflow: Vacation request, Overtime approval, PPE replacement, or Equipment repair.</p>
+            </div>
+
+            <div class="hw-card">
+              <div class="hw-step">Step 2</div>
+              <h4>Map 4 to 5 Statuses</h4>
+              <p>Write down the exact lifecycle tags: e.g., <code>Draft ➔ Submitted ➔ Approved ➔ In Progress ➔ Closed</code>.</p>
+            </div>
+
+            <div class="hw-card">
+              <div class="hw-step">Step 3</div>
+              <h4>Locate the Decision Fork</h4>
+              <p>Where does a condition split the path? (e.g., If cost &gt; $500, or days &gt; 3, require Director signature).</p>
+            </div>
+
+            <div class="hw-card">
+              <div class="hw-step">Step 4</div>
+              <h4>Define the Lock Rule</h4>
+              <p>What status permanently locks the record into <code>DisplayMode.View</code> so past records cannot be edited?</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ======================================================================
+           SLIDE 24: Forward Bridge to Day 9 & Master Connection Map
+           ====================================================================== -->
+      <section class="slide" id="slide-24" data-slide-index="23" data-title="Bridge to Day 9" data-segment="Part 6: Assess &amp; Bridge (75:00 - 90:00)"
+               data-notes="Congratulate learners on completing Day 8! Preview Day 9: Now that we have a 5-stage workflow with statuses and decisions, WHERE DOES THIS DATA LIVE? Tomorrow we build Relational Tables & Dataverse!">
+        <div class="slide-content">
+          <div class="slide-header">
+            <span class="section-tag">Connecting Tomorrow</span>
+            <h2>Forward Bridge: Moving from Workflow to Relational Tables</h2>
+            <p class="subtitle">Today we structured the journey; tomorrow we build the database tables that remember it!</p>
+          </div>
+
+          <div class="connection-map-container">
+            <div class="conn-card conn-past">
+              <span class="conn-tag">YESTERDAY (DAY 7)</span>
+              <h3>The Opportunity</h3>
+              <p>Diagnosed the pain, target result, people, data fields, and rules using the 5-Part Canvas.</p>
+            </div>
+
+            <div class="conn-arrow">➔</div>
+
+            <div class="conn-card conn-today">
+              <span class="conn-tag">TODAY (DAY 8)</span>
+              <h3>The Workflow &amp; Status</h3>
+              <p>Connected people, steps, statuses, and decision gates into an accountable state machine.</p>
+            </div>
+
+            <div class="conn-arrow">➔</div>
+
+            <div class="conn-card conn-future">
+              <span class="conn-tag">TOMORROW (DAY 9)</span>
+              <h3>Relational Tables</h3>
+              <p>Where does this live? Tables, Foreign Keys, Lookup Columns, and 1-to-Many Relationships!</p>
+            </div>
+          </div>
+
+          <div class="session-complete-banner">
+            <h3>🎉 Day 8 Complete! You Can Now Architect Business Workflows!</h3>
+            <p>Press <strong>Home</strong> to restart deck, or press <strong>L</strong> to view in Khmer (ភាសាខ្មែរ).</p>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- Bottom Presentation Navigation Bar -->
+        <footer id="bottom-hud">
+      <div id="progress-bar-container">
+        <div id="progress-bar"></div>
+      </div>
+
+      <div class="hud-left">
+        <button class="hud-btn" id="btn-prev" onclick="prevSlide()" title="Previous Slide (Left Arrow)">&#8592; Prev</button>
+        <button class="hud-btn" id="btn-next" onclick="nextSlide()" title="Next Slide (Right Arrow / Space)">Next &#8594;</button>
+        <span id="slide-counter">Slide <span id="slide-current-num">1</span> / <span id="slide-total-count">24</span></span>
+      </div>
+
+      <div class="hud-right">
+        <button class="hud-btn" id="btn-lang" onclick="toggleLanguage()" title="Toggle Language (L)">
+          🌐 <span id="lang-label">KH</span>
+        </button>
+        <button class="hud-btn active" id="btn-laser" onclick="toggleLaser()" title="Presenter Laser Pointer (P)">
+          🔴 Laser
+        </button>
+        <button class="hud-btn" id="btn-notes" onclick="toggleNotes()" title="Trainer Notes Drawer (N)">
+          📝 Notes
+        </button>
+        <button class="hud-btn" id="btn-overview" onclick="toggleOverview()" title="Slide Overview Modal (O)">
+          🗂️ Overview
+        </button>
+        <button class="hud-btn" id="btn-timer" onclick="toggleTimer()" title="90-Min Countdown (T)">
+          ⏱️ <span id="timer-display">90:00</span>
+        </button>
+        <button class="hud-btn" id="btn-fullscreen" onclick="toggleFullscreen()" title="Fullscreen (F)">
+          ⛶
+        </button>
+        <a href="../index.html" class="hud-btn hub-btn" title="Return to Master Curriculum Hub (ត្រឡប់ទៅទំព័រដើម)" style="text-decoration: none; display: inline-flex; align-items: center; gap: 4px; color: #fcd34d; font-weight: 600;"><span>🏠</span><span>Hub</span></a>
+      </div>
+    </footer>
+
+    <!-- Presenter Notes Drawer (Collapsible) -->
+    <aside id="notes-drawer" class="notes-drawer collapsed" aria-label="Trainer Notes Drawer">
+      <div class="notes-drawer-header">
+        <h3>📝 Trainer Script &amp; Pedagogical Notes</h3>
+        <button id="btn-close-notes" class="icon-btn-tiny" title="Close Notes" aria-label="Close Notes">✕</button>
+      </div>
+      <div class="notes-drawer-content" id="notes-content">
+        <!-- Populated dynamically via JS from active slide data-notes -->
+      </div>
+    </aside>
+
+    <!-- Slide Overview Drawer (Collapsible) -->
+    <aside id="overview-drawer" class="overview-drawer collapsed" aria-label="Slide Overview Drawer">
+      <div class="overview-drawer-header">
+        <h3>📑 Slide Deck Overview (24 Slides)</h3>
+        <button id="btn-close-overview" class="icon-btn-tiny" title="Close Overview" aria-label="Close Overview">✕</button>
+      </div>
+      <div class="overview-grid" id="overview-grid">
+        <!-- Populated dynamically via JS -->
+      </div>
+    </aside>
+
+    <!-- Presenter Focus Spotlight & Laser Pointer Elements -->
+    <div id="presenter-pointer" class="presenter-pointer">
+      <div class="pointer-core"></div>
+      <div class="pointer-halo"></div>
+    </div>
+    <div id="pointer-click-ripple" class="pointer-click-ripple"></div>
+
+  </div>
+
+  <script src="script.js"></script>
+<script>
+if (window.self !== window.top) {
+  document.documentElement.classList.add('in-iframe');
+  function hideHub() { document.querySelectorAll('.hub-btn, .back-to-hub-pill').forEach(e => e.style.display = 'none'); }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', hideHub);
+  } else {
+    hideHub();
+  }
+}
+</script>
+<style>
+.in-iframe .hub-btn, .in-iframe .back-to-hub-pill { display: none !important; }
+</style>
+</body>
+</html>
+

@@ -1,0 +1,218 @@
+[
+  {
+    "day": 1,
+    "dir": "day1-presentation",
+    "title": "Power Apps Foundation — Day 1: How Apps Solve Problems",
+    "heroTitle": "",
+    "badge": "CURRICULUM ARCHITECTURE",
+    "subtitle": ""
+  },
+  {
+    "day": 2,
+    "dir": "day2-presentation",
+    "title": "Power Apps Foundation — Day 2: Instructions &amp; Sequence",
+    "heroTitle": "",
+    "badge": "Master Mental Model",
+    "subtitle": "Every digital app executes human commands in a strict order. Explore why computers never guess, how sequence prevents disaster, and how Power Apps chains actions."
+  },
+  {
+    "day": 3,
+    "dir": "day3-presentation",
+    "title": "Power Apps Foundation — Day 3: Data (What an App Knows &amp; Remembers)",
+    "heroTitle": "",
+    "badge": "",
+    "subtitle": "Instructions cannot operate in a vacuum. Every calculation, filter, and button click relies on stored values. Master the four building blocks of digital business data."
+  },
+  {
+    "day": 4,
+    "dir": "day4-presentation",
+    "title": "Power Apps Foundation — Day 4: Questions, Conditions, True &amp; False",
+    "heroTitle": "",
+    "badge": "",
+    "subtitle": "Take a breath, hydrate, and verify your mental foundation before we practice writing conditions."
+  },
+  {
+    "day": 5,
+    "dir": "day5-presentation",
+    "title": "Power Apps Foundation — Day 5: Decisions (IF / THEN / ELSE)",
+    "heroTitle": "",
+    "badge": "",
+    "subtitle": "Take a breath, hydrate, and verify your mental foundation before we start writing branching logic."
+  },
+  {
+    "day": 6,
+    "dir": "day6-presentation",
+    "title": "Power Apps Foundation — Day 6: Combining Conditions (AND / OR / NOT)",
+    "heroTitle": "",
+    "badge": "",
+    "subtitle": "Take a breath, hydrate, and verify your mental foundation before we practice writing compound logic."
+  },
+  {
+    "day": 7,
+    "dir": "day7-presentation",
+    "title": "Power Apps Foundation — Day 7: From Real Problem to App Opportunity",
+    "heroTitle": "",
+    "badge": "",
+    "subtitle": "In Days 1–6, you mastered data, conditions, and logic gates. Today, we step back to understand where those requirements come from. An app is not just buttons on a screen—it is an operational tool designed to solve a specific human friction point."
+  },
+  {
+    "day": 8,
+    "dir": "day8-presentation",
+    "title": "Power Apps Foundation — Day 8: Process, Workflow, Status &amp; Decision",
+    "heroTitle": "Process, Workflow, Status &amp; Decision",
+    "badge": "Curriculum Progression",
+    "subtitle": "Connecting Actions and Decisions Across People and States in Microsoft Power Apps"
+  },
+  {
+    "day": 9,
+    "dir": "day9-presentation",
+    "title": "Power Apps Foundation — Day 9: Model a Complete Business Flow",
+    "heroTitle": "Model a Complete Business Flow",
+    "badge": "Phase 3: Business Thinking",
+    "subtitle": "Connecting problem, request, review, decision, execution, and sign-off into one continuous operational flow with zero dropped batons."
+  },
+  {
+    "day": 10,
+    "dir": "day10-presentation",
+    "title": "Power Apps Foundation — Day 10: Records and Tables: Storing Many Cases",
+    "heroTitle": "Records &amp; Tables: Storing Many Cases",
+    "badge": "Phase 4: Data Architecture",
+    "subtitle": "How apps organize repeated workplace cases into structured, queryable data storage without overwriting past history."
+  },
+  {
+    "day": 11,
+    "dir": "day11-presentation",
+    "title": "Power Apps Foundation — Day 11: Design Data from the Process",
+    "heroTitle": "Design Data from the Process",
+    "badge": "Phase 4: Data Architecture",
+    "subtitle": "Every column in your table must answer a real question needed by the workflow. Never design data from guesswork."
+  },
+  {
+    "day": 12,
+    "dir": "day12-presentation",
+    "title": "Power Apps Foundation — Day 12: From Process + Data to App Screens",
+    "heroTitle": "From Process + Data to App Screens",
+    "badge": "Phase 5: App Design &amp; UI",
+    "subtitle": "Screens are the user-facing steps of your business process. A screen is a dedicated workstation that exposes only the exact data and actions required for one human task."
+  },
+  {
+    "day": 13,
+    "dir": "day13-presentation",
+    "title": "Power Apps Foundation — Day 13: Power Apps Studio: Map Design to Controls",
+    "heroTitle": "Power Apps Studio: Mapping Paper Design to Canvas Controls",
+    "badge": "Phase 5: Canvas Studio Implementation",
+    "subtitle": "Moving from physical wireframes to real software: Turning sketched boxes into controls, dials into properties, and tree views into industrial workstations."
+  },
+  {
+    "day": 14,
+    "dir": "day14-presentation",
+    "title": "Day 14: Controls: Input, Action, Output | Microsoft Power Apps Foundation",
+    "heroTitle": "Controls: Input, Action, Output",
+    "badge": "Microsoft Power Apps Professional Foundation",
+    "subtitle": "Every control on your canvas has an irreplaceable job. Master the input-process-output triad: Labels display facts, Inputs collect data, Dropdowns enforce clean choices, and Buttons trigger actions."
+  },
+  {
+    "day": 15,
+    "dir": "day15-presentation",
+    "title": "Day 15: Navigation: Connect Screens into a Flow | Microsoft Power Apps Foundation",
+    "heroTitle": "Navigation: Connect Screens into a Flow",
+    "badge": "Microsoft Power Apps Professional Foundation",
+    "subtitle": "Transform isolated screens into the seamless business journey designed on paper. Master the navigation chain: User Action &rarr; OnSelect &rarr; Navigate() / Back() &rarr; Target Screen, ensuring operators never feel trapped or submit duplicate records."
+  },
+  {
+    "day": 16,
+    "dir": "day16-presentation",
+    "title": "Day 16: Properties &amp; Formulas: How Controls Behave | Microsoft Power Apps Foundation",
+    "heroTitle": "Properties &amp; Formulas: How Controls Behave",
+    "badge": "Microsoft Power Apps Professional Foundation",
+    "subtitle": "A formula calculates what a property should be or what an action should do. Master the dynamic reactivity of Power Apps: when user input changes, dependent properties recalculate instantaneously like a living spreadsheet."
+  },
+  {
+    "day": 17,
+    "dir": "day17-presentation",
+    "title": "Day 17: Conditions + IF in Power Fx: Validation | Microsoft Power Apps Foundation",
+    "heroTitle": "Conditions + IF in Power Fx: Validation",
+    "badge": "Microsoft Power Apps Professional Foundation",
+    "subtitle": "Reconnect logic foundation to real Power Apps behavior. Discover how True/False decisions act as an intelligent security gatekeeper, stopping blank \"Ghost Tickets\" before they ever pollute your database."
+  },
+  {
+    "day": 18,
+    "dir": "day18-presentation",
+    "title": "Day 18: Variables: Let the App Remember | Microsoft Power Apps Foundation",
+    "heroTitle": "Variables: Let the App Remember",
+    "badge": "Microsoft Power Apps Professional Foundation",
+    "subtitle": "Give your Power Apps short-term memory! Discover how variables capture values from user actions, hold them securely in temporary memory, and reuse them across screens and calculations."
+  },
+  {
+    "day": 19,
+    "dir": "day19-presentation",
+    "title": "Day 19: SharePoint List: Persistent Business Data | Microsoft Power Apps Foundation",
+    "heroTitle": "SharePoint List: Persistent Business Data",
+    "badge": "Microsoft Power Apps Professional Foundation",
+    "subtitle": "Graduate from temporary app memory to permanent cloud storage. Learn how SharePoint lists serve as the indestructible steel filing cabinet that preserves business records across shifts, users, and app restarts."
+  },
+  {
+    "day": 20,
+    "dir": "day20-presentation",
+    "title": "Day 20: Connect Power Apps to SharePoint | Microsoft Power Apps Foundation",
+    "heroTitle": "Connect Power Apps to SharePoint",
+    "badge": "Microsoft Power Apps Professional Foundation",
+    "subtitle": "Controls on a glass screen cannot talk to a cloud database on their own. Today we build the architectural bridge: adding the SharePoint data source so your app controls can read, display, and update live business records."
+  },
+  {
+    "day": 21,
+    "dir": "day21-presentation",
+    "title": "Day 21: Gallery: Read and Select Records | Microsoft Power Apps Foundation",
+    "heroTitle": "Gallery: Read and Select Records",
+    "badge": "Microsoft Power Apps Professional Foundation",
+    "subtitle": "A single label can only show one text value. Today we unlock repeating UI architecture: a Gallery translates an entire table of cloud records into a browsable, interactive list using a single master template."
+  },
+  {
+    "day": 22,
+    "dir": "day22-presentation",
+    "title": "Day 22: Forms: One Record, Many Fields | Microsoft Power Apps Foundation",
+    "heroTitle": "Forms: One Record, Many Fields",
+    "badge": "Microsoft Power Apps Professional Foundation",
+    "subtitle": "A Gallery browses hundreds of records, but an Edit Form dives into the details. Today we master form architecture: connecting a single selected business record to structured, editable DataCards ready for inspection and update."
+  },
+  {
+    "day": 23,
+    "dir": "day23-presentation",
+    "title": "Day 23: Create Records — From User Input to Saved Data | Microsoft Power Apps Foundation",
+    "heroTitle": "Create Records: From User Input to Saved Data",
+    "badge": "Microsoft Power Apps Curriculum",
+    "subtitle": "Connecting front-end user forms, client validation, and persistent SharePoint list storage into a resilient, enterprise-grade Create pipeline."
+  },
+  {
+    "day": 24,
+    "dir": "day24-presentation",
+    "title": "Day 24: Read & Update — Complete the Record Lifecycle | Microsoft Power Apps Foundation",
+    "heroTitle": "Read &amp; Update: Complete the Record Lifecycle",
+    "badge": "Microsoft Power Apps Curriculum",
+    "subtitle": "Connecting galleries, forms, and SharePoint lists into seamless Read and Update behaviors. Master the complete CRUD lifecycle: modifying business history without creating duplicates."
+  },
+  {
+    "day": 25,
+    "dir": "day25-presentation",
+    "title": "Day 25: Architecture — Problem -> Process -> Data -> UI -> Logic | Microsoft Power Apps Foundation",
+    "heroTitle": "Architecture: Problem &rarr; Process &rarr; Data &rarr; UI &rarr; Logic",
+    "badge": "Microsoft Power Apps Curriculum",
+    "subtitle": "Synthesizing all 24 prior concepts before building. Every single button, field, variable, formula, and database column must trace directly back to an authentic business requirement."
+  },
+  {
+    "day": 26,
+    "dir": "day26-presentation",
+    "title": "Day 26: Build the Complete Connected App + Power Automate | Microsoft Power Apps Foundation",
+    "heroTitle": "Build the Complete Connected App",
+    "badge": "Microsoft Power Apps Curriculum",
+    "subtitle": "Integrate concepts as one living, unified system rather than isolated technical features. Wire the 3-screen maintenance app and awaken Power Automate cloud alerts."
+  },
+  {
+    "day": 27,
+    "dir": "day27-presentation",
+    "title": "Day 27: Final Transfer Challenge: Explain Why It Works | Microsoft Power Apps Foundation",
+    "heroTitle": "Final Transfer Challenge: Explain Why It Works",
+    "badge": "Microsoft Power Apps Curriculum",
+    "subtitle": "Assess whether you understand cause, effect, and architectural connections—not memorized clicks or formulas. Approaching a brand-new business problem systematically from scratch."
+  }
+]

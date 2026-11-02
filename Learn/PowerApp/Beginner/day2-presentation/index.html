@@ -1,0 +1,1578 @@
+<!DOCTYPE html>
+<html lang="en" translate="no" class="notranslate">
+<head>
+  <meta name="google" content="notranslate">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Power Apps Foundation — Day 2: Instructions &amp; Sequence</title>
+  
+    <!-- Famous & Universally Loved Khmer Fonts (Moul for Formal Titles, Siemreap & Battambang for Easy Reading) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=Moul&family=Kantumruy+Pro:ital,wght@0,400..700;1,400..700&family=Battambang:wght@300;400;700;900&family=Koh+Santepheap:wght@300;400;700&family=Koulen&family=Siemreap&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="../shared/design-system.css">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="fluent-dark-theme">
+
+  <!-- Main Presentation Stage Container (16:9 Viewport Constrained) -->
+  <div id="presentation-container" class="presentation-container">
+
+    <!-- Top Status Bar: Branding, Segment Indicator, Timer & Controls -->
+    <!-- Presentation Header removed to match Day 25 Standard -->
+
+    <!-- Presentation Visual Stage (16:9 Canvas) -->
+    <main id="stage" class="stage" role="region" aria-label="Slide Presentation Stage">
+
+      <!-- =================================================================== -->
+      <!-- SLIDE 1: Title & Hero                                               -->
+      <!-- =================================================================== -->
+      <section class="slide active" id="slide-1" 
+        data-title="Day 2: Instructions &amp; Sequence" 
+        data-segment="Part 1: Welcome &amp; Orientation (00:00 - 10:00)"
+        data-notes="TRAINER SPEAKING SCRIPT:
+'Welcome back to Day 2 of our Microsoft Power Apps Foundation course!
+Yesterday on Day 1, we learned that a business app exists to solve a real human problem by turning Input into Process, and Process into Output.
+Today on Day 2, we zoom into that middle box — the PROCESS.
+How does a computer actually process anything?
+Through INSTRUCTIONS and SEQUENCE!
+Today's mental chain is: instruction ➔ sequence ➔ action ➔ result.
+Apps perform actions in a strict order; the wrong order creates the wrong result.
+By the end of today, you will clearly understand how computers follow instructions, why order is critical, and how Power Apps connects actions using the semicolon ';'!'">
+        <div class="slide-content">
+          <div class="hero-layout">
+            <div class="hero-pill-group">
+              <span class="hero-pill">Phase 1: Foundation</span>
+              <span class="hero-pill teal-pill">Day 2 of 27</span>
+              <span class="hero-pill blue-pill">90 Minutes</span>
+            </div>
+            <h1 class="hero-title">
+              <span class="gradient-text">Instructions &amp; Sequence</span><br>
+              How an App Follows Steps from Start to Finish
+            </h1>
+            <p class="hero-subtitle">
+              Every digital app executes human commands in a strict order. Explore why computers never guess, how sequence prevents disaster, and how Power Apps chains actions.
+            </p>
+
+            <div class="title-feature-grid">
+              <div class="feature-item">
+                <span class="feature-icon">&#128221;</span>
+                <div class="feature-info">
+                  <h4>1. The Instruction</h4>
+                  <p>One clear, direct command telling a machine to do ONE action.</p>
+                </div>
+              </div>
+              <div class="feature-item">
+                <span class="feature-icon">&#128260;</span>
+                <div class="feature-info">
+                  <h4>2. The Sequence</h4>
+                  <p>The strict, non-negotiable order: Start ➔ Steps ➔ Finish.</p>
+                </div>
+              </div>
+              <div class="feature-item">
+                <span class="feature-icon">&#9881;</span>
+                <div class="feature-info">
+                  <h4>3. Action Chaining</h4>
+                  <p>In Power Fx, the semicolon (<code>;</code>) means <em>"Do this, AND THEN that"</em>.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- =================================================================== -->
+      <!-- SLIDE 2: 5-Minute Concept-Map Recap (Master Mental Model)           -->
+      <!-- =================================================================== -->
+      <section class="slide" id="slide-2"
+        data-title="Master Curriculum Concept Map"
+        data-segment="Part 1: Welcome &amp; Orientation (00:00 - 10:00)"
+        data-notes="TRAINER SPEAKING SCRIPT:
+'Look at the big picture on screen. This is our master mental model for all 27 days:
+REAL PROBLEM ➔ PROCESS ➔ DATA ➔ UI/SCREEN ➔ LOGIC/DECISION ➔ ACTION ➔ STORAGE ➔ FEEDBACK ➔ TEST.
+Yesterday on Day 1, we explored the entire cycle: A real workplace problem (a broken machine) is entered by an operator (Input), processed by an app (Process), and gives useful feedback (Output).
+Today on Day 2, we are looking directly inside the PROCESS box.
+Inside every process is a sequence of instructions.
+If the sequence is broken, the entire system fails!
+And tomorrow on Day 3, we will ask: 'What does each step need to work with?' It needs DATA!
+Everything in this course connects.'">
+        <div class="slide-content">
+          <div class="slide-header">
+            <span class="section-tag purple-tag">Master Mental Model</span>
+            <h2 class="slide-title">The Connected Curriculum Roadmap</h2>
+            <p class="slide-lead">Where today's lesson fits into our 27-day mastery framework.</p>
+          </div>
+
+          <div class="sequence-flow-container" style="flex-wrap: wrap;">
+            <div class="sequence-step-card" style="border-top: 4px solid var(--color-problem); flex: 1 1 200px;">
+              <span class="step-number-badge">DAY 1 ANCHOR</span>
+              <span class="step-card-icon">&#9888;</span>
+              <h3>1. Real Problem</h3>
+              <p>Workplace pain point: broken equipment, paper delays, safety risks.</p>
+            </div>
+
+            <div class="flow-arrow-divider">➔</div>
+
+            <div class="sequence-step-card" style="border-top: 4px solid var(--color-gold-accent); flex: 1 1 240px; background: rgba(245, 158, 11, 0.15); box-shadow: 0 0 16px rgba(245, 158, 11, 0.3);">
+              <span class="step-number-badge" style="background: var(--color-gold-accent); color: #000; font-weight: 800;">TODAY • DAY 2</span>
+              <span class="step-card-icon">&#128260;</span>
+              <h3>2. The Process (Sequence)</h3>
+              <p>Ordered instructions: <em>instruction ➔ sequence ➔ action ➔ result</em>.</p>
+            </div>
+
+            <div class="flow-arrow-divider">➔</div>
+
+            <div class="sequence-step-card" style="border-top: 4px solid var(--fluent-blue-light); flex: 1 1 200px;">
+              <span class="step-number-badge">DAY 3 PREVIEW</span>
+              <span class="step-card-icon">&#128196;</span>
+              <h3>3. The Data</h3>
+              <p>What each step works with: Text, Numbers, Dates, Yes/No values.</p>
+            </div>
+
+            <div class="flow-arrow-divider">➔</div>
+
+            <div class="sequence-step-card" style="border-top: 4px solid var(--color-lilac-accent); flex: 1 1 200px;">
+              <span class="step-number-badge">FUTURE DAYS</span>
+              <span class="step-card-icon">&#128187;</span>
+              <h3>4. UI ➔ Logic ➔ Storage</h3>
+              <p>Screens, buttons, Power Fx rules, and SharePoint tables.</p>
+            </div>
+          </div>
+
+          <div style="background-color: var(--bg-surface); border: 1px solid var(--border-subtle); border-radius: var(--radius-md); padding: 14px 20px;">
+            <p style="font-size: 0.94rem; color: #fff;">
+              <strong>🔗 Today's Connection Chain:</strong> <span style="color: var(--color-gold-accent);">instruction</span> ➔ <span style="color: var(--fluent-blue-light);">sequence</span> ➔ <span style="color: var(--fluent-teal-light);">action</span> ➔ <span style="color: var(--color-output);">result</span>. Order creates outcome!
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- =================================================================== -->
+      <!-- SLIDE 3: Prerequisite Retrieval Review                              -->
+      <!-- =================================================================== -->
+      <section class="slide" id="slide-3"
+        data-title="Day 1 Prerequisite Review"
+        data-segment="Part 1: Welcome &amp; Orientation (00:00 - 10:00)"
+        data-notes="TRAINER SPEAKING SCRIPT:
+'Before moving forward, let's retrieve our Day 1 concepts from long-term memory:
+1. What is an Application? A software tool designed to do ONE specific job for a human being.
+2. Who is the User? The human operator using the app — never forget their gloves, speed, and safety!
+3. What is the Golden IPO Rule? Input (what goes in) ➔ Process (what the computer computes) ➔ Output (what comes back out).
+4. What is 'Garbage In, Garbage Out'? If an operator enters wrong input, the computer produces wrong output!
+Did everyone complete last night's 'Smartphone Detective' homework?
+Take 30 seconds: turn to your neighbor and confirm which app you inspected!'">
+        <div class="slide-content">
+          <div class="slide-header">
+            <span class="section-tag">Prerequisite Retrieval</span>
+            <h2 class="slide-title">Checking Our Day 1 Foundation</h2>
+            <p class="slide-lead">Solidifying the 4 core concepts before adding sequence.</p>
+          </div>
+
+          <div class="sequence-flow-container">
+            <div class="sequence-step-card start-card">
+              <span class="step-number-badge">RETRIEVAL 1</span>
+              <span class="step-card-icon">&#128241;</span>
+              <h3>1. The Application</h3>
+              <p>A focused software tool designed to do <strong>one specific job</strong> for a human user.</p>
+            </div>
+
+            <div class="flow-arrow-divider">➔</div>
+
+            <div class="sequence-step-card middle-card">
+              <span class="step-number-badge">RETRIEVAL 2</span>
+              <span class="step-card-icon">&#128100;</span>
+              <h3>2. The User</h3>
+              <p>The human at the center: factory operator, inspector, supervisor, or warehouse worker.</p>
+            </div>
+
+            <div class="flow-arrow-divider">➔</div>
+
+            <div class="sequence-step-card finish-card">
+              <span class="step-number-badge">RETRIEVAL 3</span>
+              <span class="step-card-icon">&#9881;</span>
+              <h3>3. Input ➔ Process ➔ Output</h3>
+              <p>What I give it ➔ What it thinks ➔ What it gives back! The universal heartbeat.</p>
+            </div>
+          </div>
+
+          <div class="interactive-sequencer-box">
+            <div class="seq-builder-header">
+              <h3>&#128373; Homework Check: The Smartphone Detective</h3>
+              <span class="segment-pill">Sticky Note Review</span>
+            </div>
+            <p style="color: var(--text-secondary); font-size: 0.92rem;">
+              Did you find an app on your smartphone that followed IPO? Example: <em>Alarm Clock</em> — Input: Tap 6:30 AM; Process: Compare internal clock; Output: Loud audio chime!
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- =================================================================== -->
+      <!-- SLIDE 4: Measurable Learning Objectives                             -->
+      <!-- =================================================================== -->
+      <section class="slide" id="slide-4"
+        data-title="Day 2 Learning Objectives"
+        data-segment="Part 1: Welcome &amp; Orientation (00:00 - 10:00)"
+        data-notes="TRAINER SPEAKING SCRIPT:
+'Here are our 4 measurable learning targets for today. By Minute 90, without consulting any notes, you will be able to:
+1. Define 'Instruction' in plain English using the Literal Robot analogy.
+2. Explain the Law of 'Sequence' and why computers cannot execute steps out of order.
+3. Trace a manufacturing procedure from Start, through ordered steps, to Finish.
+4. Chain two actions in Power Apps using the semicolon ';' to clear an input and show a success notification banner.'">
+        <div class="slide-content">
+          <div class="slide-header">
+            <span class="section-tag purple-tag">Today's Targets</span>
+            <h2 class="slide-title">4 Measurable Learning Objectives</h2>
+            <p class="slide-lead">What you will confidently explain and demonstrate by Minute 90.</p>
+          </div>
+
+          <div class="objectives-list">
+            <div class="objective-card">
+              <div class="objective-num">01</div>
+              <div class="objective-body">
+                <h3>Define "Instruction" in Plain English</h3>
+                <p>Explain an instruction as a single, unambiguous command telling a human or computer to do one clear action.</p>
+              </div>
+              <span class="objective-badge">Vocabulary</span>
+            </div>
+
+            <div class="objective-card">
+              <div class="objective-num">02</div>
+              <div class="objective-body">
+                <h3>Explain the Law of "Sequence" &amp; Order</h3>
+                <p>Demonstrate why computers must execute steps in exact order, using the "Socks Before Shoes" and "Recipe" analogies.</p>
+              </div>
+              <span class="objective-badge">Core Concept</span>
+            </div>
+
+            <div class="objective-card">
+              <div class="objective-num">03</div>
+              <div class="objective-body">
+                <h3>Trace Workplace Processes from Start to Finish</h3>
+                <p>Break down a factory machine start-up and equipment safety check into distinct, non-overlapping ordered stages.</p>
+              </div>
+              <span class="objective-badge">Workplace DX</span>
+            </div>
+
+            <div class="objective-card">
+              <div class="objective-num">04</div>
+              <div class="objective-body">
+                <h3>Understand Power Apps Action Chaining (The Semicolon <code>;</code>)</h3>
+                <p>Recognize that in Power Apps, the semicolon character simply means <em>"Do this, AND THEN do that"</em>.</p>
+              </div>
+              <span class="objective-badge">Power Fx Ready</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- =================================================================== -->
+      <!-- SLIDE 5: Exact 90-Minute Agenda                                     -->
+      <!-- =================================================================== -->
+      <section class="slide" id="slide-5"
+        data-title="90-Minute Timed Agenda"
+        data-segment="Part 1: Welcome &amp; Orientation (00:00 - 10:00)"
+        data-notes="TRAINER SPEAKING SCRIPT:
+'Here is our exact 90-minute roadmap. Look at the clock in the top center of your screen.
+Part 1 (00 to 10 min): Welcome, homework review, and ground rules.
+Part 2 (10 to 22 min): What is an Instruction? Clear vs. Vague commands.
+Part 3 (22 to 38 min): Why Sequence Matters — The Law of Order and everyday analogies.
+At 38 minutes: A 4-minute water stretch and pulse check!
+Part 4 (42 to 54 min): Manufacturing DX Case Study — Machine startup safety.
+Part 5 (54 to 66 min): Your Hands-On Sequencing Practice.
+Part 6 (66 to 74 min): 5-Question Knowledge Check.
+Part 7 (74 to 84 min): 10-Minute Final Challenge.
+Part 8 (84 to 90 min): Connection Map, Homework, and Preview of Day 3 Data From Zero!'">
+        <div class="slide-content">
+          <div class="slide-header">
+            <span class="section-tag teal-tag">Lesson Roadmap</span>
+            <h2 class="slide-title">Exact 90-Minute Timed Agenda</h2>
+            <p class="slide-lead">Paced deliberately for zero-coding beginners with active checkpoints.</p>
+          </div>
+
+          <div class="agenda-table-wrapper">
+            <table class="fluent-table">
+              <thead>
+                <tr>
+                  <th>Segment</th>
+                  <th>Time Range</th>
+                  <th>Duration</th>
+                  <th>Topic &amp; Hands-On Activity</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><span class="segment-pill">Part 1</span></td>
+                  <td><span class="time-range">00:00 – 10:00</span></td>
+                  <td><span class="duration-tag">10 min</span></td>
+                  <td><strong>Welcome, Day 1 Homework Review &amp; Objectives</strong></td>
+                </tr>
+                <tr>
+                  <td><span class="segment-pill">Part 2</span></td>
+                  <td><span class="time-range">10:00 – 22:00</span></td>
+                  <td><span class="duration-tag">12 min</span></td>
+                  <td><strong>What is an Instruction?</strong> The Literal Robot analogy &amp; clear commands.</td>
+                </tr>
+                <tr>
+                  <td><span class="segment-pill">Part 3</span></td>
+                  <td><span class="time-range">22:00 – 38:00</span></td>
+                  <td><span class="duration-tag">16 min</span></td>
+                  <td><strong>Why Sequence Matters:</strong> "Socks Before Shoes" &amp; Recipe Disaster.</td>
+                </tr>
+                <tr style="background-color: rgba(245, 158, 11, 0.08);">
+                  <td><span class="segment-pill" style="background: rgba(245, 158, 11, 0.25); color: var(--color-gold-accent);">Break</span></td>
+                  <td><span class="time-range">38:00 – 42:00</span></td>
+                  <td><span class="duration-tag">4 min</span></td>
+                  <td><strong>Mid-Session Pulse Check &amp; Water Stretch</strong></td>
+                </tr>
+                <tr>
+                  <td><span class="segment-pill">Part 4</span></td>
+                  <td><span class="time-range">42:00 – 54:00</span></td>
+                  <td><span class="duration-tag">12 min</span></td>
+                  <td><strong>Workplace DX Case Study:</strong> Safe machine start-up &amp; safety interlocks.</td>
+                </tr>
+                <tr>
+                  <td><span class="segment-pill">Part 5</span></td>
+                  <td><span class="time-range">54:00 – 66:00</span></td>
+                  <td><span class="duration-tag">12 min</span></td>
+                  <td><strong>Learner Hands-On Practice:</strong> 4-Step Interactive Sequencing Board.</td>
+                </tr>
+                <tr>
+                  <td><span class="segment-pill">Part 6</span></td>
+                  <td><span class="time-range">66:00 – 74:00</span></td>
+                  <td><span class="duration-tag">8 min</span></td>
+                  <td><strong>5-Question Knowledge Check:</strong> Immediate feedback quiz.</td>
+                </tr>
+                <tr>
+                  <td><span class="segment-pill">Part 7</span></td>
+                  <td><span class="time-range">74:00 – 84:00</span></td>
+                  <td><span class="duration-tag">10 min</span></td>
+                  <td><strong>10-Minute Final Challenge:</strong> Machine Breakdown Report Sequence.</td>
+                </tr>
+                <tr>
+                  <td><span class="segment-pill">Part 8</span></td>
+                  <td><span class="time-range">84:00 – 90:00</span></td>
+                  <td><span class="duration-tag">6 min</span></td>
+                  <td><strong>Connection Map, Homework &amp; Day 3 Preview:</strong> (Data From Zero).</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- =================================================================== -->
+      <!-- SLIDE 6: Today's "WHY THIS EXISTS" Workplace Problem                -->
+      <!-- =================================================================== -->
+      <section class="slide" id="slide-6"
+        data-title="Why This Exists: The $18,000 Incident"
+        data-segment="Part 2: What is an Instruction? (10:00 - 22:00)"
+        data-notes="TRAINER SPEAKING SCRIPT:
+'Why does sequence matter in real life? Why does this lesson exist?
+Let's visit Apex Plastics Manufacturing — our case study company.
+Last month, a junior operator arrived on Shift 1.
+The operator was in a rush to hit production quotas.
+He pushed the green START button on the hydraulic stamping press BEFORE turning on the cooling pump and checking the hydraulic oil pressure!
+What happened?
+The hydraulic pump ran dry for 90 seconds. Metal ground against metal.
+The pump seized, hydraulic lines burst, and $18,000 in equipment damage occurred — halting the line for 2 full days!
+The operator didn't do bad actions. Turning on the machine is a good action.
+The catastrophe happened strictly because the ACTIONS WERE IN THE WRONG SEQUENCE!
+Today you will learn how computers prevent this with digital sequencing!'">
+        <div class="slide-content">
+          <div class="slide-header">
+            <span class="section-tag" style="background: rgba(251, 113, 133, 0.2); color: var(--color-problem); border-color: rgba(251, 113, 133, 0.4);">Why This Exists</span>
+            <h2 class="slide-title">The $18,000 Premature Startup Incident</h2>
+            <p class="slide-lead">What happens when workplace steps are executed out of sequence.</p>
+          </div>
+
+          <div class="comparison-grid">
+            <div class="comparison-col bad-col">
+              <div class="comparison-col-header">
+                <span class="bad-icon">&#9888;</span>
+                <h3>The Out-of-Order Disaster (Apex Plastics)</h3>
+              </div>
+              <ul class="comparison-list">
+                <li><strong>Step A (Mistakenly Done First):</strong> Operator pressed green [START] button.</li>
+                <li><strong>Step B (Skipped):</strong> Hydraulic cooling pump was NOT turned on.</li>
+                <li><strong>Step C (Skipped):</strong> Oil pressure was NOT checked (at 0 PSI).</li>
+                <li><strong>Catastrophe:</strong> Pump ran dry, seized metal-to-metal, $18,000 repair bill, 48-hour plant shutdown!</li>
+              </ul>
+            </div>
+
+            <div class="comparison-col good-col">
+              <div class="comparison-col-header">
+                <span class="good-icon">&#10004;</span>
+                <h3>The Proper Sequential Standard (Safe)</h3>
+              </div>
+              <ul class="comparison-list">
+                <li><strong>Step 1:</strong> Inspect optical safety light curtain.</li>
+                <li><strong>Step 2:</strong> Turn on Master Power &amp; cooling fans.</li>
+                <li><strong>Step 3:</strong> Verify hydraulic oil pressure reaches steady 50 PSI.</li>
+                <li><strong>Step 4:</strong> Press green [START] button ➔ Safe, smooth operation!</li>
+              </ul>
+            </div>
+          </div>
+
+          <div style="background: rgba(251, 113, 133, 0.15); border: 1px solid rgba(251, 113, 133, 0.4); border-radius: var(--radius-sm); padding: 12px 18px;">
+            <p style="font-size: 0.95rem; color: #fff;">
+              <strong>💡 Core Takeaway:</strong> In apps and machines, doing the right thing in the wrong order equals total failure!
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- =================================================================== -->
+      <!-- SLIDE 7: Concept 1: What is an Instruction?                         -->
+      <!-- =================================================================== -->
+      <section class="slide" id="slide-7"
+        data-title="What is an Instruction?"
+        data-segment="Part 2: What is an Instruction? (10:00 - 22:00)"
+        data-notes="TRAINER SPEAKING SCRIPT:
+'Let's define our first key word: INSTRUCTION.
+Say it with me: In-struc-tion.
+In plain English, an instruction is a single, clear command telling someone — or some machine — to do ONE specific action.
+Think about a Robot Butler.
+If you tell a human: 'Hey, make breakfast', the human knows what you mean because humans have intuition and life experience.
+But if you tell a computer or a robot: 'Make breakfast', the robot stands there and does nothing!
+Why? Because 'Make breakfast' is too vague!
+To a computer, you have to break it down into single, bite-sized instructions:
+1. Walk to the refrigerator.
+2. Open the refrigerator door.
+3. Pick up the egg carton.
+Every single step is ONE instruction.'">
+        <div class="slide-content">
+          <div class="slide-header">
+            <span class="section-tag">Key Vocabulary</span>
+            <h2 class="slide-title">Concept 1: What is an "Instruction"?</h2>
+            <p class="slide-lead">A single, unambiguous command telling a machine to do ONE action.</p>
+          </div>
+
+          <div class="sequence-flow-container">
+            <div class="sequence-step-card start-card">
+              <span class="step-number-badge">EVERYDAY ANALOGY</span>
+              <span class="step-card-icon">&#129302;</span>
+              <h3>The Literal Robot</h3>
+              <p>A robot has no intuition. If you tell it <em>"Clean the room"</em>, it does not move. You must tell it: <em>"Pick up the box"</em>.</p>
+            </div>
+
+            <div class="flow-arrow-divider">➔</div>
+
+            <div class="sequence-step-card middle-card">
+              <span class="step-number-badge">WORKPLACE ANALOGY</span>
+              <span class="step-card-icon">&#128295;</span>
+              <h3>The Factory Work Standard</h3>
+              <p>Standard Operating Procedures (SOPs) are made of instructions: <em>"Tighten bolt clockwise to 25 Nm"</em>.</p>
+            </div>
+
+            <div class="flow-arrow-divider">➔</div>
+
+            <div class="sequence-step-card finish-card">
+              <span class="step-number-badge">POWER APPS ANALOGY</span>
+              <span class="step-card-icon">&#128241;</span>
+              <h3>The App Action</h3>
+              <p>In Power Apps, a button has instructions: <em>"Save the data"</em> or <em>"Navigate to Screen 2"</em>.</p>
+            </div>
+          </div>
+
+          <div style="background: rgba(0, 120, 212, 0.15); border: 1px solid rgba(0, 120, 212, 0.4); padding: 14px 20px; border-radius: 10px; display: flex; align-items: center; gap: 12px;">
+            <span style="font-size: 1.5rem;">&#128161;</span>
+            <span style="font-size: 0.95rem; color: #fff;">
+              <strong>Rule of Instructions:</strong> A computer never guesses your mood or intent. You must give it clear, simple, single commands!
+            </span>
+          </div>
+        </div>
+      </section>
+
+      <!-- =================================================================== -->
+      <!-- SLIDE 8: Clear Instruction vs. Vague Instruction                    -->
+      <!-- =================================================================== -->
+      <section class="slide" id="slide-8"
+        data-title="Clear vs. Vague Instructions"
+        data-segment="Part 2: What is an Instruction? (10:00 - 22:00)"
+        data-notes="TRAINER SPEAKING SCRIPT:
+'Look at the difference between a Bad, Vague Instruction and a Good, Clear Instruction.
+On the left:
+'Check the machine' — Check what? The oil? The heat? The paint?
+'Handle the error' — How? Stop the machine? Call a manager? Ignore it?
+On the right:
+'Read digital temperature gauge on Sensor 4' — Clear!
+'If temperature > 80°C, turn Red Warning Beacon ON' — Exact!
+In Power Apps, you will never write vague instructions. You will write simple, exact steps!'">
+        <div class="slide-content">
+          <div class="slide-header">
+            <span class="section-tag purple-tag">Precision in Computing</span>
+            <h2 class="slide-title">Clear vs. Vague Instructions</h2>
+            <p class="slide-lead">Computers fail when commands are vague. They thrive when commands are exact.</p>
+          </div>
+
+          <div class="comparison-grid">
+            <div class="comparison-col bad-col">
+              <div class="comparison-col-header">
+                <span class="bad-icon">&#10060;</span>
+                <h3>Vague Instructions (Computers Fail)</h3>
+              </div>
+              <ul class="comparison-list">
+                <li><span class="bad-icon">&#10006;</span> <em>"Make it work."</em> (Which machine? What outcome?)</li>
+                <li><span class="bad-icon">&#10006;</span> <em>"Check the temperature."</em> (Where? What is the safe limit?)</li>
+                <li><span class="bad-icon">&#10006;</span> <em>"Tell the boss if it breaks."</em> (Who is the boss? By email or phone?)</li>
+                <li><span class="bad-icon">&#10006;</span> <em>"Save the information."</em> (Where? Which fields?)</li>
+              </ul>
+            </div>
+
+            <div class="comparison-col good-col">
+              <div class="comparison-col-header">
+                <span class="good-icon">&#10004;</span>
+                <h3>Exact Instructions (Computers Succeed)</h3>
+              </div>
+              <ul class="comparison-list">
+                <li><span class="good-icon">&#10004;</span> <em>"Read Temperature Sensor #3."</em> (Exact location)</li>
+                <li><span class="good-icon">&#10004;</span> <em>"If temperature &gt; 80°C, turn Red Warning Light ON."</em> (Clear rule)</li>
+                <li><span class="good-icon">&#10004;</span> <em>"Send email notification to Manager with Machine ID."</em> (Exact target)</li>
+                <li><span class="good-icon">&#10004;</span> <em>"Save Operator Name and Date to SharePoint List."</em> (Exact storage)</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- =================================================================== -->
+      <!-- SLIDE 9: Concept 2: What is Sequence?                               -->
+      <!-- =================================================================== -->
+      <section class="slide" id="slide-9"
+        data-title="What is Sequence?"
+        data-segment="Part 3: The Law of Order (22:00 - 38:00)"
+        data-notes="TRAINER SPEAKING SCRIPT:
+'Now we come to our second core word: SEQUENCE.
+Say it with me: Se-quence.
+Sequence simply means: THE EXACT ORDER IN WHICH THINGS HAPPEN.
+Every sequence in the digital world has three anchor points:
+1. START: Where you begin (e.g. operator taps button).
+2. THE ORDERED STEPS: Step 1, Step 2, Step 3 in non-negotiable succession.
+3. FINISH: Where the goal is reached safely.
+Look at the timeline on screen. If you have the right instructions, but you put them in the wrong sequence, the entire app fails!'">
+        <div class="slide-content">
+          <div class="slide-header">
+            <span class="section-tag teal-tag">Core Concept</span>
+            <h2 class="slide-title">Concept 2: What is "Sequence"?</h2>
+            <p class="slide-lead">The strict, step-by-step order from START to FINISH.</p>
+          </div>
+
+          <div class="sequence-flow-container">
+            <div class="sequence-step-card start-card">
+              <span class="step-number-badge">ANCHOR 1</span>
+              <span class="step-card-icon">&#128681;</span>
+              <h3>START</h3>
+              <p>The initial state or trigger before any work begins (e.g. Operator pushes Start button).</p>
+            </div>
+
+            <div class="flow-arrow-divider">➔<span class="flow-arrow-text">ORDER</span></div>
+
+            <div class="sequence-step-card middle-card">
+              <span class="step-number-badge">ANCHOR 2</span>
+              <span class="step-card-icon">&#128260;</span>
+              <h3>THE STEPS (1 ➔ 2 ➔ 3)</h3>
+              <p>The exact chain of actions executed one by one, never skipping or scrambling.</p>
+            </div>
+
+            <div class="flow-arrow-divider">➔<span class="flow-arrow-text">FINISH</span></div>
+
+            <div class="sequence-step-card finish-card">
+              <span class="step-number-badge">ANCHOR 3</span>
+              <span class="step-card-icon">&#127937;</span>
+              <h3>FINISH</h3>
+              <p>The successful desired outcome when all instructions complete safely.</p>
+            </div>
+          </div>
+
+          <div style="background-color: var(--bg-surface); border: 1px solid var(--border-subtle); border-radius: var(--radius-md); padding: 18px 24px;">
+            <p style="font-size: 1rem; color: #fff; line-height: 1.5;">
+              <strong>🧠 Memory Hook:</strong> Sequence is like walking up stairs: You cannot step on Step 4 before you step on Step 1, Step 2, and Step 3!
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- =================================================================== -->
+      <!-- SLIDE 10: Everyday Analogy 1: The Socks Before Shoes Rule           -->
+      <!-- =================================================================== -->
+      <section class="slide" id="slide-10"
+        data-title="The Socks Before Shoes Rule"
+        data-segment="Part 3: The Law of Order (22:00 - 38:00)"
+        data-notes="TRAINER SPEAKING SCRIPT:
+'Let's use our favorite everyday analogy: Putting on your shoes and socks.
+Think about this:
+Step A: Put on socks.
+Step B: Put on shoes.
+If you do Step A first, and Step B second, your feet are happy, warm, and ready for work.
+Now, what happens if you reverse the sequence?
+Step B: Put on heavy work boots.
+Step A: Now try to pull your wool socks over the outside of the boots!
+Can you do it? NO! It looks silly, your socks will tear, and your feet will get wet.
+Both instructions are good instructions: 'Put on socks' and 'Put on boots'.
+The disaster happened ONLY because the SEQUENCE was wrong!'">
+        <div class="slide-content">
+          <div class="slide-header">
+            <span class="section-tag yellow-tag">Everyday Analogy</span>
+            <h2 class="slide-title">The "Socks Before Shoes" Principle</h2>
+            <p class="slide-lead">Two perfect instructions will fail completely if executed in reverse order.</p>
+          </div>
+
+          <div class="comparison-grid">
+            <div class="comparison-col good-col">
+              <div class="comparison-col-header">
+                <span class="good-icon">&#10004;</span>
+                <h3>Correct Sequence (Success)</h3>
+              </div>
+              <div style="text-align: center; margin: 14px 0; font-size: 2.5rem;">
+                <span style="display:inline-flex; align-items:center; justify-content:center; gap:10px; font-size:1.3rem; font-weight:700;"><span style="font-size:2.4rem;">🧦</span> <span style="color:#38bdf8;">Socks (ស្រោមជើង)</span> <span style="color:#94a3b8; font-size:1.6rem;">➔</span> <span style="font-size:2.4rem;">👞</span> <span style="color:#c084fc;">Shoes (ស្បែកជើង)</span></span>
+              </div>
+              <ul class="comparison-list">
+                <li><strong>Step 1:</strong> Put on socks.</li>
+                <li><strong>Step 2:</strong> Put on leather work shoes.</li>
+                <li><strong>Result:</strong> Comfortable, protected feet ready for a factory shift!</li>
+              </ul>
+            </div>
+
+            <div class="comparison-col bad-col">
+              <div class="comparison-col-header">
+                <span class="bad-icon">&#10060;</span>
+                <h3>Reversed Sequence (Disaster!)</h3>
+              </div>
+              <div style="text-align: center; margin: 14px 0; font-size: 2.5rem;">
+                <span style="display:inline-flex; align-items:center; justify-content:center; gap:10px; font-size:1.3rem; font-weight:700;"><span style="font-size:2.4rem;">👞</span> <span style="color:#c084fc;">Shoes (ស្បែកជើង)</span> <span style="color:#fb7185; font-size:1.6rem;">➔</span> <span style="font-size:2.4rem;">🧦</span> <span style="color:#38bdf8;">Socks (ស្រោមជើង)</span></span>
+              </div>
+              <ul class="comparison-list">
+                <li><strong>Step 1:</strong> Put on heavy leather shoes.</li>
+                <li><strong>Step 2:</strong> Try to pull socks over the outside of the shoes!</li>
+                <li><strong>Result:</strong> Socks rip, feet unprotected, completely broken!</li>
+              </ul>
+            </div>
+          </div>
+
+          <div style="background-color: rgba(245, 158, 11, 0.15); border: 1px solid rgba(245, 158, 11, 0.35); border-radius: var(--radius-sm); padding: 12px 18px;">
+            <p style="font-size: 0.95rem; color: var(--color-gold-accent);">
+              <strong>Lesson for Power Apps:</strong> A computer will never stop to ask: <em>'Are you sure you want to put socks over boots?'</em> It will blindly obey your sequence!
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- =================================================================== -->
+      <!-- SLIDE 11: Everyday Analogy 2: The Kitchen Recipe Disaster           -->
+      <!-- =================================================================== -->
+      <section class="slide" id="slide-11"
+        data-title="Demo: The Recipe Disaster"
+        data-segment="Part 3: The Law of Order (22:00 - 38:00)"
+        data-notes="TRAINER SPEAKING SCRIPT:
+'Let's look at another analogy: Baking a birthday cake.
+A recipe is simply a computer program written for human cooks.
+Look at the right side:
+1. Mix flour, eggs, and sugar in a bowl.
+2. Pour the batter into a cake tin.
+3. Bake in oven at 180°C for 30 minutes.
+Outcome: A delicious, fluffy chocolate cake!
+Now look at the scrambled order on the left:
+1. Put an empty tin in the hot oven for 30 minutes.
+2. Pull out the burning hot tin.
+3. Dump raw eggs and dry flour onto the kitchen counter.
+What did you get? Smoke, fire alarm, and a ruined kitchen!
+All the ingredients were there! The temperature was right! But the sequence ruined everything!'">
+        <div class="slide-content">
+          <div class="slide-header">
+            <span class="section-tag">Demonstration 1</span>
+            <h2 class="slide-title">The Kitchen Recipe Disaster</h2>
+            <p class="slide-lead">A recipe is simply software written for human chefs.</p>
+          </div>
+
+          <div class="comparison-grid">
+            <div class="comparison-col good-col">
+              <div class="comparison-col-header">
+                <span class="good-icon">&#127856;</span>
+                <h3>Correct Recipe Sequence</h3>
+              </div>
+              <ul class="comparison-list">
+                <li><strong>Step 1:</strong> Mix flour, eggs, milk, and sugar into smooth batter.</li>
+                <li><strong>Step 2:</strong> Pour batter evenly into a greased cake pan.</li>
+                <li><strong>Step 3:</strong> Place pan in 180°C oven for 30 minutes.</li>
+                <li><strong>Result:</strong> Delicious, golden-brown cake ready to enjoy!</li>
+              </ul>
+            </div>
+
+            <div class="comparison-col bad-col">
+              <div class="comparison-col-header">
+                <span class="bad-icon">&#128293;</span>
+                <h3>Scrambled Sequence (Recipe Disaster)</h3>
+              </div>
+              <ul class="comparison-list">
+                <li><strong>Step 1:</strong> Put empty metal pan into 180°C oven for 30 minutes.</li>
+                <li><strong>Step 2:</strong> Pull out scalding empty pan.</li>
+                <li><strong>Step 3:</strong> Pour raw eggs and dry flour onto the dining table.</li>
+                <li><strong>Result:</strong> Kitchen fire, ruined pan, messy flour, no food!</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- =================================================================== -->
+      <!-- SLIDE 12: Interactive Everyday Sequencer: Coffee                    -->
+      <!-- =================================================================== -->
+      <section class="slide" id="slide-12"
+        data-title="Interactive Everyday Sequencer"
+        data-segment="Part 3: The Law of Order (22:00 - 38:00)"
+        data-notes="TRAINER SPEAKING SCRIPT:
+'Now let's try it with our own hands!
+Look at the interactive board on screen: 'Making Morning Coffee'.
+We have 4 steps scrambled at the top:
+- Add Coffee Grounds
+- Enjoy Hot Coffee
+- Boil Water
+- Pour Boiling Water
+Let's tap them in order!
+What is Step 1? Boil water! Tap it.
+What is Step 2? Add coffee grounds to the filter!
+What is Step 3? Pour boiling water over the grounds!
+What is Step 4? Enjoy hot coffee!
+Watch how the green success banner lights up when the sequence is 100% correct!'">
+        <div class="slide-content">
+          <div class="slide-header">
+            <span class="section-tag purple-tag">Interactive Practice</span>
+            <h2 class="slide-title">Interactive Sequencer: Making Morning Coffee</h2>
+            <p class="slide-lead">Click the items below in the exact logical order (Step 1 to Step 4).</p>
+          </div>
+
+          <div class="interactive-sequencer-box">
+            <div class="seq-builder-header">
+              <h3>Available Steps (Tap in Order):</h3>
+              <button class="footer-icon-btn" id="coffee-reset-btn" title="Reset Sequencer">↺ Reset</button>
+            </div>
+
+            <div class="seq-items-pool" id="everyday-seq-pool">
+              <button class="seq-drag-item" data-step="grounds">&#9749; Add Coffee Grounds</button>
+              <button class="seq-drag-item" data-step="enjoy">&#128523; Enjoy Hot Coffee</button>
+              <button class="seq-drag-item" data-step="boil">&#128293; Boil Water</button>
+              <button class="seq-drag-item" data-step="pour">&#128167; Pour Boiling Water</button>
+            </div>
+
+            <div class="seq-drop-slots">
+              <div class="seq-slot" id="everyday-slot-1">
+                <span class="slot-label">Step 1</span>
+                <span class="slot-content">— Empty —</span>
+              </div>
+              <div class="seq-slot" id="everyday-slot-2">
+                <span class="slot-label">Step 2</span>
+                <span class="slot-content">— Empty —</span>
+              </div>
+              <div class="seq-slot" id="everyday-slot-3">
+                <span class="slot-label">Step 3</span>
+                <span class="slot-content">— Empty —</span>
+              </div>
+              <div class="seq-slot" id="everyday-slot-4">
+                <span class="slot-label">Step 4</span>
+                <span class="slot-content">— Empty —</span>
+              </div>
+            </div>
+
+            <div class="seq-feedback-banner waiting" id="everyday-seq-feedback">
+              👉 Tap the buttons above in the exact logical order (Step 1 to Step 4).
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- =================================================================== -->
+      <!-- SLIDE 13: Mid-Session Pulse Checkpoint                              -->
+      <!-- =================================================================== -->
+      <section class="slide" id="slide-13"
+        data-title="Mid-Session Pulse Checkpoint"
+        data-segment="Mid-Session Checkpoint (38:00 - 42:00)"
+        data-notes="TRAINER SPEAKING SCRIPT:
+'We have reached Minute 38! Exactly on schedule.
+Let's take a 4-minute water stretch, stand up, and do a quick confidence check.
+Look at what we have locked in so far:
+1. Instruction = A single, clear command.
+2. Sequence = The strict order from Start to Finish.
+3. When sequence is wrong, even good instructions fail!
+Take a sip of water. In Part 4, we bring this into the factory: How do manufacturing machines and Power Apps use sequence to protect human lives and equipment?'">
+        <div class="slide-content">
+          <div class="slide-header">
+            <span class="section-tag yellow-tag">Minute 38:00 Checkpoint</span>
+            <h2 class="slide-title">4-Minute Mid-Session Pulse &amp; Stretch</h2>
+            <p class="slide-lead">Take a deep breath, hydrate, and verify your mental foundation.</p>
+          </div>
+
+          <div class="title-feature-grid" style="margin-top: 24px;">
+            <div class="feature-item" style="border-top: 4px solid var(--color-lilac-accent);">
+              <span class="feature-icon">&#10004;</span>
+              <div class="feature-info">
+                <h4>Instruction Locked In</h4>
+                <p>One clear, direct command told to a machine.</p>
+              </div>
+            </div>
+
+            <div class="feature-item" style="border-top: 4px solid var(--fluent-blue-light);">
+              <span class="feature-icon">&#10004;</span>
+              <div class="feature-info">
+                <h4>Sequence Locked In</h4>
+                <p>Start ➔ Order ➔ Finish. Socks before shoes!</p>
+              </div>
+            </div>
+
+            <div class="feature-item" style="border-top: 4px solid var(--fluent-teal-light);">
+              <span class="feature-icon">&#128640;</span>
+              <div class="feature-info">
+                <h4>Coming Up Next</h4>
+                <p>Workplace DX case study &amp; Power Apps semicolon chaining!</p>
+              </div>
+            </div>
+          </div>
+
+          <div style="text-align: center; margin-top: 36px;">
+            <span class="segment-pill" style="font-size: 0.9rem; padding: 6px 18px; background: rgba(245, 158, 11, 0.2); color: var(--color-gold-accent);">
+              &#9201; Time Elapsed: 38:00 / 90:00 • You are doing fantastic!
+            </span>
+          </div>
+        </div>
+      </section>
+
+      <!-- =================================================================== -->
+      <!-- SLIDE 14: Workplace DX Case Study 1: Machine Safe Startup           -->
+      <!-- =================================================================== -->
+      <section class="slide" id="slide-14"
+        data-title="Workplace Case Study: Safe Machine Start"
+        data-segment="Part 4: Workplace Case Studies (42:00 - 54:00)"
+        data-notes="TRAINER SPEAKING SCRIPT:
+'Now let's step onto the factory floor.
+Here is a heavy hydraulic stamping press on an automotive assembly line.
+In manufacturing, sequence is not just about convenience — SEQUENCE IS ABOUT SAFETY AND SAVING LIVES.
+Look at the standard morning startup sequence:
+Step 1: Physical inspection. Check that the safety light curtain is working and the emergency stop is not jammed.
+Step 2: Turn the master power key ON.
+Step 3: Wait 10 seconds for hydraulic oil pressure to reach 50 PSI.
+Step 4: Press the green START button to begin conveyor operation.
+If this sequence is followed, the machine runs smoothly all day.'">
+        <div class="slide-content">
+          <div class="slide-header">
+            <span class="section-tag teal-tag">Manufacturing DX</span>
+            <h2 class="slide-title">Workplace Case Study: Machine Safe Start-Up</h2>
+            <p class="slide-lead">In industrial production, sequence protects human lives and million-dollar tools.</p>
+          </div>
+
+          <div class="sequence-flow-container">
+            <div class="sequence-step-card start-card">
+              <span class="step-number-badge">STEP 1 • SAFETY</span>
+              <span class="step-card-icon">&#128737;</span>
+              <h3>Safety Guard Check</h3>
+              <p>Verify optical light curtain &amp; emergency stops are clear of hands and debris.</p>
+            </div>
+
+            <div class="flow-arrow-divider">➔</div>
+
+            <div class="sequence-step-card middle-card">
+              <span class="step-number-badge">STEP 2 • POWER</span>
+              <span class="step-card-icon">&#128273;</span>
+              <h3>Master Key ON</h3>
+              <p>Turn electrical disconnect key to energize microcontrollers and cooling fans.</p>
+            </div>
+
+            <div class="flow-arrow-divider">➔</div>
+
+            <div class="sequence-step-card middle-card">
+              <span class="step-number-badge">STEP 3 • PRESSURE</span>
+              <span class="step-card-icon">&#9874;</span>
+              <h3>Oil Pressure Check</h3>
+              <p>Wait 10 seconds for hydraulic pump to achieve steady 50 PSI pressure.</p>
+            </div>
+
+            <div class="flow-arrow-divider">➔</div>
+
+            <div class="sequence-step-card finish-card">
+              <span class="step-number-badge">STEP 4 • RUN</span>
+              <span class="step-card-icon">&#9654;</span>
+              <h3>Press Green START</h3>
+              <p>Motor spins, green beacon illuminates, factory production begins!</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- =================================================================== -->
+      <!-- SLIDE 15: Workplace DX Case Study 2: Sequence Violations           -->
+      <!-- =================================================================== -->
+      <section class="slide" id="slide-15"
+        data-title="Workplace Sequence Violations"
+        data-segment="Part 4: Workplace Case Studies (42:00 - 54:00)"
+        data-notes="TRAINER SPEAKING SCRIPT:
+'Now, what happens if an untrained operator violates the sequence?
+Look at the screen:
+What if the operator presses Green START BEFORE checking hydraulic oil pressure?
+The dry pump grinds metal against metal, overheats, and causes a $30,000 breakdown!
+What if an operator feeds steel into the press BEFORE checking the safety guard?
+Severe injury occurs!
+This is why modern manufacturing uses DIGITAL INTERLOCKS.
+And that is what you will build in Power Apps!
+Your Power App can disable the Start button until Step 1, Step 2, and Step 3 are checked!'">
+        <div class="slide-content">
+          <div class="slide-header">
+            <span class="section-tag purple-tag">Why DX Matters</span>
+            <h2 class="slide-title">What Happens When Sequence is Violated?</h2>
+            <p class="slide-lead">Digital Transformation (DX) prevents human error by enforcing sequence in software.</p>
+          </div>
+
+          <div class="comparison-grid">
+            <div class="comparison-col bad-col">
+              <div class="comparison-col-header">
+                <span class="bad-icon">&#9888;</span>
+                <h3>The Old Paper / Memory Trap</h3>
+              </div>
+              <ul class="comparison-list">
+                <li>Operator is tired, rushed, or untrained.</li>
+                <li>Operator skips Step 1 (Safety check) and presses START.</li>
+                <li>Machine jams, motor burns out, $30,000 lost production.</li>
+                <li>Paper clipboard checklist filled out <em>after</em> the shift ended.</li>
+              </ul>
+            </div>
+
+            <div class="comparison-col good-col">
+              <div class="comparison-col-header">
+                <span class="good-icon">&#128241;</span>
+                <h3>The Power Apps Digital Solution</h3>
+              </div>
+              <ul class="comparison-list">
+                <li>Power App locks the [START] button until Step 1 is tapped.</li>
+                <li>App verifies oil pressure sensor reading automatically.</li>
+                <li>Green light appears ONLY when all safety steps are verified in order.</li>
+                <li>Zero mistakes, 100% compliance, safe workers!</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- =================================================================== -->
+      <!-- SLIDE 16: Interactive Demo 2: Safe Start Simulator                 -->
+      <!-- =================================================================== -->
+      <section class="slide" id="slide-16"
+        data-title="Interactive Machine Start Simulator"
+        data-segment="Part 4: Workplace Case Studies (42:00 - 54:00)"
+        data-notes="TRAINER SPEAKING SCRIPT:
+'Let's test this right now on our interactive simulator!
+Look at the red beacon light on the right. The machine is currently STOPPED.
+We have 4 buttons:
+- Inspect Safety Guard
+- Master Power Key
+- Check Pressure (50 PSI)
+- Press START
+Try clicking 'Press START' right now!
+Look what happens: 'SAFETY INTERLOCK BLOCKED: You cannot start yet!'
+Now click them in the proper sequence:
+1. Inspect Safety Guard...
+2. Master Power Key...
+3. Check Pressure...
+4. Press START...
+BOOM! The green beacon illuminates and the motor is running safely!'">
+        <div class="slide-content">
+          <div class="slide-header">
+            <span class="section-tag teal-tag">Interactive Simulation</span>
+            <h2 class="slide-title">Interactive Factory Safe-Start Simulator</h2>
+            <p class="slide-lead">Experience digital interlocks: You cannot start until prerequisites are satisfied.</p>
+          </div>
+
+          <div class="interactive-sequencer-box">
+            <div class="seq-builder-header">
+              <div style="display: flex; align-items: center; gap: 12px;">
+                <span id="machine-beacon-light" style="width: 16px; height: 16px; border-radius: 50%; background-color: #ef4444; display: inline-block; box-shadow: 0 0 10px rgba(239, 68, 68, 0.8);"></span>
+                <h3>Industrial Stamping Press Simulator</h3>
+              </div>
+              <button class="footer-icon-btn" id="mach-reset-btn" title="Reset Machine">↺ Reset Machine</button>
+            </div>
+
+            <div class="seq-items-pool">
+              <button class="seq-drag-item mach-seq-btn" id="mach-btn-1" data-mach-step="guard">&#128737; 1. Inspect Safety Guard</button>
+              <button class="seq-drag-item mach-seq-btn" id="mach-btn-2" data-mach-step="key">&#128273; 2. Master Key ON</button>
+              <button class="seq-drag-item mach-seq-btn" id="mach-btn-3" data-mach-step="pressure">&#9874; 3. Check Pressure (50 PSI)</button>
+              <button class="seq-drag-item mach-seq-btn" id="mach-btn-4" data-mach-step="start">&#9654; 4. Press Green START</button>
+            </div>
+
+            <div class="seq-feedback-banner waiting" id="machine-seq-feedback">
+              👉 Follow the strict safety protocol: 1. Safety Guard ➔ 2. Key Power ➔ 3. Pressure Check ➔ 4. Start.
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- =================================================================== -->
+      <!-- SLIDE 17: Guided Learner Practice Brief                             -->
+      <!-- =================================================================== -->
+      <section class="slide" id="slide-17"
+        data-title="Hands-On Exercise Brief"
+        data-segment="Part 5: Hands-On Practice (54:00 - 66:00)"
+        data-notes="TRAINER SPEAKING SCRIPT:
+'Now it is YOUR turn to take control!
+Minute 54 to 66 is our 12-minute hands-on practice session.
+You have an interactive challenge:
+A factory operator notices smoke and vibration coming from a conveyor motor.
+We need to report this machine breakdown using our tablet Power App.
+On the next slide, you will see 4 scrambled steps:
+- Scan Machine QR Barcode
+- Safety Stop (Hit E-Stop)
+- Submit Issue Report
+- Open Power App on Tablet
+Your job: Drag or click the cards into Step 1, Step 2, Step 3, and Step 4 in the exact logical order!
+Let's begin!'">
+        <div class="slide-content">
+          <div class="slide-header">
+            <span class="section-tag purple-tag">Hands-On Practice</span>
+            <h2 class="slide-title">Learner Exercise: The Sequencing Board</h2>
+            <p class="slide-lead">Apply your skills: Sequence 4 steps to report an industrial equipment breakdown.</p>
+          </div>
+
+          <div class="objectives-list">
+            <div class="objective-card">
+              <div class="objective-num">&#128065;</div>
+              <div class="objective-body">
+                <h3>The Workplace Scenario</h3>
+                <p>You are on Shift 1. Motor #3 on Conveyor Line B starts making a loud grinding sound. You need to report this issue safely.</p>
+              </div>
+            </div>
+
+            <div class="objective-card">
+              <div class="objective-num">&#128070;</div>
+              <div class="objective-body">
+                <h3>Your Task (12 Minutes)</h3>
+                <p>On the next screen, arrange the 4 scrambled action cards into the only safe, correct sequence from Step 1 to Step 4.</p>
+              </div>
+            </div>
+
+            <div class="objective-card">
+              <div class="objective-num">&#127942;</div>
+              <div class="objective-body">
+                <h3>Success Criteria</h3>
+                <p>Personal safety first, app activation second, machine identification third, supervisor notification fourth!</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- =================================================================== -->
+      <!-- SLIDE 18: Interactive Hands-On Ordering Board                       -->
+      <!-- =================================================================== -->
+      <section class="slide" id="slide-18"
+        data-title="Interactive Sorting Board"
+        data-segment="Part 5: Hands-On Practice (54:00 - 66:00)"
+        data-notes="TRAINER SPEAKING SCRIPT:
+'Here is your live practice board!
+Look at the 4 buttons in the pool:
+- Scan Machine Barcode
+- Safety Stop
+- Submit Issue Report
+- Open Power App
+Click each step in the order it must happen.
+If you click Safety Stop first, it lands in Step 1.
+If you make a mistake, click Reset Board and try again!
+Take 3 minutes to test and verify your sequence.'">
+        <div class="slide-content">
+          <div class="slide-header">
+            <span class="section-tag teal-tag">Live Board</span>
+            <h2 class="slide-title">Interactive Practice: Machine Issue Report Sequence</h2>
+            <p class="slide-lead">Click the 4 action steps below in the exact logical order.</p>
+          </div>
+
+          <div class="interactive-sequencer-box">
+            <div class="seq-builder-header">
+              <h3>Available Action Cards (Click to Place):</h3>
+              <button class="footer-icon-btn" id="handson-reset-btn" title="Reset Board">↺ Reset Board</button>
+            </div>
+
+            <div class="seq-items-pool" id="handson-pool">
+              <button class="seq-drag-item" data-action="scan">&#128269; Scan Machine Barcode</button>
+              <button class="seq-drag-item" data-action="estop">&#128721; Safety Stop (E-Stop)</button>
+              <button class="seq-drag-item" data-action="submit">&#128228; Submit Issue Report</button>
+              <button class="seq-drag-item" data-action="open">&#128241; Open Power App</button>
+            </div>
+
+            <div class="seq-drop-slots">
+              <div class="seq-slot" id="handson-slot-1">
+                <span class="slot-label">Step 1 (First)</span>
+                <span class="slot-content">— Empty —</span>
+              </div>
+              <div class="seq-slot" id="handson-slot-2">
+                <span class="slot-label">Step 2 (Then)</span>
+                <span class="slot-content">— Empty —</span>
+              </div>
+              <div class="seq-slot" id="handson-slot-3">
+                <span class="slot-label">Step 3 (Next)</span>
+                <span class="slot-content">— Empty —</span>
+              </div>
+              <div class="seq-slot" id="handson-slot-4">
+                <span class="slot-label">Step 4 (Finish)</span>
+                <span class="slot-content">— Empty —</span>
+              </div>
+            </div>
+
+            <div class="seq-feedback-banner waiting" id="handson-seq-feedback">
+              👉 Click the 4 steps in the correct operational order.
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- =================================================================== -->
+      <!-- SLIDE 19: 4 Common Beginner Mistakes & Interventions                -->
+      <!-- =================================================================== -->
+      <section class="slide" id="slide-19"
+        data-title="Common Beginner Mistakes"
+        data-segment="Part 5: Hands-On Practice (54:00 - 66:00)"
+        data-notes="TRAINER SPEAKING SCRIPT:
+'When beginners first learn sequencing, they often fall into 4 common traps. Let's look at them so you can avoid them:
+Trap 1: The 'Mind Reader' Assumption. Believing the computer knows what you meant even if you skip a step. Fix: Computers have zero intuition. Write every step!
+Trap 2: Swapping Cause and Effect. Trying to display the result before running the calculation. Fix: Remember Socks Before Shoes!
+Trap 3: Vague Instructions. Writing 'Report Problem' instead of 'Submit Form'. Fix: Be specific.
+Trap 4: Forgetting the Finish Line. Leaving the user staring at a frozen screen without a confirmation message. Fix: Always end with a green banner or chime!'">
+        <div class="slide-content">
+          <div class="slide-header">
+            <span class="section-tag yellow-tag">Trainer Guidance</span>
+            <h2 class="slide-title">4 Common Beginner Mistakes &amp; Fixes</h2>
+            <p class="slide-lead">Recognize these classic pitfalls and apply simple corrective habits.</p>
+          </div>
+
+          <div class="comparison-grid">
+            <div class="comparison-col bad-col">
+              <div class="comparison-col-header">
+                <span class="bad-icon">&#9888;</span>
+                <h3>The Beginner Mistake</h3>
+              </div>
+              <ul class="comparison-list">
+                <li><strong>1. Skipping Steps:</strong> Assuming the app knows to save data before changing screens.</li>
+                <li><strong>2. Putting Shoes on First:</strong> Trying to show a success message before the form is saved.</li>
+                <li><strong>3. Vague Action Names:</strong> Giving buttons unclear names like <em>"Go"</em> or <em>"Click"</em>.</li>
+                <li><strong>4. Leaving No Feedback:</strong> Closing the app without telling the operator their report was received.</li>
+              </ul>
+            </div>
+
+            <div class="comparison-col good-col">
+              <div class="comparison-col-header">
+                <span class="good-icon">&#128161;</span>
+                <h3>The Trainer Intervention</h3>
+              </div>
+              <ul class="comparison-list">
+                <li><strong>Fix:</strong> Computers cannot read minds. Write every single transition explicitly.</li>
+                <li><strong>Fix:</strong> Golden Order: 1. Save data ➔ 2. THEN navigate screens!</li>
+                <li><strong>Fix:</strong> Use clear verb-noun labels: <em>"Submit Issue Report"</em>.</li>
+                <li><strong>Fix:</strong> Always show a green notification banner: <em>"Report #1042 Logged!"</em></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- =================================================================== -->
+      <!-- SLIDE 20: Power Apps Connection: Chaining Actions                   -->
+      <!-- =================================================================== -->
+      <section class="slide" id="slide-20"
+        data-title="Power Apps Action Chaining"
+        data-segment="Part 6: Knowledge &amp; Power Fx (66:00 - 74:00)"
+        data-notes="TRAINER SPEAKING SCRIPT:
+'Now let's connect this directly to Microsoft Power Apps!
+In Power Apps, how do we tell a button:
+'Do Action A first, and THEN do Action B second'?
+We use one simple punctuation mark: THE SEMICOLON (;)!
+In English, a period ends a sentence.
+In Power Apps, a SEMICOLON is simply the word 'AND THEN'!
+Look at the slide:
+Plain English: Clear the text box, AND THEN show a green message.
+Power Apps Formula: Reset(txtIssue) ; Notify('Report Sent!')
+The semicolon connects the two instructions into a sequence!'">
+        <div class="slide-content">
+          <div class="slide-header">
+            <span class="section-tag purple-tag">Power Apps Connection</span>
+            <h2 class="slide-title">How Power Apps Chains Steps: The Semicolon ( ; )</h2>
+            <p class="slide-lead">In Power Fx, the semicolon is simply the code word for <em>"AND THEN"</em>.</p>
+          </div>
+
+          <div class="sequence-flow-container">
+            <div class="sequence-step-card start-card">
+              <span class="step-number-badge">STEP 1</span>
+              <span class="step-card-icon">&#128465;</span>
+              <h3>Reset(txtIssue)</h3>
+              <p>First, clear the operator's text input box so it is fresh and clean.</p>
+            </div>
+
+            <div class="flow-arrow-divider" style="color: var(--color-gold-accent);">
+              ;<br><span class="flow-arrow-text" style="color: var(--color-gold-accent);">"AND THEN"</span>
+            </div>
+
+            <div class="sequence-step-card finish-card">
+              <span class="step-number-badge">STEP 2</span>
+              <span class="step-card-icon">&#128226;</span>
+              <h3>Notify("Report Sent!")</h3>
+              <p>Second, display a reassuring green notification banner at the top of the screen.</p>
+            </div>
+          </div>
+
+          <div style="background-color: var(--bg-surface); border: 1px solid var(--border-subtle); border-radius: var(--radius-md); padding: 18px 24px;">
+            <p style="font-size: 1rem; color: #fff;">
+              <strong>Plain English First:</strong> <em>"First clear the form, <strong>AND THEN</strong> show a success banner."</em><br>
+              <strong>Power Fx Formula:</strong> <code style="color: var(--fluent-teal-light); font-size: 1.05rem;">Reset(txtIssue) ; Notify("Report Sent!", NotificationType.Success)</code>
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- =================================================================== -->
+      <!-- SLIDE 21: Power Fx Animated Formula Breakdown                       -->
+      <!-- =================================================================== -->
+      <section class="slide" id="slide-21"
+        data-title="Power Fx Formula Breakdown"
+        data-segment="Part 6: Knowledge &amp; Power Fx (66:00 - 74:00)"
+        data-notes="TRAINER SPEAKING SCRIPT:
+'Let's look at each piece of this formula carefully.
+Do not be intimidated! You already know what every piece does:
+Piece 1: Reset(txtIssue) — 'Reset' means clear. 'txtIssue' is the name of the text box.
+Piece 2: The Semicolon ';' — This means 'AND THEN'.
+Piece 3: Notify('Report Sent!', NotificationType.Success) — 'Notify' means show a banner on screen.
+Notice that the computer executes Piece 1 first, waits for it to complete, encounters the semicolon, and then executes Piece 3.
+Order matters! If you swapped them, the notification would appear before the form was cleared!'">
+        <div class="slide-content">
+          <div class="slide-header">
+            <span class="section-tag teal-tag">Formula Anatomy</span>
+            <h2 class="slide-title">Deconstructing the Sequential Formula</h2>
+            <p class="slide-lead">Every character has a logical, human purpose.</p>
+          </div>
+
+          <div class="powerfx-sequence-card">
+            <div class="pfx-formula-banner">
+              <span class="pfx-step1">Reset(txtIssue)</span>
+              <span class="pfx-semicolon">;</span>
+              <span class="pfx-step2">Notify("Report Sent!", NotificationType.Success)</span>
+            </div>
+
+            <div class="pfx-step-explanations">
+              <div class="pfx-exp-box">
+                <h4>1. The First Action</h4>
+                <p><strong>Reset(txtIssue)</strong> tells Power Apps to wipe the text field clean so the operator can type a fresh entry.</p>
+              </div>
+
+              <div class="pfx-connector-pill">
+                ; = "AND THEN"
+              </div>
+
+              <div class="pfx-exp-box">
+                <h4>2. The Second Action</h4>
+                <p><strong>Notify(...)</strong> displays a green toast banner confirming the report safely reached the server.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- =================================================================== -->
+      <!-- SLIDE 22: 5-Question Knowledge Check (Quiz)                         -->
+      <!-- =================================================================== -->
+      <section class="slide" id="slide-22"
+        data-title="5-Question Knowledge Check"
+        data-segment="Part 6: Knowledge &amp; Power Fx (66:00 - 74:00)"
+        data-notes="TRAINER SPEAKING SCRIPT:
+'Time for our 5-question knowledge check!
+Let's see how much we have absorbed.
+Read Question 1 on screen:
+'What is an Instruction in simple everyday English?'
+Let's click Option A: 'A single, clear command telling a person or computer to do ONE action.'
+GREEN CHECK! You got it!
+Click 'Next Question' to work through all 5 questions together!'">
+        <div class="slide-content">
+          <div class="slide-header flex-header">
+            <div>
+              <span class="section-tag yellow-tag">Knowledge Check</span>
+              <h2 class="slide-title">5-Question Quick Check</h2>
+              <p class="slide-lead">Click your answer to reveal immediate trainer feedback.</p>
+            </div>
+            <button class="footer-icon-btn" id="quiz-next-btn" style="border: 1px solid var(--border-subtle); padding: 6px 14px;">Next Question ➔</button>
+          </div>
+
+          <div class="quiz-widget-card">
+            <div class="quiz-progress-bar-wrap">
+              <span id="quiz-counter" style="font-size: 0.82rem; font-weight: 700; color: var(--color-lilac-accent);">Question 1 of 5</span>
+            </div>
+            <h3 class="quiz-question-text" id="quiz-question">Loading Question...</h3>
+            <div class="quiz-options-list" id="quiz-options"></div>
+            <div class="quiz-feedback-box" id="quiz-feedback" style="display: none;"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- =================================================================== -->
+      <!-- SLIDE 23: 10-Minute Final Challenge Brief & Rubric                  -->
+      <!-- =================================================================== -->
+      <section class="slide" id="slide-23"
+        data-title="10-Minute Final Challenge"
+        data-segment="Part 7: Final Challenge (74:00 - 84:00)"
+        data-notes="TRAINER SPEAKING SCRIPT:
+'Now we reach our final test of mastery: The 10-Minute Final Challenge!
+From Minute 74 to Minute 84, you will take on the role of an app solution designer.
+Your challenge:
+A stamping machine on Factory Floor B begins leaking hydraulic oil onto the floor.
+On your notepad, write down a clear 4-step sequence for an operator reporting this incident through a mobile Power App.
+Make sure you identify:
+- What is Step 1? (Hint: Safety!)
+- What is Step 2?
+- What is Step 3?
+- What is Step 4?
+Look at the rubric below: If your 4 steps prioritize safety, use exact verbs, and finish with confirmation, you hit Level 4 Mastery!'">
+        <div class="slide-content">
+          <div class="slide-header">
+            <span class="section-tag teal-tag">Capstone Assessment</span>
+            <h2 class="slide-title">10-Minute Challenge: The Machine Leak Incident</h2>
+            <p class="slide-lead">Design a clean, unambiguous 4-step reporting sequence on your notepad.</p>
+          </div>
+
+          <div class="challenge-grid">
+            <div class="challenge-task-card">
+              <h3>&#128221; The Workplace Scenario</h3>
+              <p style="font-size: 0.92rem; color: var(--text-secondary); line-height: 1.5; margin-bottom: 14px;">
+                You are walking past CNC Machine #7. You notice hydraulic fluid dripping onto the walkway, creating a slip hazard. The machine is shaking slightly.
+              </p>
+              <h4>Your Instructions:</h4>
+              <ol class="challenge-steps-ol">
+                <li>Write down <strong>Step 1</strong>: What immediate safety action must happen first?</li>
+                <li>Write down <strong>Step 2</strong>: How does the operator open and authenticate the Power App?</li>
+                <li>Write down <strong>Step 3</strong>: What exact machine data or photo is recorded?</li>
+                <li>Write down <strong>Step 4</strong>: How does the app finish and notify maintenance?</li>
+              </ol>
+            </div>
+
+            <div class="challenge-solution-card">
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                <h3>&#128065; Evaluation Criteria</h3>
+                <button class="footer-icon-btn btn-reveal-solution" id="challenge-reveal-btn" style="border: 1px solid var(--border-subtle); padding: 4px 10px; font-size: 0.78rem;">👁️ Reveal Solution</button>
+              </div>
+              <ul class="comparison-list">
+                <li><span class="good-icon">&#10004;</span> <strong>Order &amp; Logic:</strong> Safety is strictly Step 1.</li>
+                <li><span class="good-icon">&#10004;</span> <strong>No Vague Words:</strong> Uses clear verbs (Tap, Scan, Submit).</li>
+                <li><span class="good-icon">&#10004;</span> <strong>Clear Finish:</strong> The operator knows the report reached maintenance.</li>
+              </ul>
+
+              <div id="challenge-exemplar-card" class="revealed-content hidden" style="margin-top: 14px; background: rgba(0, 130, 114, 0.18); border: 1px solid var(--fluent-teal-light); padding: 12px; border-radius: 6px; font-size: 0.88rem; color: #a3f7ea; line-height: 1.5;">
+                <strong>Exemplar 4-Step Solution:</strong><br>
+                1. Press Emergency Stop &amp; place caution cone.<br>
+                2. Open 'Maintenance Support' Power App on tablet.<br>
+                3. Scan Machine #7 QR barcode &amp; snap photo of leak.<br>
+                4. Tap [Submit Report] ➔ App alerts Maintenance Lead with Ticket #!
+              </div>
+            </div>
+          </div>
+
+          <!-- Evaluation Rubric Cards -->
+          <div class="rubric-grid" style="margin-top: 10px;">
+            <div class="rubric-card level-4">
+              <span class="rubric-level-badge" style="color: var(--fluent-green-light);">Level 4 • Mastery</span>
+              <h4>Flawless Sequence</h4>
+              <p>Safety is Step 1. App actions follow strict logical order. Specific inputs (scan, photo) and clear confirmation finish.</p>
+            </div>
+
+            <div class="rubric-card level-3">
+              <span class="rubric-level-badge" style="color: var(--fluent-blue-light);">Level 3 • Competent</span>
+              <h4>Solid Sequence</h4>
+              <p>All 4 steps present. Safety prioritized. Sequence is logical, but one action description is slightly broad.</p>
+            </div>
+
+            <div class="rubric-card level-2">
+              <span class="rubric-level-badge" style="color: var(--color-gold-accent);">Level 2 • Developing</span>
+              <h4>Out of Order</h4>
+              <p>Important steps are swapped (e.g. typing report before stopping dangerous machine). Needs re-ordering.</p>
+            </div>
+
+            <div class="rubric-card level-1">
+              <span class="rubric-level-badge" style="color: var(--color-problem);">Level 1 • Novice</span>
+              <h4>Unsequenced</h4>
+              <p>Single vague sentence (<em>'Fix the leak'</em>) with no ordered steps or start/finish markers.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- =================================================================== -->
+      <!-- SLIDE 24: Connection Map, Homework & Day 3 Preview                  -->
+      <!-- =================================================================== -->
+      <section class="slide" id="slide-24"
+        data-title="Connection Map &amp; Day 3 Preview"
+        data-segment="Part 8: Synthesis &amp; Homework (84:00 - 90:00)"
+        data-notes="TRAINER SPEAKING SCRIPT:
+'We have reached Minute 84! Let's examine our Connection Map:
+BEFORE (Day 1): We learned that apps exist to solve problems using Input, Process, and Output.
+TODAY (Day 2): We looked inside Process and mastered Instructions & Sequence — how actions chain together in strict order.
+NEXT (Day 3): Tomorrow, we ask: 'What does each step need to work with?' It needs DATA! Text, Numbers, Dates, and Yes/No values!
+YOUR 15-MINUTE HOMEWORK TONIGHT:
+'The Workplace Paper Form Hunter'.
+Find ONE physical paper form in your workplace or a receipt from a store.
+Identify 5 pieces of information and label their data type (Text, Number, Date, Yes/No).
+Bring it to Day 3 tomorrow!
+You did amazing today. See you tomorrow!'">
+        <div class="slide-content">
+          <div class="slide-header">
+            <span class="section-tag teal-tag">Curriculum Bridge</span>
+            <h2 class="slide-title">The Connection Map &amp; Day 3 Preview</h2>
+            <p class="slide-lead">BEFORE ➔ TODAY ➔ NEXT: How each day builds the ultimate Power Apps mastery.</p>
+          </div>
+
+          <!-- The Spiral Curriculum Connection Map -->
+          <div class="sequence-flow-container">
+            <div class="sequence-step-card start-card">
+              <span class="step-number-badge">BEFORE • DAY 1</span>
+              <span class="step-card-icon">&#9881;</span>
+              <h3>Input / Process / Output</h3>
+              <p>Apps solve problems by moving input through a process to produce useful output.</p>
+            </div>
+
+            <div class="flow-arrow-divider">➔</div>
+
+            <div class="sequence-step-card middle-card" style="background: rgba(245, 158, 11, 0.15); border-top: 4px solid var(--color-gold-accent);">
+              <span class="step-number-badge" style="background: var(--color-gold-accent); color: #000; font-weight: 800;">TODAY • DAY 2</span>
+              <span class="step-card-icon">&#128260;</span>
+              <h3>Instructions &amp; Sequence</h3>
+              <p>Processes execute ordered steps: <em>instruction ➔ sequence ➔ action ➔ result</em>.</p>
+            </div>
+
+            <div class="flow-arrow-divider">➔</div>
+
+            <div class="sequence-step-card finish-card" style="border-top: 4px solid var(--color-lilac-accent);">
+              <span class="step-number-badge">NEXT • DAY 3</span>
+              <span class="step-card-icon">&#128196;</span>
+              <h3>Data From Zero</h3>
+              <p>Each step needs information: Text, Numbers, Dates, and Yes/No boolean values.</p>
+            </div>
+          </div>
+
+          <div class="comparison-grid" style="margin-top: 10px;">
+            <!-- Homework Card -->
+            <div class="comparison-col good-col">
+              <div class="comparison-col-header">
+                <span class="good-icon">&#128373;</span>
+                <h3>Tonight's 15-Min Homework</h3>
+              </div>
+              <p style="font-size: 0.9rem; color: #fff; margin-bottom: 6px;">
+                <strong>"The Workplace Paper Form Hunter"</strong>
+              </p>
+              <ul class="comparison-list">
+                <li>1. Find 1 physical paper form (maintenance log, requisition sheet, or store receipt).</li>
+                <li>2. Identify 5 distinct pieces of information on that paper.</li>
+                <li>3. Circle them and label what they are: <strong>Text</strong>, <strong>Number</strong>, <strong>Date</strong>, or <strong>Yes/No</strong>.</li>
+                <li>4. Bring it to class tomorrow morning!</li>
+              </ul>
+            </div>
+
+            <!-- Bilingual Glossary Summary -->
+            <div class="comparison-col" style="border-top: 4px solid var(--color-lilac-accent);">
+              <div class="comparison-col-header">
+                <span style="color: var(--color-lilac-accent); font-size: 1.3rem;">&#128218;</span>
+                <h3>Day 2 Bilingual Glossary (សទ្ទានុក្រម)</h3>
+              </div>
+              <ul class="comparison-list" style="font-size: 0.88rem;">
+                <li><strong>Instruction (សេចក្តីណែនាំ):</strong> One single clear command told to a machine.</li>
+                <li><strong>Sequence (លំដាប់លំដោយ):</strong> The strict, unchangeable order from Start to Finish.</li>
+                <li><strong>Digital Interlock (ប្រព័ន្ធរារាំងសុវត្ថិភាព):</strong> App logic that blocks action until prerequisites pass.</li>
+                <li><strong>Semicolon ; (សញ្ញាក្បៀសចំនុច):</strong> In Power Fx, connects actions: <em>"Do this, AND THEN that"</em>.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- Bottom Navigation Bar & Stage Controls (Centered Nav) -->
+        <footer id="bottom-hud">
+      <div id="progress-bar-container">
+        <div id="progress-bar"></div>
+      </div>
+
+      <div class="hud-left">
+        <button class="hud-btn" id="btn-prev" onclick="prevSlide()" title="Previous Slide (Left Arrow)">&#8592; Prev</button>
+        <button class="hud-btn" id="btn-next" onclick="nextSlide()" title="Next Slide (Right Arrow / Space)">Next &#8594;</button>
+        <span id="slide-counter">Slide <span id="slide-current-num">1</span> / <span id="slide-total-count">24</span></span>
+      </div>
+
+      <div class="hud-right">
+        <button class="hud-btn" id="btn-lang" onclick="toggleLanguage()" title="Toggle Language (L)">
+          🌐 <span id="lang-label">KH</span>
+        </button>
+        <button class="hud-btn active" id="btn-laser" onclick="toggleLaser()" title="Presenter Laser Pointer (P)">
+          🔴 Laser
+        </button>
+        <button class="hud-btn" id="btn-notes" onclick="toggleNotes()" title="Trainer Notes Drawer (N)">
+          📝 Notes
+        </button>
+        <button class="hud-btn" id="btn-overview" onclick="toggleOverview()" title="Slide Overview Modal (O)">
+          🗂️ Overview
+        </button>
+        <button class="hud-btn" id="btn-timer" onclick="toggleTimer()" title="90-Min Countdown (T)">
+          ⏱️ <span id="timer-display">90:00</span>
+        </button>
+        <button class="hud-btn" id="btn-fullscreen" onclick="toggleFullscreen()" title="Fullscreen (F)">
+          ⛶
+        </button>
+        <a href="../index.html" class="hud-btn hub-btn" title="Return to Master Curriculum Hub (ត្រឡប់ទៅទំព័រដើម)" style="text-decoration: none; display: inline-flex; align-items: center; gap: 4px; color: #fcd34d; font-weight: 600;"><span>🏠</span><span>Hub</span></a>
+      </div>
+    </footer>
+
+    <!-- Floating Quick-Toggle Pill for Trainer Notes -->
+    <button id="notes-floating-tab" class="notes-floating-tab" title="Toggle Trainer Notes (Press N)">
+      <span class="tab-icon">&#127891;</span>
+      <span class="tab-text">Notes</span>
+    </button>
+
+    <!-- Floating Presenter Notes Panel (Toggleable via N, Header Button or Floating Tab) -->
+    <aside id="presenter-notes-panel" class="presenter-notes-panel" aria-label="Trainer Speaking Guidance and Timing">
+      <div class="notes-header">
+        <div class="notes-title-group">
+          <span class="notes-badge">&#127891; TRAINER SCRIPT &amp; SPEAKING NOTES</span>
+          <span class="notes-timing-badge" id="notes-segment-label">Part 1 (00:00 - 10:00)</span>
+        </div>
+        <button id="notes-close-btn" class="notes-close-btn" title="Hide Notes Panel (Press N)">&times;</button>
+      </div>
+      <div class="notes-body" id="notes-content">
+        <!-- Dynamically populated from active slide's data-notes -->
+      </div>
+    </aside>
+
+    <!-- Slide Overview / Grid View Modal (Toggleable via O or Grid Button) -->
+    <div id="overview-modal" class="overview-modal hidden" aria-modal="true" role="dialog">
+      <div class="overview-dialog">
+        <div class="overview-header">
+          <h3>Presentation Slide Overview (24 Slides)</h3>
+          <button id="overview-close-btn" class="overview-close-btn">&times;</button>
+        </div>
+        <div class="overview-grid" id="overview-grid-container">
+          <!-- Populated dynamically via JS -->
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <script src="script.js"></script>
+
+    <!-- Presenter Laser Focus Pointer & Click Ripple Elements -->
+    <div id="presenter-pointer" class="presenter-laser-dot">
+      <div class="laser-halo"></div>
+    </div>
+    <div id="pointer-click-ripple" class="pointer-click-ripple"></div>
+  <script>
+if (window.self !== window.top) {
+  document.documentElement.classList.add('in-iframe');
+  function hideHub() { document.querySelectorAll('.hub-btn, .back-to-hub-pill').forEach(e => e.style.display = 'none'); }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', hideHub);
+  } else {
+    hideHub();
+  }
+}
+</script>
+<style>
+.in-iframe .hub-btn, .in-iframe .back-to-hub-pill { display: none !important; }
+</style>
+</body>
+</html>

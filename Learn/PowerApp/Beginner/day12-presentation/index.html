@@ -1,0 +1,1541 @@
+<!DOCTYPE html>
+<html lang="en" translate="no" class="notranslate">
+<head>
+  <meta name="google" content="notranslate">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Power Apps Foundation — Day 12: From Process + Data to App Screens</title>
+  
+  <!-- Famous & Universally Loved Khmer Fonts (Moul for Formal Titles, Siemreap & Battambang for Easy Reading) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=Moul&family=Kantumruy+Pro:ital,wght@0,400..700;1,400..700&family=Battambang:wght@300;400;700;900&family=Koh+Santepheap:wght@300;400;700&family=Koulen&family=Siemreap&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="../shared/design-system.css">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="fluent-dark-theme">
+
+  <!-- Main Presentation Stage Container (16:9 Viewport Constrained) -->
+  <div id="presentation-container" class="presentation-container">
+
+    <!-- Top Status Bar: Branding, Segment Indicator, Timer & Controls -->
+    <!-- Presentation Header removed to match Day 25 Standard -->
+
+    <!-- Main Presentation Stage: Viewport for Active Slide -->
+    <main id="presentation-stage" class="presentation-stage">
+
+      <!-- ====================================================================
+           SLIDE 1: HERO COVER SLIDE
+           ==================================================================== -->
+      <section class="slide active" id="slide-1" data-title="Title: Process &amp; Data to Screens" data-segment="Part 1: Recall &amp; Connect">
+        <div class="slide-content hero-slide-layout">
+          <div class="hero-badge-row">
+            <span class="pill pill-phase">Phase 5: App Design &amp; UI</span>
+            <span class="pill pill-accent">Day 12 of 27</span>
+            <span class="pill pill-time">90 Minutes Active Session</span>
+          </div>
+          <h1 class="hero-title">From Process + Data to App Screens</h1>
+          <p class="hero-subtitle">Screens are the user-facing steps of your business process. A screen is a dedicated workstation that exposes only the exact data and actions required for one human task.</p>
+          
+          <div class="hero-connection-card">
+            <span class="chain-label">TODAY'S CONCEPT CONNECTION CHAIN</span>
+            <div class="chain-nodes">
+              <span class="chain-node">User Task</span>
+              <span class="chain-arrow">➔</span>
+              <span class="chain-node">Dedicated Screen</span>
+              <span class="chain-arrow">➔</span>
+              <span class="chain-node">Input / Action</span>
+              <span class="chain-arrow">➔</span>
+              <span class="chain-node">Data Binding</span>
+              <span class="chain-arrow">➔</span>
+              <span class="chain-node active">User Feedback</span>
+            </div>
+          </div>
+
+          <div class="hero-action-row">
+            <button class="fluent-btn-primary" id="hero-start-btn">
+              <span>Begin Lesson (Space / ➔)</span>
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                <path d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"/>
+              </svg>
+            </button>
+            <span class="hero-hint">Microsoft Fluent Dark Stage • Microsoft Edge Optimized • Fully Bilingual</span>
+          </div>
+        </div>
+
+        <aside class="trainer-notes">
+          <h4>Trainer Opening Script (00:00 – 02:00)</h4>
+          <p><strong>Opening Anchor:</strong> "Welcome to Day 12! Today we enter Phase 5: App Design &amp; User Interface. For the last three days, we lived in the world of processes and tables. Today, we bridge that invisible backend to the physical glass of the screen!"</p>
+          <p><strong>Core Mental Model:</strong> "A common mistake beginners make is treating a Power Apps screen like an art canvas or a junk drawer—putting 50 buttons and all 8 fields on one page. Today, you will learn the golden law of UI design: <em>One human task = One dedicated screen.</em>"</p>
+        </aside>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 2: CURRICULUM BLUEPRINT & SPIRAL PROGRESS MAP
+           ==================================================================== -->
+      <section class="slide" id="slide-2" data-title="Curriculum Blueprint: Day 12" data-segment="Part 1: Recall &amp; Connect">
+        <div class="slide-content standard-layout">
+          <div class="slide-header">
+            <span class="section-tag">Spiral Learning Curriculum</span>
+            <h2>Where We Are in the 27-Day Journey</h2>
+            <p class="subtitle">The central mental model: REAL PROBLEM ➔ PROCESS ➔ DATA ➔ UI/SCREEN ➔ LOGIC ➔ ACTION ➔ STORAGE ➔ FEEDBACK ➔ TEST</p>
+          </div>
+
+          <div class="curr-map-grid">
+            <div class="curr-card passed">
+              <span class="card-phase">Phase 1–2: Digital &amp; Logic Foundations</span>
+              <span class="card-days">Days 1 – 6 (Completed)</span>
+              <h3 class="card-title">Instructions, Conditions &amp; Boolean Rules</h3>
+              <p>Hardware, variables, question gates (True/False), IF/THEN decisions, and multi-condition AND/OR validation.</p>
+              <span class="card-status">✓ Mastered</span>
+            </div>
+
+            <div class="curr-card passed">
+              <span class="card-phase">Phase 3–4: Business Processes &amp; Data</span>
+              <span class="card-days">Days 7 – 11 (Completed)</span>
+              <h3 class="card-title">6-Stage Flows, Records, Tables &amp; Schemas</h3>
+              <p>Workflow anatomy, 8-field maintenance schema, data types, master status state machines, and unique IDs.</p>
+              <span class="card-status">✓ Mastered</span>
+            </div>
+
+            <div class="curr-card active-card">
+              <span class="card-phase">Phase 5: App Design &amp; UI (Today)</span>
+              <span class="card-days">Day 12 (Active Session)</span>
+              <h3 class="card-title">From Process + Data to App Screens</h3>
+              <p>Mapping human tasks to screens, input/display/action controls, navigation flow, and user feedback loops.</p>
+              <span class="card-status">★ In Progress</span>
+            </div>
+
+            <div class="curr-card future">
+              <span class="card-phase">Phase 5: App Design &amp; UI (Tomorrow)</span>
+              <span class="card-days">Days 13 – 14 (Next Days)</span>
+              <h3 class="card-title">Canvas Studio &amp; UI Controls</h3>
+              <p>Implementing wireframes inside Power Apps Studio: Galleries, Forms, Containers, and responsive themes.</p>
+              <span class="card-status">⏳ Up Next</span>
+            </div>
+
+            <div class="curr-card future">
+              <span class="card-phase">Phase 6: Power Fx &amp; Automation</span>
+              <span class="card-days">Days 15 – 21 (Upcoming)</span>
+              <h3 class="card-title">Interactive Formulas &amp; Cloud Actions</h3>
+              <p>Patch, Collect, LookUp, Filter, validation gates, automated notifications, and Power Automate Flows.</p>
+              <span class="card-status">⏳ Upcoming</span>
+            </div>
+
+            <div class="curr-card future">
+              <span class="card-phase">Phase 7: Enterprise Testing &amp; Deploy</span>
+              <span class="card-days">Days 22 – 27 (Final Phase)</span>
+              <h3 class="card-title">Production Polish &amp; Capstone</h3>
+              <p>Security roles, error trapping, plant floor tablet testing, offline mode, and the end-to-end DX capstone project.</p>
+              <span class="card-status">⏳ Capstone</span>
+            </div>
+          </div>
+        </div>
+
+        <aside class="trainer-notes">
+          <h4>Spiral Reconnect (02:00 – 05:00)</h4>
+          <p>Point to the transition: "Look at the master chain at the top. On Days 7–9, we built the PROCESS. On Days 10–11, we built the DATA. Today on Day 12, we reach the UI/SCREEN step! This is where humans actually touch the software."</p>
+        </aside>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 3: LEARNING OBJECTIVES
+           ==================================================================== -->
+      <section class="slide" id="slide-3" data-title="Measurable Objectives" data-segment="Part 1: Recall &amp; Connect">
+        <div class="slide-content standard-layout">
+          <div class="slide-header">
+            <span class="section-tag">Learning Outcomes</span>
+            <h2>What You Will Master in Today's 90 Minutes</h2>
+            <p class="subtitle">Four actionable, measurable capabilities evaluated against industrial citizen developer UI/UX standards.</p>
+          </div>
+
+          <div class="objectives-grid">
+            <div class="obj-card">
+              <div class="obj-header">
+                <span class="obj-badge bloom-l2">L2: Understand</span>
+                <span class="obj-num">01</span>
+              </div>
+              <h3>Explain the "Screen as a Workstation" Principle</h3>
+              <p>Articulate why multi-person business workflows fail when crammed into a single screen, contrasting dedicated task screens against cluttered dashboards.</p>
+            </div>
+
+            <div class="obj-card">
+              <div class="obj-header">
+                <span class="obj-badge bloom-l3">L3: Apply</span>
+                <span class="obj-num">02</span>
+              </div>
+              <h3>Classify the 3 Core UI Control Families</h3>
+              <p>Accurately categorize any screen element into its functional role: Input Controls (write data), Display Controls (read data), or Action Controls (trigger work).</p>
+            </div>
+
+            <div class="obj-card">
+              <div class="obj-header">
+                <span class="obj-badge bloom-l4">L4: Analyze</span>
+                <span class="obj-num">03</span>
+              </div>
+              <h3>Segment Workflow into the 4-Screen Enterprise Pattern</h3>
+              <p>Analyze a factory maintenance flow to cleanly distribute fields and tasks across Browse (`scrHome`), New Request (`scrNew`), Details (`scrView`), and Action (`scrApprove`).</p>
+            </div>
+
+            <div class="obj-card">
+              <div class="obj-header">
+                <span class="obj-badge bloom-l5">L5: Create</span>
+                <span class="obj-num">04</span>
+              </div>
+              <h3>Wireframe UI &amp; Formulate Navigation Logic</h3>
+              <p>Draft a complete low-fidelity screen specification matrix and formulate foundational Power Fx navigation and feedback expressions (`Navigate`, `Back`, `Notify`).</p>
+            </div>
+          </div>
+        </div>
+
+        <aside class="trainer-notes">
+          <h4>Objective Setting (05:00 – 07:00)</h4>
+          <p>Read through the 4 objectives. Emphasize: "By 90 minutes from now, you will never look at an app as a bunch of random rectangles. You will see every screen as a purposeful workstation with inputs, displays, and feedback."</p>
+        </aside>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 4: TIMED AGENDA
+           ==================================================================== -->
+      <section class="slide" id="slide-4" data-title="90-Minute Agenda" data-segment="Part 1: Recall &amp; Connect">
+        <div class="slide-content standard-layout">
+          <div class="slide-header">
+            <span class="section-tag">Timed Lesson Blueprint</span>
+            <h2>90-Minute Spiral Learning Schedule</h2>
+            <p class="subtitle">Every minute is structured for active engagement, physical analogies, live demonstration, and hands-on simulation.</p>
+          </div>
+
+          <div class="agenda-timeline">
+            <div class="time-block">
+              <span class="time-stamp">00:00 – 10:00 (10 Min)</span>
+              <span class="time-badge">Part 1: Recall &amp; Connect</span>
+              <p class="time-content">Spiral recap from Days 9–11, active retrieval quiz, and framing today's UI screen architecture goal.</p>
+            </div>
+
+            <div class="time-block">
+              <span class="time-stamp">10:00 – 25:00 (15 Min)</span>
+              <span class="time-badge">Part 2: Discover (The Why)</span>
+              <p class="time-content">The $38,000 "1-Screen Dashboard Nightmare" at Apex Plastics, and the Airport Terminal / ATM analogy.</p>
+            </div>
+
+            <div class="time-block">
+              <span class="time-stamp">25:00 – 45:00 (20 Min)</span>
+              <span class="time-badge">Part 3: Deep Dive Theory</span>
+              <p class="time-content">The 5-Step Task-to-Screen Pipeline, the 3 Control Families, the 4-Screen Enterprise Pattern, and Feedback loops.</p>
+            </div>
+
+            <div class="time-block highlight-block">
+              <span class="time-stamp">45:00 – 60:00 (15 Min)</span>
+              <span class="time-badge">Part 4: Demonstrate &amp; Lab</span>
+              <p class="time-content">Energy stretch (45:00), Interactive Task-to-Screen Architect (Widget 1), and Trainer live wireframing demo.</p>
+            </div>
+
+            <div class="time-block">
+              <span class="time-stamp">60:00 – 75:00 (15 Min)</span>
+              <span class="time-badge">Part 5: Guided Practice</span>
+              <p class="time-content">Auditing a broken single-screen warehouse app, 6-Scenario Simulator (Widget 2), and 4 UI mental traps.</p>
+            </div>
+
+            <div class="time-block">
+              <span class="time-stamp">75:00 – 90:00 (15 Min)</span>
+              <span class="time-badge">Part 6: Assess &amp; Bridge</span>
+              <p class="time-content">5-Question Knowledge Check (Widget 3), Capstone Challenge, Solution Reveal &amp; Rubric, and Day 13 Bridge.</p>
+            </div>
+          </div>
+        </div>
+
+        <aside class="trainer-notes">
+          <h4>Agenda Protocol (07:00 – 10:00)</h4>
+          <p>Highlight the flow: "Notice that we do not open Power Apps Studio today. Today we master the architectural design on paper and interactive wireframes. Tomorrow on Day 13, you will build it in software in minutes because your blueprint is already complete!"</p>
+        </aside>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 5: PREREQUISITE RETRIEVAL DECK
+           ==================================================================== -->
+      <section class="slide" id="slide-5" data-title="Prerequisite Retrieval" data-segment="Part 1: Recall &amp; Connect">
+        <div class="slide-content standard-layout">
+          <div class="slide-header">
+            <span class="section-tag">Active Recall</span>
+            <h2>Prerequisite Retrieval: Locking In Prior Knowledge</h2>
+            <p class="subtitle">Click each card to verify the foundational concepts learned on Days 9, 10, and 11.</p>
+          </div>
+
+          <div class="retrieval-deck">
+            <div class="retrieval-card" id="ret-card-1">
+              <div class="retrieval-q-badge">From Day 11: Deriving Data</div>
+              <div class="card-prompt">
+                <h3>"How did we determine what columns to create in our database on Day 11?"</h3>
+              </div>
+              <button class="fluent-btn-secondary ret-reveal-btn" data-target="ret-ans-1">Reveal Answer</button>
+              <div class="retrieval-answer" id="ret-ans-1">
+                <strong>Correct Concept:</strong> We didn't guess! We looked at each step in the business process, identified the exact question people ask, and turned those questions into structured data fields.
+              </div>
+            </div>
+
+            <div class="retrieval-card" id="ret-card-2">
+              <div class="retrieval-q-badge">From Day 11: Data Types</div>
+              <div class="card-prompt">
+                <h3>"Why did we make UrgencyLevel a Choice column instead of a free-text box?"</h3>
+              </div>
+              <button class="fluent-btn-secondary ret-reveal-btn" data-target="ret-ans-2">Reveal Answer</button>
+              <div class="retrieval-answer" id="ret-ans-2">
+                <strong>Correct Concept:</strong> To prevent spelling typos ('urgent' vs 'High'). Choice columns restrict users to approved values, allowing Power Apps to sort, filter, and send automated notifications without failing.
+              </div>
+            </div>
+
+            <div class="retrieval-card" id="ret-card-3">
+              <div class="retrieval-q-badge">From Day 9: Workflow Ownership</div>
+              <div class="card-prompt">
+                <h3>"In a 4-step workflow (Report ➔ Review ➔ Work ➔ Complete), do all four people work at the exact same moment on the same screen?"</h3>
+              </div>
+              <button class="fluent-btn-secondary ret-reveal-btn" data-target="ret-ans-3">Reveal Answer</button>
+              <div class="retrieval-answer" id="ret-ans-3">
+                <strong>Correct Concept:</strong> No! Work happens sequentially across time and roles. The operator reports first, the supervisor reviews later, and the technician repairs. Each role needs a screen focused strictly on their step!
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <aside class="trainer-notes">
+          <h4>Retrieval Execution Protocol (07:00 – 10:00)</h4>
+          <p>Ask question 3 enthusiastically. Emphasize: "If work happens sequentially by different people, why on earth would we put everyone's work on one single screen? That leads us directly to today's disaster case!"</p>
+        </aside>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 6: THE $38,000 DISASTER AT APEX PLASTICS
+           ==================================================================== -->
+      <section class="slide" id="slide-6" data-title="Workplace Crisis: Apex Plastics" data-segment="Part 2: Discover (The Why)">
+        <div class="slide-content standard-layout">
+          <div class="slide-header">
+            <span class="section-tag section-tag-danger">Workplace Crisis Case Study</span>
+            <h2>The $38,000 "1-Screen Dashboard Nightmare" &amp; The Shattered Mold</h2>
+            <p class="subtitle">What happens when you cram an entire multi-person workflow onto a single cluttered screen.</p>
+          </div>
+
+          <div class="crisis-story-grid">
+            <div class="crisis-timeline-card">
+              <div class="crisis-event">
+                <span class="event-time">Month 1</span>
+                <div class="event-desc">
+                  <strong>The "All-In-One" Screen:</strong> A junior citizen developer built an app by putting <strong>all 8 fields, 6 dropdowns, and 8 buttons</strong> onto one giant screen so users "wouldn't have to switch pages."
+                </div>
+              </div>
+              <div class="crisis-event">
+                <span class="event-time">10:15 AM</span>
+                <div class="event-desc">
+                  <strong>The Greasy Finger:</strong> Operator Sothea had grease on her work gloves. She wanted to log a jittering clamp on Press #2. She tapped near the blue "Submit" button.
+                </div>
+              </div>
+              <div class="crisis-event fatal">
+                <span class="event-time">10:16 AM</span>
+                <div class="event-desc">
+                  <strong>The Accidental Click:</strong> Right next to "Submit", the developer had placed a green <strong>"Supervisor Final Sign-Off &amp; Release"</strong> button. Her glove tapped the sign-off button on an open ticket for Press #7!
+                </div>
+              </div>
+              <div class="crisis-event fatal">
+                <span class="event-time">11:00 AM</span>
+                <div class="event-desc">
+                  <strong>The Catastrophe:</strong> Technician Dara saw the screen say "Approved &amp; Released: Mold Die 44B Ready for Press #2". He loaded a $38,000 custom automotive die onto Press #2 (which was misaligned). On the first 400-ton stroke, the misaligned clamp <strong>completely shattered the $38,000 mold!</strong>
+                </div>
+              </div>
+            </div>
+
+            <div class="crisis-lesson-card">
+              <div class="loss-badge">$38,000 Loss</div>
+              <h3>The Root Architectural Failure</h3>
+              <p>The developer thought: <em>"A single screen is simpler and saves time."</em></p>
+              <div class="flaw-box">
+                <span class="flaw-icon">⚠️</span>
+                <span>Cramming multiple roles onto one screen creates an <strong>operational minefield</strong> where critical approval actions sit inches away from routine data entry!</span>
+              </div>
+              <div class="solution-preview">
+                <strong>The Architectural Fix:</strong>
+                <p>Never build a monolithic screen. Follow the <strong>"Workstation Principle"</strong>: The operator gets an Intake Screen with only report fields; the supervisor gets an Approval Screen; the technician gets a Work Screen. If you don't need a button to do your task right now, that button must not exist on your screen!</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <aside class="trainer-notes">
+          <h4>Trainer Storytelling Protocol (10:00 – 16:00)</h4>
+          <p>Tell this story with dramatic intensity. Ask: "Has anyone ever seen an app or website with 40 buttons on one page, and you were terrified of clicking the wrong one?" Everyone will nod. Explain: This is why professional apps separate tasks into dedicated screens.</p>
+        </aside>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 7: PLAIN-LANGUAGE CONCEPT
+           ==================================================================== -->
+      <section class="slide" id="slide-7" data-title="Plain-Language Concept" data-segment="Part 2: Discover (The Why)">
+        <div class="slide-content standard-layout">
+          <div class="slide-header">
+            <span class="section-tag">Plain-Language Mental Model</span>
+            <h2>"Screens as Dedicated Workstations": The Airport &amp; ATM Analogy</h2>
+            <p class="subtitle">Before looking at Power Apps, understand how physical architecture organizes human journeys.</p>
+          </div>
+
+          <div class="analogy-cards-trio">
+            <div class="concept-trio-card">
+              <div class="trio-badge">The Airport Terminal</div>
+              <div class="trio-icon">🛫</div>
+              <h3>Sequential Physical Stations</h3>
+              <p class="trio-def">An airport doesn't do check-in, security, and boarding in one giant room.</p>
+              <ul class="trio-points">
+                <li><strong>Station 1 (Check-in Kiosk):</strong> Task: print boarding pass. Only passport inputs visible.</li>
+                <li><strong>Station 2 (Security Gate):</strong> Task: screen baggage. Only scan actions visible.</li>
+                <li><strong>Station 3 (Boarding Gate):</strong> Task: board aircraft. Only seat number &amp; door active.</li>
+              </ul>
+            </div>
+
+            <div class="concept-trio-card active-trio">
+              <div class="trio-badge highlight">The Bank ATM</div>
+              <div class="trio-icon">🏧</div>
+              <h3>Focused Single-Task Screens</h3>
+              <p class="trio-def">An ATM guides you through distinct, focused steps.</p>
+              <ul class="trio-points">
+                <li><strong>Screen 1:</strong> Enter 4-digit PIN (Nothing else visible).</li>
+                <li><strong>Screen 2:</strong> Select transaction (Withdraw, Balance).</li>
+                <li><strong>Screen 3:</strong> Select amount ($20, $50, $100).</li>
+                <li><strong>Screen 4:</strong> Take card &amp; cash (Feedback confirmation).</li>
+              </ul>
+            </div>
+
+            <div class="concept-trio-card">
+              <div class="trio-badge">The Core Golden Rule</div>
+              <div class="trio-icon">🎯</div>
+              <h3>The Golden UI Law</h3>
+              <p class="trio-def">One Screen = One Human Task.</p>
+              <ul class="trio-points">
+                <li>A screen is not an art canvas; it is a physical workstation.</li>
+                <li>Expose only the data needed to perform <em>this specific task</em>.</li>
+                <li>Keep action buttons relevant to the active user role.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <aside class="trainer-notes">
+          <h4>Analogy Delivery (16:00 – 25:00)</h4>
+          <p>Connect the ATM analogy: "Imagine if the ATM showed: 'Enter PIN', 'Deposit Check', 'Change Address', 'Wire Money to London', and 'Delete Account' all on one screen! You would be terrified to withdraw $20. Power Apps must be just as clean as an ATM."</p>
+        </aside>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 8: THE 5-STEP TASK-TO-SCREEN PIPELINE
+           ==================================================================== -->
+      <section class="slide" id="slide-8" data-title="Task-to-Screen Pipeline" data-segment="Part 3: Deep Dive Theory">
+        <div class="slide-content standard-layout">
+          <div class="slide-header">
+            <span class="section-tag">Systematic Engineering Method</span>
+            <h2>The 5-Step Task-to-Screen Architecture Pipeline</h2>
+            <p class="subtitle">How a professional citizen developer translates an operational process into a clean multi-screen application.</p>
+          </div>
+
+          <div class="pipeline-container">
+            <div class="pipeline-step">
+              <div class="pipe-num">1</div>
+              <h4>Identify User Task</h4>
+              <p>"Who is standing here, and what single job do they need to get done?"</p>
+              <span class="pipe-tag">User Story</span>
+            </div>
+
+            <div class="pipeline-arrow">➔</div>
+
+            <div class="pipeline-step">
+              <div class="pipe-num">2</div>
+              <h4>Define Screen Purpose</h4>
+              <p>Is this screen for Browsing, Intake, Inspection, or Approval?</p>
+              <span class="pipe-tag">Screen Name (`scr`)</span>
+            </div>
+
+            <div class="pipeline-arrow">➔</div>
+
+            <div class="pipeline-step">
+              <div class="pipe-num">3</div>
+              <h4>Select Controls</h4>
+              <p>Which Input, Display, and Action controls are needed for this task?</p>
+              <span class="pipe-tag">UI Controls</span>
+            </div>
+
+            <div class="pipeline-arrow">➔</div>
+
+            <div class="pipeline-step">
+              <div class="pipe-num">4</div>
+              <h4>Bind Schema Data</h4>
+              <p>Connect controls to the exact Day 11 table fields: <code>MachineID</code>, <code>Status</code>.</p>
+              <span class="pipe-tag">Data Binding</span>
+            </div>
+
+            <div class="pipeline-arrow">➔</div>
+
+            <div class="pipeline-step highlight-pipe">
+              <div class="pipe-num">5</div>
+              <h4>Provide User Feedback</h4>
+              <p>Speak back to the user: Success banner (<code>Notify</code>) and smooth transition.</p>
+              <span class="pipe-tag">Feedback Loop</span>
+            </div>
+          </div>
+
+          <div class="pipeline-summary-box">
+            <span class="box-icon">💡</span>
+            <span class="box-text"><strong>Core Rule:</strong> Screens don't start with colors or buttons. They start with the <strong>human task</strong>. Once you know the task, the controls and data binding become obvious!</span>
+          </div>
+        </div>
+
+        <aside class="trainer-notes">
+          <h4>Pipeline Deep Dive (25:00 – 30:00)</h4>
+          <p>Walk through the 5 steps. Notice how step 4 directly references Day 11's data schema! Step 5 is critical: "If the app doesn't say 'Success!', the human will tap submit 3 times and create 3 duplicate tickets."</p>
+        </aside>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 9: THE 3 CORE CONTROL FAMILIES
+           ==================================================================== -->
+      <section class="slide" id="slide-9" data-title="3 Control Families" data-segment="Part 3: Deep Dive Theory">
+        <div class="slide-content standard-layout">
+          <div class="slide-header">
+            <span class="section-tag">UI Element Categorization</span>
+            <h2>The 3 Core Control Families: Input, Display &amp; Action</h2>
+            <p class="subtitle">Every single control inside Power Apps belongs to one of three functional families. Never confuse their roles.</p>
+          </div>
+
+          <div class="datatypes-grid">
+            <div class="dt-card">
+              <div class="dt-badge dt-text">Family 1: Input Controls</div>
+              <h4>Writing Data to the App</h4>
+              <p class="dt-desc">Controls that let a human give information to the system. Must match Day 11 Data Types.</p>
+              <ul class="control-family-list">
+                <li><code>TextInput</code> ➔ Short &amp; Long text descriptions</li>
+                <li><code>Dropdown / ComboBox</code> ➔ Choice columns (Machine list)</li>
+                <li><code>DatePicker</code> ➔ Scheduled maintenance dates</li>
+                <li><code>Toggle / Checkbox</code> ➔ Yes/No boolean states</li>
+              </ul>
+              <div class="dt-example">Purpose: Capture human input cleanly</div>
+            </div>
+
+            <div class="dt-card">
+              <div class="dt-badge dt-multitext">Family 2: Display Controls</div>
+              <h4>Reading Data from the App</h4>
+              <p class="dt-desc">Controls that are read-only. They show data without allowing accidental edits.</p>
+              <ul class="control-family-list">
+                <li><code>Label</code> ➔ Titles, instructions, field names</li>
+                <li><code>HTML Text / Badge</code> ➔ Colored status indicators</li>
+                <li><code>Gallery (`gal`)</code> ➔ Scrollable list of cards/records</li>
+                <li><code>Image</code> ➔ Machine schematics, equipment photos</li>
+              </ul>
+              <div class="dt-example">Purpose: Present facts clearly &amp; safely</div>
+            </div>
+
+            <div class="dt-card">
+              <div class="dt-badge dt-bool">Family 3: Action Controls</div>
+              <h4>Triggering Work &amp; Flow</h4>
+              <p class="dt-desc">Controls that execute Power Fx logic, submit forms, or navigate to other rooms.</p>
+              <ul class="control-family-list">
+                <li><code>Button</code> ➔ Primary triggers ("Submit", "Approve")</li>
+                <li><code>Icon</code> ➔ Back arrows, search magnifying glass, refresh</li>
+                <li><code>Timer</code> ➔ Auto-refresh feeds, countdown clocks</li>
+              </ul>
+              <div class="dt-example">Purpose: Cause actions &amp; state changes</div>
+            </div>
+          </div>
+        </div>
+
+        <aside class="trainer-notes">
+          <h4>Control Families Explanation (30:00 – 35:00)</h4>
+          <p>Ask the class: "If you want a supervisor to view an incident report, should the description be in a Text Input or a Label?" Answer: A Label! Because if it's in a Text Input, the supervisor might accidentally delete words while reading it!</p>
+        </aside>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 10: FEEDBACK & NAVIGATION: THE USER EXPERIENCE
+           ==================================================================== -->
+      <section class="slide" id="slide-10" data-title="Feedback &amp; Navigation" data-segment="Part 3: Deep Dive Theory">
+        <div class="slide-content standard-layout">
+          <div class="slide-header">
+            <span class="section-tag">Human Psychology &amp; Feedback Loops</span>
+            <h2>Navigation &amp; Feedback: Keeping Humans Informed and Safe</h2>
+            <p class="subtitle">Without navigation, users get trapped in rooms. Without feedback, users feel anxious and submit duplicate tickets.</p>
+          </div>
+
+          <div class="status-architecture-layout">
+            <div class="status-flow-diagram">
+              <div class="status-node node-draft">
+                <span class="node-num">1</span>
+                <h4>Screen Entry</h4>
+                <p>User arrives in room</p>
+                <span class="node-rule">NewForm(frmRequest)</span>
+              </div>
+              <div class="status-link">➔</div>
+
+              <div class="status-node node-submitted">
+                <span class="node-num">2</span>
+                <h4>User Interaction</h4>
+                <p>User fills required inputs</p>
+                <span class="node-rule">btnSubmit.DisplayMode</span>
+              </div>
+              <div class="status-link">➔</div>
+
+              <div class="status-node node-progress">
+                <span class="node-num">3</span>
+                <h4>Data Submission</h4>
+                <p>Data saved to Dataverse/SP</p>
+                <span class="node-rule">SubmitForm(frmRequest)</span>
+              </div>
+              <div class="status-link">➔</div>
+
+              <div class="status-node node-closed">
+                <span class="node-num">4</span>
+                <h4>Explicit Feedback</h4>
+                <p>Green banner &amp; return</p>
+                <span class="node-rule">Notify() + Navigate()</span>
+              </div>
+            </div>
+
+            <div class="status-powerfx-box">
+              <div class="box-title">The Standard Submission &amp; Feedback Formula Chain:</div>
+              <div class="code-snippet">
+                <span class="code-comment">// 1. Save data, show success banner, and return home with a fade transition</span><br>
+                <code>btnSubmit.OnSelect = <br>
+                &nbsp;&nbsp;SubmitForm(frmNewRequest);<br>
+                &nbsp;&nbsp;Notify("Maintenance ticket created successfully!", NotificationType.Success);<br>
+                &nbsp;&nbsp;Navigate(scrHome, ScreenTransition.Fade)</code><br><br>
+                <span class="code-comment">// 2. The Cancel button: discard changes safely without saving</span><br>
+                <code>btnCancel.OnSelect = ResetForm(frmNewRequest); Back(ScreenTransition.Fade)</code>
+              </div>
+              <div class="box-note">
+                <strong>Crucial UX Rule:</strong> Always give the user an escape hatch! Every screen must have a clear "Cancel" or "Back" icon so users never feel trapped.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <aside class="trainer-notes">
+          <h4>Feedback &amp; Navigation Protocol (35:00 – 40:00)</h4>
+          <p>Highlight the semi-colon chain: In Power Fx, we separate sequential actions with a semi-colon `;`. Notice how line 1 saves the data, line 2 fires the notification banner, and line 3 changes the screen. It is an exact sequence of human events.</p>
+        </aside>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 11: THE STANDARD 4-SCREEN ENTERPRISE PATTERN
+           ==================================================================== -->
+      <section class="slide" id="slide-11" data-title="4-Screen Enterprise Pattern" data-segment="Part 3: Deep Dive Theory">
+        <div class="slide-content standard-layout">
+          <div class="slide-header">
+            <span class="section-tag">Enterprise Architecture Template</span>
+            <h2>The Standard 4-Screen Enterprise Pattern</h2>
+            <p class="subtitle">90% of all successful business apps are built using these four universal screen archetypes.</p>
+          </div>
+
+          <div class="four-screens-grid">
+            <div class="screen-card">
+              <div class="screen-header">
+                <span class="screen-badge">Screen 1</span>
+                <h4>`scrBrowse` (Dashboard)</h4>
+              </div>
+              <p class="screen-desc">Scrollable card gallery showing all active tickets, with search and status filter chips.</p>
+              <div class="screen-controls-list">
+                <span>• Controls: Gallery, Search Box, New Button</span>
+                <span>• User Task: Find my ticket &amp; check state</span>
+              </div>
+            </div>
+
+            <div class="screen-card">
+              <div class="screen-header">
+                <span class="screen-badge">Screen 2</span>
+                <h4>`scrNewRequest` (Intake)</h4>
+              </div>
+              <p class="screen-desc">Clean data entry form with required field validation. Used by operators on the plant floor.</p>
+              <div class="screen-controls-list">
+                <span>• Controls: Dropdowns, Text Inputs, Submit Button</span>
+                <span>• User Task: Log a broken machine</span>
+              </div>
+            </div>
+
+            <div class="screen-card">
+              <div class="screen-header">
+                <span class="screen-badge">Screen 3</span>
+                <h4>`scrDetail` (Inspection)</h4>
+              </div>
+              <p class="screen-desc">Read-only view showing full incident history, timestamps, and technician repair notes.</p>
+              <div class="screen-controls-list">
+                <span>• Controls: Labels, Status Badges, Back Arrow</span>
+                <span>• User Task: Inspect historical facts safely</span>
+              </div>
+            </div>
+
+            <div class="screen-card">
+              <div class="screen-header">
+                <span class="screen-badge">Screen 4</span>
+                <h4>`scrApproval` (Action Gate)</h4>
+              </div>
+              <p class="screen-desc">Decision screen with read-only cost summary and big Approve/Reject buttons for managers.</p>
+              <div class="screen-controls-list">
+                <span>• Controls: Cost Input, Approve/Reject Buttons</span>
+                <span>• User Task: Make governance decision</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <aside class="trainer-notes">
+          <h4>4-Screen Template Explanation (40:00 – 45:00)</h4>
+          <p>Explain that this pattern is industry standard. Even Microsoft's automated app generator creates this exact 3-to-4 screen model because it aligns perfectly with human psychology and database safety.</p>
+        </aside>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 12: INTERACTIVE WIDGET 1: TASK-TO-SCREEN ARCHITECT
+           ==================================================================== -->
+      <section class="slide" id="slide-12" data-title="Interactive Screen Architect" data-segment="Part 4: Demonstrate &amp; Lab">
+        <div class="slide-content standard-layout">
+          <div class="slide-header">
+            <span class="section-tag section-tag-accent">Interactive Workbench</span>
+            <h2>Widget 1: Task-to-Screen Architect &amp; Control Mapper</h2>
+            <p class="subtitle">Select a human task to dynamically configure screen purpose, layout archetype, required controls, and Power Fx navigation.</p>
+          </div>
+
+          <div class="schema-workbench-layout">
+            <!-- Left Panel: Task Selection & Screen Builder -->
+            <div class="workbench-form-panel">
+              <div class="panel-header">
+                <span class="panel-icon">📐</span>
+                <h3>Step 1 &amp; 2: User Task &amp; Screen Role</h3>
+              </div>
+
+              <div class="form-group">
+                <label for="wb-user-role">Active Human Role:</label>
+                <select id="wb-user-role" class="fluent-select">
+                  <option value="operator">1. Plant Floor Operator (Bopha)</option>
+                  <option value="supervisor">2. Shift Supervisor (Visal)</option>
+                  <option value="technician">3. Maintenance Technician (Dara)</option>
+                  <option value="qa">4. Quality Auditor (Vanna)</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for="wb-human-task">User Task to Accomplish:</label>
+                <select id="wb-human-task" class="fluent-select">
+                  <!-- Populated dynamically by script.js -->
+                </select>
+              </div>
+
+              <div class="form-row-dual">
+                <div class="form-group">
+                  <label for="wb-screen-name">Screen Name (`scr`):</label>
+                  <input type="text" id="wb-screen-name" class="fluent-input" readonly>
+                </div>
+                <div class="form-group">
+                  <label for="wb-layout-type">Screen Archetype:</label>
+                  <input type="text" id="wb-layout-type" class="fluent-input" readonly>
+                </div>
+              </div>
+            </div>
+
+            <!-- Right Panel: Visual Wireframe Preview & Controls Specification -->
+            <div class="workbench-output-panel">
+              <div class="panel-header">
+                <span class="panel-icon">📱</span>
+                <h3>Generated Screen Wireframe Blueprint</h3>
+              </div>
+
+              <div class="schema-inspector-card">
+                <div class="spec-row">
+                  <span class="spec-label">Input Controls:</span>
+                  <span class="spec-val" id="wb-input-controls">Dropdown, Text Input, Radio</span>
+                </div>
+                <div class="spec-row">
+                  <span class="spec-label">Display Controls:</span>
+                  <span class="spec-val" id="wb-display-controls">Title Label, Header Icon</span>
+                </div>
+                <div class="spec-row">
+                  <span class="spec-label">Action Triggers:</span>
+                  <span class="spec-val" id="wb-action-controls">Submit Button, Cancel Button</span>
+                </div>
+              </div>
+
+              <div class="powerfx-preview-box">
+                <span class="code-title">Generated Navigation &amp; Feedback Formula:</span>
+                <pre><code id="wb-screen-powerfx">// Generated dynamically based on your selection</code></pre>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <aside class="trainer-notes">
+          <h4>Interactive Lab Protocol (45:00 – 55:00)</h4>
+          <p>Demonstrate this tool to the class: "Notice that when you change the role to 'Shift Supervisor' and choose 'Review &amp; Approve Quote', the archetype automatically changes from 'Intake Form' to 'Decision Station', and the Power Fx formula updates to approve the ticket and notify the team!"</p>
+        </aside>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 13: MAPPING APEX PLASTICS PROCESS TO 4 SCREENS
+           ==================================================================== -->
+      <section class="slide" id="slide-13" data-title="Apex Plastics Screen Blueprint" data-segment="Part 4: Demonstrate &amp; Lab">
+        <div class="slide-content standard-layout">
+          <div class="slide-header">
+            <span class="section-tag">Production Architectural Blueprint</span>
+            <h2>The Complete Apex Plastics 4-Screen App Blueprint</h2>
+            <p class="subtitle">How our 8 data schema fields are cleanly distributed across 4 dedicated, uncrowded screens.</p>
+          </div>
+
+          <div class="schema-table-container">
+            <table class="capstone-table">
+              <thead>
+                <tr>
+                  <th>Screen Name</th>
+                  <th>Primary User Role</th>
+                  <th>Core Task</th>
+                  <th>Data Fields Exposed</th>
+                  <th>Primary Action &amp; Power Fx</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><code>scrHome</code></td>
+                  <td>All Factory Roles</td>
+                  <td>Browse active requests &amp; filter</td>
+                  <td><code>RequestID</code>, <code>MachineID</code>, <code>Status</code>, <code>Date</code></td>
+                  <td><code>Navigate(scrNewRequest)</code></td>
+                </tr>
+                <tr>
+                  <td><code>scrNewRequest</code></td>
+                  <td>Floor Operator</td>
+                  <td>Log incident &amp; broken symptom</td>
+                  <td><code>MachineID</code>, <code>IssueDescription</code>, <code>Urgency</code></td>
+                  <td><code>SubmitForm(); Notify(); Navigate()</code></td>
+                </tr>
+                <tr>
+                  <td><code>scrApproval</code></td>
+                  <td>Shift Supervisor</td>
+                  <td>Review quote &amp; authorize work</td>
+                  <td>Read incident facts + <code>EstimatedCost</code></td>
+                  <td><code>Patch(Status: "Approved"); Notify()</code></td>
+                </tr>
+                <tr>
+                  <td><code>scrWorkOrder</code></td>
+                  <td>Maintenance &amp; QA</td>
+                  <td>Log repair labor &amp; certify safety</td>
+                  <td><code>LaborHours</code>, <code>SafetyRunPassed</code></td>
+                  <td><code>Patch(Status: "Closed"); Notify()</code></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <aside class="trainer-notes">
+          <h4>Screen Distribution Protocol (55:00 – 60:00)</h4>
+          <p>Point out the clean separation: "Look at `scrNewRequest`: Operator Bopha ONLY sees 3 fields! She does not see EstimatedCost, she does not see LaborHours, and she does not see Approval buttons. She can log a broken machine in 15 seconds without making a mistake."</p>
+        </aside>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 14: SCREEN DESIGN TRAPS: WHAT HAPPENS IF?
+           ==================================================================== -->
+      <section class="slide" id="slide-14" data-title="Screen Design Traps" data-segment="Part 4: Demonstrate &amp; Lab">
+        <div class="slide-content standard-layout">
+          <div class="slide-header">
+            <span class="section-tag section-tag-danger">Cause &amp; Effect Breakdown</span>
+            <h2>What Happens When You Break Screen Discipline?</h2>
+            <p class="subtitle">Real operational failures that occur inside factories when citizen developers design poor user interfaces.</p>
+          </div>
+
+          <div class="failure-analysis-grid">
+            <div class="failure-card">
+              <div class="fail-header">
+                <span class="fail-badge">Trap 1: The Monolithic Screen Trap</span>
+                <h4>Putting Everyone on One Screen</h4>
+              </div>
+              <p>Operator, supervisor, and technician all share one giant screen with 25 text inputs and 6 buttons.</p>
+              <div class="fail-visual">
+                <div class="fail-box-bad">
+                  <span>Consequence:</span>
+                  <strong>Cognitive Overload &amp; Misclicks:</strong> Operators accidentally click supervisor approval buttons, releasing uninspected machines into production.
+                </div>
+              </div>
+              <div class="fail-impact">Disaster: Broken governance, bypassed inspections, equipment damage!</div>
+            </div>
+
+            <div class="failure-card">
+              <div class="fail-header">
+                <span class="fail-badge">Trap 2: The Silent Submit Trap</span>
+                <h4>Missing User Feedback (`Notify`)</h4>
+              </div>
+              <p>The user clicks "Submit", the button flashes, but no confirmation message appears on the screen.</p>
+              <div class="fail-visual">
+                <div class="fail-box-bad">
+                  <span>Consequence:</span>
+                  <strong>User Uncertainty &amp; Duplication:</strong> The operator assumes the app crashed or froze. They tap "Submit" 4 more times, creating 4 duplicate repair orders.
+                </div>
+              </div>
+              <div class="fail-impact">Disaster: Duplicate tickets, technician confusion, bloated database!</div>
+            </div>
+          </div>
+        </div>
+
+        <aside class="trainer-notes">
+          <h4>Design Traps Protocol (55:00 – 60:00)</h4>
+          <p>Deliver these two traps with conviction. Emphasize: "Good UI design isn't about making things pretty; it is about keeping humans safe from their own cognitive fatigue."</p>
+        </aside>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 15: TRAINER LIVE DEMONSTRATION
+           ==================================================================== -->
+      <section class="slide" id="slide-15" data-title="Trainer Demonstration" data-segment="Part 5: Guided Practice">
+        <div class="slide-content standard-layout">
+          <div class="slide-header">
+            <span class="section-tag">Demonstration Protocol</span>
+            <h2>Trainer Live Demo: Wireframing the Intake Screen on Paper</h2>
+            <p class="subtitle">Watch the trainer sketch a production-grade mobile intake screen using the 4-zone UI formula.</p>
+          </div>
+
+          <div class="demo-protocol-steps">
+            <div class="proto-step">
+              <span class="step-num">01</span>
+              <h4>Zone 1: Header &amp; Context</h4>
+              <p>Place a top title bar with Back arrow (<code>&lt;</code>) and screen title: <code>"Log Equipment Issue"</code>.</p>
+            </div>
+
+            <div class="proto-step">
+              <span class="step-num">02</span>
+              <h4>Zone 2: Primary Inputs</h4>
+              <p>Place <code>cmbMachine</code> (Dropdown) and <code>txtDescription</code> (Multi-text) with clear, high-contrast labels.</p>
+            </div>
+
+            <div class="proto-step">
+              <span class="step-num">03</span>
+              <h4>Zone 3: Urgency Selector</h4>
+              <p>Place clean radio button pills for Urgency: <code>[Low] [Medium] [Critical]</code>.</p>
+            </div>
+
+            <div class="proto-step">
+              <span class="step-num">04</span>
+              <h4>Zone 4: Bottom Action Bar</h4>
+              <p>Place big, thumb-friendly <code>btnSubmit</code> locked via <code>DisplayMode = If(IsBlank(Desc), Disabled, Edit)</code>.</p>
+            </div>
+          </div>
+        </div>
+
+        <aside class="trainer-notes">
+          <h4>Live Demo Script (60:00 – 65:00)</h4>
+          <p>Sketch this live on a whiteboard or tablet. Point out the 4 zones: Top is Header, Middle is Inputs, Bottom is Action. This is the universal mobile UI layout that every factory technician instinctively understands.</p>
+        </aside>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 16: GUIDED PRACTICE: AUDITING A BROKEN APP
+           ==================================================================== -->
+      <section class="slide" id="slide-16" data-title="Guided Practice Audit" data-segment="Part 5: Guided Practice">
+        <div class="slide-content standard-layout">
+          <div class="slide-header">
+            <span class="section-tag">Guided Learner Practice</span>
+            <h2>Spot the 4 Fatal UI Flaws in This Single-Screen Warehouse App</h2>
+            <p class="subtitle">Examine this proposed screen wireframe created by an untrained builder. Can you identify all 4 UX violations?</p>
+          </div>
+
+          <div class="audit-grid">
+            <div class="audit-schema-table">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Screen Element</th>
+                    <th>Proposed Implementation</th>
+                    <th>Current State</th>
+                    <th>The Hidden Fatal Flaw</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr class="flaw-row">
+                    <td>Delete Button</td>
+                    <td>Giant Red "Delete All" next to Save</td>
+                    <td>Always active</td>
+                    <td>❌ Flaw 1: No confirmation dialog; catastrophic accidental data loss!</td>
+                  </tr>
+                  <tr class="flaw-row">
+                    <td>Cost Field</td>
+                    <td>Editable Text Box on Browse Screen</td>
+                    <td>Editable by all</td>
+                    <td>❌ Flaw 2: Anyone browsing tickets can accidentally modify the budget!</td>
+                  </tr>
+                  <tr class="flaw-row">
+                    <td>Cancel Button</td>
+                    <td>Missing completely</td>
+                    <td>No back arrow</td>
+                    <td>❌ Flaw 3: User is trapped with no escape hatch if they change their mind!</td>
+                  </tr>
+                  <tr class="flaw-row">
+                    <td>Submit Action</td>
+                    <td>Saves data with zero popup or banner</td>
+                    <td>Silent submit</td>
+                    <td>❌ Flaw 4: User assumes app froze and clicks submit 5 times (duplicates)!</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div class="audit-takeaway-card">
+              <h3>The 4 Professional UI Corrections:</h3>
+              <ul class="correction-list">
+                <li><strong>1. Separate Destructive Actions:</strong> Move Delete behind an admin-only confirmation popup.</li>
+                <li><strong>2. Use Display Controls for Browse:</strong> Browse screen must use read-only Labels, never editable inputs.</li>
+                <li><strong>3. Provide Universal Escape:</strong> Every screen must have a Back arrow executing <code>Back()</code>.</li>
+                <li><strong>4. Mandatory Feedback:</strong> Always invoke <code>Notify("Success", NotificationType.Success)</code>.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <aside class="trainer-notes">
+          <h4>Guided Practice Protocol (65:00 – 70:00)</h4>
+          <p>Call on different learners. Ask: "Look at row 2: Why is having an editable text box on the browse screen a disaster?" Have a learner explain that someone scrolling on their phone will accidentally delete a digit. Affirm their answer!</p>
+        </aside>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 17: INDEPENDENT MINI-TASK
+           ==================================================================== -->
+      <section class="slide" id="slide-17" data-title="Independent Mini-Task" data-segment="Part 5: Guided Practice">
+        <div class="slide-content standard-layout">
+          <div class="slide-header">
+            <span class="section-tag">3-Minute Fast Drill</span>
+            <h2>Independent Mini-Task: Wireframe the Warehouse Scrap Return Screen</h2>
+            <p class="subtitle">In 3 minutes, sketch the 3 essential controls needed for a warehouse worker logging defective scrap parts.</p>
+          </div>
+
+          <div class="mini-task-grid">
+            <div class="task-card">
+              <div class="task-num">Control 1: The Input</div>
+              <h3>Part Number &amp; Defect Reason</h3>
+              <div class="task-form-box">
+                <div class="task-item">
+                  <span class="task-q">Control Type:</span>
+                  <span class="task-ans"><code>Dropdown / ComboBox</code></span>
+                </div>
+                <div class="task-item">
+                  <span class="task-q">Field Bound:</span>
+                  <span class="task-ans"><code>ScrapReason</code> (Day 11 Choice)</span>
+                </div>
+                <div class="task-item">
+                  <span class="task-q">Why?</span>
+                  <span class="task-ans">Prevents typing typos; forces selection of approved defect codes.</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="task-card">
+              <div class="task-num">Control 2: The Action &amp; Feedback</div>
+              <h3>Submit Scrap Slip Button</h3>
+              <div class="task-form-box">
+                <div class="task-item">
+                  <span class="task-q">Control Type:</span>
+                  <span class="task-ans"><code>Button (Fluent Primary)</code></span>
+                </div>
+                <div class="task-item">
+                  <span class="task-q">Power Fx:</span>
+                  <span class="task-ans"><code>SubmitForm(); Notify("Scrap logged!");</code></span>
+                </div>
+                <div class="task-item">
+                  <span class="task-q">Gating:</span>
+                  <span class="task-ans">Disabled until Quantity &gt; 0</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <aside class="trainer-notes">
+          <h4>Mini-Task Timing (70:00 – 73:00)</h4>
+          <p>Give learners 90 seconds to sketch this in their notebooks. Confirm that Control 1 is a Dropdown and Control 2 is a Button with a Notify feedback formula.</p>
+        </aside>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 18: INTERACTIVE WIDGET 2: 6-SCENARIO SIMULATOR
+           ==================================================================== -->
+      <section class="slide" id="slide-18" data-title="Interactive Simulator" data-segment="Part 5: Guided Practice">
+        <div class="slide-content standard-layout">
+          <div class="slide-header">
+            <span class="section-tag section-tag-accent">Interactive Simulation</span>
+            <h2>Widget 2: Multi-Scenario Screen Architecture Simulator</h2>
+            <p class="subtitle">Evaluate 6 realistic factory user tasks. Choose the correct screen archetype, control combination, and feedback rule.</p>
+          </div>
+
+          <div class="sim-workbench-container">
+            <div class="sim-header-row">
+              <span class="sim-progress-indicator" id="sim-progress-text">Scenario 1 of 6</span>
+              <span class="sim-score-counter">Score: <span id="sim-score">0</span> / 6 Solved</span>
+            </div>
+
+            <div class="sim-card-body" id="sim-card-body">
+              <div class="sim-scenario-badge" id="sim-scenario-num">SCENARIO 1</div>
+              <h3 class="sim-title" id="sim-scenario-title">The Plant Manager's Daily Review</h3>
+              <p class="sim-desc" id="sim-scenario-desc">The plant manager wants to see a quick morning summary of all open repair requests, filter them by urgency, and see total estimated costs.</p>
+              
+              <div class="sim-choices-row">
+                <button class="sim-choice-btn" data-choice="browse">
+                  <span class="choice-icon">📊</span>
+                  <span>Browse / Dashboard Gallery (`scrHome`)</span>
+                </button>
+                <button class="sim-choice-btn" data-choice="intake">
+                  <span class="choice-icon">📝</span>
+                  <span>New Request Intake Form (`scrNew`)</span>
+                </button>
+                <button class="sim-choice-btn" data-choice="work">
+                  <span class="choice-icon">🔧</span>
+                  <span>Technician Execution Screen (`scrWork`)</span>
+                </button>
+              </div>
+
+              <div class="sim-feedback-box" id="sim-feedback" style="display: none;"></div>
+            </div>
+
+            <div class="sim-nav-row">
+              <button class="fluent-btn-secondary" id="sim-prev-btn" disabled>Previous Scenario</button>
+              <button class="fluent-btn-primary" id="sim-next-btn">Next Scenario ➔</button>
+            </div>
+          </div>
+        </div>
+
+        <aside class="trainer-notes">
+          <h4>Simulator Protocol (70:00 – 75:00)</h4>
+          <p>Guide learners through the 6 scenarios. Scenario 1 tests matching user tasks to screen archetypes. Have a learner explain why the manager needs a Browse screen rather than an Intake screen.</p>
+        </aside>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 19: 4 DANGEROUS MENTAL MISCONCEPTIONS
+           ==================================================================== -->
+      <section class="slide" id="slide-19" data-title="Common Misconceptions" data-segment="Part 5: Guided Practice">
+        <div class="slide-content standard-layout">
+          <div class="slide-header">
+            <span class="section-tag section-tag-danger">Pitfalls to Avoid</span>
+            <h2>4 Dangerous Mental Misconceptions in Screen Design</h2>
+            <p class="subtitle">Preempting the most frequent UI/UX blunders committed by beginner citizen developers.</p>
+          </div>
+
+          <div class="misconceptions-grid">
+            <div class="misconception-card">
+              <div class="misconception-wrong">
+                <span class="wrong-badge">Wrong Mental Model 1</span>
+                <h4>"A Power App is just one big webpage; putting everything on one screen saves clicks."</h4>
+              </div>
+              <div class="misconception-right">
+                <span class="right-badge">The Trainer's Correction</span>
+                <p>One screen creates <strong>cognitive paralysis</strong> and security vulnerabilities. Separate screens act as distinct rooms, keeping users focused strictly on their specific task.</p>
+              </div>
+            </div>
+
+            <div class="misconception-card">
+              <div class="misconception-wrong">
+                <span class="wrong-badge">Wrong Mental Model 2</span>
+                <h4>"Color is just decoration; let's make all buttons and cards bright neon colors."</h4>
+              </div>
+              <div class="misconception-right">
+                <span class="right-badge">The Trainer's Correction</span>
+                <p>In industrial apps, color is <strong>semantic communication</strong>. Red means Danger/Stop; Green means Success/Safe; Amber means Caution. Decorative color creates visual noise and misses emergency alarms.</p>
+              </div>
+            </div>
+
+            <div class="misconception-card">
+              <div class="misconception-wrong">
+                <span class="wrong-badge">Wrong Mental Model 3</span>
+                <h4>"Users don't need confirmation messages; they will know it worked when the screen changes."</h4>
+              </div>
+              <div class="misconception-right">
+                <span class="right-badge">The Trainer's Correction</span>
+                <p>Silence breeds anxiety. Without a green <code>Notify()</code> banner, users assume the app froze and tap submit multiple times, creating costly duplicate records.</p>
+              </div>
+            </div>
+
+            <div class="misconception-card">
+              <div class="misconception-wrong">
+                <span class="wrong-badge">Wrong Mental Model 4</span>
+                <h4>"I should make all text boxes editable on the detail screen so users can fix typos anytime."</h4>
+              </div>
+              <div class="misconception-right">
+                <span class="right-badge">The Trainer's Correction</span>
+                <p>Detail screens must be <strong>read-only Display Controls (Labels)</strong>. Editable boxes allow accidental keystrokes while scrolling on mobile devices to silently overwrite historical audit data.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <aside class="trainer-notes">
+          <h4>Misconception Review (73:00 – 75:00)</h4>
+          <p>Read through each misconception with humor and empathy. Say: "We have all wanted to use 10 different colors on a screen. Now you know why enterprise UI guidelines restrict colors strictly to meaningful signals."</p>
+        </aside>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 20: INTERACTIVE WIDGET 3: 5-QUESTION KNOWLEDGE CHECK
+           ==================================================================== -->
+      <section class="slide" id="slide-20" data-title="Evaluative Quiz" data-segment="Part 6: Assess &amp; Bridge">
+        <div class="slide-content standard-layout">
+          <div class="slide-header">
+            <span class="section-tag section-tag-accent">Knowledge Check</span>
+            <h2>Widget 3: 5-Question Evaluative Assessment</h2>
+            <p class="subtitle">Test your understanding of screen architecture, control families, navigation logic, and feedback loops.</p>
+          </div>
+
+          <div class="quiz-container">
+            <div class="quiz-header-row">
+              <span class="quiz-q-counter" id="quiz-question-counter">Question 1 of 5</span>
+              <span class="quiz-score-badge">Score: <span id="quiz-score-display">0</span> / 5</span>
+            </div>
+
+            <div class="quiz-question-box">
+              <h3 class="quiz-question-title" id="quiz-title">Loading Question...</h3>
+              <div class="quiz-options-grid" id="quiz-options">
+                <!-- Dynamically populated by script.js -->
+              </div>
+              <div class="quiz-feedback-box" id="quiz-feedback" style="display: none;"></div>
+            </div>
+
+            <div class="quiz-footer-row">
+              <button class="fluent-btn-secondary" id="quiz-prev-btn" disabled>Previous Question</button>
+              <button class="fluent-btn-primary" id="quiz-next-btn">Next Question ➔</button>
+            </div>
+          </div>
+        </div>
+
+        <aside class="trainer-notes">
+          <h4>Quiz Protocol (75:00 – 80:00)</h4>
+          <p>Run the 5 questions. Remind learners: "Notice questions 2 and 4: they test 'what happens if' and 'why'. Focus on the cause-and-effect relationship between screen architecture and user safety."</p>
+        </aside>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 21: CAPSTONE INDEPENDENT CHALLENGE
+           ==================================================================== -->
+      <section class="slide" id="slide-21" data-title="Capstone Challenge Brief" data-segment="Part 6: Assess &amp; Bridge">
+        <div class="slide-content standard-layout">
+          <div class="slide-header">
+            <span class="section-tag">Independent Synthesis</span>
+            <h2>Capstone Challenge: Wireframe the Tooling Replacement App</h2>
+            <p class="subtitle">Translate the 4-step tooling replacement workflow (from Day 11) into a professional 3-screen app architecture.</p>
+          </div>
+
+          <div class="capstone-brief-grid">
+            <div class="capstone-req-card">
+              <div class="req-header">
+                <span class="req-badge">The 3 Human Tasks</span>
+                <h3>Business Process Story:</h3>
+              </div>
+              <p>Injection mold tooling wears out after 50,000 presses. Design 3 dedicated screens:</p>
+              <ol class="req-steps-list">
+                <li><strong>Screen 1 (`scrToolingList`):</strong> Plant overview gallery showing open tooling replacement orders, sorted by Press Machine #.</li>
+                <li><strong>Screen 2 (`scrToolingRequest`):</strong> Toolroom technician reports worn die, chooses Press #, and enters serial number.</li>
+                <li><strong>Screen 3 (`scrToolingApproval`):</strong> Supervisor reviews replacement quote ($2,500+) and taps Approve or Reject.</li>
+              </ol>
+            </div>
+
+            <div class="capstone-tasks-card">
+              <div class="req-header">
+                <span class="req-badge">Your Deliverable Matrix</span>
+                <h3>Required Table Specification:</h3>
+              </div>
+              <p>Draft a 3-row Screen Wireframe Table on paper or notebook:</p>
+              <ul class="deliverable-list">
+                <li>• <strong>Screen Name:</strong> `scrToolingList`, `scrToolingRequest`, `scrToolingApproval`.</li>
+                <li>• <strong>Intended User:</strong> Technician, Supervisor, or All.</li>
+                <li>• <strong>Input Controls:</strong> Dropdown, Text box, Number input.</li>
+                <li>• <strong>Display Controls:</strong> Gallery, Labels, Status badges.</li>
+                <li>• <strong>Action &amp; Power Fx:</strong> Navigation and feedback formulas.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <aside class="trainer-notes">
+          <h4>Capstone Briefing (80:00 – 83:00)</h4>
+          <p>Give learners 3 minutes to sketch their 3-row table. Remind them: "Make sure you include a Back arrow on Screens 2 and 3 so the user can cancel and return home!"</p>
+        </aside>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 22: BENCHMARK SOLUTION & 4-LEVEL RUBRIC
+           ==================================================================== -->
+      <section class="slide" id="slide-22" data-title="Benchmark Solution &amp; Rubric" data-segment="Part 6: Assess &amp; Bridge">
+        <div class="slide-content standard-layout">
+          <div class="slide-header">
+            <span class="section-tag section-tag-accent">Evaluation &amp; Self-Assessment</span>
+            <h2>Widget 4: Capstone Solution Reveal &amp; 4-Level Evaluation Rubric</h2>
+            <p class="subtitle">Compare your wireframe against the official enterprise solution and evaluate your performance.</p>
+          </div>
+
+          <div class="solution-rubric-container">
+            <div class="solution-toggle-bar">
+              <button class="fluent-btn-primary" id="btn-reveal-solution">
+                <span id="solution-btn-icon">👁️</span>
+                <span id="solution-btn-text">Reveal Benchmark Wireframe Matrix</span>
+              </button>
+              <span class="rubric-hint">Click to inspect the production-standard screen architecture</span>
+            </div>
+
+            <!-- Collapsible Solution Drawer -->
+            <div class="solution-content-drawer collapsed" id="solution-content">
+              <table class="capstone-table solution-table">
+                <thead>
+                  <tr>
+                    <th>Screen Name</th>
+                    <th>User Role</th>
+                    <th>Screen Purpose</th>
+                    <th>Input Controls</th>
+                    <th>Display Controls</th>
+                    <th>Primary Action &amp; Power Fx</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><code>scrToolingList</code></td>
+                    <td>All Factory Roles</td>
+                    <td>Browse active tooling requests</td>
+                    <td>Search box (`txtSearch`)</td>
+                    <td>Gallery (`galTooling`), Status Badges</td>
+                    <td><code>Navigate(scrToolingRequest)</code></td>
+                  </tr>
+                  <tr>
+                    <td><code>scrToolingRequest</code></td>
+                    <td>Toolroom Tech</td>
+                    <td>Intake for worn mold die</td>
+                    <td><code>cmbPress</code>, <code>txtDieSerial</code></td>
+                    <td>Header Labels, Form Title</td>
+                    <td><code>SubmitForm(); Notify(); Navigate()</code></td>
+                  </tr>
+                  <tr>
+                    <td><code>scrToolingApproval</code></td>
+                    <td>Shift Supervisor</td>
+                    <td>Review quote &amp; authorize PO</td>
+                    <td><code>txtQuoteCost</code> (Currency)</td>
+                    <td>Read-only Die info, Press history</td>
+                    <td><code>Patch(Status: "Approved"); Notify()</code></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <!-- 4-Level Evaluation Rubric -->
+            <div class="rubric-matrix-grid">
+              <div class="rubric-level-card level-4">
+                <div class="rubric-badge">Level 4: Mastery (100%)</div>
+                <h4>Flawless UX Architecture</h4>
+                <p>Complete 3-screen separation matching exact human tasks; 100% correct classification of Input vs Display controls; clear feedback and navigation formulas.</p>
+              </div>
+
+              <div class="rubric-level-card level-3">
+                <div class="rubric-badge">Level 3: Proficient (75–99%)</div>
+                <h4>Solid Understanding</h4>
+                <p>3 screens designed; minor control misclassification (e.g. using an input control for read-only data); correct navigation flow; minor syntax typo in Notify.</p>
+              </div>
+
+              <div class="rubric-level-card level-2">
+                <div class="rubric-badge">Level 2: Developing (50–74%)</div>
+                <h4>Partial Understanding</h4>
+                <p>Crammed steps into 2 screens; left supervisor approval on the intake form; confused Display controls with Input controls; omitted user feedback.</p>
+              </div>
+
+              <div class="rubric-level-card level-1">
+                <div class="rubric-badge">Level 1: Novice (&lt;50%)</div>
+                <h4>Needs Spiral Re-teaching</h4>
+                <p>Built a single monolithic screen containing all fields; unable to categorize controls into Input, Display, or Action; no understanding of screen navigation.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <aside class="trainer-notes">
+          <h4>Rubric Evaluation Protocol (83:00 – 86:00)</h4>
+          <p>Click "Reveal Benchmark Wireframe Matrix". Have students compare their sketches against the official solution. Ask: "Who separated the Intake form from the Approval screen?" Congratulate them on mastering enterprise UX!</p>
+        </aside>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 23: 15-MINUTE HOMEWORK ASSIGNMENT
+           ==================================================================== -->
+      <section class="slide" id="slide-23" data-title="15-Minute Review &amp; Homework" data-segment="Part 6: Assess &amp; Bridge">
+        <div class="slide-content standard-layout">
+          <div class="slide-header">
+            <span class="section-tag">Reinforcement Practice</span>
+            <h2>15-Minute Daily Reflection &amp; Homework Challenge</h2>
+            <p class="subtitle">Audit an app on your smartphone before tomorrow's live Power Apps Studio construction session.</p>
+          </div>
+
+          <div class="homework-container">
+            <div class="homework-card">
+              <div class="hw-icon">📱</div>
+              <h3>Smartphone App Screen Audit Exercise</h3>
+              <p>Open your favorite mobile banking app or food delivery app on your phone:</p>
+              <div class="hw-steps">
+                <div class="hw-step-item">
+                  <span class="hw-bullet">1</span>
+                  <span>Count how many <strong>different screens</strong> you move through to order one meal or transfer money.</span>
+                </div>
+                <div class="hw-step-item">
+                  <span class="hw-bullet">2</span>
+                  <span>Notice how each screen asks only <strong>one or two questions</strong> at a time.</span>
+                </div>
+                <div class="hw-step-item">
+                  <span class="hw-bullet">3</span>
+                  <span>Identify one <strong>Input Control</strong>, one <strong>Display Control</strong>, and one <strong>Action Control</strong> on each screen.</span>
+                </div>
+                <div class="hw-step-item">
+                  <span class="hw-bullet">4</span>
+                  <span>Observe what <strong>Feedback</strong> the app gives you when your order or transfer succeeds.</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="trainer-quote-card">
+              <span class="quote-sparkle">✨</span>
+              <p class="quote-text">"The secret to building great applications isn't coding genius. It is empathy for the human user. When you give each human task its own clean room, your app becomes effortless to use."</p>
+              <span class="quote-author">— Power Apps Foundation Trainer Note</span>
+            </div>
+          </div>
+        </div>
+
+        <aside class="trainer-notes">
+          <h4>Homework Debrief (86:00 – 88:00)</h4>
+          <p>Assign the 15-minute smartphone audit. Remind them: "When you look at your banking app tonight, you will notice that multi-billion dollar banks use the exact same 4-screen pattern you learned today!"</p>
+        </aside>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 24: 3-DAY BRIDGE MAP
+           ==================================================================== -->
+      <section class="slide" id="slide-24" data-title="3-Day Bridge Map to Day 13" data-segment="Part 6: Assess &amp; Bridge">
+        <div class="slide-content standard-layout">
+          <div class="slide-header">
+            <span class="section-tag section-tag-accent">Forward Bridge</span>
+            <h2>Where We've Been &amp; Where We Are Going Tomorrow</h2>
+            <p class="subtitle">Tomorrow in Day 13, we open Power Apps Studio for the first time: Implementing the Paper Design in Canvas Studio!</p>
+          </div>
+
+          <div class="three-day-bridge-grid">
+            <div class="bridge-card bridge-yesterday">
+              <span class="bridge-day">Yesterday (Day 11)</span>
+              <h4>Design Data from the Process</h4>
+              <p>Extracted 8 fields from workflow questions, chose unbreakable data types, established master status, and created unique IDs.</p>
+              <div class="bridge-footer">Concept: Process ➔ Data Schema</div>
+            </div>
+
+            <div class="bridge-card bridge-today">
+              <span class="bridge-day active-day">Today (Day 12)</span>
+              <h4>From Process + Data to App Screens</h4>
+              <p>Segmented human tasks into dedicated screens, categorized Input/Display/Action controls, and mapped navigation with feedback.</p>
+              <div class="bridge-footer">Concept: Task ➔ Screens Wireframe</div>
+            </div>
+
+            <div class="bridge-card bridge-tomorrow">
+              <span class="bridge-day">Tomorrow (Day 13)</span>
+              <h4>Implement Paper Design in Studio</h4>
+              <p>We open Microsoft Power Apps Canvas Studio! You will insert Galleries, Forms, Cards, and Containers to make today's wireframes come alive!</p>
+              <div class="bridge-footer">Concept: Studio Construction</div>
+            </div>
+          </div>
+
+          <div class="bridge-conclusion-banner">
+            <strong>Congratulations on completing Day 12!</strong>
+            <span>Your UI wireframes are complete. Tomorrow, we build the real application inside Power Apps Studio!</span>
+          </div>
+        </div>
+
+        <aside class="trainer-notes">
+          <h4>Forward Bridge Closing (88:00 – 90:00)</h4>
+          <p>Deliver the closing bridge with high energy: "Congratulations on completing Day 12! Today you conquered UI architecture. Tomorrow in Day 13, we take these paper wireframes and build them live inside Power Apps Canvas Studio. You will insert actual galleries, forms, and buttons! Have a wonderful evening, and see you tomorrow for Day 13!"</p>
+        </aside>
+      </section>
+
+    </main>
+
+    <!-- Bottom Navigation Bar & Controls -->
+        <footer id="bottom-hud">
+      <div id="progress-bar-container">
+        <div id="progress-bar"></div>
+      </div>
+
+      <div class="hud-left">
+        <button class="hud-btn" id="btn-prev" onclick="prevSlide()" title="Previous Slide (Left Arrow)">&#8592; Prev</button>
+        <button class="hud-btn" id="btn-next" onclick="nextSlide()" title="Next Slide (Right Arrow / Space)">Next &#8594;</button>
+        <span id="slide-counter">Slide <span id="slide-current-num">1</span> / <span id="slide-total-count">24</span></span>
+      </div>
+
+      <div class="hud-right">
+        <button class="hud-btn" id="btn-lang" onclick="toggleLanguage()" title="Toggle Language (L)">
+          🌐 <span id="lang-label">KH</span>
+        </button>
+        <button class="hud-btn active" id="btn-laser" onclick="toggleLaser()" title="Presenter Laser Pointer (P)">
+          🔴 Laser
+        </button>
+        <button class="hud-btn" id="btn-notes" onclick="toggleNotes()" title="Trainer Notes Drawer (N)">
+          📝 Notes
+        </button>
+        <button class="hud-btn" id="btn-overview" onclick="toggleOverview()" title="Slide Overview Modal (O)">
+          🗂️ Overview
+        </button>
+        <button class="hud-btn" id="btn-timer" onclick="toggleTimer()" title="90-Min Countdown (T)">
+          ⏱️ <span id="timer-display">90:00</span>
+        </button>
+        <button class="hud-btn" id="btn-fullscreen" onclick="toggleFullscreen()" title="Fullscreen (F)">
+          ⛶
+        </button>
+        <a href="../index.html" class="hud-btn hub-btn" title="Return to Master Curriculum Hub (ត្រឡប់ទៅទំព័រដើម)" style="text-decoration: none; display: inline-flex; align-items: center; gap: 4px; color: #fcd34d; font-weight: 600;"><span>🏠</span><span>Hub</span></a>
+      </div>
+    </footer>
+
+    <!-- Presenter Notes Drawer (Toggled with 'N' or header button) -->
+    <aside id="notes-drawer" class="notes-drawer" aria-label="Trainer Notes Drawer">
+      <div class="notes-drawer-header">
+        <div class="notes-title">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+            <polyline points="14 2 14 8 20 8"/>
+          </svg>
+          <h3>Trainer Presentation Notes</h3>
+        </div>
+        <button id="notes-close-btn" class="icon-btn-tiny" title="Close Notes (Esc / N)">✕</button>
+      </div>
+      <div class="notes-drawer-content" id="notes-content">
+        <!-- Dynamically injected from active slide's <aside class="trainer-notes"> -->
+      </div>
+    </aside>
+
+    <!-- Slide Overview Modal Grid (Toggled with 'O' or 'G') -->
+    <div id="overview-modal" class="overview-modal" aria-label="Slide Overview Grid">
+      <div class="overview-header">
+        <h3>Presentation Slides Navigator (24 Scenes)</h3>
+        <button id="overview-close-btn" class="icon-btn-tiny" title="Close Grid (Esc / O)">✕</button>
+      </div>
+      <div class="overview-grid" id="overview-grid">
+        <!-- Dynamically injected cards -->
+      </div>
+    </div>
+
+    <!-- Presenter Laser Focus Pointer & Click Ripple Elements -->
+    <div id="presenter-pointer" class="presenter-laser-dot">
+      <div class="laser-halo"></div>
+    </div>
+    <div id="pointer-click-ripple" class="pointer-click-ripple"></div>
+
+  </div>
+
+  <script src="script.js"></script>
+<script>
+if (window.self !== window.top) {
+  document.documentElement.classList.add('in-iframe');
+  function hideHub() { document.querySelectorAll('.hub-btn, .back-to-hub-pill').forEach(e => e.style.display = 'none'); }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', hideHub);
+  } else {
+    hideHub();
+  }
+}
+</script>
+<style>
+.in-iframe .hub-btn, .in-iframe .back-to-hub-pill { display: none !important; }
+</style>
+</body>
+</html>
+

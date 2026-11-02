@@ -1,0 +1,1625 @@
+<!DOCTYPE html>
+<html lang="en" translate="no" class="notranslate">
+<head>
+  <meta name="google" content="notranslate">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Day 15: Navigation: Connect Screens into a Flow | Microsoft Power Apps Foundation</title>
+  <link rel="stylesheet" href="../shared/design-system.css">
+  <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=Moul&family=Kantumruy+Pro:ital,wght@0,400..700;1,400..700&family=Battambang:wght@300;400;700;900&family=Koh+Santepheap:wght@300;400;700&family=Koulen&family=Siemreap&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- Presentation Stage Wrapper -->
+  <div id="presentation-stage">
+    
+    <!-- Ambient Aurora Orbs (60fps backdrop) -->
+    <div class="aurora-orb orb-1"></div>
+    <div class="aurora-orb orb-2"></div>
+    <div class="aurora-orb orb-3"></div>
+
+    <!-- Presenter Laser Pointer & Shockwave Click Ripple -->
+    <div id="presenter-laser"></div>
+    <div id="pointer-ripple" class="pointer-click-ripple"></div>
+
+    <!-- Viewport for 24 Slides -->
+    <main id="slides-viewport">
+
+      <!-- ====================================================================
+           SLIDE 1: HERO TITLE & SYSTEM MENTAL MODEL
+           ==================================================================== -->
+      <section class="slide active" id="slide-1" data-slide-index="0" data-title="Day 15: Navigation: Connect Screens into a Flow" data-segment="Phase 5: Canvas Studio Implementation">
+        <div class="slide-content hero-content">
+          <div class="hero-badge">
+            <span>Microsoft Power Apps Professional Foundation</span>
+            <span>&bull;</span>
+            <span>Day 15 of 27</span>
+          </div>
+          <h1 class="hero-title">Navigation: Connect Screens into a Flow</h1>
+          <p class="hero-subtitle">
+            Transform isolated screens into the seamless business journey designed on paper. Master the navigation chain: User Action &rarr; OnSelect &rarr; Navigate() / Back() &rarr; Target Screen, ensuring operators never feel trapped or submit duplicate records.
+          </p>
+
+          <div class="model-chain">
+            <span class="chain-item">Real Problem</span>
+            <span class="chain-arrow">&rarr;</span>
+            <span class="chain-item">Process</span>
+            <span class="chain-arrow">&rarr;</span>
+            <span class="chain-item">Data</span>
+            <span class="chain-arrow">&rarr;</span>
+            <span class="chain-item active">UI / Screens</span>
+            <span class="chain-arrow">&rarr;</span>
+            <span class="chain-item active">Action (Navigate)</span>
+            <span class="chain-arrow">&rarr;</span>
+            <span class="chain-item">Storage</span>
+            <span class="chain-arrow">&rarr;</span>
+            <span class="chain-item active">Feedback (Confirmation)</span>
+            <span class="chain-arrow">&rarr;</span>
+            <span class="chain-item">Test</span>
+          </div>
+        </div>
+
+        <aside class="trainer-notes">
+          <h4>Trainer Speaking Script & Pedagogical Cues:</h4>
+          <p>Welcome to Day 15! Over the last few days, we designed data schemas, wireframed screens on paper, explored Power Apps Studio, and mastered individual controls. But right now, our screens are like separate rooms in a house with no doors between them.</p>
+          <p>Today is the day we build the doors! We will connect screens into an uninterrupted journey using Power Fx navigation: <code>Navigate()</code> to move forward, <code>Back()</code> to return safely, and screen transitions to give operators visual spatial awareness.</p>
+        </aside>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 2: 90-MINUTE AGENDA & OBJECTIVES
+           ==================================================================== -->
+      <section class="slide" id="slide-2" data-slide-index="1" data-title="90-Minute Agenda & Measurable Objectives" data-segment="Section 1: Orientation & Outcomes">
+        <div class="slide-header">
+          <span class="section-tag">Agenda & Goals</span>
+          <h2>90-Minute Agenda & Measurable Objectives</h2>
+          <p class="subtitle">A structured spiral-learning progression connecting prior controls to multi-screen flow architecture.</p>
+        </div>
+
+        <div class="slide-content grid-2">
+          <div class="card">
+            <h3 class="card-title">4 Measurable Learning Objectives</h3>
+            <div class="objective-item">
+              <span class="obj-num">1</span>
+              <div>
+                <strong>Articulate the Role of Navigation:</strong>
+                <p>Explain why isolated screens must be stitched together with explicit transition logic to complete the business process designed in earlier days.</p>
+              </div>
+            </div>
+            <div class="objective-item">
+              <span class="obj-num">2</span>
+              <div>
+                <strong>Author the <code>Navigate()</code> Function:</strong>
+                <p>Construct valid <code>Navigate(TargetScreen, Transition)</code> formulas, breaking down each function argument without memorization.</p>
+              </div>
+            </div>
+            <div class="objective-item">
+              <span class="obj-num">3</span>
+              <div>
+                <strong>Master the Screen History Stack:</strong>
+                <p>Differentiate between popping previous screens with <code>Back()</code> versus forcing forward jumps with <code>Navigate(scrHome)</code>.</p>
+              </div>
+            </div>
+            <div class="objective-item">
+              <span class="obj-num">4</span>
+              <div>
+                <strong>Eliminate Dead-End UX Bottlenecks:</strong>
+                <p>Design and implement clear Cancel, Back, and Success Confirmation pathways to eliminate operator panic and duplicate data submissions.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <h3 class="card-title">90-Minute Timed Lesson Plan</h3>
+            <div class="agenda-timeline">
+              <div class="agenda-block">
+                <span class="agenda-time">00 - 10m</span>
+                <span class="agenda-name">Block 1: Recall & Connect</span>
+                <span class="agenda-desc">Retrieval Practice</span>
+              </div>
+              <div class="agenda-block">
+                <span class="agenda-time">10 - 25m</span>
+                <span class="agenda-name">Block 2: Discover The Why</span>
+                <span class="agenda-desc">Trapped Operator Crisis</span>
+              </div>
+              <div class="agenda-block">
+                <span class="agenda-time">25 - 40m</span>
+                <span class="agenda-name">Block 3: Navigation Functions</span>
+                <span class="agenda-desc">Navigate vs Back Anatomy</span>
+              </div>
+              <div class="agenda-block">
+                <span class="agenda-time">40 - 55m</span>
+                <span class="agenda-name">Block 4: Trainer Demonstration</span>
+                <span class="agenda-desc">Wiring Studio Circuit</span>
+              </div>
+              <div class="agenda-block">
+                <span class="agenda-time">55 - 65m</span>
+                <span class="agenda-name">Block 5: Guided Practice</span>
+                <span class="agenda-desc">Shift Handover Flow</span>
+              </div>
+              <div class="agenda-block">
+                <span class="agenda-time">65 - 75m</span>
+                <span class="agenda-name">Block 6: Independent Task</span>
+                <span class="agenda-desc">Tool Crib 3-Screen Flow</span>
+              </div>
+              <div class="agenda-block">
+                <span class="agenda-time">75 - 85m</span>
+                <span class="agenda-name">Block 7: Check & Challenge</span>
+                <span class="agenda-desc">5-Quiz + Final Challenge</span>
+              </div>
+              <div class="agenda-block">
+                <span class="agenda-time">85 - 90m</span>
+                <span class="agenda-name">Block 8: Forward Bridge</span>
+                <span class="agenda-desc">Preview Day 16 Dynamic Logic</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <aside class="trainer-notes">
+          <h4>Trainer Speaking Script & Pedagogical Cues:</h4>
+          <p>Review the four objectives with the class. Pay special attention to Objective 3: the difference between <code>Back()</code> and <code>Navigate(scrHome)</code>. This is one of the most critical architectural distinctions for beginners.</p>
+          <p>Remind students of the agenda timer in the HUD. Point out that Blocks 4 and 5 are completely hands-on in Studio, so keep the pacing crisp through the concept blocks.</p>
+        </aside>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 3: CONCEPT MAP & CURRICULUM BRIDGE
+           ==================================================================== -->
+      <section class="slide" id="slide-3" data-slide-index="2" data-title="Curriculum Map: The Connected Machine" data-segment="Section 1: Orientation & Outcomes">
+        <div class="slide-header">
+          <span class="section-tag">System Continuity</span>
+          <h2>The Curriculum Map: How Today Fits the Whole System</h2>
+          <p class="subtitle">Every lesson builds directly on what came before and prepares the foundation for what comes next.</p>
+        </div>
+
+        <div class="slide-content grid-3">
+          <div class="card">
+            <span class="card-badge">Days 12–14 (Earlier)</span>
+            <h3 class="card-title">Wireframes & Controls</h3>
+            <p class="card-body">
+              On Day 12, we wireframed screens on paper (Dashboard, Form, Success). On Day 13, we created screens in Studio. On Day 14, we configured buttons, labels, and dropdowns.
+            </p>
+          </div>
+
+          <div class="card" style="border-color: var(--color-cyan); box-shadow: 0 0 20px rgba(6, 182, 212, 0.2);">
+            <span class="card-badge" style="background: rgba(6, 182, 212, 0.2); color: #67e8f9;">TODAY (Day 15)</span>
+            <h3 class="card-title">Navigation: Stitched Flows</h3>
+            <p class="card-body">
+              We connect those isolated screens using <code>Navigate()</code> and <code>Back()</code> in button <code>OnSelect</code> properties, completing the business loop from start to finish.
+            </p>
+          </div>
+
+          <div class="card">
+            <span class="card-badge">Tomorrow (Day 16)</span>
+            <h3 class="card-title">Dynamic Control Logic</h3>
+            <p class="card-body">
+              Now that screens connect, we will make controls react dynamically: locking submit buttons until required inputs are filled and conditionally displaying warning badges.
+            </p>
+          </div>
+        </div>
+
+        <aside class="trainer-notes">
+          <h4>Trainer Speaking Script & Pedagogical Cues:</h4>
+          <p>Emphasize curriculum continuity: on Day 12 we planned these exact 3 screens on paper. Today we connect them with real Power Fx code. We are not making up random examples; we are building out the exact Apex Plastics system step-by-step.</p>
+        </aside>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 4: PREREQUISITE RETRIEVAL PRACTICE
+           ==================================================================== -->
+      <section class="slide" id="slide-4" data-slide-index="3" data-title="Prerequisite Retrieval Practice" data-segment="Section 1: Orientation & Outcomes">
+        <div class="slide-header">
+          <span class="section-tag">Memory Activation</span>
+          <h2>Prerequisite Retrieval: Click Cards to Reveal Answers</h2>
+          <p class="subtitle">Active recall of Hungarian naming and control events before we wire multi-screen journeys.</p>
+        </div>
+
+        <div class="slide-content grid-4">
+          <div class="flip-card" onclick="this.classList.toggle('flipped')">
+            <div class="flip-inner">
+              <div class="flip-front">
+                <span class="card-badge">Question 1</span>
+                <p>What Hungarian notation prefix do we assign to Screen controls in Tree View?</p>
+                <span class="flip-prompt">Click to flip &rarr;</span>
+              </div>
+              <div class="flip-back">
+                <span class="card-badge">Answer 1</span>
+                <p>The <code>scr</code> prefix (e.g. <code>scrHome</code>, <code>scrNewRequest</code>, <code>scrSuccessConfirmation</code>).</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="flip-card" onclick="this.classList.toggle('flipped')">
+            <div class="flip-inner">
+              <div class="flip-front">
+                <span class="card-badge">Question 2</span>
+                <p>Which property on a Button control determines what happens when the user clicks it?</p>
+                <span class="flip-prompt">Click to flip &rarr;</span>
+              </div>
+              <div class="flip-back">
+                <span class="card-badge">Answer 2</span>
+                <p>The <code>OnSelect</code> property. By default it is empty; we write navigation and action formulas inside it.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="flip-card" onclick="this.classList.toggle('flipped')">
+            <div class="flip-inner">
+              <div class="flip-front">
+                <span class="card-badge">Question 3</span>
+                <p>What critical job does the Confirmation Screen perform in an application?</p>
+                <span class="flip-prompt">Click to flip &rarr;</span>
+              </div>
+              <div class="flip-back">
+                <span class="card-badge">Answer 3</span>
+                <p>Provides clear psychological feedback that data was saved, showing reference numbers and relieving user anxiety.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="flip-card" onclick="this.classList.toggle('flipped')">
+            <div class="flip-inner">
+              <div class="flip-front">
+                <span class="card-badge">Question 4</span>
+                <p>If a button has <code>DisplayMode = DisplayMode.Disabled</code>, does its OnSelect run?</p>
+                <span class="flip-prompt">Click to flip &rarr;</span>
+              </div>
+              <div class="flip-back">
+                <span class="card-badge">Answer 4</span>
+                <p>No. A disabled button is completely unresponsive to touch and ignores its <code>OnSelect</code> formula.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <aside class="trainer-notes">
+          <h4>Trainer Speaking Script & Pedagogical Cues:</h4>
+          <p>Have learners answer each card before clicking. Praise correct answers. Re-iterate Question 2: today, <code>OnSelect</code> is our home base. Everything we do with navigation will be written inside an <code>OnSelect</code> property.</p>
+        </aside>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 5: TODAY'S PROBLEM: TRAPPED OPERATOR PANIC
+           ==================================================================== -->
+      <section class="slide" id="slide-5" data-slide-index="4" data-title="The Workplace Problem: The Trapped Operator Panic" data-segment="Section 2: The Real-World Why">
+        <div class="slide-header">
+          <span class="section-tag">Workplace Reality</span>
+          <h2>The Workplace Crisis: The Trapped Operator Panic</h2>
+          <p class="subtitle">What happens when screens exist as disconnected islands with no exit or confirmation pathways.</p>
+        </div>
+
+        <div class="slide-content">
+          <div class="crisis-banner">
+            <span class="crisis-icon">&Delta;</span>
+            <div>
+              <h3>Apex Plastics Night Shift Incident</h3>
+              <p>Technician Somnang built 3 screens in Studio: <code>scrHome</code>, <code>scrNewRequest</code>, and <code>scrSuccess</code>. But he forgot to connect them with navigation code. Chaos followed immediately.</p>
+            </div>
+          </div>
+
+          <div class="grid-3">
+            <div class="card">
+              <span class="consequence-badge">Stage 1: The Trapped User</span>
+              <h4 style="margin: 0.6rem 0;">No Cancel or Back Button</h4>
+              <p>Operator Dara tapped a link on his tablet that opened <code>scrNewRequest</code> by accident. There was <strong>no Back button, no Cancel button, and no Home button</strong>. He was completely locked inside the form with no way to return.</p>
+            </div>
+
+            <div class="card">
+              <span class="consequence-badge">Stage 2: Forced Garbage Data</span>
+              <h4 style="margin: 0.6rem 0;">Submitting to Escape</h4>
+              <p>Believing the only way out was to submit something, Dara typed <em>"test asdf"</em> into the notes and tapped Submit, polluting the maintenance database with garbage records.</p>
+            </div>
+
+            <div class="card">
+              <span class="consequence-badge">Stage 3: The Silent Dead End</span>
+              <h4 style="margin: 0.6rem 0;">9 Duplicate Tickets Created</h4>
+              <p>When Dara tapped Submit, the screen didn't move! Thinking the tablet was frozen, he tapped Submit <strong>8 more times</strong>, generating 9 urgent alarms that sent engineers chasing phantom breakdowns!</p>
+            </div>
+          </div>
+        </div>
+
+        <aside class="trainer-notes">
+          <h4>Trainer Speaking Script & Pedagogical Cues:</h4>
+          <p>Tell Dara's story vividly. Ask: "Have you ever been on a website or app where you couldn't find the Back button or didn't know if your payment went through?" Every beginner has experienced that exact anxiety.</p>
+          <p>Reinforce: navigation is not a visual luxury; it is the fundamental mechanism that prevents duplicate submissions and keeps data clean.</p>
+        </aside>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 6: ANATOMY OF FAILURE: CONSEQUENCE ANALYSIS
+           ==================================================================== -->
+      <section class="slide" id="slide-6" data-slide-index="5" data-title="Anatomy of Failure: Consequences of Disconnected Screens" data-segment="Section 2: The Real-World Why">
+        <div class="slide-header">
+          <span class="section-tag">Consequence Analysis</span>
+          <h2>The Chain Reaction: From Broken Navigation to Burned Machinery</h2>
+          <p class="subtitle">A missing navigation formula ripples straight through factory floor operations.</p>
+        </div>
+
+        <div class="slide-content grid-2">
+          <div class="card">
+            <h3 class="card-title">The Operational Ripple Effect</h3>
+            <div class="consequence-row">
+              <span class="consequence-badge">1. Panic</span>
+              <div>
+                <strong>Operator Anxiety & Multiple Taps:</strong>
+                <p>Without a transition to a confirmation screen, the user assumes the app crashed and taps Submit repeatedly.</p>
+              </div>
+            </div>
+            <div class="consequence-row">
+              <span class="consequence-badge">2. Pollution</span>
+              <div>
+                <strong>9 Duplicate Tickets in SharePoint:</strong>
+                <p>Database flooded with phantom records, overwhelming maintenance triage dispatchers.</p>
+              </div>
+            </div>
+            <div class="consequence-row">
+              <span class="consequence-badge">3. Distraction</span>
+              <div>
+                <strong>Engineers Sent to Healthy Machine:</strong>
+                <p>Three senior technicians ran to Press #3, which was operating perfectly at 100% capacity.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="card" style="border-color: rgba(239, 68, 68, 0.4); background: rgba(30, 41, 59, 0.9);">
+            <h3 class="card-title" style="color: #fca5a5;">The Industrial Fallout</h3>
+            <div style="font-size: 2.8rem; font-weight: 800; color: #ef4444; margin: 1rem 0;">Burned Gearbox</div>
+            <p style="font-size: 1.05rem; line-height: 1.6; color: #cbd5e1;">
+              While maintenance was distracted investigating the 9 phantom tickets for Press #3, a genuine high-temperature alarm on Injection Press #1 was neglected for 2 hours. The main drive gearbox seized, causing $18,500 in replacement costs.
+            </p>
+            <div style="margin-top: auto; padding: 0.85rem; background: rgba(239, 68, 68, 0.15); border-radius: 0.5rem; font-weight: 600; color: #fca5a5;">
+              Key Takeaway: Navigation connects human trust to business reality. Always provide an escape route and confirmation feedback!
+            </div>
+          </div>
+        </div>
+
+        <aside class="trainer-notes">
+          <h4>Trainer Speaking Script & Pedagogical Cues:</h4>
+          <p>Highlight the tragedy: Somnang's controls were fine, but because the screen didn't transition to a success screen, Dara tapped Submit 8 extra times. The real cost was the distraction that led to a burned gearbox.</p>
+        </aside>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 7: PLAIN-LANGUAGE CONCEPT: ROOMS AND DOORS
+           ==================================================================== -->
+      <section class="slide" id="slide-7" data-slide-index="6" data-title="Plain-Language Concept: Rooms and Doors in a Building" data-segment="Section 2: The Real-World Why">
+        <div class="slide-header">
+          <span class="section-tag">Mental Model</span>
+          <h2>Plain-Language Concept: Rooms and Doors in a Building</h2>
+          <p class="subtitle">Before looking at formulas, picture physical rooms inside a manufacturing facility.</p>
+        </div>
+
+        <div class="slide-content grid-3">
+          <div class="card">
+            <span class="card-badge" style="background: rgba(6, 182, 212, 0.2); color: #67e8f9;">1. The Dedicated Room</span>
+            <h3 class="card-title">The Physical Room (Screen)</h3>
+            <p class="card-body">
+              A factory has distinct rooms: Reception Lobby, Maintenance Workshop, and Quality Lab. You don't perform surgery in the reception lobby. Each screen in your app is a room designed for <strong>one specific user task</strong>.
+            </p>
+            <div style="margin-top: auto; font-family: var(--font-code); color: var(--color-cyan); font-size: 0.85rem;">
+              Studio Equivalent: Screen (scr)
+            </div>
+          </div>
+
+          <div class="card">
+            <span class="card-badge" style="background: rgba(59, 130, 246, 0.2); color: #93c5fd;">2. The Door Handle</span>
+            <h3 class="card-title">The Marked Door (Navigate)</h3>
+            <p class="card-body">
+              To move from Reception to the Workshop, you walk to a door with a clear sign: <em>"Enter Workshop"</em>. You turn the handle. In Power Apps, a Button with <code>Navigate()</code> is a door leading forward into the next room.
+            </p>
+            <div style="margin-top: auto; font-family: var(--font-code); color: #60a5fa; font-size: 0.85rem;">
+              Power Fx: Navigate(scrTarget)
+            </div>
+          </div>
+
+          <div class="card">
+            <span class="card-badge" style="background: rgba(16, 185, 129, 0.2); color: #6ee7b7;">3. Stepping Backward</span>
+            <h3 class="card-title">Retracing Steps (Back)</h3>
+            <p class="card-body">
+              When you finish in the workshop, you don't jump out the window. You turn around and step back through the doorway you came in. In Power Apps, <code>Back()</code> retraces your steps through the screen history stack.
+            </p>
+            <div style="margin-top: auto; font-family: var(--font-code); color: #34d399; font-size: 0.85rem;">
+              Power Fx: Back()
+            </div>
+          </div>
+        </div>
+
+        <aside class="trainer-notes">
+          <h4>Trainer Speaking Script & Pedagogical Cues:</h4>
+          <p>Use this physical analogy: an app without a Back button is a room with a lock on the outside and no doorknob inside! People will break the window to get out.</p>
+          <p>A good app designer ensures every single room has a door leading forward to the next step, and a door leading safely back to where the user came from.</p>
+        </aside>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 8: EVERYDAY ANALOGY: THE BANK ATM JOURNEY
+           ==================================================================== -->
+      <section class="slide" id="slide-8" data-slide-index="7" data-title="Everyday Analogy: The Bank ATM Cash Withdrawal" data-segment="Section 2: The Real-World Why">
+        <div class="slide-header">
+          <span class="section-tag">Everyday Analogy</span>
+          <h2>Everyday Analogy: The Bank ATM Cash Withdrawal</h2>
+          <p class="subtitle">Every ATM transaction is an unbroken 5-screen flow with built-in escape routes.</p>
+        </div>
+
+        <div class="slide-content grid-4">
+          <div class="card">
+            <span class="card-badge">Step 1</span>
+            <h4 style="margin: 0.5rem 0;">Welcome Screen</h4>
+            <p style="font-size: 0.88rem; color: var(--text-muted);">
+              "Insert card". User inserts card &rarr; ATM automatically executes <code>Navigate(scrPIN)</code>.
+            </p>
+            <div style="margin-top: auto; font-family: var(--font-code); font-size: 0.78rem; color: var(--color-cyan);">Forward Trigger</div>
+          </div>
+
+          <div class="card">
+            <span class="card-badge">Step 2</span>
+            <h4 style="margin: 0.5rem 0;">PIN Entry + Cancel</h4>
+            <p style="font-size: 0.88rem; color: var(--text-muted);">
+              Asks for 4 digits. Prominent red button: <strong>Cancel (Back)</strong>. User is never trapped.
+            </p>
+            <div style="margin-top: auto; font-family: var(--font-code); font-size: 0.78rem; color: #ef4444;">Safety Escape Route</div>
+          </div>
+
+          <div class="card">
+            <span class="card-badge">Step 3</span>
+            <h4 style="margin: 0.5rem 0;">Select Amount</h4>
+            <p style="font-size: 0.88rem; color: var(--text-muted);">
+              Taps "$100". Dispenser hums &rarr; <code>Navigate(scrDispense, ScreenTransition.Fade)</code>.
+            </p>
+            <div style="margin-top: auto; font-family: var(--font-code); font-size: 0.78rem; color: #60a5fa;">State Change</div>
+          </div>
+
+          <div class="card">
+            <span class="card-badge">Step 4</span>
+            <h4 style="margin: 0.5rem 0;">Confirmation Screen</h4>
+            <p style="font-size: 0.88rem; color: var(--text-muted);">
+              "Please take your cash". Cash collected &rarr; Screen smoothly resets to Welcome screen.
+            </p>
+            <div style="margin-top: auto; font-family: var(--font-code); font-size: 0.78rem; color: #34d399;">Closed Loop Reset</div>
+          </div>
+        </div>
+
+        <aside class="trainer-notes">
+          <h4>Trainer Speaking Script & Pedagogical Cues:</h4>
+          <p>Walk through this ATM flow. Ask: "What if the ATM dispensed your cash but stayed frozen on the $100 button?" You would panic! You would tap it again! That's why Step 4 (Confirmation) is mandatory in every app you build.</p>
+        </aside>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 9: THE CORE NAVIGATION FUNCTIONS IN POWER APPS
+           ==================================================================== -->
+      <section class="slide" id="slide-9" data-slide-index="8" data-title="The Core Navigation Functions in Power Apps" data-segment="Section 3: Anatomy & Mechanisms">
+        <div class="slide-header">
+          <span class="section-tag">Syntax Architecture</span>
+          <h2>The Two Core Navigation Functions at a Glance</h2>
+          <p class="subtitle">Power Apps provides two dedicated functions to steer the user's camera view across screens.</p>
+        </div>
+
+        <div class="slide-content grid-2">
+          <div class="card">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+              <span class="card-badge" style="background: rgba(59, 130, 246, 0.2); color: #93c5fd;">Forward Router</span>
+              <span style="font-family: var(--font-code); color: #60a5fa; font-weight: 700;">Navigate()</span>
+            </div>
+            <h3 style="margin: 0.8rem 0 0.4rem 0;">The Navigate() Function</h3>
+            <p style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: 1rem;">
+              Explicitly transports the user's viewport forward to a specific destination screen named in Tree View.
+            </p>
+
+            <div style="background: #020617; padding: 1rem; border-radius: 0.6rem; border: 1px solid var(--border-subtle); font-family: var(--font-code); font-size: 0.85rem; line-height: 1.6; color: #93c5fd;">
+              Navigate( <span style="color: #38bdf8;">TargetScreen</span>, <span style="color: #a78bfa;">ScreenTransition</span> )
+            </div>
+
+            <div style="margin-top: 1rem; font-size: 0.82rem; color: var(--text-muted);">
+              <strong>Example:</strong> <code>Navigate(scrNewRequest, ScreenTransition.Cover)</code>
+            </div>
+          </div>
+
+          <div class="card">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+              <span class="card-badge" style="background: rgba(16, 185, 129, 0.2); color: #6ee7b7;">Backward Router</span>
+              <span style="font-family: var(--font-code); color: #34d399; font-weight: 700;">Back()</span>
+            </div>
+            <h3 style="margin: 0.8rem 0 0.4rem 0;">The Back() Function</h3>
+            <p style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: 1rem;">
+              Reads the internal navigation history stack and returns the user backwards to whichever screen they just came from.
+            </p>
+
+            <div style="background: #020617; padding: 1rem; border-radius: 0.6rem; border: 1px solid var(--border-subtle); font-family: var(--font-code); font-size: 0.85rem; line-height: 1.6; color: #86efac;">
+              Back( [ <span style="color: #a78bfa;">ScreenTransition</span> ] )
+            </div>
+
+            <div style="margin-top: 1rem; font-size: 0.82rem; color: var(--text-muted);">
+              <strong>Example:</strong> <code>Back(ScreenTransition.UnCover)</code> or simple <code>Back()</code>
+            </div>
+          </div>
+        </div>
+
+        <aside class="trainer-notes">
+          <h4>Trainer Speaking Script & Pedagogical Cues:</h4>
+          <p>Explain the syntax breakdown carefully. Point out that <code>Navigate()</code> requires at least 1 argument: the destination screen name. The second argument, the transition effect, is optional but highly recommended.</p>
+          <p>Notice that <code>Back()</code> does NOT take a destination screen argument. Why? Because it already knows where to go by reading the memory history stack!</p>
+        </aside>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 10: DEEP-DIVE: THE NAVIGATE() FUNCTION
+           ==================================================================== -->
+      <section class="slide" id="slide-10" data-slide-index="9" data-title="Deep-Dive: The Navigate() Function Formula Anatomy" data-segment="Section 3: Anatomy & Mechanisms">
+        <div class="slide-header">
+          <span class="section-tag">Formula Anatomy</span>
+          <h2>Deep-Dive: Anatomy of the <code>Navigate()</code> Formula</h2>
+          <p class="subtitle">Understanding every argument so you never have to memorize code syntax.</p>
+        </div>
+
+        <div class="slide-content grid-2">
+          <div class="card">
+            <h3 class="card-title">Breaking Down the Formula</h3>
+            <div style="background: #070a12; padding: 1.25rem; border-radius: 0.75rem; border: 1px solid var(--border-subtle); font-family: var(--font-code); font-size: 0.95rem; margin-bottom: 1.25rem;">
+              <span style="color: #f59e0b;">Navigate</span>( <span style="color: #38bdf8;">scrNewRequest</span>, <span style="color: #c084fc;">ScreenTransition.Cover</span> )
+            </div>
+
+            <div class="consequence-row">
+              <span class="card-badge" style="background: rgba(245, 158, 11, 0.2); color: #fbbf24;">Function</span>
+              <div>
+                <strong>Navigate:</strong>
+                <p>The imperative verb. Instructs the Power Apps runtime engine to switch the visible screen.</p>
+              </div>
+            </div>
+            <div class="consequence-row">
+              <span class="card-badge" style="background: rgba(56, 189, 248, 0.2); color: #38bdf8;">Arg 1</span>
+              <div>
+                <strong>TargetScreen (scrNewRequest):</strong>
+                <p>The exact name of the screen object in Tree View. Must match spelling exactly (no quotes!).</p>
+              </div>
+            </div>
+            <div class="consequence-row">
+              <span class="card-badge" style="background: rgba(192, 132, 252, 0.2); color: #c084fc;">Arg 2</span>
+              <div>
+                <strong>ScreenTransition (Visual Physics):</strong>
+                <p>The animation effect applied during the transition (Fade, Cover, CoverRight, None).</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <h3 class="card-title">Where Do We Write This Formula?</h3>
+            <p class="card-body">
+              In Power Apps Studio, navigation formulas are executed in response to user actions. Therefore, you almost always write <code>Navigate()</code> inside:
+            </p>
+
+            <div style="background: rgba(15, 23, 42, 0.85); padding: 1rem; border-radius: 0.6rem; border: 1px solid var(--border-subtle); margin: 0.85rem 0;">
+              <strong style="color: var(--color-cyan); font-size: 0.85rem;">The OnSelect Property of:</strong>
+              <ul style="margin: 0.5rem 0 0 1.2rem; font-size: 0.85rem; color: var(--text-muted); line-height: 1.6;">
+                <li>Buttons: <code>btnNewTicket.OnSelect</code></li>
+                <li>Icons: <code>icnNextArrow.OnSelect</code></li>
+                <li>Gallery Item Cards: <code>galIncidents.OnSelect</code></li>
+              </ul>
+            </div>
+
+            <div style="margin-top: auto; padding: 0.85rem; background: rgba(59, 130, 246, 0.1); border-radius: 0.5rem; font-size: 0.82rem; color: #93c5fd;">
+              Notice: Screen names do NOT use quotation marks because they are live object references, not text strings!
+            </div>
+          </div>
+        </div>
+
+        <aside class="trainer-notes">
+          <h4>Trainer Speaking Script & Pedagogical Cues:</h4>
+          <p>Highlight the quotation mark rule! Beginners love putting quotes around everything: <code>Navigate("scrNewRequest")</code>. Show them that in Power Apps, text strings use quotes, but object names (like screens and controls) do NOT have quotes!</p>
+          <p>Explain that typing <code>ScreenTransition.</code> will trigger Power Apps IntelliSense, showing all available animations in a helpful drop-down list.</p>
+        </aside>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 11: INTERACTIVE WIDGET 1: MULTI-SCREEN FLOW SIMULATOR
+           ==================================================================== -->
+      <section class="slide" id="slide-11" data-slide-index="10" data-title="Interactive Widget 1: Multi-Screen Flow Simulator" data-segment="Section 3: Anatomy & Mechanisms">
+        <div class="slide-header">
+          <span class="section-tag">Interactive Simulation</span>
+          <h2>Live Simulator: Experience the 3-Screen Circuit</h2>
+          <p class="subtitle">Click the phone buttons to navigate through the entire circuit and watch the history stack update.</p>
+        </div>
+
+        <div class="slide-content flow-stage">
+          <!-- Interactive Phone Mockup -->
+          <div class="phone-mockup-frame">
+            <div class="phone-notch"></div>
+            <div class="sim-screen-container">
+              
+              <!-- Screen 1: scrHome -->
+              <div id="sim-scr-home" class="sim-screen active">
+                <span class="card-badge" style="align-self: flex-start; margin-bottom: 0.5rem;">scrHome</span>
+                <h4 style="font-size: 1.1rem; margin-bottom: 0.35rem;">Apex Maintenance Hub</h4>
+                <p style="font-size: 0.82rem; color: var(--text-muted); margin-bottom: 1.5rem;">
+                  All 4 production lines active. 0 critical alarms.
+                </p>
+
+                <div style="background: rgba(30, 41, 59, 0.6); padding: 0.85rem; border-radius: 0.5rem; border: 1px solid var(--border-subtle); margin-bottom: 1.5rem; font-size: 0.8rem; color: #cbd5e1;">
+                  Recent Repairs:<br>&bull; Press-02: Valve replaced (08:30)<br>&bull; Extruder-01: Filter cleaned
+                </div>
+
+                <button id="sim-btn-goto-form" class="hud-btn" style="width: 100%; justify-content: center; background: #0078d4; color: #fff; padding: 0.75rem; margin-top: auto;">
+                  + REPORT INCIDENT &rarr;
+                </button>
+              </div>
+
+              <!-- Screen 2: scrNewRequest -->
+              <div id="sim-scr-form" class="sim-screen">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem;">
+                  <button id="sim-btn-cancel-form" class="hud-btn" style="padding: 0.25rem 0.6rem; font-size: 0.75rem; background: rgba(239, 68, 68, 0.2); color: #fca5a5; border-color: rgba(239, 68, 68, 0.4);">
+                    &larr; Cancel (Back)
+                  </button>
+                  <span class="card-badge">scrNewRequest</span>
+                </div>
+
+                <h4 style="font-size: 1.05rem; margin-bottom: 0.25rem;">New Breakdown Report</h4>
+                <p style="font-size: 0.78rem; color: var(--text-muted); margin-bottom: 0.85rem;">Select machine & describe issue.</p>
+
+                <div style="margin-bottom: 0.65rem;">
+                  <label style="font-size: 0.75rem; color: var(--text-dim); display: block; margin-bottom: 0.2rem;">Machine ID:</label>
+                  <select class="dial-select" style="width: 100%; font-size: 0.8rem; padding: 0.4rem;">
+                    <option>Press-01 (Molding)</option>
+                    <option>Press-02 (Molding)</option>
+                    <option>Press-03 (Molding)</option>
+                  </select>
+                </div>
+
+                <div style="margin-bottom: 1rem;">
+                  <label style="font-size: 0.75rem; color: var(--text-dim); display: block; margin-bottom: 0.2rem;">Notes:</label>
+                  <input type="text" class="dial-input" value="Hydraulic leak at seal #3" style="width: 100%; font-size: 0.8rem; padding: 0.4rem;">
+                </div>
+
+                <button id="sim-btn-submit-form" class="hud-btn" style="width: 100%; justify-content: center; background: #10b981; color: #fff; padding: 0.75rem; margin-top: auto;">
+                  SUBMIT TICKET &rarr;
+                </button>
+              </div>
+
+              <!-- Screen 3: scrSuccess -->
+              <div id="sim-scr-success" class="sim-screen">
+                <span class="card-badge" style="align-self: flex-start; margin-bottom: 0.5rem; background: rgba(16, 185, 129, 0.2); color: #86efac;">scrSuccess</span>
+                <div style="text-align: center; margin: 1.5rem 0 1rem 0;">
+                  <div style="font-size: 2.5rem; color: #10b981; margin-bottom: 0.5rem;">&check;</div>
+                  <h4 style="font-size: 1.15rem; color: #fff;">Ticket Logged!</h4>
+                  <p style="font-size: 0.82rem; color: var(--color-cyan); font-family: var(--font-code); margin-top: 0.25rem;">
+                    Ref: TKT-2026-0914
+                  </p>
+                </div>
+
+                <p style="font-size: 0.82rem; color: var(--text-muted); text-align: center; line-height: 1.5; margin-bottom: 1.5rem;">
+                  Dispatch alert sent to maintenance team on duty.
+                </p>
+
+                <button id="sim-btn-return-home" class="hud-btn" style="width: 100%; justify-content: center; background: #0078d4; color: #fff; padding: 0.75rem; margin-top: auto;">
+                  RETURN TO DASHBOARD &larr;
+                </button>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- Stack Inspector & Formula Terminal -->
+          <div class="stack-inspector-panel">
+            <h3 class="card-title">Runtime Navigation Inspector</h3>
+            <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1rem;">
+              Observe how Power Apps tracks the active screen and manages the screen memory history stack:
+            </p>
+
+            <div class="stack-trail-box">
+              <div><span style="color: var(--color-cyan);">CURRENT VISIBLE SCREEN:</span> <strong id="sim-active-screen-name" style="color: #fff;">scrHome</strong></div>
+              <div><span style="color: #c084fc;">PREVIOUS SCREEN IN STACK:</span> <span id="sim-stack-prev-name" style="color: #94a3b8;">(None - Root)</span></div>
+              <div><span style="color: #f59e0b;">LAST FORMULA EVALUATED:</span> <span id="sim-last-formula" style="color: #93c5fd;">App.OnStart</span></div>
+            </div>
+
+            <div style="background: rgba(30, 41, 59, 0.5); padding: 1rem; border-radius: 0.6rem; border: 1px solid var(--border-subtle); font-size: 0.85rem; line-height: 1.7; color: var(--text-muted);">
+              <strong>Architecture Observation:</strong>
+              <p>When you click <strong>"+ Report Incident"</strong>, the engine pushes <code>scrHome</code> into history and renders <code>scrNewRequest</code>. When you click <strong>"Cancel"</strong>, <code>Back()</code> pops the history stack without needing a hardcoded destination.</p>
+            </div>
+          </div>
+        </div>
+
+        <aside class="trainer-notes">
+          <h4>Trainer Speaking Script & Pedagogical Cues:</h4>
+          <p>Click through the phone simulator in front of the students: click "+ Report Incident", then click "Cancel (Back)", then click it again and click "Submit Ticket", then click "Return to Dashboard".</p>
+          <p>Direct attention to the "Runtime Navigation Inspector" panel on the right. Point out how the "Current Screen" and "Previous Screen in Stack" change with every tap.</p>
+        </aside>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 12: DEEP-DIVE: THE BACK() FUNCTION & HISTORY STACK
+           ==================================================================== -->
+      <section class="slide" id="slide-12" data-slide-index="11" data-title="Deep-Dive: The Back() Function & The Screen History Stack" data-segment="Section 3: Anatomy & Mechanisms">
+        <div class="slide-header">
+          <span class="section-tag">Stack Architecture</span>
+          <h2>Deep-Dive: The <code>Back()</code> Function &amp; History Stack</h2>
+          <p class="subtitle">Why <code>Back()</code> is architecturally superior to hardcoding <code>Navigate(scrHome)</code> on cancel buttons.</p>
+        </div>
+
+        <div class="slide-content grid-2">
+          <div class="card">
+            <h3 class="card-title">How the Navigation Stack Works (LIFO)</h3>
+            <p class="card-body">
+              Every time you call <code>Navigate()</code>, Power Apps pushes the current screen onto an internal memory stack like a deck of cards:
+            </p>
+
+            <div style="background: #020617; padding: 1rem; border-radius: 0.6rem; border: 1px solid var(--border-subtle); margin: 1rem 0; font-family: var(--font-code); font-size: 0.82rem; line-height: 1.7;">
+              [Top of Stack] &rarr; scrNewRequest (Active Screen)<br>
+              [Card Underneath] &rarr; scrHome (Pushed when Navigate called)<br>
+              [Bottom of Stack] &rarr; (Root of App)
+            </div>
+
+            <p style="font-size: 0.85rem; color: var(--text-muted);">
+              When you call <code>Back()</code>, Power Apps simply removes the top card and reveals the card underneath.
+            </p>
+          </div>
+
+          <div class="card">
+            <h3 class="card-title">Back() vs. Navigate(scrHome) Comparison</h3>
+            <div class="consequence-row">
+              <span class="card-badge" style="background: rgba(16, 185, 129, 0.2); color: #86efac;">Back()</span>
+              <div>
+                <strong>Context-Aware Return:</strong>
+                <p>If the user arrived from Search, <code>Back()</code> returns them to Search with their filter text intact.</p>
+              </div>
+            </div>
+            <div class="consequence-row">
+              <span class="card-badge" style="background: rgba(239, 68, 68, 0.2); color: #fca5a5;">Navigate(scrHome)</span>
+              <div>
+                <strong>Brute Force Forward Jump:</strong>
+                <p>Wipes out user context. If they arrived from a deep search, forcing them home destroys their work!</p>
+              </div>
+            </div>
+            <div style="margin-top: auto; padding: 0.85rem; background: rgba(59, 130, 246, 0.1); border-radius: 0.5rem; font-size: 0.82rem; color: #93c5fd;">
+              Engineering Rule: Always use <code>Back()</code> for Cancel buttons and Back arrows!
+            </div>
+          </div>
+        </div>
+
+        <aside class="trainer-notes">
+          <h4>Trainer Speaking Script & Pedagogical Cues:</h4>
+          <p>Explain the "deck of cards" metaphor: if you place a card on top, <code>Back()</code> simply lifts that card off. If you use <code>Navigate(scrHome)</code>, you are throwing a new card on top of the pile, growing the stack indefinitely.</p>
+        </aside>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 13: INTERACTIVE WIDGET 2: TRANSITION MATRIX LAB
+           ==================================================================== -->
+      <section class="slide" id="slide-13" data-slide-index="12" data-title="Interactive Widget 2: Screen Transition Matrix Laboratory" data-segment="Section 3: Anatomy & Mechanisms">
+        <div class="slide-header">
+          <span class="section-tag">Interactive Physics</span>
+          <h2>Screen Transition Laboratory: Test Visual Animations</h2>
+          <p class="subtitle">Select a transition type on the left and click "Play Transition" to observe the visual physics.</p>
+        </div>
+
+        <div class="slide-content transition-lab-grid">
+          <div class="transition-options-menu">
+            <div class="transition-opt-card active" data-transition="fade">
+              <h4 style="color: var(--color-cyan); font-size: 0.95rem;">ScreenTransition.Fade</h4>
+              <p style="font-size: 0.78rem; color: var(--text-muted);">Smooth cross-fade. Best for status changes and confirmations.</p>
+            </div>
+            <div class="transition-opt-card" data-transition="cover">
+              <h4 style="color: #60a5fa; font-size: 0.95rem;">ScreenTransition.Cover</h4>
+              <p style="font-size: 0.78rem; color: var(--text-muted);">Slides new screen from right to left. Signals drilling deeper into detail.</p>
+            </div>
+            <div class="transition-opt-card" data-transition="uncover">
+              <h4 style="color: #34d399; font-size: 0.95rem;">ScreenTransition.UnCover</h4>
+              <p style="font-size: 0.78rem; color: var(--text-muted);">Slides current screen away to right. Natural companion for Back().</p>
+            </div>
+            <div class="transition-opt-card" data-transition="none">
+              <h4 style="color: #cbd5e1; font-size: 0.95rem;">ScreenTransition.None</h4>
+              <p style="font-size: 0.78rem; color: var(--text-muted);">Instant snap. No animation. Best for quick desktop utility tools.</p>
+            </div>
+
+            <button id="btn-play-transition" class="hud-btn" style="width: 100%; justify-content: center; background: #0078d4; color: #fff; padding: 0.75rem; margin-top: auto;">
+              PLAY TRANSITION &rarr;
+            </button>
+          </div>
+
+          <div class="transition-preview-stage" id="transition-stage-box">
+            <div id="trans-card-a" style="position: absolute; width: 340px; height: 220px; background: rgba(30, 41, 59, 0.95); border: 2px solid #38bdf8; border-radius: 1rem; display: flex; flex-direction: column; align-items: center; justify-content: center; transition: all 0.5s ease;">
+              <span class="card-badge" style="margin-bottom: 0.5rem;">SCREEN A</span>
+              <h4 style="color: #fff;">Dashboard View</h4>
+              <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.35rem;">Waiting for transition...</p>
+            </div>
+
+            <div id="trans-card-b" style="position: absolute; width: 340px; height: 220px; background: rgba(16, 185, 129, 0.95); border: 2px solid #34d399; border-radius: 1rem; display: flex; flex-direction: column; align-items: center; justify-content: center; opacity: 0; transform: translateX(100%); transition: all 0.5s ease;">
+              <span class="card-badge" style="margin-bottom: 0.5rem; background: #064e3b; color: #6ee7b7;">SCREEN B</span>
+              <h4 style="color: #fff;">Target Form View</h4>
+              <p style="font-size: 0.8rem; color: #dcfce7; margin-top: 0.35rem;">Transition Completed!</p>
+            </div>
+          </div>
+        </div>
+
+        <aside class="trainer-notes">
+          <h4>Trainer Speaking Script & Pedagogical Cues:</h4>
+          <p>Select each transition option and click "Play Transition". Show how <code>ScreenTransition.Cover</code> moves from right to left, matching the mental model of opening a new notebook page.</p>
+          <p>Show how <code>ScreenTransition.Fade</code> dissolves smoothly, which is perfect for submitting a ticket and landing on a Confirmation Screen.</p>
+        </aside>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 14: DEEP-DIVE: CONFIRMATION LOOPS & ESCAPE ROUTES
+           ==================================================================== -->
+      <section class="slide" id="slide-14" data-slide-index="13" data-title="Deep-Dive: The Confirmation Loop & Escape Routes" data-segment="Section 3: Anatomy & Mechanisms">
+        <div class="slide-header">
+          <span class="section-tag">UX Safety Rules</span>
+          <h2>Deep-Dive: The Confirmation Loop &amp; Escape Routes</h2>
+          <p class="subtitle">Two non-negotiable safety rules for every enterprise business application.</p>
+        </div>
+
+        <div class="slide-content grid-2">
+          <div class="card">
+            <span class="consequence-badge" style="background: rgba(16, 185, 129, 0.2); color: #86efac; border-color: rgba(16, 185, 129, 0.4);">Safety Rule 1</span>
+            <h3 style="margin: 0.6rem 0;">The Mandatory Escape Route (Cancel / Back)</h3>
+            <p style="font-size: 0.88rem; color: var(--text-muted); line-height: 1.6; margin-bottom: 1rem;">
+              Never trap an operator on a form. If a worker opens a screen by mistake, they must always have a zero-consequence way to leave.
+            </p>
+            <div style="background: rgba(15, 23, 42, 0.85); padding: 0.85rem; border-radius: 0.5rem; border: 1px solid var(--border-subtle); font-size: 0.82rem; color: #cbd5e1;">
+              <strong>Without an Escape Route:</strong> Users submit fake data just to exit the form.<br>
+              <strong>With an Escape Route (Back()):</strong> Clean database, zero operator panic.
+            </div>
+          </div>
+
+          <div class="card">
+            <span class="consequence-badge" style="background: rgba(59, 130, 246, 0.2); color: #93c5fd; border-color: rgba(59, 130, 246, 0.4);">Safety Rule 2</span>
+            <h3 style="margin: 0.6rem 0;">The Mandatory Confirmation Loop (Success Screen)</h3>
+            <p style="font-size: 0.88rem; color: var(--text-muted); line-height: 1.6; margin-bottom: 1rem;">
+              Never leave the user staring at the submitted form. Immediate transition to a Success screen delivers three vital psychological reassurances:
+            </p>
+            <div style="background: rgba(15, 23, 42, 0.85); padding: 0.85rem; border-radius: 0.5rem; border: 1px solid var(--border-subtle); font-size: 0.82rem; color: #cbd5e1;">
+              1. <strong>Proof of Receipt:</strong> Shows generated Ticket ID.<br>
+              2. <strong>Expectation Setting:</strong> "Technician dispatched within 15m".<br>
+              3. <strong>Loop Reset:</strong> Clear button to return to home dashboard.
+            </div>
+          </div>
+        </div>
+
+        <aside class="trainer-notes">
+          <h4>Trainer Speaking Script & Pedagogical Cues:</h4>
+          <p>Re-iterate: these two rules are not optional. When evaluating student projects, if a form lacks a Cancel button or a submission lacks a Confirmation Screen, it is an automatic deduction.</p>
+        </aside>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 15: TRAINER DEMONSTRATION: BUILDING THE 3-SCREEN CIRCUIT
+           ==================================================================== -->
+      <section class="slide" id="slide-15" data-slide-index="14" data-title="Trainer Demonstration: Building the 3-Screen Circuit" data-segment="Section 4: Demonstration">
+        <div class="slide-header">
+          <span class="section-tag">Trainer Modeling</span>
+          <h2>Trainer Demonstration: Assembling the 3-Screen Circuit</h2>
+          <p class="subtitle">Watch the trainer wire up the entire navigation circuit in Power Apps Studio.</p>
+        </div>
+
+        <div class="slide-content grid-4">
+          <div class="card">
+            <span class="obj-num">1</span>
+            <h4 style="margin: 0.6rem 0 0.3rem 0;">Create Success Screen</h4>
+            <p style="font-size: 0.85rem; color: var(--text-muted); flex: 1;">
+              Click <code>+ New screen</code> &rarr; <code>Blank</code>. Rename to <code>scrSuccessConfirmation</code>. Add confirmation labels.
+            </p>
+            <div style="font-family: var(--font-code); font-size: 0.78rem; color: var(--color-cyan); margin-top: 0.5rem;">Tree View Setup</div>
+          </div>
+
+          <div class="card">
+            <span class="obj-num">2</span>
+            <h4 style="margin: 0.6rem 0 0.3rem 0;">Wire Forward Button</h4>
+            <p style="font-size: 0.85rem; color: var(--text-muted); flex: 1;">
+              On <code>scrHome</code>, select <code>btnNewTicket</code>. In <code>OnSelect</code>, write: <code>Navigate(scrNewRequest, ScreenTransition.Cover)</code>.
+            </p>
+            <div style="font-family: var(--font-code); font-size: 0.78rem; color: #60a5fa; margin-top: 0.5rem;">Forward Route</div>
+          </div>
+
+          <div class="card">
+            <span class="obj-num">3</span>
+            <h4 style="margin: 0.6rem 0 0.3rem 0;">Wire Cancel Escape</h4>
+            <p style="font-size: 0.85rem; color: var(--text-muted); flex: 1;">
+              On <code>scrNewRequest</code>, insert <code>icnBack</code>. In <code>OnSelect</code>, write: <code>Back(ScreenTransition.UnCover)</code>.
+            </p>
+            <div style="font-family: var(--font-code); font-size: 0.78rem; color: #a78bfa; margin-top: 0.5rem;">Safety Route</div>
+          </div>
+
+          <div class="card">
+            <span class="obj-num">4</span>
+            <h4 style="margin: 0.6rem 0 0.3rem 0;">Wire Submit & Loop</h4>
+            <p style="font-size: 0.85rem; color: var(--text-muted); flex: 1;">
+              On <code>scrNewRequest</code>, set <code>btnSubmit.OnSelect = Navigate(scrSuccessConfirmation, ScreenTransition.Fade)</code>.
+            </p>
+            <div style="font-family: var(--font-code); font-size: 0.78rem; color: #34d399; margin-top: 0.5rem;">Closed Loop</div>
+          </div>
+        </div>
+
+        <aside class="trainer-notes">
+          <h4>Trainer Speaking Script & Pedagogical Cues:</h4>
+          <p>Demonstrate this live in Studio (or narrate smoothly across the 4 cards). Notice the deliberate transition pairing: <code>Cover</code> on the way in, and <code>UnCover</code> on the way out!</p>
+          <p>This symmetry creates a polished, native mobile feel that makes citizen developer apps feel like professionally engineered software.</p>
+        </aside>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 16: INTERACTIVE WIDGET 3: TRAPPED USER DIAGNOSTIC LAB
+           ==================================================================== -->
+      <section class="slide" id="slide-16" data-slide-index="15" data-title="Interactive Widget 3: The Trapped User Diagnostic Lab" data-segment="Section 5: Guided Practice">
+        <div class="slide-header">
+          <span class="section-tag">Diagnostic Lab</span>
+          <h2>Diagnostic Lab: Fix the Trapped User Bug</h2>
+          <p class="subtitle">Experience the trapped user dead-end bug on the left, then apply the fix to unlock the escape route.</p>
+        </div>
+
+        <div class="slide-content diagnostic-grid">
+          <!-- Broken State -->
+          <div class="diagnostic-panel" style="border-color: rgba(239, 68, 68, 0.4);">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem;">
+              <h3 style="color: #fca5a5; font-size: 1.05rem;">Flawed Screen: Trapped Operator</h3>
+              <span class="consequence-badge">Dead-End Bug</span>
+            </div>
+            <p style="font-size: 0.82rem; color: var(--text-muted); margin-bottom: 1rem;">
+              Notice: There is NO Back button. Click "Try to Leave":
+            </p>
+
+            <div style="background: #020617; padding: 1.25rem; border-radius: 0.75rem; border: 1px solid var(--border-subtle); flex: 1; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;">
+              <span class="card-badge" style="margin-bottom: 0.5rem;">scrToolPicker</span>
+              <h4 style="color: #fff; margin-bottom: 0.25rem;">Select Machine Tool</h4>
+              <p style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 1rem;">No Cancel or Back route available.</p>
+              <button id="btn-diag-trapped" class="hud-btn" style="background: rgba(239, 68, 68, 0.2); color: #fca5a5; border-color: rgba(239, 68, 68, 0.4);">
+                Try to Leave Screen &rarr;
+              </button>
+            </div>
+
+            <div id="diag-trapped-msg" style="margin-top: 0.75rem; font-size: 0.82rem; color: #fca5a5; min-height: 24px;"></div>
+          </div>
+
+          <!-- Fixed State -->
+          <div class="diagnostic-panel" style="border-color: rgba(16, 185, 129, 0.4);">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem;">
+              <h3 style="color: #86efac; font-size: 1.05rem;">Remediated Screen: Back() Injected</h3>
+              <span class="consequence-badge" style="background: rgba(16, 185, 129, 0.2); color: #86efac; border-color: rgba(16, 185, 129, 0.4);">Fixed</span>
+            </div>
+            <p style="font-size: 0.82rem; color: var(--text-muted); margin-bottom: 1rem;">
+              Back route configured: <code>icnBack.OnSelect = Back()</code>:
+            </p>
+
+            <div style="background: #020617; padding: 1.25rem; border-radius: 0.75rem; border: 1px solid var(--border-subtle); flex: 1; display: flex; flex-direction: column; position: relative;">
+              <button id="btn-diag-fixed-back" class="hud-btn" style="align-self: flex-start; padding: 0.3rem 0.75rem; font-size: 0.8rem; background: rgba(59, 130, 246, 0.2); color: #93c5fd; border-color: rgba(59, 130, 246, 0.4); margin-bottom: 1rem;">
+                &larr; Back()
+              </button>
+              <div style="text-align: center; margin-top: auto; margin-bottom: auto;">
+                <span class="card-badge" style="margin-bottom: 0.5rem;">scrToolPicker</span>
+                <h4 style="color: #fff; margin-bottom: 0.25rem;">Select Machine Tool</h4>
+                <p style="font-size: 0.8rem; color: #86efac; margin-top: 0.35rem;">Operator can safely abort without data pollution!</p>
+              </div>
+            </div>
+
+            <div id="diag-fixed-msg" style="margin-top: 0.75rem; font-size: 0.82rem; color: #86efac; min-height: 24px;"></div>
+          </div>
+        </div>
+
+        <aside class="trainer-notes">
+          <h4>Trainer Speaking Script & Pedagogical Cues:</h4>
+          <p>Click "Try to Leave Screen" on the left: show the red alert: "Error: No escape route found! Operator is trapped."</p>
+          <p>Then click "&larr; Back()" on the right: show the green success: "Back() executed smoothly. Operator returned to Dashboard without corrupting data."</p>
+        </aside>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 17: GUIDED PRACTICE: SHIFT HANDOVER FLOW
+           ==================================================================== -->
+      <section class="slide" id="slide-17" data-slide-index="16" data-title="Guided Practice: Shift Handover 3-Screen Journey" data-segment="Section 5: Guided Practice">
+        <div class="slide-header">
+          <span class="section-tag">Guided Exercise</span>
+          <h2>Guided Practice: Building the Shift Handover Flow</h2>
+          <p class="subtitle">Follow along as we map 3 shift handover navigation touchpoints in Studio.</p>
+        </div>
+
+        <div class="slide-content grid-2">
+          <div class="card">
+            <h3 class="card-title">Plant Requirement Specifications</h3>
+            <div class="consequence-row">
+              <span class="obj-num">A</span>
+              <div>
+                <strong>Launch Handover Wizard:</strong>
+                <p>On <code>scrShiftDashboard</code>, supervisor taps <code>btnStartHandover</code> &rarr; opens form with Cover transition.</p>
+              </div>
+            </div>
+            <div class="consequence-row">
+              <span class="obj-num">B</span>
+              <div>
+                <strong>Abort Handover:</strong>
+                <p>On <code>scrHandoverForm</code>, supervisor taps <code>btnCancel</code> &rarr; uncovers and returns to previous dashboard.</p>
+              </div>
+            </div>
+            <div class="consequence-row">
+              <span class="obj-num">C</span>
+              <div>
+                <strong>Seal Handover:</strong>
+                <p>On <code>scrHandoverForm</code>, supervisor taps <code>btnSealHandover</code> &rarr; cross-fades into <code>scrHandoverSuccess</code>.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <h3 class="card-title">Learner Architecture Solution</h3>
+            <table style="width: 100%; border-collapse: collapse; font-size: 0.85rem; color: var(--text-muted);">
+              <thead>
+                <tr style="border-bottom: 1px solid var(--border-subtle); color: var(--color-cyan); text-align: left;">
+                  <th style="padding: 0.5rem 0.25rem;">Touchpoint</th>
+                  <th style="padding: 0.5rem 0.25rem;">Control Name</th>
+                  <th style="padding: 0.5rem 0.25rem;">Property</th>
+                  <th style="padding: 0.5rem 0.25rem;">Power Fx Formula</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr style="border-bottom: 1px solid var(--border-subtle);">
+                  <td style="padding: 0.6rem 0.25rem; font-weight: 700; color: #fff;">A</td>
+                  <td style="padding: 0.6rem 0.25rem; font-family: var(--font-code); color: #60a5fa;">btnStartHandover</td>
+                  <td style="padding: 0.6rem 0.25rem;">OnSelect</td>
+                  <td style="padding: 0.6rem 0.25rem; font-family: var(--font-code); color: #93c5fd;">Navigate(scrHandoverForm, ScreenTransition.Cover)</td>
+                </tr>
+                <tr style="border-bottom: 1px solid var(--border-subtle);">
+                  <td style="padding: 0.6rem 0.25rem; font-weight: 700; color: #fff;">B</td>
+                  <td style="padding: 0.6rem 0.25rem; font-family: var(--font-code); color: #ef4444;">btnCancel</td>
+                  <td style="padding: 0.6rem 0.25rem;">OnSelect</td>
+                  <td style="padding: 0.6rem 0.25rem; font-family: var(--font-code); color: #fca5a5;">Back(ScreenTransition.UnCover)</td>
+                </tr>
+                <tr>
+                  <td style="padding: 0.6rem 0.25rem; font-weight: 700; color: #fff;">C</td>
+                  <td style="padding: 0.6rem 0.25rem; font-family: var(--font-code); color: #10b981;">btnSealHandover</td>
+                  <td style="padding: 0.6rem 0.25rem;">OnSelect</td>
+                  <td style="padding: 0.6rem 0.25rem; font-family: var(--font-code); color: #86efac;">Navigate(scrHandoverSuccess, ScreenTransition.Fade)</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <aside class="trainer-notes">
+          <h4>Trainer Speaking Script & Pedagogical Cues:</h4>
+          <p>Prompt the class: "Notice Touchpoint B. Why did we write <code>Back(ScreenTransition.UnCover)</code> instead of <code>Navigate(scrShiftDashboard)</code>?"</p>
+          <p>Reinforce: <code>Back()</code> reverses the history stack. The visual physics of <code>UnCover</code> matches the reversal, sliding the screen away to the right.</p>
+        </aside>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 18: INDEPENDENT PRACTICE: TOOL CRIB 3-SCREEN FLOW
+           ==================================================================== -->
+      <section class="slide" id="slide-18" data-slide-index="17" data-title="Independent Practice: Tool Crib 3-Screen Flow" data-segment="Section 6: Independent Practice">
+        <div class="slide-header">
+          <span class="section-tag">Independent Task</span>
+          <h2>Independent Mini-Task: Tool Crib Kiosk Navigation Flow</h2>
+          <p class="subtitle">Spend 10 minutes mapping the 4 navigation touchpoints for the tool cage check-out kiosk.</p>
+        </div>
+
+        <div class="slide-content grid-2">
+          <div class="card">
+            <h3 class="card-title">The Tool Crib Business Scenario</h3>
+            <p style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: 1rem;">
+              Workers stand at a touchscreen on the tool cage wall. Wire up the navigation for their session:
+            </p>
+
+            <div class="objective-item">
+              <span class="obj-num">1</span>
+              <div>
+                <strong>Enter Tool Crib:</strong>
+                <p>On <code>scrKioskWelcome</code>, tap <code>btnCheckoutTool</code> &rarr; slide cover into <code>scrPartPicker</code>.</p>
+              </div>
+            </div>
+            <div class="objective-item">
+              <span class="obj-num">2</span>
+              <div>
+                <strong>Abort Picker:</strong>
+                <p>On <code>scrPartPicker</code>, worker taps <code>btnAbort</code> &rarr; return safely to welcome view.</p>
+              </div>
+            </div>
+            <div class="objective-item">
+              <span class="obj-num">3</span>
+              <div>
+                <strong>Review Checkout:</strong>
+                <p>On <code>scrPartPicker</code>, tap <code>btnConfirmCart</code> &rarr; fade into <code>scrReceiptSummary</code>.</p>
+              </div>
+            </div>
+            <div class="objective-item">
+              <span class="obj-num">4</span>
+              <div>
+                <strong>Finish &amp; Reset:</strong>
+                <p>On <code>scrReceiptSummary</code>, tap <code>btnDone</code> &rarr; fade reset to <code>scrKioskWelcome</code>.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="card" style="border-color: rgba(59, 130, 246, 0.4); background: rgba(15, 23, 42, 0.9);">
+            <h3 class="card-title">Your Deliverable Specification</h3>
+            <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1rem;">
+              Draft the exact Power Fx formulas for the 4 button <code>OnSelect</code> properties:
+            </p>
+
+            <div style="background: rgba(30, 41, 59, 0.6); padding: 1rem; border-radius: 0.6rem; border: 1px dashed var(--border-subtle); font-family: var(--font-code); font-size: 0.82rem; line-height: 1.8;">
+              Item 1: btnCheckoutTool.OnSelect = [Power Fx Formula?]<br>
+              Item 2: btnAbort.OnSelect = [Power Fx Formula?]<br>
+              Item 3: btnConfirmCart.OnSelect = [Power Fx Formula?]<br>
+              Item 4: btnDone.OnSelect = [Power Fx Formula?]
+            </div>
+
+            <div style="margin-top: auto; padding: 0.85rem; background: rgba(6, 182, 212, 0.1); border-radius: 0.5rem; font-size: 0.82rem; color: #67e8f9;">
+              Hint: Remember that object names (screens) do NOT use quotation marks!
+            </div>
+          </div>
+        </div>
+
+        <aside class="trainer-notes">
+          <h4>Trainer Speaking Script & Pedagogical Cues:</h4>
+          <p>Give students 7 minutes to write their formulas. Walk around the room or check chat responses. Look for students who accidentally put quotes around screen names: <code>Navigate("scrPartPicker")</code>.</p>
+          <p>When time is up, ask a student to read out Item 2 (Abort): make sure they used <code>Back()</code>!</p>
+        </aside>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 19: FOUR DANGEROUS MISCONCEPTIONS DEBUNKED
+           ==================================================================== -->
+      <section class="slide" id="slide-19" data-slide-index="18" data-title="Four Dangerous Navigation Misconceptions Debunked" data-segment="Section 6: Independent Practice">
+        <div class="slide-header">
+          <span class="section-tag">Error Prevention</span>
+          <h2>Four Dangerous Beginner Misconceptions Debunked</h2>
+          <p class="subtitle">Replacing plausible wrong mental models with professional engineering instincts.</p>
+        </div>
+
+        <div class="slide-content grid-2">
+          <div class="card">
+            <span class="consequence-badge">Plausible Misconception 1</span>
+            <h4 style="margin: 0.5rem 0;">"Screens automatically advance when you finish a form."</h4>
+            <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.65rem;">
+              <strong>Why beginners think this:</strong> Social media apps like TikTok auto-swipe to the next screen.
+            </p>
+            <p style="font-size: 0.85rem; color: #86efac; border-left: 2px solid var(--color-success); padding-left: 0.75rem;">
+              <strong>Trainer Truth:</strong> Enterprise apps NEVER guess user intent. You must explicitly author a <code>Navigate()</code> formula in the button's <code>OnSelect</code>.
+            </p>
+          </div>
+
+          <div class="card">
+            <span class="consequence-badge">Plausible Misconception 2</span>
+            <h4 style="margin: 0.5rem 0;">"Navigate() automatically saves form data to SharePoint."</h4>
+            <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.65rem;">
+              <strong>Why beginners think this:</strong> Because the screen changes, they assume the database was updated too.
+            </p>
+            <p style="font-size: 0.85rem; color: #86efac; border-left: 2px solid var(--color-success); padding-left: 0.75rem;">
+              <strong>Trainer Truth:</strong> <code>Navigate()</code> ONLY moves the camera view. Data storage is executed by <code>SubmitForm()</code> or <code>Patch()</code>.
+            </p>
+          </div>
+
+          <div class="card">
+            <span class="consequence-badge">Plausible Misconception 3</span>
+            <h4 style="margin: 0.5rem 0;">"Back() is identical to Navigate(scrHome)."</h4>
+            <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.65rem;">
+              <strong>Why beginners think this:</strong> In simple 2-screen apps, both end up back at the starting screen.
+            </p>
+            <p style="font-size: 0.85rem; color: #86efac; border-left: 2px solid var(--color-success); padding-left: 0.75rem;">
+              <strong>Trainer Truth:</strong> <code>Back()</code> pops the history stack. If a user arrived from a deep search, <code>Navigate(scrHome)</code> destroys their search results!
+            </p>
+          </div>
+
+          <div class="card">
+            <span class="consequence-badge">Plausible Misconception 4</span>
+            <h4 style="margin: 0.5rem 0;">"Transitions are just decorative toys that slow down phones."</h4>
+            <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.65rem;">
+              <strong>Why beginners think this:</strong> Animations seem like superficial design fluff.
+            </p>
+            <p style="font-size: 0.85rem; color: #86efac; border-left: 2px solid var(--color-success); padding-left: 0.75rem;">
+              <strong>Trainer Truth:</strong> Transitions provide vital spatial depth. A <code>Cover</code> tells the brain: <em>"Drilling into detail."</em> A <code>Fade</code> signals: <em>"Task complete."</em>
+            </p>
+          </div>
+        </div>
+
+        <aside class="trainer-notes">
+          <h4>Trainer Speaking Script & Pedagogical Cues:</h4>
+          <p>Read through each misconception. Emphasize Misconception 2: this is a huge trap! Beginners write <code>Navigate(scrSuccess)</code> and think their data saved. Remind them: Navigate only steers the camera; saving data is a separate function.</p>
+        </aside>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 20: INTERACTIVE WIDGET 4: 5-QUESTION KNOWLEDGE CHECK
+           ==================================================================== -->
+      <section class="slide" id="slide-20" data-slide-index="19" data-title="Interactive Widget 4: 5-Question Knowledge Check" data-segment="Section 7: Evaluation & Check">
+        <div class="slide-header">
+          <span class="section-tag">Interactive Evaluation</span>
+          <h2>Knowledge Check: 5 Questions on Navigation Architecture</h2>
+          <p class="subtitle">Test your mastery of navigation functions, history stacks, and UX safety loops.</p>
+        </div>
+
+        <div class="slide-content quiz-container">
+          <div class="quiz-card">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+              <span id="quiz-question-badge" class="card-badge">Question 1 of 5</span>
+              <span id="quiz-score-badge" style="font-family: var(--font-code); color: var(--color-cyan); font-size: 0.85rem;">Score: 0/5</span>
+            </div>
+
+            <h3 id="quiz-question-title" style="margin: 1rem 0 0.5rem 0; font-size: 1.15rem; line-height: 1.4;">
+              Why is the Back() function architecturally superior to hardcoding Navigate(scrHome) on a Cancel button?
+            </h3>
+
+            <div class="quiz-options" id="quiz-options-container">
+              <!-- Rendered dynamically by script.js -->
+            </div>
+
+            <div class="quiz-feedback" id="quiz-feedback-box">
+              <!-- Feedback rationale shown upon answering -->
+            </div>
+
+            <div style="margin-top: auto; display: flex; justify-content: space-between; align-items: center; padding-top: 1rem;">
+              <button id="btn-quiz-prev" class="hud-btn" style="visibility: hidden;">&larr; Previous</button>
+              <button id="btn-quiz-next" class="hud-btn" style="display: none;">Next Question &rarr;</button>
+            </div>
+          </div>
+
+          <div class="card" style="border-color: rgba(59, 130, 246, 0.3); background: rgba(15, 23, 42, 0.85);">
+            <h3 class="card-title">Navigation Engineering Rules Summary</h3>
+            <div class="consequence-row">
+              <span class="card-badge" style="background: rgba(59, 130, 246, 0.2); color: #93c5fd;">Forward</span>
+              <div>
+                <strong>Navigate(TargetScreen, Transition):</strong>
+                <p>Requires exact screen name (no quotes). Pushes current screen into history stack.</p>
+              </div>
+            </div>
+            <div class="consequence-row">
+              <span class="card-badge" style="background: rgba(16, 185, 129, 0.2); color: #86efac;">Backward</span>
+              <div>
+                <strong>Back(Transition):</strong>
+                <p>Pops the memory stack. Respects user history and preserves filter/search context.</p>
+              </div>
+            </div>
+            <div class="consequence-row">
+              <span class="card-badge" style="background: rgba(6, 182, 212, 0.2); color: #67e8f9;">Loop Safety</span>
+              <div>
+                <strong>Confirmation &amp; Escape:</strong>
+                <p>Every form must have a Cancel route (Back) and every submit must navigate to Confirmation (Fade).</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <aside class="trainer-notes">
+          <h4>Trainer Speaking Script & Pedagogical Cues:</h4>
+          <p>Work through the 5 quiz questions. Have students discuss the "Why" and "What happens if" scenarios out loud before locking in their answers.</p>
+          <p>Questions cover: Back vs Navigate stack mechanics, what happens if Navigate is missing on Submit, ScreenTransition purpose, why Cancel buttons are mandatory, and Navigate vs data storage.</p>
+        </aside>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 21: FINAL CHALLENGE: QUALITY INSPECTION 3-SCREEN JOURNEY
+           ==================================================================== -->
+      <section class="slide" id="slide-21" data-slide-index="20" data-title="Final Challenge: Quality Inspection 3-Screen Journey" data-segment="Section 7: Evaluation & Check">
+        <div class="slide-header">
+          <span class="section-tag">Final Assessment</span>
+          <h2>Final Challenge: Quality Inspection 3-Screen Flow</h2>
+          <p class="subtitle">Design the complete navigation architecture for Quality Inspector Bopha's mobile workflow.</p>
+        </div>
+
+        <div class="slide-content grid-2">
+          <div class="card">
+            <h3 class="card-title">Workplace Scenario &amp; Requirements</h3>
+            <p style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: 1rem;">
+              Quality Inspector Bopha inspects molded plastic parts every hour. Wire her complete 3-screen workflow on her handheld barcode scanner:
+            </p>
+
+            <div class="consequence-row">
+              <span class="obj-num">1</span>
+              <div>
+                <strong>scrQualityDashboard:</strong>
+                <p>Tap <code>btnNewInspection</code> &rarr; slide cover into <code>scrInspectionForm</code>.</p>
+              </div>
+            </div>
+            <div class="consequence-row">
+              <span class="obj-num">2</span>
+              <div>
+                <strong>scrInspectionForm (Escape):</strong>
+                <p>Tap <code>icnCancel</code> &rarr; uncover and return safely to previous dashboard using <code>Back()</code>.</p>
+              </div>
+            </div>
+            <div class="consequence-row">
+              <span class="obj-num">3</span>
+              <div>
+                <strong>scrInspectionForm (Submit):</strong>
+                <p>Tap <code>btnLogVerdict</code> &rarr; cross-fade into <code>scrInspectionSuccess</code>.</p>
+              </div>
+            </div>
+            <div class="consequence-row">
+              <span class="obj-num">4</span>
+              <div>
+                <strong>scrInspectionSuccess (Dual Return):</strong>
+                <p>Option A: <code>btnLogAnother</code> &rarr; opens new form.<br>Option B: <code>btnBackToDashboard</code> &rarr; returns home.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="card" style="border-color: var(--color-cyan); background: rgba(15, 23, 42, 0.9);">
+            <h3 class="card-title">Challenge Mission Deliverable</h3>
+            <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1.25rem;">
+              In your workbook, produce the 4-item Navigation Specification Table:
+            </p>
+
+            <ul style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.8; margin-left: 1.2rem; margin-bottom: 1.25rem;">
+              <li><strong>Source Screen</strong> (Tree View name)</li>
+              <li><strong>Triggering Control</strong> (Hungarian button or icon name)</li>
+              <li><strong>Target Property</strong> (<code>OnSelect</code>)</li>
+              <li><strong>Exact Power Fx Formula</strong> (Function + Arguments)</li>
+              <li><strong>Transition Animation Justification</strong></li>
+            </ul>
+
+            <div style="padding: 0.85rem; background: rgba(6, 182, 212, 0.1); border-radius: 0.5rem; font-size: 0.82rem; color: #67e8f9;">
+              Evaluated on: Syntax Precision, Stack History Preservation, and Closed-Loop UX Flow!
+            </div>
+          </div>
+        </div>
+
+        <aside class="trainer-notes">
+          <h4>Trainer Speaking Script & Pedagogical Cues:</h4>
+          <p>Explain the mission clearly. Notice the dual return path on Screen 3: Bopha inspects parts every hour. Having a "Log Another Batch" button directly on the Success screen saves her two extra taps every single hour!</p>
+          <p>This is where citizen developers become business heroes: by streamlining repetitive operational routines.</p>
+        </aside>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 22: EVALUATION RUBRIC & MODEL SOLUTION
+           ==================================================================== -->
+      <section class="slide" id="slide-22" data-slide-index="21" data-title="Evaluation Rubric & Model Solution" data-segment="Section 7: Evaluation & Check">
+        <div class="slide-header">
+          <span class="section-tag">Grading Standards</span>
+          <h2>Assessment Rubric &amp; Model Architecture Solution</h2>
+          <p class="subtitle">Compare your specifications against the 4-tier rubric and professional engineering benchmark.</p>
+        </div>
+
+        <div class="slide-content grid-2">
+          <div class="card">
+            <h3 class="card-title">4-Tier Assessment Rubric</h3>
+            <div style="display: flex; flex-direction: column; gap: 0.65rem; font-size: 0.82rem;">
+              <div style="background: rgba(30, 41, 59, 0.5); padding: 0.65rem; border-radius: 0.4rem; border-left: 3px solid var(--color-cyan);">
+                <strong>4 - Exemplary:</strong> Flawless syntax; uses <code>Back()</code> with <code>UnCover</code> for abort; uses <code>Fade</code> for confirmation; implements dual return paths.
+              </div>
+              <div style="background: rgba(30, 41, 59, 0.5); padding: 0.65rem; border-radius: 0.4rem; border-left: 3px solid var(--color-success);">
+                <strong>3 - Proficient:</strong> Accurate <code>Navigate()</code> and <code>Back()</code> formulas; transition arguments specified; no dead ends.
+              </div>
+              <div style="background: rgba(30, 41, 59, 0.5); padding: 0.65rem; border-radius: 0.4rem; border-left: 3px solid var(--color-warning);">
+                <strong>2 - Developing:</strong> Quotes used around screen names; uses <code>Navigate(scrDashboard)</code> instead of <code>Back()</code> on cancel.
+              </div>
+              <div style="background: rgba(30, 41, 59, 0.5); padding: 0.65rem; border-radius: 0.4rem; border-left: 3px solid var(--color-danger);">
+                <strong>1 - Beginning:</strong> Leaves screens with zero exit paths; writes navigation formula on wrong property.
+              </div>
+            </div>
+          </div>
+
+          <div class="card" style="border-color: rgba(16, 185, 129, 0.4); background: rgba(15, 23, 42, 0.9);">
+            <h3 class="card-title" style="color: #86efac;">Model Engineering Solution</h3>
+            <table style="width: 100%; border-collapse: collapse; font-size: 0.82rem; color: var(--text-muted);">
+              <thead>
+                <tr style="border-bottom: 1px solid var(--border-subtle); color: #86efac; text-align: left;">
+                  <th style="padding: 0.4rem 0.2rem;">Screen</th>
+                  <th style="padding: 0.4rem 0.2rem;">Control</th>
+                  <th style="padding: 0.4rem 0.2rem;">Power Fx Formula</th>
+                  <th style="padding: 0.4rem 0.2rem;">Transition</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr style="border-bottom: 1px solid var(--border-subtle);">
+                  <td style="padding: 0.4rem 0.2rem; color: #fff;">Dashboard</td>
+                  <td style="padding: 0.4rem 0.2rem; font-family: var(--font-code); color: var(--color-cyan);">btnNewInspection</td>
+                  <td style="padding: 0.4rem 0.2rem; font-family: var(--font-code);">Navigate(scrInspectionForm, ScreenTransition.Cover)</td>
+                  <td style="padding: 0.4rem 0.2rem;">Cover</td>
+                </tr>
+                <tr style="border-bottom: 1px solid var(--border-subtle);">
+                  <td style="padding: 0.4rem 0.2rem; color: #fff;">Form</td>
+                  <td style="padding: 0.4rem 0.2rem; font-family: var(--font-code); color: #fca5a5;">icnCancel</td>
+                  <td style="padding: 0.4rem 0.2rem; font-family: var(--font-code);">Back(ScreenTransition.UnCover)</td>
+                  <td style="padding: 0.4rem 0.2rem;">UnCover</td>
+                </tr>
+                <tr style="border-bottom: 1px solid var(--border-subtle);">
+                  <td style="padding: 0.4rem 0.2rem; color: #fff;">Form</td>
+                  <td style="padding: 0.4rem 0.2rem; font-family: var(--font-code); color: #34d399;">btnLogVerdict</td>
+                  <td style="padding: 0.4rem 0.2rem; font-family: var(--font-code);">Navigate(scrInspectionSuccess, ScreenTransition.Fade)</td>
+                  <td style="padding: 0.4rem 0.2rem;">Fade</td>
+                </tr>
+                <tr style="border-bottom: 1px solid var(--border-subtle);">
+                  <td style="padding: 0.4rem 0.2rem; color: #fff;">Success</td>
+                  <td style="padding: 0.4rem 0.2rem; font-family: var(--font-code); color: #60a5fa;">btnLogAnother</td>
+                  <td style="padding: 0.4rem 0.2rem; font-family: var(--font-code);">Navigate(scrInspectionForm, ScreenTransition.Cover)</td>
+                  <td style="padding: 0.4rem 0.2rem;">Cover</td>
+                </tr>
+                <tr>
+                  <td style="padding: 0.4rem 0.2rem; color: #fff;">Success</td>
+                  <td style="padding: 0.4rem 0.2rem; font-family: var(--font-code); color: #cbd5e1;">btnBackToDash</td>
+                  <td style="padding: 0.4rem 0.2rem; font-family: var(--font-code);">Navigate(scrQualityDashboard, ScreenTransition.Fade)</td>
+                  <td style="padding: 0.4rem 0.2rem;">Fade</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <aside class="trainer-notes">
+          <h4>Trainer Speaking Script & Pedagogical Cues:</h4>
+          <p>Review the model solution table with the class. Point out how clean and readable this table is. Every single user flow is accounted for, with zero dead ends and zero trapped users.</p>
+        </aside>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 23: 15-MINUTE REVIEW & HOMEWORK
+           ==================================================================== -->
+      <section class="slide" id="slide-23" data-slide-index="22" data-title="15-Minute Review: Audit the Broken Receiving App Flow" data-segment="Section 8: Bridge & Homework">
+        <div class="slide-header">
+          <span class="section-tag">Takeaway & Homework</span>
+          <h2>15-Minute Review: Audit the Broken Warehouse Flow</h2>
+          <p class="subtitle">Apply your navigation engineering skills to fix a defective logistics app map.</p>
+        </div>
+
+        <div class="slide-content grid-2">
+          <div class="card">
+            <h3 class="card-title">The Flawed Warehouse Logistics App Flow</h3>
+            <p style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: 0.85rem;">
+              Here is an app flow diagram from a logistics warehouse:
+            </p>
+
+            <div class="consequence-row">
+              <span class="consequence-badge">Defect 1</span>
+              <div>
+                <strong>scrScanner has no Back button!</strong> Only has "Finish". Workers cannot abort wrong scans.
+              </div>
+            </div>
+            <div class="consequence-row">
+              <span class="consequence-badge">Defect 2</span>
+              <div>
+                <strong>Tapping "Finish" jumps directly to Welcome!</strong> No confirmation screen to show receipt number.
+              </div>
+            </div>
+            <div class="consequence-row">
+              <span class="consequence-badge">Defect 3</span>
+              <div>
+                <strong>Help Screen Traps User:</strong> Tapping "Done" on `scrHelp` jumps home, wiping out the package scan!
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <h3 class="card-title">Your 15-Minute Homework Assignment</h3>
+            <p style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: 1rem;">
+              In your personal development journal, redesign this flow into a clean 4-step specification:
+            </p>
+
+            <ol style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.8; margin-left: 1.2rem; margin-bottom: 1.25rem;">
+              <li>Add the missing <strong>Confirmation Screen</strong> and wire forward navigation.</li>
+              <li>Replace the brute-force home jump on `scrHelp` with <code>Back()</code>.</li>
+              <li>Add a Cancel button on `scrScanner` with <code>Back()</code>.</li>
+              <li>Write the <strong>4 corrected Power Fx formulas</strong>.</li>
+            </ol>
+
+            <div style="margin-top: auto; padding: 0.85rem; background: rgba(59, 130, 246, 0.1); border-radius: 0.5rem; font-size: 0.82rem; color: #93c5fd;">
+              Review time: Exactly 15 minutes before tomorrow's Day 16 class!
+            </div>
+          </div>
+        </div>
+
+        <aside class="trainer-notes">
+          <h4>Trainer Speaking Script & Pedagogical Cues:</h4>
+          <p>Explain the homework assignment. Auditing bad navigation architectures is the fastest way for beginners to solidify their instincts for closed-loop, user-friendly design.</p>
+        </aside>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 24: CONNECTION MAP: TODAY -> TOMORROW
+           ==================================================================== -->
+      <section class="slide" id="slide-24" data-slide-index="23" data-title="Curriculum Connection Map: Day 15 -> Day 16" data-segment="Section 8: Bridge & Homework">
+        <div class="slide-header">
+          <span class="section-tag">Forward Bridge</span>
+          <h2>Curriculum Bridge: Day 15 &rarr; Day 16</h2>
+          <p class="subtitle">From static screen transitions to dynamic, reactive control behavior.</p>
+        </div>
+
+        <div class="slide-content grid-3">
+          <div class="card">
+            <span class="card-badge">Yesterday (Day 14)</span>
+            <h3 class="card-title">Control Roles &amp; Properties</h3>
+            <p class="card-body">
+              We mastered the functional roles of controls: Labels broadcast information, Inputs collect text, Dropdowns enforce clean choices, and Buttons trigger action.
+            </p>
+          </div>
+
+          <div class="card" style="border-color: rgba(59, 130, 246, 0.4); background: rgba(30, 41, 59, 0.85);">
+            <span class="card-badge" style="background: rgba(59, 130, 246, 0.2); color: #93c5fd;">TODAY (Day 15)</span>
+            <h3 class="card-title">Navigation &amp; User Flow</h3>
+            <p class="card-body">
+              We connected those controls into an unbroken journey using <code>Navigate()</code> and <code>Back()</code>, providing visual transitions and confirmation loops.
+            </p>
+          </div>
+
+          <div class="card" style="border-color: var(--color-cyan); box-shadow: 0 0 20px rgba(6, 182, 212, 0.2);">
+            <span class="card-badge" style="background: rgba(6, 182, 212, 0.2); color: #67e8f9;">TOMORROW (Day 16)</span>
+            <h3 class="card-title">Dynamic Control Logic</h3>
+            <p class="card-body">
+              We will make controls react dynamically! We will lock submit buttons until required inputs are filled, hide warning banners conditionally, and write our first validation formulas!
+            </p>
+          </div>
+        </div>
+
+        <aside class="trainer-notes">
+          <h4>Trainer Speaking Script & Pedagogical Cues:</h4>
+          <p>Deliver the closing bridge forward. Congratulate the students: today they brought motion and journey to their app. Tomorrow on Day 16, we add intelligence: making controls talk to each other and react dynamically!</p>
+        </aside>
+      </section>
+
+    </main>
+
+    <!-- Bottom HUD & Navigation Controls -->
+        <footer id="bottom-hud">
+      <div id="progress-bar-container">
+        <div id="progress-bar"></div>
+      </div>
+
+      <div class="hud-left">
+        <button class="hud-btn" id="btn-prev" onclick="prevSlide()" title="Previous Slide (Left Arrow)">&#8592; Prev</button>
+        <button class="hud-btn" id="btn-next" onclick="nextSlide()" title="Next Slide (Right Arrow / Space)">Next &#8594;</button>
+        <span id="slide-counter">Slide <span id="slide-current-num">1</span> / <span id="slide-total-count">24</span></span>
+      </div>
+
+      <div class="hud-right">
+        <button class="hud-btn" id="btn-lang" onclick="toggleLanguage()" title="Toggle Language (L)">
+          🌐 <span id="lang-label">KH</span>
+        </button>
+        <button class="hud-btn active" id="btn-laser" onclick="toggleLaser()" title="Presenter Laser Pointer (P)">
+          🔴 Laser
+        </button>
+        <button class="hud-btn" id="btn-notes" onclick="toggleNotes()" title="Trainer Notes Drawer (N)">
+          📝 Notes
+        </button>
+        <button class="hud-btn" id="btn-overview" onclick="toggleOverview()" title="Slide Overview Modal (O)">
+          🗂️ Overview
+        </button>
+        <button class="hud-btn" id="btn-timer" onclick="toggleTimer()" title="90-Min Countdown (T)">
+          ⏱️ <span id="timer-display">90:00</span>
+        </button>
+        <button class="hud-btn" id="btn-fullscreen" onclick="toggleFullscreen()" title="Fullscreen (F)">
+          ⛶
+        </button>
+        <a href="../index.html" class="hud-btn hub-btn" title="Return to Master Curriculum Hub (ត្រឡប់ទៅទំព័រដើម)" style="text-decoration: none; display: inline-flex; align-items: center; gap: 4px; color: #fcd34d; font-weight: 600;"><span>🏠</span><span>Hub</span></a>
+      </div>
+    </footer>
+
+    <!-- Slide-Out Trainer Notes Drawer (Hotkey: N) -->
+    <div id="notes-drawer">
+      <div class="notes-header">
+        <h3>Trainer Notes &bull; <span id="notes-slide-title">Day 15</span></h3>
+        <button id="notes-close-btn" class="notes-close-btn">&times;</button>
+      </div>
+      <div class="notes-body" id="notes-body-content">
+        <!-- Injected dynamically from active slide aside.trainer-notes -->
+      </div>
+    </div>
+
+    <!-- Slide Grid Overview Modal (Hotkey: O) -->
+    <div id="overview-modal">
+      <div class="overview-header">
+        <h2>Slide Grid Overview &bull; Day 15 (24 Slides)</h2>
+        <button id="overview-close-btn" class="hud-btn">Close (Esc / O)</button>
+      </div>
+      <div class="overview-grid" id="overview-grid-container">
+        <!-- Rendered dynamically by script.js -->
+      </div>
+    </div>
+
+  </div>
+
+  <script src="script.js"></script>
+<script>
+if (window.self !== window.top) {
+  document.documentElement.classList.add('in-iframe');
+  function hideHub() { document.querySelectorAll('.hub-btn, .back-to-hub-pill').forEach(e => e.style.display = 'none'); }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', hideHub);
+  } else {
+    hideHub();
+  }
+}
+</script>
+<style>
+.in-iframe .hub-btn, .in-iframe .back-to-hub-pill { display: none !important; }
+</style>
+</body>
+</html>
+

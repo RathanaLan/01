@@ -1,0 +1,1350 @@
+<!DOCTYPE html>
+<html lang="en" translate="no" class="notranslate">
+<head>
+  <meta name="google" content="notranslate">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Day 27: Final Transfer Challenge: Explain Why It Works | Microsoft Power Apps Foundation</title>
+  <link rel="stylesheet" href="../shared/design-system.css">
+  <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=Moul&family=Kantumruy+Pro:ital,wght@0,400..700;1,400..700&family=Battambang:wght@300;400;700;900&family=Koh+Santepheap:wght@300;400;700&family=Koulen&family=Siemreap&display=swap" rel="stylesheet">
+  <style>
+    /* Strict Speaker Notes Lock: Never render on slide stage under any circumstance */
+    aside.trainer-notes,
+    .trainer-notes,
+    .slide aside,
+    aside {
+      display: none !important;
+      visibility: hidden !important;
+      height: 0 !important;
+      width: 0 !important;
+      overflow: hidden !important;
+      opacity: 0 !important;
+      position: absolute !important;
+      pointer-events: none !important;
+      margin: 0 !important;
+      padding: 0 !important;
+      border: none !important;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Presentation Stage Wrapper -->
+  <div id="presentation-stage">
+    
+    <!-- Ambient Aurora Orbs (60fps backdrop) -->
+    <div class="aurora-orb orb-1"></div>
+    <div class="aurora-orb orb-2"></div>
+    <div class="aurora-orb orb-3"></div>
+
+    <!-- Presenter Laser Pointer & Shockwave Click Ripple -->
+    <div id="presenter-laser"></div>
+    <div id="pointer-ripple" class="pointer-click-ripple"></div>
+
+    <!-- Viewport for 24 Slides -->
+    <main id="slides-viewport">
+
+      <!-- ====================================================================
+           SLIDE 1: HERO TITLE & CAPSTONE MENTAL MODEL
+           ==================================================================== -->
+      <section class="slide active" id="slide-1" data-slide-index="0" data-title="Final Transfer Challenge" data-segment="Capstone Assessment">
+        <div class="slide-content hero-content">
+          <div class="hero-badge">
+            <span>Microsoft Power Apps Curriculum</span>
+            <span>&bull;</span>
+            <span>Day 27 of 27 &bull; Graduation Day</span>
+          </div>
+          <h1 class="hero-title">Final Transfer Challenge: Explain Why It Works</h1>
+          <p class="hero-subtitle">
+            Assess whether you understand cause, effect, and architectural connections—not memorized clicks or formulas. Approaching a brand-new business problem systematically from scratch.
+          </p>
+
+          <div class="model-chain">
+            <span class="chain-item">New Problem</span>
+            <span class="chain-arrow">&rarr;</span>
+            <span class="chain-item">Process Flow</span>
+            <span class="chain-arrow">&rarr;</span>
+            <span class="chain-item">Data Schema</span>
+            <span class="chain-arrow">&rarr;</span>
+            <span class="chain-item active">3 Screens</span>
+            <span class="chain-arrow">&rarr;</span>
+            <span class="chain-item active">Logic Gate</span>
+            <span class="chain-arrow">&rarr;</span>
+            <span class="chain-item">Cloud Storage</span>
+            <span class="chain-arrow">&rarr;</span>
+            <span class="chain-item flow">Cloud Flow</span>
+            <span class="chain-arrow">&rarr;</span>
+            <span class="chain-item">Test &amp; Troubleshoot</span>
+            <span class="chain-arrow">&rarr;</span>
+            <span class="chain-item active" style="background: rgba(16, 185, 129, 0.25); color: #86efac; border-color: #10b981;">Explain Why</span>
+          </div>
+        </div>
+        <aside class="trainer-notes">
+          <h4>Trainer Speaking Script &amp; Pedagogical Cues:</h4>
+          <p><strong>Opening Hook (2 min):</strong> "Welcome to Day 27—our Graduation Day! For 26 days, you built technical muscle. You learned controls, formulas, SharePoint lists, galleries, forms, architectures, and automated flows. Today is not about following instructions. Today is your official driving test. Today, you take the wheel."</p>
+          <p><strong>The Core Connection:</strong> Walk across the mental model chain. Emphasize that anyone can copy a recipe, but a Master Chef understands *why* heat and salt change ingredients. Today you prove that you understand *why* software works.</p>
+        </aside>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 2: 90-MINUTE AGENDA & MEASURABLE OBJECTIVES
+           ==================================================================== -->
+      <section class="slide" id="slide-2" data-slide-index="1" data-title="90-Minute Agenda & Objectives" data-segment="Part 1: Orientation & Goals">
+        <header class="slide-header">
+          <div class="section-tag">Part 1 &bull; Schedule &amp; Outcomes</div>
+          <h2>90-Minute Agenda &amp; Measurable Objectives</h2>
+          <p class="subtitle">Spiral learning architecture: demonstrating autonomous problem-solving and architectural synthesis.</p>
+        </header>
+
+        <div class="slide-content grid-2-col">
+          <div class="card">
+            <h3 class="card-title">🎯 Today's 5 Core Objectives</h3>
+            <div style="display: flex; flex-direction: column; gap: 0.75rem; margin-top: 0.5rem;">
+              <div style="display: flex; gap: 0.65rem;">
+                <span class="card-badge" style="background: rgba(245, 158, 11, 0.2); color: #fcd34d;">1</span>
+                <div><strong>Independently Deconstruct a New Scenario:</strong> Map an unfamiliar shop-floor problem into human workflow, data schema, and UI screens.</div>
+              </div>
+              <div style="display: flex; gap: 0.65rem;">
+                <span class="card-badge" style="background: rgba(6, 182, 212, 0.2); color: #67e8f9;">2</span>
+                <div><strong>Architect the 3-Screen Connected App:</strong> Wire Home ➔ Report ➔ Review screens with clean data passing and zero dead ends.</div>
+              </div>
+              <div style="display: flex; gap: 0.65rem;">
+                <span class="card-badge" style="background: rgba(16, 185, 129, 0.2); color: #86efac;">3</span>
+                <div><strong>Enforce Production Validation &amp; Truth:</strong> Implement gatekeeper validation with <code>IsBlank()</code> and truthful <code>OnSuccess</code> alerts.</div>
+              </div>
+              <div style="display: flex; gap: 0.65rem;">
+                <span class="card-badge" style="background: rgba(139, 92, 246, 0.2); color: #c084fc;">4</span>
+                <div><strong>Deploy Decoupled Cloud Automation:</strong> Justify why notification belongs in Power Automate and implement a 2-step automated alert.</div>
+              </div>
+              <div style="display: flex; gap: 0.65rem;">
+                <span class="card-badge" style="background: rgba(239, 68, 68, 0.2); color: #fca5a5;">5</span>
+                <div><strong>Execute 3-Tier Troubleshooting &amp; Explain Why:</strong> Isolate App, Trigger, and Email delivery failures without guessing.</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <h3 class="card-title">⏱️ Timed 90-Minute Agenda Breakdown</h3>
+            <div style="display: flex; flex-direction: column; gap: 0.6rem; font-size: 0.85rem; margin-top: 0.35rem;">
+              <div style="display: flex; justify-content: space-between; border-bottom: 1px solid var(--border-subtle); padding-bottom: 0.3rem;">
+                <span style="color: #fcd34d; font-weight: bold;">00 - 10 min</span>
+                <span><strong>Recall &amp; Connect:</strong> The 27-Day Journey + 3 Active Retrieval Checks</span>
+              </div>
+              <div style="display: flex; justify-content: space-between; border-bottom: 1px solid var(--border-subtle); padding-bottom: 0.3rem;">
+                <span style="color: #fca5a5; font-weight: bold;">10 - 20 min</span>
+                <span><strong>Discover Pain:</strong> The $45,000 Tutorial Hell Crisis + Driving Test Analogy</span>
+              </div>
+              <div style="display: flex; justify-content: space-between; border-bottom: 1px solid var(--border-subtle); padding-bottom: 0.3rem;">
+                <span style="color: #67e8f9; font-weight: bold;">20 - 35 min</span>
+                <span><strong>Demonstrate Architecture:</strong> Rapid modeling of Safety Hazard Tracker</span>
+              </div>
+              <div style="display: flex; justify-content: space-between; border-bottom: 1px solid var(--border-subtle); padding-bottom: 0.3rem;">
+                <span style="color: #c084fc; font-weight: bold;">35 - 45 min</span>
+                <span><strong>Demonstrate Automation:</strong> Decoupled Cloud Flow Trigger &amp; Tokens</span>
+              </div>
+              <div style="display: flex; justify-content: space-between; border-bottom: 1px solid var(--border-subtle); padding-bottom: 0.3rem;">
+                <span style="color: #86efac; font-weight: bold;">45 - 65 min</span>
+                <span><strong>Independent Capstone:</strong> Autonomous Build &amp; Live Hand-Off Test</span>
+              </div>
+              <div style="display: flex; justify-content: space-between; border-bottom: 1px solid var(--border-subtle); padding-bottom: 0.3rem;">
+                <span style="color: #fcd34d; font-weight: bold;">65 - 75 min</span>
+                <span><strong>Troubleshoot &amp; Explain:</strong> 3-Tier Root Cause Audit &amp; System Defense</span>
+              </div>
+              <div style="display: flex; justify-content: space-between; border-bottom: 1px solid var(--border-subtle); padding-bottom: 0.3rem;">
+                <span style="color: #67e8f9; font-weight: bold;">75 - 83 min</span>
+                <span><strong>Formative Assessment:</strong> 5 Dual-State Architectural Checks</span>
+              </div>
+              <div style="display: flex; justify-content: space-between; padding-bottom: 0.3rem;">
+                <span style="color: #86efac; font-weight: bold;">83 - 90 min</span>
+                <span><strong>Graduation &amp; Beyond:</strong> Master Rubric Review &amp; Citizen Developer Launch</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <aside class="trainer-notes">
+          <h4>Trainer Speaking Script &amp; Pedagogical Cues:</h4>
+          <p><strong>Agenda Overview (2 min):</strong> "Notice our agenda. Today, the trainer does less talking and the learner does more building and explaining. The goal is complete autonomy: you will design, build, test, and defend your architecture."</p>
+        </aside>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 3: CONCEPT MAP RECAP: THE 27-DAY JOURNEY
+           ==================================================================== -->
+      <section class="slide" id="slide-3" data-slide-index="2" data-title="The 27-Day Connected Arc" data-segment="Part 1: Curriculum Integration">
+        <header class="slide-header">
+          <div class="section-tag">Part 1 &bull; Curriculum Synthesis</div>
+          <h2>The 27-Day Connected Arc: From Absolute Zero to Architect</h2>
+          <p class="subtitle">Every single concept you learned was a gear in today's graduation engine.</p>
+        </header>
+
+        <div class="slide-content">
+          <div class="card" style="border-left: 3px solid #f59e0b;">
+            <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.25rem;">
+              <div style="background: rgba(12, 19, 31, 0.7); padding: 1.15rem; border-radius: 8px; border: 1px solid var(--border-subtle);">
+                <span class="card-badge" style="background: rgba(6, 182, 212, 0.2); color: #67e8f9;">Days 1 - 10</span>
+                <h4 style="color: #f8fafc; margin: 0.5rem 0;">UI &amp; Logic Atoms</h4>
+                <p style="color: var(--text-muted); font-size: 0.86rem; line-height: 1.5;">
+                  Buttons, Labels, Text Inputs, Boolean Logic, Comparisons, If(), and IsBlank(). The thinking and input atoms.
+                </p>
+              </div>
+
+              <div style="background: rgba(12, 19, 31, 0.7); padding: 1.15rem; border-radius: 8px; border: 1px solid var(--border-subtle);">
+                <span class="card-badge" style="background: rgba(245, 158, 11, 0.2); color: #fcd34d;">Days 11 - 16</span>
+                <h4 style="color: #f8fafc; margin: 0.5rem 0;">Screens &amp; UX Flow</h4>
+                <p style="color: var(--text-muted); font-size: 0.86rem; line-height: 1.5;">
+                  Multi-screen navigation, Back(), ResetForm(), Screen transitions, and truthful user feedback with Notify().
+                </p>
+              </div>
+
+              <div style="background: rgba(12, 19, 31, 0.7); padding: 1.15rem; border-radius: 8px; border: 1px solid var(--border-subtle);">
+                <span class="card-badge" style="background: rgba(16, 185, 129, 0.2); color: #86efac;">Days 17 - 24</span>
+                <h4 style="color: #f8fafc; margin: 0.5rem 0;">Cloud Data &amp; CRUD</h4>
+                <p style="color: var(--text-muted); font-size: 0.86rem; line-height: 1.5;">
+                  SharePoint lists, typed schemas, Galleries (Items), Forms (Item, Mode), NewForm, and SubmitForm.
+                </p>
+              </div>
+
+              <div style="background: rgba(139, 92, 246, 0.15); padding: 1.15rem; border-radius: 8px; border: 1px solid rgba(139, 92, 246, 0.4);">
+                <span class="card-badge" style="background: rgba(139, 92, 246, 0.25); color: #c084fc;">Days 25 - 27</span>
+                <h4 style="color: #c084fc; margin: 0.5rem 0;">System Architecture</h4>
+                <p style="color: #f5f3ff; font-size: 0.86rem; line-height: 1.5;">
+                  7-Layer Blueprinting, End-to-End Connected App + Power Automate Flow, and today's Independent Transfer!
+                </p>
+              </div>
+            </div>
+
+            <div style="margin-top: 1.5rem; padding: 1rem; background: rgba(245, 158, 11, 0.08); border-radius: 8px; text-align: center; border: 1px dashed rgba(245, 158, 11, 0.3);">
+              <span style="color: #fcd34d; font-weight: 700; font-size: 0.95rem;">
+                The Graduation Principle: You do not memorize software. You master the 9-step causality chain: Problem ➔ Process ➔ Data ➔ UI ➔ Logic ➔ Action ➔ Storage ➔ Flow ➔ Test!
+              </span>
+            </div>
+          </div>
+        </div>
+        <aside class="trainer-notes">
+          <h4>Trainer Speaking Script &amp; Pedagogical Cues:</h4>
+          <p><strong>Journey Synthesis (3 min):</strong> "Look back at where you started on Day 1. You didn't know what a variable was or what Boolean logic meant. Today you are designing multi-screen cloud database systems with automated background workflows. Stand tall!"</p>
+        </aside>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 4: PREREQUISITE RETRIEVAL CHECK
+           ==================================================================== -->
+      <section class="slide" id="slide-4" data-slide-index="3" data-title="Active Retrieval Check" data-segment="Part 2: Prerequisite Retrieval">
+        <header class="slide-header">
+          <div class="section-tag">Part 2 &bull; Active Retrieval Check</div>
+          <h2>Prerequisite Retrieval: Activate Your Architectural Reflexes</h2>
+          <p class="subtitle">Click each card to flip and verify the core principles needed for today's independent transfer.</p>
+        </header>
+
+        <div class="slide-content grid-3-col">
+          <div class="flip-card" onclick="this.classList.toggle('flipped')">
+            <div class="flip-card-inner">
+              <div class="flip-card-front">
+                <span class="card-badge" style="background: rgba(245, 158, 11, 0.2); color: #fcd34d;">Reflex Check 1</span>
+                <h4 style="color: #f8fafc; margin-top: 1rem;">The Troubleshooting Audit</h4>
+                <p style="color: var(--text-muted); font-size: 0.88rem; margin-top: 0.5rem;">
+                  A user says: "I didn't get an email alert!" What is the first place you check, and what do you NOT touch?
+                </p>
+                <div class="flip-hint">Click to flip &rarr;</div>
+              </div>
+              <div class="flip-card-back">
+                <span class="card-badge" style="background: rgba(16, 185, 129, 0.2); color: #86efac;">Principle 1</span>
+                <p style="color: #ecfdf5; font-size: 0.92rem; margin-top: 0.8rem; line-height: 1.6;">
+                  <strong>Check SharePoint List First (Tier A)!</strong><br><br>
+                  If the row exists, Power Apps is 100% innocent—<strong>NEVER touch the app code!</strong> Check Power Automate Run History (Tier B).
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="flip-card" onclick="this.classList.toggle('flipped')">
+            <div class="flip-card-inner">
+              <div class="flip-card-front">
+                <span class="card-badge" style="background: rgba(6, 182, 212, 0.2); color: #67e8f9;">Reflex Check 2</span>
+                <h4 style="color: #f8fafc; margin-top: 1rem;">The Data Binding Glue</h4>
+                <p style="color: var(--text-muted); font-size: 0.88rem; margin-top: 0.5rem;">
+                  Why does <code>frmReview.Item = galHazards.Selected</code> prevent duplicate records on edit?
+                </p>
+                <div class="flip-hint">Click to flip &rarr;</div>
+              </div>
+              <div class="flip-card-back">
+                <span class="card-badge" style="background: rgba(16, 185, 129, 0.2); color: #86efac;">Principle 2</span>
+                <p style="color: #ecfdf5; font-size: 0.92rem; margin-top: 0.8rem; line-height: 1.6;">
+                  <strong>Record ID Inheritance!</strong><br><br>
+                  The gallery passes the existing item's ID. When <code>FormMode.Edit</code> runs, <code>SubmitForm()</code> performs an UPDATE, not an INSERT.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="flip-card" onclick="this.classList.toggle('flipped')">
+            <div class="flip-card-inner">
+              <div class="flip-card-front">
+                <span class="card-badge" style="background: rgba(139, 92, 246, 0.2); color: #c084fc;">Reflex Check 3</span>
+                <h4 style="color: #f8fafc; margin-top: 1rem;">The Feedback Contract</h4>
+                <p style="color: var(--text-muted); font-size: 0.88rem; margin-top: 0.5rem;">
+                  Why must <code>Notify()</code> live inside <code>Form.OnSuccess</code> instead of the submit button?
+                </p>
+                <div class="flip-hint">Click to flip &rarr;</div>
+              </div>
+              <div class="flip-card-back">
+                <span class="card-badge" style="background: rgba(16, 185, 129, 0.2); color: #86efac;">Principle 3</span>
+                <p style="color: #ecfdf5; font-size: 0.92rem; margin-top: 0.8rem; line-height: 1.6;">
+                  <strong>Truth in Engineering!</strong><br><br>
+                  <code>OnSuccess</code> fires only when cloud storage confirms the write. If mobile internet drops, the app will never falsely report success.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <aside class="trainer-notes">
+          <h4>Trainer Speaking Script &amp; Pedagogical Cues:</h4>
+          <p><strong>Active Retrieval (3 min):</strong> "Ask 3 students to answer each question before flipping. Listen for key phrases: 'Never touch app code if row exists', 'Item binds to Selected', and 'Truth in feedback'. These are the hallmarks of a true architect."</p>
+        </aside>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 5: THE "WHY THIS EXISTS" PROBLEM
+           ==================================================================== -->
+      <section class="slide" id="slide-5" data-slide-index="4" data-title="The $45,000 Tutorial Hell Crisis" data-segment="Part 3: Why This Exists">
+        <header class="slide-header">
+          <div class="section-tag" style="background: rgba(239, 68, 68, 0.15); border-color: rgba(239, 68, 68, 0.4); color: #fca5a5;">Part 3 &bull; Real-World Failure</div>
+          <h2>The $45,000 Crisis: The "Tutorial Hell" Trap</h2>
+          <p class="subtitle">What happens when someone memorizes clicks from video tutorials instead of understanding connections.</p>
+        </header>
+
+        <div class="slide-content">
+          <div class="card" style="border-left: 3px solid #ef4444;">
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;">
+              <div>
+                <h4 style="color: #f87171; margin-bottom: 0.5rem;">What Happened at Apex Industries:</h4>
+                <ul style="color: var(--text-muted); font-size: 0.88rem; line-height: 1.6; padding-left: 1.2rem;">
+                  <li>A developer watched 100 hours of YouTube tutorials and memorized button clicks.</li>
+                  <li>When asked to build a Safety Hazard App, they copied and pasted formulas without understanding data schema or form binding.</li>
+                  <li>Their submit button overwrote customer work orders instead of safety incidents.</li>
+                  <li>They hardcoded in-app email buttons that failed when workers submitted reports in concrete stairwells.</li>
+                </ul>
+              </div>
+
+              <div>
+                <h4 style="color: #fca5a5; margin-bottom: 0.5rem;">The Catastrophic Fallout:</h4>
+                <ul style="color: var(--text-muted); font-size: 0.88rem; line-height: 1.6; padding-left: 1.2rem;">
+                  <li><strong>Lost Near-Miss Reports:</strong> 18 critical safety hazards vanished into thin air.</li>
+                  <li><strong>OSHA Safety Violation:</strong> An unaddressed oil spill caused a worker injury.</li>
+                  <li><strong>$45,000 Emergency Rebuild:</strong> The company had to hire external consultants to scrap the app and engineer it properly.</li>
+                </ul>
+              </div>
+            </div>
+
+            <div style="margin-top: 1.25rem; padding: 0.85rem; background: rgba(239, 68, 68, 0.1); border-radius: 6px; border-left: 3px solid #ef4444;">
+              <p style="color: var(--text-main); font-size: 0.88rem; margin: 0;">
+                <strong>The Antidote:</strong> Memorized clicks break when requirements shift by 5%. The 9-step architectural mental model allows you to walk into any company and build robust systems from first principles.
+              </p>
+            </div>
+          </div>
+        </div>
+        <aside class="trainer-notes">
+          <h4>Trainer Speaking Script &amp; Pedagogical Cues:</h4>
+          <p><strong>Storytelling &amp; Emotion (3 min):</strong> "Explain that this isn't fiction—it happens every single day in corporate IT. People copy formulas from ChatGPT or YouTube without knowing what they do. Today, you prove you are an engineer who understands causality."</p>
+        </aside>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 6: PLAIN LANGUAGE BEFORE TECHNICAL JARGON
+           ==================================================================== -->
+      <section class="slide" id="slide-6" data-slide-index="5" data-title="Plain Language Concept Matrix" data-segment="Part 4: Plain-Language Foundations">
+        <header class="slide-header">
+          <div class="section-tag">Part 4 &bull; De-jargoning Concepts</div>
+          <h2>Plain Language First: The Vocabulary of Transfer</h2>
+          <p class="subtitle">Never learn a technical term in isolation. Every piece of software engineering translates to common sense.</p>
+        </header>
+
+        <div class="slide-content">
+          <div class="card">
+            <table class="matrix-table">
+              <thead>
+                <tr>
+                  <th>Plain-Language Concept</th>
+                  <th>Technical Term</th>
+                  <th>What It Actually Means in the Living System</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Autonomous Transfer</strong></td>
+                  <td><span class="badge-tag tag-cyan">First-Principles Modeling</span></td>
+                  <td>Approaching an unfamiliar problem and architecting it from scratch without copying a tutorial.</td>
+                </tr>
+                <tr>
+                  <td><strong>Data Bucket Agreement</strong></td>
+                  <td><span class="badge-tag tag-amber">Typed Data Schema</span></td>
+                  <td>Agreeing on exact column types (Choice, Date, Number) before designing a single UI button.</td>
+                </tr>
+                <tr>
+                  <td><strong>Separation of Labor</strong></td>
+                  <td><span class="badge-tag tag-purple">Decoupled Architecture</span></td>
+                  <td>Power Apps captures user input; an independent Cloud Flow handles background notifications.</td>
+                </tr>
+                <tr>
+                  <td><strong>Gatekeeper Safety</strong></td>
+                  <td><span class="badge-tag tag-rose">Validation Rules</span></td>
+                  <td>Locking actions (`DisplayMode.Disabled`) until humans provide complete, valid information.</td>
+                </tr>
+                <tr>
+                  <td><strong>Sequential Diagnosis</strong></td>
+                  <td><span class="badge-tag tag-emerald">3-Tier Troubleshooting</span></td>
+                  <td>Checking App ➔ Storage ➔ Flow ➔ Delivery in order without wild guesswork or panic.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <aside class="trainer-notes">
+          <h4>Trainer Speaking Script &amp; Pedagogical Cues:</h4>
+          <p><strong>Demystification (3 min):</strong> "Notice how each term is rooted in ordinary workplace reality. When you explain your app to a manager, speak plain language: 'We decoupled the notification so mobile disconnects never lose alerts.'"</p>
+        </aside>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 7: EVERYDAY ANALOGY: DRIVING TEST
+           ==================================================================== -->
+      <section class="slide" id="slide-7" data-slide-index="6" data-title="Analogy: The Driving Test" data-segment="Part 4: Mental Models">
+        <header class="slide-header">
+          <div class="section-tag">Part 4 &bull; Mental Model</div>
+          <h2>Everyday Analogy: The Driver's License vs Memorized GPS</h2>
+          <p class="subtitle">Why understanding vehicle controls and road rules triumphs over memorizing turn-by-turn directions.</p>
+        </header>
+
+        <div class="slide-content grid-2-col">
+          <div class="card" style="border-top: 4px solid #ef4444;">
+            <span class="card-badge" style="background: rgba(239, 68, 68, 0.2); color: #fca5a5;">The Memorizer (Fragile)</span>
+            <h3 class="card-title" style="color: #f87171;">Turn-by-Turn GPS Memorization</h3>
+            <p style="color: var(--text-muted); font-size: 0.9rem; line-height: 1.6;">
+              A learner driver memorizes: <em>"Drive forward 400m, turn left at the blue house, turn right at the tree."</em>
+            </p>
+            <div style="margin-top: 1rem; padding: 0.85rem; background: rgba(0, 0, 0, 0.35); border-radius: 6px; font-size: 0.85rem; color: #fca5a5; line-height: 1.5;">
+              ⚠️ <strong>The Road Closes for Construction:</strong><br>
+              Because the driver doesn't understand road signs, engine behavior, or maps, they get hopelessly lost and crash.
+            </div>
+          </div>
+
+          <div class="card" style="border-top: 4px solid #10b981;">
+            <span class="card-badge" style="background: rgba(16, 185, 129, 0.2); color: #86efac;">The Architect (Antifragile)</span>
+            <h3 class="card-title" style="color: #86efac;">The Licensed Master Driver</h3>
+            <p style="color: var(--text-muted); font-size: 0.9rem; line-height: 1.6;">
+              A licensed driver understands vehicle physics (accelerator, brakes), traffic rules (yield, stop), and the city map.
+            </p>
+            <div style="margin-top: 1rem; padding: 0.85rem; background: rgba(0, 0, 0, 0.35); border-radius: 6px; font-size: 0.85rem; color: #86efac; line-height: 1.5;">
+              ✓ <strong>A Detour Appears:</strong><br>
+              The driver evaluates the detour, consults the map, steers calmly down an alternative avenue, and arrives safely.
+            </div>
+          </div>
+        </div>
+        <aside class="trainer-notes">
+          <h4>Trainer Speaking Script &amp; Pedagogical Cues:</h4>
+          <p><strong>The Driving Metaphor (3 min):</strong> "Ask the learner: 'When you take a driving test, does the examiner give you a GPS to follow?' No! They tell you to turn left, park, and brake safely. Today is your driving test for Power Platform."</p>
+        </aside>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 8: MANUFACTURING WORKPLACE SCENARIO
+           ==================================================================== -->
+      <section class="slide" id="slide-8" data-slide-index="7" data-title="Workplace Scenario: Safety Hazard App" data-segment="Part 4: Workplace DX Application">
+        <header class="slide-header">
+          <div class="section-tag">Part 4 &bull; Capstone Challenge Scenario</div>
+          <h2>Workplace DX Scenario: Plant Safety &amp; Near-Miss Hazard Tracker</h2>
+          <p class="subtitle">A brand-new operational problem at Apex Precision: replacing paper incident clipboards with a 30-second digital loop.</p>
+        </header>
+
+        <div class="slide-content grid-4-col">
+          <div class="card">
+            <span class="card-badge" style="background: rgba(239, 68, 68, 0.2); color: #fca5a5;">1. Shop-Floor Worker</span>
+            <h4 style="color: #f8fafc; margin: 0.5rem 0;">Spots Slip Hazard</h4>
+            <p style="color: var(--text-muted); font-size: 0.86rem; line-height: 1.5;">
+              Operator notices cutting fluid pooling across the aisle near CNC Lathe #04.
+            </p>
+          </div>
+
+          <div class="card">
+            <span class="card-badge" style="background: rgba(245, 158, 11, 0.2); color: #fcd34d;">2. Tablet Intake Gate</span>
+            <h4 style="color: #f8fafc; margin: 0.5rem 0;">30-Second Logging</h4>
+            <p style="color: var(--text-muted); font-size: 0.86rem; line-height: 1.5;">
+              Taps <code>+ Report Hazard</code>, picks Location 'Line 2 Bay', Severity 'High', types description, and saves.
+            </p>
+          </div>
+
+          <div class="card">
+            <span class="card-badge" style="background: rgba(139, 92, 246, 0.2); color: #c084fc;">3. Decoupled Cloud Alert</span>
+            <h4 style="color: #f8fafc; margin: 0.5rem 0;">Instant EHS Notification</h4>
+            <p style="color: var(--text-muted); font-size: 0.86rem; line-height: 1.5;">
+              SharePoint trigger wakes Power Automate. High-priority alert lands in Safety Officer Sokha's Outlook in 40s.
+            </p>
+          </div>
+
+          <div class="card">
+            <span class="card-badge" style="background: rgba(16, 185, 129, 0.2); color: #86efac;">4. EHS Resolution Desk</span>
+            <h4 style="color: #f8fafc; margin: 0.5rem 0;">Audit &amp; Resolve</h4>
+            <p style="color: var(--text-muted); font-size: 0.86rem; line-height: 1.5;">
+              Sokha opens the app, selects hazard #HAZ-204, reviews details, marks 'Mitigated', and enters spill kit cost.
+            </p>
+          </div>
+        </div>
+        <aside class="trainer-notes">
+          <h4>Trainer Speaking Script &amp; Pedagogical Cues:</h4>
+          <p><strong>Scenario Setup (3 min):</strong> "Notice this is a brand-new scenario. It's not equipment maintenance—it's environmental health and safety. But the architecture is identical! That is the power of transfer."</p>
+        </aside>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 9: MASTER CAUSE-AND-EFFECT PIPELINE
+           ==================================================================== -->
+      <section class="slide" id="slide-9" data-slide-index="8" data-title="Master Cause-and-Effect Architecture" data-segment="Part 5: Architecture">
+        <header class="slide-header">
+          <div class="section-tag">Part 5 &bull; The Complete 9-Step Chain</div>
+          <h2>The 9-Step Transfer Architecture: Cause &amp; Effect</h2>
+          <p class="subtitle">Every digital artifact exists to serve human safety. Trace the unbroken causality chain from slip hazard to resolution.</p>
+        </header>
+
+        <div class="slide-content">
+          <div class="card">
+            <div class="flow-pipeline-container">
+              <div class="flow-step-node">
+                <div class="flow-step-icon">⚠️</div>
+                <div class="flow-step-title">1. Problem</div>
+                <div class="flow-step-desc">Oil spill slip hazard on shop aisle</div>
+              </div>
+              <div class="flow-step-arrow">&rarr;</div>
+              <div class="flow-step-node">
+                <div class="flow-step-icon">📋</div>
+                <div class="flow-step-title">2. Process</div>
+                <div class="flow-step-desc">Report ➔ Alert ➔ Mitigate ➔ Review</div>
+              </div>
+              <div class="flow-step-arrow">&rarr;</div>
+              <div class="flow-step-node">
+                <div class="flow-step-icon">🗄️</div>
+                <div class="flow-step-title">3. Data</div>
+                <div class="flow-step-desc">SharePoint: SafetyHazards list</div>
+              </div>
+              <div class="flow-step-arrow">&rarr;</div>
+              <div class="flow-step-node">
+                <div class="flow-step-icon">📱</div>
+                <div class="flow-step-title">4. Screens</div>
+                <div class="flow-step-desc">Home ➔ Report ➔ Review screens</div>
+              </div>
+              <div class="flow-step-arrow">&rarr;</div>
+              <div class="flow-step-node">
+                <div class="flow-step-icon">🔒</div>
+                <div class="flow-step-title">5. Logic Gate</div>
+                <div class="flow-step-desc">If(IsBlank(), Disabled, Edit)</div>
+              </div>
+              <div class="flow-step-arrow">&rarr;</div>
+              <div class="flow-step-node" style="border-color: #8b5cf6;">
+                <div class="flow-step-icon">⚡</div>
+                <div class="flow-step-title" style="color: #c084fc;">6. Cloud Flow</div>
+                <div class="flow-step-desc">Trigger ➔ Outlook Email V2</div>
+              </div>
+              <div class="flow-step-arrow">&rarr;</div>
+              <div class="flow-step-node" style="border-color: #10b981;">
+                <div class="flow-step-icon">🎓</div>
+                <div class="flow-step-title" style="color: #86efac;">7. Explain Why</div>
+                <div class="flow-step-desc">Articulate 3-tier causality</div>
+              </div>
+            </div>
+
+            <div style="margin-top: 1.25rem; padding: 0.85rem; background: rgba(245, 158, 11, 0.08); border-radius: 6px; border-left: 3px solid #f59e0b;">
+              <strong style="color: #fcd34d;">The Universal Chain:</strong> USER ➔ POWER APPS ➔ SHAREPOINT ➔ POWER AUTOMATE ➔ NOTIFICATION ➔ PERSON.
+            </div>
+          </div>
+        </div>
+        <aside class="trainer-notes">
+          <h4>Trainer Speaking Script &amp; Pedagogical Cues:</h4>
+          <p><strong>System Walkthrough (3 min):</strong> "Have the student recite this chain. If a button fails, what layer is it? Layer 5. If an email fails, what layer is it? Layer 6. Every problem has an exact address."</p>
+        </aside>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 10: LAYER 1 & 2 TRANSFER: PROBLEM & PROCESS
+           ==================================================================== -->
+      <section class="slide" id="slide-10" data-slide-index="9" data-title="Layer 1 & 2: Problem & Process" data-segment="Part 6: Architecture Transfer">
+        <header class="slide-header">
+          <div class="section-tag">Part 6 &bull; Layers 1 &amp; 2 Transfer</div>
+          <h2>Layers 1 &amp; 2: Deconstruct Problem &amp; Human Process</h2>
+          <p class="subtitle">Before touching Power Apps Studio or SharePoint, map the real-world operational actors and hand-offs.</p>
+        </header>
+
+        <div class="slide-content grid-2-col">
+          <div class="card">
+            <h3 class="card-title">🚨 Layer 1: Problem Anatomy</h3>
+            <ul style="color: var(--text-muted); font-size: 0.88rem; line-height: 1.6; padding-left: 1.2rem;">
+              <li><strong>The Human Pain:</strong> Workers notice physical dangers but paper reporting takes 15 minutes to find and submit.</li>
+              <li><strong>The Bottleneck:</strong> Paper logs sit in supervisor mail trays for 48 hours unread.</li>
+              <li><strong>The Consequence:</strong> Slips, falls, OSHA fines, and lost productivity.</li>
+              <li><strong>The Target Metric:</strong> Reduce hazard reporting time from 15 minutes to under 30 seconds; alert safety leads in under 60 seconds.</li>
+            </ul>
+          </div>
+
+          <div class="card">
+            <h3 class="card-title">🔄 Layer 2: Human Workflow Handoffs</h3>
+            <div style="display: flex; flex-direction: column; gap: 0.6rem; font-size: 0.85rem; margin-top: 0.25rem;">
+              <div style="background: rgba(0, 0, 0, 0.3); padding: 0.6rem; border-radius: 6px; border-left: 3px solid #f59e0b;">
+                <strong>Step 1 (Intake):</strong> Operator sees hazard ➔ enters Title, Location, Severity on tablet ➔ Taps Submit.
+              </div>
+              <div style="background: rgba(0, 0, 0, 0.3); padding: 0.6rem; border-radius: 6px; border-left: 3px solid #8b5cf6;">
+                <strong>Step 2 (Notification):</strong> SharePoint triggers Power Automate ➔ EHS Director receives instant Outlook alert.
+              </div>
+              <div style="background: rgba(0, 0, 0, 0.3); padding: 0.6rem; border-radius: 6px; border-left: 3px solid #10b981;">
+                <strong>Step 3 (Mitigation):</strong> EHS Officer inspects site, deploys cleanup crew, logs cost, and marks 'Mitigated'.
+              </div>
+            </div>
+          </div>
+        </div>
+        <aside class="trainer-notes">
+          <h4>Trainer Speaking Script &amp; Pedagogical Cues:</h4>
+          <p><strong>Process Mapping (3 min):</strong> "Ask the learner: 'Who are the human personas in this process?' There are two: The Shop-Floor Operator and the EHS Officer. Your app must serve both without confusion."</p>
+        </aside>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 11: LAYER 3 TRANSFER: DATA SCHEMA
+           ==================================================================== -->
+      <section class="slide" id="slide-11" data-slide-index="10" data-title="Layer 3: Independent Data Schema" data-segment="Part 6: Architecture Transfer">
+        <header class="slide-header">
+          <div class="section-tag">Part 6 &bull; Layer 3 Transfer</div>
+          <h2>Layer 3: Establishing the SharePoint Data Schema</h2>
+          <p class="subtitle">Creating the permanent cloud storage containers with proper column data types before building screens.</p>
+        </header>
+
+        <div class="slide-content">
+          <div class="card">
+            <h3 class="card-title">🗄️ SharePoint List: <code>SafetyHazards</code></h3>
+            <table class="matrix-table" style="margin-top: 0.5rem;">
+              <thead>
+                <tr>
+                  <th>Column Name</th>
+                  <th>SharePoint Type</th>
+                  <th>Configuration &amp; Allowed Values</th>
+                  <th>Purpose in the System</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><code>Title</code></td>
+                  <td>Single Line of Text</td>
+                  <td>Required (e.g. "Oil spill aisle 4")</td>
+                  <td>Short descriptive label for summaries and gallery titles.</td>
+                </tr>
+                <tr>
+                  <td><code>Location</code></td>
+                  <td>Choice (Dropdown)</td>
+                  <td>Line 1 Bay, Line 2 Bay, CNC Area, Assembly, Shipping</td>
+                  <td>Standardizes facility zones for easy filtering and reporting.</td>
+                </tr>
+                <tr>
+                  <td><code>Severity</code></td>
+                  <td>Choice (Dropdown)</td>
+                  <td>Critical, High, Medium, Low</td>
+                  <td>Drives visual color alarms and high-priority email alerts.</td>
+                </tr>
+                <tr>
+                  <td><code>Description</code></td>
+                  <td>Multiple Lines of Text</td>
+                  <td>Plain text notes</td>
+                  <td>Detailed explanation of the condition and immediate risks.</td>
+                </tr>
+                <tr>
+                  <td><code>Status</code></td>
+                  <td>Choice (Dropdown)</td>
+                  <td>New, In Progress, Mitigated, Closed</td>
+                  <td>Lifecycle state; controls whether hazard appears in active queues.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <aside class="trainer-notes">
+          <h4>Trainer Speaking Script &amp; Pedagogical Cues:</h4>
+          <p><strong>Schema Review (3 min):</strong> "Emphasize why Location and Severity are Choice columns, not free-text. If someone types 'cnc area' and another types 'CNC Area 1', our filters will fail. Choice columns guarantee data consistency."</p>
+        </aside>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 12: LAYER 4 TRANSFER: 3-SCREEN UI ARCHITECTURE
+           ==================================================================== -->
+      <section class="slide" id="slide-12" data-slide-index="11" data-title="Layer 4: 3-Screen UI Pattern" data-segment="Part 6: Architecture Transfer">
+        <header class="slide-header">
+          <div class="section-tag">Part 6 &bull; Layer 4 Transfer</div>
+          <h2>Layer 4: Applying the Standard 3-Screen Architecture</h2>
+          <p class="subtitle">The proven enterprise pattern: 1 Browse Screen, 1 Intake Screen, and 1 Review/Edit Screen.</p>
+        </header>
+
+        <div class="slide-content grid-3-col">
+          <div class="card">
+            <span class="card-badge" style="background: rgba(6, 182, 212, 0.2); color: #67e8f9;">Screen 1</span>
+            <h3 class="card-title"><code>scr_HazardHome</code></h3>
+            <p style="color: var(--text-muted); font-size: 0.85rem; line-height: 1.5;">
+              <strong>The Mission Control Center:</strong><br>
+              &bull; Search input (<code>txtSearchHazard</code>)<br>
+              &bull; Severity filter dropdown<br>
+              &bull; Gallery (<code>galHazards</code>) displaying active hazards with severity color badges<br>
+              &bull; Primary button: <code>+ Report Hazard</code>
+            </p>
+          </div>
+
+          <div class="card">
+            <span class="card-badge" style="background: rgba(245, 158, 11, 0.2); color: #fcd34d;">Screen 2</span>
+            <h3 class="card-title"><code>scr_ReportHazard</code></h3>
+            <p style="color: var(--text-muted); font-size: 0.85rem; line-height: 1.5;">
+              <strong>The Clean Intake Gate:</strong><br>
+              &bull; Single form: <code>frmNewHazard</code> in <code>FormMode.New</code><br>
+              &bull; Big tap targets for shop-floor touch screens<br>
+              &bull; Locked Submit button enforcing validation<br>
+              &bull; Safe Cancel button: <code>ResetForm(); Back()</code>
+            </p>
+          </div>
+
+          <div class="card">
+            <span class="card-badge" style="background: rgba(16, 185, 129, 0.2); color: #86efac;">Screen 3</span>
+            <h3 class="card-title"><code>scr_ReviewHazard</code></h3>
+            <p style="color: var(--text-muted); font-size: 0.85rem; line-height: 1.5;">
+              <strong>The EHS Resolution Desk:</strong><br>
+              &bull; Single form: <code>frmReviewHazard</code> in <code>FormMode.Edit</code><br>
+              &bull; Bound directly via <code>Item = galHazards.Selected</code><br>
+              &bull; Read-only audit fields (Created By, Date)<br>
+              &bull; Status update (Mitigated) &amp; cost notes
+            </p>
+          </div>
+        </div>
+        <aside class="trainer-notes">
+          <h4>Trainer Speaking Script &amp; Pedagogical Cues:</h4>
+          <p><strong>The 3-Screen Discipline (3 min):</strong> "Remind the learner: We do not invent 10 screens. 95% of business applications operate perfectly on these exact 3 screens. Master this pattern and you can build anything."</p>
+        </aside>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 13: LAYER 5 TRANSFER: POWER FX DECISION RULES
+           ==================================================================== -->
+      <section class="slide" id="slide-13" data-slide-index="12" data-title="Layer 5: Power Fx Decision Rules" data-segment="Part 6: Architecture Transfer">
+        <header class="slide-header">
+          <div class="section-tag">Part 6 &bull; Layer 5 Transfer</div>
+          <h2>Layer 5: Power Fx Decision Rules &amp; Gatekeeper Logic</h2>
+          <p class="subtitle">Enforcing business rules through Boolean questions, conditional formatting, and lifecycle hooks.</p>
+        </header>
+
+        <div class="slide-content grid-2-col">
+          <div class="card">
+            <h3 class="card-title">🔒 Gatekeeper Submit Validation</h3>
+            <div style="background: rgba(0, 0, 0, 0.45); padding: 0.85rem; border-radius: 6px; font-family: var(--font-code); font-size: 0.82rem; color: #fcd34d; line-height: 1.6;">
+              // btnSubmitHazard.DisplayMode<br>
+              If(<br>
+              &nbsp;&nbsp;IsBlank(cmbLocation.Selected.Value) Or IsBlank(txtDescription.Text),<br>
+              &nbsp;&nbsp;DisplayMode.Disabled,<br>
+              &nbsp;&nbsp;DisplayMode.Edit<br>
+              )
+            </div>
+            <p style="color: var(--text-muted); font-size: 0.82rem; margin-top: 0.75rem;">
+              <strong>Why it works:</strong> The <code>Or</code> operator evaluates to True if either required field is empty, locking the button in gray to prevent corrupted database records.
+            </p>
+          </div>
+
+          <div class="card">
+            <h3 class="card-title">🎨 Severity Badge Conditional Color</h3>
+            <div style="background: rgba(0, 0, 0, 0.45); padding: 0.85rem; border-radius: 6px; font-family: var(--font-code); font-size: 0.82rem; color: #67e8f9; line-height: 1.6;">
+              // lblSeverityBadge.Fill<br>
+              Switch(<br>
+              &nbsp;&nbsp;ThisItem.Severity.Value,<br>
+              &nbsp;&nbsp;"Critical", RGBA(239, 68, 68, 0.8),<br>
+              &nbsp;&nbsp;"High", RGBA(245, 158, 11, 0.8),<br>
+              &nbsp;&nbsp;RGBA(16, 185, 129, 0.8)<br>
+              )
+            </div>
+            <p style="color: var(--text-muted); font-size: 0.82rem; margin-top: 0.75rem;">
+              <strong>Why it works:</strong> <code>Switch()</code> evaluates the hazard severity choice and applies instant visual triage colors so critical hazards scream for attention.
+            </p>
+          </div>
+        </div>
+        <aside class="trainer-notes">
+          <h4>Trainer Speaking Script &amp; Pedagogical Cues:</h4>
+          <p><strong>Logic Explanation (3 min):</strong> "Ask the learner: 'What is the question being asked in the submit button?' The question is: Is the location empty, or is the description empty? If yes, disable the button. Plain English first!"</p>
+        </aside>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 14: LAYER 6 & 7 TRANSFER: CLOUD AUTOMATION
+           ==================================================================== -->
+      <section class="slide" id="slide-14" data-slide-index="13" data-title="Layer 6 & 7: Decoupled Cloud Automation" data-segment="Part 6: Architecture Transfer">
+        <header class="slide-header">
+          <div class="section-tag" style="background: rgba(139, 92, 246, 0.15); border-color: rgba(139, 92, 246, 0.4); color: #c084fc;">Part 6 &bull; Layers 6 &amp; 7 Transfer</div>
+          <h2>Layers 6 &amp; 7: Decoupled Cloud Automation with Power Automate</h2>
+          <p class="subtitle">Why notifications belong on the cloud server, and how SharePoint triggers run independently 24/7.</p>
+        </header>
+
+        <div class="slide-content grid-2-col">
+          <div class="card" style="border-left: 3px solid #8b5cf6;">
+            <h3 class="card-title">⚡ Trigger: When an item is created</h3>
+            <div style="background: rgba(0, 0, 0, 0.35); padding: 0.85rem; border-radius: 6px; font-size: 0.85rem; color: #cbd5e1; line-height: 1.6;">
+              <strong>Connector:</strong> SharePoint<br>
+              &bull; <strong>Site Address:</strong> https://apexprecision.sharepoint.com/sites/EHS<br>
+              &bull; <strong>List Name:</strong> SafetyHazards
+            </div>
+            <p style="color: var(--text-muted); font-size: 0.82rem; margin-top: 0.75rem;">
+              <strong>The Decoupled Rule:</strong> The flow sleeps on Microsoft Cloud servers until SharePoint tells it: <em>"A new hazard row landed!"</em> It does not care if the mobile tablet is shut off.
+            </p>
+          </div>
+
+          <div class="card" style="border-left: 3px solid #8b5cf6;">
+            <h3 class="card-title">📧 Action: Send an email (V2)</h3>
+            <div style="background: rgba(0, 0, 0, 0.35); padding: 0.85rem; border-radius: 6px; font-size: 0.85rem; color: #cbd5e1; line-height: 1.6;">
+              <strong>Connector:</strong> Office 365 Outlook<br>
+              &bull; <strong>To:</strong> EHS_Director@apexprecision.com<br>
+              &bull; <strong>Subject:</strong> 🚨 <code>[Severity Value]</code> Hazard: <code>[Title]</code> at <code>[Location Value]</code><br>
+              &bull; <strong>Body:</strong> Logged by <code>[Created By DisplayName]</code>. View in app immediately.
+            </div>
+            <p style="color: var(--text-muted); font-size: 0.82rem; margin-top: 0.75rem;">
+              <strong>Dynamic Content Tokens:</strong> Bracketed tokens <code>[ ]</code> automatically insert the exact live row data from the trigger!
+            </p>
+          </div>
+        </div>
+        <aside class="trainer-notes">
+          <h4>Trainer Speaking Script &amp; Pedagogical Cues:</h4>
+          <p><strong>Cloud Decoupling (3 min):</strong> "Highlight why in-app email buttons are fragile. If a worker drops their phone or walks into a dead zone, the email dies. Cloud flows guarantee 100% notification reliability once the row is stored."</p>
+        </aside>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 15: LAYER 8 & 9 TRANSFER: 3-TIER TROUBLESHOOTING
+           ==================================================================== -->
+      <section class="slide" id="slide-15" data-slide-index="14" data-title="Layer 8 & 9: 3-Tier Troubleshooting" data-segment="Part 6: Architecture Transfer">
+        <header class="slide-header">
+          <div class="section-tag">Part 6 &bull; Layers 8 &amp; 9 Transfer</div>
+          <h2>Layers 8 &amp; 9: The 3-Tier Systematic Troubleshooting Framework</h2>
+          <p class="subtitle">When someone reports an error, never guess or rewrite working code. Execute the 3-Tier Audit.</p>
+        </header>
+
+        <div class="slide-content">
+          <div class="troubleshoot-grid">
+            <div class="troubleshoot-card troubleshoot-tier-a">
+              <span class="troubleshoot-badge" style="background: rgba(2, 132, 199, 0.2); color: #38bdf8;">Tier A &bull; Power Apps Layer</span>
+              <h4 style="color: #f8fafc; margin-bottom: 0.5rem;">Did the Record Land in SharePoint?</h4>
+              <p style="color: var(--text-muted); font-size: 0.82rem; line-height: 1.5;">
+                Open SharePoint list in browser. Look for the newly reported hazard.
+              </p>
+              <div class="troubleshoot-check-item">
+                <span style="color: #f87171;">✕ Row Missing:</span>
+                <span>Power Apps failed to submit. Check <code>Form.Error</code>, Wi-Fi, or validation rules.</span>
+              </div>
+              <div class="troubleshoot-check-item">
+                <span style="color: #34d399;">✓ Row Exists:</span>
+                <span>Power Apps is 100% innocent! <strong>NEVER touch app code!</strong> Move to Tier B.</span>
+              </div>
+            </div>
+
+            <div class="troubleshoot-card troubleshoot-tier-b">
+              <span class="troubleshoot-badge" style="background: rgba(139, 92, 246, 0.2); color: #c084fc;">Tier B &bull; Flow Trigger Layer</span>
+              <h4 style="color: #f8fafc; margin-bottom: 0.5rem;">Did Power Automate Wake Up?</h4>
+              <p style="color: var(--text-muted); font-size: 0.82rem; line-height: 1.5;">
+                Open Power Automate &rarr; Flow Details &rarr; Inspect <strong>Run History</strong>.
+              </p>
+              <div class="troubleshoot-check-item">
+                <span style="color: #f87171;">✕ No Runs Listed:</span>
+                <span>Trigger failed to detect item. Check if Flow is turned <strong>On</strong> or credentials expired.</span>
+              </div>
+              <div class="troubleshoot-check-item">
+                <span style="color: #34d399;">✓ Run Listed:</span>
+                <span>Trigger successfully fired! Move to Tier C to inspect the action card.</span>
+              </div>
+            </div>
+
+            <div class="troubleshoot-card troubleshoot-tier-c">
+              <span class="troubleshoot-badge" style="background: rgba(16, 185, 129, 0.2); color: #86efac;">Tier C &bull; Email Delivery Layer</span>
+              <h4 style="color: #f8fafc; margin-bottom: 0.5rem;">Did the Email Action Succeed?</h4>
+              <p style="color: var(--text-muted); font-size: 0.82rem; line-height: 1.5;">
+                Click inside the Run History to inspect the <code>Send an email (V2)</code> card.
+              </p>
+              <div class="troubleshoot-check-item">
+                <span style="color: #f87171;">✕ Red ✕ on Card:</span>
+                <span>Action failed. Recipient address had a typo or permissions were denied.</span>
+              </div>
+              <div class="troubleshoot-check-item">
+                <span style="color: #34d399;">✓ Green Checkmark:</span>
+                <span>Email was dispatched! Check recipient's <strong>Junk / Spam</strong> folder in Outlook.</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <aside class="trainer-notes">
+          <h4>Trainer Speaking Script &amp; Pedagogical Cues:</h4>
+          <p><strong>Diagnostic Discipline (3 min):</strong> "Drill this into the student: 'If the row exists in SharePoint, do you touch your Power Apps code?' NEVER! Doing so only breaks working software. Move calmly to Tier B."</p>
+        </aside>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 16: INTERACTIVE SIMULATOR: CAPSTONE LIFECYCLE
+           ==================================================================== -->
+      <section class="slide" id="slide-16" data-slide-index="15" data-title="Interactive Lifecycle Simulator" data-segment="Part 7: Interactive Simulator">
+        <header class="slide-header">
+          <div class="section-tag">Part 7 &bull; Capstone Simulator</div>
+          <h2>Interactive Capstone Simulator: Trace the Full Lifecycle</h2>
+          <p class="subtitle">Click each stage below to simulate data movement and architectural hand-offs from tablet to email alert.</p>
+        </header>
+
+        <div class="slide-content">
+          <div class="blueprint-sim">
+            <div class="sim-nav-tabs">
+              <button class="sim-tab-btn active" id="sim-tab-1" onclick="selectDay27Sim(1)">1. Shop Floor Spot</button>
+              <button class="sim-tab-btn" id="sim-tab-2" onclick="selectDay27Sim(2)">2. Tablet Intake</button>
+              <button class="sim-tab-btn" id="sim-tab-3" onclick="selectDay27Sim(3)">3. Validation Gate</button>
+              <button class="sim-tab-btn" id="sim-tab-4" onclick="selectDay27Sim(4)">4. SharePoint Write</button>
+              <button class="sim-tab-btn flow-tab" id="sim-tab-5" onclick="selectDay27Sim(5)">5. Flow Trigger</button>
+              <button class="sim-tab-btn flow-tab" id="sim-tab-6" onclick="selectDay27Sim(6)">6. Outlook Alert</button>
+              <button class="sim-tab-btn" id="sim-tab-7" onclick="selectDay27Sim(7)">7. EHS Resolution</button>
+            </div>
+            <div class="sim-stage-content" id="sim-day27-display">
+              <!-- Populated dynamically by JS selectDay27Sim(1) -->
+            </div>
+          </div>
+        </div>
+        <aside class="trainer-notes">
+          <h4>Trainer Speaking Script &amp; Pedagogical Cues:</h4>
+          <p><strong>Simulator Exploration (3 min):</strong> "Click tabs 1 through 7. Ask the student: 'Where does Power Apps end and SharePoint begin? Where does SharePoint end and Power Automate begin?' Verify they understand the exact hand-off boundaries."</p>
+        </aside>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 17: TRAINER DEMONSTRATION: RAPID DECONSTRUCTION
+           ==================================================================== -->
+      <section class="slide" id="slide-17" data-slide-index="16" data-title="Trainer Demonstration" data-segment="Part 8: Demonstration">
+        <header class="slide-header">
+          <div class="section-tag">Part 8 &bull; Trainer Demonstration</div>
+          <h2>Trainer Live Demo: Rapid Problem Deconstruction in 15 Minutes</h2>
+          <p class="subtitle">Watch the trainer deconstruct the Safety Hazard problem into SharePoint schema, 3 screens, and a Cloud Flow.</p>
+        </header>
+
+        <div class="slide-content grid-4-col">
+          <div class="card">
+            <span class="card-badge" style="background: rgba(245, 158, 11, 0.2); color: #fcd34d;">Phase 1 &bull; 4 min</span>
+            <h4 style="color: #f8fafc; margin: 0.5rem 0;">Schema in SharePoint</h4>
+            <p style="color: var(--text-muted); font-size: 0.85rem; line-height: 1.5;">
+              Create <code>SafetyHazards</code> list. Add Choice columns for Location, Severity, and Status.
+            </p>
+          </div>
+
+          <div class="card">
+            <span class="card-badge" style="background: rgba(6, 182, 212, 0.2); color: #67e8f9;">Phase 2 &bull; 4 min</span>
+            <h4 style="color: #f8fafc; margin: 0.5rem 0;">Wire 3 Screens</h4>
+            <p style="color: var(--text-muted); font-size: 0.85rem; line-height: 1.5;">
+              Create Home, Report, and Review screens. Connect <code>NewForm()</code> on button and <code>Item = gal.Selected</code> on Edit form.
+            </p>
+          </div>
+
+          <div class="card">
+            <span class="card-badge" style="background: rgba(16, 185, 129, 0.2); color: #86efac;">Phase 3 &bull; 3 min</span>
+            <h4 style="color: #f8fafc; margin: 0.5rem 0;">Gatekeeper Logic</h4>
+            <p style="color: var(--text-muted); font-size: 0.85rem; line-height: 1.5;">
+              Apply <code>DisplayMode</code> validation on Submit and configure <code>OnSuccess</code> notification.
+            </p>
+          </div>
+
+          <div class="card">
+            <span class="card-badge" style="background: rgba(139, 92, 246, 0.2); color: #c084fc;">Phase 4 &bull; 4 min</span>
+            <h4 style="color: #f8fafc; margin: 0.5rem 0;">Deploy Cloud Flow</h4>
+            <p style="color: var(--text-muted); font-size: 0.85rem; line-height: 1.5;">
+              Create 2-step automated flow in Power Automate and submit a live test ticket to verify email delivery.
+            </p>
+          </div>
+        </div>
+        <aside class="trainer-notes">
+          <h4>Trainer Speaking Script &amp; Pedagogical Cues:</h4>
+          <p><strong>Demo Script (15 min):</strong> "Demonstrate calmly and deliberately. Show that by having the Day 25 architectural blueprint, you assemble working software in minutes without trial and error. Submit a test hazard and show the email in Outlook."</p>
+        </aside>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 18: GUIDED LEARNER PRACTICE
+           ==================================================================== -->
+      <section class="slide" id="slide-18" data-slide-index="17" data-title="Guided Practice: Co-Modeling" data-segment="Part 9: Guided Practice">
+        <header class="slide-header">
+          <div class="section-tag">Part 9 &bull; Guided Practice</div>
+          <h2>Guided Practice: Co-Modeling the Intake Gate &amp; Validation</h2>
+          <p class="subtitle">Step through the critical validation and hand-off checkpoints with the trainer before your autonomous build.</p>
+        </header>
+
+        <div class="slide-content grid-2-col">
+          <div class="card">
+            <h3 class="card-title">📝 Checkpoint Checklist</h3>
+            <ol style="color: var(--text-muted); font-size: 0.88rem; line-height: 1.7; padding-left: 1.2rem;">
+              <li>Verify that <code>btnNewHazard.OnSelect</code> calls <code>NewForm(frmNewHazard); Navigate(scr_ReportHazard)</code>.</li>
+              <li>Verify that <code>btnCancel.OnSelect</code> calls <code>ResetForm(frmNewHazard); Back()</code>.</li>
+              <li>Verify that <code>btnSubmit.DisplayMode</code> evaluates <code>IsBlank()</code> for Location and Description.</li>
+              <li>Verify that <code>frmNewHazard.OnSuccess</code> contains <code>Notify()</code> and <code>Navigate(scr_HazardHome)</code>.</li>
+            </ol>
+          </div>
+
+          <div class="card">
+            <h3 class="card-title">🔍 Verification Questions</h3>
+            <div style="background: rgba(0, 0, 0, 0.35); padding: 0.85rem; border-radius: 6px; font-size: 0.85rem; color: #cbd5e1; line-height: 1.6;">
+              &bull; <strong>Question 1:</strong> What happens if an operator types a description, then clicks Cancel, then clicks New again? Does old text appear?<br>
+              &bull; <strong>Question 2:</strong> What happens if the operator taps Submit while Location is unselected? Does the button respond?<br>
+              &bull; <strong>Question 3:</strong> What happens if the tablet Wi-Fi drops right as they tap Submit?
+            </div>
+            <p style="color: #86efac; font-size: 0.82rem; margin-top: 0.75rem;">
+              If your architecture answers all 3 safely, your intake gate is enterprise-grade!
+            </p>
+          </div>
+        </div>
+        <aside class="trainer-notes">
+          <h4>Trainer Speaking Script &amp; Pedagogical Cues:</h4>
+          <p><strong>Guided Coaching (10 min):</strong> "Walk the room and ensure the student can explain why NewForm() clears the form and why OnSuccess provides truth in feedback."</p>
+        </aside>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 19: INDEPENDENT CAPSTONE CHALLENGE
+           ==================================================================== -->
+      <section class="slide" id="slide-19" data-slide-index="18" data-title="Independent Capstone Challenge" data-segment="Part 10: Independent Practice">
+        <header class="slide-header">
+          <div class="section-tag" style="background: rgba(245, 158, 11, 0.15); border-color: rgba(245, 158, 11, 0.4); color: #fcd34d;">Part 10 &bull; Autonomous Capstone</div>
+          <h2>Independent Capstone: Build &amp; Test the Safety Hazard App</h2>
+          <p class="subtitle">20 Minutes: Build the 3 screens, enforce gatekeeper logic, wire the cloud flow, and perform a live end-to-end test.</p>
+        </header>
+
+        <div class="slide-content grid-2-col">
+          <div class="card">
+            <span class="card-badge" style="background: rgba(245, 158, 11, 0.2); color: #fcd34d;">The Challenge Scope</span>
+            <h4 style="color: #f8fafc; margin: 0.5rem 0;">4 Autonomous Deliverables:</h4>
+            <ul style="color: var(--text-muted); font-size: 0.88rem; line-height: 1.6; padding-left: 1.2rem;">
+              <li><strong>Deliverable 1 (UI):</strong> Wire 3 screens (<code>scr_HazardHome</code>, <code>scr_ReportHazard</code>, <code>scr_ReviewHazard</code>).</li>
+              <li><strong>Deliverable 2 (Logic):</strong> Enforce <code>DisplayMode</code> validation on Submit; bind <code>Item = galHazards.Selected</code> on Review form.</li>
+              <li><strong>Deliverable 3 (Feedback):</strong> Route green <code>Notify()</code> through <code>OnSuccess</code>.</li>
+              <li><strong>Deliverable 4 (Cloud Flow):</strong> Deploy a 2-step automated flow alerting your email address on new item creation.</li>
+            </ul>
+          </div>
+
+          <div class="card">
+            <span class="card-badge" style="background: rgba(16, 185, 129, 0.2); color: #86efac;">The Proof of Mastery</span>
+            <h4 style="color: #f8fafc; margin: 0.5rem 0;">Expected End-to-End Result:</h4>
+            <p style="color: var(--text-muted); font-size: 0.88rem; line-height: 1.6;">
+              Submit a live test hazard: <em>"Line 2 Bay - Oil spill near lathe CNC-04 (High)"</em>.<br><br>
+              Within 60 seconds, you must show the trainer:<br>
+              1. The new hazard row appearing in the Home screen gallery.<br>
+              2. The automated email notification resting inside your Outlook inbox!
+            </p>
+          </div>
+        </div>
+        <aside class="trainer-notes">
+          <h4>Trainer Speaking Script &amp; Pedagogical Cues:</h4>
+          <p><strong>Independent Facilitation (20 min):</strong> "Step back. Do not touch their keyboard. Let them build and make mistakes. If they get stuck, ask: 'Which layer of the 9-step model are you working on?' Prompt them to think, not copy."</p>
+        </aside>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 20: 3 FATAL MISCONCEPTIONS DEMOLISHED
+           ==================================================================== -->
+      <section class="slide" id="slide-20" data-slide-index="19" data-title="3 Fatal Misconceptions Demolished" data-segment="Part 11: Mental Model Correction">
+        <header class="slide-header">
+          <div class="section-tag" style="background: rgba(239, 68, 68, 0.15); border-color: rgba(239, 68, 68, 0.4); color: #fca5a5;">Part 11 &bull; Myth Busting</div>
+          <h2>3 Fatal Misconceptions Demolished for Good</h2>
+          <p class="subtitle">Replacing flawed amateur mental models with rock-solid enterprise engineering discipline.</p>
+        </header>
+
+        <div class="slide-content grid-3-col">
+          <div class="card" style="border-top: 3px solid #ef4444;">
+            <span class="card-badge" style="background: rgba(239, 68, 68, 0.2); color: #fca5a5;">Myth 1</span>
+            <h4 style="color: #f87171; margin: 0.5rem 0;">"I Need a Tutorial for Every App"</h4>
+            <p style="color: var(--text-muted); font-size: 0.84rem; line-height: 1.5;">
+              <strong>The Trap:</strong> Believing safety apps, IT helpdesks, and vacation requests are completely different animals.<br><br>
+              <strong>The Reality:</strong> All business apps share the exact same 9-step causality chain. Master the chain, build anything!
+            </p>
+          </div>
+
+          <div class="card" style="border-top: 3px solid #f59e0b;">
+            <span class="card-badge" style="background: rgba(245, 158, 11, 0.2); color: #fcd34d;">Myth 2</span>
+            <h4 style="color: #fbbf24; margin: 0.5rem 0;">"Re-type Code When Broken"</h4>
+            <p style="color: var(--text-muted); font-size: 0.84rem; line-height: 1.5;">
+              <strong>The Trap:</strong> Randomly modifying Power Fx formulas when an email notification fails.<br><br>
+              <strong>The Reality:</strong> If the row is in SharePoint, Power Apps is innocent! Tracing through 3 tiers prevents breaking working software.
+            </p>
+          </div>
+
+          <div class="card" style="border-top: 3px solid #06b6d4;">
+            <span class="card-badge" style="background: rgba(6, 182, 212, 0.2); color: #67e8f9;">Myth 3</span>
+            <h4 style="color: #67e8f9; margin: 0.5rem 0;">"Developers Memorize Everything"</h4>
+            <p style="color: var(--text-muted); font-size: 0.84rem; line-height: 1.5;">
+              <strong>The Trap:</strong> Feeling insecure because you don't memorize every function argument.<br><br>
+              <strong>The Reality:</strong> Architects memorize relationships and data flow. The formula bar auto-completes syntax.
+            </p>
+          </div>
+        </div>
+        <aside class="trainer-notes">
+          <h4>Trainer Speaking Script &amp; Pedagogical Cues:</h4>
+          <p><strong>Myth Review (3 min):</strong> "Reinforce Myth 3. Reassure the learner that professional engineers consult documentation every day. What makes you an engineer is knowing *what question to ask*."</p>
+        </aside>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 21: FORMATIVE ASSESSMENT: DUAL-STATE QUIZ
+           ==================================================================== -->
+      <section class="slide" id="slide-21" data-slide-index="20" data-title="Knowledge Check Quiz" data-segment="Part 12: Knowledge Check">
+        <header class="slide-header">
+          <div class="section-tag">Part 12 &bull; Formative Assessment</div>
+          <h2>Capstone Knowledge Check: Dual-State System Inspector</h2>
+          <p class="subtitle">Test your architectural reasoning. Click any option on the left to verify principles.</p>
+        </header>
+
+        <div class="slide-content">
+          <div class="quiz-container">
+            <div class="quiz-card">
+              <div style="display: flex; justify-content: space-between; align-items: center;">
+                <span class="card-badge" style="background: rgba(245, 158, 11, 0.2); color: #fcd34d;" id="quiz-day27-q-num">Question 1 of 5</span>
+                <button class="hud-btn" id="quiz-day27-next-btn" onclick="nextDay27QuizQuestion()" style="padding: 0.35rem 0.75rem; font-size: 0.8rem;">Next &rarr;</button>
+              </div>
+              <h3 class="card-title" id="quiz-day27-q-text" style="margin-top: 0.75rem; font-size: 1.15rem; line-height: 1.4;">Question text</h3>
+              <div class="quiz-options" id="quiz-day27-options-container">
+                <!-- Dynamically populated by JS renderDay27QuizQuestion() -->
+              </div>
+            </div>
+
+            <div class="quiz-inspector-card" id="quiz-day27-feedback-box">
+              <div class="feedback-placeholder" id="quiz-day27-placeholder">
+                <span style="font-size: 2.5rem; color: var(--text-dim); margin-bottom: 0.5rem;">🔍</span>
+                <h4 style="color: var(--text-muted);">Select an Answer</h4>
+                <p style="font-size: 0.85rem; color: var(--text-dim); max-width: 280px; margin-top: 0.35rem;">
+                  Click any option on the left to inspect architectural causality.
+                </p>
+              </div>
+              <div class="feedback-content" id="quiz-day27-feedback-content" style="display: none; flex-direction: column;">
+                <span class="card-badge" id="quiz-day27-feedback-badge" style="margin-bottom: 0.5rem;">Outcome</span>
+                <h4 id="quiz-day27-feedback-status" style="margin-bottom: 0.5rem; font-size: 1.1rem;">Status</h4>
+                <p id="quiz-day27-feedback-text" style="font-size: 0.88rem; color: #cbd5e1; line-height: 1.6;">Detailed explanation</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <aside class="trainer-notes">
+          <h4>Trainer Speaking Script &amp; Pedagogical Cues:</h4>
+          <p><strong>Quiz Facilitation (4 min):</strong> "Read the questions aloud. Have the learner explain WHY they picked an answer before clicking. Highlight Question 4 on troubleshooting discipline."</p>
+        </aside>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 22: CAPSTONE GRADUATION RUBRIC
+           ==================================================================== -->
+      <section class="slide" id="slide-22" data-slide-index="21" data-title="Capstone Graduation Rubric" data-segment="Part 13: Evaluation Rubric">
+        <header class="slide-header">
+          <div class="section-tag">Part 13 &bull; Evaluation Rubric</div>
+          <h2>Capstone Graduation Rubric: Measuring True Independence</h2>
+          <p class="subtitle">Where do you stand on the engineering spectrum? Evaluating architectural competence.</p>
+        </header>
+
+        <div class="slide-content">
+          <div class="card">
+            <table class="rubric-table">
+              <thead>
+                <tr>
+                  <th>Dimension</th>
+                  <th>Level 1: Novice (Tutorial Follower)</th>
+                  <th>Level 2: Competent (Citizen Developer)</th>
+                  <th>Level 3: Master Solution Architect</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>System Modeling</strong></td>
+                  <td>Guesses columns in Power Apps; builds screens before data design.</td>
+                  <td>Maps human process to SharePoint schema before touching UI components.</td>
+                  <td>Normalizes columns, enforces choice buckets, maps complete human hand-offs.</td>
+                </tr>
+                <tr>
+                  <td><strong>UI &amp; Flow Wiring</strong></td>
+                  <td>Dead-end buttons; forgets <code>NewForm()</code>; blanks persist on cancel.</td>
+                  <td>3-Screen flow works with <code>NewForm()</code>, <code>SubmitForm()</code>, and <code>Back()</code>.</td>
+                  <td>Flawless UX. <code>OnSuccess</code> routes home; responsive layout; zero data leakage.</td>
+                </tr>
+                <tr>
+                  <td><strong>Logic &amp; Validation</strong></td>
+                  <td>Leaves Submit button clickable when required fields are empty.</td>
+                  <td>Uses <code>If(IsBlank(...))</code> to lock submit button properly.</td>
+                  <td>Multi-condition validation; severity color badges; seamless <code>gal.Selected</code> binding.</td>
+                </tr>
+                <tr>
+                  <td><strong>Automation &amp; Debugging</strong></td>
+                  <td>Hardcodes emails in App buttons; panics when emails fail to arrive.</td>
+                  <td>Builds 2-step cloud flow; correctly isolates Tier A vs Tier B in debugging.</td>
+                  <td>Decoupled cloud architecture; dynamic tokens; effortlessly explains root cause across all 3 tiers.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <aside class="trainer-notes">
+          <h4>Trainer Speaking Script &amp; Pedagogical Cues:</h4>
+          <p><strong>Rubric Evaluation (2 min):</strong> "Show the learner that by completing today's challenge, they have achieved Level 2 (Competent) and demonstrated Level 3 traits in troubleshooting and decoupling!"</p>
+        </aside>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 23: 15-MINUTE CAPSTONE REFLECTION
+           ==================================================================== -->
+      <section class="slide" id="slide-23" data-slide-index="22" data-title="Reflection & Portfolio Blueprint" data-segment="Part 14: Capstone Reflection">
+        <header class="slide-header">
+          <div class="section-tag">Part 14 &bull; Reflection &amp; Portfolio</div>
+          <h2>15-Minute Reflection &amp; Your Professional Portfolio Blueprint</h2>
+          <p class="subtitle">How to document today's capstone system to demonstrate your capabilities to employers and managers.</p>
+        </header>
+
+        <div class="slide-content grid-2-col">
+          <div class="card">
+            <h3 class="card-title">📁 Portfolio Artifact Blueprint</h3>
+            <div style="display: flex; flex-direction: column; gap: 0.65rem; font-size: 0.88rem; color: var(--text-muted); line-height: 1.6;">
+              <div><strong>1. Problem Statement:</strong> Document the original pain (paper incident clipboards, lost reports, OSHA compliance risk).</div>
+              <div><strong>2. Architecture Diagram:</strong> Include your 9-step cause-and-effect pipeline diagram.</div>
+              <div><strong>3. Data Dictionary:</strong> List SharePoint columns, data types, and allowed choice values.</div>
+              <div><strong>4. Power Fx Rules:</strong> Showcase your gatekeeper <code>DisplayMode</code> validation and gallery binding.</div>
+              <div><strong>5. Cloud Flow:</strong> Screenshot your automated 2-step Power Automate flow and email output.</div>
+            </div>
+          </div>
+
+          <div class="card">
+            <h3 class="card-title">💼 The 30-Second Interview Pitch</h3>
+            <p style="color: #cbd5e1; font-size: 0.88rem; line-height: 1.6; font-style: italic;">
+              "I don't just build screens in Power Apps. I design end-to-end digital systems. For example, I engineered a Safety Hazard Tracking solution connecting 3 responsive mobile screens, a structured SharePoint cloud database, and an automated Power Automate alert flow that notifies safety officers in seconds, backed by systematic 3-tier diagnostic auditability."
+            </p>
+            <div style="margin-top: 1rem; padding: 0.75rem; background: rgba(16, 185, 129, 0.1); border-radius: 6px; font-size: 0.82rem; color: #86efac;">
+              ✓ Proves business value &nbsp;&bull;&nbsp; ✓ Demonstrates architectural thinking &nbsp;&bull;&nbsp; ✓ Highlights automation
+            </div>
+          </div>
+        </div>
+        <aside class="trainer-notes">
+          <h4>Trainer Speaking Script &amp; Pedagogical Cues:</h4>
+          <p><strong>Professional Pitch (2 min):</strong> "Teach the learner how to talk about their work. Managers don't care about button colors; they care about reduced risk, faster communication, and reliable software."</p>
+        </aside>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 24: GRADUATION CELEBRATION & THE JOURNEY AHEAD
+           ==================================================================== -->
+      <section class="slide" id="slide-24" data-slide-index="23" data-title="Graduation & Beyond" data-segment="Part 15: Graduation Celebration">
+        <header class="slide-header">
+          <div class="section-tag" style="background: rgba(16, 185, 129, 0.15); border-color: rgba(16, 185, 129, 0.4); color: #86efac;">Part 15 &bull; Official Graduation</div>
+          <h2>Official Program Graduation: You Are a Power Platform Architect!</h2>
+          <p class="subtitle">Looking back at 27 days of continuous growth, and launching into your career as a confident Citizen Developer.</p>
+        </header>
+
+        <div class="slide-content grid-2-col">
+          <div class="card" style="border-left: 3px solid #10b981;">
+            <h3 class="card-title" style="color: #86efac;">🎓 Official Certification of Completion</h3>
+            <p style="color: var(--text-muted); font-size: 0.88rem; line-height: 1.6;">
+              You have completed all 27 days of the <strong>Microsoft Power Apps Foundation Program</strong>:
+            </p>
+            <div style="margin-top: 0.75rem; padding: 0.75rem; background: rgba(16, 185, 129, 0.1); border-radius: 6px; font-family: var(--font-code); font-size: 0.82rem; color: #86efac;">
+              Problem ➔ Process ➔ Data ➔ UI ➔ Logic ➔ Action ➔ Storage ➔ Flow ➔ Test ➔ Explain Why!
+            </div>
+            <p style="color: var(--text-muted); font-size: 0.84rem; line-height: 1.5; margin-top: 0.75rem;">
+              You possess an unbreakable engineering mindset. You are capable of transforming messy spreadsheets, paper forms, and slow email chains into polished enterprise software.
+            </p>
+          </div>
+
+          <div class="card" style="border-left: 3px solid #f59e0b;">
+            <h3 class="card-title" style="color: #fcd34d;">🚀 Your Next Frontier</h3>
+            <p style="color: var(--text-muted); font-size: 0.88rem; line-height: 1.6;">
+              Where do you go from here?
+            </p>
+            <ul style="color: var(--text-muted); font-size: 0.86rem; line-height: 1.6; padding-left: 1.2rem; margin-top: 0.5rem;">
+              <li><strong>In Your Workplace:</strong> Identify 1 paper clipboard or painful Excel sheet and build a 3-screen solution.</li>
+              <li><strong>Advanced Power Automate:</strong> Approvals, multi-branch conditions, and scheduled flows.</li>
+              <li><strong>Advanced UI/UX:</strong> Component libraries, responsive containers, and dark-mode toggles.</li>
+            </ul>
+            <p style="color: #fcd34d; font-size: 0.88rem; font-weight: bold; margin-top: 0.75rem;">
+              Congratulations, Graduate! Go forth and build software that matters!
+            </p>
+          </div>
+        </div>
+        <aside class="trainer-notes">
+          <h4>Trainer Speaking Script &amp; Pedagogical Cues:</h4>
+          <p><strong>Graduation Speech (3 min):</strong> "Deliver a heartfelt graduation message. Commend their persistence, curiosity, and transformation from Day 1 absolute beginner to Day 27 independent solution architect. Lead a round of applause!"</p>
+        </aside>
+      </section>
+
+    </main>
+
+    <!-- Bottom Presentation HUD Dock Controls -->
+        <footer id="bottom-hud">
+      <div id="progress-bar-container">
+        <div id="progress-bar"></div>
+      </div>
+
+      <div class="hud-left">
+        <button class="hud-btn" id="btn-prev" onclick="prevSlide()" title="Previous Slide (Left Arrow)">&#8592; Prev</button>
+        <button class="hud-btn" id="btn-next" onclick="nextSlide()" title="Next Slide (Right Arrow / Space)">Next &#8594;</button>
+        <span id="slide-counter">Slide <span id="slide-current-num">1</span> / <span id="slide-total-count">24</span></span>
+      </div>
+
+      <div class="hud-right">
+        <button class="hud-btn" id="btn-lang" onclick="toggleLanguage()" title="Toggle Language (L)">
+          🌐 <span id="lang-label">KH</span>
+        </button>
+        <button class="hud-btn active" id="btn-laser" onclick="toggleLaser()" title="Presenter Laser Pointer (P)">
+          🔴 Laser
+        </button>
+        <button class="hud-btn" id="btn-notes" onclick="toggleNotes()" title="Trainer Notes Drawer (N)">
+          📝 Notes
+        </button>
+        <button class="hud-btn" id="btn-overview" onclick="toggleOverview()" title="Slide Overview Modal (O)">
+          🗂️ Overview
+        </button>
+        <button class="hud-btn" id="btn-timer" onclick="toggleTimer()" title="90-Min Countdown (T)">
+          ⏱️ <span id="timer-display">90:00</span>
+        </button>
+        <button class="hud-btn" id="btn-fullscreen" onclick="toggleFullscreen()" title="Fullscreen (F)">
+          ⛶
+        </button>
+        <a href="../index.html" class="hud-btn hub-btn" title="Return to Master Curriculum Hub (ត្រឡប់ទៅទំព័រដើម)" style="text-decoration: none; display: inline-flex; align-items: center; gap: 4px; color: #fcd34d; font-weight: 600;"><span>🏠</span><span>Hub</span></a>
+      </div>
+    </footer>
+
+    
+
+    <!-- Trainer Notes Drawer (Strictly Off-Stage, Slides from Right) -->
+    <div class="notes-drawer" id="notes-drawer">
+      <div class="notes-header">
+        <h3 id="notes-slide-title">Trainer Speaking Notes &bull; Slide 1</h3>
+        <button class="notes-close-btn" onclick="toggleNotes()">&times;</button>
+      </div>
+      <div class="notes-content" id="notes-body-content">
+        <!-- Dynamically filled with active slide's speaking cues -->
+      </div>
+    </div>
+
+    <!-- 24-Slide Overview Modal -->
+    <div class="overview-modal" id="overview-modal">
+      <div class="overview-header">
+        <h3>24-Slide Master Navigation</h3>
+        <button class="overview-close" onclick="toggleOverview()">&times;</button>
+      </div>
+      <div class="overview-grid" id="overview-grid">
+        <!-- 24 cards populated by JS -->
+      </div>
+    </div>
+
+  </div>
+
+  <script src="script.js"></script>
+<script>
+if (window.self !== window.top) {
+  document.documentElement.classList.add('in-iframe');
+  function hideHub() { document.querySelectorAll('.hub-btn, .back-to-hub-pill').forEach(e => e.style.display = 'none'); }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', hideHub);
+  } else {
+    hideHub();
+  }
+}
+</script>
+<style>
+.in-iframe .hub-btn, .in-iframe .back-to-hub-pill { display: none !important; }
+</style>
+</body>
+</html>
+

@@ -1,0 +1,218 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=Moul&family=Kantumruy+Pro:ital,wght@0,400..700;1,400..700&family=Battambang:wght@300;400;700;900&family=Koh+Santepheap:wght@300;400;700&family=Koulen&family=Siemreap&display=swap');
+
+/* Custom CSS for Power Apps-style Support Request & Approval Application */
+
+:root {
+  --font-khmer-title: 'Plus Jakarta Sans', 'Inter', 'Moul', 'Khmer OS Muol Light', serif;
+  --font-khmer-heading: 'Plus Jakarta Sans', 'Inter', 'Kantumruy Pro', 'Battambang', sans-serif;
+  --font-khmer-body: 'Plus Jakarta Sans', 'Inter', 'Battambang', 'Koh Santepheap', sans-serif;
+  --font-khmer: 'Plus Jakarta Sans', 'Inter', 'Battambang', 'Koh Santepheap', sans-serif;
+  --ms-primary: #0078d4;       /* Microsoft Fluent Blue */
+  --ms-primary-dark: #106ebe;
+  --ms-primary-light: #eff6fc;
+  --ms-neutral-dark: #201f1e;
+  --ms-neutral-light: #f3f2f1;
+  --ms-border: #edebe9;
+  --ms-success: #107c10;
+  --ms-warning: #ffb900;
+  --ms-danger: #d13438;
+}
+
+body {
+  font-family: 'Inter', 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #f8f9fa;
+  color: var(--ms-neutral-dark);
+  min-height: 100vh;
+}
+
+/* Header & Navigation */
+.navbar-brand {
+  font-weight: 600;
+  font-size: 1.2rem;
+  letter-spacing: -0.2px;
+}
+
+.brand-icon {
+  width: 32px;
+  height: 32px;
+  background: linear-gradient(135deg, #742774 0%, #0078d4 100%);
+  border-radius: 6px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: bold;
+}
+
+/* Sidebar Styling */
+.sidebar {
+  background-color: #ffffff;
+  border-right: 1px solid #e9ecef;
+  min-height: calc(100vh - 56px);
+}
+
+.sidebar .nav-link {
+  color: #495057;
+  font-weight: 500;
+  padding: 0.75rem 1rem;
+  border-radius: 0.375rem;
+  margin-bottom: 0.25rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  transition: all 0.2s ease-in-out;
+}
+
+.sidebar .nav-link:hover {
+  background-color: var(--ms-primary-light);
+  color: var(--ms-primary-dark);
+}
+
+.sidebar .nav-link.active {
+  background-color: #e7f1ff;
+  color: var(--ms-primary);
+  font-weight: 600;
+  border-left: 4px solid var(--ms-primary);
+}
+
+/* Metric KPI Cards */
+.kpi-card {
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 0.5rem;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  overflow: hidden;
+}
+
+.kpi-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.08) !important;
+}
+
+.kpi-icon-wrapper {
+  width: 48px;
+  height: 48px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+}
+
+/* Status Badges */
+.badge-status {
+  padding: 0.4em 0.75em;
+  font-weight: 600;
+  font-size: 0.8rem;
+  border-radius: 50rem;
+  letter-spacing: 0.3px;
+}
+
+/* Stepper / Timeline */
+.timeline-stepper {
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+  margin: 1.5rem 0 2rem 0;
+}
+
+.timeline-stepper::before {
+  content: '';
+  position: absolute;
+  top: 18px;
+  left: 20px;
+  right: 20px;
+  height: 3px;
+  background-color: #dee2e6;
+  z-index: 1;
+}
+
+.timeline-step {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  flex: 1;
+}
+
+.timeline-step-circle {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background-color: #ffffff;
+  border: 3px solid #dee2e6;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  color: #6c757d;
+  margin-bottom: 0.5rem;
+  transition: all 0.3s ease;
+}
+
+.timeline-step.active .timeline-step-circle {
+  border-color: var(--ms-primary);
+  background-color: var(--ms-primary);
+  color: #ffffff;
+}
+
+.timeline-step.completed .timeline-step-circle {
+  border-color: var(--ms-success);
+  background-color: var(--ms-success);
+  color: #ffffff;
+}
+
+.timeline-step.rejected .timeline-step-circle {
+  border-color: var(--ms-danger);
+  background-color: var(--ms-danger);
+  color: #ffffff;
+}
+
+.timeline-step-label {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: #495057;
+  display: block;
+}
+
+.timeline-step-date {
+  font-size: 0.72rem;
+  color: #6c757d;
+  display: block;
+}
+
+/* Table Enhancements */
+.table th {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: #6c757d;
+  font-weight: 600;
+  border-top: none;
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+/* Toast container positioning */
+.toast-container {
+  z-index: 1090;
+}
+
+/* Subtle transitions between views */
+.view-section {
+  animation: fadeIn 0.25s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+

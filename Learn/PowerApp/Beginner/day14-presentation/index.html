@@ -1,0 +1,1699 @@
+<!DOCTYPE html>
+<html lang="en" translate="no" class="notranslate">
+<head>
+  <meta name="google" content="notranslate">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Day 14: Controls: Input, Action, Output | Microsoft Power Apps Foundation</title>
+  <link rel="stylesheet" href="../shared/design-system.css">
+  <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=Moul&family=Kantumruy+Pro:ital,wght@0,400..700;1,400..700&family=Battambang:wght@300;400;700;900&family=Koh+Santepheap:wght@300;400;700&family=Koulen&family=Siemreap&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- Presentation Stage Wrapper -->
+  <div id="presentation-stage">
+    
+    <!-- Ambient Aurora Orbs (60fps backdrop) -->
+    <div class="aurora-orb orb-1"></div>
+    <div class="aurora-orb orb-2"></div>
+    <div class="aurora-orb orb-3"></div>
+
+    <!-- Presenter Laser Pointer & Shockwave Click Ripple -->
+    <div id="presenter-laser"></div>
+    <div id="pointer-ripple" class="pointer-click-ripple"></div>
+
+    <!-- Viewport for 24 Slides -->
+    <main id="slides-viewport">
+
+      <!-- ====================================================================
+           SLIDE 1: HERO TITLE & SYSTEM MENTAL MODEL
+           ==================================================================== -->
+      <section class="slide active" id="slide-1" data-slide-index="0" data-title="Day 14: Controls: Input, Action, Output" data-segment="Phase 5: Canvas Studio Implementation">
+        <div class="slide-content hero-content">
+          <div class="hero-badge">
+            <span>Microsoft Power Apps Professional Foundation</span>
+            <span>&bull;</span>
+            <span>Day 14 of 27</span>
+          </div>
+          <h1 class="hero-title">Controls: Input, Action, Output</h1>
+          <p class="hero-subtitle">
+            Every control on your canvas has an irreplaceable job. Master the input-process-output triad: Labels display facts, Inputs collect data, Dropdowns enforce clean choices, and Buttons trigger actions.
+          </p>
+
+          <div class="model-chain">
+            <span class="chain-item">Real Problem</span>
+            <span class="chain-arrow">&rarr;</span>
+            <span class="chain-item">Process</span>
+            <span class="chain-arrow">&rarr;</span>
+            <span class="chain-item">Data</span>
+            <span class="chain-arrow">&rarr;</span>
+            <span class="chain-item active">UI / Controls</span>
+            <span class="chain-arrow">&rarr;</span>
+            <span class="chain-item active">Action</span>
+            <span class="chain-arrow">&rarr;</span>
+            <span class="chain-item">Storage</span>
+            <span class="chain-arrow">&rarr;</span>
+            <span class="chain-item">Feedback</span>
+            <span class="chain-arrow">&rarr;</span>
+            <span class="chain-item">Test</span>
+          </div>
+        </div>
+
+        <aside class="trainer-notes">
+          <h4>Trainer Speaking Script & Pedagogical Cues:</h4>
+          <p>Welcome back everyone to Day 14! Yesterday on Day 13, we took our first steps inside Power Apps Studio. We learned how to navigate the Tree View, place blank controls, and name them using standard Hungarian notation like <code>lblTitle</code> and <code>btnSubmit</code>.</p>
+          <p>Today, we breathe life into those controls. A control is not just a pretty shape on a screen; it is an industrial tool with a specific job in our Input-Process-Output engine. Today we connect Day 1's foundational rule to concrete Studio controls: Labels broadcast information, Inputs harvest data, Dropdowns prevent garbage data, and Buttons execute decisions.</p>
+        </aside>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 2: 90-MINUTE AGENDA & OBJECTIVES
+           ==================================================================== -->
+      <section class="slide" id="slide-2" data-slide-index="1" data-title="90-Minute Timed Agenda & Measurable Objectives" data-segment="Section 1: Orientation & Outcomes">
+        <div class="slide-header">
+          <span class="section-tag">Agenda & Goals</span>
+          <h2>90-Minute Agenda & Measurable Objectives</h2>
+          <p class="subtitle">A spiral-learning structure connecting prior architecture to hands-on control mastery.</p>
+        </div>
+
+        <div class="slide-content grid-2">
+          <div class="card">
+            <h3 class="card-title">4 Measurable Learning Objectives</h3>
+            <div class="objective-item">
+              <span class="obj-num">1</span>
+              <div>
+                <strong>Classify by Functional Role:</strong>
+                <p>Categorize any control as Output (Label), Freeform Input (TextInput), Finite Choice (Dropdown), or Action Trigger (Button).</p>
+              </div>
+            </div>
+            <div class="objective-item">
+              <span class="obj-num">2</span>
+              <div>
+                <strong>Apply Data Integrity Rules:</strong>
+                <p>Choose between Dropdown and TextInput based on whether the business requirement demands restricted choices or open qualitative text.</p>
+              </div>
+            </div>
+            <div class="objective-item">
+              <span class="obj-num">3</span>
+              <div>
+                <strong>Configure Core Control Properties:</strong>
+                <p>Accurately set <code>Text</code>, <code>Default</code>, <code>HintText</code>, <code>Items</code>, <code>OnSelect</code>, and <code>DisplayMode</code> in Power Apps Studio.</p>
+              </div>
+            </div>
+            <div class="objective-item">
+              <span class="obj-num">4</span>
+              <div>
+                <strong>Diagnose & Rectify Miscast Controls:</strong>
+                <p>Identify and resolve operational bottlenecks caused by mismatched control types in existing legacy applications.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <h3 class="card-title">90-Minute Timed Lesson Plan</h3>
+            <div class="agenda-timeline">
+              <div class="agenda-block">
+                <span class="agenda-time">00 - 10m</span>
+                <span class="agenda-name">Block 1: Recall & Connect</span>
+                <span class="agenda-desc">Retrieval Practice</span>
+              </div>
+              <div class="agenda-block">
+                <span class="agenda-time">10 - 25m</span>
+                <span class="agenda-name">Block 2: Discover The Why</span>
+                <span class="agenda-desc">Apex Plastics Crisis</span>
+              </div>
+              <div class="agenda-block">
+                <span class="agenda-time">25 - 40m</span>
+                <span class="agenda-name">Block 3: The 4 Core Controls</span>
+                <span class="agenda-desc">Anatomy & Roles</span>
+              </div>
+              <div class="agenda-block">
+                <span class="agenda-time">40 - 55m</span>
+                <span class="agenda-name">Block 4: Trainer Demonstration</span>
+                <span class="agenda-desc">Studio Construction</span>
+              </div>
+              <div class="agenda-block">
+                <span class="agenda-time">55 - 65m</span>
+                <span class="agenda-name">Block 5: Guided Practice</span>
+                <span class="agenda-desc">Shift Handover Form</span>
+              </div>
+              <div class="agenda-block">
+                <span class="agenda-time">65 - 75m</span>
+                <span class="agenda-name">Block 6: Independent Task</span>
+                <span class="agenda-desc">Tool Crib Checkout</span>
+              </div>
+              <div class="agenda-block">
+                <span class="agenda-time">75 - 85m</span>
+                <span class="agenda-name">Block 7: Check & Challenge</span>
+                <span class="agenda-desc">5-Quiz + Final Challenge</span>
+              </div>
+              <div class="agenda-block">
+                <span class="agenda-time">85 - 90m</span>
+                <span class="agenda-name">Block 8: Forward Bridge</span>
+                <span class="agenda-desc">Preview Day 15 Navigation</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <aside class="trainer-notes">
+          <h4>Trainer Speaking Script & Pedagogical Cues:</h4>
+          <p>Review the four objectives with the class. Emphasize Objective 2: Data Integrity. Beginners often think "Text input is easiest because users can type whatever they want." Today they will learn why that freedom is the greatest enemy of database reliability.</p>
+          <p>Point out the timer in the HUD. Keep the pacing tight across each 10-15 minute block so we have plenty of time for hands-on property tweaking in Blocks 4 and 5.</p>
+        </aside>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 3: CONCEPT MAP & CURRICULUM BRIDGE
+           ==================================================================== -->
+      <section class="slide" id="slide-3" data-slide-index="2" data-title="Curriculum Map: The Connected Machine" data-segment="Section 1: Orientation & Outcomes">
+        <div class="slide-header">
+          <span class="section-tag">System Continuity</span>
+          <h2>The Curriculum Map: How Today Fits the Whole System</h2>
+          <p class="subtitle">Every lesson builds directly on what came before and prepares the foundation for what comes next.</p>
+        </div>
+
+        <div class="slide-content grid-3">
+          <div class="card">
+            <span class="card-badge">Foundations (Days 1–11)</span>
+            <h3 class="card-title">Problem & Data Schema</h3>
+            <p class="card-body">
+              On Day 1, we learned that apps turn <strong>Input &rarr; Process &rarr; Output</strong>. On Days 9–11, we designed the SharePoint table: <code>MachineID</code>, <code>Urgency</code>, <code>Description</code>, and <code>Status</code>.
+            </p>
+          </div>
+
+          <div class="card" style="border-color: rgba(59, 130, 246, 0.4); background: rgba(30, 41, 59, 0.85);">
+            <span class="card-badge" style="background: rgba(59, 130, 246, 0.2); color: #93c5fd;">Yesterday (Day 13)</span>
+            <h3 class="card-title">Studio & Tree View</h3>
+            <p class="card-body">
+              We mapped our paper wireframe into Studio. We structured screens, placed blank shapes, and adopted Hungarian naming conventions (<code>lbl</code>, <code>txt</code>, <code>drp</code>, <code>btn</code>).
+            </p>
+          </div>
+
+          <div class="card" style="border-color: var(--color-cyan); box-shadow: 0 0 20px rgba(6, 182, 212, 0.2);">
+            <span class="card-badge" style="background: rgba(6, 182, 212, 0.2); color: #67e8f9;">TODAY (Day 14)</span>
+            <h3 class="card-title">Input, Action, Output</h3>
+            <p class="card-body">
+              We assign functional roles to each control: <strong>Labels</strong> broadcast facts, <strong>Inputs</strong> collect text, <strong>Dropdowns</strong> enforce valid choices, and <strong>Buttons</strong> trigger business logic.
+            </p>
+          </div>
+        </div>
+
+        <aside class="trainer-notes">
+          <h4>Trainer Speaking Script & Pedagogical Cues:</h4>
+          <p>Reinforce the golden rule: we never introduce isolated features. Remind them of Day 1: what was the definition of an application? An information machine that accepts inputs, applies business rules, and outputs results.</p>
+          <p>Today is where that Day 1 definition becomes real in Power Apps Studio. Every control they drag from the Insert menu belongs to one of those three exact categories.</p>
+        </aside>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 4: PREREQUISITE RETRIEVAL PRACTICE
+           ==================================================================== -->
+      <section class="slide" id="slide-4" data-slide-index="3" data-title="Prerequisite Retrieval Practice" data-segment="Section 1: Orientation & Outcomes">
+        <div class="slide-header">
+          <span class="section-tag">Memory Activation</span>
+          <h2>Prerequisite Retrieval: Click Cards to Reveal Answers</h2>
+          <p class="subtitle">Quick active recall before we explore the inner workings of controls.</p>
+        </div>
+
+        <div class="slide-content grid-4">
+          <div class="flip-card" onclick="this.classList.toggle('flipped')">
+            <div class="flip-inner">
+              <div class="flip-front">
+                <span class="card-badge">Question 1</span>
+                <p>Why do we rename controls to <code>txtNotes</code> instead of leaving <code>TextInput1</code>?</p>
+                <span class="flip-prompt">Click to flip &rarr;</span>
+              </div>
+              <div class="flip-back">
+                <span class="card-badge">Answer 1</span>
+                <p>Default names cause bugs in formulas. <code>txtNotes</code> immediately tells any developer the control type and its exact business purpose.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="flip-card" onclick="this.classList.toggle('flipped')">
+            <div class="flip-inner">
+              <div class="flip-front">
+                <span class="card-badge">Question 2</span>
+                <p>Where in Power Apps Studio do you view the hierarchy of screens and controls?</p>
+                <span class="flip-prompt">Click to flip &rarr;</span>
+              </div>
+              <div class="flip-back">
+                <span class="card-badge">Answer 2</span>
+                <p>The <strong>Tree View</strong> panel on the left navigation rail, showing parent screens and nested child controls.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="flip-card" onclick="this.classList.toggle('flipped')">
+            <div class="flip-inner">
+              <div class="flip-front">
+                <span class="card-badge">Question 3</span>
+                <p>If a button has its property <code>Visible = false</code>, what does the user experience?</p>
+                <span class="flip-prompt">Click to flip &rarr;</span>
+              </div>
+              <div class="flip-back">
+                <span class="card-badge">Answer 3</span>
+                <p>The button vanishes entirely from the screen; the user cannot see it, click it, or interact with it.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="flip-card" onclick="this.classList.toggle('flipped')">
+            <div class="flip-inner">
+              <div class="flip-front">
+                <span class="card-badge">Question 4</span>
+                <p>How does bad user input in an app affect the rest of the company?</p>
+                <span class="flip-prompt">Click to flip &rarr;</span>
+              </div>
+              <div class="flip-back">
+                <span class="card-badge">Answer 4</span>
+                <p>Garbage In, Garbage Out. Bad data entered in controls saves bad rows to SharePoint, crashing reports and causing costly inventory errors.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <aside class="trainer-notes">
+          <h4>Trainer Speaking Script & Pedagogical Cues:</h4>
+          <p>Have students answer out loud or in the chat before clicking each card to flip. Notice Question 4: connecting the user interface directly to the database consequences.</p>
+          <p>Give positive reinforcement when students remember Hungarian prefixes (<code>txt</code>, <code>lbl</code>, <code>btn</code>, <code>drp</code>) from Day 13.</p>
+        </aside>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 5: TODAY'S PROBLEM: CHAOTIC CONTROL CATASTROPHE
+           ==================================================================== -->
+      <section class="slide" id="slide-5" data-slide-index="4" data-title="The Workplace Problem: The Chaotic Control Catastrophe" data-segment="Section 2: The Real-World Why">
+        <div class="slide-header">
+          <span class="section-tag">Workplace Reality</span>
+          <h2>The Workplace Crisis: The Chaotic Control Catastrophe</h2>
+          <p class="subtitle">What happens when a citizen developer builds a form without understanding control roles.</p>
+        </div>
+
+        <div class="slide-content">
+          <div class="crisis-banner">
+            <span class="crisis-icon">&Delta;</span>
+            <div>
+              <h3>Apex Plastics Night Shift Incident</h3>
+              <p>Maintenance tech Somnang rushed to build a "Quick Machine Breakdown" form. He grabbed random shapes from Studio without understanding what each control was engineered to do.</p>
+            </div>
+          </div>
+
+          <div class="grid-3">
+            <div class="card">
+              <span class="consequence-badge">Error 1: The Ghost Input</span>
+              <h4 style="margin: 0.6rem 0;">Label Used for Employee ID</h4>
+              <p>Somnang inserted a <strong>Text Label</strong> and typed <em>"Enter Employee ID here"</em>. When operators tapped their tablets, no keyboard popped up! The label is an Output control and cannot accept input.</p>
+            </div>
+
+            <div class="card">
+              <span class="consequence-badge">Error 2: 14 Variations of Press 1</span>
+              <h4 style="margin: 0.6rem 0;">TextInput Used for Machine ID</h4>
+              <p>Somnang used a freeform <strong>Text Input</strong> for Machine ID. Within 48 hours, operators typed: <em>"press 1"</em>, <em>"P-01"</em>, <em>"Press #1"</em>, and <em>"machine one"</em>. The database query crashed completely!</p>
+            </div>
+
+            <div class="card">
+              <span class="consequence-badge">Error 3: The Dead Button</span>
+              <h4 style="margin: 0.6rem 0;">Image Used as Submit Button</h4>
+              <p>Somnang placed an image of a green checkmark as "Submit". Operators tapped it and walked away. But because its <code>OnSelect</code> was untouched, zero records were saved into SharePoint!</p>
+            </div>
+          </div>
+        </div>
+
+        <aside class="trainer-notes">
+          <h4>Trainer Speaking Script & Pedagogical Cues:</h4>
+          <p>Tell this story with dramatic emphasis. This is not a theoretical bug; this happens in 90% of beginner Power Apps projects.</p>
+          <p>Highlight the tragedy: Somnang thought he was doing the plant a favor, but by using a Label instead of a Text Input, a Text Input instead of a Dropdown, and an unconfigured Image instead of a Button, he created chaos.</p>
+        </aside>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 6: ANATOMY OF FAILURE: CONSEQUENCE ANALYSIS
+           ==================================================================== -->
+      <section class="slide" id="slide-6" data-slide-index="5" data-title="Anatomy of Failure: Consequences of Miscast Controls" data-segment="Section 2: The Real-World Why">
+        <div class="slide-header">
+          <span class="section-tag">Consequence Analysis</span>
+          <h2>The Chain Reaction: From Wrong Control to $34,000 Loss</h2>
+          <p class="subtitle">A user interface mistake is never just cosmetic—it ripples straight into factory operations.</p>
+        </div>
+
+        <div class="slide-content grid-2">
+          <div class="card">
+            <h3 class="card-title">The Operational Ripple Effect</h3>
+            <div class="consequence-row">
+              <span class="consequence-badge">Stage 1</span>
+              <div>
+                <strong>Operators Confused & Frustrated:</strong>
+                <p>Could not type into labels; thought the app was frozen. Tapped image 10 times without response.</p>
+              </div>
+            </div>
+            <div class="consequence-row">
+              <span class="consequence-badge">Stage 2</span>
+              <div>
+                <strong>17 Tickets Vanished into Thin Air:</strong>
+                <p>Because the image had no <code>OnSelect</code> action, no data was transmitted to SharePoint.</p>
+              </div>
+            </div>
+            <div class="consequence-row">
+              <span class="consequence-badge">Stage 3</span>
+              <div>
+                <strong>Automated Spare Parts Query Failed:</strong>
+                <p>Freeform machine names didn't match the database list; zero hydraulic seals were ordered.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="card" style="border-color: rgba(239, 68, 68, 0.4); background: rgba(30, 41, 59, 0.9);">
+            <h3 class="card-title" style="color: #fca5a5;">The Industrial Outcome</h3>
+            <div style="font-size: 2.8rem; font-weight: 800; color: #ef4444; margin: 1rem 0;">$34,000</div>
+            <p style="font-size: 1.05rem; line-height: 1.6; color: #cbd5e1;">
+              Injection Press #2 overheated without maintenance notification. 400kg of polymer melted and burned inside the barrel, destroying the screw assembly and shutting down Production Line B for 36 hours.
+            </p>
+            <div style="margin-top: auto; padding: 0.85rem; background: rgba(239, 68, 68, 0.15); border-radius: 0.5rem; font-weight: 600; color: #fca5a5;">
+              Key Takeaway: Power Apps controls are precision industrial valves, not arbitrary decorations!
+            </div>
+          </div>
+        </div>
+
+        <aside class="trainer-notes">
+          <h4>Trainer Speaking Script & Pedagogical Cues:</h4>
+          <p>Pause on the $34,000 number. This connects technical choices in Studio directly to executive business value.</p>
+          <p>Ask the class: "Who is to blame? The machine operator or the developer who chose the wrong controls?" The answer is the developer. A well-designed control layout prevents operator mistakes before they can even happen.</p>
+        </aside>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 7: PLAIN-LANGUAGE CONCEPT: THE PHYSICAL TOOLBOARD
+           ==================================================================== -->
+      <section class="slide" id="slide-7" data-slide-index="6" data-title="Plain-Language Concept: The Physical Toolboard" data-segment="Section 2: The Real-World Why">
+        <div class="slide-header">
+          <span class="section-tag">Mental Model</span>
+          <h2>Plain-Language Concept: The Factory Workshop Toolboard</h2>
+          <p class="subtitle">Before touching software terminology, imagine standing in front of a physical service counter.</p>
+        </div>
+
+        <div class="slide-content grid-3">
+          <div class="card">
+            <span class="role-badge-pill pill-output">1. The Notice Board (Output)</span>
+            <h3 class="card-title">Notice Boards & Signs</h3>
+            <p class="card-body">
+              A printed sign pinned to the wall showing <em>"Shift Safety Record: 142 Days"</em>. You read it from across the room. You cannot write on it, and it does not run errands for you. It strictly <strong>broadcasts information</strong>.
+            </p>
+            <div style="margin-top: auto; font-family: var(--font-code); color: var(--color-cyan); font-size: 0.85rem;">
+              Power Apps Equivalent: Label (lbl)
+            </div>
+          </div>
+
+          <div class="card">
+            <span class="role-badge-pill pill-input">2. The Collection Slots (Input)</span>
+            <h3 class="card-title">Funnels & Slotted Trays</h3>
+            <p class="card-body">
+              <strong>Blank Paper Slot:</strong> You write whatever words you want (Text Input).<br><br>
+              <strong>Color-Coded Tray:</strong> You pick from 4 pre-made tokens (Dropdown). You cannot invent a new token. It strictly <strong>harvests clean data</strong>.
+            </p>
+            <div style="margin-top: auto; font-family: var(--font-code); color: #60a5fa; font-size: 0.85rem;">
+              Power Apps: TextInput & Dropdown
+            </div>
+          </div>
+
+          <div class="card">
+            <span class="role-badge-pill pill-action">3. The Mechanical Lever (Action)</span>
+            <h3 class="card-title">Heavy Emergency Levers</h3>
+            <p class="card-body">
+              A physical red lever on the wall. It stores no words, collects no text, and displays no reports. But when you pull it down, it engages the hydraulic pump, rings the horn, or stamps the work order. It strictly <strong>triggers an action</strong>.
+            </p>
+            <div style="margin-top: auto; font-family: var(--font-code); color: #34d399; font-size: 0.85rem;">
+              Power Apps Equivalent: Button (btn)
+            </div>
+          </div>
+        </div>
+
+        <aside class="trainer-notes">
+          <h4>Trainer Speaking Script & Pedagogical Cues:</h4>
+          <p>Have students visualize these physical workshop items: the notice board, the slotted tray, and the heavy lever.</p>
+          <p>Ask: "If I want to know what time it is, do I pull the red lever?" No, you look at the notice board. "If I want to submit my timesheet, do I look at the notice board?" No, you put it in the slot. Keep this physical separation crystal clear.</p>
+        </aside>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 8: EVERYDAY ANALOGY: THE AUTOMATED COFFEE KIOSK
+           ==================================================================== -->
+      <section class="slide" id="slide-8" data-slide-index="7" data-title="Everyday Analogy: The Automated Coffee Kiosk" data-segment="Section 2: The Real-World Why">
+        <div class="slide-header">
+          <span class="section-tag">Everyday Analogy</span>
+          <h2>Everyday Analogy: The Touchscreen Coffee Kiosk</h2>
+          <p class="subtitle">You interact with the exact same Input-Process-Output control system every morning.</p>
+        </div>
+
+        <div class="slide-content grid-4">
+          <div class="card">
+            <span class="role-badge-pill pill-output">Output Control</span>
+            <h4 style="margin: 0.5rem 0;">Status Screen</h4>
+            <p style="font-size: 0.88rem; color: var(--text-muted);">
+              Displays <em>"Price: $3.50"</em> and <em>"Boiler Temp: 92°C"</em>. Pure read-only facts.
+            </p>
+            <div style="margin-top: auto; font-family: var(--font-code); font-size: 0.8rem; color: var(--color-cyan);">
+              Control: Label (lbl)
+            </div>
+          </div>
+
+          <div class="card">
+            <span class="role-badge-pill pill-input">Controlled Choice</span>
+            <h4 style="margin: 0.5rem 0;">Cup Size Selector</h4>
+            <p style="font-size: 0.88rem; color: var(--text-muted);">
+              Options: <code>["Small", "Medium", "Large"]</code>. Prevents you from asking for an 80oz bucket.
+            </p>
+            <div style="margin-top: auto; font-family: var(--font-code); font-size: 0.8rem; color: #60a5fa;">
+              Control: Dropdown (drp)
+            </div>
+          </div>
+
+          <div class="card">
+            <span class="role-badge-pill pill-input">Freeform Input</span>
+            <h4 style="margin: 0.5rem 0;">Cup Name Slot</h4>
+            <p style="font-size: 0.88rem; color: var(--text-muted);">
+              A blank keyboard box where you type your nickname <em>"Bopha"</em> for the barista.
+            </p>
+            <div style="margin-top: auto; font-family: var(--font-code); font-size: 0.8rem; color: #60a5fa;">
+              Control: TextInput (txt)
+            </div>
+          </div>
+
+          <div class="card">
+            <span class="role-badge-pill pill-action">Action Trigger</span>
+            <h4 style="margin: 0.5rem 0;">"Start Brewing"</h4>
+            <p style="font-size: 0.88rem; color: var(--text-muted);">
+              Tapping it powers the grinder, opens the water valve, and charges your debit card.
+            </p>
+            <div style="margin-top: auto; font-family: var(--font-code); font-size: 0.8rem; color: #34d399;">
+              Control: Button (btn)
+            </div>
+          </div>
+        </div>
+
+        <aside class="trainer-notes">
+          <h4>Trainer Speaking Script & Pedagogical Cues:</h4>
+          <p>Walk through the user journey at this coffee machine. Notice what happens if the coffee machine made Cup Size a Text Input: people would type "huge cup", "super grande", or "medium-ish", and the mechanical dispenser would jam.</p>
+          <p>A Dropdown exists because the physical world has constraints. In factory DX, machines and parts have strict constraints too.</p>
+        </aside>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 9: THE FOUR CORE CONTROLS AT A GLANCE
+           ==================================================================== -->
+      <section class="slide" id="slide-9" data-slide-index="8" data-title="The Four Core Controls at a Glance" data-segment="Section 3: Anatomy & Mechanisms">
+        <div class="slide-header">
+          <span class="section-tag">Control Catalog</span>
+          <h2>The Four Core Controls at a Glance</h2>
+          <p class="subtitle">Standard Hungarian prefixes, functional roles, and their primary configuration dials.</p>
+        </div>
+
+        <div class="slide-content grid-4">
+          <div class="card">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+              <span class="card-badge">Label</span>
+              <span style="font-family: var(--font-code); color: var(--color-cyan); font-weight: 700;">lbl</span>
+            </div>
+            <h3 style="margin: 0.8rem 0 0.4rem 0;">Text Label</h3>
+            <p style="font-size: 0.85rem; color: var(--text-muted); flex: 1;">
+              Displays static text, calculated values, or instructions to the user. Cannot be typed into.
+            </p>
+            <div style="border-top: 1px solid var(--border-subtle); padding-top: 0.75rem; margin-top: 0.75rem;">
+              <span style="font-size: 0.75rem; color: var(--color-cyan); font-weight: 700;">KEY PROPERTIES:</span>
+              <p style="font-family: var(--font-code); font-size: 0.8rem;">Text, Color, Size, Visible</p>
+            </div>
+          </div>
+
+          <div class="card">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+              <span class="card-badge">Text Input</span>
+              <span style="font-family: var(--font-code); color: #60a5fa; font-weight: 700;">txt</span>
+            </div>
+            <h3 style="margin: 0.8rem 0 0.4rem 0;">Text Input</h3>
+            <p style="font-size: 0.85rem; color: var(--text-muted); flex: 1;">
+              Collects freeform alphanumeric data entered by the user via physical or virtual keyboard.
+            </p>
+            <div style="border-top: 1px solid var(--border-subtle); padding-top: 0.75rem; margin-top: 0.75rem;">
+              <span style="font-size: 0.75rem; color: #60a5fa; font-weight: 700;">KEY PROPERTIES:</span>
+              <p style="font-family: var(--font-code); font-size: 0.8rem;">Default, HintText, Mode</p>
+            </div>
+          </div>
+
+          <div class="card">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+              <span class="card-badge">Dropdown</span>
+              <span style="font-family: var(--font-code); color: #a78bfa; font-weight: 700;">drp</span>
+            </div>
+            <h3 style="margin: 0.8rem 0 0.4rem 0;">Drop Down</h3>
+            <p style="font-size: 0.85rem; color: var(--text-muted); flex: 1;">
+              Restricts user input to a predefined list of verified choices. Protects data integrity.
+            </p>
+            <div style="border-top: 1px solid var(--border-subtle); padding-top: 0.75rem; margin-top: 0.75rem;">
+              <span style="font-size: 0.75rem; color: #a78bfa; font-weight: 700;">KEY PROPERTIES:</span>
+              <p style="font-family: var(--font-code); font-size: 0.8rem;">Items, Default, Selected</p>
+            </div>
+          </div>
+
+          <div class="card">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+              <span class="card-badge">Button</span>
+              <span style="font-family: var(--font-code); color: #34d399; font-weight: 700;">btn</span>
+            </div>
+            <h3 style="margin: 0.8rem 0 0.4rem 0;">Button</h3>
+            <p style="font-size: 0.85rem; color: var(--text-muted); flex: 1;">
+              Executes Power Fx formulas, submits data, transitions screens, or triggers workflows.
+            </p>
+            <div style="border-top: 1px solid var(--border-subtle); padding-top: 0.75rem; margin-top: 0.75rem;">
+              <span style="font-size: 0.75rem; color: #34d399; font-weight: 700;">KEY PROPERTIES:</span>
+              <p style="font-family: var(--font-code); font-size: 0.8rem;">Text, OnSelect, DisplayMode</p>
+            </div>
+          </div>
+        </div>
+
+        <aside class="trainer-notes">
+          <h4>Trainer Speaking Script & Pedagogical Cues:</h4>
+          <p>Highlight the Hungarian prefixes: <code>lbl</code>, <code>txt</code>, <code>drp</code>, <code>btn</code>. Every time a student inserts a control in Studio, their very next reflex must be to rename it with this 3-letter tag.</p>
+          <p>Point out the "Key Properties" row at the bottom of each card. In Power Apps, a control is just a bundle of properties. To change how it looks or behaves, you select the property dial and assign a formula.</p>
+        </aside>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 10: DEEP-DIVE: OUTPUT CONTROLS (LABEL)
+           ==================================================================== -->
+      <section class="slide" id="slide-10" data-slide-index="9" data-title="Deep-Dive: Output Controls (Label - lbl)" data-segment="Section 3: Anatomy & Mechanisms">
+        <div class="slide-header">
+          <span class="section-tag">Output Deep-Dive</span>
+          <h2>Deep-Dive: Output Controls (Label &bull; lbl)</h2>
+          <p class="subtitle">The voice of your application: presenting facts, status codes, and instructions.</p>
+        </div>
+
+        <div class="slide-content grid-2">
+          <div class="card">
+            <h3 class="card-title">Anatomy of a Label</h3>
+            <p class="card-body">
+              A Label is a <strong>one-way broadcast mirror</strong>. Information flows strictly from the app out to the human eye. The human cannot type words into it, check boxes on it, or pull it like a lever.
+            </p>
+
+            <div style="margin-top: 1rem; background: rgba(15, 23, 42, 0.8); padding: 1rem; border-radius: 0.6rem; border: 1px solid var(--border-subtle);">
+              <span style="font-size: 0.75rem; font-weight: 700; color: var(--color-cyan);">COMMON USE CASES IN APEX PLASTICS:</span>
+              <ul style="margin: 0.5rem 0 0 1.2rem; font-size: 0.88rem; color: var(--text-muted); line-height: 1.6;">
+                <li>Screen Title: <code>"Apex Plastics - New Maintenance Ticket"</code></li>
+                <li>Dynamic Date: <code>"Logged On: " & Text(Today(), "dd-mmm-yyyy")</code></li>
+                <li>Field Instructions: <code>"Select the machine that experienced failure:"</code></li>
+                <li>Auto-Generated Key: <code>"Ticket # TKT-2026-0891"</code></li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="card">
+            <h3 class="card-title">Critical Properties on a Label</h3>
+            <div class="consequence-row">
+              <span class="card-badge" style="background: rgba(6, 182, 212, 0.2); color: #67e8f9;">Text</span>
+              <div>
+                <strong>The message displayed:</strong>
+                <p>Can be static text in quotes <code>"Hello"</code> or dynamic formulas <code>User().FullName</code>.</p>
+              </div>
+            </div>
+            <div class="consequence-row">
+              <span class="card-badge" style="background: rgba(6, 182, 212, 0.2); color: #67e8f9;">Color & Fill</span>
+              <div>
+                <strong>Visual signaling:</strong>
+                <p>Text color and background color. Used to flag red warnings or green success states.</p>
+              </div>
+            </div>
+            <div class="consequence-row">
+              <span class="card-badge" style="background: rgba(6, 182, 212, 0.2); color: #67e8f9;">DisplayMode</span>
+              <div>
+                <strong>Interaction state:</strong>
+                <p>Defaults to <code>DisplayMode.View</code>. Indicates to the browser engine that it is read-only.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <aside class="trainer-notes">
+          <h4>Trainer Speaking Script & Pedagogical Cues:</h4>
+          <p>Explain the difference between static text and dynamic text in a Label's <code>Text</code> property. Static text uses quotation marks: <code>"Apex Plastics"</code>. Dynamic text uses formulas without quotes: <code>Today()</code> or <code>User().FullName</code>.</p>
+          <p>Re-iterate: if you ever see a beginner trying to click on a label to enter their phone number, remind them: a Label is a poster on the wall, not a piece of paper in their hand.</p>
+        </aside>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 11: INTERACTIVE WIDGET 1: CONTROL ROLE INSPECTOR
+           ==================================================================== -->
+      <section class="slide" id="slide-11" data-slide-index="10" data-title="Interactive Widget 1: Control Role Inspector" data-segment="Section 3: Anatomy & Mechanisms">
+        <div class="slide-header">
+          <span class="section-tag">Interactive Widget</span>
+          <h2>Live Control Inspector: Test the 4 Core Control Roles</h2>
+          <p class="subtitle">Select a control tab on the left to inspect its live behavior, role badge, and properties on the right.</p>
+        </div>
+
+        <div class="slide-content widget-stage">
+          <div class="inspector-menu">
+            <div class="inspector-tab active" data-control-key="label">
+              <span class="tab-icon">&loz;</span>
+              <div class="tab-info">
+                <h4>Label Control (lbl)</h4>
+                <span>Role: Output / Information</span>
+              </div>
+            </div>
+
+            <div class="inspector-tab" data-control-key="textinput">
+              <span class="tab-icon">&square;</span>
+              <div class="tab-info">
+                <h4>TextInput Control (txt)</h4>
+                <span>Role: Freeform Data Input</span>
+              </div>
+            </div>
+
+            <div class="inspector-tab" data-control-key="dropdown">
+              <span class="tab-icon">&blacktriangledown;</span>
+              <div class="tab-info">
+                <h4>Dropdown Control (drp)</h4>
+                <span>Role: Finite Choice Input</span>
+              </div>
+            </div>
+
+            <div class="inspector-tab" data-control-key="button">
+              <span class="tab-icon">&circledast;</span>
+              <div class="tab-info">
+                <h4>Button Control (btn)</h4>
+                <span>Role: Event / Action Trigger</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="inspector-display">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem;">
+              <span id="inspector-role-badge" class="role-badge-pill pill-output">Output Control</span>
+              <span id="inspector-hungarian-tag" style="font-family: var(--font-code); color: var(--color-cyan); font-weight: 700;">Prefix: lbl</span>
+            </div>
+
+            <h3 id="inspector-control-title" style="margin-bottom: 0.5rem;">Text Label &bull; lblIncidentDate</h3>
+            <p id="inspector-control-desc" style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: 1.25rem;">
+              Displays system facts or calculated text. Read-only by nature; cannot receive keyboard keystrokes.
+            </p>
+
+            <div class="live-control-box">
+              <div id="inspector-live-mount" style="width: 100%; display: flex; justify-content: center;">
+                <!-- Live HTML Control rendered by script.js -->
+              </div>
+            </div>
+
+            <div style="background: rgba(15, 23, 42, 0.9); padding: 1rem; border-radius: 0.6rem; border: 1px solid var(--border-subtle);">
+              <span style="font-size: 0.75rem; font-weight: 700; color: var(--color-cyan);">FORMULA BAR DEFINITION:</span>
+              <div id="inspector-formula-code" style="font-family: var(--font-code); font-size: 0.85rem; color: #93c5fd; margin-top: 0.35rem;">
+                lblIncidentDate.Text = "Date: " & Text(Today(), "dd-mmm-yyyy")
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <aside class="trainer-notes">
+          <h4>Trainer Speaking Script & Pedagogical Cues:</h4>
+          <p>Click through each of the four tabs. For the Label, have a student try to type in it (it's uneditable). For the TextInput, type a machine note. For the Dropdown, show how choices drop down. For the Button, click it and observe the feedback.</p>
+          <p>Point out how the Formula Bar snippet updates with each control tab. Emphasize that in Power Apps Studio, each control is configured by pointing at a specific property in the formula bar.</p>
+        </aside>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 12: DEEP-DIVE: INPUT CONTROLS (TEXTINPUT & DROPDOWN)
+           ==================================================================== -->
+      <section class="slide" id="slide-12" data-slide-index="11" data-title="Deep-Dive: Input Controls (TextInput & Dropdown)" data-segment="Section 3: Anatomy & Mechanisms">
+        <div class="slide-header">
+          <span class="section-tag">Input Deep-Dive</span>
+          <h2>Deep-Dive: Input Controls (TextInput &amp; Dropdown)</h2>
+          <p class="subtitle">The Data Integrity Rule: Freeform text when answers are infinite; Dropdowns when choices are finite.</p>
+        </div>
+
+        <div class="slide-content grid-2">
+          <div class="card">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+              <span class="role-badge-pill pill-input">Freeform Input</span>
+              <span style="font-family: var(--font-code); color: #60a5fa; font-weight: 700;">txt</span>
+            </div>
+            <h3 style="margin: 0.6rem 0;">Text Input (txt)</h3>
+            <p style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: 0.85rem;">
+              Used when the answer cannot be predicted in advance (e.g., incident descriptions, serial numbers, operator comments).
+            </p>
+            <div style="background: rgba(15, 23, 42, 0.8); padding: 0.85rem; border-radius: 0.5rem; border: 1px solid var(--border-subtle);">
+              <strong style="font-size: 0.82rem; color: #93c5fd;">Critical Properties:</strong>
+              <ul style="margin: 0.4rem 0 0 1.2rem; font-size: 0.82rem; color: var(--text-muted); line-height: 1.5;">
+                <li><code>Default</code>: Pre-populated value (usually empty <code>""</code>).</li>
+                <li><code>HintText</code>: Ghost guidance (e.g. <em>"Describe unusual sounds..."</em>).</li>
+                <li><code>Mode</code>: <code>TextMode.SingleLine</code> vs <code>TextMode.MultiLine</code>.</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="card">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+              <span class="role-badge-pill pill-input">Controlled Choice</span>
+              <span style="font-family: var(--font-code); color: #a78bfa; font-weight: 700;">drp</span>
+            </div>
+            <h3 style="margin: 0.6rem 0;">Drop Down (drp)</h3>
+            <p style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: 0.85rem;">
+              Used whenever options are finite and predefined. <strong>Guarantees data integrity</strong> by eliminating typos and spelling variations.
+            </p>
+            <div style="background: rgba(15, 23, 42, 0.8); padding: 0.85rem; border-radius: 0.5rem; border: 1px solid var(--border-subtle);">
+              <strong style="font-size: 0.82rem; color: #c4b5fd;">Critical Properties:</strong>
+              <ul style="margin: 0.4rem 0 0 1.2rem; font-size: 0.82rem; color: var(--text-muted); line-height: 1.5;">
+                <li><code>Items</code>: Single-column table of choices: <code>["Press-01", "Press-02", "Press-03"]</code>.</li>
+                <li><code>Default</code>: The option selected initially when the screen opens.</li>
+                <li><code>Selected.Value</code>: The exact choice picked by the user.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <aside class="trainer-notes">
+          <h4>Trainer Speaking Script & Pedagogical Cues:</h4>
+          <p>Explain the difference between <code>Default</code> and <code>HintText</code>. This is one of the most common beginner misunderstandings! <code>Default</code> is actual data. If an operator leaves it untouched, <code>Default</code> will be saved to SharePoint. <code>HintText</code> is just ghost instructional text; if untouched, empty text is saved.</p>
+          <p>For Dropdowns, emphasize the square brackets <code>[...]</code> in the <code>Items</code> property. Connect back to Day 10: square brackets create a single-column table of strings.</p>
+        </aside>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 13: INTERACTIVE WIDGET 2: CONTROL DISASTER SIMULATOR
+           ==================================================================== -->
+      <section class="slide" id="slide-13" data-slide-index="12" data-title="Interactive Widget 2: Control Disaster Simulator" data-segment="Section 3: Anatomy & Mechanisms">
+        <div class="slide-header">
+          <span class="section-tag">Interactive Simulation</span>
+          <h2>Control Role Disaster Simulator: Free Text vs Dropdown</h2>
+          <p class="subtitle">Experience why picking the wrong control corrupts databases and crashes production.</p>
+        </div>
+
+        <div class="slide-content sim-grid">
+          <div class="sim-panel error-side">
+            <div class="sim-header">
+              <h3 style="color: #fca5a5; font-size: 1.05rem;">Flawed Architecture: Free Text Input</h3>
+              <span class="consequence-badge">High Data Corruption Risk</span>
+            </div>
+            <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.75rem;">
+              Operators type machine names freely into <code>txtMachineName</code>:
+            </p>
+
+            <div style="display: flex; gap: 0.5rem; margin-bottom: 1rem;">
+              <input type="text" id="sim-bad-input" class="sample-input-control" placeholder="e.g. press 1, P01, Machine-1" value="press 1">
+              <button id="btn-sim-test-bad" class="hud-btn" style="background: rgba(239, 68, 68, 0.2); border-color: var(--color-danger); color: #fca5a5;">
+                Simulate Submit
+              </button>
+            </div>
+
+            <div class="sim-log-box" id="sim-bad-log">
+              <div class="log-entry-bad">[08:14] User entered "press 1" &rarr; DB Lookup Failed (No matching machine)</div>
+              <div class="log-entry-bad">[08:32] User entered "M/C #1" &rarr; Inventory spare parts query crashed!</div>
+              <div class="log-entry-bad">[09:05] User entered "P-01" &rarr; Foreign Key violation in SharePoint!</div>
+            </div>
+          </div>
+
+          <div class="sim-panel success-side">
+            <div class="sim-header">
+              <h3 style="color: #86efac; font-size: 1.05rem;">Engineered Architecture: Dropdown Choice</h3>
+              <span class="consequence-badge" style="background: rgba(16, 185, 129, 0.2); color: #86efac; border-color: rgba(16, 185, 129, 0.4);">100% Clean Data</span>
+            </div>
+            <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.75rem;">
+              Operators pick from verified machine assets registered in <code>drpMachineSelect</code>:
+            </p>
+
+            <div style="display: flex; gap: 0.5rem; margin-bottom: 1rem;">
+              <select id="sim-good-select" class="sample-input-control" style="cursor: pointer;">
+                <option value="Press-01">Injection Press 01 (M-01)</option>
+                <option value="Press-02">Injection Press 02 (M-02)</option>
+                <option value="Press-03">Injection Press 03 (M-03)</option>
+                <option value="Extruder-01">Extruder Line 01 (E-01)</option>
+              </select>
+              <button id="btn-sim-test-good" class="hud-btn" style="background: rgba(16, 185, 129, 0.2); border-color: var(--color-success); color: #86efac;">
+                Simulate Submit
+              </button>
+            </div>
+
+            <div class="sim-log-box" id="sim-good-log">
+              <div class="log-entry-good">[08:14] Picked "Press-01" &rarr; Matched Asset ID 1042 (Clean Record)</div>
+              <div class="log-entry-good">[08:32] Picked "Press-02" &rarr; Spare hydraulic valve reserved automatically</div>
+              <div class="log-entry-good">[09:05] Picked "Press-01" &rarr; Maintenance dispatch SLA triggered</div>
+            </div>
+          </div>
+        </div>
+
+        <aside class="trainer-notes">
+          <h4>Trainer Speaking Script & Pedagogical Cues:</h4>
+          <p>Click "Simulate Submit" on both sides. Type different variations into the bad side ("p1", "press one", "PRESS-01") and show how the server rejects or mishandles the record.</p>
+          <p>Then switch to the right side: by using a Dropdown, the operator CANNOT make a typo even if they are wearing thick work gloves or typing on a vibrating factory floor.</p>
+        </aside>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 14: DEEP-DIVE: ACTION CONTROLS (BUTTON)
+           ==================================================================== -->
+      <section class="slide" id="slide-14" data-slide-index="13" data-title="Deep-Dive: Action Controls (Button - btn)" data-segment="Section 3: Anatomy & Mechanisms">
+        <div class="slide-header">
+          <span class="section-tag">Action Deep-Dive</span>
+          <h2>Deep-Dive: Action Controls (Button &bull; btn)</h2>
+          <p class="subtitle">The physical trigger: converting human intention into database commits and navigation.</p>
+        </div>
+
+        <div class="slide-content grid-2">
+          <div class="card">
+            <h3 class="card-title">Anatomy of an Action Button</h3>
+            <p class="card-body">
+              A Button is a <strong>mechanical electrical switch</strong>. By itself, it stores nothing and knows nothing. It sits waiting for an <code>OnSelect</code> event.
+            </p>
+
+            <div style="margin-top: 1rem; background: rgba(15, 23, 42, 0.85); padding: 1rem; border-radius: 0.6rem; border: 1px solid var(--border-subtle);">
+              <span style="font-size: 0.75rem; font-weight: 700; color: #34d399;">THE BUTTON LIFECYCLE:</span>
+              <ol style="margin: 0.5rem 0 0 1.2rem; font-size: 0.88rem; color: var(--text-muted); line-height: 1.6;">
+                <li>User taps screen &rarr; Browser fires <code>OnSelect</code> event.</li>
+                <li>Power Apps evaluates formula: validates fields, saves data, or navigates.</li>
+                <li>Visual feedback: button depresses and highlights.</li>
+              </ol>
+            </div>
+          </div>
+
+          <div class="card">
+            <h3 class="card-title">The Three Dial Settings: DisplayMode</h3>
+            <div class="consequence-row">
+              <span class="card-badge" style="background: rgba(16, 185, 129, 0.2); color: #86efac;">DisplayMode.Edit</span>
+              <div>
+                <strong>Active &amp; Clickable:</strong>
+                <p>Normal operating state. Button responds to touch and runs its <code>OnSelect</code> logic.</p>
+              </div>
+            </div>
+            <div class="consequence-row">
+              <span class="card-badge" style="background: rgba(100, 116, 139, 0.3); color: #94a3b8;">DisplayMode.Disabled</span>
+              <div>
+                <strong>Inactive &amp; Grayed Out:</strong>
+                <p>Cannot be clicked. Used to prevent submissions when mandatory fields are still empty.</p>
+              </div>
+            </div>
+            <div class="consequence-row">
+              <span class="card-badge" style="background: rgba(59, 130, 246, 0.2); color: #93c5fd;">DisplayMode.View</span>
+              <div>
+                <strong>Display Only:</strong>
+                <p>Renders text without interactive button styling; behaves like a label.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <aside class="trainer-notes">
+          <h4>Trainer Speaking Script & Pedagogical Cues:</h4>
+          <p>Explain <code>DisplayMode.Disabled</code>. This is how professional apps prevent bad data! Instead of letting the operator tap Submit and then yelling at them with an error message, we gray out the button until all required inputs have valid data.</p>
+          <p>Emphasize: A newly inserted button has <code>OnSelect = false</code>. That is why clicking it in preview mode does nothing. You must write an action formula!</p>
+        </aside>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 15: TRAINER DEMONSTRATION: STUDIO ASSEMBLY
+           ==================================================================== -->
+      <section class="slide" id="slide-15" data-slide-index="14" data-title="Trainer Demonstration: Building scrNewRequest" data-segment="Section 4: Demonstration">
+        <div class="slide-header">
+          <span class="section-tag">Trainer Modeling</span>
+          <h2>Trainer Demonstration: Assembling the Incident Form</h2>
+          <p class="subtitle">Watch the trainer construct the 4 core controls in Power Apps Studio with zero hesitation.</p>
+        </div>
+
+        <div class="slide-content grid-4">
+          <div class="card">
+            <span class="obj-num">1</span>
+            <h4 style="margin: 0.6rem 0 0.3rem 0;">Insert Header Label</h4>
+            <p style="font-size: 0.85rem; color: var(--text-muted); flex: 1;">
+              Click <code>+ Insert</code> &rarr; <code>Text label</code>. Rename to <code>lblFormTitle</code>. Set <code>Text = "Report Machine Incident"</code>.
+            </p>
+            <div style="font-family: var(--font-code); font-size: 0.78rem; color: var(--color-cyan); margin-top: 0.5rem;">Role: Output</div>
+          </div>
+
+          <div class="card">
+            <span class="obj-num">2</span>
+            <h4 style="margin: 0.6rem 0 0.3rem 0;">Insert Machine Dropdown</h4>
+            <p style="font-size: 0.85rem; color: var(--text-muted); flex: 1;">
+              Click <code>+ Insert</code> &rarr; <code>Drop down</code>. Rename to <code>drpMachineSelect</code>. Set <code>Items = ["Press-01", "Press-02", "Press-03"]</code>.
+            </p>
+            <div style="font-family: var(--font-code); font-size: 0.78rem; color: #60a5fa; margin-top: 0.5rem;">Role: Choice Input</div>
+          </div>
+
+          <div class="card">
+            <span class="obj-num">3</span>
+            <h4 style="margin: 0.6rem 0 0.3rem 0;">Insert Notes TextInput</h4>
+            <p style="font-size: 0.85rem; color: var(--text-muted); flex: 1;">
+              Click <code>+ Insert</code> &rarr; <code>Text input</code>. Rename to <code>txtFailureNotes</code>. Set <code>Default = ""</code> and <code>Mode = TextMode.MultiLine</code>.
+            </p>
+            <div style="font-family: var(--font-code); font-size: 0.78rem; color: #a78bfa; margin-top: 0.5rem;">Role: Freeform Input</div>
+          </div>
+
+          <div class="card">
+            <span class="obj-num">4</span>
+            <h4 style="margin: 0.6rem 0 0.3rem 0;">Insert Submit Button</h4>
+            <p style="font-size: 0.85rem; color: var(--text-muted); flex: 1;">
+              Click <code>+ Insert</code> &rarr; <code>Button</code>. Rename to <code>btnSubmitTicket</code>. Set <code>Text = "SUBMIT TICKET"</code>.
+            </p>
+            <div style="font-family: var(--font-code); font-size: 0.78rem; color: #34d399; margin-top: 0.5rem;">Role: Action Trigger</div>
+          </div>
+        </div>
+
+        <aside class="trainer-notes">
+          <h4>Trainer Speaking Script & Pedagogical Cues:</h4>
+          <p>Switch your screen share to Power Apps Studio (or walk through the 4 steps clearly on the slide). Narrate every click: Insert &rarr; Rename in Tree View &rarr; Select Property in Property Dropdown &rarr; Type Formula in Formula Bar.</p>
+          <p>Remind students: Hungarian naming is not optional homework; it is the fundamental habit of professional Power Apps development.</p>
+        </aside>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 16: INTERACTIVE WIDGET 3: LIVE CONTROL PROPERTY LAB
+           ==================================================================== -->
+      <section class="slide" id="slide-16" data-slide-index="15" data-title="Interactive Widget 3: Control Property Lab" data-segment="Section 5: Guided Practice">
+        <div class="slide-header">
+          <span class="section-tag">Interactive Playground</span>
+          <h2>Live Control Property Lab: Adjust Dials &amp; Observe Behavior</h2>
+          <p class="subtitle">Modify property dials in real time to see how Power Apps Studio controls react.</p>
+        </div>
+
+        <div class="slide-content lab-container">
+          <div class="dials-panel">
+            <h3 style="font-size: 1.05rem; margin-bottom: 0.4rem;">Property Dials (Inspector Panel)</h3>
+            
+            <div class="dial-group">
+              <label class="dial-label" for="lab-hint-input">txtIncidentNotes &bull; HintText:</label>
+              <input type="text" id="lab-hint-input" class="dial-input" value="Describe unusual noise, smell, or leak...">
+            </div>
+
+            <div class="dial-group">
+              <label class="dial-label" for="lab-items-select">drpUrgency &bull; Items Table:</label>
+              <select id="lab-items-select" class="dial-select">
+                <option value="standard">["Low", "Medium", "High", "Critical"]</option>
+                <option value="shift">["Shift A", "Shift B", "Shift C"]</option>
+                <option value="department">["Molding", "Tooling", "Packaging"]</option>
+              </select>
+            </div>
+
+            <div class="dial-group">
+              <label class="dial-label" for="lab-display-mode">btnSubmit &bull; DisplayMode:</label>
+              <select id="lab-display-mode" class="dial-select">
+                <option value="Edit">DisplayMode.Edit (Active / Clickable)</option>
+                <option value="Disabled">DisplayMode.Disabled (Grayed Out / Locked)</option>
+              </select>
+            </div>
+
+            <div style="margin-top: auto; padding: 0.75rem; background: rgba(59, 130, 246, 0.1); border-radius: 0.5rem; border: 1px solid rgba(59, 130, 246, 0.3); font-size: 0.8rem; color: #93c5fd;">
+              Tip: In Power Apps Studio, every visual change is driven by changing a property value!
+            </div>
+          </div>
+
+          <div class="canvas-preview-panel">
+            <span style="position: absolute; top: 1rem; left: 1.5rem; font-size: 0.75rem; font-weight: 700; color: var(--color-cyan); text-transform: uppercase;">
+              Canvas Live Preview (scrNewRequest)
+            </span>
+
+            <div style="width: 100%; max-width: 440px; display: flex; flex-direction: column; gap: 1.25rem;">
+              <div>
+                <label style="font-size: 0.82rem; font-weight: 600; color: var(--text-muted); display: block; margin-bottom: 0.35rem;">
+                  1. Incident Urgency Level (drpUrgency):
+                </label>
+                <select id="lab-preview-dropdown" class="sample-input-control" style="cursor: pointer;">
+                  <option>Low</option>
+                  <option>Medium</option>
+                  <option>High</option>
+                  <option>Critical</option>
+                </select>
+              </div>
+
+              <div>
+                <label style="font-size: 0.82rem; font-weight: 600; color: var(--text-muted); display: block; margin-bottom: 0.35rem;">
+                  2. Detailed Incident Notes (txtIncidentNotes):
+                </label>
+                <input type="text" id="lab-preview-textinput" class="sample-input-control" placeholder="Describe unusual noise, smell, or leak...">
+              </div>
+
+              <div>
+                <label style="font-size: 0.82rem; font-weight: 600; color: var(--text-muted); display: block; margin-bottom: 0.35rem;">
+                  3. Action Confirmation (btnSubmit):
+                </label>
+                <button id="lab-preview-button" class="sample-button-control">
+                  SUBMIT MAINTENANCE TICKET
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <aside class="trainer-notes">
+          <h4>Trainer Speaking Script & Pedagogical Cues:</h4>
+          <p>Guide the learners through this interactive lab. Change the <code>DisplayMode</code> from <code>Edit</code> to <code>Disabled</code>: notice how the button immediately turns gray and mouse clicks do nothing.</p>
+          <p>Change the <code>HintText</code> string: notice how the ghost placeholder inside the text box updates in real-time. Change the <code>Items</code> dropdown: see the options change dynamically.</p>
+        </aside>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 17: GUIDED PRACTICE: SHIFT HANDOVER FORM
+           ==================================================================== -->
+      <section class="slide" id="slide-17" data-slide-index="16" data-title="Guided Practice: Shift Handover Form" data-segment="Section 5: Guided Practice">
+        <div class="slide-header">
+          <span class="section-tag">Guided Exercise</span>
+          <h2>Guided Practice: Building the Shift Handover Kit</h2>
+          <p class="subtitle">Follow along as we map 4 shift handover requirements to controls and properties.</p>
+        </div>
+
+        <div class="slide-content grid-2">
+          <div class="card">
+            <h3 class="card-title">Plant Requirement Specifications</h3>
+            <div class="consequence-row">
+              <span class="obj-num">A</span>
+              <div>
+                <strong>Shift Identity Banner:</strong>
+                <p>Must show "Current Shift: Morning Shift (06:00 - 14:00)" as read-only notice.</p>
+              </div>
+            </div>
+            <div class="consequence-row">
+              <span class="obj-num">B</span>
+              <div>
+                <strong>Line Status Choice:</strong>
+                <p>Supervisor picks one of 3 states: "100% Operational", "Degraded Rate", "Full Stoppage".</p>
+              </div>
+            </div>
+            <div class="consequence-row">
+              <span class="obj-num">C</span>
+              <div>
+                <strong>Handover Notes:</strong>
+                <p>Freeform multiline box for noting pending raw material deliveries or tooling wear.</p>
+              </div>
+            </div>
+            <div class="consequence-row">
+              <span class="obj-num">D</span>
+              <div>
+                <strong>Acknowledge &amp; Lock:</strong>
+                <p>Button to seal the handover log and trigger the automated shift report.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <h3 class="card-title">Learner Architecture Solution</h3>
+            <table style="width: 100%; border-collapse: collapse; font-size: 0.85rem; color: var(--text-muted);">
+              <thead>
+                <tr style="border-bottom: 1px solid var(--border-subtle); color: var(--color-cyan); text-align: left;">
+                  <th style="padding: 0.5rem 0.25rem;">Req</th>
+                  <th style="padding: 0.5rem 0.25rem;">Control</th>
+                  <th style="padding: 0.5rem 0.25rem;">Hungarian Name</th>
+                  <th style="padding: 0.5rem 0.25rem;">Key Property</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr style="border-bottom: 1px solid var(--border-subtle);">
+                  <td style="padding: 0.6rem 0.25rem; font-weight: 700; color: #fff;">A</td>
+                  <td style="padding: 0.6rem 0.25rem;">Label</td>
+                  <td style="padding: 0.6rem 0.25rem; font-family: var(--font-code); color: var(--color-cyan);">lblShiftBanner</td>
+                  <td style="padding: 0.6rem 0.25rem; font-family: var(--font-code);">Text</td>
+                </tr>
+                <tr style="border-bottom: 1px solid var(--border-subtle);">
+                  <td style="padding: 0.6rem 0.25rem; font-weight: 700; color: #fff;">B</td>
+                  <td style="padding: 0.6rem 0.25rem;">Dropdown</td>
+                  <td style="padding: 0.6rem 0.25rem; font-family: var(--font-code); color: #60a5fa;">drpLineStatus</td>
+                  <td style="padding: 0.6rem 0.25rem; font-family: var(--font-code);">Items</td>
+                </tr>
+                <tr style="border-bottom: 1px solid var(--border-subtle);">
+                  <td style="padding: 0.6rem 0.25rem; font-weight: 700; color: #fff;">C</td>
+                  <td style="padding: 0.6rem 0.25rem;">TextInput</td>
+                  <td style="padding: 0.6rem 0.25rem; font-family: var(--font-code); color: #a78bfa;">txtHandoverNotes</td>
+                  <td style="padding: 0.6rem 0.25rem; font-family: var(--font-code);">HintText</td>
+                </tr>
+                <tr>
+                  <td style="padding: 0.6rem 0.25rem; font-weight: 700; color: #fff;">D</td>
+                  <td style="padding: 0.6rem 0.25rem;">Button</td>
+                  <td style="padding: 0.6rem 0.25rem; font-family: var(--font-code); color: #34d399;">btnConfirmHandover</td>
+                  <td style="padding: 0.6rem 0.25rem; font-family: var(--font-code);">OnSelect</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <aside class="trainer-notes">
+          <h4>Trainer Speaking Script & Pedagogical Cues:</h4>
+          <p>Prompt the learners before revealing the table rows: "For Requirement B, line status, why did we choose a Dropdown instead of a Text Input?"</p>
+          <p>Reinforce: if it were a Text Input, someone might write "okay", another "running good", another "fine". With a Dropdown, our shift analytics can produce 100% accurate downtime percentages.</p>
+        </aside>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 18: INDEPENDENT PRACTICE: TOOL CRIB CHECKOUT WIDGET
+           ==================================================================== -->
+      <section class="slide" id="slide-18" data-slide-index="17" data-title="Independent Practice: Tool Crib Checkout Widget" data-segment="Section 6: Independent Practice">
+        <div class="slide-header">
+          <span class="section-tag">Independent Task</span>
+          <h2>Independent Mini-Task: Tool Crib Checkout Control Kit</h2>
+          <p class="subtitle">Spend 10 minutes mapping the 4 requirements below to their ideal control configuration.</p>
+        </div>
+
+        <div class="slide-content grid-2">
+          <div class="card">
+            <h3 class="card-title">The Tool Crib Business Scenario</h3>
+            <p style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: 1rem;">
+              When maintenance technicians pick up replacement parts from the secure Tool Crib, they use an iPad mounted on the tool cage wall.
+            </p>
+
+            <div class="objective-item">
+              <span class="obj-num">1</span>
+              <div>
+                <strong>Display Cabinet Location:</strong>
+                <p>Read-only text showing <em>"Cabinet #4: Hydraulic Spares &bull; Shelf B"</em>.</p>
+              </div>
+            </div>
+            <div class="objective-item">
+              <span class="obj-num">2</span>
+              <div>
+                <strong>Select Verified Part:</strong>
+                <p>Pick from inventory list: <code>O-Ring 50mm</code>, <code>Piston Seal</code>, <code>Hydraulic Fluid 5L</code>.</p>
+              </div>
+            </div>
+            <div class="objective-item">
+              <span class="obj-num">3</span>
+              <div>
+                <strong>Enter Quantity Taken:</strong>
+                <p>Technician types the number of units removed from the bin (e.g. <code>2</code>).</p>
+              </div>
+            </div>
+            <div class="objective-item">
+              <span class="obj-num">4</span>
+              <div>
+                <strong>Commit Transaction:</strong>
+                <p>Touch trigger to write the transaction log and update SharePoint stock levels.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="card" style="border-color: rgba(59, 130, 246, 0.4); background: rgba(15, 23, 42, 0.9);">
+            <h3 class="card-title">Your Deliverable Specification</h3>
+            <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1rem;">
+              Draft your answers in your workbook or notepad before we reveal the answer key:
+            </p>
+
+            <div style="background: rgba(30, 41, 59, 0.6); padding: 1rem; border-radius: 0.6rem; border: 1px dashed var(--border-subtle); font-family: var(--font-code); font-size: 0.82rem; line-height: 1.8;">
+              Item 1: [Control Type?] &bull; [Prefix + Name?] &bull; [Property?]<br>
+              Item 2: [Control Type?] &bull; [Prefix + Name?] &bull; [Property?]<br>
+              Item 3: [Control Type?] &bull; [Prefix + Name?] &bull; [Property?]<br>
+              Item 4: [Control Type?] &bull; [Prefix + Name?] &bull; [Property?]
+            </div>
+
+            <div style="margin-top: auto; padding: 0.85rem; background: rgba(6, 182, 212, 0.1); border-radius: 0.5rem; font-size: 0.82rem; color: #67e8f9;">
+              Hint: Remember Hungarian notation prefixes: <code>lbl</code>, <code>drp</code>, <code>txt</code>, <code>btn</code>!
+            </div>
+          </div>
+        </div>
+
+        <aside class="trainer-notes">
+          <h4>Trainer Speaking Script & Pedagogical Cues:</h4>
+          <p>Give students 5 to 7 minutes to write their answers. Circulate the room (or check direct messages). Look out for students who accidentally assign a Label to Item 3 (quantity) or a Text Input to Item 2 (parts).</p>
+          <p>When time is up, ask a volunteer to share their four Hungarian names before progressing.</p>
+        </aside>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 19: FOUR DANGEROUS MISCONCEPTIONS DEBUNKED
+           ==================================================================== -->
+      <section class="slide" id="slide-19" data-slide-index="18" data-title="Four Dangerous Misconceptions Debunked" data-segment="Section 6: Independent Practice">
+        <div class="slide-header">
+          <span class="section-tag">Error Prevention</span>
+          <h2>Four Dangerous Beginner Misconceptions Debunked</h2>
+          <p class="subtitle">Replacing plausible wrong mental models with professional engineering instincts.</p>
+        </div>
+
+        <div class="slide-content grid-2">
+          <div class="card">
+            <span class="consequence-badge">Plausible Misconception 1</span>
+            <h4 style="margin: 0.5rem 0;">"A Label can collect input if I type into it."</h4>
+            <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.65rem;">
+              <strong>Why beginners think this:</strong> In Microsoft Word, all text looks the same and can be clicked and edited anywhere.
+            </p>
+            <p style="font-size: 0.85rem; color: #86efac; border-left: 2px solid var(--color-success); padding-left: 0.75rem;">
+              <strong>Trainer Truth:</strong> A Label is a one-way mirror. It only broadcasts text out. To collect user text, you MUST insert a Text Input control.
+            </p>
+          </div>
+
+          <div class="card">
+            <span class="consequence-badge">Plausible Misconception 2</span>
+            <h4 style="margin: 0.5rem 0;">"Text Input is better than Dropdown because users can type anything."</h4>
+            <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.65rem;">
+              <strong>Why beginners think this:</strong> Beginners value freedom of typing and fear restricting the user.
+            </p>
+            <p style="font-size: 0.85rem; color: #86efac; border-left: 2px solid var(--color-success); padding-left: 0.75rem;">
+              <strong>Trainer Truth:</strong> Unrestricted typing ruins databases. Dropdowns enforce clean data standards that power automated reporting and AI lookups.
+            </p>
+          </div>
+
+          <div class="card">
+            <span class="consequence-badge">Plausible Misconception 3</span>
+            <h4 style="margin: 0.5rem 0;">"A Button automatically saves data to the server."</h4>
+            <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.65rem;">
+              <strong>Why beginners think this:</strong> On web forms, clicking "Submit" feels like it automagically saves everything.
+            </p>
+            <p style="font-size: 0.85rem; color: #86efac; border-left: 2px solid var(--color-success); padding-left: 0.75rem;">
+              <strong>Trainer Truth:</strong> A Button is a dumb plastic switch. It does literally nothing until you configure its <code>OnSelect</code> property with action logic.
+            </p>
+          </div>
+
+          <div class="card">
+            <span class="consequence-badge">Plausible Misconception 4</span>
+            <h4 style="margin: 0.5rem 0;">"HintText and Default are the exact same thing."</h4>
+            <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.65rem;">
+              <strong>Why beginners think this:</strong> Both show words inside the text box when the screen first loads.
+            </p>
+            <p style="font-size: 0.85rem; color: #86efac; border-left: 2px solid var(--color-success); padding-left: 0.75rem;">
+              <strong>Trainer Truth:</strong> <code>Default</code> is real data that will be saved if untouched. <code>HintText</code> is a ghost placeholder that disappears upon typing and is never saved.
+            </p>
+          </div>
+        </div>
+
+        <aside class="trainer-notes">
+          <h4>Trainer Speaking Script & Pedagogical Cues:</h4>
+          <p>Read through each misconception. Ask the class: "Has anyone here ever made one of these assumptions?" Almost everyone will nod.</p>
+          <p>Normalize the mistake, then solidify the professional mental model: controls are functional tools with strict boundaries.</p>
+        </aside>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 20: INTERACTIVE WIDGET 4: 5-QUESTION KNOWLEDGE CHECK
+           ==================================================================== -->
+      <section class="slide" id="slide-20" data-slide-index="19" data-title="Interactive Widget 4: 5-Question Knowledge Check" data-segment="Section 7: Evaluation & Check">
+        <div class="slide-header">
+          <span class="section-tag">Interactive Evaluation</span>
+          <h2>Knowledge Check: 5 Questions on Control Mastery</h2>
+          <p class="subtitle">Test your understanding of control roles, properties, and data integrity.</p>
+        </div>
+
+        <div class="slide-content quiz-container">
+          <div class="quiz-card">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+              <span id="quiz-question-badge" class="card-badge">Question 1 of 5</span>
+              <span id="quiz-score-badge" style="font-family: var(--font-code); color: var(--color-cyan); font-size: 0.85rem;">Score: 0/5</span>
+            </div>
+
+            <h3 id="quiz-question-title" style="margin: 1rem 0 0.5rem 0; font-size: 1.15rem; line-height: 1.4;">
+              Why should Machine ID in our incident report be a Dropdown instead of a Text Input?
+            </h3>
+
+            <div class="quiz-options" id="quiz-options-container">
+              <!-- Rendered dynamically by script.js -->
+            </div>
+
+            <div class="quiz-feedback" id="quiz-feedback-box">
+              <!-- Feedback rationale shown upon answering -->
+            </div>
+
+            <div style="margin-top: auto; display: flex; justify-content: space-between; align-items: center; padding-top: 1rem;">
+              <button id="btn-quiz-prev" class="hud-btn" style="visibility: hidden;">&larr; Previous</button>
+              <button id="btn-quiz-next" class="hud-btn" style="display: none;">Next Question &rarr;</button>
+            </div>
+          </div>
+
+          <div class="card" style="border-color: rgba(59, 130, 246, 0.3); background: rgba(15, 23, 42, 0.85);">
+            <h3 class="card-title">Control Engineering Rules Summary</h3>
+            <div class="consequence-row">
+              <span class="role-badge-pill pill-output">Output Rule</span>
+              <div>
+                <strong>Label (lbl):</strong>
+                <p>Never use for data collection. Use strictly for headings, read-only badges, and calculated summaries.</p>
+              </div>
+            </div>
+            <div class="consequence-row">
+              <span class="role-badge-pill pill-input">Input Rule</span>
+              <div>
+                <strong>Dropdown (drp):</strong>
+                <p>Enforce whenever valid values are finite (e.g. Machine IDs, Urgency, Shift, Categories).</p>
+              </div>
+            </div>
+            <div class="consequence-row">
+              <span class="role-badge-pill pill-action">Action Rule</span>
+              <div>
+                <strong>Button (btn):</strong>
+                <p>Must have an <code>OnSelect</code> formula to execute action. Use <code>DisplayMode.Disabled</code> to lock invalid submissions.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <aside class="trainer-notes">
+          <h4>Trainer Speaking Script & Pedagogical Cues:</h4>
+          <p>Work through the 5 quiz questions. Have learners vote or commit to an answer before clicking. Make sure to discuss the "Why" and "What happens if" scenarios.</p>
+          <p>The 5 questions cover: Dropdown vs TextInput data integrity, Button OnSelect behavior, Label for Ticket ID output, HintText vs Default, and DisplayMode.Disabled.</p>
+        </aside>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 21: FINAL CHALLENGE: QUALITY INSPECTION QUICK-LOGGER
+           ==================================================================== -->
+      <section class="slide" id="slide-21" data-slide-index="20" data-title="Final Challenge: Quality Inspection Quick-Logger" data-segment="Section 7: Evaluation & Check">
+        <div class="slide-header">
+          <span class="section-tag">Final Assessment</span>
+          <h2>Final Challenge: Quality Inspection Quick-Logger</h2>
+          <p class="subtitle">Design the complete control schema for Inspector Bopha's hourly quality check.</p>
+        </div>
+
+        <div class="slide-content grid-2">
+          <div class="card">
+            <h3 class="card-title">Workplace Scenario &amp; Requirements</h3>
+            <p style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: 1rem;">
+              Quality Inspector Bopha inspects molded plastic parts every hour. She needs a fast single-screen tool on a handheld barcode scanner to log passes and defects.
+            </p>
+
+            <div class="consequence-row">
+              <span class="obj-num">1</span>
+              <div>
+                <strong>Timestamp &amp; Inspector Display:</strong>
+                <p>Read-only display of current time and inspector name at the top.</p>
+              </div>
+            </div>
+            <div class="consequence-row">
+              <span class="obj-num">2</span>
+              <div>
+                <strong>Mold Cavity Number:</strong>
+                <p>Choice of 4 specific physical cavities: <code>Cavity-A</code>, <code>Cavity-B</code>, <code>Cavity-C</code>, <code>Cavity-D</code>.</p>
+              </div>
+            </div>
+            <div class="consequence-row">
+              <span class="obj-num">3</span>
+              <div>
+                <strong>Inspection Verdict:</strong>
+                <p>Choice: <code>PASS</code>, <code>FAIL - Burr</code>, <code>FAIL - Bubble</code>, <code>FAIL - Warpage</code>.</p>
+              </div>
+            </div>
+            <div class="consequence-row">
+              <span class="obj-num">4</span>
+              <div>
+                <strong>Defect Observation Notes:</strong>
+                <p>Freeform comments to explain defect severity if a failure occurs.</p>
+              </div>
+            </div>
+            <div class="consequence-row">
+              <span class="obj-num">5</span>
+              <div>
+                <strong>Log Inspection Record:</strong>
+                <p>Action trigger to record the inspection verdict into the quality log.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="card" style="border-color: var(--color-cyan); background: rgba(15, 23, 42, 0.9);">
+            <h3 class="card-title">Challenge Mission Deliverable</h3>
+            <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1.25rem;">
+              In your workbook, produce the 5-item Control Specification Table containing:
+            </p>
+
+            <ul style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.8; margin-left: 1.2rem; margin-bottom: 1.25rem;">
+              <li><strong>Requirement Number</strong> (1 through 5)</li>
+              <li><strong>Control Type</strong> (Label, Dropdown, TextInput, Button)</li>
+              <li><strong>Hungarian Notation Name</strong> (e.g. <code>drpCavitySelect</code>)</li>
+              <li><strong>Critical Property Configured</strong> (<code>Text</code>, <code>Items</code>, <code>HintText</code>, <code>OnSelect</code>)</li>
+              <li><strong>Sample Formula / Setting Value</strong></li>
+            </ul>
+
+            <div style="padding: 0.85rem; background: rgba(6, 182, 212, 0.1); border-radius: 0.5rem; font-size: 0.82rem; color: #67e8f9;">
+              Evaluated on: Control Role Precision, Naming Rigor, and Data Integrity Protection!
+            </div>
+          </div>
+        </div>
+
+        <aside class="trainer-notes">
+          <h4>Trainer Speaking Script & Pedagogical Cues:</h4>
+          <p>Explain the mission clearly. Bopha is working under time pressure on a factory floor. If we give her a text box for Mold Cavity, she might type "A" or "cavity 1" or "mold a".</p>
+          <p>Emphasize that the learner must specify both the Hungarian name and the exact property configuration for each of the 5 requirements.</p>
+        </aside>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 22: EVALUATION RUBRIC & MODEL SOLUTION
+           ==================================================================== -->
+      <section class="slide" id="slide-22" data-slide-index="21" data-title="Evaluation Rubric & Model Solution" data-segment="Section 7: Evaluation & Check">
+        <div class="slide-header">
+          <span class="section-tag">Grading Standards</span>
+          <h2>Assessment Rubric &amp; Model Architecture Solution</h2>
+          <p class="subtitle">Compare your specifications against the 4-tier rubric and professional engineering benchmark.</p>
+        </div>
+
+        <div class="slide-content grid-2">
+          <div class="card">
+            <h3 class="card-title">4-Tier Assessment Rubric</h3>
+            <div style="display: flex; flex-direction: column; gap: 0.65rem; font-size: 0.82rem;">
+              <div style="background: rgba(30, 41, 59, 0.5); padding: 0.65rem; border-radius: 0.4rem; border-left: 3px solid var(--color-cyan);">
+                <strong>4 - Exemplary:</strong> Perfect control role mapping; 100% Hungarian naming compliance; clean single-column table formulas; clear rationale for data integrity.
+              </div>
+              <div style="background: rgba(30, 41, 59, 0.5); padding: 0.65rem; border-radius: 0.4rem; border-left: 3px solid var(--color-success);">
+                <strong>3 - Proficient:</strong> Correct controls chosen for all 5 requirements; names follow Hungarian prefixes; key properties accurately identified.
+              </div>
+              <div style="background: rgba(30, 41, 59, 0.5); padding: 0.65rem; border-radius: 0.4rem; border-left: 3px solid var(--color-warning);">
+                <strong>2 - Developing:</strong> Uses TextInputs for finite choices; leaves default names like <code>Dropdown1</code>; minor confusion between <code>Default</code> and <code>HintText</code>.
+              </div>
+              <div style="background: rgba(30, 41, 59, 0.5); padding: 0.65rem; border-radius: 0.4rem; border-left: 3px solid var(--color-danger);">
+                <strong>1 - Beginning:</strong> Assigns Labels to collect data; cannot explain what <code>OnSelect</code> does on a Button.
+              </div>
+            </div>
+          </div>
+
+          <div class="card" style="border-color: rgba(16, 185, 129, 0.4); background: rgba(15, 23, 42, 0.9);">
+            <h3 class="card-title" style="color: #86efac;">Model Engineering Solution</h3>
+            <table style="width: 100%; border-collapse: collapse; font-size: 0.82rem; color: var(--text-muted);">
+              <thead>
+                <tr style="border-bottom: 1px solid var(--border-subtle); color: #86efac; text-align: left;">
+                  <th style="padding: 0.4rem 0.2rem;">Req</th>
+                  <th style="padding: 0.4rem 0.2rem;">Control</th>
+                  <th style="padding: 0.4rem 0.2rem;">Name</th>
+                  <th style="padding: 0.4rem 0.2rem;">Property &amp; Formula</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr style="border-bottom: 1px solid var(--border-subtle);">
+                  <td style="padding: 0.4rem 0.2rem; color: #fff;">1</td>
+                  <td style="padding: 0.4rem 0.2rem;">Label</td>
+                  <td style="padding: 0.4rem 0.2rem; font-family: var(--font-code); color: var(--color-cyan);">lblInspectionInfo</td>
+                  <td style="padding: 0.4rem 0.2rem; font-family: var(--font-code);">Text: Now() &amp; " - " &amp; User().FullName</td>
+                </tr>
+                <tr style="border-bottom: 1px solid var(--border-subtle);">
+                  <td style="padding: 0.4rem 0.2rem; color: #fff;">2</td>
+                  <td style="padding: 0.4rem 0.2rem;">Dropdown</td>
+                  <td style="padding: 0.4rem 0.2rem; font-family: var(--font-code); color: #60a5fa;">drpCavitySelect</td>
+                  <td style="padding: 0.4rem 0.2rem; font-family: var(--font-code);">Items: ["Cavity-A", "Cavity-B", "Cavity-C", "Cavity-D"]</td>
+                </tr>
+                <tr style="border-bottom: 1px solid var(--border-subtle);">
+                  <td style="padding: 0.4rem 0.2rem; color: #fff;">3</td>
+                  <td style="padding: 0.4rem 0.2rem;">Dropdown</td>
+                  <td style="padding: 0.4rem 0.2rem; font-family: var(--font-code); color: #60a5fa;">drpQualityVerdict</td>
+                  <td style="padding: 0.4rem 0.2rem; font-family: var(--font-code);">Items: ["PASS", "FAIL - Burr", "FAIL - Bubble"]</td>
+                </tr>
+                <tr style="border-bottom: 1px solid var(--border-subtle);">
+                  <td style="padding: 0.4rem 0.2rem; color: #fff;">4</td>
+                  <td style="padding: 0.4rem 0.2rem;">TextInput</td>
+                  <td style="padding: 0.4rem 0.2rem; font-family: var(--font-code); color: #a78bfa;">txtDefectNotes</td>
+                  <td style="padding: 0.4rem 0.2rem; font-family: var(--font-code);">HintText: "Specify defect location or cause..."</td>
+                </tr>
+                <tr>
+                  <td style="padding: 0.4rem 0.2rem; color: #fff;">5</td>
+                  <td style="padding: 0.4rem 0.2rem;">Button</td>
+                  <td style="padding: 0.4rem 0.2rem; font-family: var(--font-code); color: #34d399;">btnLogInspection</td>
+                  <td style="padding: 0.4rem 0.2rem; font-family: var(--font-code);">Text: "LOG INSPECTION VERDICT"</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <aside class="trainer-notes">
+          <h4>Trainer Speaking Script & Pedagogical Cues:</h4>
+          <p>Review the model table with the class. Notice the beauty and clarity of this architecture: any developer in the company can glance at this table and immediately understand the screen layout.</p>
+          <p>Highlight how both Cavity and Verdict use Dropdowns. Why? Because quality statistics (PPM defect rates) can only be calculated when verdict strings are 100% standardized.</p>
+        </aside>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 23: 15-MINUTE REVIEW & HOMEWORK
+           ==================================================================== -->
+      <section class="slide" id="slide-23" data-slide-index="22" data-title="15-Minute Review: Audit the Broken Receiving Form" data-segment="Section 8: Bridge & Homework">
+        <div class="slide-header">
+          <span class="section-tag">Takeaway & Homework</span>
+          <h2>15-Minute Review: Audit the Broken Receiving Form</h2>
+          <p class="subtitle">Apply your control engineering skills to fix a flawed warehouse intake screen.</p>
+        </div>
+
+        <div class="slide-content grid-2">
+          <div class="card">
+            <h3 class="card-title">The Flawed Warehouse Receiving Form</h3>
+            <p style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: 0.85rem;">
+              Here is a snippet from a broken warehouse dock intake application:
+            </p>
+
+            <div class="consequence-row">
+              <span class="consequence-badge">Flaw 1</span>
+              <div>
+                <strong>txtDeliveryDate:</strong> Text input where workers type <em>"Oct 30 2026"</em>.
+              </div>
+            </div>
+            <div class="consequence-row">
+              <span class="consequence-badge">Flaw 2</span>
+              <div>
+                <strong>lblVendorName:</strong> Label with text <em>"Type Vendor Name Here"</em>.
+              </div>
+            </div>
+            <div class="consequence-row">
+              <span class="consequence-badge">Flaw 3</span>
+              <div>
+                <strong>txtCondition:</strong> Text input where workers type <em>"Good"</em> or <em>"Damaged"</em>.
+              </div>
+            </div>
+            <div class="consequence-row">
+              <span class="consequence-badge">Flaw 4</span>
+              <div>
+                <strong>imgSubmit:</strong> Image of a green truck icon with no click formula.
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <h3 class="card-title">Your 15-Minute Homework Assignment</h3>
+            <p style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: 1rem;">
+              In your personal development journal, rewrite these 4 flawed elements into a clean table:
+            </p>
+
+            <ol style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.8; margin-left: 1.2rem; margin-bottom: 1.25rem;">
+              <li>Identify the <strong>Correct Control Type</strong> for each item.</li>
+              <li>Assign a professional <strong>Hungarian Name</strong>.</li>
+              <li>Specify the <strong>Target Property</strong> to configure.</li>
+              <li>Write a <strong>1-sentence business justification</strong> for why the change prevents data loss or worker frustration.</li>
+            </ol>
+
+            <div style="margin-top: auto; padding: 0.85rem; background: rgba(59, 130, 246, 0.1); border-radius: 0.5rem; font-size: 0.82rem; color: #93c5fd;">
+              Review time: Exactly 15 minutes before tomorrow's Day 15 class!
+            </div>
+          </div>
+        </div>
+
+        <aside class="trainer-notes">
+          <h4>Trainer Speaking Script & Pedagogical Cues:</h4>
+          <p>Explain the homework assignment. It reinforces everything learned today in under 15 minutes. By auditing bad code, beginners cement their instincts on what constitutes good architectural design.</p>
+          <p>Encourage them to reflect on Flaw 4: replacing an image with an actual Button or Icon with an <code>OnSelect</code> formula.</p>
+        </aside>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 24: CONNECTION MAP: TODAY -> TOMORROW
+           ==================================================================== -->
+      <section class="slide" id="slide-24" data-slide-index="23" data-title="Curriculum Connection Map: Day 14 -> Day 15" data-segment="Section 8: Bridge & Homework">
+        <div class="slide-header">
+          <span class="section-tag">Forward Bridge</span>
+          <h2>Curriculum Bridge: Day 14 &rarr; Day 15</h2>
+          <p class="subtitle">From isolated controls to interconnected multi-screen user journeys.</p>
+        </div>
+
+        <div class="slide-content grid-3">
+          <div class="card">
+            <span class="card-badge">Yesterday (Day 13)</span>
+            <h3 class="card-title">Studio Canvas &amp; Structure</h3>
+            <p class="card-body">
+              We mastered the Power Apps Studio environment, navigating the Tree View, naming controls with Hungarian notation, and arranging visual layouts.
+            </p>
+          </div>
+
+          <div class="card" style="border-color: rgba(59, 130, 246, 0.4); background: rgba(30, 41, 59, 0.85);">
+            <span class="card-badge" style="background: rgba(59, 130, 246, 0.2); color: #93c5fd;">TODAY (Day 14)</span>
+            <h3 class="card-title">Control Roles &amp; Properties</h3>
+            <p class="card-body">
+              We breathed life into the controls: <strong>Labels</strong> broadcast info, <strong>Inputs</strong> collect free text, <strong>Dropdowns</strong> enforce choice integrity, and <strong>Buttons</strong> trigger actions.
+            </p>
+          </div>
+
+          <div class="card" style="border-color: var(--color-cyan); box-shadow: 0 0 20px rgba(6, 182, 212, 0.2);">
+            <span class="card-badge" style="background: rgba(6, 182, 212, 0.2); color: #67e8f9;">TOMORROW (Day 15)</span>
+            <h3 class="card-title">Multi-Screen User Journeys</h3>
+            <p class="card-body">
+              We connect our isolated screens into a complete flow using <code>Navigate(scrSuccess, ScreenTransition.Fade)</code> and <code>Back()</code>, giving operators seamless feedback after submission!
+            </p>
+          </div>
+        </div>
+
+        <aside class="trainer-notes">
+          <h4>Trainer Speaking Script & Pedagogical Cues:</h4>
+          <p>Deliver the closing bridge forward. Congratulate the students: today they mastered the individual precision tools of Power Apps.</p>
+          <p>Tomorrow on Day 15, we take these controls and link screens together into a complete user journey: from the Home Screen, to the Incident Form, to the Confirmation Success Screen! See you all tomorrow!</p>
+        </aside>
+      </section>
+
+    </main>
+
+    <!-- Bottom HUD & Navigation Controls -->
+        <footer id="bottom-hud">
+      <div id="progress-bar-container">
+        <div id="progress-bar"></div>
+      </div>
+
+      <div class="hud-left">
+        <button class="hud-btn" id="btn-prev" onclick="prevSlide()" title="Previous Slide (Left Arrow)">&#8592; Prev</button>
+        <button class="hud-btn" id="btn-next" onclick="nextSlide()" title="Next Slide (Right Arrow / Space)">Next &#8594;</button>
+        <span id="slide-counter">Slide <span id="slide-current-num">1</span> / <span id="slide-total-count">24</span></span>
+      </div>
+
+      <div class="hud-right">
+        <button class="hud-btn" id="btn-lang" onclick="toggleLanguage()" title="Toggle Language (L)">
+          🌐 <span id="lang-label">KH</span>
+        </button>
+        <button class="hud-btn active" id="btn-laser" onclick="toggleLaser()" title="Presenter Laser Pointer (P)">
+          🔴 Laser
+        </button>
+        <button class="hud-btn" id="btn-notes" onclick="toggleNotes()" title="Trainer Notes Drawer (N)">
+          📝 Notes
+        </button>
+        <button class="hud-btn" id="btn-overview" onclick="toggleOverview()" title="Slide Overview Modal (O)">
+          🗂️ Overview
+        </button>
+        <button class="hud-btn" id="btn-timer" onclick="toggleTimer()" title="90-Min Countdown (T)">
+          ⏱️ <span id="timer-display">90:00</span>
+        </button>
+        <button class="hud-btn" id="btn-fullscreen" onclick="toggleFullscreen()" title="Fullscreen (F)">
+          ⛶
+        </button>
+        <a href="../index.html" class="hud-btn hub-btn" title="Return to Master Curriculum Hub (ត្រឡប់ទៅទំព័រដើម)" style="text-decoration: none; display: inline-flex; align-items: center; gap: 4px; color: #fcd34d; font-weight: 600;"><span>🏠</span><span>Hub</span></a>
+      </div>
+    </footer>
+
+    <!-- Slide-Out Trainer Notes Drawer (Hotkey: N) -->
+    <div id="notes-drawer">
+      <div class="notes-header">
+        <h3>Trainer Notes &bull; <span id="notes-slide-title">Day 14</span></h3>
+        <button id="notes-close-btn" class="notes-close-btn">&times;</button>
+      </div>
+      <div class="notes-body" id="notes-body-content">
+        <!-- Injected dynamically from active slide aside.trainer-notes -->
+      </div>
+    </div>
+
+    <!-- Slide Grid Overview Modal (Hotkey: O) -->
+    <div id="overview-modal">
+      <div class="overview-header">
+        <h2>Slide Grid Overview &bull; Day 14 (24 Slides)</h2>
+        <button id="overview-close-btn" class="hud-btn">Close (Esc / O)</button>
+      </div>
+      <div class="overview-grid" id="overview-grid-container">
+        <!-- Rendered dynamically by script.js -->
+      </div>
+    </div>
+
+  </div>
+
+  <script src="script.js"></script>
+<script>
+if (window.self !== window.top) {
+  document.documentElement.classList.add('in-iframe');
+  function hideHub() { document.querySelectorAll('.hub-btn, .back-to-hub-pill').forEach(e => e.style.display = 'none'); }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', hideHub);
+  } else {
+    hideHub();
+  }
+}
+</script>
+<style>
+.in-iframe .hub-btn, .in-iframe .back-to-hub-pill { display: none !important; }
+</style>
+</body>
+</html>
+

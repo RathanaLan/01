@@ -1,0 +1,1565 @@
+<!DOCTYPE html>
+<html lang="en" translate="no" class="notranslate">
+<head>
+  <meta name="google" content="notranslate">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Power Apps Foundation — Day 5: Decisions (IF / THEN / ELSE)</title>
+  
+    <!-- Famous & Universally Loved Khmer Fonts (Moul for Formal Titles, Siemreap & Battambang for Easy Reading) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=Moul&family=Kantumruy+Pro:ital,wght@0,400..700;1,400..700&family=Battambang:wght@300;400;700;900&family=Koh+Santepheap:wght@300;400;700&family=Koulen&family=Siemreap&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="../shared/design-system.css">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="fluent-dark-theme">
+
+  <!-- Main Presentation Stage Container (16:9 Viewport Constrained) -->
+  <div id="presentation-container" class="presentation-container">
+
+    <!-- Top Status Bar: Branding, Segment Indicator, Timer & Controls -->
+    <!-- Presentation Header removed to match Day 25 Standard -->
+
+    <!-- Presentation Visual Stage (16:9 Canvas) -->
+    <main id="stage" class="stage" role="region" aria-label="Slide Presentation Stage">
+
+      <!-- =================================================================== -->
+      <!-- SLIDE 1: Title & Mental Model Anchor                                -->
+      <!-- =================================================================== -->
+      <section class="slide active" id="slide-1" 
+        data-title="Day 5: Decisions (IF / THEN / ELSE)" 
+        data-segment="Part 1: Welcome &amp; Spiral Recall (00:00 - 10:00)"
+        data-notes="TRAINER SPEAKING SCRIPT:
+'Welcome to Day 5 of Microsoft Power Apps Foundation!
+Today is the milestone where our application transitions from a passive calculator into an INTELLIGENT ASSISTANT!
+On Day 1, we learned why apps exist: to solve problems.
+On Day 2, we learned how apps sequence steps.
+On Day 3, we stored data in containers (Text, Number, Date, Boolean).
+On Day 4, we learned how to ask questions about that data using CONDITIONS to produce TRUE or FALSE.
+Today on Day 5, we introduce the king of business logic: IF!
+Notice today's connection chain:
+condition ➔ True/False ➔ IF ➔ action A / action B.
+Here is the core truth you will master today:
+An app does not think; IF simply listens to the True/False verdict of a condition, and uses that verdict to choose which path to take!
+If True, do Action A.
+Else (If False), do Action B!
+Let's see how this transforms business automation!'">
+        <div class="slide-content">
+          <div class="hero-layout">
+            <div class="hero-pill-group">
+              <span class="hero-pill">Phase 2: Logic &amp; Decisions</span>
+              <span class="hero-pill teal-pill">Day 5 of 27</span>
+              <span class="hero-pill blue-pill">90 Minutes</span>
+            </div>
+            <h1 class="hero-title">
+              <span class="gradient-text">Decisions: IF / THEN / ELSE</span><br>
+              How an App Chooses Different Actions Based on Truth
+            </h1>
+            <p class="hero-subtitle">
+              Yesterday, conditions gave our app the ability to discover <strong>True</strong> and <strong>False</strong>. Today, the <code>If()</code> function turns that verdict into active business behavior—opening a fork in the road so the app does the right thing at the right moment.
+            </p>
+
+            <div class="title-feature-grid">
+              <div class="feature-item">
+                <span class="feature-icon">&#10067;</span>
+                <div class="feature-info">
+                  <h4>1. The Condition</h4>
+                  <p>Yesterday's question evaluating data to produce strictly <strong>True</strong> or <strong>False</strong>.</p>
+                </div>
+              </div>
+              <div class="feature-item">
+                <span class="feature-icon">&#128256;</span>
+                <div class="feature-info">
+                  <h4>2. The Fork in the Road</h4>
+                  <p>The <code>If()</code> function inspecting the verdict to branch execution into two separate paths.</p>
+                </div>
+              </div>
+              <div class="feature-item">
+                <span class="feature-icon">&#128640;</span>
+                <div class="feature-info">
+                  <h4>3. The Chosen Action</h4>
+                  <p>Executing <strong>Action A (THEN)</strong> if True, or falling back to <strong>Action B (ELSE)</strong> if False.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- =================================================================== -->
+      <!-- SLIDE 2: 5-Minute Concept-Map Recap (Master Mental Model)            -->
+      <!-- =================================================================== -->
+      <section class="slide" id="slide-2" 
+        data-title="Master Curriculum Concept Map" 
+        data-segment="Part 1: Welcome &amp; Spiral Recall (00:00 - 10:00)"
+        data-notes="TRAINER SPEAKING SCRIPT:
+'Look at our Master Mental Model map on screen.
+Every single day builds directly on the previous day.
+On Day 3, we had DATA (numbers, text, dates).
+On Day 4, we asked CONDITIONS about that data (Is Pressure > 200?), which gave us TRUE or FALSE.
+Today on Day 5, we complete the DECISION block highlighted in glowing purple!
+How does an app make a decision?
+By passing the Condition into IF!
+If True ➔ Sound Emergency Alarm!
+Else ➔ Continue Normal Operation!
+And look at what comes tomorrow on Day 6: Multi-condition decision gates (AND / OR)!
+Real business decisions often need more than one condition. But before you can combine conditions, you must master the single IF fork today.'">
+        <div class="slide-content">
+          <div class="slide-header">
+            <span class="slide-badge purple-badge">Curriculum Architecture</span>
+            <h2 class="slide-title">Where Today Fits in the 27-Day Master Mental Model</h2>
+            <p class="slide-lead">We never teach isolated features. Today completes the bridge between passive conditions and active application behavior.</p>
+          </div>
+
+          <div class="mental-model-chain">
+            <div class="chain-step step-completed">
+              <span class="step-num">Days 1-2</span>
+              <span class="step-name">Problem &amp; Sequence</span>
+              <span class="step-status">&#10003; Foundation</span>
+            </div>
+            <span class="chain-arrow">&#8594;</span>
+            <div class="chain-step step-completed">
+              <span class="step-num">Days 3-4</span>
+              <span class="step-name">Data &amp; Conditions</span>
+              <span class="step-status">&#10003; True / False</span>
+            </div>
+            <span class="chain-arrow">&#8594;</span>
+            <div class="chain-step step-active-day5">
+              <span class="step-num">TODAY (Day 5)</span>
+              <span class="step-name">IF / DECISION</span>
+              <span class="step-status">&#9733; Branching Logic</span>
+            </div>
+            <span class="chain-arrow">&#8594;</span>
+            <div class="chain-step step-future">
+              <span class="step-num">Day 6</span>
+              <span class="step-name">AND / OR Gates</span>
+              <span class="step-status">Tomorrow</span>
+            </div>
+            <span class="chain-arrow">&#8594;</span>
+            <div class="chain-step step-future">
+              <span class="step-num">Days 7-27</span>
+              <span class="step-name">UI ➔ Store ➔ Feedback</span>
+              <span class="step-status">Ahead</span>
+            </div>
+          </div>
+
+          <div class="grid-2-col" style="margin-top: 1.25rem;">
+            <div class="info-card border-blue">
+              <div class="card-header-icon">&#128260; How Day 4 Connects to Day 5</div>
+              <p>Yesterday, we learned that a <strong>Condition</strong> is a question that evaluates data to produce strictly <strong>True</strong> or <strong>False</strong>. Today, <code>If()</code> takes that exact True/False answer and uses it as a switch track to choose between Action A and Action B.</p>
+            </div>
+            <div class="info-card border-purple">
+              <div class="card-header-icon">&#128301; Why Day 6 Requires Day 5</div>
+              <p>Tomorrow on Day 6, our apps will face complex business decisions that require multiple checks simultaneously: <em>"Is Pressure &gt; 200 AND SafetyGate = Open?"</em>. To combine conditions tomorrow, you must first master how a single condition drives an <code>If()</code> branch today.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- =================================================================== -->
+      <!-- SLIDE 3: Prerequisite Active Recall Check                           -->
+      <!-- =================================================================== -->
+      <section class="slide" id="slide-3" 
+        data-title="Prerequisite Retrieval Check" 
+        data-segment="Part 1: Welcome &amp; Spiral Recall (00:00 - 10:00)"
+        data-notes="TRAINER SPEAKING SCRIPT:
+'Let's warm up our brains with 3 quick retrieval questions from Day 4!
+Question 1: What is a Condition in software?
+(Learner response: A comparison question asked about data!)
+Question 2: What are the only two possible answers a condition can ever produce?
+(Learner response: TRUE or FALSE!)
+Question 3: If an operator types '2.5' into txtDowntime, what does the expression 'Value(txtDowntime.Text) > 4.0' evaluate to?
+(Learner response: FALSE, because 2.5 is not greater than 4.0!)
+Excellent! You have solid foundations. Now let's see how an app acts upon that True or False answer.'">
+        <div class="slide-content">
+          <div class="slide-header">
+            <span class="slide-badge blue-badge">Spiral Active Recall</span>
+            <h2 class="slide-title">Testing Prior Knowledge: Day 4 Condition Recall</h2>
+            <p class="slide-lead">Retrieve the fundamental condition concepts from memory before we give our apps the power of decision-making.</p>
+          </div>
+
+          <div class="grid-3-col">
+            <div class="retrieval-card">
+              <div class="retrieval-num">01</div>
+              <h4>From Day 4: Definition</h4>
+              <p class="retrieval-q">What is the core definition of a "Condition"?</p>
+              <div class="retrieval-answer">
+                <strong>Answer:</strong> A closed comparison question comparing data against a benchmark (e.g. <code>Pressure &gt; 200</code>) that yields strictly <strong>True</strong> or <strong>False</strong>.
+              </div>
+            </div>
+            <div class="retrieval-card">
+              <div class="retrieval-num">02</div>
+              <h4>From Day 4: Output</h4>
+              <p class="retrieval-q">Is True or False the whole decision?</p>
+              <div class="retrieval-answer">
+                <strong>Answer:</strong> No! True/False is merely the <strong>verdict</strong>. The app has not taken any action yet until an <code>If()</code> function acts upon it.
+              </div>
+            </div>
+            <div class="retrieval-card">
+              <div class="retrieval-num">03</div>
+              <h4>From Day 4: Operators</h4>
+              <p class="retrieval-q">What symbol means "not equal to" in Power Fx?</p>
+              <div class="retrieval-answer">
+                <strong>Answer:</strong> The angle brackets <code>&lt;&gt;</code>, asking the question: *"Is the left value different from the right value?"*.
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- =================================================================== -->
+      <!-- SLIDE 4: Measurable Learning Objectives                             -->
+      <!-- =================================================================== -->
+      <section class="slide" id="slide-4" 
+        data-title="Measurable Learning Objectives" 
+        data-segment="Part 1: Welcome &amp; Spiral Recall (00:00 - 10:00)"
+        data-notes="TRAINER SPEAKING SCRIPT:
+'Here are our 4 measurable learning targets for Day 5.
+By 90:00 today, you will:
+1. Explain the 3-part anatomy of an IF statement: Condition, True Action, and False Action.
+2. Trace branching logic paths—knowing with 100% precision which branch executes when a condition is True vs False.
+3. Diagnose the danger of a one-path app—like why sounding an evacuation siren for a minor oil drip cost Apex Plastics $18,000!
+4. Author clean Power Fx If() formulas across UI Visibility, DisplayMode, and Button Click workflows.'">
+        <div class="slide-content">
+          <div class="slide-header">
+            <span class="slide-badge green-badge">Target Competencies</span>
+            <h2 class="slide-title">4 Measurable Learning Objectives for Day 5</h2>
+            <p class="slide-lead">By the end of this 90-minute session, you will independently demonstrate these four practical competencies:</p>
+          </div>
+
+          <div class="grid-2-col">
+            <div class="objective-card">
+              <div class="obj-badge">OBJ 1 • Comprehension</div>
+              <h3>Deconstruct the 3 Parts of IF</h3>
+              <p>Identify and explain the 3 essential components of every decision: the <strong>Condition</strong> (question), the <strong>True branch</strong> (THEN), and the <strong>False branch</strong> (ELSE).</p>
+              <div class="obj-outcome">&#10004; Evaluated via Railway Switch Track Analogy</div>
+            </div>
+
+            <div class="objective-card">
+              <div class="obj-badge">OBJ 2 • Logic Tracing</div>
+              <h3>Trace Branching Execution Paths</h3>
+              <p>Predict with 100% accuracy which action executes given specific live data values, verifying that only ONE branch ever runs per evaluation.</p>
+              <div class="obj-outcome">&#10004; Evaluated via 6-Scenario Decision Simulator</div>
+            </div>
+
+            <div class="objective-card">
+              <div class="obj-badge">OBJ 3 • Diagnosis</div>
+              <h3>Prevent One-Path "Blind Automation"</h3>
+              <p>Diagnose what happens when an app treats all events identically without branching, causing false alarms, wasted resources, and operational paralysis.</p>
+              <div class="obj-outcome">&#10004; Evaluated via Apex $18,000 Blind Alarm Post-Mortem</div>
+            </div>
+
+            <div class="objective-card">
+              <div class="obj-badge">OBJ 4 • Application</div>
+              <h3>Author Power Fx <code>If()</code> Formulas</h3>
+              <p>Write syntactic Power Fx <code>If()</code> statements controlling button actions, dynamic label colors, and control visibility (<code>Visible</code>, <code>DisplayMode</code>).</p>
+              <div class="obj-outcome">&#10004; Evaluated via Automated Warehouse Dispatcher Challenge</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- =================================================================== -->
+      <!-- SLIDE 5: 90-Minute Timed Agenda                                     -->
+      <!-- =================================================================== -->
+      <section class="slide" id="slide-5" 
+        data-title="90-Minute Timed Agenda" 
+        data-segment="Part 1: Welcome &amp; Spiral Recall (00:00 - 10:00)"
+        data-notes="TRAINER SPEAKING SCRIPT:
+'Here is our strict, disciplined 90-minute roadmap.
+We spend 10 minutes on orientation and spiral recall.
+From 10 to 25 minutes, we examine the $18,000 workplace catastrophe at Apex Plastics and explore the Railway Switch Track analogy.
+From 25 to 45 minutes, we deep-dive into the 3 parts of IF and see where IF lives in Power Apps (Visible, DisplayMode, OnSelect).
+From 45 to 60 minutes, I will demonstrate the live IF Decision Workbench.
+From 60 to 75 minutes, you will do hands-on practice routing support tickets.
+And our final 15 minutes is our knowledge check, final challenge rubric, and bridge to Day 6 multi-condition gates.'">
+        <div class="slide-content">
+          <div class="slide-header">
+            <span class="slide-badge purple-badge">Lesson Structure</span>
+            <h2 class="slide-title">Master 90-Minute Spiral Agenda</h2>
+            <p class="slide-lead">A balanced pedagogical progression from workplace automation failure to hands-on branching mastery.</p>
+          </div>
+
+          <div class="agenda-timeline-grid">
+            <div class="agenda-row">
+              <div class="agenda-time">00:00 - 10:00 (10m)</div>
+              <div class="agenda-topic">
+                <strong>Part 1: Welcome &amp; Spiral Recall</strong>
+                <span>Master mental model anchor, active retrieval of Days 1–4, 4 measurable learning objectives.</span>
+              </div>
+              <div class="agenda-milestone">Milestone: Mental Anchor</div>
+            </div>
+            <div class="agenda-row">
+              <div class="agenda-time">10:00 - 25:00 (15m)</div>
+              <div class="agenda-topic">
+                <strong>Part 2: Why Decisions Exist &amp; Everyday Analogy</strong>
+                <span>Apex Plastics $18,000 Blind Alarm blunder, plain concept of a Decision, and the Railway Switch Track.</span>
+              </div>
+              <div class="agenda-milestone">Milestone: Problem Clarity</div>
+            </div>
+            <div class="agenda-row">
+              <div class="agenda-time">25:00 - 45:00 (20m)</div>
+              <div class="agenda-topic">
+                <strong>Part 3: The 3 Essential Parts of IF</strong>
+                <span>Condition ➔ Action If True ➔ Action If False. Where IF lives: OnSelect, Visible, and DisplayMode.</span>
+              </div>
+              <div class="agenda-milestone">Milestone: Core Logic Grammar</div>
+            </div>
+            <div class="agenda-row">
+              <div class="agenda-time">45:00 - 60:00 (15m)</div>
+              <div class="agenda-topic">
+                <strong>Part 4: Trainer Demonstration &amp; Decision Lab</strong>
+                <span>Interactive IF Decision Workbench: dynamic slider/toggles switching live execution paths in real time.</span>
+              </div>
+              <div class="agenda-milestone">Milestone: Visual Modeling</div>
+            </div>
+            <div class="agenda-row">
+              <div class="agenda-time">60:00 - 75:00 (15m)</div>
+              <div class="agenda-topic">
+                <strong>Part 5: Guided Learner Practice &amp; Decision Simulator</strong>
+                <span>Deconstructing Apex Support Form routing rules; hands-on practice with the 6-scenario branching board.</span>
+              </div>
+              <div class="agenda-milestone">Milestone: Independent Practice</div>
+            </div>
+            <div class="agenda-row">
+              <div class="agenda-time">75:00 - 90:00 (15m)</div>
+              <div class="agenda-topic">
+                <strong>Part 6: Knowledge Check, Capstone &amp; Forward Bridge</strong>
+                <span>5-question quiz, 8-branch Warehouse Dispatcher challenge, rubric, homework &amp; bridge to Day 6 AND/OR gates.</span>
+              </div>
+              <div class="agenda-milestone">Milestone: Master Assessment</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- =================================================================== -->
+      <!-- SLIDE 6: Workplace Problem: The $18,000 Blind Alert Blunder         -->
+      <!-- =================================================================== -->
+      <section class="slide" id="slide-6" 
+        data-title="Workplace Problem: The $18,000 Blunder" 
+        data-segment="Part 2: Why Decisions Exist (10:00 - 25:00)"
+        data-notes="TRAINER SPEAKING SCRIPT:
+'Let's step into the packaging hall at Apex Plastics.
+A junior app developer built an intake form with a button: 'Report Incident'.
+Because they hadn't learned IF yet, the button only had ONE linear instruction:
+SendAlertToPlantManager() ; SoundPlantEvacuationAlarm()!
+At 10:00 AM on Tuesday, an operator noticed a small 5-milliliter oil drip from a loose conveyor bolt—a minor 10-minute maintenance task!
+The operator tapped 'Report Incident'.
+What happened?
+The app had no IF! It couldn't ask: Is this an emergency?
+The plant-wide evacuation sirens blared!
+All 12 molding lines shut down! 140 workers evacuated the building into the parking lot!
+Two fire trucks were dispatched!
+Total production downtime: 2 hours!
+Cost of lost factory output: $18,000!
+All because an app treated a minor oil drip the EXACT same way as an exploding boiler!
+An app without IF is dangerous. IF is what gives software discretion!'">
+        <div class="slide-content">
+          <div class="slide-header">
+            <span class="slide-badge red-badge">Workplace Case Study</span>
+            <h2 class="slide-title">Apex Plastics: The $18,000 "Blind Alert" Blunder</h2>
+            <p class="slide-lead">How a one-track app without branching logic evacuated an entire factory for a minor 10-minute oil drip.</p>
+          </div>
+
+          <div class="story-case-box">
+            <div class="story-header">
+              <span class="warning-icon">&#9888;</span>
+              <div>
+                <h3 style="margin:0; color:#fb7185;">INCIDENT REPORT: Erroneous Full-Plant Emergency Evacuation</h3>
+                <span style="font-size:0.85rem; color:#cbd5e1;">Apex Plastics Manufacturing • Packaging Conveyor #2 Shift A</span>
+              </div>
+            </div>
+            <div class="story-grid">
+              <div class="story-panel">
+                <h4>What the App Executed (Linear One-Track Code):</h4>
+                <div class="math-card math-actual">
+                  <span>Reported Incident: <code>"Minor loose bolt drip"</code></span>
+                  <span>App Formula: <code>SoundEvacuationSiren()</code></span>
+                  <div class="calc-divider"></div>
+                  <span class="result-line-fail">Outcome: <strong>140 Workers Evacuated ($18,000 Lost)</strong></span>
+                </div>
+              </div>
+              <div class="story-panel">
+                <h4>What Branching Logic Should Have Done (IF):</h4>
+                <div class="math-card math-expected">
+                  <span>Condition: <code>IsUrgent = true</code> (Evaluated: FALSE)</span>
+                  <span>True Branch: <code>SoundEvacuationSiren()</code></span>
+                  <span>False Branch: <code>NotifyLineMechanic()</code></span>
+                  <div class="calc-divider"></div>
+                  <span class="result-line">Result: <strong>Mechanic Dispatched • Zero Factory Downtime</strong></span>
+                </div>
+              </div>
+            </div>
+            <div class="story-footer">
+              <strong>Root Cause:</strong> The app lacked a decision fork. Real business processes are not one-track trains; they require <strong>branching logic</strong> to treat minor tasks differently from catastrophic emergencies.
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- =================================================================== -->
+      <!-- SLIDE 7: Plain Concept: What is a "Decision"?                       -->
+      <!-- =================================================================== -->
+      <section class="slide" id="slide-7" 
+        data-title="Plain Concept: What is a Decision?" 
+        data-segment="Part 2: Why Decisions Exist (10:00 - 25:00)"
+        data-notes="TRAINER SPEAKING SCRIPT:
+'Before we look at code syntax, let's establish plain-language clarity.
+What is a Decision in software?
+A Decision is simply a FORK IN THE ROAD.
+Imagine you are walking down a hallway.
+You see a signpost that says:
+'Is your badge green?'
+If your badge is green (TRUE), you turn LEFT into the Executive Lounge.
+If your badge is NOT green (FALSE), you turn RIGHT into the General Cafeteria.
+Notice: You cannot go both left and right at the same time!
+You choose ONE path based strictly on the answer to the question on the signpost!
+In Power Apps, the signpost is the CONDITION (Day 4).
+The hallway fork is the IF statement (Day 5).
+The two doors are ACTION A and ACTION B!'">
+        <div class="slide-content">
+          <div class="slide-header">
+            <span class="slide-badge blue-badge">Core Mental Model</span>
+            <h2 class="slide-title">Plain Language: What is a "Decision"?</h2>
+            <p class="slide-lead">A decision is a fork in the road where an app chooses exactly ONE path based on a condition's verdict.</p>
+          </div>
+
+          <div class="grid-2-col" style="gap: 1.5rem;">
+            <div class="concept-card">
+              <div class="concept-badge red-badge">&#10060; One-Track Script (Dumb Automation)</div>
+              <h3>Executes Every Step Blindly</h3>
+              <p>Follows a fixed sequence regardless of the situation. Treats emergencies and minor issues identically.</p>
+              <div class="concept-examples">
+                <div class="example-item">Always sounds the emergency siren.</div>
+                <div class="example-item">Always demands manager sign-off even for a $2 purchase.</div>
+                <div class="example-item">Always blocks the screen even if fields are valid.</div>
+              </div>
+            </div>
+
+            <div class="concept-card">
+              <div class="concept-badge green-badge">&#10004; Branching Decision (Intelligent App)</div>
+              <h3>Chooses the Appropriate Action Based on Truth</h3>
+              <p>Inspects the condition's True/False verdict to dynamically route the user to the correct outcome.</p>
+              <div class="concept-examples">
+                <div class="example-item">&#10004; <strong>If Critical?</strong> Sound Alarm. <strong>Else?</strong> Log quiet ticket.</div>
+                <div class="example-item">&#10004; <strong>If Cost &gt; $500?</strong> Route to VP. <strong>Else?</strong> Auto-approve.</div>
+                <div class="example-item">&#10004; <strong>If Name Blank?</strong> Show red warning. <strong>Else?</strong> Save form.</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="takeaway-banner">
+            <strong>Key Insight:</strong> <code>If()</code> does not make the decision on its own; it simply follows the direction pointed to by the <strong>True/False verdict</strong> of your condition!
+          </div>
+        </div>
+      </section>
+
+      <!-- =================================================================== -->
+      <!-- SLIDE 8: Everyday Analogy: The Railway Track Switch                 -->
+      <!-- =================================================================== -->
+      <section class="slide" id="slide-8" 
+        data-title="Everyday Analogy: Railway Switch Track" 
+        data-segment="Part 2: Why Decisions Exist (10:00 - 25:00)"
+        data-notes="TRAINER SPEAKING SCRIPT:
+'To make IF statements unforgettable, imagine a train approaching a railway switch track.
+A single train is rolling forward. That train represents the app's execution flow!
+Ahead on the track stands a physical mechanical switch.
+The switch inspects a sensor:
+'Is the track ahead clear?'
+If the answer is TRUE, the switch stays straight, and the train rolls smoothly to Station A (Passenger Terminal)!
+If the answer is FALSE (track blocked), the switch shifts the rails to the right, diverting the train onto Siding B (Safety Depot)!
+Can the train split in half and travel down both tracks at once?
+Of course not!
+It takes Track A OR it takes Track B.
+In Power Fx, If(Condition, ActionA, ActionB) is that exact railway switch!'">
+        <div class="slide-content">
+          <div class="slide-header">
+            <span class="slide-badge gold-badge">Everyday Metaphor</span>
+            <h2 class="slide-title">Everyday Analogy: The Railway Track Switch</h2>
+            <p class="slide-lead">A train cannot travel down two tracks simultaneously. The switch lever diverts the train to Track A or Track B.</p>
+          </div>
+
+          <div class="railway-switch-box">
+            <div class="train-origin">
+              <span class="rail-icon">&#128642;</span>
+              <strong>Execution Flow</strong>
+              <p>User clicks button</p>
+            </div>
+
+            <div class="switch-lever">
+              <div class="lever-indicator">&#128256;</div>
+              <span class="lever-label">THE IF SWITCH</span>
+              <code>Condition: True or False?</code>
+            </div>
+
+            <div class="track-branches">
+              <div class="track-branch branch-true">
+                <span class="branch-pill pill-true">TRUE (THEN)</span>
+                <strong>Track A: Station Express</strong>
+                <p>Run Action A (e.g., Save Form &amp; Notify Supervisor)</p>
+              </div>
+
+              <div class="track-branch branch-false">
+                <span class="branch-pill pill-false">FALSE (ELSE)</span>
+                <strong>Track B: Safety Siding</strong>
+                <p>Run Action B (e.g., Show Red Error &amp; Block Navigation)</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- =================================================================== -->
+      <!-- SLIDE 9: The 3 Essential Parts of IF                               -->
+      <!-- =================================================================== -->
+      <section class="slide" id="slide-9" 
+        data-title="The 3 Essential Parts of IF" 
+        data-segment="Part 3: The 3 Essential Parts of IF (25:00 - 45:00)"
+        data-notes="TRAINER SPEAKING SCRIPT:
+'Every IF statement in Power Apps, Excel, or any programming language in the world has exactly THREE essential parts, separated by commas:
+Part 1: The CONDITION — The question that produces True or False.
+Part 2: The THEN action — What happens if the condition evaluates to TRUE.
+Part 3: The ELSE action — What happens if the condition evaluates to FALSE.
+Look at the syntax on screen:
+If ( Condition , ActionIfTrue , ActionIfFalse )
+Notice the commas!
+The first comma means 'THEN'.
+The second comma means 'ELSE'.
+If you read it like an English sentence:
+'If the downtime is over 4 hours, THEN alert the plant manager, ELSE notify the shift lead!'
+Memorize this 3-part rhythm: Condition, Then, Else!'">
+        <div class="slide-content">
+          <div class="slide-header">
+            <span class="slide-badge purple-badge">Syntax Anatomy</span>
+            <h2 class="slide-title">The 3 Essential Components of <code>If()</code></h2>
+            <p class="slide-lead">Separated by commas, these three arguments form the universal grammar of digital decision-making.</p>
+          </div>
+
+          <div class="if-syntax-anatomy-box">
+            <div class="if-banner">
+              <span class="if-kw">If</span> ( 
+              <span class="if-arg if-cond">Condition</span> , 
+              <span class="if-arg if-then">ActionIfTrue</span> , 
+              <span class="if-arg if-else">ActionIfFalse</span> )
+            </div>
+
+            <div class="if-cards-grid">
+              <div class="if-card card-cond">
+                <span class="card-step-tag">ARGUMENT 1</span>
+                <h4>The Condition (Question)</h4>
+                <p>A comparison question from Day 4 that evaluates to strictly <strong>True</strong> or <strong>False</strong>.</p>
+                <div class="card-example"><code>Value(txtHours.Text) &gt; 4.0</code></div>
+              </div>
+
+              <div class="if-card card-then">
+                <span class="card-step-tag">ARGUMENT 2 (After 1st Comma)</span>
+                <h4>THEN: The True Branch</h4>
+                <p>The action or value returned when the condition evaluates to <strong>TRUE</strong>.</p>
+                <div class="card-example"><code>"CRITICAL ESCALATION"</code></div>
+              </div>
+
+              <div class="if-card card-else">
+                <span class="card-step-tag">ARGUMENT 3 (After 2nd Comma)</span>
+                <h4>ELSE: The False Branch</h4>
+                <p>The fallback action or value returned when the condition evaluates to <strong>FALSE</strong>.</p>
+                <div class="card-example"><code>"STANDARD TICKET"</code></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- =================================================================== -->
+      <!-- SLIDE 10: Where IF Lives in Power Apps                              -->
+      <!-- =================================================================== -->
+      <section class="slide" id="slide-10" 
+        data-title="Where IF Lives in Power Apps" 
+        data-segment="Part 3: The 3 Essential Parts of IF (25:00 - 45:00)"
+        data-notes="TRAINER SPEAKING SCRIPT:
+'Where do citizen developers actually use IF inside Microsoft Power Apps?
+In three major places:
+1. Behavior (Button OnSelect): Deciding what to do when clicked:
+If (IsBlank(txtName.Text), Notify('Please enter name!'), SubmitForm(frmSupport))!
+2. Visibility (Visible Property): Hiding or showing controls dynamically:
+lblEmergencyWarning.Visible = If(chkHazard.Value = true, true, false)!
+If the switch is flipped, the warning appears. If off, it disappears!
+3. Control Permissions (DisplayMode): Disabling or enabling inputs:
+btnSubmit.DisplayMode = If(IsBlank(txtName.Text), DisplayMode.Disabled, DisplayMode.Edit)!
+Notice: The exact same 3-part formula works everywhere across your app!'">
+        <div class="slide-content">
+          <div class="slide-header">
+            <span class="slide-badge gold-badge">Application Patterns</span>
+            <h2 class="slide-title">Where <code>If()</code> Lives Inside Microsoft Power Apps</h2>
+            <p class="slide-lead">The exact same decision pattern powers button actions, dynamic UI visibility, and field permissions.</p>
+          </div>
+
+          <div class="pantry-grid">
+            <div class="pantry-jar border-blue">
+              <div class="jar-icon">&#128433;</div>
+              <h4>1. Actions (OnSelect)</h4>
+              <span class="jar-substance">Button Workflows</span>
+              <p>Decides which command to execute when a user taps a button.</p>
+              <div class="jar-example"><code>If(Valid, Save(), Alert())</code></div>
+            </div>
+
+            <div class="pantry-jar border-num">
+              <div class="jar-icon">&#128065;</div>
+              <h4>2. Visibility (Visible)</h4>
+              <span class="jar-substance">Dynamic UI Display</span>
+              <p>Shows a warning banner only when a danger condition is True.</p>
+              <div class="jar-example"><code>If(Hazard, true, false)</code></div>
+            </div>
+
+            <div class="pantry-jar border-date">
+              <div class="jar-icon">&#128274;</div>
+              <h4>3. Permissions (DisplayMode)</h4>
+              <span class="jar-substance">Field Disabling</span>
+              <p>Disables the Submit button until all mandatory fields are filled.</p>
+              <div class="jar-example"><code>If(Blank, Disabled, Edit)</code></div>
+            </div>
+
+            <div class="pantry-jar border-bool">
+              <div class="jar-icon">&#127912;</div>
+              <h4>4. Styling (Color)</h4>
+              <span class="jar-substance">Visual Status</span>
+              <p>Changes text color to Red if past-due, or Green if on schedule.</p>
+              <div class="jar-example"><code>If(Late, Color.Red, Green)</code></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- =================================================================== -->
+      <!-- SLIDE 11: Visual Cause-and-Effect Flow: The Fork in the Road        -->
+      <!-- =================================================================== -->
+      <section class="slide" id="slide-11" 
+        data-title="Visual Cause &amp; Effect: The Fork" 
+        data-segment="Part 3: The 3 Essential Parts of IF (25:00 - 45:00)"
+        data-notes="TRAINER SPEAKING SCRIPT:
+'Look at the visual cause-and-effect flow on screen.
+Watch how data moves through the decision pipeline:
+Input data: Operator enters Downtime = 5.5 Hours.
+Step 1: The condition asks: 5.5 > 4.0?
+Step 2: The comparison evaluates to TRUE.
+Step 3: The IF switch shifts to the True branch.
+Step 4: Action A executes: Escalation notification sent to Plant Manager!
+What if Downtime was 1.5 Hours?
+1.5 > 4.0 evaluates to FALSE!
+The IF switch shifts to the False branch.
+Action B executes: Normal ticket logged for Shift Lead!
+This is clean, predictable, reliable business logic.'">
+        <div class="slide-content">
+          <div class="slide-header">
+            <span class="slide-badge blue-badge">Logical Flow</span>
+            <h2 class="slide-title">Visual Cause &amp; Effect: The Fork in the Road</h2>
+            <p class="slide-lead">Tracing live data through the condition evaluation into the mutually exclusive execution branches.</p>
+          </div>
+
+          <div class="branching-diagram-container">
+            <div class="diagram-root">
+              <span class="root-badge">LIVE SENSOR DATA</span>
+              <code>Downtime = 5.5 Hours</code>
+            </div>
+
+            <div class="diagram-stem">&#10142;</div>
+
+            <div class="diagram-decision-diamond">
+              <span class="diamond-tag">CONDITION CHECK</span>
+              <strong>Value(Hours) &gt; 4.0?</strong>
+              <div class="diamond-result">Verdict: TRUE</div>
+            </div>
+
+            <div class="diagram-fork-branches">
+              <div class="fork-path path-active">
+                <span class="fork-tag tag-true">&#10004; TRUE PATH TAKEN</span>
+                <h4>Action A: High-Severity Escalation</h4>
+                <p>Send urgent push notification to Plant Manager phone; flash red banner on kiosk.</p>
+              </div>
+
+              <div class="fork-path path-dormant">
+                <span class="fork-tag tag-false">&#10060; FALSE PATH (SKIPPED)</span>
+                <h4>Action B: Standard Routing</h4>
+                <p>Log routine ticket in SharePoint; assign to next available shift mechanic.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- =================================================================== -->
+      <!-- SLIDE 12: Trainer Demo: Interactive IF Decision Workbench           -->
+      <!-- =================================================================== -->
+      <section class="slide" id="slide-12" 
+        data-title="Trainer Demo: IF Workbench" 
+        data-segment="Part 4: Trainer Demonstration (45:00 - 60:00)"
+        data-notes="TRAINER SPEAKING SCRIPT:
+'Now let's open our live Interactive IF Decision Workbench!
+Watch as I interact with the live controls:
+Look at the Downtime Slider:
+When Downtime is 2.0 hours, look at the active branch below:
+Condition 2.0 > 4.0 is FALSE!
+The 'Standard Lead Dispatch' box lights up in cool blue, while the Emergency box stays dark!
+Now watch what happens when I drag the slider past 4.0 hours to 6.5 hours:
+BOOM! Look at the transition:
+The condition flips to TRUE!
+The railway switch shifts!
+The Critical Plant Manager Escalation card bursts into RADIANT RED with flashing sirens!
+Look at the Submit button below:
+When the Operator Name is empty, the button is DISABLED.
+When I type a name, the button turns VIBRANT BLUE and enabled!
+This is how citizen developers build intelligent, responsive apps.'">
+        <div class="slide-content">
+          <div class="slide-header">
+            <span class="slide-badge blue-badge">Interactive Simulation</span>
+            <h2 class="slide-title">Trainer Demonstration: The IF Decision Workbench</h2>
+            <p class="slide-lead">Adjust the live factory controls on the left to see how <code>If()</code> dynamically switches between Action A and Action B.</p>
+          </div>
+
+          <div class="workbench-grid">
+            <div class="workbench-inputs">
+              <h4>Live Maintenance Ticket Inputs:</h4>
+              <div class="input-control-row">
+                <label>Reported Downtime: <strong id="wb-hours-val">2.0</strong> Hours</label>
+                <input type="range" id="wb-hours-slider" min="0.5" max="10.0" step="0.5" value="2.0" class="fluent-slider">
+              </div>
+              <div class="input-control-row">
+                <label>Operator Name Input:</label>
+                <input type="text" id="wb-op-input" value="" class="fluent-text-input" placeholder="Type name to enable button...">
+              </div>
+              <div class="input-control-row">
+                <label>Safety Hazard Present?</label>
+                <button type="button" id="wb-hazard-btn" class="workbench-toggle-btn">
+                  <span class="toggle-indicator off"></span> Hazard: NO (false)
+                </button>
+              </div>
+            </div>
+
+            <div class="workbench-evaluations">
+              <h4>Live Dynamic Action Execution:</h4>
+              
+              <!-- Dynamic Notification Card -->
+              <div class="decision-result-card" id="card-alert-branch">
+                <span class="branch-label" id="branch-indicator">FALSE PATH ACTIVE: Standard Dispatch</span>
+                <h4 id="branch-title" style="color: #38bdf8;">&#128227; Route to Shift Lead Mechanic</h4>
+                <p id="branch-desc">Downtime is under 4.0 hours. Logged as Routine Priority.</p>
+              </div>
+
+              <!-- Dynamic Submit Button State -->
+              <div class="submit-state-demo">
+                <label>Button DisplayMode: <code>If(IsBlank(Name), Disabled, Edit)</code></label>
+                <button id="demo-submit-btn" class="nav-btn" disabled style="width: 100%; justify-content: center; opacity: 0.4;">
+                  &#128274; Submit Ticket (Disabled: Name Required)
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- =================================================================== -->
+      <!-- SLIDE 13: Mid-Session Pulse Checkpoint & Hydration                  -->
+      <!-- =================================================================== -->
+      <section class="slide" id="slide-13" 
+        data-title="Mid-Session Pulse Check" 
+        data-segment="Part 4: Trainer Demonstration (45:00 - 60:00)"
+        data-notes="TRAINER SPEAKING SCRIPT:
+'We have reached the 45-minute mark! Halfway through Day 5!
+Let's pause for a quick 60-second breathing and posture reset.
+Take a sip of water.
+Quick thumb check for everyone in the room:
+Thumbs UP if you clearly see the 3 parts of IF: Condition, True Action, and False Action.
+Thumbs SIDEWAYS if you still wonder how the commas work in Power Fx.
+Remember: The first comma means THEN; the second comma means ELSE!'">
+        <div class="slide-content">
+          <div class="checkpoint-card">
+            <div class="checkpoint-icon">&#9749;</div>
+            <h2 class="checkpoint-title">Mid-Session Pulse Checkpoint (45:00 Elapsed)</h2>
+            <p class="checkpoint-subtitle">Take a breath, hydrate, and verify your mental foundation before we start writing branching logic.</p>
+
+            <div class="checkpoint-grid">
+              <div class="check-item">
+                <div class="check-icon">&#128077;</div>
+                <h4>Thumbs Up: Clear</h4>
+                <p>I know the 3 parts of <code>If()</code>: Condition, True action, and False action, separated by commas.</p>
+              </div>
+              <div class="check-item">
+                <div class="check-icon">&#9995;</div>
+                <h4>Thumbs Sideways: Unsure</h4>
+                <p>I understand the fork concept, but I want to practice writing the exact syntax in Power Fx.</p>
+              </div>
+              <div class="check-item">
+                <div class="check-icon">&#128161;</div>
+                <h4>The Golden Rule Remembered</h4>
+                <p><em>"First comma means THEN; second comma means ELSE."</em></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- =================================================================== -->
+      <!-- SLIDE 14: Workplace Case Study: Apex Support Form Routing           -->
+      <!-- =================================================================== -->
+      <section class="slide" id="slide-14" 
+        data-title="Case Study: Apex Support Form Routing" 
+        data-segment="Part 5: Guided Learner Practice (60:00 - 75:00)"
+        data-notes="TRAINER SPEAKING SCRIPT:
+'Now let's examine how IF protects our Apex Plastics Support Form!
+Look at the 3 production business rules on screen:
+Rule 1: Priority Badge Color
+If the reported downtime is over 4 hours, display the badge in RED; ELSE display in BLUE.
+Rule 2: Automated Dispatch Routing
+If Safety Hazard is TRUE, send SMS to Emergency Team; ELSE log ticket quietly to SharePoint.
+Rule 3: Submit Button Protection
+If the Operator Name is Blank, disable the button; ELSE enable it for clicking.
+Every business rule has the exact same structure: If this is true, do that; otherwise do this!'">
+        <div class="slide-content">
+          <div class="slide-header">
+            <span class="slide-badge teal-badge">Workplace DX Architecture</span>
+            <h2 class="slide-title">Apex Plastics: Deconstructing Form Routing Rules</h2>
+            <p class="slide-lead">Translating real factory operational rules into clean, dual-path branching decisions.</p>
+          </div>
+
+          <div class="form-blueprint-grid">
+            <div class="form-preview-card">
+              <div class="form-title-bar">Apex Plastics Support Form Logic Blueprint</div>
+              <div class="form-field-row">
+                <label>Rule 1: Priority Badge Color</label>
+                <div class="mock-input"><code>If(Downtime &gt; 4, Color.Red, Color.Blue)</code></div>
+              </div>
+              <div class="form-field-row">
+                <label>Rule 2: Emergency Alert Dispatch</label>
+                <div class="mock-input"><code>If(chkHazard.Value, DispatchEmergency(), LogTicket())</code></div>
+              </div>
+              <div class="form-field-row">
+                <label>Rule 3: Submit Button Interlock</label>
+                <div class="mock-input"><code>If(IsBlank(txtName.Text), Disabled, Edit)</code></div>
+              </div>
+              <div class="form-field-row">
+                <label>Rule 4: Confirmation Message</label>
+                <div class="mock-input"><code>If(chkHazard.Value, "SIREN SENT!", "Ticket Logged")</code></div>
+              </div>
+            </div>
+
+            <div class="schema-mapping-card">
+              <h4 style="margin-top:0; color:#38bdf8;">Branching Breakdown:</h4>
+              <div class="mapping-row">
+                <span class="field-name">Priority Color</span>
+                <span class="type-pill pill-text">Visual Property</span>
+                <span class="ui-ctrl">Red (True) vs Blue (False)</span>
+              </div>
+              <div class="mapping-row">
+                <span class="field-name">Emergency Siren</span>
+                <span class="type-pill pill-bool">Action Behavior</span>
+                <span class="ui-ctrl">SMS Alert vs Standard Log</span>
+              </div>
+              <div class="mapping-row">
+                <span class="field-name">Button Lock</span>
+                <span class="type-pill pill-date">Control State</span>
+                <span class="ui-ctrl">Disabled vs Clickable</span>
+              </div>
+              <div class="mapping-row">
+                <span class="field-name">User Feedback</span>
+                <span class="type-pill pill-num">Text Banner</span>
+                <span class="ui-ctrl">Urgent vs Routine Text</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- =================================================================== -->
+      <!-- SLIDE 15: Power Fx Connection: Writing If() in Power Apps           -->
+      <!-- =================================================================== -->
+      <section class="slide" id="slide-15" 
+        data-title="Power Fx If() Syntax" 
+        data-segment="Part 5: Guided Learner Practice (60:00 - 75:00)"
+        data-notes="TRAINER SPEAKING SCRIPT:
+'How do we author If() formulas in Power Fx?
+Notice on screen:
+Example 1: Setting a variable based on downtime:
+If(Value(txtDowntime.Text) > 4.0, Set(varPriority, 'CRITICAL'), Set(varPriority, 'ROUTINE'))!
+Example 2: Dynamic UI Visibility:
+lblWarning.Visible = If(chkHazard.Value = true, true, false)!
+Notice that in Power Apps, the Visible property accepts a Boolean.
+So If(chkHazard.Value = true, true, false) can even be simplified directly to chkHazard.Value!
+Look at Example 3: Changing a button's color:
+btnSubmit.Fill = If(IsBlank(txtOperator.Text), RGBA(100,100,100,1), RGBA(0,120,212,1))!'">
+        <div class="slide-content">
+          <div class="slide-header">
+            <span class="slide-badge purple-badge">Power Fx Connection</span>
+            <h2 class="slide-title">How Power Fx Authors Decisions</h2>
+            <p class="slide-lead">Connecting business requirements to syntactic Power Fx <code>If()</code> implementations.</p>
+          </div>
+
+          <div class="grid-2-col">
+            <div class="code-card">
+              <div class="code-header">Branching Actions (OnSelect)</div>
+              <pre class="powerfx-code">
+<span class="comment">// 1. Decide which action to run on click</span>
+<span class="keyword">If</span>(
+    <span class="func">Value</span>(txtDowntime.<span class="prop">Text</span>) &gt; 4.0,
+    <span class="func">Notify</span>("CRITICAL ESCALATION DISPATCHED!", NotificationType.<span class="prop">Error</span>),
+    <span class="func">Notify</span>("Routine ticket logged.", NotificationType.<span class="prop">Success</span>)
+);
+              </pre>
+            </div>
+
+            <div class="code-card">
+              <div class="code-header">Dynamic Property Values (UI)</div>
+              <pre class="powerfx-code">
+<span class="comment">// 2. Dynamic Text based on condition</span>
+<span class="keyword">If</span>(chkHazard.<span class="prop">Value</span> = <span class="keyword">true</span>, "DANGER: HALT PRESS", "OPERATING NORMALLY")
+
+<span class="comment">// 3. Button Enable/Disable (DisplayMode)</span>
+<span class="keyword">If</span>(
+    <span class="func">IsBlank</span>(txtOperator.<span class="prop">Text</span>),
+    DisplayMode.<span class="prop">Disabled</span>,
+    DisplayMode.<span class="prop">Edit</span>
+)
+              </pre>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- =================================================================== -->
+      <!-- SLIDE 16: The Anatomy of If(): Arguments & Commas                   -->
+      <!-- =================================================================== -->
+      <section class="slide" id="slide-16" 
+        data-title="Anatomy of If(): Commas &amp; Arguments" 
+        data-segment="Part 5: Guided Learner Practice (60:00 - 75:00)"
+        data-notes="TRAINER SPEAKING SCRIPT:
+'Let's examine common comma confusion beginners experience:
+Beginners often forget what the commas mean.
+Remember this mantra:
+Comma 1 means THEN.
+Comma 2 means ELSE.
+If you omit the second comma and the False action, what does Power Apps do?
+In Power Apps, if you omit the False branch:
+If(Condition, ActionTrue)
+When the condition evaluates to FALSE, the function returns BLANK and executes NOTHING!
+This is called a Single-Branch IF. It is safe when you only want an action on True, but dangerous when you need a fallback!'">
+        <div class="slide-content">
+          <div class="slide-header">
+            <span class="slide-badge blue-badge">Syntax Mechanics</span>
+            <h2 class="slide-title">The Comma Rule: How Power Apps Reads Arguments</h2>
+            <p class="slide-lead">Mastering the exact role of commas and what happens when the False branch is omitted.</p>
+          </div>
+
+          <div class="conversion-bridge-grid">
+            <div class="bridge-card bridge-to-num">
+              <div class="bridge-direction">
+                <span class="type-pill pill-bool">Dual-Branch IF</span>
+                <span class="bridge-arrow">&#10142;</span>
+                <span class="type-pill pill-text">Complete Fork</span>
+              </div>
+              <h3>Two Actions Guaranteed</h3>
+              <p>Provides an explicit action for BOTH outcomes. Nothing is left to chance.</p>
+              <div class="code-box">
+                <code>If(Condition , ActionTrue , ActionFalse)</code>
+              </div>
+              <div class="bridge-note">&#10004; Preferred for UI styling, DisplayMode, and dual notifications.</div>
+            </div>
+
+            <div class="bridge-card bridge-to-text">
+              <div class="bridge-direction">
+                <span class="type-pill pill-num">Single-Branch IF</span>
+                <span class="bridge-arrow">&#10142;</span>
+                <span class="type-pill pill-date">Optional Fallback</span>
+              </div>
+              <h3>Action on True Only</h3>
+              <p>If False, executes nothing and returns Blank.</p>
+              <div class="code-box">
+                <code>If(Condition , ActionTrue)</code>
+              </div>
+              <div class="bridge-note">&#9888; Safe for quick validations; avoid when a default value is required.</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- =================================================================== -->
+      <!-- SLIDE 17: Guided Practice Brief: Apex Extruder Line 4 Dispatcher    -->
+      <!-- =================================================================== -->
+      <section class="slide" id="slide-17" 
+        data-title="Guided Practice Brief" 
+        data-segment="Part 5: Guided Learner Practice (60:00 - 75:00)"
+        data-notes="TRAINER SPEAKING SCRIPT:
+'Now it is time for your hands-on practice!
+You are the automation architect configuring the dispatcher for Apex Plastics Extruder Line #4.
+The plant manager gives you 6 operational scenarios:
+1. Hydraulic Oil Temp > 90°C: Turn On Cooler vs Keep Cooler Off.
+2. Operator Name Blank: Show Red Error Banner vs Proceed to Save.
+3. Repair Cost > $500: Require Manager Approval vs Auto-Approve.
+4. Machine Safe to Run = true: Enable Start Button vs Lock Start Button.
+5. Replacement Parts in Stock < 5: Order From Supplier vs Take From Shelf.
+6. Incident Reported Today: Mark 'New Issue' vs Mark 'Carryover Issue'.
+On the next slide, you will trace each scenario through its IF decision fork!'">
+        <div class="slide-content">
+          <div class="slide-header">
+            <span class="slide-badge teal-badge">Guided Challenge Brief</span>
+            <h2 class="slide-title">Guided Practice: Apex Extruder Line 4 Dispatcher</h2>
+            <p class="slide-lead">Analyze the 6 operational scenarios below before routing them through their IF decision branches.</p>
+          </div>
+
+          <div class="parts-brief-grid">
+            <div class="brief-item">
+              <span class="brief-num">1</span>
+              <div>
+                <strong>Overheating Chiller Switch</strong>
+                <p>Rule: <code>If(Temp &gt; 90, TurnOnCooler(), CoolerOff())</code> &bull; Current Temp: 94°C.</p>
+              </div>
+            </div>
+            <div class="brief-item">
+              <span class="brief-num">2</span>
+              <div>
+                <strong>Missing Name Validation</strong>
+                <p>Rule: <code>If(IsBlank(Name), ShowError(), SaveForm())</code> &bull; Current Input: "Dara".</p>
+              </div>
+            </div>
+            <div class="brief-item">
+              <span class="brief-num">3</span>
+              <div>
+                <strong>Budget Approval Threshold</strong>
+                <p>Rule: <code>If(Cost &gt; 500, RequireVP(), AutoApprove())</code> &bull; Current Cost: $350.</p>
+              </div>
+            </div>
+            <div class="brief-item">
+              <span class="brief-num">4</span>
+              <div>
+                <strong>Safety Interlock Lockout</strong>
+                <p>Rule: <code>If(Safe = true, DisplayMode.Edit, Disabled)</code> &bull; Current Safe: false.</p>
+              </div>
+            </div>
+            <div class="brief-item">
+              <span class="brief-num">5</span>
+              <div>
+                <strong>Warehouse Stock Reorder</strong>
+                <p>Rule: <code>If(Stock &lt; 5, ReorderSupplier(), UseStock())</code> &bull; Current Stock: 2.</p>
+              </div>
+            </div>
+            <div class="brief-item">
+              <span class="brief-num">6</span>
+              <div>
+                <strong>Daily Carryover Tag</strong>
+                <p>Rule: <code>If(Date = Today(), "NEW", "CARRYOVER")</code> &bull; Current Date: 2026-10-15.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- =================================================================== -->
+      <!-- SLIDE 18: Interactive Practice Board: 6-Scenario IF Simulator       -->
+      <!-- =================================================================== -->
+      <section class="slide" id="slide-18" 
+        data-title="Interactive IF Decision Simulator" 
+        data-segment="Part 5: Guided Learner Practice (60:00 - 75:00)"
+        data-notes="TRAINER SPEAKING SCRIPT:
+'Here is your live IF Decision Simulator!
+For each of the 6 manufacturing scenarios, read the condition and the live data, then click which action executes: Path A (True/Then) or Path B (False/Else)!
+Notice:
+In Scenario 1, Temp is 94°C. 94 > 90 is TRUE, so Path A (Turn On Cooler) executes!
+In Scenario 3, Cost is $350. 350 > 500 is FALSE, so Path B (Auto-Approve) executes!
+Let's see if you can achieve a 6 out of 6 perfect score!'">
+        <div class="slide-content">
+          <div class="slide-header">
+            <span class="slide-badge green-badge">Hands-On Practice</span>
+            <h2 class="slide-title">Interactive 6-Scenario IF Decision Simulator</h2>
+            <p class="slide-lead">Trace each scenario below. Select which branch executes based on the live condition truth.</p>
+          </div>
+
+          <div class="evaluator-grid-container" id="if-simulator-widget">
+            <div class="evaluator-card" data-scenario="s1" data-correct="path-a">
+              <div class="cond-title">1. Temp: <code>94 &gt; 90</code></div>
+              <div class="cond-btn-pair">
+                <button class="cond-btn" data-choice="path-a">Path A: Turn On Cooler</button>
+                <button class="cond-btn" data-choice="path-b">Path B: Keep Off</button>
+              </div>
+              <div class="cond-status-text">Select Path A or Path B</div>
+            </div>
+
+            <div class="evaluator-card" data-scenario="s2" data-correct="path-b">
+              <div class="cond-title">2. Name Blank: <code>IsBlank("Dara")</code></div>
+              <div class="cond-btn-pair">
+                <button class="cond-btn" data-choice="path-a">Path A: Show Error</button>
+                <button class="cond-btn" data-choice="path-b">Path B: Save Form</button>
+              </div>
+              <div class="cond-status-text">Select Path A or Path B</div>
+            </div>
+
+            <div class="evaluator-card" data-scenario="s3" data-correct="path-b">
+              <div class="cond-title">3. Cost: <code>350 &gt; 500</code></div>
+              <div class="cond-btn-pair">
+                <button class="cond-btn" data-choice="path-a">Path A: Require VP</button>
+                <button class="cond-btn" data-choice="path-b">Path B: Auto-Approve</button>
+              </div>
+              <div class="cond-status-text">Select Path A or Path B</div>
+            </div>
+
+            <div class="evaluator-card" data-scenario="s4" data-correct="path-b">
+              <div class="cond-title">4. Safety Interlock: <code>false = true</code></div>
+              <div class="cond-btn-pair">
+                <button class="cond-btn" data-choice="path-a">Path A: Enable Button</button>
+                <button class="cond-btn" data-choice="path-b">Path B: Lock Button</button>
+              </div>
+              <div class="cond-status-text">Select Path A or Path B</div>
+            </div>
+
+            <div class="evaluator-card" data-scenario="s5" data-correct="path-a">
+              <div class="cond-title">5. Stock: <code>2 &lt; 5</code></div>
+              <div class="cond-btn-pair">
+                <button class="cond-btn" data-choice="path-a">Path A: Reorder</button>
+                <button class="cond-btn" data-choice="path-b">Path B: Use Shelf</button>
+              </div>
+              <div class="cond-status-text">Select Path A or Path B</div>
+            </div>
+
+            <div class="evaluator-card" data-scenario="s6" data-correct="path-b">
+              <div class="cond-title">6. Date Check: <code>"Oct-15" = "Today"</code></div>
+              <div class="cond-btn-pair">
+                <button class="cond-btn" data-choice="path-a">Path A: "NEW"</button>
+                <button class="cond-btn" data-choice="path-b">Path B: "CARRYOVER"</button>
+              </div>
+              <div class="cond-status-text">Select Path A or Path B</div>
+            </div>
+          </div>
+
+          <div class="evaluator-footer-bar">
+            <span>Score: <strong id="sim-score">0</strong> / 6 Correct</span>
+            <span id="sim-feedback">Select the executing branch for all 6 scenarios above.</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- =================================================================== -->
+      <!-- SLIDE 19: 4 Common Beginner Misconceptions & Corrections            -->
+      <!-- =================================================================== -->
+      <section class="slide" id="slide-19" 
+        data-title="Common Beginner Misconceptions" 
+        data-segment="Part 6: Assessment &amp; Forward Bridge (75:00 - 90:00)"
+        data-notes="TRAINER SPEAKING SCRIPT:
+'Let's examine 4 common misconceptions beginners make about IF:
+Misconception 1: 'Both branches execute to check what happens.'
+Correction: NEVER! If is mutually exclusive. Only ONE branch runs. If True runs, False is completely ignored.
+Misconception 2: 'IF creates the condition.'
+Correction: No! The condition is created by comparison operators (>, =, <). IF merely inspects the True or False produced by that question!
+Misconception 3: 'I can leave out the condition and just write If(Action).'
+Correction: If requires a question first! You cannot choose a path without a question on the signpost!
+Misconception 4: 'Power Apps If() is different from Excel If().'
+Correction: They are identical! If(LogicalTest, ValueIfTrue, ValueIfFalse). Everything you know from Excel carries forward!'">
+        <div class="slide-content">
+          <div class="slide-header">
+            <span class="slide-badge red-badge">Mental Model Corrections</span>
+            <h2 class="slide-title">4 Common Beginner Misconceptions &amp; Trainer Fixes</h2>
+            <p class="slide-lead">Correcting plausible but dangerous wrong mental models before they become bad habits.</p>
+          </div>
+
+          <div class="grid-2-col">
+            <div class="misconception-card">
+              <div class="misc-bad">&#10060; Wrong Mental Model #1</div>
+              <h4>"The app runs both branches to test them."</h4>
+              <p class="misc-fix"><strong>Trainer Correction:</strong> <code>If()</code> branches are 100% mutually exclusive. The app evaluates the condition once, picks ONE branch, and skips the other entirely.</p>
+            </div>
+
+            <div class="misconception-card">
+              <div class="misc-bad">&#10060; Wrong Mental Model #2</div>
+              <h4>"IF is the thing asking the question."</h4>
+              <p class="misc-fix"><strong>Trainer Correction:</strong> <code>If()</code> does not ask the question. The <strong>Condition</strong> (`> 4`, `= "Done"`) asks the question. <code>If()</code> is merely the switch track listening to the True/False answer.</p>
+            </div>
+
+            <div class="misconception-card">
+              <div class="misc-bad">&#10060; Wrong Mental Model #3</div>
+              <h4>"The second comma is optional in UI styling."</h4>
+              <p class="misc-fix"><strong>Trainer Correction:</strong> If you omit the False branch in a color formula, your text turns Blank/Invisible when False! Always supply both branches for UI styling.</p>
+            </div>
+
+            <div class="misconception-card">
+              <div class="misc-bad">&#10060; Wrong Mental Model #4</div>
+              <h4>"Power Apps IF is completely different from Excel."</h4>
+              <p class="misc-fix"><strong>Trainer Correction:</strong> Power Fx was born from Microsoft Excel. <code>If(Condition, TrueVal, FalseVal)</code> behaves identically in both platforms.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- =================================================================== -->
+      <!-- SLIDE 20: 5-Question Knowledge Check (Interactive Quiz)             -->
+      <!-- =================================================================== -->
+      <section class="slide" id="slide-20" 
+        data-title="5-Question Knowledge Check" 
+        data-segment="Part 6: Assessment &amp; Forward Bridge (75:00 - 90:00)"
+        data-notes="TRAINER SPEAKING SCRIPT:
+'Time for our 5-Question Knowledge Check!
+Notice questions 2 and 4 specifically ask 'Why' and 'What happens if'.
+Take your time, select the best answer for each question, and let's review the rationale together.'">
+        <div class="slide-content">
+          <div class="slide-header">
+            <span class="slide-badge blue-badge">Knowledge Verification</span>
+            <h2 class="slide-title">Day 5 Evaluative Knowledge Check</h2>
+            <p class="slide-lead">Answer all 5 questions to verify your mastery of IF branching, arguments, and execution paths.</p>
+          </div>
+
+          <div class="quiz-container" id="quiz-widget">
+            <div class="quiz-header-bar">
+              <span id="quiz-question-counter">Question 1 of 5</span>
+              <span id="quiz-score-display">Score: 0 / 5</span>
+            </div>
+
+            <div class="quiz-body" id="quiz-body">
+              <!-- Dynamically rendered via script.js -->
+            </div>
+
+            <div class="quiz-navigation">
+              <button class="btn-subtle" id="quiz-prev-btn" disabled>&#8592; Previous</button>
+              <button class="btn-primary" id="quiz-next-btn">Next Question &#8594;</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- =================================================================== -->
+      <!-- SLIDE 21: Final Challenge: Automated Warehouse Dispatcher (8 Branches) -->
+      <!-- =================================================================== -->
+      <section class="slide" id="slide-21" 
+        data-title="Final Challenge: Warehouse Dispatcher" 
+        data-segment="Part 6: Assessment &amp; Forward Bridge (75:00 - 90:00)"
+        data-notes="TRAINER SPEAKING SCRIPT:
+'Here is your Day 5 Capstone Challenge:
+Apex Plastics is automating their central finished-goods warehouse loading dock.
+You must author the 8 branching logic rules for the forklift dispatch tablet:
+1. Pallet Weight > 500kg: Heavy Forklift vs Standard Hand-Truck.
+2. Fragile Parts Flag = true: Slow Conveyor vs Express Roller.
+3. Shipping Destination = 'Export': Custom Customs Clearance Tag vs Domestic Invoice.
+4. Storage Bay Filled >= 100: Divert to Bay B vs Park in Bay A.
+5. Quality Passed = true: Apply Green Seal vs Apply Red Quarantine Tag.
+6. Driver Name Blank: Disable Dispatch Button vs Enable Button.
+7. Delivery Time < 12:00: Morning Priority Flight vs Afternoon Road Transit.
+8. Safety Gate Open: Emergency Stop Siren vs Green Go-Ahead Light.
+For each rule, write the complete Power Fx If() formula!'">
+        <div class="slide-content">
+          <div class="slide-header">
+            <span class="slide-badge purple-badge">Independent Capstone</span>
+            <h2 class="slide-title">Final Challenge: Apex Automated Warehouse Dispatcher</h2>
+            <p class="slide-lead">Author the 8 complete branching <code>If()</code> formulas controlling warehouse routing and physical dispatch.</p>
+          </div>
+
+          <div class="challenge-table-wrapper">
+            <table class="challenge-table">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Operational Business Rule</th>
+                  <th>Condition (Question)</th>
+                  <th>Action If TRUE (Then)</th>
+                  <th>Action If FALSE (Else)</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td>1</td><td>Heavy Pallet Routing</td><td><code>Weight &gt; 500</code></td><td>Dispatch Heavy Forklift</td><td>Dispatch Hand-Truck</td></tr>
+                <tr><td>2</td><td>Fragile Material Speed</td><td><code>IsFragile = true</code></td><td>Conveyor Speed = Slow</td><td>Conveyor Speed = Normal</td></tr>
+                <tr><td>3</td><td>Export Documentation</td><td><code>Dest = "Export"</code></td><td>Print Customs Docket</td><td>Print Domestic Bill</td></tr>
+                <tr><td>4</td><td>Bay Capacity Overflow</td><td><code>Count &gt;= 100</code></td><td>Reroute to Overflow B</td><td>Park in Main Bay A</td></tr>
+                <tr><td>5</td><td>QC Quality Labeling</td><td><code>Passed = true</code></td><td>Apply Green Seal</td><td>Apply Red Hold Tag</td></tr>
+                <tr><td>6</td><td>Driver Sign-In Lockout</td><td><code>IsBlank(Driver)</code></td><td>Button.Disabled</td><td>Button.Edit</td></tr>
+                <tr><td>7</td><td>Air Transit Priority</td><td><code>Hour &lt; 12</code></td><td>Air Freight Flight</td><td>Ground Truck Transit</td></tr>
+                <tr><td>8</td><td>Loading Barrier Interlock</td><td><code>GateOpen = true</code></td><td>Sound Emergency Alarm</td><td>Display Green Light</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- =================================================================== -->
+      <!-- SLIDE 22: Challenge Solution Reveal & Evaluation Rubric              -->
+      <!-- =================================================================== -->
+      <section class="slide" id="slide-22" 
+        data-title="Challenge Solution &amp; Rubric" 
+        data-segment="Part 6: Assessment &amp; Forward Bridge (75:00 - 90:00)"
+        data-notes="TRAINER SPEAKING SCRIPT:
+'Let's reveal the exemplar solution!
+Click 'Reveal Solution' to inspect the benchmark answer key.
+Look at how clean each formula is:
+If(Condition, ActionTrue, ActionFalse).
+Notice: In rule 6, we use DisplayMode.Disabled and DisplayMode.Edit.
+In rule 8, we trigger emergency siren on True, and green light on False.
+Check your formulas against our 4-level evaluation rubric:
+Level 4 Mastery means all 8 formulas are syntactically perfect with correct commas and arguments!'">
+        <div class="slide-content">
+          <div class="slide-header">
+            <span class="slide-badge green-badge">Exemplar &amp; Rubric</span>
+            <h2 class="slide-title">Final Challenge Solution &amp; 4-Level Evaluation Rubric</h2>
+            <p class="slide-lead">Compare your branching formulas against the production benchmark and evaluate your performance.</p>
+          </div>
+
+          <div class="grid-2-col">
+            <div class="solution-card">
+              <div class="solution-header">
+                <h4>Exemplar Power Fx Branching Formulas</h4>
+                <button class="btn-reveal" id="btn-reveal-solution">Reveal Solution</button>
+              </div>
+              <div class="solution-body collapsed" id="solution-content">
+                <ul class="solution-list">
+                  <li><strong>1. Forklift:</strong> <code>If(Value(txtWeight.Text) &gt; 500, "HEAVY_FORKLIFT", "HAND_TRUCK")</code></li>
+                  <li><strong>2. Speed:</strong> <code>If(chkFragile.Value = true, "SLOW", "NORMAL")</code></li>
+                  <li><strong>3. Export:</strong> <code>If(txtDest.Text = "Export", PrintCustoms(), PrintDomestic())</code></li>
+                  <li><strong>4. Overflow:</strong> <code>If(Value(txtBay.Text) &gt;= 100, RouteBayB(), RouteBayA())</code></li>
+                  <li><strong>5. QC Seal:</strong> <code>If(chkPassed.Value, Color.Green, Color.Red)</code></li>
+                  <li><strong>6. Sign-in:</strong> <code>If(IsBlank(txtDriver.Text), DisplayMode.Disabled, DisplayMode.Edit)</code></li>
+                  <li><strong>7. Freight:</strong> <code>If(Hour(Now()) &lt; 12, "AIR_EXPRESS", "GROUND_TRUCK")</code></li>
+                  <li><strong>8. Barrier:</strong> <code>If(chkGate.Value = true, SoundAlarm(), GreenLight())</code></li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="rubric-card">
+              <h4>Evaluation Rubric (4 Performance Levels)</h4>
+              <div class="rubric-levels">
+                <div class="level-item level-4">
+                  <span class="lvl-title">Level 4: Mastery (100%)</span>
+                  <p>All 8 If() formulas syntactically flawless; correctly uses commas; provides both True and False branches.</p>
+                </div>
+                <div class="level-item level-3">
+                  <span class="lvl-title">Level 3: Proficient (75-99%)</span>
+                  <p>6-7 formulas correct; understands condition vs branch; minor typo in property names.</p>
+                </div>
+                <div class="level-item level-2">
+                  <span class="lvl-title">Level 2: Developing (50-74%)</span>
+                  <p>Omitted the second comma (Else branch); confused condition with action; needs syntax coaching.</p>
+                </div>
+                <div class="level-item level-1">
+                  <span class="lvl-title">Level 1: Novice (&lt;50%)</span>
+                  <p>Unable to construct 3-part syntax; treats If() as a simple linear command without branches.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- =================================================================== -->
+      <!-- SLIDE 23: The Connection Map (Before -> Today -> Next)              -->
+      <!-- =================================================================== -->
+      <section class="slide" id="slide-23" 
+        data-title="Curriculum Connection Map" 
+        data-segment="Part 6: Assessment &amp; Forward Bridge (75:00 - 90:00)"
+        data-notes="TRAINER SPEAKING SCRIPT:
+'Look at our 3-day Connection Map.
+BEFORE on Day 4: We learned how conditions compare data to produce TRUE or FALSE.
+TODAY on Day 5: We learned how IF turns that True/False verdict into active behavior by choosing Path A or Path B.
+NEXT on Day 6: Real business decisions often need MORE than one condition!
+What if you only want to sound the alarm when Pressure > 200 AND Safety Gate is OPEN?
+Tomorrow, we learn multi-condition decision gates using AND and OR!
+Everything connects. One skill unlocks the next!'">
+        <div class="slide-content">
+          <div class="slide-header">
+            <span class="slide-badge purple-badge">Curriculum Bridge</span>
+            <h2 class="slide-title">The Three-Day Connection Map</h2>
+            <p class="slide-lead">How yesterday's conditions, today's IF decisions, and tomorrow's multi-condition gates form a continuous progression.</p>
+          </div>
+
+          <div class="bridge-three-col">
+            <div class="bridge-col before-col">
+              <span class="bridge-time-tag">YESTERDAY (Day 4)</span>
+              <h3>Conditions &amp; Truth</h3>
+              <div class="bridge-summary">
+                Comparison questions (<code>=</code>, <code>&gt;</code>, <code>&lt;</code>, <code>&lt;&gt;</code>) evaluate data to produce strictly <strong>True</strong> or <strong>False</strong>.
+              </div>
+              <div class="bridge-flow-arrow">&#10142; Consumed by...</div>
+            </div>
+
+            <div class="bridge-col today-col">
+              <span class="bridge-time-tag">TODAY (Day 5)</span>
+              <h3>Decisions: IF / THEN / ELSE</h3>
+              <div class="bridge-summary">
+                <code>If()</code> takes the True/False verdict and branches execution into Action A (True) or Action B (False).
+              </div>
+              <div class="bridge-flow-arrow">&#10142; Expanded by...</div>
+            </div>
+
+            <div class="bridge-col next-col">
+              <span class="bridge-time-tag">TOMORROW (Day 6)</span>
+              <h3>AND / OR Multi-Gates</h3>
+              <div class="bridge-summary">
+                Real-world rules require multiple conditions: <code>If(Pressure &gt; 200 And Gate = Open, Alarm())</code>.
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- =================================================================== -->
+      <!-- SLIDE 24: Homework, Bilingual Glossary & Session Wrap-Up            -->
+      <!-- =================================================================== -->
+      <section class="slide" id="slide-24" 
+        data-title="Homework &amp; Glossary" 
+        data-segment="Part 6: Assessment &amp; Forward Bridge (75:00 - 90:00)"
+        data-notes="TRAINER SPEAKING SCRIPT:
+'Congratulations on completing Day 5! You now know how software makes intelligent decisions!
+Here is your 15-minute optional review homework: 'The Real-Life IF/THEN/ELSE Tracker'.
+Identify 3 branching decisions you make in your daily routine:
+1. 'If traffic on bridge > 30 mins, THEN take highway, ELSE take local road.'
+2. 'If refrigerator milk < 1 glass, THEN buy milk, ELSE drink water.'
+3. 'If phone battery < 20%, THEN plug in charger, ELSE keep watching video.'
+Review the bilingual English-Khmer glossary below.
+Thank you for your fantastic focus today. Tomorrow on Day 6, we master multi-condition decision gates with AND and OR!'">
+        <div class="slide-content">
+          <div class="slide-header">
+            <span class="slide-badge blue-badge">Session Wrap-Up</span>
+            <h2 class="slide-title">15-Minute Homework &amp; Bilingual Glossary</h2>
+            <p class="slide-lead">Reinforce today's branching logic in your daily environment and master the technical decision vocabulary.</p>
+          </div>
+
+          <div class="grid-2-col">
+            <div class="homework-card">
+              <div class="hw-icon">&#128269;</div>
+              <div class="hw-content">
+                <h4>Homework: "The Real-Life IF/THEN/ELSE Tracker" (&le; 15 Mins)</h4>
+                <p>1. Identify <strong>3 real-life decisions</strong> you make every day with distinct True and False branches.</p>
+                <p>2. Write each in the format: <code>If ( Condition , ActionTrue , ActionFalse )</code>.</p>
+                <p>3. Note which action you actually executed today based on the condition!</p>
+                <div class="hw-outcome">Expected Result: 3 written branching formulas ready to share tomorrow!</div>
+              </div>
+            </div>
+
+            <div class="glossary-card">
+              <h4>Bilingual Technical Glossary (Day 5)</h4>
+              <div class="glossary-list">
+                <div class="gloss-item">
+                  <span class="en-term">Decision / Branching</span>
+                  <span class="kh-term">ការសម្រេចចិត្ត / ការបំបែកផ្លូវតក្កវិជ្ជា</span>
+                </div>
+                <div class="gloss-item">
+                  <span class="en-term">IF Function</span>
+                  <span class="kh-term">អនុគមន៍ IF (ប្រសិនបើ)</span>
+                </div>
+                <div class="gloss-item">
+                  <span class="en-term">THEN (True Branch)</span>
+                  <span class="kh-term">នោះ (សកម្មភាពនៅពេលលក្ខខណ្ឌពិត)</span>
+                </div>
+                <div class="gloss-item">
+                  <span class="en-term">ELSE (False Branch)</span>
+                  <span class="kh-term">បើមិនដូច្នោះទេ (សកម្មភាពនៅពេលមិនពិត)</span>
+                </div>
+                <div class="gloss-item">
+                  <span class="en-term">Visible Property</span>
+                  <span class="kh-term">លក្ខណៈបង្ហាញ/លាក់វត្ថុ (Visible)</span>
+                </div>
+                <div class="gloss-item">
+                  <span class="en-term">DisplayMode Property</span>
+                  <span class="kh-term">ស្ថានភាពប៊ូតុង បើក/បិទ (Edit/Disabled)</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- Bottom Controls & Navigation Bar -->
+        <footer id="bottom-hud">
+      <div id="progress-bar-container">
+        <div id="progress-bar"></div>
+      </div>
+
+      <div class="hud-left">
+        <button class="hud-btn" id="btn-prev" onclick="prevSlide()" title="Previous Slide (Left Arrow)">&#8592; Prev</button>
+        <button class="hud-btn" id="btn-next" onclick="nextSlide()" title="Next Slide (Right Arrow / Space)">Next &#8594;</button>
+        <span id="slide-counter">Slide <span id="slide-current-num">1</span> / <span id="slide-total-count">24</span></span>
+      </div>
+
+      <div class="hud-right">
+        <button class="hud-btn" id="btn-lang" onclick="toggleLanguage()" title="Toggle Language (L)">
+          🌐 <span id="lang-label">KH</span>
+        </button>
+        <button class="hud-btn active" id="btn-laser" onclick="toggleLaser()" title="Presenter Laser Pointer (P)">
+          🔴 Laser
+        </button>
+        <button class="hud-btn" id="btn-notes" onclick="toggleNotes()" title="Trainer Notes Drawer (N)">
+          📝 Notes
+        </button>
+        <button class="hud-btn" id="btn-overview" onclick="toggleOverview()" title="Slide Overview Modal (O)">
+          🗂️ Overview
+        </button>
+        <button class="hud-btn" id="btn-timer" onclick="toggleTimer()" title="90-Min Countdown (T)">
+          ⏱️ <span id="timer-display">90:00</span>
+        </button>
+        <button class="hud-btn" id="btn-fullscreen" onclick="toggleFullscreen()" title="Fullscreen (F)">
+          ⛶
+        </button>
+        <a href="../index.html" class="hud-btn hub-btn" title="Return to Master Curriculum Hub (ត្រឡប់ទៅទំព័រដើម)" style="text-decoration: none; display: inline-flex; align-items: center; gap: 4px; color: #fcd34d; font-weight: 600;"><span>🏠</span><span>Hub</span></a>
+      </div>
+    </footer>
+
+    
+
+  </div> <!-- /#presentation-container -->
+
+  <!-- Presenter Notes Bottom Drawer -->
+  <aside id="presenter-notes-panel" class="presenter-notes-panel" aria-label="Trainer Notes and Speaking Script">
+    <div class="notes-header">
+      <div class="notes-title">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+          <path d="M2.5 1A1.5 1.5 0 0 0 1 2.5v11A1.5 1.5 0 0 0 2.5 15h6.086a1.5 1.5 0 0 0 1.06-.44l4.915-4.914A1.5 1.5 0 0 0 15 8.586V2.5A1.5 1.5 0 0 0 13.5 1h-11zM2 2.5a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 .5.5v6H9.5A1.5 1.5 0 0 0 8 10v4.5H2.5a.5.5 0 0 1-.5-.5v-11zm7 7.5v4.379L13.379 10H9z"/>
+        </svg>
+        <span>Trainer Delivery Script &amp; Pedagogical Notes</span>
+      </div>
+      <button id="btn-close-notes" class="icon-btn-close" aria-label="Close Notes Panel">&times;</button>
+    </div>
+    <div class="notes-body" id="notes-content">
+      <!-- Dynamically filled with data-notes of current slide -->
+    </div>
+  </aside>
+
+  <!-- Floating Notes Tab (When panel is closed) -->
+  <button id="notes-floating-tab" class="notes-floating-tab" title="Open Trainer Script (Press N)">
+    <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor">
+      <path d="M2.5 1A1.5 1.5 0 0 0 1 2.5v11A1.5 1.5 0 0 0 2.5 15h6.086a1.5 1.5 0 0 0 1.06-.44l4.915-4.914A1.5 1.5 0 0 0 15 8.586V2.5A1.5 1.5 0 0 0 13.5 1h-11zM2 2.5a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 .5.5v6H9.5A1.5 1.5 0 0 0 8 10v4.5H2.5a.5.5 0 0 1-.5-.5v-11zm7 7.5v4.379L13.379 10H9z"/>
+    </svg>
+    <span>Trainer Notes (N)</span>
+  </button>
+
+  <!-- Slide Grid Overview Modal (Press O) -->
+  <div id="overview-modal" class="overview-modal hidden" aria-hidden="true" role="dialog" aria-label="Slide Navigation Grid">
+    <div class="overview-backdrop" id="overview-backdrop"></div>
+    <div class="overview-dialog">
+      <div class="overview-header">
+        <h3>Lesson Slide Grid Navigator (24 Slides)</h3>
+        <button id="btn-close-overview" class="icon-btn-close" aria-label="Close Overview">&times;</button>
+      </div>
+      <div class="overview-grid" id="overview-grid">
+        <!-- Dynamically rendered by script.js -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Presentation Engine & Bilingual Logic -->
+  <script src="script.js"></script>
+
+    <!-- Presenter Laser Focus Pointer & Click Ripple Elements -->
+    <div id="presenter-pointer" class="presenter-laser-dot">
+      <div class="laser-halo"></div>
+    </div>
+    <div id="pointer-click-ripple" class="pointer-click-ripple"></div>
+  <script>
+if (window.self !== window.top) {
+  document.documentElement.classList.add('in-iframe');
+  function hideHub() { document.querySelectorAll('.hub-btn, .back-to-hub-pill').forEach(e => e.style.display = 'none'); }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', hideHub);
+  } else {
+    hideHub();
+  }
+}
+</script>
+<style>
+.in-iframe .hub-btn, .in-iframe .back-to-hub-pill { display: none !important; }
+</style>
+</body>
+</html>
+

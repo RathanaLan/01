@@ -1,0 +1,1395 @@
+<!DOCTYPE html>
+<html lang="en" translate="no" class="notranslate">
+<head>
+  <meta name="google" content="notranslate">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Day 16: Properties &amp; Formulas: How Controls Behave | Microsoft Power Apps Foundation</title>
+  <link rel="stylesheet" href="../shared/design-system.css">
+  <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=Moul&family=Kantumruy+Pro:ital,wght@0,400..700;1,400..700&family=Battambang:wght@300;400;700;900&family=Koh+Santepheap:wght@300;400;700&family=Koulen&family=Siemreap&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- Presentation Stage Wrapper (Lesson 14 Architecture) -->
+  <div id="presentation-stage">
+    
+    <!-- Ambient Aurora Orbs (60fps backdrop) -->
+    <div class="aurora-orb orb-1"></div>
+    <div class="aurora-orb orb-2"></div>
+    <div class="aurora-orb orb-3"></div>
+
+    <!-- Presenter Laser Pointer & Shockwave Click Ripple -->
+    <div id="presenter-laser"></div>
+    <div id="pointer-ripple" class="pointer-click-ripple"></div>
+
+    <!-- Viewport for 24 Slides -->
+    <main id="slides-viewport">
+
+      <!-- Slide 1: Hero -->
+      <section class="slide active" id="slide-1" data-slide-index="0" data-title="Properties & Formulas: How Controls Behave" data-segment="Phase 6: Power Fx Fundamentals">
+        <div class="slide-content hero-content">
+          <div class="hero-badge">
+            <span>Microsoft Power Apps Professional Foundation</span>
+            <span>&bull;</span>
+            <span>Day 16 of 27</span>
+          </div>
+          <h1 class="hero-title">Properties &amp; Formulas: How Controls Behave</h1>
+          <p class="hero-subtitle">
+            A formula calculates what a property should be or what an action should do. Master the dynamic reactivity of Power Apps: when user input changes, dependent properties recalculate instantaneously like a living spreadsheet.
+          </p>
+
+          <div class="model-chain">
+            <span class="chain-item">Real Problem</span>
+            <span class="chain-arrow">&rarr;</span>
+            <span class="chain-item">Process</span>
+            <span class="chain-arrow">&rarr;</span>
+            <span class="chain-item">Data</span>
+            <span class="chain-arrow">&rarr;</span>
+            <span class="chain-item active">UI / Controls</span>
+            <span class="chain-arrow">&rarr;</span>
+            <span class="chain-item active">Logic / Formulas</span>
+            <span class="chain-arrow">&rarr;</span>
+            <span class="chain-item">Action</span>
+            <span class="chain-arrow">&rarr;</span>
+            <span class="chain-item">Storage</span>
+            <span class="chain-arrow">&rarr;</span>
+            <span class="chain-item">Feedback</span>
+            <span class="chain-arrow">&rarr;</span>
+            <span class="chain-item">Test</span>
+          </div>
+        </div>
+        <aside class="trainer-notes">
+          <h4>Trainer Speaking Script & Pedagogical Cues:</h4>
+<p>Welcome back everyone to Day 16! On Days 14 and 15, we placed controls on our canvas and linked screens into journeys with Navigate() and Back().</p>
+<p>Today is where the magic truly begins. An app where controls are static is just a digital drawing. Today we transform frozen pixels into living software using Properties and Formulas. Remember our central chain: Control -> Property -> Formula -> Resulting Value or Behavior.</p>
+        </aside>
+      </section>
+
+      <!-- Slide 2: 90-Minute Agenda & Measurable Objectives -->
+      <section class="slide" id="slide-2" data-slide-index="1" data-title="90-Minute Agenda & Measurable Objectives" data-segment="Section 1: Orientation & Outcomes">
+        <div class="slide-header">
+          <span class="section-tag">Section 1: Orientation & Outcomes</span>
+          <h2>90-Minute Agenda & Measurable Objectives</h2>
+          <p class="subtitle">A structured spiral-learning progression connecting prior controls to dynamic calculations.</p>
+        </div>
+        <div class="slide-content grid-2">
+          <div class="card">
+            <h3 class="card-title">4 Measurable Learning Objectives</h3>
+            <div class="objective-item">
+              <span class="obj-num">1</span>
+              <div>
+                <strong>The Control-Property-Formula Triad:</strong>
+                <p>Explain in plain language why controls have properties, and how formulas dictate their values like dynamic spreadsheet cells.</p>
+              </div>
+            </div>
+            <div class="objective-item">
+              <span class="obj-num">2</span>
+              <div>
+                <strong>Dot Operator Mastery (.):</strong>
+                <p>Navigate control properties using the dot operator (<code>ControlName.PropertyName</code>) to extract text, selections, and values.</p>
+              </div>
+            </div>
+            <div class="objective-item">
+              <span class="obj-num">3</span>
+              <div>
+                <strong>String Concatenation with Ampersand (&amp;):</strong>
+                <p>Join dynamic control inputs with static literals to build human-readable tickets (e.g. <code>"REQ-" &amp; txtDept.Text</code>).</p>
+              </div>
+            </div>
+            <div class="objective-item">
+              <span class="obj-num">4</span>
+              <div>
+                <strong>Live Character Counter Engineering:</strong>
+                <p>Implement the <code>Len()</code> function to calculate live character count and give immediate visual feedback to operators.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <h3 class="card-title">90-Minute Timed Lesson Plan</h3>
+            <div class="agenda-timeline">
+              <div class="agenda-block">
+                <span class="agenda-time">00 - 10m</span>
+                <span class="agenda-name">Block 1: Recall &amp; Retrieval</span>
+                <span class="agenda-desc">Days 14-15 Foundations</span>
+              </div>
+              <div class="agenda-block">
+                <span class="agenda-time">10 - 20m</span>
+                <span class="agenda-name">Block 2: Why This Exists</span>
+                <span class="agenda-desc">$18k Shipping Blunder</span>
+              </div>
+              <div class="agenda-block">
+                <span class="agenda-time">20 - 35m</span>
+                <span class="agenda-name">Block 3: Syntax Dissection</span>
+                <span class="agenda-desc">The Dot (.) &amp; Ampersand (&amp;)</span>
+              </div>
+              <div class="agenda-block">
+                <span class="agenda-time">35 - 50m</span>
+                <span class="agenda-name">Block 4: Trainer Demo</span>
+                <span class="agenda-desc">Building Dynamic Banner</span>
+              </div>
+              <div class="agenda-block">
+                <span class="agenda-time">50 - 65m</span>
+                <span class="agenda-name">Block 5: Guided Practice</span>
+                <span class="agenda-desc">Ticket Preview Card</span>
+              </div>
+              <div class="agenda-block">
+                <span class="agenda-time">65 - 78m</span>
+                <span class="agenda-name">Block 6: Independent Task</span>
+                <span class="agenda-desc">Asset Tag Generator</span>
+              </div>
+              <div class="agenda-block">
+                <span class="agenda-time">78 - 86m</span>
+                <span class="agenda-name">Block 7: Check &amp; Challenge</span>
+                <span class="agenda-desc">5-Quiz + Rubric Review</span>
+              </div>
+              <div class="agenda-block">
+                <span class="agenda-time">86 - 90m</span>
+                <span class="agenda-name">Block 8: Forward Bridge</span>
+                <span class="agenda-desc">Preview Day 17 IF()</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <aside class="trainer-notes">
+          <h4>Trainer Speaking Script & Pedagogical Cues:</h4>
+<p>Walk through our 90-minute roadmap. Emphasize that we are building directly on Day 14 and 15: yesterday we built the rooms and doors (screens and navigation); today we install the automated smart sensors and lighting (properties and formulas).</p>
+        </aside>
+      </section>
+
+      <!-- Slide 3: Curriculum Architecture: Where Today Fits in the 27 Days -->
+      <section class="slide" id="slide-3" data-slide-index="2" data-title="Curriculum Architecture: Where Today Fits in the 27 Days" data-segment="Section 1: Orientation & Outcomes">
+        <div class="slide-header">
+          <span class="section-tag">Section 1: Orientation & Outcomes</span>
+          <h2>Curriculum Architecture: Where Today Fits in the 27 Days</h2>
+          <p class="subtitle">Reconnecting the master mental model: turning frozen screen elements into a reactive system.</p>
+        </div>
+        <div class="slide-content grid-3">
+          <div class="card">
+            <span class="card-badge" style="background: rgba(59, 130, 246, 0.15); color: #60a5fa;">Foundation (Days 1–13)</span>
+            <h3 class="card-title">Structure &amp; Design</h3>
+            <p style="font-size: 0.9rem; color: var(--text-muted); line-height: 1.6;">
+              We studied business processes, tables in SharePoint, wireframes, and Power Apps Studio layout with the Tree View and Hungarian naming.
+            </p>
+            <div style="margin-top: auto; padding: 0.75rem; background: rgba(255,255,255,0.04); border-radius: 0.5rem; font-size: 0.8rem; color: #94a3b8;">
+              Status: Static physical skeleton built.
+            </div>
+          </div>
+
+          <div class="card" style="border-color: rgba(59, 130, 246, 0.4); background: rgba(30, 41, 59, 0.85);">
+            <span class="card-badge" style="background: rgba(59, 130, 246, 0.2); color: #93c5fd;">Immediate Context (Days 14–15)</span>
+            <h3 class="card-title">Controls &amp; Navigation</h3>
+            <p style="font-size: 0.9rem; color: var(--text-muted); line-height: 1.6;">
+              <strong>Day 14:</strong> Assigned roles: Labels, Inputs, Dropdowns, Buttons.<br>
+              <strong>Day 15:</strong> Connected screens with <code>Navigate()</code> and <code>Back()</code>.
+            </p>
+            <div style="margin-top: auto; padding: 0.75rem; background: rgba(59, 130, 246, 0.15); border-radius: 0.5rem; font-size: 0.8rem; color: #60a5fa;">
+              Result: Controls can be tapped, but their text is frozen!
+            </div>
+          </div>
+
+          <div class="card" style="border-color: var(--color-cyan); box-shadow: 0 0 20px rgba(6, 182, 212, 0.2);">
+            <span class="card-badge" style="background: rgba(6, 182, 212, 0.2); color: #67e8f9;">TODAY (Day 16) &rarr; Next (Day 17)</span>
+            <h3 class="card-title">Properties, Formulas &amp; Logic</h3>
+            <p style="font-size: 0.9rem; color: var(--text-muted); line-height: 1.6;">
+              <strong>Day 16:</strong> Wire properties to formulas. The canvas comes alive like Excel.<br>
+              <strong>Day 17:</strong> Add True/False questions and <code>IF()</code> conditions to make autonomous decisions.
+            </p>
+            <div style="margin-top: auto; padding: 0.75rem; background: rgba(6, 182, 212, 0.15); border-radius: 0.5rem; font-size: 0.8rem; color: #67e8f9;">
+              Transformation: From static picture to responsive enterprise app!
+            </div>
+          </div>
+        </div>
+        <aside class="trainer-notes">
+          <h4>Trainer Speaking Script & Pedagogical Cues:</h4>
+<p>Remind students of our 9-step mental model: Real Problem -> Process -> Data -> UI/Screen -> Logic/Decision -> Action -> Storage -> Feedback -> Test.</p>
+<p>We are currently at the bridge between UI/Screen and Logic/Decision. Today we give controls dynamic voices before we give them conditional logic tomorrow.</p>
+        </aside>
+      </section>
+
+      <!-- Slide 4: Prerequisite Retrieval: 4 Quick Retrieval Checks -->
+      <section class="slide" id="slide-4" data-slide-index="3" data-title="Prerequisite Retrieval: 4 Quick Retrieval Checks" data-segment="Section 2: Recall & Foundations">
+        <div class="slide-header">
+          <span class="section-tag">Section 2: Recall & Foundations</span>
+          <h2>Prerequisite Retrieval: 4 Quick Retrieval Checks</h2>
+          <p class="subtitle">Activate your memory from Days 14 and 15 before introducing Power Fx formulas.</p>
+        </div>
+        <div class="slide-content grid-4">
+          <div class="flip-card" onclick="this.classList.toggle('flipped')">
+            <div class="flip-inner">
+              <div class="flip-front">
+                <span class="card-badge">Recall 1 &bull; Day 14</span>
+                <h4 style="margin: 0.75rem 0; font-size: 1.05rem;">Which control displays text without keyboard input?</h4>
+                <p style="font-size: 0.82rem; color: var(--text-muted);">Think about the 4 core control types.</p>
+                <div class="flip-prompt">Click to reveal answer &circlearrowright;</div>
+              </div>
+              <div class="flip-back">
+                <span class="card-badge" style="background: rgba(16, 185, 129, 0.2); color: #6ee7b7;">Answer</span>
+                <h4 style="color: #6ee7b7; margin: 0.5rem 0;">Text Label (lbl)</h4>
+                <p style="font-size: 0.82rem; color: #cbd5e1; line-height: 1.5;">Labels are Output controls. They display system facts and formula calculations; users cannot type into them.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="flip-card" onclick="this.classList.toggle('flipped')">
+            <div class="flip-inner">
+              <div class="flip-front">
+                <span class="card-badge">Recall 2 &bull; Day 14</span>
+                <h4 style="margin: 0.75rem 0; font-size: 1.05rem;">Why use a Dropdown instead of a Text Input?</h4>
+                <p style="font-size: 0.82rem; color: var(--text-muted);">Recall data integrity rules.</p>
+                <div class="flip-prompt">Click to reveal answer &circlearrowright;</div>
+              </div>
+              <div class="flip-back">
+                <span class="card-badge" style="background: rgba(16, 185, 129, 0.2); color: #6ee7b7;">Answer</span>
+                <h4 style="color: #6ee7b7; margin: 0.5rem 0;">Choice Integrity</h4>
+                <p style="font-size: 0.82rem; color: #cbd5e1; line-height: 1.5;">Dropdown restricts operators to pre-approved values, eliminating typos that corrupt reports and database filters.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="flip-card" onclick="this.classList.toggle('flipped')">
+            <div class="flip-inner">
+              <div class="flip-front">
+                <span class="card-badge">Recall 3 &bull; Day 15</span>
+                <h4 style="margin: 0.75rem 0; font-size: 1.05rem;">What function moves the user to another screen?</h4>
+                <p style="font-size: 0.82rem; color: var(--text-muted);">Think about screen navigation.</p>
+                <div class="flip-prompt">Click to reveal answer &circlearrowright;</div>
+              </div>
+              <div class="flip-back">
+                <span class="card-badge" style="background: rgba(16, 185, 129, 0.2); color: #6ee7b7;">Answer</span>
+                <h4 style="color: #6ee7b7; margin: 0.5rem 0;">Navigate()</h4>
+                <p style="font-size: 0.82rem; color: #cbd5e1; line-height: 1.5;"><code>Navigate(TargetScreen, Transition)</code> changes the active viewport smoothly to guide the operator forward.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="flip-card" onclick="this.classList.toggle('flipped')">
+            <div class="flip-inner">
+              <div class="flip-front">
+                <span class="card-badge">Recall 4 &bull; Day 15</span>
+                <h4 style="margin: 0.75rem 0; font-size: 1.05rem;">What happens if you hardcode return screens instead of Back()?</h4>
+                <p style="font-size: 0.82rem; color: var(--text-muted);">Consider branching user journeys.</p>
+                <div class="flip-prompt">Click to reveal answer &circlearrowright;</div>
+              </div>
+              <div class="flip-back">
+                <span class="card-badge" style="background: rgba(16, 185, 129, 0.2); color: #6ee7b7;">Answer</span>
+                <h4 style="color: #6ee7b7; margin: 0.5rem 0;">Navigation Trap!</h4>
+                <p style="font-size: 0.82rem; color: #cbd5e1; line-height: 1.5;">Users get trapped or redirected to the wrong origin screen. <code>Back()</code> safely reverses along their actual history trail.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <aside class="trainer-notes">
+          <h4>Trainer Speaking Script & Pedagogical Cues:</h4>
+<p>Engage the learners by having them click or tap each flip card. Ask volunteers to guess the answers out loud before clicking.</p>
+<p>Reassure beginners: today we use the exact same Button OnSelect property where they wrote Navigate(), but we will write formulas that change text, count characters, and combine data!</p>
+        </aside>
+      </section>
+
+      <!-- Slide 5: The $18,000 Crisis: The Danger of Static Software -->
+      <section class="slide" id="slide-5" data-slide-index="4" data-title="The $18,000 Crisis: The Danger of Static Software" data-segment="Section 2: The Core Problem">
+        <div class="slide-header">
+          <span class="section-tag">Section 2: The Core Problem</span>
+          <h2>The $18,000 Crisis: The Danger of Static Software</h2>
+          <p class="subtitle">How hardcoded controls without reactive formulas brought factory lines to a halt.</p>
+        </div>
+        <div class="slide-content grid-2">
+          <div class="card">
+            <div class="crisis-banner">
+              <span class="crisis-icon">&triangle;</span>
+              <div>
+                <strong style="color: #fca5a5; font-size: 1.05rem;">Apex Plastics Shipping Disaster</strong>
+                <p style="font-size: 0.82rem; color: #cbd5e1; margin-top: 0.25rem;">Stale control state caused catastrophic dispatch of uninspected fragile components.</p>
+              </div>
+            </div>
+
+            <div class="consequence-row">
+              <span class="consequence-badge">Root Cause 1</span>
+              <div>
+                <strong>Hardcoded Status Label:</strong>
+                <p style="font-size: 0.85rem; color: var(--text-muted);">The label text was permanently typed as <code>"Status: Standard Inspection"</code> instead of dynamically computing the machine's true danger level.</p>
+              </div>
+            </div>
+
+            <div class="consequence-row">
+              <span class="consequence-badge">Root Cause 2</span>
+              <div>
+                <strong>Missing Real-Time Calculation:</strong>
+                <p style="font-size: 0.85rem; color: var(--text-muted);">When operators chose "Critical Breakdown", the screen gave no visual warning because properties weren't wired to formulas.</p>
+              </div>
+            </div>
+
+            <div class="consequence-row">
+              <span class="consequence-badge">Root Cause 3</span>
+              <div>
+                <strong>Blind Operator Submission:</strong>
+                <p style="font-size: 0.85rem; color: var(--text-muted);">Operators submitted tickets blindly with zero computed confirmation or feedback.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="card" style="border-color: rgba(239, 68, 68, 0.4); background: rgba(30, 41, 59, 0.9);">
+            <h3 class="card-title" style="color: #fca5a5;">The Total Financial Impact</h3>
+            <div style="font-size: 2.8rem; font-weight: 800; color: #ef4444; margin: 0.75rem 0;">$18,400</div>
+            <p style="font-size: 0.95rem; line-height: 1.6; color: #cbd5e1;">
+              Over 400 defective injection molded parts were dispatched to assembly lines across two provinces. 48 hours of line shutdown and expedited replacement freight cost the company $18,400 in direct losses.
+            </p>
+            <div style="margin-top: auto; padding: 0.85rem; background: rgba(239, 68, 68, 0.15); border-radius: 0.5rem; font-weight: 600; color: #fca5a5; font-size: 0.85rem;">
+              The takeaway: A screen where controls don't dynamically compute their state is not an app—it's an operational hazard waiting to happen!
+            </div>
+          </div>
+        </div>
+        <aside class="trainer-notes">
+          <h4>Trainer Speaking Script & Pedagogical Cues:</h4>
+<p>Tell the story of Apex Plastics with emotional gravitas. Help beginners feel the pain of static controls: someone drew a pretty screen with text boxes, but because they didn't know how to wire a formula, the app failed in production.</p>
+<p>Formulas are not an academic math topic; they are safety fuses that prevent real-world manufacturing disasters.</p>
+        </aside>
+      </section>
+
+      <!-- Slide 6: Visual Cause & Effect: The 5-Step Reactive Circuit -->
+      <section class="slide" id="slide-6" data-slide-index="5" data-title="Visual Cause & Effect: The 5-Step Reactive Circuit" data-segment="Section 2: The Core Problem">
+        <div class="slide-header">
+          <span class="section-tag">Section 2: The Core Problem</span>
+          <h2>Visual Cause & Effect: The 5-Step Reactive Circuit</h2>
+          <p class="subtitle">How Power Apps reacts to human input automatically without clicking a save button.</p>
+        </div>
+        <div class="slide-content" style="display: flex; flex-direction: column; gap: 1rem;">
+          <div class="circuit-flow">
+            <div class="circuit-step">
+              <span class="circuit-badge" style="background: rgba(59, 130, 246, 0.2); color: #60a5fa;">Step 1</span>
+              <strong style="font-size: 0.88rem; margin-top: 0.3rem;">User Action</strong>
+              <span style="font-size: 0.75rem; color: var(--text-muted);">Operator types in text</span>
+            </div>
+            <span class="circuit-arrow">&rarr;</span>
+            <div class="circuit-step">
+              <span class="circuit-badge" style="background: rgba(139, 92, 246, 0.2); color: #c084fc;">Step 2</span>
+              <strong style="font-size: 0.88rem; margin-top: 0.3rem;">Property Shifts</strong>
+              <span style="font-size: 0.75rem; color: var(--text-muted);"><code>txtInput.Text</code> changes</span>
+            </div>
+            <span class="circuit-arrow">&rarr;</span>
+            <div class="circuit-step">
+              <span class="circuit-badge" style="background: rgba(245, 158, 11, 0.2); color: #fbbf24;">Step 3</span>
+              <strong style="font-size: 0.88rem; margin-top: 0.3rem;">Formula Fires</strong>
+              <span style="font-size: 0.75rem; color: var(--text-muted);">Power Fx recalculates</span>
+            </div>
+            <span class="circuit-arrow">&rarr;</span>
+            <div class="circuit-step">
+              <span class="circuit-badge" style="background: rgba(16, 185, 129, 0.2); color: #34d399;">Step 4</span>
+              <strong style="font-size: 0.88rem; margin-top: 0.3rem;">Output Updates</strong>
+              <span style="font-size: 0.75rem; color: var(--text-muted);"><code>lblNotice.Text</code> rewrites</span>
+            </div>
+            <span class="circuit-arrow">&rarr;</span>
+            <div class="circuit-step">
+              <span class="circuit-badge" style="background: rgba(6, 182, 212, 0.2); color: #67e8f9;">Step 5</span>
+              <strong style="font-size: 0.88rem; margin-top: 0.3rem;">Live Feedback</strong>
+              <span style="font-size: 0.75rem; color: var(--text-muted);">Zero delay, 60fps refresh</span>
+            </div>
+          </div>
+
+          <div class="grid-2">
+            <div class="card">
+              <h3 class="card-title">Spreadsheet Reactivity</h3>
+              <p style="font-size: 0.88rem; color: var(--text-muted); line-height: 1.6;">
+                In Microsoft Excel, if cell <code>C1 = A1 + B1</code>, you never press a "Calculate" button. As soon as you type a new number in <code>A1</code>, <code>C1</code> changes in real time.
+              </p>
+              <p style="font-size: 0.88rem; color: var(--text-muted); line-height: 1.6; margin-top: 0.5rem;">
+                Power Apps works on the exact same engine. Controls are cells, Properties are cell contents, and Formulas define dependencies!
+              </p>
+            </div>
+
+            <div class="card">
+              <h3 class="card-title">The Beginner's Breakthrough</h3>
+              <p style="font-size: 0.88rem; color: var(--text-muted); line-height: 1.6;">
+                Beginners often ask: <em>"Where do I write the code that tells the label to update?"</em>
+              </p>
+              <div style="margin-top: 0.5rem; padding: 0.75rem; background: rgba(59, 130, 246, 0.15); border-radius: 0.5rem; font-size: 0.85rem; color: #93c5fd;">
+                <strong>Key Rule:</strong> You do NOT push data to the label. Instead, you go to the Label, open its <code>Text</code> property, and tell it to <strong>pull</strong> data from the input control!
+              </div>
+            </div>
+          </div>
+        </div>
+        <aside class="trainer-notes">
+          <h4>Trainer Speaking Script & Pedagogical Cues:</h4>
+<p>Emphasize the difference between procedural code (push) and declarative spreadsheets (pull). Absolute zero beginners understand Excel: when A1 changes, C1 recalculates automatically.</p>
+<p>Tell them: Power Apps is Excel for mobile and web screens!</p>
+        </aside>
+      </section>
+
+      <!-- Slide 7: Everyday Analogy: The Smart Thermostat vs Frozen Painting -->
+      <section class="slide" id="slide-7" data-slide-index="6" data-title="Everyday Analogy: The Smart Thermostat vs Frozen Painting" data-segment="Section 3: Concepts & Mental Models">
+        <div class="slide-header">
+          <span class="section-tag">Section 3: Concepts & Mental Models</span>
+          <h2>Everyday Analogy: The Smart Thermostat vs Frozen Painting</h2>
+          <p class="subtitle">Understanding the difference between a static image and living, reactive software.</p>
+        </div>
+        <div class="slide-content grid-2">
+          <div class="card">
+            <span class="card-badge" style="background: rgba(239, 68, 68, 0.15); color: #fca5a5;">The Wrong Mental Model</span>
+            <h3 class="card-title" style="color: #fca5a5;">A Painted Thermostat on the Wall</h3>
+            <div style="padding: 1.5rem; background: rgba(15, 23, 42, 0.8); border: 2px dashed rgba(239, 68, 68, 0.3); border-radius: 0.75rem; text-align: center; margin: 1rem 0;">
+              <div style="font-size: 2.2rem; font-weight: 800; color: #cbd5e1;">72&deg;F</div>
+              <span style="font-size: 0.8rem; color: #fca5a5;">(Frozen Painted Value &bull; Never Changes)</span>
+            </div>
+            <p style="font-size: 0.88rem; color: var(--text-muted); line-height: 1.6;">
+              If you paint "72&deg;F" on your living room wall, it will say 72&deg;F in July during a heatwave and in December during a blizzard. It has no sensor, no wires, and no reaction.
+            </p>
+            <div style="margin-top: auto; padding: 0.75rem; background: rgba(255,255,255,0.04); border-radius: 0.5rem; font-size: 0.82rem; color: #94a3b8;">
+              This is what a Label is when you hardcode static text into its properties!
+            </div>
+          </div>
+
+          <div class="card" style="border-color: rgba(16, 185, 129, 0.4); background: rgba(30, 41, 59, 0.85);">
+            <span class="card-badge" style="background: rgba(16, 185, 129, 0.15); color: #86efac;">The True Power Apps Model</span>
+            <h3 class="card-title" style="color: #86efac;">A Living Smart Thermostat</h3>
+            <div style="padding: 1.5rem; background: rgba(15, 23, 42, 0.8); border: 2px solid #10b981; border-radius: 0.75rem; text-align: center; margin: 1rem 0;">
+              <div style="font-size: 2.2rem; font-weight: 800; color: #4ade80;">lblTemp.Text = Sensor.Value</div>
+              <span style="font-size: 0.8rem; color: #86efac;">(Live Computed Value &bull; Continuous Listening)</span>
+            </div>
+            <p style="font-size: 0.88rem; color: var(--text-muted); line-height: 1.6;">
+              A modern digital thermostat has internal sensor properties wired to a formula. When the room warms up, the sensor value changes, and the digital display recalculates automatically.
+            </p>
+            <div style="margin-top: auto; padding: 0.75rem; background: rgba(16, 185, 129, 0.15); border-radius: 0.5rem; font-size: 0.82rem; color: #86efac;">
+              In Power Apps, your formulas act as sensory wires, connecting controls into living, dynamic systems!
+            </div>
+          </div>
+        </div>
+        <aside class="trainer-notes">
+          <h4>Trainer Speaking Script & Pedagogical Cues:</h4>
+<p>Use the thermostat analogy to make the abstract concept physical and intuitive. Every student has seen a digital thermostat.</p>
+<p>Ask: "If the room temperature rises to 80 degrees, does someone have to press a button on the thermostat to make the display show 80?" They will say "No, it updates itself!" Exactly—that is Power Fx!</p>
+        </aside>
+      </section>
+
+      <!-- Slide 8: Control Anatomy Blueprint: The 4 Structural Components -->
+      <section class="slide" id="slide-8" data-slide-index="7" data-title="Control Anatomy Blueprint: The 4 Structural Components" data-segment="Section 3: Concepts & Mental Models">
+        <div class="slide-header">
+          <span class="section-tag">Section 3: Concepts & Mental Models</span>
+          <h2>Control Anatomy Blueprint: The 4 Structural Components</h2>
+          <p class="subtitle">Dissecting how every visual element on your canvas is assembled inside Power Apps Studio.</p>
+        </div>
+        <div class="slide-content anatomy-container">
+          <div class="anatomy-box">
+            <h3 class="card-title">The 4 Interlocking Components</h3>
+            <div class="consequence-row" style="background: rgba(59, 130, 246, 0.1); border-color: rgba(59, 130, 246, 0.3);">
+              <span class="obj-num">1</span>
+              <div>
+                <strong>Control Identity (Name):</strong>
+                <p style="font-size: 0.85rem; color: var(--text-muted);">Unique identifier in Hungarian notation (e.g., <code>lblTicketSummary</code>). How other formulas reference this control.</p>
+              </div>
+            </div>
+            <div class="consequence-row" style="background: rgba(139, 92, 246, 0.1); border-color: rgba(139, 92, 246, 0.3);">
+              <span class="obj-num" style="background: #8b5cf6;">2</span>
+              <div>
+                <strong>Property Drawer (Target):</strong>
+                <p style="font-size: 0.85rem; color: var(--text-muted);">The specific characteristic being configured: <code>Text</code>, <code>Color</code>, <code>Visible</code>, <code>DisplayMode</code>.</p>
+              </div>
+            </div>
+            <div class="consequence-row" style="background: rgba(245, 158, 11, 0.1); border-color: rgba(245, 158, 11, 0.3);">
+              <span class="obj-num" style="background: #f59e0b;">3</span>
+              <div>
+                <strong>Formula Bar (Calculation Engine):</strong>
+                <p style="font-size: 0.85rem; color: var(--text-muted);">The expression entered by the developer, always starting with an equals sign (e.g. <code>="Status: " &amp; drpSeverity.Selected.Value</code>).</p>
+              </div>
+            </div>
+            <div class="consequence-row" style="background: rgba(16, 185, 129, 0.1); border-color: rgba(16, 185, 129, 0.3);">
+              <span class="obj-num" style="background: #10b981;">4</span>
+              <div>
+                <strong>Evaluated Output (Result):</strong>
+                <p style="font-size: 0.85rem; color: var(--text-muted);">The live rendered result produced on screen: <code>"Status: CRITICAL"</code>.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="anatomy-box" style="background: #070a12; justify-content: center; align-items: center;">
+            <div style="width: 100%; border: 1px solid var(--border-subtle); border-radius: 0.75rem; padding: 1.25rem; background: rgba(15, 23, 42, 0.9);">
+              <div style="display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid var(--border-subtle); padding-bottom: 0.5rem; margin-bottom: 0.75rem;">
+                <span style="font-size: 0.78rem; font-weight: 700; color: #60a5fa;">Studio Property Selector</span>
+                <span style="font-size: 0.75rem; font-family: var(--font-code); color: #fbbf24;">Property: Text</span>
+              </div>
+              <div style="background: #0b101b; padding: 0.75rem 1rem; border-radius: 0.4rem; font-family: var(--font-code); font-size: 0.9rem; color: #e2e8f0; border: 1px solid rgba(59, 130, 246, 0.3);">
+                <span style="color: #60a5fa;">lblTicketSummary</span>.<span style="color: #34d399;">Text</span> = <span style="color: #c084fc;">"REQ-"</span> &amp; <span style="color: #60a5fa;">txtDept</span>.<span style="color: #34d399;">Text</span> &amp; <span style="color: #c084fc;">"-2026"</span>
+              </div>
+              <div style="margin-top: 1rem; padding: 1rem; background: rgba(16, 185, 129, 0.1); border: 1px solid #10b981; border-radius: 0.5rem; text-align: center;">
+                <span style="font-size: 0.72rem; text-transform: uppercase; color: #86efac; font-weight: 700;">Live Evaluated Result On Canvas:</span>
+                <div style="font-size: 1.25rem; font-weight: 700; color: #ffffff; margin-top: 0.35rem;">REQ-MAINTENANCE-2026</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <aside class="trainer-notes">
+          <h4>Trainer Speaking Script & Pedagogical Cues:</h4>
+<p>Walk students through the 4 components. Have them point to each piece on their own screen if Studio is open: where is the control name? In the Tree View. Where is the property selector? At the top left of the formula bar.</p>
+        </aside>
+      </section>
+
+      <!-- Slide 9: Plain-Language Translation: From Business Need to Power Fx -->
+      <section class="slide" id="slide-9" data-slide-index="8" data-title="Plain-Language Translation: From Business Need to Power Fx" data-segment="Section 4: Technical Bridge">
+        <div class="slide-header">
+          <span class="section-tag">Section 4: Technical Bridge</span>
+          <h2>Plain-Language Translation: From Business Need to Power Fx</h2>
+          <p class="subtitle">How to translate human workplace thoughts into exact Power Apps formulas.</p>
+        </div>
+        <div class="slide-content grid-2">
+          <div class="card">
+            <h3 class="card-title">The 4-Step Translation Highway</h3>
+            <div class="consequence-row" style="background: rgba(255,255,255,0.03); border-color: rgba(255,255,255,0.1);">
+              <span class="obj-num">1</span>
+              <div>
+                <strong>Human Need:</strong>
+                <p style="font-size: 0.85rem; color: var(--text-muted);">"I want the screen to greet the technician by name and show their shift."</p>
+              </div>
+            </div>
+            <div class="consequence-row" style="background: rgba(59, 130, 246, 0.1); border-color: rgba(59, 130, 246, 0.3);">
+              <span class="obj-num">2</span>
+              <div>
+                <strong>Plain English Rule:</strong>
+                <p style="font-size: 0.85rem; color: var(--text-muted);">Join word "Welcome ", take text typed in operator box, add dash, add shift dropdown choice.</p>
+              </div>
+            </div>
+            <div class="consequence-row" style="background: rgba(139, 92, 246, 0.1); border-color: rgba(139, 92, 246, 0.3);">
+              <span class="obj-num" style="background: #8b5cf6;">3</span>
+              <div>
+                <strong>Target Property:</strong>
+                <p style="font-size: 0.85rem; color: var(--text-muted);">Select <code>lblGreeting</code> on canvas and choose its <code>Text</code> property.</p>
+              </div>
+            </div>
+            <div class="consequence-row" style="background: rgba(16, 185, 129, 0.1); border-color: rgba(16, 185, 129, 0.3);">
+              <span class="obj-num" style="background: #10b981;">4</span>
+              <div>
+                <strong>Power Fx Formula:</strong>
+                <p style="font-size: 0.85rem; color: #86efac; font-family: var(--font-code);">="Welcome " &amp; txtTechnician.Text &amp; " | " &amp; drpShift.Selected.Value</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="card" style="background: #070a12;">
+            <h3 class="card-title" style="color: var(--color-cyan);">Why Absolute Beginners Love This Formula</h3>
+            <p style="font-size: 0.88rem; color: var(--text-muted); line-height: 1.6;">
+              Notice how there are no hidden programming tricks:
+            </p>
+            <ul style="margin: 0.75rem 0 0.75rem 1.25rem; font-size: 0.85rem; color: #cbd5e1; line-height: 1.8;">
+              <li>Words you want to print literally stay wrapped in double quotes (<code>"Welcome "</code>).</li>
+              <li>Values you want to pull from controls use their exact names (<code>txtTechnician.Text</code>).</li>
+              <li>The ampersand symbol (<code>&amp;</code>) acts as glue holding the pieces together.</li>
+            </ul>
+            <div style="margin-top: auto; padding: 0.85rem; background: rgba(6, 182, 212, 0.15); border-radius: 0.5rem; font-size: 0.82rem; color: #67e8f9;">
+              If you can type <code>="Total: " &amp; SUM(A1:A5)</code> in Excel, you already know 90% of Power Fx!
+            </div>
+          </div>
+        </div>
+        <aside class="trainer-notes">
+          <h4>Trainer Speaking Script & Pedagogical Cues:</h4>
+<p>Walk through the 4 steps slowly. Never show the formula first. Always start with the Human Need: what is the human operator trying to accomplish on the factory floor?</p>
+        </aside>
+      </section>
+
+      <!-- Slide 10: Property Taxonomy: Appearance vs Value vs Behavior -->
+      <section class="slide" id="slide-10" data-slide-index="9" data-title="Property Taxonomy: Appearance vs Value vs Behavior" data-segment="Section 4: Technical Bridge">
+        <div class="slide-header">
+          <span class="section-tag">Section 4: Technical Bridge</span>
+          <h2>Property Taxonomy: Appearance vs Value vs Behavior</h2>
+          <p class="subtitle">Classifying control properties into three distinct functional families.</p>
+        </div>
+        <div class="slide-content grid-3">
+          <div class="card">
+            <span class="card-badge" style="background: rgba(139, 92, 246, 0.2); color: #c084fc;">Family 1</span>
+            <h3 class="card-title" style="color: #c084fc;">Appearance Properties</h3>
+            <p style="font-size: 0.88rem; color: var(--text-muted); line-height: 1.6;">
+              Controls how the element renders to the human eye.
+            </p>
+            <div style="margin-top: 1rem; display: flex; flex-direction: column; gap: 0.5rem; font-family: var(--font-code); font-size: 0.82rem;">
+              <div style="padding: 0.4rem 0.6rem; background: rgba(255,255,255,0.04); border-radius: 0.3rem;">Color (Text font color)</div>
+              <div style="padding: 0.4rem 0.6rem; background: rgba(255,255,255,0.04); border-radius: 0.3rem;">Fill (Background color)</div>
+              <div style="padding: 0.4rem 0.6rem; background: rgba(255,255,255,0.04); border-radius: 0.3rem;">Size / Font (Font styling)</div>
+              <div style="padding: 0.4rem 0.6rem; background: rgba(255,255,255,0.04); border-radius: 0.3rem;">BorderThickness / Radius</div>
+            </div>
+          </div>
+
+          <div class="card" style="border-color: rgba(59, 130, 246, 0.4); background: rgba(30, 41, 59, 0.85);">
+            <span class="card-badge" style="background: rgba(59, 130, 246, 0.2); color: #60a5fa;">Family 2</span>
+            <h3 class="card-title" style="color: #60a5fa;">Value &amp; Content</h3>
+            <p style="font-size: 0.88rem; color: var(--text-muted); line-height: 1.6;">
+              Holds the operational data payload.
+            </p>
+            <div style="margin-top: 1rem; display: flex; flex-direction: column; gap: 0.5rem; font-family: var(--font-code); font-size: 0.82rem;">
+              <div style="padding: 0.4rem 0.6rem; background: rgba(59, 130, 246, 0.15); border-radius: 0.3rem; color: #93c5fd;">Text (Current string in control)</div>
+              <div style="padding: 0.4rem 0.6rem; background: rgba(59, 130, 246, 0.15); border-radius: 0.3rem; color: #93c5fd;">Default (Initial value before edit)</div>
+              <div style="padding: 0.4rem 0.6rem; background: rgba(59, 130, 246, 0.15); border-radius: 0.3rem; color: #93c5fd;">Items (Table/List of choices)</div>
+              <div style="padding: 0.4rem 0.6rem; background: rgba(59, 130, 246, 0.15); border-radius: 0.3rem; color: #93c5fd;">Selected (Active chosen record)</div>
+            </div>
+          </div>
+
+          <div class="card">
+            <span class="card-badge" style="background: rgba(16, 185, 129, 0.2); color: #34d399;">Family 3</span>
+            <h3 class="card-title" style="color: #34d399;">Behavior &amp; State</h3>
+            <p style="font-size: 0.88rem; color: var(--text-muted); line-height: 1.6;">
+              Controls interactivity and triggers actions.
+            </p>
+            <div style="margin-top: 1rem; display: flex; flex-direction: column; gap: 0.5rem; font-family: var(--font-code); font-size: 0.82rem;">
+              <div style="padding: 0.4rem 0.6rem; background: rgba(16, 185, 129, 0.15); border-radius: 0.3rem; color: #86efac;">Visible (True/False to show)</div>
+              <div style="padding: 0.4rem 0.6rem; background: rgba(16, 185, 129, 0.15); border-radius: 0.3rem; color: #86efac;">DisplayMode (Edit / Disabled / View)</div>
+              <div style="padding: 0.4rem 0.6rem; background: rgba(16, 185, 129, 0.15); border-radius: 0.3rem; color: #86efac;">OnSelect (Action formula to execute)</div>
+              <div style="padding: 0.4rem 0.6rem; background: rgba(16, 185, 129, 0.15); border-radius: 0.3rem; color: #86efac;">OnChange (Triggers on value change)</div>
+            </div>
+          </div>
+        </div>
+        <aside class="trainer-notes">
+          <h4>Trainer Speaking Script & Pedagogical Cues:</h4>
+<p>Clarify this mental taxonomy. When beginners get confused about properties, it's usually because they confuse a Value property (Text) with a Behavior property (OnSelect) or Appearance (Color).</p>
+        </aside>
+      </section>
+
+      <!-- Slide 11: Syntax Dissection 1: The Dot Operator (.) -->
+      <section class="slide" id="slide-11" data-slide-index="10" data-title="Syntax Dissection 1: The Dot Operator (.)" data-segment="Section 5: Code Dissection">
+        <div class="slide-header">
+          <span class="section-tag">Section 5: Code Dissection</span>
+          <h2>Syntax Dissection 1: The Dot Operator (.)</h2>
+          <p class="subtitle">The fundamental tool for reaching inside controls to extract their inner properties.</p>
+        </div>
+        <div class="slide-content syntax-dissection-grid">
+          <div class="syntax-visual-chain">
+            <div class="syntax-token-pill token-control">
+              <span>txtMachineCode</span>
+              <span class="token-desc">The Control Box</span>
+            </div>
+            <div class="syntax-token-pill token-operator">
+              <span>.</span>
+              <span class="token-desc">The "Reach Inside" Key</span>
+            </div>
+            <div class="syntax-token-pill token-property">
+              <span>Text</span>
+              <span class="token-desc">The Inner Property</span>
+            </div>
+          </div>
+
+          <div class="grid-2" style="margin-top: 0.5rem;">
+            <div class="card" style="background: rgba(15, 23, 42, 0.6);">
+              <h4 style="color: var(--color-cyan); margin-bottom: 0.5rem;">The Everyday Mailbox Analogy</h4>
+              <p style="font-size: 0.88rem; color: var(--text-muted); line-height: 1.6;">
+                Imagine a row of houses on your street. You cannot just shout "Letters!". You must specify: <code>House#42.Mailbox</code>.
+              </p>
+              <p style="font-size: 0.88rem; color: var(--text-muted); line-height: 1.6; margin-top: 0.4rem;">
+                In Power Apps, the screen contains 20 controls. The Dot Operator (<code>.</code>) opens the specific control's door to read what is inside its property drawer!
+              </p>
+            </div>
+
+            <div class="card" style="background: rgba(15, 23, 42, 0.6);">
+              <h4 style="color: #fca5a5; margin-bottom: 0.5rem;">Common Beginner Syntax Trap</h4>
+              <p style="font-size: 0.88rem; color: var(--text-muted); line-height: 1.6;">
+                Beginners often write: <code>="Machine: " &amp; txtMachineCode</code> (without the dot).
+              </p>
+              <div style="margin-top: 0.5rem; padding: 0.65rem; background: rgba(239, 68, 68, 0.15); border-radius: 0.4rem; font-size: 0.82rem; color: #fca5a5;">
+                <strong>Error:</strong> Power Apps will report: <em>"Incompatible type: Control cannot be coerced to Text."</em> Always remember: a control is a box; the dot reaches inside to get the <code>.Text</code>!
+              </div>
+            </div>
+          </div>
+        </div>
+        <aside class="trainer-notes">
+          <h4>Trainer Speaking Script & Pedagogical Cues:</h4>
+<p>Highlight the token chain diagram. Have the students chant: "Control Dot Property! Control Dot Property!"</p>
+<p>Ask: "Why can't I just say txtMachineCode?" Because txtMachineCode is the physical box. If you want the words inside the box, you must say .Text!</p>
+        </aside>
+      </section>
+
+      <!-- Slide 12: Syntax Dissection 2: The Ampersand Glue (&) -->
+      <section class="slide" id="slide-12" data-slide-index="11" data-title="Syntax Dissection 2: The Ampersand Glue (&)" data-segment="Section 5: Code Dissection">
+        <div class="slide-header">
+          <span class="section-tag">Section 5: Code Dissection</span>
+          <h2>Syntax Dissection 2: The Ampersand Glue (&)</h2>
+          <p class="subtitle">Joining static text literals with dynamic control inputs into composite business codes.</p>
+        </div>
+        <div class="slide-content syntax-dissection-grid">
+          <div class="syntax-visual-chain">
+            <div class="syntax-token-pill token-literal">
+              <span>"REQ-"</span>
+              <span class="token-desc">Static Literal</span>
+            </div>
+            <div class="syntax-token-pill token-operator">
+              <span>&amp;</span>
+              <span class="token-desc">Text Glue</span>
+            </div>
+            <div class="syntax-token-pill token-control">
+              <span>drpDept.Selected.Value</span>
+              <span class="token-desc">Dynamic Choice</span>
+            </div>
+            <div class="syntax-token-pill token-operator">
+              <span>&amp;</span>
+              <span class="token-desc">Text Glue</span>
+            </div>
+            <div class="syntax-token-pill token-literal">
+              <span>"-2026"</span>
+              <span class="token-desc">Static Literal</span>
+            </div>
+          </div>
+
+          <div class="grid-2" style="margin-top: 0.5rem;">
+            <div class="card" style="background: rgba(15, 23, 42, 0.6);">
+              <h4 style="color: var(--color-cyan); margin-bottom: 0.5rem;">The Golden Rule of Quotes</h4>
+              <p style="font-size: 0.88rem; color: var(--text-muted); line-height: 1.6;">
+                <strong>With Quotes:</strong> <code>"Text"</code> means: <em>"Print these exact letters literally."</em>
+              </p>
+              <p style="font-size: 0.88rem; color: var(--text-muted); line-height: 1.6; margin-top: 0.4rem;">
+                <strong>Without Quotes:</strong> <code>txtInput.Text</code> means: <em>"Go find the control named txtInput and extract its live property."</em>
+              </p>
+            </div>
+
+            <div class="card" style="background: rgba(15, 23, 42, 0.6);">
+              <h4 style="color: #6ee7b7; margin-bottom: 0.5rem;">Resulting Dynamic Output</h4>
+              <div style="padding: 1rem; background: #070a12; border: 1px solid rgba(16, 185, 129, 0.4); border-radius: 0.5rem; text-align: center;">
+                <span style="font-size: 0.75rem; color: #86efac; text-transform: uppercase; font-weight: 700;">When Operator selects "ELEC":</span>
+                <div style="font-size: 1.4rem; font-weight: 700; color: #ffffff; font-family: var(--font-code); margin-top: 0.4rem;">REQ-ELEC-2026</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <aside class="trainer-notes">
+          <h4>Trainer Speaking Script & Pedagogical Cues:</h4>
+<p>Explain string concatenation visually as digital carpentry: quotes are wooden blocks, and the ampersand (&) is the wood glue connecting them together.</p>
+        </aside>
+      </section>
+
+      <!-- Slide 13: Interactive Lab 1: Control Property Inspector -->
+      <section class="slide" id="slide-13" data-slide-index="12" data-title="Interactive Lab 1: Control Property Inspector" data-segment="Section 6: Interactive Demonstrations">
+        <div class="slide-header">
+          <span class="section-tag">Section 6: Interactive Demonstrations</span>
+          <h2>Interactive Lab 1: Control Property Inspector</h2>
+          <p class="subtitle">Click tabs below to inspect how properties and formulas shape each control type.</p>
+        </div>
+        <div class="slide-content widget-stage">
+          <div class="inspector-menu">
+            <div class="inspector-tab active" data-control-key="label">
+              <span class="tab-icon">&blk14;</span>
+              <div class="tab-info">
+                <h4>Text Label (lbl)</h4>
+                <span>Output &bull; Displays calculated text</span>
+              </div>
+            </div>
+            <div class="inspector-tab" data-control-key="textinput">
+              <span class="tab-icon">&equiv;</span>
+              <div class="tab-info">
+                <h4>Text Input (txt)</h4>
+                <span>Input &bull; Collects user keystrokes</span>
+              </div>
+            </div>
+            <div class="inspector-tab" data-control-key="button">
+              <span class="tab-icon">&blacktriangleright;</span>
+              <div class="tab-info">
+                <h4>Action Button (btn)</h4>
+                <span>Action &bull; Executes OnSelect logic</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="inspector-display">
+            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.75rem;">
+              <span id="inspector-role-badge" class="role-badge-pill pill-output">Output Control</span>
+              <span id="inspector-hungarian-tag" style="font-family: var(--font-code); font-size: 0.8rem; color: var(--color-cyan);">Prefix: lbl</span>
+            </div>
+            <h3 id="inspector-control-title" style="margin-bottom: 0.5rem;">Text Label &bull; lblStatusBanner</h3>
+            <p id="inspector-control-desc" style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.5; margin-bottom: 1rem;">
+              Displays system facts, calculated messages, or status banners. Read-only by nature.
+            </p>
+
+            <div class="live-control-box" id="inspector-live-preview">
+              <div style="background: rgba(15, 23, 42, 0.9); border: 1px solid #38bdf8; border-radius: 4px; padding: 0.75rem 1.25rem; color: #38bdf8; font-weight: 700; font-size: 1.05rem;">
+                &bull; Status: PENDING INSPECTION
+              </div>
+            </div>
+
+            <div style="margin-top: auto; padding: 0.75rem 1rem; background: #070a12; border: 1px solid var(--border-subtle); border-radius: 0.5rem; font-family: var(--font-code); font-size: 0.85rem; color: #e2e8f0;">
+              <span style="color: var(--text-muted);">Formula:</span> <span id="inspector-formula" style="color: #60a5fa;">lblStatusBanner.Text = "Status: " &amp; drpSeverity.Selected.Value</span>
+            </div>
+          </div>
+        </div>
+        <aside class="trainer-notes">
+          <h4>Trainer Speaking Script & Pedagogical Cues:</h4>
+<p>Invite a learner to come up or click between the three tabs. Show them that each control has a specific role, a property being configured, and an active formula.</p>
+        </aside>
+      </section>
+
+      <!-- Slide 14: Trainer Demonstration: Building a Live Confirmation Banner -->
+      <section class="slide" id="slide-14" data-slide-index="13" data-title="Trainer Demonstration: Building a Live Confirmation Banner" data-segment="Section 6: Practical Implementation">
+        <div class="slide-header">
+          <span class="section-tag">Section 6: Practical Implementation</span>
+          <h2>Trainer Demonstration: Building a Live Confirmation Banner</h2>
+          <p class="subtitle">Watch the step-by-step workflow inside Power Apps Studio to wire formulas.</p>
+        </div>
+        <div class="slide-content grid-2">
+          <div class="card">
+            <h3 class="card-title">Studio Step-by-Step Workflow</h3>
+            <div class="objective-item">
+              <span class="obj-num">1</span>
+              <div>
+                <strong>Insert Controls &amp; Apply Hungarian Names:</strong>
+                <p>Insert a Text Input named <code>txtRequester</code> and a Label named <code>lblDynamicGreeting</code>.</p>
+              </div>
+            </div>
+            <div class="objective-item">
+              <span class="obj-num">2</span>
+              <div>
+                <strong>Select Target Property:</strong>
+                <p>Select <code>lblDynamicGreeting</code>, click the property dropdown in the top-left, and select <code>Text</code>.</p>
+              </div>
+            </div>
+            <div class="objective-item">
+              <span class="obj-num">3</span>
+              <div>
+                <strong>Enter Reactive Formula:</strong>
+                <p>Replace static quotes with: <code>="Welcome to Factory floor, " &amp; txtRequester.Text &amp; "!"</code></p>
+              </div>
+            </div>
+            <div class="objective-item">
+              <span class="obj-num">4</span>
+              <div>
+                <strong>Test in Studio Preview (F5):</strong>
+                <p>Hold Alt key or press F5, type in <code>txtRequester</code>, and watch the greeting update letter-by-letter!</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="card" style="background: #070a12; justify-content: center; align-items: center;">
+            <div style="width: 100%; border: 1px solid var(--border-subtle); border-radius: 0.75rem; padding: 1.5rem; background: rgba(15, 23, 42, 0.85);">
+              <span class="card-badge" style="background: rgba(16, 185, 129, 0.15); color: #86efac;">Studio Canvas Simulator</span>
+              <div style="margin: 1.25rem 0; display: flex; flex-direction: column; gap: 0.75rem;">
+                <label style="font-size: 0.8rem; color: var(--text-muted); font-weight: 600;">OPERATOR NAME INPUT (txtRequester):</label>
+                <input type="text" class="sample-input-control" value="Sokha Chea" readonly style="background: rgba(255,255,255,0.05); color: #60a5fa; border-color: rgba(59, 130, 246, 0.4);">
+              </div>
+              <div style="display: flex; flex-direction: column; gap: 0.5rem;">
+                <label style="font-size: 0.8rem; color: var(--text-muted); font-weight: 600;">LIVE EVALUATED BANNER (lblDynamicGreeting):</label>
+                <div style="padding: 1rem; background: rgba(16, 185, 129, 0.15); border: 1px solid #10b981; border-radius: 0.5rem; color: #86efac; font-weight: 700; font-size: 1.1rem; text-align: center;">
+                  Welcome to Factory floor, Sokha Chea!
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <aside class="trainer-notes">
+          <h4>Trainer Speaking Script & Pedagogical Cues:</h4>
+<p>Perform this demonstration live in Power Apps Studio on your projector. Deliberately make the mistake of leaving out the ampersand (&) to show the syntax error red squiggly line, then fix it.</p>
+        </aside>
+      </section>
+
+      <!-- Slide 15: Guided Practice: Build the Live Ticket Summary Card -->
+      <section class="slide" id="slide-15" data-slide-index="14" data-title="Guided Practice: Build the Live Ticket Summary Card" data-segment="Section 6: Practical Implementation">
+        <div class="slide-header">
+          <span class="section-tag">Section 6: Practical Implementation</span>
+          <h2>Guided Practice: Build the Live Ticket Summary Card</h2>
+          <p class="subtitle">Pair programming exercise: combine dropdown severity with machine ID into an audit badge.</p>
+        </div>
+        <div class="slide-content grid-2">
+          <div class="card">
+            <h3 class="card-title">Your 4-Step Build Mission</h3>
+            <div class="agenda-timeline" style="gap: 0.5rem;">
+              <div class="agenda-block">
+                <span class="agenda-time">Task 1</span>
+                <span class="agenda-name">Add Dropdown <code>drpSeverity</code></span>
+                <span class="agenda-desc">Items = ["Low", "High", "Critical"]</span>
+              </div>
+              <div class="agenda-block">
+                <span class="agenda-time">Task 2</span>
+                <span class="agenda-name">Add Text Input <code>txtAssetID</code></span>
+                <span class="agenda-desc">HintText = "e.g. PRESS-02"</span>
+              </div>
+              <div class="agenda-block">
+                <span class="agenda-time">Task 3</span>
+                <span class="agenda-name">Add Summary Label <code>lblSummary</code></span>
+                <span class="agenda-desc">Target Property: <code>Text</code></span>
+              </div>
+              <div class="agenda-block">
+                <span class="agenda-time">Task 4</span>
+                <span class="agenda-name">Write Compound Formula</span>
+                <span class="agenda-desc">Join asset ID + severity</span>
+              </div>
+            </div>
+
+            <div style="margin-top: auto; padding: 0.75rem; background: rgba(59, 130, 246, 0.1); border-radius: 0.5rem; font-size: 0.82rem; color: #93c5fd;">
+              Trainer Tip: Check that both ampersands (<code>&amp;</code>) are in place!
+            </div>
+          </div>
+
+          <div class="card" style="background: #070a12;">
+            <h3 class="card-title" style="color: var(--color-cyan);">Target Formula &amp; Expected Output</h3>
+            <div style="padding: 1rem; background: #0f172a; border: 1px solid rgba(59, 130, 246, 0.3); border-radius: 0.5rem; font-family: var(--font-code); font-size: 0.85rem; color: #f8fafc; margin-bottom: 1rem;">
+              <span style="color: #60a5fa;">lblSummary</span>.<span style="color: #34d399;">Text</span> = <span style="color: #c084fc;">"INCIDENT: "</span> &amp; <span style="color: #60a5fa;">txtAssetID</span>.<span style="color: #34d399;">Text</span> &amp; <span style="color: #c084fc;">" ["</span> &amp; <span style="color: #60a5fa;">drpSeverity</span>.<span style="color: #34d399;">Selected</span>.<span style="color: #34d399;">Value</span> &amp; <span style="color: #c084fc;">"]"</span>
+            </div>
+
+            <div style="border: 2px dashed rgba(16, 185, 129, 0.4); border-radius: 0.75rem; padding: 1.5rem; text-align: center;">
+              <span style="font-size: 0.75rem; color: #86efac; text-transform: uppercase; font-weight: 700;">Rendered Output on Student Canvas:</span>
+              <div style="font-size: 1.25rem; font-weight: 700; color: #ffffff; margin-top: 0.5rem; font-family: var(--font-code);">
+                INCIDENT: PRESS-02 [Critical]
+              </div>
+            </div>
+          </div>
+        </div>
+        <aside class="trainer-notes">
+          <h4>Trainer Speaking Script & Pedagogical Cues:</h4>
+<p>Give learners 8 minutes to complete this task in their own apps. Circulate the room and look for the most common mistake: forgetting .Value on the dropdown!</p>
+        </aside>
+      </section>
+
+      <!-- Slide 16: Independent Task: The Live Character Counter Lab -->
+      <section class="slide" id="slide-16" data-slide-index="15" data-title="Independent Task: The Live Character Counter Lab" data-segment="Section 6: Practical Implementation">
+        <div class="slide-header">
+          <span class="section-tag">Section 6: Practical Implementation</span>
+          <h2>Independent Task: The Live Character Counter Lab</h2>
+          <p class="subtitle">Prevent database field overflow by computing Len(txtNotes.Text) in real time.</p>
+        </div>
+        <div class="slide-content lab-container">
+          <div class="dials-panel">
+            <h3 class="card-title" style="font-size: 1.05rem;">The Engineering Requirement</h3>
+            <p style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.5;">
+              Factory incident descriptions cannot exceed 100 characters in the SQL database. Build a live badge that tells operators how many characters they have typed.
+            </p>
+
+            <div style="margin-top: auto; padding: 0.85rem; background: rgba(15, 23, 42, 0.9); border: 1px solid var(--border-subtle); border-radius: 0.5rem;">
+              <span style="font-size: 0.75rem; color: var(--color-cyan); font-weight: 700; text-transform: uppercase;">Required Formula:</span>
+              <div style="font-family: var(--font-code); font-size: 0.85rem; color: #86efac; margin-top: 0.35rem;">
+                lblCounter.Text = "Characters: " &amp; Len(txtNotes.Text) &amp; " / 100"
+              </div>
+            </div>
+          </div>
+
+          <div class="counter-demo-box">
+            <div style="display: flex; align-items: center; justify-content: space-between;">
+              <label style="font-size: 0.82rem; font-weight: 700; color: #60a5fa;">TRY IT LIVE: TYPE FAILURE SYMPTOMS BELOW</label>
+              <span id="live-char-badge" class="char-counter-badge">0 / 100 Characters</span>
+            </div>
+
+            <textarea id="lab-notes-input" class="sample-input-control" rows="4" style="width: 100%; max-width: 100%; height: 110px; resize: none; font-family: var(--font-body);" placeholder="Type a machinery problem here to see Len() calculate in real time..."></textarea>
+
+            <div style="display: flex; align-items: center; justify-content: space-between; border-top: 1px solid var(--border-subtle); padding-top: 0.75rem;">
+              <span style="font-size: 0.78rem; color: var(--text-muted);">Reactive Status:</span>
+              <span id="live-counter-status" style="font-size: 0.82rem; font-weight: 600; color: #86efac;">Safe &bull; Under Limit</span>
+            </div>
+          </div>
+        </div>
+        <aside class="trainer-notes">
+          <h4>Trainer Speaking Script & Pedagogical Cues:</h4>
+<p>Let students type directly into the text area on this slide! Watch their eyes light up when they see the numbers change on every keystroke. Explain that Len() counts string length.</p>
+        </aside>
+      </section>
+
+      <!-- Slide 17: 5 Dangerous Mental Traps vs Power Fx Reality -->
+      <section class="slide" id="slide-17" data-slide-index="16" data-title="5 Dangerous Mental Traps vs Power Fx Reality" data-segment="Section 7: Diagnostics & Pitfalls">
+        <div class="slide-header">
+          <span class="section-tag">Section 7: Diagnostics & Pitfalls</span>
+          <h2>5 Dangerous Mental Traps vs Power Fx Reality</h2>
+          <p class="subtitle">Unlearning flawed beginner assumptions before they become production bugs.</p>
+        </div>
+        <div class="slide-content" style="display: flex; flex-direction: column; gap: 0.5rem; overflow-y: auto;">
+          <div class="misconception-card">
+            <div class="trap-side">
+              <strong style="color: #fca5a5; font-size: 0.85rem;">Trap 1: "Formulas run once when app opens"</strong>
+              <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.2rem;">Beginners think formulas execute like a calculator, produce an answer, and stop.</p>
+            </div>
+            <div class="truth-side">
+              <strong style="color: #86efac; font-size: 0.85rem;">Truth: Continuous Reactive Listening</strong>
+              <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.2rem;">Power Fx formulas are live spreadsheet equations that recalculate whenever referenced data shifts.</p>
+            </div>
+          </div>
+
+          <div class="misconception-card">
+            <div class="trap-side">
+              <strong style="color: #fca5a5; font-size: 0.85rem;">Trap 2: "Labels are just static text signs"</strong>
+              <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.2rem;">Believing labels are only for fixed titles like "Company Portal".</p>
+            </div>
+            <div class="truth-side">
+              <strong style="color: #86efac; font-size: 0.85rem;">Truth: Labels are Dynamic Windows</strong>
+              <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.2rem;">Labels can calculate totals, format dates, count characters, and display compound status strings.</p>
+            </div>
+          </div>
+
+          <div class="misconception-card">
+            <div class="trap-side">
+              <strong style="color: #fca5a5; font-size: 0.85rem;">Trap 3: "The dot operator means math multiplication"</strong>
+              <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.2rem;">Confusing algebraic dot notation with object-oriented access.</p>
+            </div>
+            <div class="truth-side">
+              <strong style="color: #86efac; font-size: 0.85rem;">Truth: Dot Reaches Inside Properties</strong>
+              <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.2rem;">The dot reaches inside an object (<code>ControlName.Property</code>) to fetch its value.</p>
+            </div>
+          </div>
+
+          <div class="misconception-card">
+            <div class="trap-side">
+              <strong style="color: #fca5a5; font-size: 0.85rem;">Trap 4: "Numbers must always be in quotes"</strong>
+              <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.2rem;">Writing <code>"5" + "10"</code> expecting numeric mathematics.</p>
+            </div>
+            <div class="truth-side">
+              <strong style="color: #86efac; font-size: 0.85rem;">Truth: Quotes Turn Numbers into Words</strong>
+              <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.2rem;">Numbers in quotes become strings. For calculations, write bare numbers: <code>5 + 10</code>.</p>
+            </div>
+          </div>
+
+          <div class="misconception-card">
+            <div class="trap-side">
+              <strong style="color: #fca5a5; font-size: 0.85rem;">Trap 5: "Formulas save data to SharePoint"</strong>
+              <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.2rem;">Expecting a Text formula to write permanently to the cloud database.</p>
+            </div>
+            <div class="truth-side">
+              <strong style="color: #86efac; font-size: 0.85rem;">Truth: Formulas Calculate; Actions Save</strong>
+              <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.2rem;">Display formulas only compute values on screen. Saving requires Action triggers like <code>SubmitForm()</code>.</p>
+            </div>
+          </div>
+        </div>
+        <aside class="trainer-notes">
+          <h4>Trainer Speaking Script & Pedagogical Cues:</h4>
+<p>Walk through these 5 misconceptions. These are the exact 5 stumbling blocks that cause 90% of beginner frustration. Have learners read the trap out loud and explain why it is wrong.</p>
+        </aside>
+      </section>
+
+      <!-- Slide 18: Knowledge Check 1: Understanding Reactivity & Formulas -->
+      <section class="slide" id="slide-18" data-slide-index="17" data-title="Knowledge Check 1: Understanding Reactivity & Formulas" data-segment="Section 7: Knowledge Check 1/5">
+        <div class="slide-header">
+          <span class="section-tag">Section 7: Knowledge Check 1/5</span>
+          <h2>Knowledge Check 1: Understanding Reactivity & Formulas</h2>
+          <p class="subtitle">Test your mastery of Power Fx reactivity and syntax rules.</p>
+        </div>
+        <div class="slide-content quiz-container">
+          <div class="quiz-card">
+            <span class="card-badge" style="background: rgba(59, 130, 246, 0.15); color: #60a5fa;">Knowledge Check 1 of 5</span>
+            <h3 style="margin-top: 0.75rem; font-size: 1.15rem; line-height: 1.5; color: var(--text-main);">Why does lblWelcome.Text = "Hello " & txtName.Text update instantaneously without clicking a button?</h3>
+            <div class="quiz-options">
+              <button class="quiz-option-btn" data-correct="false" onclick="handleQuizAnswer(this)"><span>A.</span> <span>Power Apps runs a hidden background timer that refreshes the whole page every second.</span></button>
+<button class="quiz-option-btn" data-correct="true" onclick="handleQuizAnswer(this)"><span>B.</span> <span>Power Fx is reactive: when txtName.Text changes, dependent formulas recalculate automatically like Excel.</span></button>
+<button class="quiz-option-btn" data-correct="false" onclick="handleQuizAnswer(this)"><span>C.</span> <span>Because the web browser cache forces an automatic form submit on every keystroke.</span></button>
+<button class="quiz-option-btn" data-correct="false" onclick="handleQuizAnswer(this)"><span>D.</span> <span>It only updates if the developer manually configured a timer control on the canvas.</span></button>
+
+            </div>
+          </div>
+
+          <div class="quiz-card" style="background: #070a12; justify-content: center;">
+            <div id="quiz-feedback-box-1" class="quiz-feedback">
+              <span id="quiz-badge-1" class="card-badge" style="background: rgba(16, 185, 129, 0.2); color: #6ee7b7;">Correct!</span>
+              <h4 id="quiz-status-title-1" style="margin: 0.5rem 0; color: #86efac;">Great Job!</h4>
+              <p id="quiz-expl-1" style="font-size: 0.88rem; color: #cbd5e1; line-height: 1.6;">Power Fx operates on a spreadsheet dependency graph. Formulas continuously listen to their input dependencies and re-evaluate instantly.</p>
+            </div>
+            <div id="quiz-prompt-placeholder-1" style="text-align: center; color: var(--text-muted); font-size: 0.9rem;">
+              &larr; Select an option on the left to verify your understanding.
+            </div>
+          </div>
+        </div>
+        <aside class="trainer-notes">
+          <h4>Trainer Speaking Script & Pedagogical Cues:</h4><p>Ask question 1 to the room. Wait for student clicks, then expand on the explanation.</p>
+        </aside>
+      </section>
+
+      <!-- Slide 19: Knowledge Check 2: Understanding Reactivity & Formulas -->
+      <section class="slide" id="slide-19" data-slide-index="18" data-title="Knowledge Check 2: Understanding Reactivity & Formulas" data-segment="Section 7: Knowledge Check 2/5">
+        <div class="slide-header">
+          <span class="section-tag">Section 7: Knowledge Check 2/5</span>
+          <h2>Knowledge Check 2: Understanding Reactivity & Formulas</h2>
+          <p class="subtitle">Test your mastery of Power Fx reactivity and syntax rules.</p>
+        </div>
+        <div class="slide-content quiz-container">
+          <div class="quiz-card">
+            <span class="card-badge" style="background: rgba(59, 130, 246, 0.15); color: #60a5fa;">Knowledge Check 2 of 5</span>
+            <h3 style="margin-top: 0.75rem; font-size: 1.15rem; line-height: 1.5; color: var(--text-main);">What happens if an operator enters "25" into txtQuantity and you write: txtQuantity.Text * 2?</h3>
+            <div class="quiz-options">
+              <button class="quiz-option-btn" data-correct="false" onclick="handleQuizAnswer(this)"><span>A.</span> <span>Power Apps safely outputs 50 without needing any conversion.</span></button>
+<button class="quiz-option-btn" data-correct="true" onclick="handleQuizAnswer(this)"><span>B.</span> <span>Power Fx flags a type error because Text is a String and requires Value(txtQuantity.Text) for math.</span></button>
+<button class="quiz-option-btn" data-correct="false" onclick="handleQuizAnswer(this)"><span>C.</span> <span>The screen prints the text "2525".</span></button>
+<button class="quiz-option-btn" data-correct="false" onclick="handleQuizAnswer(this)"><span>D.</span> <span>The application crashes and restarts the mobile device.</span></button>
+
+            </div>
+          </div>
+
+          <div class="quiz-card" style="background: #070a12; justify-content: center;">
+            <div id="quiz-feedback-box-2" class="quiz-feedback">
+              <span id="quiz-badge-2" class="card-badge" style="background: rgba(16, 185, 129, 0.2); color: #6ee7b7;">Correct!</span>
+              <h4 id="quiz-status-title-2" style="margin: 0.5rem 0; color: #86efac;">Great Job!</h4>
+              <p id="quiz-expl-2" style="font-size: 0.88rem; color: #cbd5e1; line-height: 1.6;">Controls store typed input as Text strings. To perform arithmetic, you must explicitly wrap it in Value() to convert the string to a numeric value.</p>
+            </div>
+            <div id="quiz-prompt-placeholder-2" style="text-align: center; color: var(--text-muted); font-size: 0.9rem;">
+              &larr; Select an option on the left to verify your understanding.
+            </div>
+          </div>
+        </div>
+        <aside class="trainer-notes">
+          <h4>Trainer Speaking Script & Pedagogical Cues:</h4><p>Ask question 2 to the room. Wait for student clicks, then expand on the explanation.</p>
+        </aside>
+      </section>
+
+      <!-- Slide 20: Knowledge Check 3: Understanding Reactivity & Formulas -->
+      <section class="slide" id="slide-20" data-slide-index="19" data-title="Knowledge Check 3: Understanding Reactivity & Formulas" data-segment="Section 7: Knowledge Check 3/5">
+        <div class="slide-header">
+          <span class="section-tag">Section 7: Knowledge Check 3/5</span>
+          <h2>Knowledge Check 3: Understanding Reactivity & Formulas</h2>
+          <p class="subtitle">Test your mastery of Power Fx reactivity and syntax rules.</p>
+        </div>
+        <div class="slide-content quiz-container">
+          <div class="quiz-card">
+            <span class="card-badge" style="background: rgba(59, 130, 246, 0.15); color: #60a5fa;">Knowledge Check 3 of 5</span>
+            <h3 style="margin-top: 0.75rem; font-size: 1.15rem; line-height: 1.5; color: var(--text-main);">Which property controls whether a submit button is clickable, grayed-out, or hidden?</h3>
+            <div class="quiz-options">
+              <button class="quiz-option-btn" data-correct="false" onclick="handleQuizAnswer(this)"><span>A.</span> <span>Color and Fill properties.</span></button>
+<button class="quiz-option-btn" data-correct="true" onclick="handleQuizAnswer(this)"><span>B.</span> <span>DisplayMode (Edit / Disabled / View) and Visible (True / False).</span></button>
+<button class="quiz-option-btn" data-correct="false" onclick="handleQuizAnswer(this)"><span>C.</span> <span>The OnSelect action formula.</span></button>
+<button class="quiz-option-btn" data-correct="false" onclick="handleQuizAnswer(this)"><span>D.</span> <span>The Default and Text properties.</span></button>
+
+            </div>
+          </div>
+
+          <div class="quiz-card" style="background: #070a12; justify-content: center;">
+            <div id="quiz-feedback-box-3" class="quiz-feedback">
+              <span id="quiz-badge-3" class="card-badge" style="background: rgba(16, 185, 129, 0.2); color: #6ee7b7;">Correct!</span>
+              <h4 id="quiz-status-title-3" style="margin: 0.5rem 0; color: #86efac;">Great Job!</h4>
+              <p id="quiz-expl-3" style="font-size: 0.88rem; color: #cbd5e1; line-height: 1.6;">Visible determines presence on canvas (True/False); DisplayMode determines operational state: DisplayMode.Edit (clickable), DisplayMode.Disabled (grayed out), or DisplayMode.View (read-only).</p>
+            </div>
+            <div id="quiz-prompt-placeholder-3" style="text-align: center; color: var(--text-muted); font-size: 0.9rem;">
+              &larr; Select an option on the left to verify your understanding.
+            </div>
+          </div>
+        </div>
+        <aside class="trainer-notes">
+          <h4>Trainer Speaking Script & Pedagogical Cues:</h4><p>Ask question 3 to the room. Wait for student clicks, then expand on the explanation.</p>
+        </aside>
+      </section>
+
+      <!-- Slide 21: Knowledge Check 4: Understanding Reactivity & Formulas -->
+      <section class="slide" id="slide-21" data-slide-index="20" data-title="Knowledge Check 4: Understanding Reactivity & Formulas" data-segment="Section 7: Knowledge Check 4/5">
+        <div class="slide-header">
+          <span class="section-tag">Section 7: Knowledge Check 4/5</span>
+          <h2>Knowledge Check 4: Understanding Reactivity & Formulas</h2>
+          <p class="subtitle">Test your mastery of Power Fx reactivity and syntax rules.</p>
+        </div>
+        <div class="slide-content quiz-container">
+          <div class="quiz-card">
+            <span class="card-badge" style="background: rgba(59, 130, 246, 0.15); color: #60a5fa;">Knowledge Check 4 of 5</span>
+            <h3 style="margin-top: 0.75rem; font-size: 1.15rem; line-height: 1.5; color: var(--text-main);">What is the exact purpose of the dot (.) in: drpDepartment.Selected.Value?</h3>
+            <div class="quiz-options">
+              <button class="quiz-option-btn" data-correct="false" onclick="handleQuizAnswer(this)"><span>A.</span> <span>It functions as an end-of-sentence punctuation mark.</span></button>
+<button class="quiz-option-btn" data-correct="true" onclick="handleQuizAnswer(this)"><span>B.</span> <span>It reaches inside drpDepartment to get the Selected record, then inside that record to get the Value string.</span></button>
+<button class="quiz-option-btn" data-correct="false" onclick="handleQuizAnswer(this)"><span>C.</span> <span>It multiplies the department options by the record index.</span></button>
+<button class="quiz-option-btn" data-correct="false" onclick="handleQuizAnswer(this)"><span>D.</span> <span>It tells Power Apps to save the choice to the server database.</span></button>
+
+            </div>
+          </div>
+
+          <div class="quiz-card" style="background: #070a12; justify-content: center;">
+            <div id="quiz-feedback-box-4" class="quiz-feedback">
+              <span id="quiz-badge-4" class="card-badge" style="background: rgba(16, 185, 129, 0.2); color: #6ee7b7;">Correct!</span>
+              <h4 id="quiz-status-title-4" style="margin: 0.5rem 0; color: #86efac;">Great Job!</h4>
+              <p id="quiz-expl-4" style="font-size: 0.88rem; color: #cbd5e1; line-height: 1.6;">The dot operator accesses hierarchical properties: from the Dropdown control, into its Selected record object, and finally into the text Value field.</p>
+            </div>
+            <div id="quiz-prompt-placeholder-4" style="text-align: center; color: var(--text-muted); font-size: 0.9rem;">
+              &larr; Select an option on the left to verify your understanding.
+            </div>
+          </div>
+        </div>
+        <aside class="trainer-notes">
+          <h4>Trainer Speaking Script & Pedagogical Cues:</h4><p>Ask question 4 to the room. Wait for student clicks, then expand on the explanation.</p>
+        </aside>
+      </section>
+
+      <!-- Slide 22: Knowledge Check 5: Understanding Reactivity & Formulas -->
+      <section class="slide" id="slide-22" data-slide-index="21" data-title="Knowledge Check 5: Understanding Reactivity & Formulas" data-segment="Section 7: Knowledge Check 5/5">
+        <div class="slide-header">
+          <span class="section-tag">Section 7: Knowledge Check 5/5</span>
+          <h2>Knowledge Check 5: Understanding Reactivity & Formulas</h2>
+          <p class="subtitle">Test your mastery of Power Fx reactivity and syntax rules.</p>
+        </div>
+        <div class="slide-content quiz-container">
+          <div class="quiz-card">
+            <span class="card-badge" style="background: rgba(59, 130, 246, 0.15); color: #60a5fa;">Knowledge Check 5 of 5</span>
+            <h3 style="margin-top: 0.75rem; font-size: 1.15rem; line-height: 1.5; color: var(--text-main);">What is the difference between a Behavior property (OnSelect) and a Value property (Text)?</h3>
+            <div class="quiz-options">
+              <button class="quiz-option-btn" data-correct="true" onclick="handleQuizAnswer(this)"><span>A.</span> <span>Behavior properties execute sequential action steps when tapped; Value properties continuously evaluate state.</span></button>
+<button class="quiz-option-btn" data-correct="false" onclick="handleQuizAnswer(this)"><span>B.</span> <span>Behavior properties only work in tablet applications, not on mobile phones.</span></button>
+<button class="quiz-option-btn" data-correct="false" onclick="handleQuizAnswer(this)"><span>C.</span> <span>Value properties cannot contain formulas or references to other controls.</span></button>
+<button class="quiz-option-btn" data-correct="false" onclick="handleQuizAnswer(this)"><span>D.</span> <span>There is no difference; they can be used interchangeably.</span></button>
+
+            </div>
+          </div>
+
+          <div class="quiz-card" style="background: #070a12; justify-content: center;">
+            <div id="quiz-feedback-box-5" class="quiz-feedback">
+              <span id="quiz-badge-5" class="card-badge" style="background: rgba(16, 185, 129, 0.2); color: #6ee7b7;">Correct!</span>
+              <h4 id="quiz-status-title-5" style="margin: 0.5rem 0; color: #86efac;">Great Job!</h4>
+              <p id="quiz-expl-5" style="font-size: 0.88rem; color: #cbd5e1; line-height: 1.6;">Value properties (Text, Color, Visible) declare what a control IS right now. Behavior properties (OnSelect, OnChange) execute actions (Navigate, Notify, SubmitForm) when an event OCCURS.</p>
+            </div>
+            <div id="quiz-prompt-placeholder-5" style="text-align: center; color: var(--text-muted); font-size: 0.9rem;">
+              &larr; Select an option on the left to verify your understanding.
+            </div>
+          </div>
+        </div>
+        <aside class="trainer-notes">
+          <h4>Trainer Speaking Script & Pedagogical Cues:</h4><p>Ask question 5 to the room. Wait for student clicks, then expand on the explanation.</p>
+        </aside>
+      </section>
+
+      <!-- Slide 23: Final Challenge: Equipment Asset Tag Generator -->
+      <section class="slide" id="slide-23" data-slide-index="22" data-title="Final Challenge: Equipment Asset Tag Generator" data-segment="Section 8: Bridge & Homework">
+        <div class="slide-header">
+          <span class="section-tag">Section 8: Bridge & Homework</span>
+          <h2>Final Challenge: Equipment Asset Tag Generator</h2>
+          <p class="subtitle">Engineer a live asset tag badge combining plant area, machine code, and Len() verification.</p>
+        </div>
+        <div class="slide-content grid-2">
+          <div class="card">
+            <h3 class="card-title">The Engineering Challenge</h3>
+            <p style="font-size: 0.88rem; color: var(--text-muted); line-height: 1.6;">
+              Apex Manufacturing requires all factory equipment to have a dynamic asset tag generated automatically before technicians inspect machinery:
+            </p>
+            <ol style="margin: 0.75rem 0 0.75rem 1.25rem; font-size: 0.85rem; color: #cbd5e1; line-height: 1.8;">
+              <li>Dropdown <code>drpPlantArea</code> with <code>["STAMPING", "ASSEMBLY", "MOLDING"]</code>.</li>
+              <li>Text Input <code>txtMachineNum</code> with Hint <code>"e.g. M-104"</code>.</li>
+              <li>Label <code>lblAssetTag</code> formula: <code>"TAG-" &amp; drpPlantArea.Selected.Value &amp; "-" &amp; txtMachineNum.Text &amp; "-2026"</code>.</li>
+              <li>Character Counter <code>lblTagLength</code> formula: <code>"Tag Length: " &amp; Len(lblAssetTag.Text) &amp; " chars"</code>.</li>
+            </ol>
+
+            <div style="margin-top: auto; padding: 0.75rem; background: rgba(59, 130, 246, 0.15); border-radius: 0.5rem; font-size: 0.82rem; color: #93c5fd;">
+              Expected Live Result: <strong>TAG-MOLDING-M-104-2026</strong> (22 chars)
+            </div>
+          </div>
+
+          <div class="card">
+            <h3 class="card-title">Evaluation Rubric (100 Points)</h3>
+            <div class="agenda-timeline" style="gap: 0.5rem;">
+              <div class="agenda-block" style="border-color: rgba(16, 185, 129, 0.4);">
+                <span class="agenda-time" style="background: rgba(16, 185, 129, 0.15); color: #86efac;">4 &bull; Exemplary</span>
+                <span class="agenda-name" style="font-size: 0.85rem;">All Hungarian names perfect, formula reactive, Len() updates live without errors.</span>
+              </div>
+              <div class="agenda-block">
+                <span class="agenda-time">3 &bull; Proficient</span>
+                <span class="agenda-name" style="font-size: 0.85rem;">Tag generates correctly, but character count is missing or names lack Hungarian prefix.</span>
+              </div>
+              <div class="agenda-block">
+                <span class="agenda-time" style="border-color: rgba(245, 158, 11, 0.4);">
+                  <span style="color: #fbbf24;">2 &bull; Developing</span>
+                </span>
+                <span class="agenda-name" style="font-size: 0.85rem;">Syntax error on dropdown (missing .Value) or ampersand missing quotes.</span>
+              </div>
+              <div class="agenda-block" style="border-color: rgba(239, 68, 68, 0.4);">
+                <span class="agenda-time" style="background: rgba(239, 68, 68, 0.15); color: #fca5a5;">1 &bull; Incomplete</span>
+                <span class="agenda-name" style="font-size: 0.85rem;">Hardcoded static text entered instead of reactive Power Fx formula.</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <aside class="trainer-notes">
+          <h4>Trainer Speaking Script & Pedagogical Cues:</h4>
+<p>Explain the final challenge rubric. Allow students 10 minutes of hands-on build time. Review successful student screens on the main projector.</p>
+        </aside>
+      </section>
+
+      <!-- Slide 24: Curriculum Connection Map: Day 16 -> Day 17 -->
+      <section class="slide" id="slide-24" data-slide-index="23" data-title="Curriculum Connection Map: Day 16 -> Day 17" data-segment="Section 8: Bridge & Homework">
+        <div class="slide-header">
+          <span class="section-tag">Section 8: Bridge & Homework</span>
+          <h2>Curriculum Connection Map: Day 16 -> Day 17</h2>
+          <p class="subtitle">Connecting today's dynamic properties to tomorrow's conditional decisions.</p>
+        </div>
+        <div class="slide-content grid-3">
+          <div class="card">
+            <span class="card-badge">Yesterday (Day 15)</span>
+            <h3 class="card-title">Screen Navigation Flows</h3>
+            <p style="font-size: 0.88rem; color: var(--text-muted); line-height: 1.6;">
+              We connected screens with <code>Navigate()</code> and <code>Back()</code>, creating multi-screen business flows from Home to Success screens.
+            </p>
+          </div>
+
+          <div class="card" style="border-color: rgba(59, 130, 246, 0.4); background: rgba(30, 41, 59, 0.85);">
+            <span class="card-badge" style="background: rgba(59, 130, 246, 0.2); color: #93c5fd;">TODAY (Day 16)</span>
+            <h3 class="card-title">Properties &amp; Formulas</h3>
+            <p style="font-size: 0.88rem; color: var(--text-muted); line-height: 1.6;">
+              We breathed dynamic intelligence into controls using the dot operator (<code>.</code>), concatenation (<code>&amp;</code>), and <code>Len()</code> for live feedback.
+            </p>
+          </div>
+
+          <div class="card" style="border-color: var(--color-cyan); box-shadow: 0 0 20px rgba(6, 182, 212, 0.2);">
+            <span class="card-badge" style="background: rgba(6, 182, 212, 0.2); color: #67e8f9;">TOMORROW (Day 17)</span>
+            <h3 class="card-title">Logic, Decisions &amp; IF()</h3>
+            <p style="font-size: 0.88rem; color: var(--text-muted); line-height: 1.6;">
+              We teach apps how to THINK! Conditions ask questions that evaluate to <strong>True or False</strong>, and <code>IF()</code> makes autonomous choices (e.g. show warning if priority is Critical)!
+            </p>
+          </div>
+        </div>
+        <aside class="trainer-notes">
+          <h4>Trainer Speaking Script & Pedagogical Cues:</h4>
+<p>Deliver the closing bridge forward. Congratulate students on mastering Power Fx reactivity today!</p>
+<p>Preview Day 17: "Today controls learned to talk; tomorrow they will learn how to THINK with IF conditions!"</p>
+        </aside>
+      </section>
+
+    </main>
+
+    <!-- Bottom HUD & Navigation Controls -->
+        <footer id="bottom-hud">
+      <div id="progress-bar-container">
+        <div id="progress-bar"></div>
+      </div>
+
+      <div class="hud-left">
+        <button class="hud-btn" id="btn-prev" onclick="prevSlide()" title="Previous Slide (Left Arrow)">&#8592; Prev</button>
+        <button class="hud-btn" id="btn-next" onclick="nextSlide()" title="Next Slide (Right Arrow / Space)">Next &#8594;</button>
+        <span id="slide-counter">Slide <span id="slide-current-num">1</span> / <span id="slide-total-count">24</span></span>
+      </div>
+
+      <div class="hud-right">
+        <button class="hud-btn" id="btn-lang" onclick="toggleLanguage()" title="Toggle Language (L)">
+          🌐 <span id="lang-label">KH</span>
+        </button>
+        <button class="hud-btn active" id="btn-laser" onclick="toggleLaser()" title="Presenter Laser Pointer (P)">
+          🔴 Laser
+        </button>
+        <button class="hud-btn" id="btn-notes" onclick="toggleNotes()" title="Trainer Notes Drawer (N)">
+          📝 Notes
+        </button>
+        <button class="hud-btn" id="btn-overview" onclick="toggleOverview()" title="Slide Overview Modal (O)">
+          🗂️ Overview
+        </button>
+        <button class="hud-btn" id="btn-timer" onclick="toggleTimer()" title="90-Min Countdown (T)">
+          ⏱️ <span id="timer-display">90:00</span>
+        </button>
+        <button class="hud-btn" id="btn-fullscreen" onclick="toggleFullscreen()" title="Fullscreen (F)">
+          ⛶
+        </button>
+        <a href="../index.html" class="hud-btn hub-btn" title="Return to Master Curriculum Hub (ត្រឡប់ទៅទំព័រដើម)" style="text-decoration: none; display: inline-flex; align-items: center; gap: 4px; color: #fcd34d; font-weight: 600;"><span>🏠</span><span>Hub</span></a>
+      </div>
+    </footer>
+
+    <!-- Slide-Out Trainer Notes Drawer (Hotkey: N) -->
+    <div id="notes-drawer">
+      <div class="notes-header">
+        <h3>Trainer Notes &bull; <span id="notes-slide-title">Day 16</span></h3>
+        <button id="notes-close-btn" class="notes-close-btn">&times;</button>
+      </div>
+      <div class="notes-body" id="notes-body-content">
+        <!-- Injected dynamically from active slide aside.trainer-notes -->
+      </div>
+    </div>
+
+    <!-- Slide Grid Overview Modal (Hotkey: O) -->
+    <div id="overview-modal">
+      <div class="overview-header">
+        <h2>Slide Grid Overview &bull; Day 16 (24 Slides)</h2>
+        <button id="overview-close-btn" class="hud-btn">Close (Esc / O)</button>
+      </div>
+      <div class="overview-grid" id="overview-grid-container">
+        <!-- Rendered dynamically by script.js -->
+      </div>
+    </div>
+
+  </div>
+
+  <script src="script.js"></script>
+<script>
+if (window.self !== window.top) {
+  document.documentElement.classList.add('in-iframe');
+  function hideHub() { document.querySelectorAll('.hub-btn, .back-to-hub-pill').forEach(e => e.style.display = 'none'); }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', hideHub);
+  } else {
+    hideHub();
+  }
+}
+</script>
+<style>
+.in-iframe .hub-btn, .in-iframe .back-to-hub-pill { display: none !important; }
+</style>
+</body>
+</html>

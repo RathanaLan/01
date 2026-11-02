@@ -1,0 +1,1332 @@
+<!DOCTYPE html>
+<html lang="en" translate="no" class="notranslate">
+<head>
+  <meta name="google" content="notranslate">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Day 24: Read & Update — Complete the Record Lifecycle | Microsoft Power Apps Foundation</title>
+  <link rel="stylesheet" href="../shared/design-system.css">
+  <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=Moul&family=Kantumruy+Pro:ital,wght@0,400..700;1,400..700&family=Battambang:wght@300;400;700;900&family=Koh+Santepheap:wght@300;400;700&family=Koulen&family=Siemreap&display=swap" rel="stylesheet">
+  <style>
+    /* Strict Speaker Notes Lock: Never render on slide stage under any circumstance */
+    aside.trainer-notes,
+    .trainer-notes,
+    .slide aside,
+    aside {
+      display: none !important;
+      visibility: hidden !important;
+      height: 0 !important;
+      width: 0 !important;
+      overflow: hidden !important;
+      opacity: 0 !important;
+      position: absolute !important;
+      pointer-events: none !important;
+      margin: 0 !important;
+      padding: 0 !important;
+      border: none !important;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Presentation Stage Wrapper (Lesson 14 Architecture) -->
+  <div id="presentation-stage">
+    
+    <!-- Ambient Aurora Orbs (60fps backdrop) -->
+    <div class="aurora-orb orb-1"></div>
+    <div class="aurora-orb orb-2"></div>
+    <div class="aurora-orb orb-3"></div>
+
+    <!-- Presenter Laser Pointer & Shockwave Click Ripple -->
+    <div id="presenter-laser"></div>
+    <div id="pointer-ripple" class="pointer-click-ripple"></div>
+
+    <!-- Viewport for 24 Slides -->
+    <main id="slides-viewport">
+
+      <!-- ====================================================================
+           SLIDE 1: HERO TITLE & SYSTEM MENTAL MODEL
+           ==================================================================== -->
+      <section class="slide active" id="slide-1" data-slide-index="0" data-title="Read & Update: Complete the Lifecycle" data-segment="Phase 7: CRUD Lifecycle">
+        <div class="slide-content hero-content">
+          <div class="hero-badge">
+            <span>Microsoft Power Apps Curriculum</span>
+            <span>&bull;</span>
+            <span>Day 24 of 27</span>
+          </div>
+          <h1 class="hero-title">Read &amp; Update: Complete the Record Lifecycle</h1>
+          <p class="hero-subtitle">
+            Connecting galleries, forms, and SharePoint lists into seamless Read and Update behaviors. Master the complete CRUD lifecycle: modifying business history without creating duplicates.
+          </p>
+
+          <div class="model-chain">
+            <span class="chain-item">Problem</span>
+            <span class="chain-arrow">&rarr;</span>
+            <span class="chain-item">Process</span>
+            <span class="chain-arrow">&rarr;</span>
+            <span class="chain-item">Data</span>
+            <span class="chain-arrow">&rarr;</span>
+            <span class="chain-item active">Gallery [READ]</span>
+            <span class="chain-arrow">&rarr;</span>
+            <span class="chain-item active">Selected Row</span>
+            <span class="chain-arrow">&rarr;</span>
+            <span class="chain-item active">EditForm()</span>
+            <span class="chain-arrow">&rarr;</span>
+            <span class="chain-item active">SubmitForm() [UPDATE]</span>
+            <span class="chain-arrow">&rarr;</span>
+            <span class="chain-item active">SharePoint Storage</span>
+            <span class="chain-arrow">&rarr;</span>
+            <span class="chain-item">Refreshed Result</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 2: OBJECTIVES & AGENDA TIMELINE
+           ==================================================================== -->
+      <section class="slide" id="slide-2" data-slide-index="1" data-title="90-Minute Agenda & Objectives" data-segment="Part 1: Orientation & Goals">
+        <header class="slide-header">
+          <div class="section-tag">Part 1 &bull; Objectives &amp; Agenda</div>
+          <h2>90-Minute Agenda &amp; Measurable Objectives</h2>
+          <p class="subtitle">Spiral learning architecture designed specifically for absolute beginners.</p>
+        </header>
+
+        <div class="slide-content grid-2-col">
+          <div class="card">
+            <h3 class="card-title">🎯 Today's 4 Core Competencies</h3>
+            <div class="objective-item">
+              <span class="obj-num">1</span>
+              <div>
+                <strong>Understand the Complete CRUD Lifecycle:</strong>
+                <p>Articulate how Create, Read, Update, and Delete form a complete enterprise data cycle.</p>
+              </div>
+            </div>
+            <div class="objective-item">
+              <span class="obj-num">2</span>
+              <div>
+                <strong>Execute the Read-to-Edit Transition:</strong>
+                <p>Wire an Edit icon inside a gallery row using <code>EditForm()</code> and <code>Navigate()</code>.</p>
+              </div>
+            </div>
+            <div class="objective-item">
+              <span class="obj-num">3</span>
+              <div>
+                <strong>Master Form.Item = galRequests.Selected:</strong>
+                <p>Ensure <code>SubmitForm()</code> updates the existing record instead of creating accidental duplicates.</p>
+              </div>
+            </div>
+            <div class="objective-item">
+              <span class="obj-num">4</span>
+              <div>
+                <strong>Implement the Discard Pattern via ResetForm():</strong>
+                <p>Provide a safe "Cancel" escape hatch that rolls back unsaved typing to the cloud truth.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <h3 class="card-title">⏱️ 90-Minute Timed Schedule</h3>
+            <div class="agenda-timeline">
+              <div class="agenda-row">
+                <span class="agenda-time">00 - 10 min</span>
+                <div><strong>Recall &amp; Mental Model:</strong> Days 21-23 recap + Smartphone Contact Analogy</div>
+              </div>
+              <div class="agenda-row">
+                <span class="agenda-time">10 - 25 min</span>
+                <div><strong>The Why Problem:</strong> The $18,000 duplicate ticket disaster at Apex Plastics</div>
+              </div>
+              <div class="agenda-row">
+                <span class="agenda-time">25 - 45 min</span>
+                <div><strong>Trainer Demonstration:</strong> Wiring <code>EditForm</code>, <code>Item</code>, and <code>ResetForm</code></div>
+              </div>
+              <div class="agenda-row">
+                <span class="agenda-time">45 - 65 min</span>
+                <div><strong>Guided Practice:</strong> Building the Work Order status update console</div>
+              </div>
+              <div class="agenda-row">
+                <span class="agenda-time">65 - 80 min</span>
+                <div><strong>Independent Task:</strong> Technician repair notes and status progression</div>
+              </div>
+              <div class="agenda-row">
+                <span class="agenda-time">80 - 90 min</span>
+                <div><strong>Checks &amp; Forward Bridge:</strong> 5 knowledge checks &amp; Day 25 Architecture preview</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 3: CONCEPT MAP RECAP
+           ==================================================================== -->
+      <section class="slide" id="slide-3" data-slide-index="2" data-title="Concept Map: Connecting the Curriculum" data-segment="Part 1: Orientation & Goals">
+        <header class="slide-header">
+          <div class="section-tag">Part 1 &bull; Curriculum Integration</div>
+          <h2>The Connected Curriculum: How We Reached Day 24</h2>
+          <p class="subtitle">Every concept learned previously is now assembled into a complete business workflow.</p>
+        </header>
+
+        <div class="slide-content">
+          <div class="card" style="border-left: 3px solid #06b6d4;">
+            <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.25rem;">
+              <div style="background: rgba(12, 19, 31, 0.7); padding: 1.15rem; border-radius: 8px; border: 1px solid var(--border-subtle);">
+                <span class="card-badge" style="background: rgba(59, 130, 246, 0.2); color: #93c5fd;">Day 21: Read Many</span>
+                <h4 style="color: #f8fafc; margin: 0.5rem 0;">The Gallery</h4>
+                <p style="color: var(--text-muted); font-size: 0.86rem; line-height: 1.5;">
+                  <code>galRequests.Items</code> displays 150 records; operator clicks a row to set <code>Selected</code>.
+                </p>
+              </div>
+
+              <div style="background: rgba(12, 19, 31, 0.7); padding: 1.15rem; border-radius: 8px; border: 1px solid var(--border-subtle);">
+                <span class="card-badge" style="background: rgba(245, 158, 11, 0.2); color: #fcd34d;">Day 22: Read One</span>
+                <h4 style="color: #f8fafc; margin: 0.5rem 0;">The Form &amp; Cards</h4>
+                <p style="color: var(--text-muted); font-size: 0.86rem; line-height: 1.5;">
+                  <code>frmRequest.Item</code> displays all columns for exactly one selected business record.
+                </p>
+              </div>
+
+              <div style="background: rgba(12, 19, 31, 0.7); padding: 1.15rem; border-radius: 8px; border: 1px solid var(--border-subtle);">
+                <span class="card-badge" style="background: rgba(16, 185, 129, 0.2); color: #86efac;">Day 23: Create</span>
+                <h4 style="color: #f8fafc; margin: 0.5rem 0;">NewForm &amp; Save</h4>
+                <p style="color: var(--text-muted); font-size: 0.86rem; line-height: 1.5;">
+                  <code>NewForm()</code> wiped the canvas; <code>SubmitForm()</code> created a brand-new row in SharePoint.
+                </p>
+              </div>
+
+              <div style="background: rgba(6, 182, 212, 0.15); padding: 1.15rem; border-radius: 8px; border: 1px solid rgba(6, 182, 212, 0.4);">
+                <span class="card-badge" style="background: rgba(6, 182, 212, 0.25); color: #67e8f9;">TODAY (Day 24)</span>
+                <h4 style="color: #67e8f9; margin: 0.5rem 0;">Read &amp; Update</h4>
+                <p style="color: #ecfeff; font-size: 0.86rem; line-height: 1.5;">
+                  <code>EditForm()</code> unlocks the existing row; <code>SubmitForm()</code> saves updates without duplicating!
+                </p>
+              </div>
+            </div>
+
+            <div style="margin-top: 1.5rem; padding: 1rem; background: rgba(6, 182, 212, 0.08); border-radius: 8px; text-align: center; border: 1px dashed rgba(6, 182, 212, 0.3);">
+              <span style="color: #67e8f9; font-weight: 700; font-size: 0.95rem;">
+                The Golden Architectural Loop: Create (Day 23) + Read (Day 21) + Update (Today) = 100% of Enterprise Work Order Management!
+              </span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 4: RETRIEVAL PRACTICE (FLIP CARDS)
+           ==================================================================== -->
+      <section class="slide" id="slide-4" data-slide-index="3" data-title="Prerequisite Retrieval Check" data-segment="Part 2: Recall & Foundations">
+        <header class="slide-header">
+          <div class="section-tag">Part 2 &bull; Retrieval Practice</div>
+          <h2>Prerequisite Retrieval: Activating Prior Knowledge</h2>
+          <p class="subtitle">Click each card to reveal the foundational architectural principle.</p>
+        </header>
+
+        <div class="slide-content grid-3-col">
+          <div class="flip-card" onclick="this.classList.toggle('flipped')">
+            <div class="flip-card-inner">
+              <div class="flip-card-front">
+                <span class="card-badge" style="background: rgba(59, 130, 246, 0.2); color: #93c5fd;">Question 1</span>
+                <h4 style="color: #f8fafc; margin-top: 1rem;">NewForm() vs EditForm()</h4>
+                <p style="color: var(--text-muted); font-size: 0.88rem; margin-top: 0.5rem;">
+                  What does <code>NewForm()</code> do to a form compared to what <code>EditForm()</code> does?
+                </p>
+                <div class="flip-hint">Tap to flip &rarr;</div>
+              </div>
+              <div class="flip-card-back">
+                <span class="card-badge" style="background: rgba(16, 185, 129, 0.2); color: #86efac;">Answer 1</span>
+                <p style="color: #ecfdf5; font-size: 0.92rem; margin-top: 0.8rem; line-height: 1.6;">
+                  <code>NewForm()</code> wipes all cards blank to create a <strong>new row</strong>.<br><br>
+                  <code>EditForm()</code> pre-populates cards with the <strong>existing row</strong> specified in <code>Item</code>!
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="flip-card" onclick="this.classList.toggle('flipped')">
+            <div class="flip-card-inner">
+              <div class="flip-card-front">
+                <span class="card-badge" style="background: rgba(245, 158, 11, 0.2); color: #fcd34d;">Question 2</span>
+                <h4 style="color: #f8fafc; margin-top: 1rem;">Form.Item Role</h4>
+                <p style="color: var(--text-muted); font-size: 0.88rem; margin-top: 0.5rem;">
+                  Why is <code>Item = galRequests.Selected</code> the most important property when editing?
+                </p>
+                <div class="flip-hint">Tap to flip &rarr;</div>
+              </div>
+              <div class="flip-card-back">
+                <span class="card-badge" style="background: rgba(16, 185, 129, 0.2); color: #86efac;">Answer 2</span>
+                <p style="color: #ecfdf5; font-size: 0.92rem; margin-top: 0.8rem; line-height: 1.6;">
+                  Because <code>Item</code> provides the exact SharePoint <strong>ID</strong>! Without it, Power Apps doesn't know <em>which</em> row to update.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="flip-card" onclick="this.classList.toggle('flipped')">
+            <div class="flip-card-inner">
+              <div class="flip-card-front">
+                <span class="card-badge" style="background: rgba(6, 182, 212, 0.2); color: #67e8f9;">Question 3</span>
+                <h4 style="color: #f8fafc; margin-top: 1rem;">SubmitForm() Versatility</h4>
+                <p style="color: var(--text-muted); font-size: 0.88rem; margin-top: 0.5rem;">
+                  Does <code>SubmitForm()</code> only create new rows, or can it also update existing ones?
+                </p>
+                <div class="flip-hint">Tap to flip &rarr;</div>
+              </div>
+              <div class="flip-card-back">
+                <span class="card-badge" style="background: rgba(16, 185, 129, 0.2); color: #86efac;">Answer 3</span>
+                <p style="color: #ecfdf5; font-size: 0.92rem; margin-top: 0.8rem; line-height: 1.6;">
+                  <strong>It does both!</strong> If <code>Mode = New</code>, it creates. If <code>Mode = Edit</code>, it updates the existing row matching <code>Item</code>!
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 5: THE WHY CRISIS
+           ==================================================================== -->
+      <section class="slide" id="slide-5" data-slide-index="4" data-title="The Workplace Crisis: $18,000 Wasted Overtime" data-segment="Part 3: The 'Why' Problem">
+        <header class="slide-header">
+          <div class="section-tag">Part 3 &bull; Why This Exists</div>
+          <h2>The Workplace Crisis: The $18,000 Duplicate Disaster</h2>
+          <p class="subtitle">Why building apps that only create records causes operational paralysis.</p>
+        </header>
+
+        <div class="slide-content">
+          <div class="card" style="border-left: 3px solid #ef4444;">
+            <div class="crisis-banner">
+              <span class="crisis-icon">&iexcl;</span>
+              <div>
+                <strong style="color: #fca5a5; font-size: 1.1rem;">Emergency Work Order Crisis: Extruder Motor Bearing Overhaul</strong>
+                <p style="color: #fecaca; font-size: 0.88rem; margin: 0.25rem 0 0 0;">Apex Plastics Injection Facility &bull; Shift 1 (8:00 AM)</p>
+              </div>
+            </div>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-top: 1.25rem;">
+              <div>
+                <h4 style="color: #f87171; margin-bottom: 0.5rem;">What Happened (The Amateur Mistake):</h4>
+                <p style="color: var(--text-muted); font-size: 0.88rem; line-height: 1.6;">
+                  1. Yesterday Somnang logged Ticket #1043: <em>"Extruder Motor High Vibration"</em>.<br>
+                  2. At 8:00 AM, Mechanic Bopha replaced the bearings. Motor runs at 100%.<br>
+                  3. Bopha opened the tablet to close the ticket. The app only had a <strong>"+ New Ticket"</strong> button!<br>
+                  4. Bopha clicked "+ New Ticket" and typed <em>"Motor bearings replaced - ALL FIXED"</em>.<br>
+                  5. Now SharePoint had Ticket #1043 (still "New / High") AND Ticket #1044 ("All Fixed").
+                </p>
+              </div>
+
+              <div>
+                <h4 style="color: #fca5a5; margin-bottom: 0.5rem;">The Catastrophic DX Result:</h4>
+                <ul style="color: var(--text-muted); font-size: 0.88rem; line-height: 1.6; padding-left: 1.2rem;">
+                  <li><strong>Ticket #1043 Remained Active:</strong> Supervisor saw the critical alarm still red.</li>
+                  <li><strong>Line 4 Halted for 4 Hours:</strong> Supervisor shut down the line unnecessarily.</li>
+                  <li><strong>$18,000 Wasted Overtime:</strong> Called emergency contractors to tear down a motor that was already repaired!</li>
+                  <li><strong>The Solution:</strong> You MUST provide an <strong>Update Path</strong> (<code>EditForm</code> + <code>Item = galRequests.Selected</code>)!</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 6: PLAIN-LANGUAGE CONCEPT
+           ==================================================================== -->
+      <section class="slide" id="slide-6" data-slide-index="5" data-title="Plain-Language Concept: The Passport Address Stamp" data-segment="Part 4: Concept Before Syntax">
+        <header class="slide-header">
+          <div class="section-tag">Part 4 &bull; Plain Language First</div>
+          <h2>Concept Before Syntax: The Passport Address Stamp</h2>
+          <p class="subtitle">Understanding why updating history preserves identity while changing details.</p>
+        </header>
+
+        <div class="slide-content grid-2-col">
+          <div class="card" style="align-items: center; text-align: center;">
+            <div style="width: 64px; height: 64px; border-radius: 50%; background: rgba(239, 68, 68, 0.15); display: flex; align-items: center; justify-content: center; font-size: 1.8rem; color: #f87171; margin-bottom: 1rem;">
+              🚫
+            </div>
+            <h3 style="color: #f8fafc; margin-bottom: 0.5rem;">The Wrong Mental Model: The Imposter</h3>
+            <p style="color: var(--text-muted); font-size: 0.9rem; line-height: 1.6; max-width: 400px;">
+              When you move to a new apartment, you don't throw away your passport and apply for citizenship as a brand-new baby. That creates two conflicting identities!
+            </p>
+            <div style="margin-top: 1rem; padding: 0.6rem 1rem; background: rgba(239, 68, 68, 0.1); border-radius: 6px; border: 1px solid rgba(239, 68, 68, 0.3); font-family: var(--font-code); font-size: 0.88rem; color: #fca5a5;">
+              Calling NewForm() to update = DUPLICATE ROW BUG
+            </div>
+          </div>
+
+          <div class="card" style="align-items: center; text-align: center;">
+            <div style="width: 64px; height: 64px; border-radius: 50%; background: rgba(6, 182, 212, 0.15); display: flex; align-items: center; justify-content: center; font-size: 1.8rem; color: #67e8f9; margin-bottom: 1rem;">
+              🛂
+            </div>
+            <h3 style="color: #f8fafc; margin-bottom: 0.5rem;">The Enterprise Pattern: The Official Stamp</h3>
+            <p style="color: var(--text-muted); font-size: 0.9rem; line-height: 1.6; max-width: 400px;">
+              You hand your existing passport to the clerk. Your passport number stays identical. The clerk stamps your new address onto the existing page.
+            </p>
+            <div style="margin-top: 1rem; padding: 0.6rem 1rem; background: rgba(6, 182, 212, 0.1); border-radius: 6px; border: 1px solid rgba(6, 182, 212, 0.3); font-family: var(--font-code); font-size: 0.88rem; color: #67e8f9;">
+              EditForm() + Item = galRequests.Selected = UPDATE EXISTING
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 7: EVERYDAY ANALOGY: SMARTPHONE CONTACT
+           ==================================================================== -->
+      <section class="slide" id="slide-7" data-slide-index="6" data-title="Everyday Analogy: Editing a Phone Contact" data-segment="Part 4: Concept Before Syntax">
+        <header class="slide-header">
+          <div class="section-tag">Part 4 &bull; Mental Model</div>
+          <h2>Everyday Analogy: Editing a Smartphone Contact</h2>
+          <p class="subtitle">How your smartphone manages the exact Read-to-Edit lifecycle.</p>
+        </header>
+
+        <div class="slide-content">
+          <div class="card">
+            <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem;">
+              <div style="background: rgba(12, 19, 31, 0.6); padding: 1rem; border-radius: 8px; text-align: center; border: 1px solid var(--border-subtle);">
+                <div style="font-size: 1.6rem; margin-bottom: 0.5rem;">📱</div>
+                <strong style="color: #93c5fd; font-size: 0.9rem; display: block;">1. Browse List (Read Many)</strong>
+                <p style="color: var(--text-muted); font-size: 0.78rem; margin-top: 0.4rem; line-height: 1.4;">
+                  You scroll through 200 contacts and tap "Mom".<br>
+                  <code>galRequests.Selected</code>
+                </p>
+              </div>
+
+              <div style="background: rgba(12, 19, 31, 0.6); padding: 1rem; border-radius: 8px; text-align: center; border: 1px solid var(--border-subtle);">
+                <div style="font-size: 1.6rem; margin-bottom: 0.5rem;">👁️</div>
+                <strong style="color: #fcd34d; font-size: 0.9rem; display: block;">2. View Card (Read One)</strong>
+                <p style="color: var(--text-muted); font-size: 0.78rem; margin-top: 0.4rem; line-height: 1.4;">
+                  Static card shows her phone &amp; photo. No accidental edits.<br>
+                  <code>ViewForm()</code>
+                </p>
+              </div>
+
+              <div style="background: rgba(12, 19, 31, 0.6); padding: 1rem; border-radius: 8px; text-align: center; border: 1px solid var(--border-subtle);">
+                <div style="font-size: 1.6rem; margin-bottom: 0.5rem;">✏️</div>
+                <strong style="color: #67e8f9; font-size: 0.9rem; display: block;">3. Tap Edit (Unlock)</strong>
+                <p style="color: var(--text-muted); font-size: 0.78rem; margin-top: 0.4rem; line-height: 1.4;">
+                  Inputs become editable. Her current digits stay filled in!<br>
+                  <code>EditForm()</code>
+                </p>
+              </div>
+
+              <div style="background: rgba(12, 19, 31, 0.6); padding: 1rem; border-radius: 8px; text-align: center; border: 1px solid var(--border-subtle);">
+                <div style="font-size: 1.6rem; margin-bottom: 0.5rem;">💾</div>
+                <strong style="color: #86efac; font-size: 0.9rem; display: block;">4. Tap Done (Update)</strong>
+                <p style="color: var(--text-muted); font-size: 0.78rem; margin-top: 0.4rem; line-height: 1.4;">
+                  Phone updates her existing card. Zero duplicates created!<br>
+                  <code>SubmitForm()</code>
+                </p>
+              </div>
+            </div>
+
+            <div style="margin-top: 1.5rem; padding: 0.85rem; background: rgba(6, 182, 212, 0.08); border-radius: 6px; border-left: 3px solid #06b6d4;">
+              <p style="color: var(--text-main); font-size: 0.88rem; margin: 0;">
+                <strong>What if you made a typo?</strong> You tap "Cancel". The phone discards your typing and reloads her saved number. In Power Apps, that command is <code>ResetForm(frmRequest)</code>!
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 8: THE COMPLETE CRUD LIFECYCLE
+           ==================================================================== -->
+      <section class="slide" id="slide-8" data-slide-index="7" data-title="The Complete CRUD Lifecycle Architecture" data-segment="Part 5: Architecture & Pipeline">
+        <header class="slide-header">
+          <div class="section-tag">Part 5 &bull; Architecture Deep Dive</div>
+          <h2>The Complete CRUD Lifecycle Architecture</h2>
+          <p class="subtitle">The four universal data operations powering all enterprise software engineering.</p>
+        </header>
+
+        <div class="slide-content">
+          <div class="crud-cycle-grid">
+            <div class="crud-node" style="border-top: 3px solid #10b981;">
+              <div class="crud-letter crud-c">C</div>
+              <h4 style="color: #6ee7b7; margin-bottom: 0.35rem;">CREATE (Day 23)</h4>
+              <p style="color: var(--text-muted); font-size: 0.82rem; line-height: 1.45;">
+                <code>NewForm()</code> wipes canvas. User inputs data. <code>SubmitForm()</code> creates a new row with a new ID in SharePoint.
+              </p>
+              <span class="card-badge" style="background: rgba(16, 185, 129, 0.2); color: #86efac; margin-top: 0.75rem;">HTTP POST</span>
+            </div>
+
+            <div class="crud-node" style="border-top: 3px solid #3b82f6;">
+              <div class="crud-letter crud-r">R</div>
+              <h4 style="color: #93c5fd; margin-bottom: 0.35rem;">READ (Day 21)</h4>
+              <p style="color: var(--text-muted); font-size: 0.82rem; line-height: 1.45;">
+                <code>Gallery.Items</code> streams the table. <code>ViewForm()</code> inspects all columns of one record in read-only security.
+              </p>
+              <span class="card-badge" style="background: rgba(59, 130, 246, 0.2); color: #93c5fd; margin-top: 0.75rem;">HTTP GET</span>
+            </div>
+
+            <div class="crud-node" style="border-top: 3px solid #06b6d4;">
+              <div class="crud-letter crud-u">U</div>
+              <h4 style="color: #67e8f9; margin-bottom: 0.35rem;">UPDATE (TODAY)</h4>
+              <p style="color: var(--text-muted); font-size: 0.82rem; line-height: 1.45;">
+                <code>EditForm()</code> loads <code>Item</code>. User changes status. <code>SubmitForm()</code> updates the same row without duplicates!
+              </p>
+              <span class="card-badge" style="background: rgba(6, 182, 212, 0.2); color: #67e8f9; margin-top: 0.75rem;">HTTP PATCH</span>
+            </div>
+
+            <div class="crud-node" style="border-top: 3px solid #ef4444;">
+              <div class="crud-letter crud-d">D</div>
+              <h4 style="color: #fca5a5; margin-bottom: 0.35rem;">DELETE (Archive)</h4>
+              <p style="color: var(--text-muted); font-size: 0.82rem; line-height: 1.45;">
+                <code>Remove()</code> or soft-delete status (e.g. Status = "Archived") permanently closes the lifecycle loop.
+              </p>
+              <span class="card-badge" style="background: rgba(239, 68, 68, 0.2); color: #fca5a5; margin-top: 0.75rem;">HTTP DELETE</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 9: COMMAND 1: EDITFORM()
+           ==================================================================== -->
+      <section class="slide" id="slide-9" data-slide-index="8" data-title="Command 1: EditForm() — Unlocking Data" data-segment="Part 6: Power Fx Syntax">
+        <header class="slide-header">
+          <div class="section-tag">Part 6 &bull; Power Fx Command</div>
+          <h2>Command 1: <code>EditForm()</code> — Unlocking Data for Modification</h2>
+          <p class="subtitle">How to transition a form into its interactive edit state.</p>
+        </header>
+
+        <div class="slide-content grid-2-col">
+          <div class="card">
+            <h3 class="card-title">⚙️ Function Mechanics</h3>
+            <div style="padding: 1rem; background: #0c1524; border-radius: 6px; border: 1px solid var(--border-subtle); margin: 0.75rem 0;">
+              <code style="color: #67e8f9; font-size: 1.1rem; font-weight: bold;">EditForm( <span style="color: #fcd34d;">frmRequest</span> )</code>
+            </div>
+            <ul style="color: var(--text-muted); font-size: 0.88rem; line-height: 1.6; padding-left: 1.2rem;">
+              <li><strong>Sets Mode:</strong> Switches the form property <code>Mode</code> to <code>FormMode.Edit</code>.</li>
+              <li><strong>Preserves Values:</strong> Looks at <code>Item</code> (e.g. <code>galRequests.Selected</code>) and loads all existing values into the DataCards.</li>
+              <li><strong>Unlocks Controls:</strong> Converts read-only labels into editable text inputs, date pickers, and choice dropdowns.</li>
+            </ul>
+          </div>
+
+          <div class="card">
+            <h3 class="card-title">💡 Gallery Icon Wiring Pattern</h3>
+            <p style="color: var(--text-muted); font-size: 0.88rem; line-height: 1.6;">
+              Inside your gallery template row, insert an Edit pencil icon and write:
+            </p>
+            <div style="padding: 1rem; background: #0c1524; border-radius: 6px; border: 1px solid var(--border-subtle); margin: 0.75rem 0; font-family: var(--font-code); font-size: 0.92rem; color: #a7f3d0;">
+              // Gallery Item: icnEdit.OnSelect<br>
+              <span style="color: #67e8f9;">EditForm</span>(frmRequest);<br>
+              <span style="color: #c084fc;">Navigate</span>(scrEdit, <span style="color: #fcd34d;">ScreenTransition.Fade</span>)
+            </div>
+            <div style="padding: 0.65rem 0.85rem; background: rgba(6, 182, 212, 0.1); border-radius: 6px; border-left: 3px solid #06b6d4;">
+              <span style="color: #67e8f9; font-size: 0.82rem;">
+                Key Principle: Because the icon is inside the gallery row, clicking it automatically sets <code>galRequests.Selected</code> to that exact record!
+              </span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 10: INTERACTIVE SIMULATOR 1
+           ==================================================================== -->
+      <section class="slide" id="slide-10" data-slide-index="9" data-title="Interactive Lab: Master-Detail Read-to-Edit Controller" data-segment="Part 6: Interactive Lab">
+        <header class="slide-header">
+          <div class="section-tag">Part 6 &bull; Interactive Studio</div>
+          <h2>Interactive Lab: Master-Detail Read-to-Edit Controller</h2>
+          <p class="subtitle">Select a ticket in the gallery, then toggle between View and Edit modes.</p>
+        </header>
+
+        <div class="slide-content">
+          <div class="interactive-lab-container">
+            <div class="lab-controls">
+              <button class="lab-btn active" id="btn-ticket-1043" onclick="selectSimTicket(1043)">Ticket #1043: Extruder Motor</button>
+              <button class="lab-btn" id="btn-ticket-1042" onclick="selectSimTicket(1042)">Ticket #1042: Conveyor Squeak</button>
+              <button class="lab-btn" id="btn-ticket-1041" onclick="selectSimTicket(1041)">Ticket #1041: Sensor Calibration</button>
+              <div style="flex: 1;"></div>
+              <button class="lab-btn" id="btn-sim-view" onclick="setSimFormState('View')">ViewForm()</button>
+              <button class="lab-btn active" id="btn-sim-edit" onclick="setSimFormState('Edit')">EditForm()</button>
+            </div>
+
+            <div class="grid-2-col" style="gap: 1.5rem; margin-top: 1rem;">
+              <div class="card" style="background: rgba(12, 19, 31, 0.85);">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.85rem;">
+                  <strong style="color: #f8fafc;" id="sim-form-title">Edit Work Order #1043</strong>
+                  <span class="card-badge" id="sim-badge" style="background: rgba(6, 182, 212, 0.2); color: #67e8f9;">Mode: FormMode.Edit</span>
+                </div>
+
+                <div style="display: flex; flex-direction: column; gap: 0.75rem;">
+                  <div>
+                    <label style="font-size: 0.8rem; color: var(--text-muted); display: block;">Title</label>
+                    <input type="text" id="sim-edit-title" class="sim-input" value="Extruder Motor High Vibration">
+                  </div>
+                  <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem;">
+                    <div>
+                      <label style="font-size: 0.8rem; color: var(--text-muted); display: block;">Status</label>
+                      <select id="sim-edit-status" class="sim-input">
+                        <option value="New">New</option>
+                        <option value="In Progress" selected>In Progress</option>
+                        <option value="Completed">Completed</option>
+                      </select>
+                    </div>
+                    <div>
+                      <label style="font-size: 0.8rem; color: var(--text-muted); display: block;">Priority</label>
+                      <input type="text" id="sim-edit-priority" class="sim-input" value="High">
+                    </div>
+                  </div>
+                  <div>
+                    <label style="font-size: 0.8rem; color: var(--text-muted); display: block;">Technician Repair Notes</label>
+                    <input type="text" id="sim-edit-notes" class="sim-input" value="Bearings disassembled; rotor aligned.">
+                  </div>
+                </div>
+              </div>
+
+              <div class="card" style="background: rgba(12, 19, 31, 0.85); border-left: 3px solid #06b6d4;">
+                <h4 style="color: #67e8f9; margin-bottom: 0.5rem;" id="sim-state-title">Live Update State Inspector</h4>
+                <p style="color: var(--text-muted); font-size: 0.86rem; line-height: 1.6;" id="sim-state-desc">
+                  Because <code>Item = galRequests.Selected</code> points to Ticket #1043, submitting this form will issue an <strong>HTTP PATCH</strong> targeting Row ID 1043. The existing row will be updated with your new notes and status without creating any duplicate tickets!
+                </p>
+                <div style="margin-top: 1rem; padding: 0.75rem; background: rgba(6, 182, 212, 0.1); border-radius: 6px; font-family: var(--font-code); font-size: 0.84rem; color: #a7f3d0;" id="sim-state-code">
+                  Target: SharePoint.UpdateRecord(ID = 1043)<br>
+                  Action: Patch(MaintenanceRequests, {ID: 1043, Status: "In Progress"})
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 11: THE CORE PLUMBING: FORM.ITEM
+           ==================================================================== -->
+      <section class="slide" id="slide-11" data-slide-index="10" data-title="Core Plumbing: Form.Item = galRequests.Selected" data-segment="Part 7: Core Architecture">
+        <header class="slide-header">
+          <div class="section-tag">Part 7 &bull; Architectural Plumbing</div>
+          <h2>The Core Plumbing: <code>Form.Item = galRequests.Selected</code></h2>
+          <p class="subtitle">How Power Apps tells the form which exact business record to read and modify.</p>
+        </header>
+
+        <div class="slide-content grid-2-col">
+          <div class="card">
+            <h3 class="card-title">🔍 The Missing Link</h3>
+            <p style="color: var(--text-muted); font-size: 0.88rem; line-height: 1.6;">
+              When you put a form into Edit mode, Power Apps asks: <em>"Which record do you want to edit?"</em>
+            </p>
+            <div style="padding: 0.85rem; background: #0c1524; border-radius: 6px; border: 1px solid var(--border-subtle); margin: 0.75rem 0;">
+              <code style="color: #fcd34d; font-size: 1.05rem;">frmRequest.Item = <span style="color: #67e8f9;">galRequests.Selected</span></code>
+            </div>
+            <ul style="color: var(--text-muted); font-size: 0.86rem; line-height: 1.6; padding-left: 1.2rem;">
+              <li><code>galRequests</code> is the name of your gallery control.</li>
+              <li><code>.Selected</code> represents the active record clicked by the user.</li>
+              <li>It includes the primary key: <strong><code>Selected.ID</code></strong>.</li>
+            </ul>
+          </div>
+
+          <div class="card">
+            <h3 class="card-title">⚠️ What Happens If Item is Empty?</h3>
+            <div style="padding: 0.85rem; background: rgba(239, 68, 68, 0.1); border-radius: 6px; border-left: 3px solid #ef4444; margin-bottom: 0.75rem;">
+              <strong style="color: #fca5a5;">The Dreaded "No item to display"</strong>
+              <p style="color: #fecaca; font-size: 0.84rem; margin-top: 0.35rem;">
+                If a form is in Edit mode but <code>Item</code> is blank, the form locks all fields and says "No item to display".
+              </p>
+            </div>
+            <p style="color: var(--text-muted); font-size: 0.86rem; line-height: 1.6;">
+              This is the #1 panic point for beginners. If you see this, do not panic! Simply select the form and type <code>galRequests.Selected</code> into the Item formula bar.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 12: HOW SUBMITFORM DECIDES
+           ==================================================================== -->
+      <section class="slide" id="slide-12" data-slide-index="11" data-title="How SubmitForm Decides: Insert vs Update" data-segment="Part 8: Storage Dispatch">
+        <header class="slide-header">
+          <div class="section-tag">Part 8 &bull; Engine Decision Logic</div>
+          <h2>How <code>SubmitForm()</code> Decides: Insert vs Update</h2>
+          <p class="subtitle">The internal intelligence of Power Apps submission engine.</p>
+        </header>
+
+        <div class="slide-content grid-2-col">
+          <div class="card" style="border-left: 3px solid #10b981;">
+            <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem;">
+              <span class="card-badge" style="background: rgba(16, 185, 129, 0.2); color: #86efac;">Case 1: FormMode.New</span>
+            </div>
+            <h4 style="color: #6ee7b7; margin-bottom: 0.5rem;">Creates Brand-New Row</h4>
+            <ul style="color: var(--text-muted); font-size: 0.86rem; line-height: 1.6; padding-left: 1.2rem;">
+              <li><code>Item</code> is ignored (treated as Blank).</li>
+              <li>Issues an <strong>HTTP POST</strong> to SharePoint List.</li>
+              <li>SharePoint generates a brand-new unique ID (e.g. #1045).</li>
+              <li>Used for: <em>Logging a brand-new breakdown</em>.</li>
+            </ul>
+          </div>
+
+          <div class="card" style="border-left: 3px solid #06b6d4;">
+            <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem;">
+              <span class="card-badge" style="background: rgba(6, 182, 212, 0.2); color: #67e8f9;">Case 2: FormMode.Edit</span>
+            </div>
+            <h4 style="color: #67e8f9; margin-bottom: 0.5rem;">Updates Existing Row</h4>
+            <ul style="color: var(--text-muted); font-size: 0.86rem; line-height: 1.6; padding-left: 1.2rem;">
+              <li>Reads <code>Item.ID</code> (e.g. ID #1043).</li>
+              <li>Issues an <strong>HTTP PATCH</strong> targeting that exact row.</li>
+              <li>Preserves original ID, Created date, and CreatedBy author!</li>
+              <li>Used for: <em>Closing tickets, adding notes, updating status</em>.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 13: INTERACTIVE SIMULATOR 2
+           ==================================================================== -->
+      <section class="slide" id="slide-13" data-slide-index="12" data-title="Interactive Lab: CRUD State Engine Simulator" data-segment="Part 8: Interactive Lab">
+        <header class="slide-header">
+          <div class="section-tag">Part 8 &bull; Engine Simulation</div>
+          <h2>Interactive Lab: CRUD State Engine Simulator</h2>
+          <p class="subtitle">Click each Power Fx command to inspect how the network payload changes.</p>
+        </header>
+
+        <div class="slide-content">
+          <div class="interactive-lab-container">
+            <div class="lab-controls">
+              <button class="lab-btn" id="btn-engine-new" onclick="runEngineCmd('NewForm')">NewForm(frmRequest)</button>
+              <button class="lab-btn active" id="btn-engine-edit" onclick="runEngineCmd('EditForm')">EditForm(frmRequest)</button>
+              <button class="lab-btn" id="btn-engine-submit" onclick="runEngineCmd('SubmitForm')">SubmitForm(frmRequest)</button>
+              <button class="lab-btn" id="btn-engine-reset" onclick="runEngineCmd('ResetForm')">ResetForm(frmRequest)</button>
+            </div>
+
+            <div class="card" style="margin-top: 1rem; min-height: 200px; display: flex; flex-direction: column; justify-content: space-between;">
+              <div>
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+                  <h4 style="color: #67e8f9; font-size: 1.05rem;" id="engine-title">Active Command: EditForm(frmRequest)</h4>
+                  <span class="card-badge" id="engine-badge" style="background: rgba(6, 182, 212, 0.2); color: #67e8f9;">HTTP Method: N/A (State Switch)</span>
+                </div>
+                <p style="color: var(--text-muted); font-size: 0.9rem; line-height: 1.6;" id="engine-desc">
+                  The form switches to FormMode.Edit. It reads galRequests.Selected (ID #1043), loads the existing Title, Priority, and Status into memory, and enables the inputs for editing.
+                </p>
+              </div>
+
+              <div style="margin-top: 1rem; padding-top: 0.75rem; border-top: 1px solid var(--border-subtle); display: flex; justify-content: space-between; align-items: center;">
+                <span style="font-family: var(--font-code); font-size: 0.84rem; color: #a7f3d0;" id="engine-code">
+                  Form State: FormMode.Edit &bull; Target ID: 1043 &bull; Buffer: Populated
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 14: THE SAFETY ESCAPE HATCH: RESETFORM()
+           ==================================================================== -->
+      <section class="slide" id="slide-14" data-slide-index="13" data-title="The Safety Escape Hatch: ResetForm()" data-segment="Part 9: Error Prevention">
+        <header class="slide-header">
+          <div class="section-tag">Part 9 &bull; Safety &amp; Resilience</div>
+          <h2>The Safety Escape Hatch: <code>ResetForm()</code> vs Cancelling</h2>
+          <p class="subtitle">Why enterprise applications require an explicit discard buffer command.</p>
+        </header>
+
+        <div class="slide-content grid-2-col">
+          <div class="card" style="border-left: 3px solid #ef4444;">
+            <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem;">
+              <span style="color: #ef4444; font-size: 1.2rem;">❌</span>
+              <strong style="color: #f87171; font-size: 1rem;">Fragile Pattern: Navigate Back Alone</strong>
+            </div>
+            <div style="padding: 0.85rem; background: #0c1524; border-radius: 6px; font-family: var(--font-code); font-size: 0.88rem; color: #fca5a5; margin: 0.5rem 0;">
+              // Cancel Button<br>
+              Back()
+            </div>
+            <ul style="color: var(--text-muted); font-size: 0.84rem; line-height: 1.6; padding-left: 1.2rem;">
+              <li>Leaves half-typed text trapped in the form memory cache!</li>
+              <li>If the operator clicks a different ticket later, the old typed text might still be lingering in the boxes!</li>
+            </ul>
+          </div>
+
+          <div class="card" style="border-left: 3px solid #10b981;">
+            <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem;">
+              <span style="color: #10b981; font-size: 1.2rem;">✅</span>
+              <strong style="color: #34d399; font-size: 1rem;">Enterprise Pattern: ResetForm + Back</strong>
+            </div>
+            <div style="padding: 0.85rem; background: #0c1524; border-radius: 6px; font-family: var(--font-code); font-size: 0.88rem; color: #86efac; margin: 0.5rem 0;">
+              // Cancel Button: btnCancel.OnSelect<br>
+              ResetForm(frmRequest);<br>
+              Back()
+            </div>
+            <ul style="color: var(--text-muted); font-size: 0.84rem; line-height: 1.6; padding-left: 1.2rem;">
+              <li>Wipes uncommitted typing from local memory buffer.</li>
+              <li>Reloads the pristine saved truth directly from SharePoint.</li>
+              <li>Navigates back with zero memory leakage!</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 15: TWO-WAY SYNCHRONIZATION
+           ==================================================================== -->
+      <section class="slide" id="slide-15" data-slide-index="14" data-title="Two-Way Synchronization: Gallery Reflection" data-segment="Part 9: Data Integrity">
+        <header class="slide-header">
+          <div class="section-tag">Part 9 &bull; Data Reactivity</div>
+          <h2>Two-Way Synchronization: How Updates Reflect in the Gallery</h2>
+          <p class="subtitle">Understanding Power Apps declarative reactive data binding.</p>
+        </header>
+
+        <div class="slide-content grid-2-col">
+          <div class="card">
+            <h3 class="card-title">⚡ Instant Reactive Binding</h3>
+            <p style="color: var(--text-muted); font-size: 0.88rem; line-height: 1.6;">
+              When <code>SubmitForm()</code> updates SharePoint:
+            </p>
+            <ul style="color: var(--text-muted); font-size: 0.86rem; line-height: 1.6; padding-left: 1.2rem; margin-top: 0.5rem;">
+              <li>SharePoint commits the change and updates <code>Modified</code> timestamp.</li>
+              <li>The SharePoint connector notifies Power Apps Studio of the updated row.</li>
+              <li>Because <code>galRequests.Items = MaintenanceRequests</code>, the gallery <strong>automatically re-renders</strong>!</li>
+              <li>No manual <code>Refresh(SharePoint)</code> query is needed!</li>
+            </ul>
+          </div>
+
+          <div class="card">
+            <h3 class="card-title">🏷️ Status Badge Color Formula</h3>
+            <p style="color: var(--text-muted); font-size: 0.88rem; line-height: 1.6;">
+              Reconnecting Day 17 logic: your gallery status pill changes color automatically when the status changes:
+            </p>
+            <div style="padding: 0.85rem; background: #0c1524; border-radius: 6px; font-family: var(--font-code); font-size: 0.84rem; color: #fcd34d; margin: 0.5rem 0;">
+              Switch(<br>
+              &nbsp;&nbsp;ThisItem.Status.Value,<br>
+              &nbsp;&nbsp;"Completed", Color.Green,<br>
+              &nbsp;&nbsp;"In Progress", Color.Cyan,<br>
+              &nbsp;&nbsp;Color.Orange<br>
+              )
+            </div>
+            <span style="font-size: 0.8rem; color: var(--text-muted);">
+              Result: Changing status to "Completed" turns the gallery badge green instantly!
+            </span>
+          </div>
+        </div>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 16: TRAINER LIVE DEMO
+           ==================================================================== -->
+      <section class="slide" id="slide-16" data-slide-index="15" data-title="Trainer Live Demonstration: Building Edit Screen" data-segment="Part 10: Live Demonstration">
+        <header class="slide-header">
+          <div class="section-tag">Part 10 &bull; Trainer Demonstration</div>
+          <h2>Trainer Live Demo: Assembling the Edit Screen</h2>
+          <p class="subtitle">Watch the complete wiring of the Edit pencil icon, Item binding, and Save action.</p>
+        </header>
+
+        <div class="slide-content">
+          <div class="card">
+            <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem;">
+              <div style="background: rgba(12, 19, 31, 0.6); padding: 1rem; border-radius: 6px; border-top: 3px solid #3b82f6;">
+                <span class="card-badge" style="background: rgba(59, 130, 246, 0.2); color: #93c5fd;">Step 1</span>
+                <h4 style="color: #f8fafc; margin: 0.5rem 0; font-size: 0.95rem;">Add Edit Pencil</h4>
+                <p style="color: var(--text-muted); font-size: 0.82rem; line-height: 1.5;">
+                  Inside <code>galRequests</code> template row, insert Edit icon. Set <code>OnSelect = EditForm(frmRequest); Navigate(scrEdit)</code>.
+                </p>
+              </div>
+
+              <div style="background: rgba(12, 19, 31, 0.6); padding: 1rem; border-radius: 6px; border-top: 3px solid #06b6d4;">
+                <span class="card-badge" style="background: rgba(6, 182, 212, 0.2); color: #67e8f9;">Step 2</span>
+                <h4 style="color: #f8fafc; margin: 0.5rem 0; font-size: 0.95rem;">Bind Form.Item</h4>
+                <p style="color: var(--text-muted); font-size: 0.82rem; line-height: 1.5;">
+                  On <code>scrEdit</code>, select <code>frmRequest</code>. Set <code>Item = galRequests.Selected</code>. Watch cards fill with data!
+                </p>
+              </div>
+
+              <div style="background: rgba(12, 19, 31, 0.6); padding: 1rem; border-radius: 6px; border-top: 3px solid #10b981;">
+                <span class="card-badge" style="background: rgba(16, 185, 129, 0.2); color: #86efac;">Step 3</span>
+                <h4 style="color: #f8fafc; margin: 0.5rem 0; font-size: 0.95rem;">Wire Submit Button</h4>
+                <p style="color: var(--text-muted); font-size: 0.82rem; line-height: 1.5;">
+                  Set Save button <code>OnSelect = SubmitForm(frmRequest)</code>. Form mode handles the HTTP PATCH automatically.
+                </p>
+              </div>
+
+              <div style="background: rgba(12, 19, 31, 0.6); padding: 1rem; border-radius: 6px; border-top: 3px solid #f59e0b;">
+                <span class="card-badge" style="background: rgba(245, 158, 11, 0.2); color: #fcd34d;">Step 4</span>
+                <h4 style="color: #f8fafc; margin: 0.5rem 0; font-size: 0.95rem;">Wire Cancel Button</h4>
+                <p style="color: var(--text-muted); font-size: 0.82rem; line-height: 1.5;">
+                  Add Cancel button. Set <code>OnSelect = ResetForm(frmRequest); Back()</code> to cleanly discard changes.
+                </p>
+              </div>
+            </div>
+
+            <div style="margin-top: 1.25rem; padding: 0.85rem; background: rgba(6, 182, 212, 0.1); border-radius: 6px; border: 1px solid rgba(6, 182, 212, 0.3);">
+              <span style="color: #67e8f9; font-size: 0.88rem;">
+                <strong>Trainer Demonstration Cue:</strong> Edit Ticket #1043, change status to "Completed", tap Save, and show the class that the SharePoint row count stayed identical while the status updated!
+              </span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 17: GUIDED PRACTICE
+           ==================================================================== -->
+      <section class="slide" id="slide-17" data-slide-index="16" data-title="Guided Practice: Step-by-Step Hands-On" data-segment="Part 11: Guided Practice">
+        <header class="slide-header">
+          <div class="section-tag">Part 11 &bull; Hands-On Lab</div>
+          <h2>Guided Practice: Wire Your Edit &amp; Update Screen</h2>
+          <p class="subtitle">Follow these five steps in your Power Apps Studio environment right now.</p>
+        </header>
+
+        <div class="slide-content">
+          <div class="card" style="border-left: 3px solid #06b6d4;">
+            <div style="display: flex; flex-direction: column; gap: 0.75rem;">
+              <div class="objective-item">
+                <span class="obj-num">1</span>
+                <div>
+                  <strong>Add Edit Icon in Gallery Row:</strong> Select first row of <code>galRequests</code>. Insert an Edit pencil icon. Set <code>OnSelect = EditForm(frmRequest); Navigate(scrEdit, ScreenTransition.Fade)</code>.
+                </div>
+              </div>
+              <div class="objective-item">
+                <span class="obj-num">2</span>
+                <div>
+                  <strong>Set Form.Item:</strong> Click the pencil while holding <kbd>Alt</kbd>. On <code>scrEdit</code>, select <code>frmRequest</code>. Set <code>Item = galRequests.Selected</code>.
+                </div>
+              </div>
+              <div class="objective-item">
+                <span class="obj-num">3</span>
+                <div>
+                  <strong>Add Save Button:</strong> Insert Button named <code>btnSaveUpdates</code>. Set <code>OnSelect = SubmitForm(frmRequest)</code>.
+                </div>
+              </div>
+              <div class="objective-item">
+                <span class="obj-num">4</span>
+                <div>
+                  <strong>Add Cancel Button:</strong> Insert Button named <code>btnCancel</code>. Set <code>OnSelect = ResetForm(frmRequest); Back()</code>.
+                </div>
+              </div>
+              <div class="objective-item">
+                <span class="obj-num">5</span>
+                <div>
+                  <strong>Test &amp; Verify Zero Duplicates:</strong> Change status to "In Progress", tap Save, and confirm the gallery updates without increasing row count!
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 18: COMMON MISCONCEPTIONS
+           ==================================================================== -->
+      <section class="slide" id="slide-18" data-slide-index="17" data-title="Common Misconceptions & Structural Traps" data-segment="Part 12: Pitfalls & Traps">
+        <header class="slide-header">
+          <div class="section-tag">Part 12 &bull; Diagnostic Pitfalls</div>
+          <h2>Common Misconceptions &amp; Structural Traps</h2>
+          <p class="subtitle">Three beginner mental traps that break enterprise Update workflows.</p>
+        </header>
+
+        <div class="slide-content grid-3-col">
+          <div class="card" style="border-top: 3px solid #ef4444;">
+            <span class="card-badge" style="background: rgba(239, 68, 68, 0.2); color: #fca5a5;">Trap 1</span>
+            <h4 style="color: #f8fafc; margin: 0.75rem 0 0.25rem 0;">SubmitForm Only Creates</h4>
+            <p style="color: #fecaca; font-size: 0.82rem; font-style: italic;">"SubmitForm() always makes a new row; I need a different function to update."</p>
+            <p style="color: var(--text-muted); font-size: 0.84rem; margin-top: 0.5rem; line-height: 1.5;">
+              <strong>The Fix:</strong> <code>SubmitForm()</code> inspects <code>Form.Mode</code>. In Edit mode, it issues an HTTP PATCH update to the row in <code>Item</code>!
+            </p>
+          </div>
+
+          <div class="card" style="border-top: 3px solid #f59e0b;">
+            <span class="card-badge" style="background: rgba(245, 158, 11, 0.2); color: #fcd34d;">Trap 2</span>
+            <h4 style="color: #f8fafc; margin: 0.75rem 0 0.25rem 0;">Item Left Blank</h4>
+            <p style="color: #fecaca; font-size: 0.82rem; font-style: italic;">"Power Apps knows which row I clicked without setting Item."</p>
+            <p style="color: var(--text-muted); font-size: 0.84rem; margin-top: 0.5rem; line-height: 1.5;">
+              <strong>The Fix:</strong> If <code>Item</code> is empty, the form locks with "No item to display". Always write <code>Item = galRequests.Selected</code>!
+            </p>
+          </div>
+
+          <div class="card" style="border-top: 3px solid #8b5cf6;">
+            <span class="card-badge" style="background: rgba(139, 92, 246, 0.2); color: #c4b5fd;">Trap 3</span>
+            <h4 style="color: #f8fafc; margin: 0.75rem 0 0.25rem 0;">Cancel Without Reset</h4>
+            <p style="color: #fecaca; font-size: 0.82rem; font-style: italic;">"I can just call Back() to cancel an edit."</p>
+            <p style="color: var(--text-muted); font-size: 0.84rem; margin-top: 0.5rem; line-height: 1.5;">
+              <strong>The Fix:</strong> Unsaved text stays cached in memory. Always call <code>ResetForm(frmRequest)</code> before <code>Back()</code>!
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 19: KNOWLEDGE CHECK 1
+           ==================================================================== -->
+      <section class="slide" id="slide-19" data-slide-index="18" data-title="Knowledge Check 1: How SubmitForm Decides" data-segment="Part 13: Knowledge Checks">
+        <header class="slide-header">
+          <div class="section-tag">Part 13 &bull; Knowledge Check 1 of 5</div>
+          <h2>Knowledge Check: How does <code>SubmitForm()</code> decide whether to Insert or Update?</h2>
+          <p class="subtitle">Verifying your understanding of form mode states and HTTP routing.</p>
+        </header>
+
+        <div class="slide-content">
+          <div class="quiz-container">
+            <div class="quiz-card">
+              <span class="card-badge" style="background: rgba(59, 130, 246, 0.2); color: #93c5fd;">Question 1</span>
+              <p style="color: var(--text-main); font-size: 1.05rem; line-height: 1.6; margin-top: 0.5rem;">
+                How does <code>SubmitForm(frmRequest)</code> determine whether to insert a new row or update an existing row in SharePoint?
+              </p>
+
+              <div class="quiz-options">
+                <button class="quiz-option-btn" onclick="handleQuizAnswer(1, 'A', false, this)">
+                  <strong>A.</strong> <span>By checking whether the submit button is colored blue or green</span>
+                </button>
+                <button class="quiz-option-btn" onclick="handleQuizAnswer(1, 'B', true, this)">
+                  <strong>B.</strong> <span>By inspecting Form.Mode: New inserts a new row, while Edit updates the row in Item</span>
+                </button>
+                <button class="quiz-option-btn" onclick="handleQuizAnswer(1, 'C', false, this)">
+                  <strong>C.</strong> <span>By counting how many text boxes the user modified</span>
+                </button>
+                <button class="quiz-option-btn" onclick="handleQuizAnswer(1, 'D', false, this)">
+                  <strong>D.</strong> <span>By asking the operator with a pop-up confirmation box</span>
+                </button>
+              </div>
+            </div>
+
+            <div class="quiz-inspector-card" id="quiz-inspector-1">
+              <div class="feedback-placeholder">
+                <div class="inspector-icon">&quest;</div>
+                <span class="card-badge" style="background: rgba(59, 130, 246, 0.2); color: #93c5fd;">Awaiting Selection</span>
+                <h4>System Architecture Inspector</h4>
+                <p>Select an option on the left to verify the engine decision mechanics.</p>
+              </div>
+              <div class="feedback-content">
+                <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.75rem;">
+                  <span class="card-badge" id="quiz-badge-1" style="background: rgba(16, 185, 129, 0.2); color: #86efac;">Correct!</span>
+                  <strong style="color: var(--text-main); font-size: 1.05rem;" id="quiz-status-1">Mode Logic Confirmed!</strong>
+                </div>
+                <p style="color: var(--text-muted); font-size: 0.88rem; line-height: 1.6;">
+                  <code>SubmitForm()</code> is a polymorphic dispatcher! If <code>Form.Mode == FormMode.New</code>, it issues an HTTP POST. If <code>Form.Mode == FormMode.Edit</code>, it issues an HTTP PATCH targeting <code>Item.ID</code>!
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 20: KNOWLEDGE CHECK 2 (WHY QUESTION)
+           ==================================================================== -->
+      <section class="slide" id="slide-20" data-slide-index="19" data-title="Knowledge Check 2: The 'Why' of ResetForm" data-segment="Part 13: Knowledge Checks">
+        <header class="slide-header">
+          <div class="section-tag">Part 13 &bull; Knowledge Check 2 of 5</div>
+          <h2>Knowledge Check: Why is <code>ResetForm()</code> mandatory when cancelling?</h2>
+          <p class="subtitle">Memory buffer analysis and cache isolation.</p>
+        </header>
+
+        <div class="slide-content">
+          <div class="quiz-container">
+            <div class="quiz-card">
+              <span class="card-badge" style="background: rgba(59, 130, 246, 0.2); color: #93c5fd;">Question 2 &bull; The 'Why' Question</span>
+              <p style="color: var(--text-main); font-size: 1.05rem; line-height: 1.6; margin-top: 0.5rem;">
+                Why must an app call <code>ResetForm(frmRequest)</code> when an operator clicks Cancel instead of just calling <code>Back()</code>?
+              </p>
+
+              <div class="quiz-options">
+                <button class="quiz-option-btn" onclick="handleQuizAnswer(2, 'A', false, this)">
+                  <strong>A.</strong> <span>Because Power Apps Studio will shut down if uncommitted edits exist</span>
+                </button>
+                <button class="quiz-option-btn" onclick="handleQuizAnswer(2, 'B', true, this)">
+                  <strong>B.</strong> <span>Without ResetForm, unsaved typing remains cached in memory and can leak into the next record</span>
+                </button>
+                <button class="quiz-option-btn" onclick="handleQuizAnswer(2, 'C', false, this)">
+                  <strong>C.</strong> <span>Because ResetForm deletes the record from SharePoint to save storage</span>
+                </button>
+                <button class="quiz-option-btn" onclick="handleQuizAnswer(2, 'D', false, this)">
+                  <strong>D.</strong> <span>Because SharePoint lists require a Reset token every 24 hours</span>
+                </button>
+              </div>
+            </div>
+
+            <div class="quiz-inspector-card" id="quiz-inspector-2">
+              <div class="feedback-placeholder">
+                <div class="inspector-icon">&quest;</div>
+                <span class="card-badge" style="background: rgba(59, 130, 246, 0.2); color: #93c5fd;">Awaiting Selection</span>
+                <h4>System Architecture Inspector</h4>
+                <p>Select an option on the left to verify memory buffer behavior.</p>
+              </div>
+              <div class="feedback-content">
+                <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.75rem;">
+                  <span class="card-badge" id="quiz-badge-2" style="background: rgba(16, 185, 129, 0.2); color: #86efac;">Correct!</span>
+                  <strong style="color: var(--text-main); font-size: 1.05rem;" id="quiz-status-2">Memory Cleanliness Confirmed!</strong>
+                </div>
+                <p style="color: var(--text-muted); font-size: 0.88rem; line-height: 1.6;">
+                  Form controls cache user input. Calling <code>ResetForm()</code> purges dirty memory and restores card values back to the pristine truth stored in SharePoint!
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 21: KNOWLEDGE CHECK 3 (WHAT HAPPENS IF)
+           ==================================================================== -->
+      <section class="slide" id="slide-21" data-slide-index="20" data-title="Knowledge Check 3: What If Item is Blank" data-segment="Part 13: Knowledge Checks">
+        <header class="slide-header">
+          <div class="section-tag">Part 13 &bull; Knowledge Check 3 of 5</div>
+          <h2>Knowledge Check: What happens if <code>Item</code> is blank in Edit mode?</h2>
+          <p class="subtitle">Diagnosing the #1 beginner panic message.</p>
+        </header>
+
+        <div class="slide-content">
+          <div class="quiz-container">
+            <div class="quiz-card">
+              <span class="card-badge" style="background: rgba(59, 130, 246, 0.2); color: #93c5fd;">Question 3 &bull; The 'What Happens If' Question</span>
+              <p style="color: var(--text-main); font-size: 1.05rem; line-height: 1.6; margin-top: 0.5rem;">
+                A developer configures <code>EditForm(frmRequest)</code>, but leaves <code>frmRequest.Item</code> completely blank. What occurs on screen?
+              </p>
+
+              <div class="quiz-options">
+                <button class="quiz-option-btn" onclick="handleQuizAnswer(3, 'A', false, this)">
+                  <strong>A.</strong> <span>The form automatically edits the very first row in the SharePoint list</span>
+                </button>
+                <button class="quiz-option-btn" onclick="handleQuizAnswer(3, 'B', false, this)">
+                  <strong>B.</strong> <span>The app crashes and displays a red error dialog</span>
+                </button>
+                <button class="quiz-option-btn" onclick="handleQuizAnswer(3, 'C', true, this)">
+                  <strong>C.</strong> <span>The form displays "No item to display" and all DataCards become disabled</span>
+                </button>
+                <button class="quiz-option-btn" onclick="handleQuizAnswer(3, 'D', false, this)">
+                  <strong>D.</strong> <span>SharePoint creates a blank record called "Ghost Ticket"</span>
+                </button>
+              </div>
+            </div>
+
+            <div class="quiz-inspector-card" id="quiz-inspector-3">
+              <div class="feedback-placeholder">
+                <div class="inspector-icon">&quest;</div>
+                <span class="card-badge" style="background: rgba(59, 130, 246, 0.2); color: #93c5fd;">Awaiting Selection</span>
+                <h4>System Architecture Inspector</h4>
+                <p>Select an option on the left to verify form binding behavior.</p>
+              </div>
+              <div class="feedback-content">
+                <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.75rem;">
+                  <span class="card-badge" id="quiz-badge-3" style="background: rgba(16, 185, 129, 0.2); color: #86efac;">Correct!</span>
+                  <strong style="color: var(--text-main); font-size: 1.05rem;" id="quiz-status-3">Diagnostic Solved!</strong>
+                </div>
+                <p style="color: var(--text-muted); font-size: 0.88rem; line-height: 1.6;">
+                  An EditForm cannot edit thin air! If <code>Item</code> is missing, it displays <em>"No item to display"</em>. Simply set <code>Item = galRequests.Selected</code> to resolve it.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 22: KNOWLEDGE CHECK 4
+           ==================================================================== -->
+      <section class="slide" id="slide-22" data-slide-index="21" data-title="Knowledge Check 4: The Edit Transition Formula" data-segment="Part 13: Knowledge Checks">
+        <header class="slide-header">
+          <div class="section-tag">Part 13 &bull; Knowledge Check 4 of 5</div>
+          <h2>Knowledge Check: The Correct Edit Transition Formula</h2>
+          <p class="subtitle">Mastering the syntax of gallery row interaction.</p>
+        </header>
+
+        <div class="slide-content">
+          <div class="quiz-container">
+            <div class="quiz-card">
+              <span class="card-badge" style="background: rgba(59, 130, 246, 0.2); color: #93c5fd;">Question 4</span>
+              <p style="color: var(--text-main); font-size: 1.05rem; line-height: 1.6; margin-top: 0.5rem;">
+                Which formula correctly transitions an operator from clicking an edit icon in a gallery to the editing screen?
+              </p>
+
+              <div class="quiz-options">
+                <button class="quiz-option-btn" onclick="handleQuizAnswer(4, 'A', false, this)">
+                  <strong>A.</strong> <span>NewForm(frmRequest); Navigate(scrEdit)</span>
+                </button>
+                <button class="quiz-option-btn" onclick="handleQuizAnswer(4, 'B', true, this)">
+                  <strong>B.</strong> <span>EditForm(frmRequest); Navigate(scrEdit, ScreenTransition.Fade)</span>
+                </button>
+                <button class="quiz-option-btn" onclick="handleQuizAnswer(4, 'C', false, this)">
+                  <strong>C.</strong> <span>ResetForm(frmRequest); SubmitForm(frmRequest)</span>
+                </button>
+                <button class="quiz-option-btn" onclick="handleQuizAnswer(4, 'D', false, this)">
+                  <strong>D.</strong> <span>ViewForm(frmRequest); Exit()</span>
+                </button>
+              </div>
+            </div>
+
+            <div class="quiz-inspector-card" id="quiz-inspector-4">
+              <div class="feedback-placeholder">
+                <div class="inspector-icon">&quest;</div>
+                <span class="card-badge" style="background: rgba(59, 130, 246, 0.2); color: #93c5fd;">Awaiting Selection</span>
+                <h4>System Architecture Inspector</h4>
+                <p>Select an option on the left to verify formula syntax.</p>
+              </div>
+              <div class="feedback-content">
+                <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.75rem;">
+                  <span class="card-badge" id="quiz-badge-4" style="background: rgba(16, 185, 129, 0.2); color: #86efac;">Correct!</span>
+                  <strong style="color: var(--text-main); font-size: 1.05rem;" id="quiz-status-4">Syntax Verified!</strong>
+                </div>
+                <p style="color: var(--text-muted); font-size: 0.88rem; line-height: 1.6;">
+                  <code>EditForm(frmRequest)</code> sets the form state, loads the selected row's data, and <code>Navigate()</code> smoothly carries the user to the edit screen!
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 23: FINAL CHALLENGE & RUBRIC
+           ==================================================================== -->
+      <section class="slide" id="slide-23" data-slide-index="22" data-title="Final Challenge: Work Order Lifecycle Console" data-segment="Part 14: Practical Evaluation">
+        <header class="slide-header">
+          <div class="section-tag">Part 14 &bull; Evaluation &amp; Rubric</div>
+          <h2>Final Challenge: Work Order Lifecycle Console</h2>
+          <p class="subtitle">Construct a complete multi-screen CRUD flow and evaluate against enterprise standards.</p>
+        </header>
+
+        <div class="slide-content grid-2-col">
+          <div class="card">
+            <h3 class="card-title">🏆 Challenge Specifications</h3>
+            <div style="font-size: 0.88rem; color: var(--text-muted); line-height: 1.6;">
+              <p>Build a factory work order lifecycle meeting these 4 requirements:</p>
+              <ol style="padding-left: 1.2rem; margin-top: 0.5rem;">
+                <li>Gallery on <code>scrGallery</code> shows all work orders with status pills and an Edit icon.</li>
+                <li>Edit icon calls <code>EditForm()</code> and navigates cleanly to <code>scrEdit</code>.</li>
+                <li><code>frmEdit.Item = galRequests.Selected</code>; updates status and technician notes.</li>
+                <li>Cancel button calls <code>ResetForm(frmEdit); Back()</code> to cleanly discard changes.</li>
+              </ol>
+            </div>
+          </div>
+
+          <div class="card">
+            <h3 class="card-title">📊 Enterprise Assessment Rubric</h3>
+            <table class="rubric-table">
+              <thead>
+                <tr>
+                  <th>Criteria</th>
+                  <th>Level 1: Novice</th>
+                  <th>Level 3: Master</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Edit Navigation</strong></td>
+                  <td>Navigates without EditForm; cards stay in View or New.</td>
+                  <td>Seamlessly combines EditForm and Navigate with zero flicker.</td>
+                </tr>
+                <tr>
+                  <td><strong>Item Binding</strong></td>
+                  <td>Item left blank, causing "No item to display".</td>
+                  <td>Flawlessly binds Item = galRequests.Selected.</td>
+                </tr>
+                <tr>
+                  <td><strong>Duplicate Prevention</strong></td>
+                  <td>Submitting creates duplicate rows in SharePoint.</td>
+                  <td>Zero duplicate rows; existing record cleanly updated via PATCH.</td>
+                </tr>
+                <tr>
+                  <td><strong>Cancel Architecture</strong></td>
+                  <td>No Cancel button; user forced to reload app.</td>
+                  <td>Implements ResetForm(frm); Back() with zero cached leaks.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 24: WRAP-UP & FORWARD BRIDGE
+           ==================================================================== -->
+      <section class="slide" id="slide-24" data-slide-index="23" data-title="Lesson Wrap-Up & Forward Bridge to Day 25" data-segment="Part 15: Wrap-Up & Bridge">
+        <header class="slide-header">
+          <div class="section-tag">Part 15 &bull; Synthesis &amp; Next Steps</div>
+          <h2>Lesson Wrap-Up: You've Mastered the CRUD Lifecycle!</h2>
+          <p class="subtitle">Reviewing today's victory and bridging forward to Day 25 (Full System Architecture).</p>
+        </header>
+
+        <div class="slide-content grid-2-col">
+          <div class="card" style="border-left: 3px solid #06b6d4;">
+            <h3 class="card-title">🎯 Today's Accomplishment (Read &amp; Update)</h3>
+            <p style="color: var(--text-muted); font-size: 0.88rem; line-height: 1.6;">
+              You closed the golden loop of enterprise data:
+            </p>
+            <div style="margin-top: 0.75rem; padding: 0.75rem; background: rgba(6, 182, 212, 0.1); border-radius: 6px; font-family: var(--font-code); font-size: 0.84rem; color: #67e8f9;">
+              Gallery &rarr; Selected Row &rarr; EditForm() &rarr; SubmitForm() &rarr; SharePoint Update &rarr; Gallery Refresh
+            </div>
+            <p style="color: var(--text-muted); font-size: 0.85rem; line-height: 1.5; margin-top: 0.75rem;">
+              You now know how every enterprise app reads records, allows safe edits, and updates cloud databases without creating duplicates.
+            </p>
+          </div>
+
+          <div class="card" style="border-left: 3px solid #f59e0b;">
+            <h3 class="card-title">🌉 Forward Bridge to Tomorrow: Day 25</h3>
+            <p style="color: var(--text-muted); font-size: 0.88rem; line-height: 1.6;">
+              We now have all the individual building blocks: Process, Tables, Columns, Galleries, Forms, Create, Read, and Update.
+            </p>
+            <div style="margin-top: 0.75rem; padding: 0.75rem; background: rgba(245, 158, 11, 0.1); border-radius: 6px; font-family: var(--font-code); font-size: 0.84rem; color: #fcd34d;">
+              TOMORROW: Complete System Architecture (Day 25)<br>
+              Planning an entire multi-screen application from scratch using all 9 layers together!
+            </div>
+            <p style="color: #fcd34d; font-size: 0.85rem; font-weight: bold; margin-top: 0.75rem;">
+              Tomorrow, you become a Software Architect!
+            </p>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- Bottom HUD & Navigation Controls -->
+    <footer id="bottom-hud">
+      <div id="progress-bar-container">
+        <div id="progress-bar"></div>
+      </div>
+
+      <div class="hud-left">
+        <button id="btn-prev" class="hud-btn" onclick="prevSlide()">&larr; Prev</button>
+        <button id="btn-next" class="hud-btn" onclick="nextSlide()">Next &rarr;</button>
+        <span id="slide-counter">Slide 1 / 24</span>
+      </div>
+
+      <div class="hud-right">
+        <button id="btn-lang" class="hud-btn" onclick="toggleLanguage()"><span id="lang-label">KH</span></button>
+        <button id="btn-laser" class="hud-btn active" onclick="toggleLaser()">Laser</button>
+        <button id="btn-notes" class="hud-btn" onclick="toggleNotes()">Notes (N)</button>
+        <button id="btn-overview" class="hud-btn" onclick="toggleOverview()">Overview (O)</button>
+        <button id="btn-timer" class="hud-btn" onclick="toggleTimer()"><span id="timer-display">90:00</span></button>
+        <button id="btn-fullscreen" class="hud-btn" onclick="toggleFullscreen()">Full</button>
+        <a href="../index.html" class="hud-btn hub-btn" title="Return to Master Curriculum Hub (ត្រឡប់ទៅទំព័រដើម)" style="text-decoration: none; display: inline-flex; align-items: center; gap: 4px; color: #fcd34d; font-weight: 600;"><span>🏠</span><span>Hub</span></a>
+      </div></footer>
+
+    <!-- Slide-Out Trainer Notes Drawer (Strictly off-screen until N pressed) -->
+    <div id="notes-drawer">
+      <div class="notes-header">
+        <h3 id="notes-slide-title" style="color: #fcd34d; font-size: 1.15rem;">Trainer Speaking Notes</h3>
+        <button class="notes-close-btn" id="notes-close-btn" onclick="toggleNotes()">&times;</button>
+      </div>
+      <div class="notes-body" id="notes-body-content">
+        <!-- Dynamically populated by script.js -->
+      </div>
+    </div>
+
+    <!-- Slide Overview Grid Modal -->
+    <div id="overview-modal">
+      <div class="overview-header">
+        <h2 style="color: #f8fafc; font-size: 1.6rem;">Slide Overview (24 Slides)</h2>
+        <button class="notes-close-btn" id="overview-close-btn" onclick="toggleOverview()">&times;</button>
+      </div>
+      <div class="overview-grid" id="overview-grid">
+        <!-- Dynamically populated by script.js -->
+      </div>
+    </div>
+
+  </div>
+
+  <script src="script.js"></script>
+<script>
+if (window.self !== window.top) {
+  document.documentElement.classList.add('in-iframe');
+  function hideHub() { document.querySelectorAll('.hub-btn, .back-to-hub-pill').forEach(e => e.style.display = 'none'); }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', hideHub);
+  } else {
+    hideHub();
+  }
+}
+</script>
+<style>
+.in-iframe .hub-btn, .in-iframe .back-to-hub-pill { display: none !important; }
+</style>
+</body>
+</html>
+

@@ -1,0 +1,1291 @@
+/* ============================================================================
+   POWER APPS FOUNDATION: DAY 15 PRESENTATION STYLESHEET
+   Topic: Navigation: Connect Screens into a Flow
+   Theme: Microsoft Fluent 2 Dark Mode (Industrial Neon / Precision Glass)
+   Bilingual: English + Khmer (Google Fonts: Moul, Siemreap, Battambang)
+   ============================================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=Moul&family=Kantumruy+Pro:ital,wght@0,400..700;1,400..700&family=Battambang:wght@300;400;700;900&family=Koh+Santepheap:wght@300;400;700&family=Koulen&family=Siemreap&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=Moul&family=Kantumruy+Pro:ital,wght@0,400..700;1,400..700&family=Battambang:wght@300;400;700;900&family=Koh+Santepheap:wght@300;400;700&family=Koulen&family=Siemreap&display=swap');
+
+:root {
+  /* Color Palette */
+  --bg-dark: #070a12;
+  --bg-surface: #0f172a;
+  --bg-card: rgba(30, 41, 59, 0.7);
+  --bg-card-hover: rgba(51, 65, 85, 0.85);
+  --border-subtle: rgba(255, 255, 255, 0.08);
+  --border-focus: #3b82f6;
+
+  /* Neon Accents */
+  --color-primary: #3b82f6;      /* Power Apps Blue */
+  --color-primary-glow: rgba(59, 130, 246, 0.35);
+  --color-success: #10b981;      /* Emerald */
+  --color-success-glow: rgba(16, 185, 129, 0.3);
+  --color-warning: #f59e0b;      /* Amber */
+  --color-warning-glow: rgba(245, 158, 11, 0.3);
+  --color-danger: #ef4444;       /* Rose */
+  --color-danger-glow: rgba(239, 68, 68, 0.35);
+  --color-purple: #8b5cf6;       /* Violet */
+  --color-cyan: #06b6d4;         /* Cyan */
+
+  /* Text Colors */
+  --text-main: #f8fafc;
+  --text-muted: #94a3b8;
+  --text-dim: #64748b;
+
+  /* Typography Defaults (English) */
+  --font-title: 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-heading: 'Plus Jakarta Sans', 'Inter', system-ui, -apple-system, sans-serif;
+  --font-body: 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-code: 'JetBrains Mono', 'Cascadia Code', 'Fira Code', 'Consolas', monospace;
+
+  /* Khmer Typography Tokens (Standardized across Days 1–15) */
+  --font-khmer-title: 'Plus Jakarta Sans', 'Inter', 'Moul', 'Khmer OS Muol Light', serif;
+  --font-khmer-heading: 'Plus Jakarta Sans', 'Inter', 'Kantumruy Pro', 'Battambang', sans-serif;
+  --font-khmer-body: 'Plus Jakarta Sans', 'Inter', 'Battambang', 'Koh Santepheap', sans-serif;
+
+  /* Dynamic Stage Spotlight (Mouse tracked) */
+  --mouse-x: 50vw;
+  --mouse-y: 50vh;
+
+  /* Dimensions & Transitions */
+  --slide-width: 100vw;
+  --slide-height: 100vh;
+  --transition-smooth: all 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Base Reset */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: var(--bg-dark);
+  color: var(--text-main);
+  font-family: var(--font-body);
+  overflow: hidden;
+  height: 100vh;
+  width: 100vw;
+  line-height: 1.5;
+  user-select: none;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* --------------------------------------------------------------------------
+   KHMER FONT OVERRIDES & ANTI-CLIPPING SYSTEM (Standardized across Days 1–15)
+   -------------------------------------------------------------------------- */
+body.khmer-mode {
+  font-family: 'Plus Jakarta Sans', 'Inter', 'Battambang', 'Kantumruy Pro', 'Koh Santepheap', 'Noto Sans Khmer', sans-serif !important;
+  font-size: 16px;
+}
+
+/* Titles and Hero */
+body.khmer-mode h1,
+body.khmer-mode .hero-title,
+body.khmer-mode .slide-title-khmer {
+  font-family: var(--font-khmer-title) !important;
+  font-weight: normal !important;
+  font-weight: 400 !important;
+  line-height: 1.75 !important;
+  letter-spacing: normal !important;
+  text-transform: none !important;
+  background: none !important;
+  -webkit-background-clip: unset !important;
+  -webkit-text-fill-color: #ffffff !important;
+  color: #ffffff !important;
+  padding-top: 6px !important;
+  padding-bottom: 10px !important;
+  overflow: visible !important;
+}
+
+/* Slide Header & Main H2 (Anti-Clipping: No text mask, ample line-height & padding) */
+body.khmer-mode .slide-header {
+  overflow: visible !important;
+  margin-bottom: 1.4rem !important;
+}
+
+body.khmer-mode h2,
+body.khmer-mode .slide-header h2 {
+  font-family: var(--font-khmer-heading) !important;
+  font-weight: 700 !important;
+  letter-spacing: normal !important;
+  text-transform: none !important;
+  line-height: 1.75 !important;
+  font-size: 1.85rem !important;
+  background: none !important;
+  -webkit-background-clip: unset !important;
+  -webkit-text-fill-color: #ffffff !important;
+  color: #ffffff !important;
+  padding-top: 6px !important;
+  padding-bottom: 12px !important;
+  margin-bottom: 0.25rem !important;
+  overflow: visible !important;
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.6) !important;
+}
+
+/* Section Tag Pill Badge (Generous vertical padding, line-height, no letter-spacing) */
+body.khmer-mode .section-tag {
+  font-family: var(--font-khmer-heading) !important;
+  font-size: 0.88rem !important;
+  font-weight: 500 !important;
+  letter-spacing: normal !important;
+  text-transform: none !important;
+  line-height: 1.95 !important;
+  padding: 8px 20px 10px 20px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  height: auto !important;
+  margin-bottom: 0.65rem !important;
+  overflow: visible !important;
+  border-radius: 9999px !important;
+}
+
+/* Headings (H3, H4) */
+body.khmer-mode h3,
+body.khmer-mode h4,
+body.khmer-mode .card-title,
+body.khmer-mode .hud-title,
+body.khmer-mode .overview-card-title {
+  font-family: var(--font-khmer-heading) !important;
+  font-weight: 700 !important;
+  font-weight: 700 !important;
+  letter-spacing: normal !important;
+  text-transform: none !important;
+  line-height: 1.68 !important;
+  padding-top: 4px !important;
+  padding-bottom: 6px !important;
+  overflow: visible !important;
+  color: #f8fafc !important;
+}
+
+/* Small Badges & Pills */
+body.khmer-mode .card-badge,
+body.khmer-mode .role-badge-pill,
+body.khmer-mode .consequence-badge,
+body.khmer-mode .chain-item,
+body.khmer-mode .hero-badge {
+  font-family: var(--font-khmer-heading) !important;
+  font-size: 0.8rem !important;
+  font-weight: 500 !important;
+  letter-spacing: normal !important;
+  text-transform: none !important;
+  line-height: 1.7 !important;
+  padding: 4px 12px 6px 12px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  overflow: visible !important;
+}
+
+/* Subtitles, Paragraphs, Lists, Table cells, Buttons */
+body.khmer-mode .subtitle,
+body.khmer-mode .slide-header .subtitle,
+body.khmer-mode .hero-subtitle,
+body.khmer-mode p,
+body.khmer-mode span,
+body.khmer-mode li,
+body.khmer-mode label,
+body.khmer-mode td,
+body.khmer-mode th,
+body.khmer-mode button,
+body.khmer-mode .card-body,
+body.khmer-mode .notes-body {
+  font-family: var(--font-khmer-body) !important;
+  font-weight: 400 !important;
+  letter-spacing: normal !important;
+  line-height: 1.88 !important;
+  text-transform: none !important;
+  overflow: visible !important;
+}
+
+body.khmer-mode .slide-header .subtitle {
+  font-size: 1.05rem !important;
+  line-height: 1.75 !important;
+  color: #cbd5e1 !important;
+  margin-top: 0.2rem !important;
+}
+
+/* Form and UI Buttons */
+body.khmer-mode .hud-btn {
+  font-family: var(--font-khmer-heading) !important;
+  font-size: 0.84rem !important;
+  line-height: 1.6 !important;
+  padding: 0.4rem 0.85rem !important;
+  letter-spacing: normal !important;
+}
+
+body.khmer-mode .quiz-option-btn {
+  font-family: var(--font-khmer-body) !important;
+  font-size: 0.95rem !important;
+  line-height: 1.78 !important;
+  letter-spacing: normal !important;
+  padding: 0.95rem 1.15rem !important;
+}
+
+/* Monospace overrides */
+body.khmer-mode code,
+body.khmer-mode pre,
+body.khmer-mode .code-pill,
+body.khmer-mode .code-font,
+body.khmer-mode .obj-num,
+body.khmer-mode .agenda-time,
+body.khmer-mode #slide-counter,
+body.khmer-mode #timer-display {
+  font-family: var(--font-code) !important;
+  line-height: 1.4 !important;
+}
+
+/* --------------------------------------------------------------------------
+   STAGE & AMBIENT AURORA BACKGROUND
+   -------------------------------------------------------------------------- */
+#presentation-stage {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  background: radial-gradient(circle 800px at var(--mouse-x) var(--mouse-y), rgba(59, 130, 246, 0.07), transparent 70%),
+              radial-gradient(ellipse at 50% 100%, #0d1527 0%, #070a12 100%);
+}
+
+.aurora-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(120px);
+  pointer-events: none;
+  opacity: 0.35;
+  z-index: 1;
+}
+
+.orb-1 {
+  width: 550px;
+  height: 550px;
+  background: radial-gradient(circle, #3b82f6 0%, transparent 70%);
+  top: -100px;
+  right: -50px;
+  animation: auroraFloat1 24s infinite ease-in-out alternate;
+}
+
+.orb-2 {
+  width: 480px;
+  height: 480px;
+  background: radial-gradient(circle, #8b5cf6 0%, transparent 70%);
+  bottom: -150px;
+  left: -80px;
+  animation: auroraFloat2 28s infinite ease-in-out alternate;
+}
+
+.orb-3 {
+  width: 350px;
+  height: 350px;
+  background: radial-gradient(circle, #10b981 0%, transparent 70%);
+  bottom: 20%;
+  right: 15%;
+  opacity: 0.2;
+}
+
+@keyframes auroraFloat1 {
+  0% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(-80px, 90px) scale(1.12); }
+  100% { transform: translate(60px, -50px) scale(0.95); }
+}
+
+@keyframes auroraFloat2 {
+  0% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(90px, -70px) scale(1.08); }
+  100% { transform: translate(-70px, 60px) scale(0.92); }
+}
+
+/* --------------------------------------------------------------------------
+   SLIDE DECK CONTAINER & SLIDE TRANSITIONS
+   -------------------------------------------------------------------------- */
+#slides-viewport {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  z-index: 10;
+}
+
+.slide {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  padding: 4.5rem 5.5rem 5rem 5.5rem;
+  display: flex;
+  flex-direction: column;
+  opacity: 0;
+  visibility: hidden;
+  transform: scale(0.98) translateY(12px);
+  transition: opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+              visibility 0.35s;
+  pointer-events: none;
+}
+
+.slide.active {
+  opacity: 1;
+  visibility: visible;
+  transform: scale(1) translateY(0);
+  pointer-events: auto;
+}
+
+/* Hide Trainer Notes on the Slide Canvas */
+aside.trainer-notes {
+  display: none !important;
+}
+
+/* Slide Header (Left-aligned by default) */
+.slide-header {
+  margin-bottom: 1.8rem;
+  text-align: left;
+  animation: slideFadeDown 0.4s ease-out forwards;
+}
+
+.section-tag {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.82rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--color-cyan);
+  background: rgba(6, 182, 212, 0.12);
+  padding: 6px 18px 8px 18px;
+  border-radius: 9999px;
+  border: 1px solid rgba(6, 182, 212, 0.35);
+  margin-bottom: 0.65rem;
+  line-height: 1.8;
+  height: auto;
+  overflow: visible;
+}
+
+.slide-header h2 {
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: var(--text-main);
+  line-height: 1.25;
+  background: linear-gradient(135deg, #ffffff 40%, #cbd5e1 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.slide-header .subtitle {
+  font-size: 1.05rem;
+  color: var(--text-muted);
+  margin-top: 0.35rem;
+}
+
+/* Slide Content Container */
+.slide-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  animation: slideFadeUp 0.45s ease-out forwards;
+  min-height: 0;
+}
+
+@keyframes slideFadeDown {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideFadeUp {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* --------------------------------------------------------------------------
+   SLIDE 1: HERO TITLE (Centered Layout Exclusively for Hero)
+   -------------------------------------------------------------------------- */
+.hero-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  text-align: center;
+  padding: 1rem 3rem;
+}
+
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: #60a5fa;
+  background: rgba(59, 130, 246, 0.15);
+  border: 1px solid rgba(59, 130, 246, 0.35);
+  padding: 0.4rem 1.1rem;
+  border-radius: 9999px;
+  margin-bottom: 1.2rem;
+  box-shadow: 0 0 20px rgba(59, 130, 246, 0.2);
+}
+
+.hero-title {
+  font-size: 3.4rem;
+  font-weight: 800;
+  line-height: 1.15;
+  margin-bottom: 1rem;
+  background: linear-gradient(135deg, #ffffff 20%, #93c5fd 60%, #38bdf8 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.hero-subtitle {
+  font-size: 1.25rem;
+  color: var(--text-muted);
+  max-width: 880px;
+  margin-bottom: 2.2rem;
+  line-height: 1.6;
+}
+
+/* Mental Model Continuity Chain */
+.model-chain {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  background: rgba(15, 23, 42, 0.85);
+  border: 1px solid var(--border-subtle);
+  padding: 0.85rem 1.4rem;
+  border-radius: 1rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+}
+
+.chain-item {
+  font-size: 0.8rem;
+  font-weight: 600;
+  padding: 0.35rem 0.75rem;
+  border-radius: 0.5rem;
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--text-muted);
+  border: 1px solid transparent;
+}
+
+.chain-item.active {
+  background: linear-gradient(135deg, #2563eb, #1d4ed8);
+  color: #ffffff;
+  border-color: #60a5fa;
+  box-shadow: 0 0 16px rgba(59, 130, 246, 0.5);
+  transform: scale(1.05);
+}
+
+.chain-arrow {
+  color: var(--text-dim);
+  font-size: 0.85rem;
+}
+
+/* --------------------------------------------------------------------------
+   GENERIC CARDS & GRIDS
+   -------------------------------------------------------------------------- */
+.grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  height: 100%;
+}
+
+.grid-3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.25rem;
+  height: 100%;
+}
+
+.grid-4 {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.1rem;
+  height: 100%;
+}
+
+.card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: 1rem;
+  padding: 1.5rem;
+  backdrop-filter: blur(16px);
+  display: flex;
+  flex-direction: column;
+  transition: var(--transition-smooth);
+}
+
+.card:hover {
+  background: var(--bg-card-hover);
+  border-color: rgba(255, 255, 255, 0.16);
+  transform: translateY(-3px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
+}
+
+.card-title {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--text-main);
+  margin-bottom: 0.75rem;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.card-badge {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  padding: 0.2rem 0.55rem;
+  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--color-cyan);
+}
+
+/* --------------------------------------------------------------------------
+   AGENDA & OBJECTIVES
+   -------------------------------------------------------------------------- */
+.agenda-timeline {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+  height: 100%;
+  overflow-y: auto;
+  padding-right: 0.5rem;
+}
+
+.agenda-block {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  background: rgba(30, 41, 59, 0.5);
+  border: 1px solid var(--border-subtle);
+  border-radius: 0.65rem;
+  padding: 0.65rem 1rem;
+  transition: var(--transition-smooth);
+}
+
+.agenda-block:hover {
+  border-color: rgba(59, 130, 246, 0.4);
+  background: rgba(30, 41, 59, 0.85);
+}
+
+.agenda-time {
+  font-family: var(--font-code);
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--color-cyan);
+  background: rgba(6, 182, 212, 0.1);
+  padding: 0.25rem 0.6rem;
+  border-radius: 0.4rem;
+  white-space: nowrap;
+}
+
+.agenda-name {
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: var(--text-main);
+}
+
+.agenda-desc {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  margin-left: auto;
+}
+
+.objective-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.85rem;
+  background: rgba(30, 41, 59, 0.5);
+  border: 1px solid var(--border-subtle);
+  border-radius: 0.75rem;
+  padding: 1rem;
+  margin-bottom: 0.85rem;
+}
+
+.obj-num {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--color-primary);
+  color: #fff;
+  font-weight: 700;
+  font-size: 0.85rem;
+  flex-shrink: 0;
+}
+
+/* --------------------------------------------------------------------------
+   RETRIEVAL FLIP CARDS
+   -------------------------------------------------------------------------- */
+.flip-card {
+  perspective: 1000px;
+  height: 230px;
+  cursor: pointer;
+}
+
+.flip-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  transform-style: preserve-3d;
+}
+
+.flip-card.flipped .flip-inner {
+  transform: rotateY(180deg);
+}
+
+.flip-front, .flip-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  border-radius: 1rem;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.flip-front {
+  background: linear-gradient(145deg, rgba(30, 41, 59, 0.85), rgba(15, 23, 42, 0.95));
+  border: 1px solid rgba(59, 130, 246, 0.3);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+}
+
+.flip-back {
+  background: linear-gradient(145deg, rgba(37, 99, 235, 0.25), rgba(15, 23, 42, 0.95));
+  border: 1px solid var(--color-primary);
+  transform: rotateY(180deg);
+  box-shadow: 0 0 25px rgba(59, 130, 246, 0.25);
+}
+
+.flip-prompt {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  color: var(--color-cyan);
+  font-weight: 700;
+  margin-top: auto;
+}
+
+/* --------------------------------------------------------------------------
+   CRISIS & CONSEQUENCE
+   -------------------------------------------------------------------------- */
+.crisis-banner {
+  background: linear-gradient(135deg, rgba(239, 68, 68, 0.15), rgba(15, 23, 42, 0.95));
+  border: 1px solid rgba(239, 68, 68, 0.35);
+  border-radius: 1rem;
+  padding: 1.4rem;
+  margin-bottom: 1.25rem;
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+}
+
+.crisis-icon {
+  font-size: 2.2rem;
+  color: var(--color-danger);
+}
+
+.consequence-row {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.85rem 1rem;
+  background: rgba(30, 41, 59, 0.6);
+  border: 1px solid var(--border-subtle);
+  border-radius: 0.75rem;
+  margin-bottom: 0.65rem;
+}
+
+.consequence-badge {
+  font-size: 0.78rem;
+  font-weight: 700;
+  padding: 0.25rem 0.65rem;
+  border-radius: 0.4rem;
+  background: rgba(239, 68, 68, 0.15);
+  color: #fca5a5;
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  white-space: nowrap;
+}
+
+/* --------------------------------------------------------------------------
+   INTERACTIVE WIDGET 1: MULTI-SCREEN FLOW SIMULATOR (Slide 11)
+   -------------------------------------------------------------------------- */
+.flow-stage {
+  display: grid;
+  grid-template-columns: 380px 1fr;
+  gap: 1.5rem;
+  height: 100%;
+}
+
+.phone-mockup-frame {
+  background: #020617;
+  border: 3px solid #334155;
+  border-radius: 2rem;
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6), 0 0 20px rgba(59, 130, 246, 0.2);
+  position: relative;
+  overflow: hidden;
+  height: 100%;
+}
+
+.phone-notch {
+  width: 120px;
+  height: 16px;
+  background: #1e293b;
+  border-radius: 0 0 10px 10px;
+  margin: 0 auto 0.75rem auto;
+}
+
+.sim-screen-container {
+  flex: 1;
+  background: #0f172a;
+  border-radius: 1rem;
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+  border: 1px solid var(--border-subtle);
+}
+
+.sim-screen {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.35s ease, transform 0.35s ease;
+  pointer-events: none;
+}
+
+.sim-screen.active {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+.stack-inspector-panel {
+  background: rgba(15, 23, 42, 0.85);
+  border: 1px solid var(--border-subtle);
+  border-radius: 1rem;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.stack-trail-box {
+  background: #070a12;
+  border-radius: 0.65rem;
+  padding: 1rem;
+  font-family: var(--font-code);
+  font-size: 0.85rem;
+  border: 1px solid var(--border-subtle);
+  margin-bottom: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+/* --------------------------------------------------------------------------
+   INTERACTIVE WIDGET 2: TRANSITION MATRIX LAB (Slide 13)
+   -------------------------------------------------------------------------- */
+.transition-lab-grid {
+  display: grid;
+  grid-template-columns: 340px 1fr;
+  gap: 1.5rem;
+  height: 100%;
+}
+
+.transition-options-menu {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+}
+
+.transition-opt-card {
+  background: rgba(30, 41, 59, 0.6);
+  border: 1px solid var(--border-subtle);
+  border-radius: 0.65rem;
+  padding: 0.75rem 1rem;
+  cursor: pointer;
+  transition: var(--transition-smooth);
+}
+
+.transition-opt-card:hover {
+  background: rgba(51, 65, 85, 0.8);
+}
+
+.transition-opt-card.active {
+  border-color: var(--color-cyan);
+  background: rgba(6, 182, 212, 0.15);
+  box-shadow: 0 0 15px rgba(6, 182, 212, 0.3);
+}
+
+.transition-preview-stage {
+  background: #0f172a;
+  border: 1px solid var(--border-subtle);
+  border-radius: 1rem;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+/* --------------------------------------------------------------------------
+   INTERACTIVE WIDGET 3: TRAPPED USER DIAGNOSTIC LAB (Slide 16)
+   -------------------------------------------------------------------------- */
+.diagnostic-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  height: 100%;
+}
+
+.diagnostic-panel {
+  background: rgba(15, 23, 42, 0.85);
+  border: 1px solid var(--border-subtle);
+  border-radius: 1rem;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+}
+
+/* --------------------------------------------------------------------------
+   INTERACTIVE WIDGET 4: KNOWLEDGE CHECK QUIZ (Slide 20)
+   -------------------------------------------------------------------------- */
+.quiz-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  height: 100%;
+}
+
+.quiz-card {
+  background: rgba(15, 23, 42, 0.85);
+  border: 1px solid var(--border-subtle);
+  border-radius: 1rem;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.quiz-options {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+  margin-top: 1rem;
+}
+
+.quiz-option-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  background: rgba(30, 41, 59, 0.6);
+  border: 1px solid var(--border-subtle);
+  border-radius: 0.65rem;
+  padding: 0.85rem 1rem;
+  color: var(--text-main);
+  cursor: pointer;
+  text-align: left;
+  font-size: 0.9rem;
+  transition: var(--transition-smooth);
+}
+
+.quiz-option-btn:hover {
+  background: rgba(51, 65, 85, 0.8);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.quiz-option-btn.correct {
+  background: rgba(16, 185, 129, 0.2);
+  border-color: var(--color-success);
+  color: #86efac;
+}
+
+.quiz-option-btn.wrong {
+  background: rgba(239, 68, 68, 0.2);
+  border-color: var(--color-danger);
+  color: #fca5a5;
+}
+
+.quiz-feedback {
+  margin-top: 1rem;
+  padding: 0.85rem 1rem;
+  border-radius: 0.65rem;
+  font-size: 0.85rem;
+  display: none;
+}
+
+.quiz-feedback.visible {
+  display: block;
+}
+
+/* --------------------------------------------------------------------------
+   HUD CONTROLS & BOTTOM NAVIGATION BAR
+   -------------------------------------------------------------------------- */
+#presentation-hud {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 52px;
+  background: rgba(11, 15, 25, 0.85);
+  backdrop-filter: blur(12px);
+  border-top: 1px solid var(--border-subtle);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 1.5rem;
+  z-index: 100;
+}
+
+.hud-left, .hud-right {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.hud-btn {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-main);
+  border-radius: 0.4rem;
+  padding: 0.4rem 0.75rem;
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  transition: var(--transition-smooth);
+}
+
+.hud-btn:hover {
+  background: rgba(255, 255, 255, 0.14);
+  border-color: rgba(255, 255, 255, 0.25);
+}
+
+.hud-btn.active {
+  background: var(--color-primary);
+  border-color: #60a5fa;
+  color: #fff;
+  box-shadow: 0 0 12px rgba(59, 130, 246, 0.4);
+}
+
+#progress-track {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+#progress-bar {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, #3b82f6, #06b6d4);
+  transition: width 0.3s ease;
+}
+
+#slide-counter {
+  font-family: var(--font-code);
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+/* --------------------------------------------------------------------------
+   PRESENTER LASER POINTER & CLICK RIPPLE
+   -------------------------------------------------------------------------- */
+#presenter-laser {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: #ff1e56;
+  box-shadow: 0 0 15px 4px rgba(255, 30, 86, 0.75), 0 0 35px 10px rgba(255, 30, 86, 0.35);
+  pointer-events: none;
+  z-index: 99999;
+  transform: translate(-50%, -50%);
+  display: none;
+  animation: haloPulse 1.8s infinite ease-in-out;
+}
+
+#presenter-laser.active {
+  display: block;
+}
+
+@keyframes haloPulse {
+  0% { transform: translate(-50%, -50%) scale(1); opacity: 0.95; }
+  50% { transform: translate(-50%, -50%) scale(1.35); opacity: 0.7; }
+  100% { transform: translate(-50%, -50%) scale(1); opacity: 0.95; }
+}
+
+.pointer-click-ripple {
+  position: fixed;
+  border-radius: 50%;
+  border: 2px solid #ff1e56;
+  pointer-events: none;
+  z-index: 99998;
+  transform: translate(-50%, -50%) scale(0.2);
+  opacity: 1;
+  transition: transform 0.45s ease-out, opacity 0.45s ease-out;
+}
+
+.pointer-click-ripple.rippling {
+  transform: translate(-50%, -50%) scale(2.8);
+  opacity: 0;
+}
+
+/* --------------------------------------------------------------------------
+   TRAINER NOTES DRAWER (Hotkey: N)
+   -------------------------------------------------------------------------- */
+#notes-drawer {
+  position: fixed;
+  top: 0;
+  right: -420px;
+  width: 400px;
+  height: 100%;
+  background: rgba(15, 23, 42, 0.96);
+  backdrop-filter: blur(20px);
+  border-left: 1px solid var(--border-subtle);
+  box-shadow: -15px 0 35px rgba(0, 0, 0, 0.6);
+  z-index: 900;
+  transition: right 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  display: flex;
+  flex-direction: column;
+}
+
+#notes-drawer.open {
+  right: 0;
+}
+
+.notes-header {
+  padding: 1.25rem 1.5rem;
+  border-bottom: 1px solid var(--border-subtle);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.notes-header h3 {
+  font-size: 1.05rem;
+  color: var(--text-main);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.notes-close-btn {
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  font-size: 1.3rem;
+  cursor: pointer;
+}
+
+.notes-body {
+  padding: 1.5rem;
+  overflow-y: auto;
+  flex: 1;
+  font-size: 0.92rem;
+  line-height: 1.65;
+  color: #cbd5e1;
+}
+
+/* --------------------------------------------------------------------------
+   SLIDE GRID OVERVIEW MODAL (Hotkey: O)
+   -------------------------------------------------------------------------- */
+#overview-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(7, 10, 18, 0.92);
+  backdrop-filter: blur(20px);
+  z-index: 950;
+  display: none;
+  flex-direction: column;
+  padding: 3rem 4rem;
+}
+
+#overview-modal.open {
+  display: flex;
+}
+
+.overview-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 2rem;
+}
+
+.overview-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 1.25rem;
+  overflow-y: auto;
+  flex: 1;
+  padding: 0.5rem;
+}
+
+.overview-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: 0.65rem;
+  padding: 0.85rem;
+  cursor: pointer;
+  transition: var(--transition-smooth);
+  display: flex;
+  flex-direction: column;
+  height: 120px;
+}
+
+.overview-card:hover {
+  background: var(--bg-card-hover);
+  border-color: var(--color-primary);
+  transform: translateY(-4px);
+}
+
+.overview-card.active {
+  border-color: var(--color-cyan);
+  box-shadow: 0 0 15px rgba(6, 182, 212, 0.4);
+}
+
+.overview-card-num {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--color-cyan);
+}
+
+.overview-card-title {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--text-main);
+  margin-top: 0.35rem;
+  line-height: 1.35;
+}
+
+
+/* ============================================================================
+   BULLETPROOF KHMER TYPOGRAPHY & ZERO-CLIPPING SYSTEM (STANDARDIZED)
+   ============================================================================ */
+:root {
+  --font-khmer-title: 'Plus Jakarta Sans', 'Inter', 'Moul', 'Khmer OS Muol Light', serif;
+  --font-khmer-heading: 'Plus Jakarta Sans', 'Inter', 'Kantumruy Pro', 'Battambang', sans-serif;
+  --font-khmer-body: 'Plus Jakarta Sans', 'Inter', 'Battambang', 'Koh Santepheap', sans-serif;
+}
+
+.slide-header {
+  overflow: visible !important;
+  margin-bottom: 1.4rem !important;
+  align-items: flex-start !important;
+  text-align: left !important;
+}
+
+.slide-header h2,
+h2,
+.slide-title-khmer,
+body.khmer-mode h2,
+body.khmer-mode .slide-header h2 {
+  font-family: var(--font-khmer-heading) !important;
+  font-weight: 700 !important;
+  letter-spacing: normal !important;
+  text-transform: none !important;
+  line-height: 1.8 !important;
+  font-size: 1.85rem !important;
+  background: none !important;
+  -webkit-background-clip: unset !important;
+  -webkit-text-fill-color: #ffffff !important;
+  color: #ffffff !important;
+  padding-top: 6px !important;
+  padding-bottom: 18px !important;
+  margin-bottom: 0.35rem !important;
+  overflow: visible !important;
+  text-shadow: 0 2px 14px rgba(0, 0, 0, 0.7) !important;
+  box-sizing: border-box !important;
+}
+
+.section-tag,
+.section-tag-danger,
+.section-tag-warning,
+.section-tag-success,
+body.khmer-mode .section-tag,
+body.khmer-mode .section-tag-danger,
+body.khmer-mode .section-tag-warning,
+body.khmer-mode .section-tag-success {
+  font-family: var(--font-khmer-heading) !important;
+  font-size: 0.88rem !important;
+  font-weight: 500 !important;
+  letter-spacing: normal !important;
+  text-transform: none !important;
+  line-height: 2 !important;
+  padding: 8px 24px 10px 24px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  height: auto !important;
+  min-height: 38px !important;
+  margin-bottom: 0.75rem !important;
+  overflow: visible !important;
+  border-radius: 9999px !important;
+  white-space: normal !important;
+  box-sizing: border-box !important;
+}
+
+body.khmer-mode h1,
+body.khmer-mode .hero-title {
+  font-family: var(--font-khmer-title) !important;
+  font-weight: normal !important;
+  font-weight: 400 !important;
+  line-height: 1.8 !important;
+  letter-spacing: normal !important;
+  text-transform: none !important;
+  background: none !important;
+  -webkit-background-clip: unset !important;
+  -webkit-text-fill-color: #ffffff !important;
+  color: #ffffff !important;
+  padding-top: 8px !important;
+  padding-bottom: 18px !important;
+  overflow: visible !important;
+}
+
+.slide-header .subtitle,
+.subtitle,
+body.khmer-mode .slide-header .subtitle,
+body.khmer-mode .subtitle,
+body.khmer-mode .hero-subtitle {
+  font-family: var(--font-khmer-body) !important;
+  font-size: 1.05rem !important;
+  line-height: 1.85 !important;
+  color: #cbd5e1 !important;
+  text-align: left !important;
+  max-width: 960px !important;
+  margin: 0 !important;
+  padding-top: 2px !important;
+  padding-bottom: 8px !important;
+  overflow: visible !important;
+}

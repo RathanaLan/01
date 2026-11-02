@@ -1,0 +1,1369 @@
+<!DOCTYPE html>
+<html lang="en" translate="no" class="notranslate">
+<head>
+  <meta name="google" content="notranslate">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Power Apps Foundation — Day 1: How Apps Solve Problems</title>
+  
+    <!-- Famous & Universally Loved Khmer Fonts (Moul for Formal Titles, Siemreap & Battambang for Easy Reading) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=Moul&family=Kantumruy+Pro:ital,wght@0,400..700;1,400..700&family=Battambang:wght@300;400;700;900&family=Koh+Santepheap:wght@300;400;700&family=Koulen&family=Siemreap&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="../shared/design-system.css">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="fluent-dark-theme">
+
+  <!-- Main Presentation Viewport Container (16:9 Viewport Constrained) -->
+  <div id="presentation-container" class="presentation-container">
+
+    <!-- Top Presentation Header Bar -->
+    <!-- Presentation Header removed to match Day 25 Standard -->
+
+    <!-- Main Presentation Stage (Slide Viewport) -->
+    <main class="stage" id="stage">
+
+      <!-- ====================================================================
+           SLIDE 1: Title & Master Mental Model Anchor
+           ==================================================================== -->
+      <section class="slide active" id="slide-1" data-title="Day 1: How Apps Solve Problems" data-segment="Part 1: Welcome &amp; Orientation (00:00 - 10:00)">
+        <div class="slide-content">
+          <div class="hero-layout">
+            <div class="hero-pill-group">
+              <span class="hero-pill">PHASE 1: FOUNDATION</span>
+              <span class="hero-pill teal-pill">DAY 1 OF 27</span>
+              <span class="hero-pill blue-pill">THE CONNECTED CURRICULUM</span>
+            </div>
+            
+            <h1 class="hero-title">
+              How Apps <span class="gradient-text">Solve Problems</span>
+            </h1>
+
+            <p class="hero-subtitle">
+              A business application does not exist to show off code or fancy screens. 
+              <strong>An application exists for one single purpose: to move a real human problem toward a useful result.</strong>
+            </p>
+
+            <!-- Master Program Pipeline (Day 1 Highlighted) -->
+            <div class="model-pipeline-container">
+              <div class="pipeline-step active-step">
+                <span class="pipeline-step-badge">1</span>
+                <span class="pipeline-step-name">Problem</span>
+              </div>
+              <span class="pipeline-arrow">&rarr;</span>
+              <div class="pipeline-step">
+                <span class="pipeline-step-badge">2</span>
+                <span class="pipeline-step-name">Process</span>
+              </div>
+              <span class="pipeline-arrow">&rarr;</span>
+              <div class="pipeline-step">
+                <span class="pipeline-step-badge">3</span>
+                <span class="pipeline-step-name">Data</span>
+              </div>
+              <span class="pipeline-arrow">&rarr;</span>
+              <div class="pipeline-step">
+                <span class="pipeline-step-badge">4</span>
+                <span class="pipeline-step-name">UI / Screen</span>
+              </div>
+              <span class="pipeline-arrow">&rarr;</span>
+              <div class="pipeline-step">
+                <span class="pipeline-step-badge">5</span>
+                <span class="pipeline-step-name">Logic</span>
+              </div>
+              <span class="pipeline-arrow">&rarr;</span>
+              <div class="pipeline-step">
+                <span class="pipeline-step-badge">6</span>
+                <span class="pipeline-step-name">Action</span>
+              </div>
+              <span class="pipeline-arrow">&rarr;</span>
+              <div class="pipeline-step">
+                <span class="pipeline-step-badge">7</span>
+                <span class="pipeline-step-name">Storage</span>
+              </div>
+              <span class="pipeline-arrow">&rarr;</span>
+              <div class="pipeline-step">
+                <span class="pipeline-step-badge">8</span>
+                <span class="pipeline-step-name">Feedback</span>
+              </div>
+              <span class="pipeline-arrow">&rarr;</span>
+              <div class="pipeline-step">
+                <span class="pipeline-step-badge">9</span>
+                <span class="pipeline-step-name">Test</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="slide-notes-content" style="display:none;">
+          <p><strong>TRAINER SCRIPT & SPEAKING GUIDANCE (00:00 - 04:00):</strong></p>
+          <p>"Welcome everyone to Day 1 of our Microsoft Power Apps transformation journey! Before we begin, look around the room and take a deep breath. You are in the right place even if you have never written a single line of code, never touched a database, and never built software in your entire life."</p>
+          <p>"This course is NOT 27 random, isolated topics. Look at the bar on the screen: REAL PROBLEM &rarr; PROCESS &rarr; DATA &rarr; UI &rarr; LOGIC &rarr; ACTION &rarr; STORAGE &rarr; FEEDBACK &rarr; TEST. This is our master mental model. Every single day connects to this chain."</p>
+          <p>"Today, we anchor Step 1: Where does every software application begin? It begins with a real human problem that needs a useful result."</p>
+        </div>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 2: 5-Minute Master Concept Map (Spiral Anchor)
+           ==================================================================== -->
+      <section class="slide" id="slide-2" data-title="Master Concept Map &amp; Program Arc" data-segment="Part 1: Welcome &amp; Orientation (00:00 - 10:00)">
+        <div class="slide-content">
+          <div class="slide-header">
+            <span class="section-tag purple-tag">CURRICULUM ARCHITECTURE</span>
+            <h2 class="slide-title">The Spiral Learning Journey: How We Grow</h2>
+            <p class="slide-lead">We never learn definitions in isolation. Each day adds one natural link to the system you build:</p>
+          </div>
+
+          <div class="title-feature-grid">
+            <div class="feature-card">
+              <div class="feature-icon-badge purple-glow">🌱</div>
+              <h3>Phase 1: Foundation (Days 1–3)</h3>
+              <p>Problem &rarr; Ordered Steps &rarr; Facts &amp; Data. Understanding the human and digital ingredients.</p>
+            </div>
+            <div class="feature-card">
+              <div class="feature-icon-badge blue-glow">🧠</div>
+              <h3>Phase 2: Logic &amp; Decisions (Days 4–6)</h3>
+              <p>Comparing facts &rarr; True/False questions &rarr; IF/THEN choices &rarr; Compound rules.</p>
+            </div>
+            <div class="feature-card">
+              <div class="feature-icon-badge teal-glow">🏗️</div>
+              <h3>Phase 3: The Live App (Days 7–27)</h3>
+              <p>Workflows &rarr; SharePoint tables &rarr; Screens &rarr; Power Fx formulas &rarr; Live testing.</p>
+            </div>
+          </div>
+
+          <div class="memory-hook-banner" style="margin-top: 18px;">
+            <strong>OUR STORYLINE:</strong> Over the next 27 days, we build ONE unified real-world system: <strong>The Factory Workplace Support &amp; Maintenance Request App</strong>.
+          </div>
+        </div>
+
+        <div class="slide-notes-content" style="display:none;">
+          <p><strong>TRAINER SCRIPT (04:00 - 07:00):</strong></p>
+          <p>"Notice how Phase 1 leads into Phase 2, which leads into building the live app. We will NOT change scenarios every day. We will follow one consistent storyline: an industrial factory where machines break, clipboards get lost, and workers need a quick, reliable way to request maintenance and track repairs."</p>
+          <p>"Today we start at zero: understanding the problem and how computers process information to deliver a result."</p>
+        </div>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 3: 3-5 Measurable Objectives
+           ==================================================================== -->
+      <section class="slide" id="slide-3" data-title="Measurable Learning Objectives" data-segment="Part 1: Welcome &amp; Orientation (00:00 - 10:00)">
+        <div class="slide-content">
+          <div class="slide-header">
+            <span class="section-tag blue-tag">SESSION TARGETS</span>
+            <h2 class="slide-title">What You Will Master in Today's 90 Minutes</h2>
+            <p class="slide-lead">By the end of this session, you will be able to perform these 4 skills confidently:</p>
+          </div>
+
+          <div class="comparison-grid">
+            <div class="comparison-card">
+              <div class="card-icon-header">
+                <span class="card-icon-circle blue-icon">1</span>
+                <h3>Identify the Real Problem</h3>
+              </div>
+              <p>Examine any workplace breakdown and separate the human pain point (the problem) from the desired outcome (the result).</p>
+            </div>
+
+            <div class="comparison-card">
+              <div class="card-icon-header">
+                <span class="card-icon-circle teal-icon">2</span>
+                <h3>Explain the Universal Chain</h3>
+              </div>
+              <p>Trace any task through the 5-step causal chain: <strong>Problem &rarr; Input &rarr; Process &rarr; Output &rarr; Result</strong> without using technical jargon.</p>
+            </div>
+
+            <div class="comparison-card">
+              <div class="card-icon-header">
+                <span class="card-icon-circle purple-icon">3</span>
+                <h3>Deconstruct an Everyday Machine</h3>
+              </div>
+              <p>Identify the exact Inputs, internal Processes, and visual Outputs of common tools like a vending machine and microwave.</p>
+            </div>
+
+            <div class="comparison-card">
+              <div class="card-icon-header">
+                <span class="card-icon-circle green-icon">4</span>
+                <h3>Map a Factory Support Request</h3>
+              </div>
+              <p>Map an industrial machine breakdown into clear inputs and outputs ready for a digital Power Apps tablet kiosk.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="slide-notes-content" style="display:none;">
+          <p><strong>TRAINER SCRIPT (07:00 - 10:00):</strong></p>
+          <p>"Look at Objective #2: 'Trace any task through the 5-step causal chain: Problem &rarr; Input &rarr; Process &rarr; Output &rarr; Result.' When you master this, you can look at any chaotic mess in an office or factory and immediately see the digital architecture."</p>
+          <p>"Let's check our baseline understanding before introducing new ideas."</p>
+        </div>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 4: Prerequisite Retrieval & Baseline Check
+           ==================================================================== -->
+      <section class="slide" id="slide-4" data-title="Prerequisite Retrieval &amp; Baseline Check" data-segment="Part 1: Welcome &amp; Orientation (00:00 - 10:00)">
+        <div class="slide-content">
+          <div class="slide-header">
+            <span class="section-tag teal-tag">BASELINE RETRIEVAL</span>
+            <h2 class="slide-title">You Already Think Like a Software Architect</h2>
+            <p class="slide-lead">Let's prove you already understand computing through common life experiences:</p>
+          </div>
+
+          <div class="comparison-grid">
+            <div class="concept-card">
+              <div class="card-icon-header">
+                <span class="card-icon-circle blue-icon">Q1</span>
+                <h3>The Vending Machine Coin</h3>
+              </div>
+              <p style="font-size: 0.95rem; color: var(--text-secondary); line-height: 1.5;">
+                When you drop a \$1 coin into a drink vending machine and press button "B-4", what are you doing?
+              </p>
+              <div style="background-color: var(--bg-card); border-left: 3px solid var(--fluent-blue); padding: 10px; margin-top: 8px; color: #fff; font-size: 0.88rem;">
+                <strong>Baseline Answer:</strong> You are feeding the machine <em>Instructions</em> and <em>Resources</em> so it knows what to do!
+              </div>
+            </div>
+
+            <div class="concept-card">
+              <div class="card-icon-header">
+                <span class="card-icon-circle teal-icon">Q2</span>
+                <h3>The Cold Coffee Dilemma</h3>
+              </div>
+              <p style="font-size: 0.95rem; color: var(--text-secondary); line-height: 1.5;">
+                Your coffee is cold. You put it in the microwave, dial "60 seconds", and press Start. What is the real problem?
+              </p>
+              <div style="background-color: var(--bg-card); border-left: 3px solid var(--fluent-teal); padding: 10px; margin-top: 8px; color: #fff; font-size: 0.88rem;">
+                <strong>Baseline Answer:</strong> The problem is <em>Cold Coffee</em>; the microwave is the <em>Process</em>; the hot cup is the <em>Result</em>!
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="slide-notes-content" style="display:none;">
+          <p><strong>TRAINER SCRIPT (10:00):</strong></p>
+          <p>"Notice: none of you needed a computer science degree to answer those two questions! You already understand that machines need an Input to trigger a Process to give you a Result."</p>
+          <p>"Now let's examine why business apps exist in the real workplace."</p>
+        </div>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 5: The 'WHY THIS EXISTS' Problem
+           ==================================================================== -->
+      <section class="slide" id="slide-5" data-title="The 'Why This Exists' Problem" data-segment="Part 2: Why Apps Exist (10:00 - 25:00)">
+        <div class="slide-content">
+          <div class="slide-header">
+            <span class="section-tag yellow-tag">THE REAL PROBLEM</span>
+            <h2 class="slide-title">The Factory Dilemma: The Lost Paper Clipboard</h2>
+            <p class="slide-lead">Why do companies spend millions replacing paper forms with Power Apps?</p>
+          </div>
+
+          <div class="comparison-grid">
+            <div class="comparison-card" style="border-left: 4px solid var(--fluent-red);">
+              <div class="card-icon-header">
+                <span class="card-icon-circle" style="background: rgba(209, 52, 56, 0.2); color: #ff8e8e;">❌</span>
+                <h3>The Paper Reality</h3>
+              </div>
+              <ul class="comparison-list">
+                <li>Conveyor Belt Motor #2 starts squealing and leaking oil at 08:15 AM.</li>
+                <li>The operator writes an issue report on a paper clipboard hanging on a post.</li>
+                <li>At 11:30 AM, someone accidentally spills motor oil over the clipboard.</li>
+                <li>The maintenance supervisor never receives the note.</li>
+                <li><strong>Result:</strong> By 2:00 PM, the motor overheats and seizes. The entire plant shuts down for 6 hours!</li>
+              </ul>
+            </div>
+
+            <div class="comparison-card" style="border-left: 4px solid var(--fluent-green);">
+              <div class="card-icon-header">
+                <span class="card-icon-circle" style="background: rgba(16, 124, 16, 0.2); color: #8ce68c;">✅</span>
+                <h3>What an App Does Differently</h3>
+              </div>
+              <ul class="comparison-list">
+                <li>Operator taps "Conveyor 2" and "Oil Leak" on a wall-mounted tablet kiosk.</li>
+                <li>The tablet instantly logs the exact second (08:15:22 AM).</li>
+                <li>An instant alert flashes on the maintenance technician's smartphone.</li>
+                <li>The technician arrives with fresh oil and bearings within 12 minutes.</li>
+                <li><strong>Result:</strong> Zero downtime, zero ruined parts, zero wasted money!</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="slide-notes-content" style="display:none;">
+          <p><strong>TRAINER SCRIPT (10:00 - 16:00):</strong></p>
+          <p>"Look at the left side of this slide. This is not fiction — this happens every single week in manufacturing plants, warehouses, hospitals, and schools. Paper gets lost, coffee gets spilled, handwriting is illegible, and problems sit unnoticed."</p>
+          <p>"Now look at the right side. The application didn't fix the motor — the human technician fixed the motor! But the app made the communication instant, permanent, and visible. That is why apps exist."</p>
+        </div>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 6: Plain Language Before Jargon
+           ==================================================================== -->
+      <section class="slide" id="slide-6" data-title="Plain Language Concept" data-segment="Part 2: Why Apps Exist (10:00 - 25:00)">
+        <div class="slide-content">
+          <div class="slide-header">
+            <span class="section-tag blue-tag">PLAIN ENGLISH FIRST</span>
+            <h2 class="slide-title">What is an "Application"?</h2>
+            <p class="slide-lead">Before we look at software screens, let's banish the technical mystique:</p>
+          </div>
+
+          <div class="comparison-grid">
+            <div class="concept-card">
+              <div class="card-icon-header">
+                <span class="card-icon-circle blue-icon">💡</span>
+                <h3>The 1-Sentence Definition</h3>
+              </div>
+              <p style="font-size: 1.25rem; color: #fff; line-height: 1.6; margin-bottom: 14px;">
+                <strong>An application is a helpful digital assistant that accepts information, follows strict rules, and delivers a result.</strong>
+              </p>
+              <p style="font-size: 0.92rem; color: var(--text-secondary); line-height: 1.5;">
+                An app cannot think for itself, it has no feelings, and it cannot guess what you want. It is completely blind and completely obedient.
+              </p>
+            </div>
+
+            <div class="concept-card">
+              <div class="card-icon-header">
+                <span class="card-icon-circle teal-icon">🔍</span>
+                <h3>Three Plain Truths About Every App</h3>
+              </div>
+              <ul class="comparison-list">
+                <li><strong>1. It is never magical:</strong> Every action an app takes is something a human being explicitly told it to do.</li>
+                <li><strong>2. It exists for humans:</strong> An app with no human user is just an empty box drawing electricity.</li>
+                <li><strong>3. It bridges problems to results:</strong> If an app does not make someone's day easier, safer, or faster, it should not exist.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="slide-notes-content" style="display:none;">
+          <p><strong>TRAINER SCRIPT (16:00 - 20:00):</strong></p>
+          <p>"Repeat this phrase in your mind: 'An app is a helpful, obedient digital assistant.' It doesn't have an artificial soul. It doesn't get tired, it doesn't forget, and it doesn't get distracted by phone calls."</p>
+          <p>"Whenever you see a Power App in this course, don't think of code. Think of an assistant waiting for your instruction."</p>
+        </div>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 7: Everyday Analogy: The Vending Machine
+           ==================================================================== -->
+      <section class="slide" id="slide-7" data-title="Everyday Analogy: The Vending Machine" data-segment="Part 2: Why Apps Exist (10:00 - 25:00)">
+        <div class="slide-content">
+          <div class="slide-header">
+            <span class="section-tag purple-tag">EVERYDAY ANALOGY</span>
+            <h2 class="slide-title">The Vending Machine: Hardware + Software In Action</h2>
+            <p class="slide-lead">Let's dissect a familiar machine everyone in the room has used:</p>
+          </div>
+
+          <div class="cause-effect-flow">
+            <div class="flow-node node-problem">
+              <span class="flow-node-tag">HUMAN NEED</span>
+              <div class="flow-node-title">Hunger / Thirst</div>
+              <p class="flow-node-desc">You are tired and need an energy drink during break time.</p>
+            </div>
+
+            <div class="flow-arrow">&rarr;</div>
+
+            <div class="flow-node node-input">
+              <span class="flow-node-tag">INPUT</span>
+              <div class="flow-node-title">Coin + Button "A3"</div>
+              <p class="flow-node-desc">You insert money and press the coordinate button.</p>
+            </div>
+
+            <div class="flow-arrow">&rarr;</div>
+
+            <div class="flow-node node-process">
+              <span class="flow-node-tag">PROCESS</span>
+              <div class="flow-node-title">Verify &amp; Rotate</div>
+              <p class="flow-node-desc">Chip checks credit, signals Motor A3 to spin 360 degrees.</p>
+            </div>
+
+            <div class="flow-arrow">&rarr;</div>
+
+            <div class="flow-node node-output">
+              <span class="flow-node-tag">OUTPUT</span>
+              <div class="flow-node-title">Can Drops + Clunk!</div>
+              <p class="flow-node-desc">Cold can lands in tray, screen reads "THANK YOU".</p>
+            </div>
+
+            <div class="flow-arrow">&rarr;</div>
+
+            <div class="flow-node node-result">
+              <span class="flow-node-tag">RESULT</span>
+              <div class="flow-node-title">Thirst Solved</div>
+              <p class="flow-node-desc">Problem resolved without needing a human cashier!</p>
+            </div>
+          </div>
+
+          <div class="memory-hook-banner">
+            <strong>KEY TAKEAWAY:</strong> Without the coin and button (Input), the motor never turns (Process), and no drink drops (Output). Every step depends on the one before it!
+          </div>
+        </div>
+
+        <div class="slide-notes-content" style="display:none;">
+          <p><strong>TRAINER SCRIPT (20:00 - 25:00):</strong></p>
+          <p>"Look at this 5-stage rhythm on screen: Need &rarr; Input &rarr; Process &rarr; Output &rarr; Result. This is the heartbeat of all computing."</p>
+          <p>"Notice what happens if you skip a step: If you press 'A3' without inserting a coin, does the drink drop? No! The Process checks a rule: 'Is money >= price?' If False, nothing drops. This is the logic we will learn in Day 4!"</p>
+        </div>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 8: Manufacturing Workplace Scenario
+           ==================================================================== -->
+      <section class="slide" id="slide-8" data-title="Workplace Scenario: Factory Support Kiosk" data-segment="Part 3: The Universal Chain (25:00 - 45:00)">
+        <div class="slide-content">
+          <div class="slide-header">
+            <span class="section-tag teal-tag">WORKPLACE APPLICATION</span>
+            <h2 class="slide-title">Our Program Project: The Support Request Kiosk</h2>
+            <p class="slide-lead">Meet the real factory application we will design and construct across this program:</p>
+          </div>
+
+          <div class="comparison-grid">
+            <div class="concept-card" style="border-left: 4px solid var(--fluent-purple);">
+              <div class="card-icon-header">
+                <span class="card-icon-circle purple-icon">🏭</span>
+                <h3>The Scene: Apex Plastics Manufacturing</h3>
+              </div>
+              <p style="font-size: 0.95rem; color: var(--text-secondary); line-height: 1.5;">
+                Apex Plastics runs 12 high-speed injection molding presses. Each press operates 24/7 producing automotive components.
+              </p>
+              <ul class="comparison-list" style="margin-top: 10px;">
+                <li><strong>The Users:</strong> Machine operators, shift leaders, safety auditors, maintenance technicians.</li>
+                <li><strong>The Friction:</strong> When a mold jams or coolant leaks, operators spend 20 minutes searching the factory for a technician.</li>
+              </ul>
+            </div>
+
+            <div class="concept-card" style="border-left: 4px solid var(--fluent-blue);">
+              <div class="card-icon-header">
+                <span class="card-icon-circle blue-icon">📱</span>
+                <h3>The Solution: A 1-Minute Digital Tablet Kiosk</h3>
+              </div>
+              <p style="font-size: 0.95rem; color: var(--text-secondary); line-height: 1.5;">
+                A durable tablet mounted at each production bay running a custom Microsoft Power App.
+              </p>
+              <ul class="comparison-list" style="margin-top: 10px;">
+                <li>Operator taps: <strong>Machine ID</strong>, <strong>Issue Category</strong>, and <strong>Urgency Level</strong>.</li>
+                <li>One big tap on <strong>"SUBMIT REQUEST"</strong> notifies the exact technician on duty!</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="slide-notes-content" style="display:none;">
+          <p><strong>TRAINER SCRIPT (25:00 - 30:00):</strong></p>
+          <p>"This is the story of our 27 days. Every single concept — sequence, data types, True/False, variables, galleries, forms, and SharePoint lists — will be built directly to make this Support Kiosk work."</p>
+          <p>"Now, let's dissect the core computing rule: Input &rarr; Process &rarr; Output."</p>
+        </div>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 9: Visual Cause & Effect Diagram
+           ==================================================================== -->
+      <section class="slide" id="slide-9" data-title="Visual Cause-and-Effect Chain" data-segment="Part 3: The Universal Chain (25:00 - 45:00)">
+        <div class="slide-content">
+          <div class="slide-header">
+            <span class="section-tag green-tag">CAUSE &amp; EFFECT</span>
+            <h2 class="slide-title">The Universal 5-Link Chain in Action</h2>
+            <p class="slide-lead">How our Support Request App moves causality from initial breakdown to fixed machine:</p>
+          </div>
+
+          <div class="cause-effect-flow">
+            <div class="flow-node node-problem">
+              <span class="flow-node-tag">1. REAL PROBLEM</span>
+              <div class="flow-node-title">Molding Press #4 Overheating</div>
+              <p class="flow-node-desc">Coolant line clogged; oil temperature hits 88°C.</p>
+            </div>
+
+            <div class="flow-arrow">&rarr;</div>
+
+            <div class="flow-node node-input">
+              <span class="flow-node-tag">2. HUMAN INPUT</span>
+              <div class="flow-node-title">Operator Taps Tablet</div>
+              <p class="flow-node-desc">Selects "Press #4", category "Overheating", presses Submit.</p>
+            </div>
+
+            <div class="flow-arrow">&rarr;</div>
+
+            <div class="flow-node node-process">
+              <span class="flow-node-tag">3. DIGITAL PROCESS</span>
+              <div class="flow-node-title">App Logic &amp; Routing</div>
+              <p class="flow-node-desc">Generates Ticket #SR-101, timestamps 08:15 AM, alerts technician.</p>
+            </div>
+
+            <div class="flow-arrow">&rarr;</div>
+
+            <div class="flow-node node-output">
+              <span class="flow-node-tag">4. VISUAL OUTPUT</span>
+              <div class="flow-node-title">Green Banner &amp; Chime</div>
+              <p class="flow-node-desc">Screen shows "Ticket #SR-101 Dispatched to Tech Srey".</p>
+            </div>
+
+            <div class="flow-arrow">&rarr;</div>
+
+            <div class="flow-node node-result">
+              <span class="flow-node-tag">5. USEFUL RESULT</span>
+              <div class="flow-node-title">Coolant Cleared</div>
+              <p class="flow-node-desc">Technician arrives in 8 mins; machine saved from damage!</p>
+            </div>
+          </div>
+
+          <div class="memory-hook-banner">
+            <strong>REMEMBER:</strong> The app lives inside steps 2, 3, and 4. But its ONLY purpose is to connect Step 1 (the Problem) to Step 5 (the Result)!
+          </div>
+        </div>
+
+        <div class="slide-notes-content" style="display:none;">
+          <p><strong>TRAINER SCRIPT (30:00 - 35:00):</strong></p>
+          <p>"Look at this diagram carefully. As app developers, we spend our time building Steps 2, 3, and 4 — the screen, the logic, and the notification."</p>
+          <p>"Never forget why you are building it! You are not building it to create pretty buttons. You are building it so that Step 1 gets solved in Step 5."</p>
+        </div>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 10: Step 1 Deep Dive: INPUT
+           ==================================================================== -->
+      <section class="slide" id="slide-10" data-title="The Universal Chain: INPUT" data-segment="Part 3: The Universal Chain (25:00 - 45:00)">
+        <div class="slide-content">
+          <div class="slide-header">
+            <span class="section-tag blue-tag">CHAIN LINK 1</span>
+            <h2 class="slide-title">Input: What Goes INTO the Machine</h2>
+            <p class="slide-lead">Computers cannot read human minds. They only know what we give them:</p>
+          </div>
+
+          <div class="comparison-grid">
+            <div class="concept-card">
+              <div class="card-icon-header">
+                <span class="card-icon-circle blue-icon">📥</span>
+                <h3>Plain English Meaning</h3>
+              </div>
+              <p style="font-size: 1.1rem; color: #fff; line-height: 1.5; margin-bottom: 12px;">
+                <strong>Input is any raw signal, text, number, or finger gesture fed into the application by a human or sensor.</strong>
+              </p>
+              <p style="font-size: 0.92rem; color: var(--text-secondary); line-height: 1.5;">
+                Without input, the computer stays frozen, waiting patiently in standby mode forever.
+              </p>
+            </div>
+
+            <div class="concept-card">
+              <div class="card-icon-header">
+                <span class="card-icon-circle teal-icon">👆</span>
+                <h3>Common Inputs in Power Apps</h3>
+              </div>
+              <ul class="comparison-list">
+                <li><strong>Finger Tap / Mouse Click:</strong> Pressing a "Submit" or "Cancel" button.</li>
+                <li><strong>Typed Text:</strong> Typing employee name or machine symptoms into a text box.</li>
+                <li><strong>Dropdown Selection:</strong> Picking "High Priority" from a list of choices.</li>
+                <li><strong>Hardware Sensors:</strong> Barcode scan of an equipment badge, or camera photo of a crack.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="slide-notes-content" style="display:none;">
+          <p><strong>TRAINER SCRIPT (35:00 - 38:00):</strong></p>
+          <p>"Think of Input as handing an envelope to a courier. If you don't hand the courier an envelope, they have nothing to deliver. Input is the fuel that starts every computer process."</p>
+        </div>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 11: Step 2 Deep Dive: PROCESS
+           ==================================================================== -->
+      <section class="slide" id="slide-11" data-title="The Universal Chain: PROCESS" data-segment="Part 3: The Universal Chain (25:00 - 45:00)">
+        <div class="slide-content">
+          <div class="slide-header">
+            <span class="section-tag yellow-tag">CHAIN LINK 2</span>
+            <h2 class="slide-title">Process: What the Machine Does in Secret</h2>
+            <p class="slide-lead">The hidden work performed inside the computer chip:</p>
+          </div>
+
+          <div class="comparison-grid">
+            <div class="concept-card">
+              <div class="card-icon-header">
+                <span class="card-icon-circle" style="background: rgba(255, 185, 0, 0.2); color: var(--fluent-yellow);">⚙️</span>
+                <h3>Plain English Meaning</h3>
+              </div>
+              <p style="font-size: 1.1rem; color: #fff; line-height: 1.5; margin-bottom: 12px;">
+                <strong>Process is the internal work: calculating math, checking safety rules, and packaging data.</strong>
+              </p>
+              <p style="font-size: 0.92rem; color: var(--text-secondary); line-height: 1.5;">
+                You cannot see the electricity moving through microchips, but you see the result. The computer follows mechanical steps at the speed of light.
+              </p>
+            </div>
+
+            <div class="concept-card">
+              <div class="card-icon-header">
+                <span class="card-icon-circle purple-icon">🧮</span>
+                <h3>What Power Apps Does During Process</h3>
+              </div>
+              <ul class="comparison-list">
+                <li><strong>Arithmetic:</strong> Calculates duration, downtime cost, or quantities.</li>
+                <li><strong>Rule Checking:</strong> <em>"Did the operator forget to type an issue description?"</em></li>
+                <li><strong>Decision Routing:</strong> <em>"If urgency is 'Critical', alert the plant manager immediately!"</em></li>
+                <li><strong>Storage:</strong> Saves the record permanently to a cloud database or SharePoint table.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="slide-notes-content" style="display:none;">
+          <p><strong>TRAINER SCRIPT (38:00 - 41:00):</strong></p>
+          <p>"The word 'Process' sounds like engineering jargon, but think of it as digestion or cooking. You put raw bread into a toaster (Input); the heating elements glow red and count seconds (Process); pop! Toast emerges (Output)."</p>
+        </div>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 12: Step 3 Deep Dive: OUTPUT & RESULT
+           ==================================================================== -->
+      <section class="slide" id="slide-12" data-title="The Universal Chain: OUTPUT &amp; RESULT" data-segment="Part 3: The Universal Chain (25:00 - 45:00)">
+        <div class="slide-content">
+          <div class="slide-header">
+            <span class="section-tag green-tag">CHAIN LINK 3 &amp; 4</span>
+            <h2 class="slide-title">Output &amp; Result: Delivering the Payoff</h2>
+            <p class="slide-lead">What human eyes and ears receive back, and how reality changes:</p>
+          </div>
+
+          <div class="comparison-grid">
+            <div class="concept-card">
+              <div class="card-icon-header">
+                <span class="card-icon-circle teal-icon">📤</span>
+                <h3>Output (The Digital Payoff)</h3>
+              </div>
+              <p style="font-size: 0.92rem; color: var(--text-secondary); line-height: 1.5;">
+                Everything presented back to the human senses:
+              </p>
+              <ul class="comparison-list">
+                <li>A green success checkmark on the tablet screen.</li>
+                <li>A push notification chime on the technician's phone.</li>
+                <li>A visual progress bar showing ticket status: <em>"Assigned to Srey"</em>.</li>
+              </ul>
+            </div>
+
+            <div class="concept-card">
+              <div class="card-icon-header">
+                <span class="card-icon-circle green-icon">🎯</span>
+                <h3>Result (The Physical Payoff)</h3>
+              </div>
+              <p style="font-size: 0.92rem; color: var(--text-secondary); line-height: 1.5;">
+                The real-world change that proves the app was worth building:
+              </p>
+              <ul class="comparison-list">
+                <li>The overheated machine is inspected before breaking.</li>
+                <li>Parts production stays on schedule.</li>
+                <li>Workers go home safe at the end of their shift!</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="slide-notes-content" style="display:none;">
+          <p><strong>TRAINER SCRIPT (41:00 - 45:00):</strong></p>
+          <p>"Never confuse Output with Result. Output is the digital confirmation (the green banner on screen). Result is the real world being improved (the machine being fixed and the factory staying productive!)."</p>
+        </div>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 13: Agenda Milestone Checkpoint
+           ==================================================================== -->
+      <section class="slide" id="slide-13" data-title="Mid-Session Checkpoint (45:00)" data-segment="Part 3: The Universal Chain (25:00 - 45:00)">
+        <div class="slide-content">
+          <div class="slide-header">
+            <span class="section-tag purple-tag">HALFWAY CHECKPOINT</span>
+            <h2 class="slide-title">Halfway Reflection: 45 Minutes Completed</h2>
+            <p class="slide-lead">Let's check our progress against the master 90-minute agenda:</p>
+          </div>
+
+          <div class="title-feature-grid">
+            <div class="feature-card" style="border-top: 3px solid var(--fluent-green);">
+              <div class="feature-icon-badge" style="background: rgba(16,124,16,0.2); color:#8ce68c;">✓</div>
+              <h3>Part 1: Orientation</h3>
+              <p>Master mental model anchored: Problem to Result.</p>
+            </div>
+            <div class="feature-card" style="border-top: 3px solid var(--fluent-green);">
+              <div class="feature-icon-badge" style="background: rgba(16,124,16,0.2); color:#8ce68c;">✓</div>
+              <h3>Part 2 &amp; 3: Universal Chain</h3>
+              <p>Problem &rarr; Input &rarr; Process &rarr; Output &rarr; Result mastered.</p>
+            </div>
+            <div class="feature-card" style="border-top: 3px solid var(--fluent-blue);">
+              <div class="feature-icon-badge blue-glow">➔</div>
+              <h3>Next 45 Minutes</h3>
+              <p>Live kiosk demonstration, guided practice, quiz &amp; final challenge!</p>
+            </div>
+          </div>
+
+          <div class="memory-hook-banner" style="margin-top: 18px;">
+            <strong>PROGRESS CHECK:</strong> Take a stretch, sip water! In the second half, you will DO something on screen, not just listen.
+          </div>
+        </div>
+
+        <div class="slide-notes-content" style="display:none;">
+          <p><strong>TRAINER SCRIPT (45:00):</strong></p>
+          <p>"We are at minute 45, exactly halfway through our lesson. You now understand the core philosophy of software better than many hobbyist coders."</p>
+          <p>"In the second half, we will put this knowledge to work with a live interactive simulation and a 10-minute challenge. Let's move to Part 4!"</p>
+        </div>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 14: Trainer Demonstration (Interactive Kiosk)
+           ==================================================================== -->
+      <section class="slide" id="slide-14" data-title="Trainer Demonstration: Live Kiosk" data-segment="Part 4: Demonstration &amp; Guided Practice (45:00 - 65:00)">
+        <div class="slide-content">
+          <div class="slide-header">
+            <span class="section-tag blue-tag">LIVE DEMONSTRATION</span>
+            <h2 class="slide-title">Demonstration: The 1-Minute Support Kiosk</h2>
+            <p class="slide-lead">Watch how the 5-step chain comes alive inside this working digital tablet simulation:</p>
+          </div>
+
+          <div class="kiosk-demo-container">
+            <!-- Simulated Tablet Kiosk Screen -->
+            <div class="kiosk-screen-box">
+              <div class="kiosk-screen-header">
+                <span class="kiosk-title">📱 APEX PLASTICS • SUPPORT KIOSK</span>
+                <span class="kiosk-status-badge">ONLINE</span>
+              </div>
+
+              <div class="kiosk-form-group">
+                <label class="kiosk-label" for="kiosk-issue-select">1. What is the issue? (Input)</label>
+                <select id="kiosk-issue-select" class="kiosk-input-select">
+                  <option value="Conveyor Belt Jammed">Conveyor Belt Jammed</option>
+                  <option value="Hydraulic Oil Leak (Press #4)">Hydraulic Oil Leak (Press #4)</option>
+                  <option value="Safety Guard Interlock Broken">Safety Guard Interlock Broken</option>
+                  <option value="Temperature Overheating (>85°C)">Temperature Overheating (>85°C)</option>
+                </select>
+              </div>
+
+              <div class="kiosk-form-group">
+                <label class="kiosk-label" for="kiosk-dept-select">2. Factory Location / Bay</label>
+                <select id="kiosk-dept-select" class="kiosk-input-select">
+                  <option value="Bay A: Molding Bay">Bay A: Molding Bay</option>
+                  <option value="Bay B: Assembly Line 2">Bay B: Assembly Line 2</option>
+                  <option value="Bay C: Quality Inspection">Bay C: Quality Inspection</option>
+                </select>
+              </div>
+
+              <button id="kiosk-submit-btn" class="kiosk-btn">
+                Submit Support Request
+              </button>
+            </div>
+
+            <!-- Real-Time Process & Output Visualizer -->
+            <div style="display: flex; flex-direction: column; gap: 12px; justify-content: center;">
+              <div style="font-size: 0.85rem; color: var(--text-muted); font-weight: 700; text-transform: uppercase;">
+                Behind the Scenes (Process &amp; Output):
+              </div>
+              <div id="kiosk-output-display" class="kiosk-output-card hidden">
+                <!-- Dynamically populated via script.js -->
+              </div>
+              <p style="font-size: 0.82rem; color: var(--text-secondary); line-height: 1.45;">
+                When you click "Submit", the processor packages the inputs, mints a unique ticket ID, records the timestamp, and pushes a notification.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="slide-notes-content" style="display:none;">
+          <p><strong>TRAINER SCRIPT (45:00 - 52:00):</strong></p>
+          <p>"Watch my screen. As the operator, I select 'Hydraulic Oil Leak (Press #4)' and 'Bay A: Molding Bay'. Those dropdowns are my INPUTS."</p>
+          <p>"Now, I tap the big blue button. Look at what happens on the right: Ticket #SR-101 is generated instantly, time-stamped, and assigned. That is the PROCESS and OUTPUT!"</p>
+        </div>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 15: Guided Learner Practice
+           ==================================================================== -->
+      <section class="slide" id="slide-15" data-title="Guided Practice: Deconstruction" data-segment="Part 4: Demonstration &amp; Guided Practice (45:00 - 65:00)">
+        <div class="slide-content">
+          <div class="slide-header">
+            <span class="section-tag teal-tag">GUIDED EXERCISE</span>
+            <h2 class="slide-title">Guided Practice: Deconstruct 3 Everyday Systems</h2>
+            <p class="slide-lead">Together with the trainer, break down each scenario into Input, Process, and Output:</p>
+          </div>
+
+          <div class="title-feature-grid">
+            <div class="feature-card">
+              <div class="feature-icon-badge blue-glow">1</div>
+              <h4>Smartphone Alarm</h4>
+              <p><strong>Input:</strong> You set time to "06:30 AM" &amp; toggle ON.</p>
+              <p><strong>Process:</strong> Phone clock counts down; compares current time to 06:30.</p>
+              <p><strong>Output:</strong> Speaker plays loud chime at 06:30 AM.</p>
+            </div>
+
+            <div class="feature-card">
+              <div class="feature-icon-badge teal-glow">2</div>
+              <h4>Supermarket Barcode</h4>
+              <p><strong>Input:</strong> Cashier sweeps barcode over laser scanner.</p>
+              <p><strong>Process:</strong> Computer matches barcode number in cloud price list.</p>
+              <p><strong>Output:</strong> Screen displays "\$3.50 Milk" and cash drawer opens.</p>
+            </div>
+
+            <div class="feature-card">
+              <div class="feature-icon-badge purple-glow">3</div>
+              <h4>Badge Clock-In</h4>
+              <p><strong>Input:</strong> Worker taps RFID badge on factory gate sensor.</p>
+              <p><strong>Process:</strong> System verifies active employee record and logs timestamp.</p>
+              <p><strong>Output:</strong> Turnstile unlocks and green arrow lights up.</p>
+            </div>
+          </div>
+
+          <div class="analogy-box" style="margin-top: 18px;">
+            <strong>OBSERVE:</strong> No matter how complex a computer system appears, it is ALWAYS just these same three steps repeating in sequence!
+          </div>
+        </div>
+
+        <div class="slide-notes-content" style="display:none;">
+          <p><strong>TRAINER SCRIPT (52:00 - 58:00):</strong></p>
+          <p>"Let's do this together as a group. Look at Example 2: The Supermarket Barcode scanner. If the laser is dirty and cannot read the black lines, what step fails? (Wait for student response: Input!). Exactly!"</p>
+          <p>"And if the input fails, can the computer look up the price? No! That is why user interface design matters so much in Power Apps."</p>
+        </div>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 16: Independent Mini-Task
+           ==================================================================== -->
+      <section class="slide" id="slide-16" data-title="Independent Mini-Task" data-segment="Part 4: Demonstration &amp; Guided Practice (45:00 - 65:00)">
+        <div class="slide-content">
+          <div class="slide-header">
+            <span class="section-tag purple-tag">INDIVIDUAL PRACTICE</span>
+            <h2 class="slide-title">Independent Mini-Task: "The Paper Detective"</h2>
+            <p class="slide-lead">Take 5 minutes on your own notepad. Pick ONE workplace paper form you use at work:</p>
+          </div>
+
+          <div class="comparison-grid">
+            <div class="concept-card">
+              <div class="card-icon-header">
+                <span class="card-icon-circle purple-icon">📝</span>
+                <h3>Your 5-Minute Checklist</h3>
+              </div>
+              <ul class="comparison-list">
+                <li><strong>1. Name the Form:</strong> e.g., Equipment Inspection Log, Overtime Request, or Material Dispatch.</li>
+                <li><strong>2. Identify 3 Inputs:</strong> What 3 things does the worker write by hand? (e.g., Name, Date, Machine #).</li>
+                <li><strong>3. Identify the Process:</strong> Who reads the paper, calculates totals, or signs approval?</li>
+                <li><strong>4. Identify the Desired Result:</strong> What good thing happens when the form is finished?</li>
+              </ul>
+            </div>
+
+            <div class="concept-card">
+              <div class="card-icon-header">
+                <span class="card-icon-circle green-icon">💡</span>
+                <h3>Example Student Breakdown</h3>
+              </div>
+              <div style="background-color: var(--bg-card); border-radius: 6px; padding: 14px; font-size: 0.88rem; line-height: 1.5;">
+                <p><strong>Form:</strong> Forklift Daily Safety Checklist.</p>
+                <p><strong>Inputs:</strong> Operator Name, Forklift ID #3, Brakes Working (Yes/No).</p>
+                <p><strong>Process:</strong> Safety supervisor reviews log at 8:30 AM.</p>
+                <p><strong>Result:</strong> Forklift with bad brakes is parked before causing an accident!</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="slide-notes-content" style="display:none;">
+          <p><strong>TRAINER SCRIPT (58:00 - 65:00):</strong></p>
+          <p>"Take 5 quiet minutes right now. Write down your 4 bullets on paper. I will walk around the room to answer questions and check your work."</p>
+          <p>"Don't worry about technology syntax — focus strictly on the human story: What is input? What is processed? What is the result?"</p>
+        </div>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 17: Common Misconceptions & Wrong Mental Models
+           ==================================================================== -->
+      <section class="slide" id="slide-17" data-title="Common Beginner Misconceptions" data-segment="Part 5: Knowledge Check &amp; Misconceptions (65:00 - 75:00)">
+        <div class="slide-content">
+          <div class="slide-header">
+            <span class="section-tag yellow-tag">AVOID MENTAL TRAPS</span>
+            <h2 class="slide-title">3 Wrong Mental Models Beginners Have</h2>
+            <p class="slide-lead">Fixing these misunderstandings now will prevent months of frustration later:</p>
+          </div>
+
+          <div class="comparison-grid">
+            <div class="comparison-card">
+              <div class="card-icon-header">
+                <span class="card-icon-circle" style="background: rgba(209, 52, 56, 0.2); color: #ff8e8e;">1</span>
+                <h3>"Apps Are Smart Like Humans"</h3>
+              </div>
+              <p style="font-size: 0.88rem; color: #ff9e9e;"><strong>Plausible Wrong Model:</strong> Thinking the app knows you made a typo and will fix it automatically.</p>
+              <p style="font-size: 0.88rem; color: #8ce68c; margin-top: 6px;"><strong>Trainer Fix:</strong> Computers are 100% blind and obedient. If you give bad input, it produces bad output (Garbage In, Garbage Out!).</p>
+            </div>
+
+            <div class="comparison-card">
+              <div class="card-icon-header">
+                <span class="card-icon-circle" style="background: rgba(209, 52, 56, 0.2); color: #ff8e8e;">2</span>
+                <h3>"Hardware and Software Are the Same"</h3>
+              </div>
+              <p style="font-size: 0.88rem; color: #ff9e9e;"><strong>Plausible Wrong Model:</strong> Calling the physical iPad screen an "app".</p>
+              <p style="font-size: 0.88rem; color: #8ce68c; margin-top: 6px;"><strong>Trainer Fix:</strong> The tablet glass and battery are <strong>Hardware</strong> (body). The Power App running on it is <strong>Software</strong> (the instructions/thoughts!).</p>
+            </div>
+
+            <div class="comparison-card">
+              <div class="card-icon-header">
+                <span class="card-icon-circle" style="background: rgba(209, 52, 56, 0.2); color: #ff8e8e;">3</span>
+                <h3>"The Process is Magic"</h3>
+              </div>
+              <p style="font-size: 0.88rem; color: #ff9e9e;"><strong>Plausible Wrong Model:</strong> Believing apps connect to data magically without instructions.</p>
+              <p style="font-size: 0.88rem; color: #8ce68c; margin-top: 6px;"><strong>Trainer Fix:</strong> In Day 2, we will see that the Process is just a recipe of ordered steps. Every single step must be explicitly linked!</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="slide-notes-content" style="display:none;">
+          <p><strong>TRAINER SCRIPT (65:00 - 70:00):</strong></p>
+          <p>"Notice Trap #2: If you drop a tablet on concrete and shatter the glass, did you break the software? No! You broke the hardware. Your Power App is safe in the Microsoft Cloud. You can pick up a brand new tablet, sign in, and your app is right there."</p>
+        </div>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 18: 5-Question Knowledge Check
+           ==================================================================== -->
+      <section class="slide" id="slide-18" data-title="Knowledge Check (5 Questions)" data-segment="Part 5: Knowledge Check &amp; Misconceptions (65:00 - 75:00)">
+        <div class="slide-content">
+          <div class="slide-header">
+            <span class="section-tag purple-tag">INTERACTIVE VERIFICATION</span>
+            <h2 class="slide-title">5-Question Knowledge Check</h2>
+            <p class="slide-lead">Click your choice on screen to test your understanding. Immediate feedback will appear:</p>
+          </div>
+
+          <div class="quiz-widget-card">
+            <div class="quiz-progress-bar-wrap">
+              <span style="font-size: 0.82rem; color: var(--fluent-purple-light); font-weight: 700;">CONCEPT VERIFICATION</span>
+              <span style="font-size: 0.82rem; color: var(--text-muted);">Click an option to check</span>
+            </div>
+
+            <div class="quiz-question-text">
+              Q1: An operator taps "Machine #4 Overheating" on a tablet screen. What is this finger tap?
+            </div>
+
+            <div class="quiz-options-list">
+              <button class="quiz-option-btn" data-correct="false" data-explanation="Incorrect: The process is what the computer chip does internally after you touch the screen!">
+                <span>A) The Process</span>
+              </button>
+              <button class="quiz-option-btn" data-correct="true" data-explanation="✓ Correct! Any action, choice, or data given by a human being into the system is an INPUT!">
+                <span>B) The Input</span>
+              </button>
+              <button class="quiz-option-btn" data-correct="false" data-explanation="Incorrect: The output is what the screen shows back to the human eyes!">
+                <span>C) The Output</span>
+              </button>
+              <button class="quiz-option-btn" data-correct="false" data-explanation="Incorrect: The battery provides electrical power, but the finger tap is an Input.">
+                <span>D) The Hardware Battery</span>
+              </button>
+            </div>
+
+            <div class="quiz-feedback-box hidden" style="margin-top: 12px;"></div>
+          </div>
+        </div>
+
+        <div class="slide-notes-content" style="display:none;">
+          <p><strong>TRAINER SCRIPT (70:00 - 75:00):</strong></p>
+          <p>"Question 1: What is the finger tap? (Wait for room: Input!). Correct!"</p>
+          <p>"Additional oral check questions for the room:  
+          Q2: What happens if an operator types the wrong machine number into the tablet? (The wrong technician gets dispatched — Garbage In, Garbage Out!).  
+          Q3: Why can't a computer process data without an input? (Because computers are obedient assistants waiting for instruction).  
+          Q4: What is the physical aluminum body of a tablet called? (Hardware!).  
+          Q5: What is the difference between Output and Result? (Output is digital information on screen; Result is the real-world problem being solved!)."</p>
+        </div>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 19: 10-Minute Final Challenge
+           ==================================================================== -->
+      <section class="slide" id="slide-19" data-title="10-Minute Final Challenge" data-segment="Part 6: Final Challenge (75:00 - 85:00)">
+        <div class="slide-content">
+          <div class="slide-header">
+            <span class="section-tag yellow-tag">FINAL CHALLENGE</span>
+            <h2 class="slide-title">10-Minute Challenge: The Machine Oil Leak Report</h2>
+            <p class="slide-lead">Prove your mastery by deconstructing this real factory breakdown into the 5-link chain:</p>
+          </div>
+
+          <div class="comparison-grid">
+            <div class="concept-card" style="border-left: 4px solid var(--fluent-yellow);">
+              <div class="card-icon-header">
+                <span class="card-icon-circle" style="background: rgba(255, 185, 0, 0.2); color: var(--fluent-yellow);">📋</span>
+                <h3>The Challenge Scenario</h3>
+              </div>
+              <p style="font-size: 0.95rem; color: var(--text-secondary); line-height: 1.5;">
+                At 09:30 AM, an operator notices a puddle of hydraulic oil spreading beneath Injection Press #2. If the oil runs dry, the \$120,000 pump will burn out.
+              </p>
+              <div style="background-color: var(--bg-card); border-radius: 6px; padding: 12px; margin-top: 10px; font-size: 0.88rem; color: #fff;">
+                <strong>Your Task:</strong> Write down the exact 5 items on your notepad:  
+                1. <strong>Problem:</strong> ...  
+                2. <strong>Input:</strong> ...  
+                3. <strong>Process:</strong> ...  
+                4. <strong>Output:</strong> ...  
+                5. <strong>Result:</strong> ...
+              </div>
+            </div>
+
+            <div class="concept-card">
+              <div class="card-icon-header">
+                <span class="card-icon-circle green-icon">⏱️</span>
+                <h3>Timing &amp; Evaluation</h3>
+              </div>
+              <ul class="comparison-list">
+                <li><strong>Allotted Time:</strong> Exactly 10 Minutes (75:00 – 85:00).</li>
+                <li><strong>Rule:</strong> Plain English only. No programming jargon required.</li>
+                <li><strong>Success Standard:</strong> Your explanation must show clear causality from the oil puddle to the saved pump!</li>
+              </ul>
+              <div style="margin-top: 14px;">
+                <button class="btn-primary-nav btn-reveal-solution" style="padding: 8px 18px; font-size: 0.85rem;">
+                  👁️ Reveal Solution &amp; Rubric
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="challenge-solution-card hidden" style="margin-top: 14px; padding: 14px; background: rgba(0, 130, 114, 0.15); border: 1px solid var(--fluent-teal); border-radius: 6px;">
+            <strong style="color: #3be4cb;">BENCHMARK EXPECTED SOLUTION:</strong>
+            <p style="font-size: 0.86rem; color: #fff; margin-top: 6px;">
+              1. <strong>Problem:</strong> Hydraulic oil leak on Press #2 risking a \$120k pump burnout.<br>
+              2. <strong>Input:</strong> Operator selects "Press #2", issue "Oil Leak", urgency "High", taps Submit.<br>
+              3. <strong>Process:</strong> App logs Ticket #SR-104, stores timestamp 09:30 AM, triggers emergency alert.<br>
+              4. <strong>Output:</strong> Screen shows green confirmation; technician phone chimes with alert.<br>
+              5. <strong>Result:</strong> Technician tightens hydraulic fitting; pump saved; zero plant downtime!
+            </p>
+          </div>
+        </div>
+
+        <div class="slide-notes-content" style="display:none;">
+          <p><strong>TRAINER SCRIPT (75:00 - 82:00):</strong></p>
+          <p>"You have 10 minutes. Work independently or in pairs. Write out your 5 stages clearly. Remember: causality must flow from the oil leak all the way to the pump being saved!"</p>
+        </div>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 20: Evaluation Rubric
+           ==================================================================== -->
+      <section class="slide" id="slide-20" data-title="Challenge Evaluation Rubric" data-segment="Part 6: Final Challenge (75:00 - 85:00)">
+        <div class="slide-content">
+          <div class="slide-header">
+            <span class="section-tag green-tag">EVALUATION RUBRIC</span>
+            <h2 class="slide-title">4-Level Challenge Competency Rubric</h2>
+            <p class="slide-lead">How to assess student mastery of the causal problem-to-result chain:</p>
+          </div>
+
+          <div class="rubric-grid">
+            <div class="rubric-card level-4">
+              <span class="rubric-level-badge" style="color: var(--fluent-green);">LEVEL 4: MASTERY (5/5)</span>
+              <strong>Flawless Causal Chain</strong>
+              <p style="font-size: 0.8rem; color: var(--text-secondary);">
+                Clearly articulates all 5 stages. Distinguishes Output (screen confirmation) from Result (saved pump) with zero confusion.
+              </p>
+            </div>
+
+            <div class="rubric-card level-3">
+              <span class="rubric-level-badge" style="color: var(--fluent-blue);">LEVEL 3: PROFICIENT (4/5)</span>
+              <strong>Solid Operational Grasp</strong>
+              <p style="font-size: 0.8rem; color: var(--text-secondary);">
+                Understands Problem, Input, Process, and Output. Might slightly blend Output and Result together. Ready for Day 2.
+              </p>
+            </div>
+
+            <div class="rubric-card level-2">
+              <span class="rubric-level-badge" style="color: var(--fluent-yellow);">LEVEL 2: DEVELOPING (3/5)</span>
+              <strong>Needs Process Clarification</strong>
+              <p style="font-size: 0.8rem; color: var(--text-secondary);">
+                Mixes up Input with Process (e.g. thinks the computer enters the data). Review the Vending Machine analogy.
+              </p>
+            </div>
+
+            <div class="rubric-card level-1">
+              <span class="rubric-level-badge" style="color: var(--fluent-red);">LEVEL 1: NOVICE (&lt;3/5)</span>
+              <strong>Requires Retraining</strong>
+              <p style="font-size: 0.8rem; color: var(--text-secondary);">
+                Views apps as magic boxes without understanding user interaction. Needs review of the Microwave &amp; IPO concept.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="slide-notes-content" style="display:none;">
+          <p><strong>TRAINER SCRIPT (82:00 - 85:00):</strong></p>
+          <p>"Score your paper against this rubric. If you separated the digital Output (screen banner) from the physical Result (saved pump), you achieved Level 4 Mastery!"</p>
+        </div>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 21: Connection Map (Before -> Today -> Next)
+           ==================================================================== -->
+      <section class="slide" id="slide-21" data-title="The Connection Map (Before -> Today -> Next)" data-segment="Part 7: Wrap-Up &amp; Bridge Forward (85:00 - 90:00)">
+        <div class="slide-content">
+          <div class="slide-header">
+            <span class="section-tag purple-tag">CURRICULUM BRIDGE</span>
+            <h2 class="slide-title">The Connection Map: Before &rarr; Today &rarr; Next</h2>
+            <p class="slide-lead">How today connects backwards and bridges forward into Day 2:</p>
+          </div>
+
+          <div class="title-feature-grid">
+            <div class="feature-card" style="border-top: 3px solid var(--text-muted);">
+              <div class="feature-icon-badge" style="background: rgba(255,255,255,0.08); color: var(--text-muted);">BEFORE</div>
+              <h4>BEFORE TODAY</h4>
+              <p><strong>Starting Point:</strong> No prior software development knowledge. Isolated view of technology.</p>
+            </div>
+
+            <div class="feature-card" style="border-top: 3px solid var(--fluent-green);">
+              <div class="feature-icon-badge" style="background: rgba(16,124,16,0.2); color: #8ce68c;">TODAY</div>
+              <h4>DAY 1 ANCHOR</h4>
+              <p><strong>Problem &rarr; Result Chain:</strong> Apps exist to move a human problem toward a useful result via Input, Process, and Output.</p>
+            </div>
+
+            <div class="feature-card" style="border-top: 3px solid var(--fluent-blue);">
+              <div class="feature-icon-badge blue-glow">NEXT</div>
+              <h4>DAY 2 FORWARD BRIDGE</h4>
+              <p><strong>Instructions &amp; Sequence:</strong> The computer is blind and obedient. It needs step-by-step instructions in exact order!</p>
+            </div>
+          </div>
+
+          <div class="memory-hook-banner" style="margin-top: 18px;">
+            <strong>FORWARD BRIDGE:</strong> Tomorrow, we ask: <em>"How does the computer actually execute that Process without making a mistake?"</em> The answer is SEQUENCE!
+          </div>
+        </div>
+
+        <div class="slide-notes-content" style="display:none;">
+          <p><strong>TRAINER SCRIPT (85:00 - 87:00):</strong></p>
+          <p>"Look at the forward bridge. Today you learned that a Process happens between Input and Output. But how does the computer know WHAT to process? A computer cannot guess! Tomorrow in Day 2, we learn about Instructions and Sequence — giving ordered steps to a blind machine."</p>
+        </div>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 22: <=15-Minute Daily Homework
+           ==================================================================== -->
+      <section class="slide" id="slide-22" data-title="15-Minute Practical Homework" data-segment="Part 7: Wrap-Up &amp; Bridge Forward (85:00 - 90:00)">
+        <div class="slide-content">
+          <div class="slide-header">
+            <span class="section-tag teal-tag">HOMEWORK ASSIGNMENT</span>
+            <h2 class="slide-title">15-Minute Homework: "The Workplace Problem Tracker"</h2>
+            <p class="slide-lead">A quick, zero-coding assignment to prepare your brain for Day 2:</p>
+          </div>
+
+          <div class="comparison-grid">
+            <div class="concept-card" style="border-left: 4px solid var(--fluent-blue);">
+              <div class="card-icon-header">
+                <span class="card-icon-circle blue-icon">📝</span>
+                <h3>Your Assignment Task</h3>
+              </div>
+              <p style="font-size: 0.92rem; line-height: 1.5; color: var(--text-secondary); margin-bottom: 12px;">
+                Find <strong>ONE real problem or annoyance</strong> in your department or home (e.g. lost keys, missing tool, paper leave request, empty printer paper).
+              </p>
+              <ul class="comparison-list">
+                <li>Write down: <strong>What is the Real Problem?</strong></li>
+                <li>Write down: <strong>What Input could a user provide?</strong></li>
+                <li>Write down: <strong>What would be the dream Useful Result?</strong></li>
+              </ul>
+            </div>
+
+            <div class="concept-card">
+              <div class="card-icon-header">
+                <span class="card-icon-circle green-icon">⏱️</span>
+                <h3>Submission &amp; Timing</h3>
+              </div>
+              <ul class="comparison-list">
+                <li><strong>Max Duration:</strong> Strictly 15 minutes or less.</li>
+                <li><strong>Format:</strong> Pen on sticky note or phone notepad.</li>
+                <li><strong>Goal:</strong> Train your brain to see software opportunities in everyday friction.</li>
+                <li><strong>Day 2 Bridge:</strong> We will use your written problem in tomorrow morning's sequence exercise!</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="slide-notes-content" style="display:none;">
+          <p><strong>TRAINER SCRIPT (87:00 - 88:30):</strong></p>
+          <p>"Here is your 15-minute homework: find one real annoyance at your workstation or at home. Write down the problem, the input, and the desired result on a sticky note. Bring it tomorrow morning!"</p>
+        </div>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 23: Trainer 1-Page Recap & Bilingual Glossary
+           ==================================================================== -->
+      <section class="slide" id="slide-23" data-title="Trainer 1-Page Recap &amp; Glossary" data-segment="Part 7: Wrap-Up &amp; Bridge Forward (85:00 - 90:00)">
+        <div class="slide-content">
+          <div class="slide-header">
+            <span class="section-tag green-tag">DAY 1 RECAP</span>
+            <h2 class="slide-title">Trainer 1-Page Summary &amp; Bilingual Glossary</h2>
+            <p class="slide-lead">Keep these core terms fresh in both English and Khmer:</p>
+          </div>
+
+          <div class="dataset-preview-table-card" style="margin: 12px 0;">
+            <table class="dataset-table">
+              <thead>
+                <tr>
+                  <th>English Term</th>
+                  <th>ភាសាខ្មែរ (Khmer)</th>
+                  <th>Plain English Explanation</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Problem</strong></td>
+                  <td>បញ្ហាជាក់ស្តែង (Problem)</td>
+                  <td>The real-world human pain point that needs fixing.</td>
+                </tr>
+                <tr>
+                  <td><strong>Input</strong></td>
+                  <td>ធាតុចូល / ការបញ្ចូល (Input)</td>
+                  <td>Raw data, numbers, or button taps fed into the machine.</td>
+                </tr>
+                <tr>
+                  <td><strong>Process</strong></td>
+                  <td>ដំណើរការផ្ទៃក្នុង (Process)</td>
+                  <td>The internal calculations and rule checks performed by chips.</td>
+                </tr>
+                <tr>
+                  <td><strong>Output</strong></td>
+                  <td>ធាតុចេញឌីជីថល (Output)</td>
+                  <td>The message, sound, or visual confirmation displayed on screen.</td>
+                </tr>
+                <tr>
+                  <td><strong>Result</strong></td>
+                  <td>លទ្ធផលចុងក្រោយ (Result)</td>
+                  <td>The real-world improvement that solves the initial problem!</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="slide-notes-content" style="display:none;">
+          <p><strong>TRAINER SCRIPT (88:30 - 89:30):</strong></p>
+          <p>"Review our bilingual table. Whether you explain this in English or Khmer, the universal computing truth is the same: Problem &rarr; Input &rarr; Process &rarr; Output &rarr; Result."</p>
+        </div>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 24: Day 2 Preview & Sneak Peek
+           ==================================================================== -->
+      <section class="slide" id="slide-24" data-title="Day 2 Sneak Peek: Sequence" data-segment="Part 7: Wrap-Up &amp; Bridge Forward (85:00 - 90:00)">
+        <div class="slide-content">
+          <div class="slide-header">
+            <span class="section-tag purple-tag">COMING UP NEXT</span>
+            <h2 class="slide-title">Congratulations! Day 1 Conquered.</h2>
+            <p class="slide-lead">Here is what awaits you tomorrow morning in Day 2:</p>
+          </div>
+
+          <div class="comparison-grid">
+            <div class="concept-card" style="border-left: 4px solid var(--fluent-green);">
+              <div class="card-icon-header">
+                <span class="card-icon-circle green-icon">🎉</span>
+                <h3>You Are No Longer a Zero Beginner</h3>
+              </div>
+              <p style="font-size: 0.95rem; color: #fff; line-height: 1.5;">
+                You now understand the fundamental truth of software architecture:
+              </p>
+              <ul class="comparison-list" style="margin-top: 8px;">
+                <li>You can identify problems and distinguish them from results.</li>
+                <li>You can break any workflow into Input &rarr; Process &rarr; Output.</li>
+                <li>You see how our Factory Support Kiosk will evolve step by step!</li>
+              </ul>
+            </div>
+
+            <div class="concept-card" style="border-left: 4px solid var(--fluent-blue);">
+              <div class="card-icon-header">
+                <span class="card-icon-circle blue-icon">🚀</span>
+                <h3>Tomorrow in Day 2: 'Instructions &amp; Sequence'</h3>
+              </div>
+              <p style="font-size: 0.95rem; color: #fff; line-height: 1.5;">
+                <strong>Why order is everything in computer software:</strong>
+              </p>
+              <ul class="comparison-list" style="margin-top: 8px;">
+                <li>Why computers cannot guess what you meant.</li>
+                <li>The Power Apps semicolon (<code>;</code>) chaining operator.</li>
+                <li>Safe machine start procedures: Inspection <em>before</em> motor run!</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="slide-notes-content" style="display:none;">
+          <p><strong>TRAINER SCRIPT (89:30 - 90:00):</strong></p>
+          <p>"Congratulations to every single one of you! You have officially conquered Day 1. You are thinking like systems architects. See you tomorrow morning for Day 2: Instructions & Sequence!"</p>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- Bottom Presentation Footer Bar (Centered Prev/Next Controls) -->
+        <footer id="bottom-hud">
+      <div id="progress-bar-container">
+        <div id="progress-bar"></div>
+      </div>
+
+      <div class="hud-left">
+        <button class="hud-btn" id="btn-prev" onclick="prevSlide()" title="Previous Slide (Left Arrow)">&#8592; Prev</button>
+        <button class="hud-btn" id="btn-next" onclick="nextSlide()" title="Next Slide (Right Arrow / Space)">Next &#8594;</button>
+        <span id="slide-counter">Slide <span id="slide-current-num">1</span> / <span id="slide-total-count">24</span></span>
+      </div>
+
+      <div class="hud-right">
+        <button class="hud-btn" id="btn-lang" onclick="toggleLanguage()" title="Toggle Language (L)">
+          🌐 <span id="lang-label">KH</span>
+        </button>
+        <button class="hud-btn active" id="btn-laser" onclick="toggleLaser()" title="Presenter Laser Pointer (P)">
+          🔴 Laser
+        </button>
+        <button class="hud-btn" id="btn-notes" onclick="toggleNotes()" title="Trainer Notes Drawer (N)">
+          📝 Notes
+        </button>
+        <button class="hud-btn" id="btn-overview" onclick="toggleOverview()" title="Slide Overview Modal (O)">
+          🗂️ Overview
+        </button>
+        <button class="hud-btn" id="btn-timer" onclick="toggleTimer()" title="90-Min Countdown (T)">
+          ⏱️ <span id="timer-display">90:00</span>
+        </button>
+        <button class="hud-btn" id="btn-fullscreen" onclick="toggleFullscreen()" title="Fullscreen (F)">
+          ⛶
+        </button>
+        <a href="../index.html" class="hud-btn hub-btn" title="Return to Master Curriculum Hub (ត្រឡប់ទៅទំព័រដើម)" style="text-decoration: none; display: inline-flex; align-items: center; gap: 4px; color: #fcd34d; font-weight: 600;"><span>🏠</span><span>Hub</span></a>
+      </div>
+    </footer>
+
+    <!-- Floating Quick-Toggle Pill for Trainer Notes -->
+    <button id="notes-floating-tab" class="notes-floating-tab" title="Toggle Trainer Notes (Press N)">
+      <span class="tab-icon">🎓</span>
+      <span class="tab-text">Notes</span>
+    </button>
+
+    <!-- Floating Presenter Notes Panel (Toggleable via N, Header Button or Floating Tab) -->
+    <aside id="presenter-notes-panel" class="presenter-notes-panel" aria-label="Trainer Speaking Guidance and Timing">
+      <div class="notes-header">
+        <div class="notes-title-group">
+          <span class="notes-badge">🎓 TRAINER SCRIPT &amp; SPEAKING NOTES</span>
+          <span class="notes-timing-badge" id="notes-segment-label">Part 1 (00:00 - 10:00)</span>
+        </div>
+        <button id="notes-close-btn" class="notes-close-btn" title="Hide Notes Panel (Press N)">&times;</button>
+      </div>
+      <div class="notes-body" id="notes-content">
+        <!-- Dynamically populated from active slide's pre-rendered translation-safe notes -->
+      </div>
+    </aside>
+
+    <!-- Slide Overview / Grid View Modal (Toggleable via O or Grid Button) -->
+    <div id="overview-modal" class="overview-modal hidden" aria-modal="true" role="dialog">
+      <div class="overview-dialog">
+        <div class="overview-header">
+          <h3>Presentation Slide Overview (24 Slides)</h3>
+          <button id="overview-close-btn" class="overview-close-btn">&times;</button>
+        </div>
+        <div class="overview-grid" id="overview-grid-container">
+          <!-- Populated dynamically via script.js -->
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <script src="script.js"></script>
+
+    <!-- Presenter Laser Focus Pointer & Click Ripple Elements -->
+    <div id="presenter-pointer" class="presenter-laser-dot">
+      <div class="laser-halo"></div>
+    </div>
+    <div id="pointer-click-ripple" class="pointer-click-ripple"></div>
+  <script>
+if (window.self !== window.top) {
+  document.documentElement.classList.add('in-iframe');
+  function hideHub() { document.querySelectorAll('.hub-btn, .back-to-hub-pill').forEach(e => e.style.display = 'none'); }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', hideHub);
+  } else {
+    hideHub();
+  }
+}
+</script>
+<style>
+.in-iframe .hub-btn, .in-iframe .back-to-hub-pill { display: none !important; }
+</style>
+</body>
+</html>

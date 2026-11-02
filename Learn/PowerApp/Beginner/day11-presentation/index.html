@@ -1,0 +1,1614 @@
+<!DOCTYPE html>
+<html lang="en" translate="no" class="notranslate">
+<head>
+  <meta name="google" content="notranslate">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Power Apps Foundation — Day 11: Design Data from the Process</title>
+  
+    <!-- Famous & Universally Loved Khmer Fonts (Moul for Formal Titles, Siemreap & Battambang for Easy Reading) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=Moul&family=Kantumruy+Pro:ital,wght@0,400..700;1,400..700&family=Battambang:wght@300;400;700;900&family=Koh+Santepheap:wght@300;400;700&family=Koulen&family=Siemreap&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="../shared/design-system.css">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="fluent-dark-theme">
+
+  <!-- Main Presentation Stage Container (16:9 Viewport Constrained) -->
+  <div id="presentation-container" class="presentation-container">
+
+    <!-- Top Status Bar: Branding, Segment Indicator, Timer & Controls -->
+    <!-- Presentation Header removed to match Day 25 Standard -->
+
+    <!-- Main Presentation Stage: Viewport for Active Slide -->
+    <main id="presentation-stage" class="presentation-stage">
+
+      <!-- ====================================================================
+           SLIDE 1: HERO COVER SLIDE
+           ==================================================================== -->
+      <section class="slide active" id="slide-1" data-title="Title: Design Data from Process" data-segment="Part 1: Recall &amp; Connect">
+        <div class="slide-content hero-slide-layout">
+          <div class="hero-badge-row">
+            <span class="pill pill-phase">Phase 4: Data Architecture</span>
+            <span class="pill pill-accent">Day 11 of 27</span>
+            <span class="pill pill-time">90 Minutes Active Session</span>
+          </div>
+          <h1 class="hero-title">Design Data from the Process</h1>
+          <p class="hero-subtitle">Every column in your table must answer a real question needed by the workflow. Never design data from guesswork.</p>
+          
+          <div class="hero-connection-card">
+            <span class="chain-label">TODAY'S CONCEPT CONNECTION CHAIN</span>
+            <div class="chain-nodes">
+              <span class="chain-node">Process Need</span>
+              <span class="chain-arrow">➔</span>
+              <span class="chain-node">Process Question</span>
+              <span class="chain-arrow">➔</span>
+              <span class="chain-node">Required Field</span>
+              <span class="chain-arrow">➔</span>
+              <span class="chain-node">Data Type</span>
+              <span class="chain-arrow">➔</span>
+              <span class="chain-node active">Status &amp; ID</span>
+            </div>
+          </div>
+
+          <div class="hero-action-row">
+            <button class="fluent-btn-primary" id="hero-start-btn">
+              <span>Begin Lesson (Space / ➔)</span>
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                <path d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"/>
+              </svg>
+            </button>
+            <span class="hero-hint">Microsoft Fluent Dark Stage • Microsoft Edge Optimized • Fully Bilingual</span>
+          </div>
+        </div>
+
+        <aside class="trainer-notes">
+          <h4>Trainer Opening Script (00:00 – 02:00)</h4>
+          <p><strong>Opening Anchor:</strong> "Welcome back to Day 11! Yesterday in Day 10, we learned the anatomy of Tables and Records: one incident equals one row, and shared questions equal columns. Today, we answer the hardest question every beginner faces: <em>How do I know what columns to create in the first place?</em>"</p>
+          <p><strong>Core Mental Model:</strong> "Beginners open a database and start inventing random columns. Professional citizen developers never do that. They look at the <em>process</em> they mapped on Day 9, find the questions people ask at each step, and turn those exact questions into data fields!"</p>
+        </aside>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 2: CURRICULUM BLUEPRINT & SPIRAL PROGRESS MAP
+           ==================================================================== -->
+      <section class="slide" id="slide-2" data-title="Curriculum Blueprint: Day 11" data-segment="Part 1: Recall &amp; Connect">
+        <div class="slide-content standard-layout">
+          <div class="slide-header">
+            <span class="section-tag">Spiral Learning Curriculum</span>
+            <h2>Where We Are in the 27-Day Journey</h2>
+            <p class="subtitle">The central mental model: REAL PROBLEM ➔ PROCESS ➔ DATA ➔ UI/SCREEN ➔ LOGIC ➔ ACTION ➔ STORAGE ➔ FEEDBACK ➔ TEST</p>
+          </div>
+
+          <div class="curr-map-grid">
+            <div class="curr-card passed">
+              <span class="card-phase">Phase 1–2: Digital &amp; Logic Foundations</span>
+              <span class="card-days">Days 1 – 6 (Completed)</span>
+              <h3 class="card-title">Instructions, Conditions &amp; Boolean Rules</h3>
+              <p>Hardware, variables, question gates (True/False), IF/THEN decisions, and multi-condition AND/OR validation.</p>
+              <span class="card-status">✓ Mastered</span>
+            </div>
+
+            <div class="curr-card passed">
+              <span class="card-phase">Phase 3: Business Thinking &amp; Tables</span>
+              <span class="card-days">Days 7 – 10 (Completed)</span>
+              <h3 class="card-title">Processes, States, Records &amp; Tables</h3>
+              <p>Business wireframing, workflow anatomy, end-to-end 6-stage flows, and storing many cases in structured tables.</p>
+              <span class="card-status">✓ Mastered</span>
+            </div>
+
+            <div class="curr-card active-card">
+              <span class="card-phase">Phase 4: Data Architecture (Today)</span>
+              <span class="card-days">Day 11 (Active Session)</span>
+              <h3 class="card-title">Design Data from the Process</h3>
+              <p>Extracting fields from workflow questions, choosing unbreakable data types, master status, and unique IDs.</p>
+              <span class="card-status">★ In Progress</span>
+            </div>
+
+            <div class="curr-card future">
+              <span class="card-phase">Phase 5: User Interface &amp; Screens</span>
+              <span class="card-days">Days 12 – 14 (Next Phase)</span>
+              <h3 class="card-title">Turn Process &amp; Data into Screens</h3>
+              <p>Wireframing screens from data, building galleries, forms, cards, and responsive factory navigation.</p>
+              <span class="card-status">⏳ Up Next</span>
+            </div>
+
+            <div class="curr-card future">
+              <span class="card-phase">Phase 6: Power Fx &amp; Automation</span>
+              <span class="card-days">Days 15 – 21 (Upcoming)</span>
+              <h3 class="card-title">Interactive Logic &amp; Cloud Actions</h3>
+              <p>Patch, Collect, LookUp, Filter, validation gates, automated notifications, and Cloud Flows.</p>
+              <span class="card-status">⏳ Upcoming</span>
+            </div>
+
+            <div class="curr-card future">
+              <span class="card-phase">Phase 7: Enterprise Testing &amp; Deploy</span>
+              <span class="card-days">Days 22 – 27 (Final Phase)</span>
+              <h3 class="card-title">Production Polish &amp; Capstone</h3>
+              <p>Security roles, error trapping, factory kiosk testing, offline mode, and the end-to-end DX capstone project.</p>
+              <span class="card-status">⏳ Capstone</span>
+            </div>
+          </div>
+        </div>
+
+        <aside class="trainer-notes">
+          <h4>Spiral Reconnect (02:00 – 05:00)</h4>
+          <p>Point to the transition between Phase 3 and Phase 4. Emphasize: "On Day 9, we built a 6-stage workflow. On Day 10, we learned that a table holds records like index cards in a drawer. Today on Day 11, we combine both: we look at each step in that Day 9 workflow and design the exact slots printed on the Day 10 cards!"</p>
+        </aside>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 3: LEARNING OBJECTIVES
+           ==================================================================== -->
+      <section class="slide" id="slide-3" data-title="Measurable Objectives" data-segment="Part 1: Recall &amp; Connect">
+        <div class="slide-content standard-layout">
+          <div class="slide-header">
+            <span class="section-tag">Learning Outcomes</span>
+            <h2>What You Will Master in Today's 90 Minutes</h2>
+            <p class="subtitle">Four actionable, measurable capabilities evaluated against industrial citizen developer standards.</p>
+          </div>
+
+          <div class="objectives-grid">
+            <div class="obj-card">
+              <div class="obj-header">
+                <span class="obj-badge bloom-l2">L2: Understand</span>
+                <span class="obj-num">01</span>
+              </div>
+              <h3>Explain the "Questions Before Columns" Principle</h3>
+              <p>Articulate why designing fields from process steps eliminates data bloat, contrasts against messy spreadsheets, and guarantees system stability.</p>
+            </div>
+
+            <div class="obj-card">
+              <div class="obj-header">
+                <span class="obj-badge bloom-l3">L3: Apply</span>
+                <span class="obj-num">02</span>
+              </div>
+              <h3>Select Unbreakable Data Types</h3>
+              <p>Correctly classify business questions into their exact Power Apps data types: Single Text, Multi-Text, Number, Currency, Date/Time, Choice, Yes/No, and Auto-ID.</p>
+            </div>
+
+            <div class="obj-card">
+              <div class="obj-header">
+                <span class="obj-badge bloom-l4">L4: Analyze</span>
+                <span class="obj-num">03</span>
+              </div>
+              <h3>Isolate Gating Fields, Status &amp; Unique IDs</h3>
+              <p>Analyze a factory request process to distinguish between mandatory gating fields, the master workflow state machine, and the permanent immutable ticket ID.</p>
+            </div>
+
+            <div class="obj-card">
+              <div class="obj-header">
+                <span class="obj-badge bloom-l5">L5: Create</span>
+                <span class="obj-num">04</span>
+              </div>
+              <h3>Draft a Production Schema &amp; Gating Logic</h3>
+              <p>Construct a complete 8-row Data Schema Specification Matrix and translate validation business rules into functional Power Fx safety interlocks.</p>
+            </div>
+          </div>
+        </div>
+
+        <aside class="trainer-notes">
+          <h4>Objective Setting (05:00 – 07:00)</h4>
+          <p>Read through the 4 objectives. Ask the class: "By the end of today, you won't just guess what fields an app needs—you will be able to look at any paper form or spoken conversation in your company and instantly write the exact data blueprint for it."</p>
+        </aside>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 4: TIMED AGENDA
+           ==================================================================== -->
+      <section class="slide" id="slide-4" data-title="90-Minute Agenda" data-segment="Part 1: Recall &amp; Connect">
+        <div class="slide-content standard-layout">
+          <div class="slide-header">
+            <span class="section-tag">Timed Lesson Blueprint</span>
+            <h2>90-Minute Spiral Learning Schedule</h2>
+            <p class="subtitle">Every minute is structured for active engagement, physical analogies, live demonstration, and hands-on simulation.</p>
+          </div>
+
+          <div class="agenda-timeline">
+            <div class="time-block">
+              <span class="time-stamp">00:00 – 10:00 (10 Min)</span>
+              <span class="time-badge">Part 1: Recall &amp; Connect</span>
+              <p class="time-content">Spiral recap from Days 9 &amp; 10, active retrieval quiz, and framing today's data architecture objective.</p>
+            </div>
+
+            <div class="time-block">
+              <span class="time-stamp">10:00 – 25:00 (15 Min)</span>
+              <span class="time-badge">Part 2: Discover (The Why)</span>
+              <p class="time-content">The $42,000 "47-Column Excel Monster" at Apex Plastics, and the Doctor's Triage Chart analogy.</p>
+            </div>
+
+            <div class="time-block">
+              <span class="time-stamp">25:00 – 45:00 (20 Min)</span>
+              <span class="time-badge">Part 3: Deep Dive Theory</span>
+              <p class="time-content">The 5-Step Process-to-Data Pipeline, selecting data types, master Status field, and Unique ID immutability.</p>
+            </div>
+
+            <div class="time-block highlight-block">
+              <span class="time-stamp">45:00 – 60:00 (15 Min)</span>
+              <span class="time-badge">Part 4: Demonstrate &amp; Lab</span>
+              <p class="time-content">Mental stretch (45:00), Interactive Schema Architect Workbench (Widget 1), and Trainer live demo.</p>
+            </div>
+
+            <div class="time-block">
+              <span class="time-stamp">60:00 – 75:00 (15 Min)</span>
+              <span class="time-badge">Part 5: Guided Practice</span>
+              <p class="time-content">Auditing a broken warehouse schema, 6-Scenario Simulator (Widget 2), and correcting 4 mental traps.</p>
+            </div>
+
+            <div class="time-block">
+              <span class="time-stamp">75:00 – 90:00 (15 Min)</span>
+              <span class="time-badge">Part 6: Assess &amp; Bridge</span>
+              <p class="time-content">5-Question Knowledge Check (Widget 3), Capstone Challenge, Solution Reveal &amp; Rubric, and Day 12 Bridge.</p>
+            </div>
+          </div>
+        </div>
+
+        <aside class="trainer-notes">
+          <h4>Agenda Checkpoint (07:00 – 10:00)</h4>
+          <p>Highlight the rhythm: Notice that Part 4 starts with an active stretch at minute 45. The interactive workbench allows learners to touch the controls before attempting guided practice.</p>
+        </aside>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 5: PREREQUISITE RETRIEVAL DECK
+           ==================================================================== -->
+      <section class="slide" id="slide-5" data-title="Prerequisite Retrieval" data-segment="Part 1: Recall &amp; Connect">
+        <div class="slide-content standard-layout">
+          <div class="slide-header">
+            <span class="section-tag">Active Recall</span>
+            <h2>Prerequisite Retrieval: Locking In Prior Knowledge</h2>
+            <p class="subtitle">Click each card to verify the foundational concepts learned on Days 4, 9, and 10.</p>
+          </div>
+
+          <div class="retrieval-deck">
+            <div class="retrieval-card" id="ret-card-1">
+              <div class="retrieval-q-badge">From Day 10: Tables vs. Variables</div>
+              <div class="card-prompt">
+                <h3>"Why can't an enterprise ticketing system store requests in simple global variables?"</h3>
+              </div>
+              <button class="fluent-btn-secondary ret-reveal-btn" data-target="ret-ans-1">Reveal Answer</button>
+              <div class="retrieval-answer" id="ret-ans-1">
+                <strong>Correct Concept:</strong> A variable is a single box that holds exactly one value at a time. The moment a second employee submits a request, it overwrites the first request! We need a <strong>Table</strong> to hold hundreds of independent <strong>Records</strong>.
+              </div>
+            </div>
+
+            <div class="retrieval-card" id="ret-card-2">
+              <div class="retrieval-q-badge">From Day 9: The Role of Status</div>
+              <div class="card-prompt">
+                <h3>"What is a 'Status' in a business flow, and why does Power Fx care about it?"</h3>
+              </div>
+              <button class="fluent-btn-secondary ret-reveal-btn" data-target="ret-ans-2">Reveal Answer</button>
+              <div class="retrieval-answer" id="ret-ans-2">
+                <strong>Correct Concept:</strong> Status is not decorative text; it is the <strong>traffic cop or switch</strong> of the application. Power Fx checks the Status (e.g. <code>Status = "Submitted"</code>) to decide which buttons appear, who owns the work, and whether screens are editable or locked.
+              </div>
+            </div>
+
+            <div class="retrieval-card" id="ret-card-3">
+              <div class="retrieval-q-badge">From Day 4: Condition Data Types</div>
+              <div class="card-prompt">
+                <h3>"If we store an estimated repair cost as plain text like '$500', what happens when Power Fx evaluates a condition?"</h3>
+              </div>
+              <button class="fluent-btn-secondary ret-reveal-btn" data-target="ret-ans-3">Reveal Answer</button>
+              <div class="retrieval-answer" id="ret-ans-3">
+                <strong>Correct Concept:</strong> Power Fx will fail or throw a type mismatch error! Computers cannot perform mathematical comparisons (<code>&gt;</code>, <code>&lt;</code>) on text characters with symbols. Numbers and Currency must be stored as <strong>Number</strong> data types!
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <aside class="trainer-notes">
+          <h4>Retrieval Execution Protocol (07:00 – 10:00)</h4>
+          <p>Do NOT click the reveal buttons immediately. Ask question 1 to the whole room. Have learners raise their hands. Click "Reveal Answer" and celebrate accurate phrasing. Repeat for questions 2 and 3.</p>
+        </aside>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 6: THE $42,000 DISASTER AT APEX PLASTICS
+           ==================================================================== -->
+      <section class="slide" id="slide-6" data-title="Workplace Crisis: Apex Plastics" data-segment="Part 2: Discover (The Why)">
+        <div class="slide-content standard-layout">
+          <div class="slide-header">
+            <span class="section-tag section-tag-danger">Workplace Crisis Case Study</span>
+            <h2>The $42,000 "47-Column Excel Monster" &amp; The Chemical Leak</h2>
+            <p class="subtitle">What happens when you design data from guesswork rather than from what the process requires.</p>
+          </div>
+
+          <div class="crisis-story-grid">
+            <div class="crisis-timeline-card">
+              <div class="crisis-event">
+                <span class="event-time">Month 1</span>
+                <div class="event-desc">
+                  <strong>The Amateur Build:</strong> The plant manager asked a junior developer to build an app. The developer went around asking everyone: <em>"What columns do you want?"</em> They created a spreadsheet with <strong>47 random fields</strong>, all formatted as free text!
+                </div>
+              </div>
+              <div class="crisis-event">
+                <span class="event-time">14:10 PM</span>
+                <div class="event-desc">
+                  <strong>The Hazardous Leak:</strong> On Line 4, a toxic solvent pump seal failed. Operator Sothea typed: <code>Machine: "Line 4 Main Pump"</code>, <code>Priority: "EMERGENCY ASAP!!!"</code>, <code>Cost: "high"</code>.
+                </div>
+              </div>
+              <div class="crisis-event">
+                <span class="event-time">14:15 PM</span>
+                <div class="event-desc">
+                  <strong>The Squeaky Chair:</strong> In the front office, an operator typed: <code>Machine: "Desk Chair"</code>, <code>Priority: "urgent"</code>.
+                </div>
+              </div>
+              <div class="crisis-event fatal">
+                <span class="event-time">14:30 PM</span>
+                <div class="event-desc">
+                  <strong>The Data Chaos:</strong> The maintenance supervisor opened the list. Alphabetical sorting put <code>"urgent"</code> *before* <code>"EMERGENCY ASAP!!!"</code>. Because there was no unique auto-ID, two tickets were numbered "#12". Maintenance dispatched a technician to the office chair!
+                </div>
+              </div>
+              <div class="crisis-event fatal">
+                <span class="event-time">18:00 PM</span>
+                <div class="event-desc">
+                  <strong>The Catastrophe:</strong> The unattended pump ruptured. 200 workers evacuated. Total hazmat cleanup and EPA penalties: <strong>$42,000!</strong>
+                </div>
+              </div>
+            </div>
+
+            <div class="crisis-lesson-card">
+              <div class="loss-badge">$42,000 Loss</div>
+              <h3>The Root Architectural Failure</h3>
+              <p>The developer thought: <em>"More columns and free text gives users more freedom."</em></p>
+              <div class="flaw-box">
+                <span class="flaw-icon">⚠️</span>
+                <span>Unrestricted free text and random columns produce a <strong>digital landfill</strong> where critical alarms cannot be sorted, filtered, or automated!</span>
+              </div>
+              <div class="solution-preview">
+                <strong>The Architectural Fix:</strong>
+                <p>Never ask <em>"What columns do you want?"</em> Ask: <em>"What question must be answered at this step of the process?"</em> Every field must have a strict Data Type, a clear Status role, and a unique immutable ID.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <aside class="trainer-notes">
+          <h4>Trainer Storytelling Protocol (10:00 – 16:00)</h4>
+          <p>Deliver this story with dramatic tension. Ask the class: "Has this ever happened at your company, where an Excel sheet has 50 columns, half of them are blank, and people type whatever they want into the priority box?" Everyone will laugh and nod.</p>
+        </aside>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 7: PLAIN-LANGUAGE CONCEPT
+           ==================================================================== -->
+      <section class="slide" id="slide-7" data-title="Plain-Language Concept" data-segment="Part 2: Discover (The Why)">
+        <div class="slide-content standard-layout">
+          <div class="slide-header">
+            <span class="section-tag">Plain-Language Mental Model</span>
+            <h2>"Questions Before Columns": The Doctor's Medical Chart</h2>
+            <p class="subtitle">Before touching software or databases, understand how physical intake charts work.</p>
+          </div>
+
+          <div class="analogy-cards-trio">
+            <div class="concept-trio-card">
+              <div class="trio-badge">The Blank Notebook (Bad)</div>
+              <div class="trio-icon">📓</div>
+              <h3>The Random Spreadsheet</h3>
+              <p class="trio-def">A doctor writes whatever they want on a blank notebook page.</p>
+              <ul class="trio-points">
+                <li>One doctor writes blood pressure; another forgets.</li>
+                <li>Drug allergies are buried in paragraph text.</li>
+                <li>In an emergency, the nurse cannot find the blood type.</li>
+              </ul>
+            </div>
+
+            <div class="concept-trio-card active-trio">
+              <div class="trio-badge highlight">The Medical Chart (Professional)</div>
+              <div class="trio-icon">📋</div>
+              <h3>Process-Driven Fields</h3>
+              <p class="trio-def">Every question corresponds to a specific medical stage.</p>
+              <ul class="trio-points">
+                <li><strong>Triage Nurse:</strong> Body Temp (Number), Blood Pressure (Number).</li>
+                <li><strong>Doctor:</strong> Diagnosis (Text), Emergency Surgery (Yes/No).</li>
+                <li><strong>Pharmacy:</strong> Medication (Choice), Dosage (Number).</li>
+              </ul>
+            </div>
+
+            <div class="concept-trio-card">
+              <div class="trio-badge">The Core Golden Rule</div>
+              <div class="trio-icon">🔑</div>
+              <h3>The Golden Architecture Law</h3>
+              <p class="trio-def">Data fields exist solely to support human decisions.</p>
+              <ul class="trio-points">
+                <li>If a piece of data doesn't trigger a decision or action, <strong>DO NOT STORE IT</strong>.</li>
+                <li>Every field requires maintenance, screen space, and user time.</li>
+                <li>Fewer, disciplined fields create faster, error-free apps.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <aside class="trainer-notes">
+          <h4>Analogy Delivery (16:00 – 25:00)</h4>
+          <p>Explain the medical analogy clearly: "Notice how the triage nurse doesn't ask about your health insurance billing number when your heart stops beating. The process step dictates the data questions! In an emergency, only vital signs matter."</p>
+        </aside>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 8: THE 5-STEP PROCESS-TO-DATA PIPELINE
+           ==================================================================== -->
+      <section class="slide" id="slide-8" data-title="Process-to-Data Pipeline" data-segment="Part 3: Deep Dive Theory">
+        <div class="slide-content standard-layout">
+          <div class="slide-header">
+            <span class="section-tag">Systematic Engineering Method</span>
+            <h2>The 5-Step Process-to-Data Pipeline</h2>
+            <p class="subtitle">How a professional citizen developer derives an entire database schema directly from human workflow steps.</p>
+          </div>
+
+          <div class="pipeline-container">
+            <div class="pipeline-step">
+              <div class="pipe-num">1</div>
+              <h4>Identify Process Step</h4>
+              <p>Look at your Day 9 workflow map (e.g. Step 1: Operator Incident Report).</p>
+              <span class="pipe-tag">Workflow Map</span>
+            </div>
+
+            <div class="pipeline-arrow">➔</div>
+
+            <div class="pipeline-step">
+              <div class="pipe-num">2</div>
+              <h4>Ask The Process Question</h4>
+              <p>"Which specific machine broke? What noise or symptom occurred?"</p>
+              <span class="pipe-tag">Plain-English</span>
+            </div>
+
+            <div class="pipeline-arrow">➔</div>
+
+            <div class="pipeline-step">
+              <div class="pipe-num">3</div>
+              <h4>Define The Field Name</h4>
+              <p>Create clean, PascalCase column names: <code>MachineID</code>, <code>IssueDescription</code>.</p>
+              <span class="pipe-tag">Column Slot</span>
+            </div>
+
+            <div class="pipeline-arrow">➔</div>
+
+            <div class="pipeline-step">
+              <div class="pipe-num">4</div>
+              <h4>Assign The Data Type</h4>
+              <p>Enforce the answer shape: Choice for machine asset, Text for symptom description.</p>
+              <span class="pipe-tag">Data Type</span>
+            </div>
+
+            <div class="pipeline-arrow">➔</div>
+
+            <div class="pipeline-step highlight-pipe">
+              <div class="pipe-num">5</div>
+              <h4>Set Gating &amp; Validation</h4>
+              <p>Is this field required? If empty, lock the submit button using Power Fx.</p>
+              <span class="pipe-tag">Power Fx Gate</span>
+            </div>
+          </div>
+
+          <div class="pipeline-summary-box">
+            <span class="box-icon">💡</span>
+            <span class="box-text"><strong>Key Principle:</strong> You never invent fields out of thin air. You simply translate human workplace questions into structured data slots!</span>
+          </div>
+        </div>
+
+        <aside class="trainer-notes">
+          <h4>Pipeline Deep Dive (25:00 – 30:00)</h4>
+          <p>Trace this pipeline with your finger across the screen. Show that every step logically forces the next step. If you have Step 1 (Process Step), Step 2 (Process Question) is natural, Step 3 (Field Name) is obvious, Step 4 (Data Type) is mathematical, and Step 5 (Power Fx) is easy!</p>
+        </aside>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 9: CHOOSING THE RIGHT DATA TYPE
+           ==================================================================== -->
+      <section class="slide" id="slide-9" data-title="Core Data Types" data-segment="Part 3: Deep Dive Theory">
+        <div class="slide-content standard-layout">
+          <div class="slide-header">
+            <span class="section-tag">Data Type Selection</span>
+            <h2>Choosing the Right Data Type: The 7 Core Building Blocks</h2>
+            <p class="subtitle">Data types govern the shape of the data and what Power Fx calculations are legally allowed.</p>
+          </div>
+
+          <div class="datatypes-grid">
+            <div class="dt-card">
+              <div class="dt-badge dt-text">Text</div>
+              <h4>Single Line of Text</h4>
+              <p class="dt-desc">Short strings under 255 characters. Names, short summaries, serial numbers.</p>
+              <div class="dt-example">Example: <code>"Hydraulic seal leak"</code></div>
+            </div>
+
+            <div class="dt-card">
+              <div class="dt-badge dt-multitext">Multi-Text</div>
+              <h4>Multiple Lines of Text</h4>
+              <p class="dt-desc">Long descriptions, technician repair notes, troubleshooting histories.</p>
+              <div class="dt-example">Example: <code>"Disassembled motor arm, replaced worn bearings..."</code></div>
+            </div>
+
+            <div class="dt-card">
+              <div class="dt-badge dt-num">Number / Currency</div>
+              <h4>Whole Number / Decimal</h4>
+              <p class="dt-desc">Quantities, repair hours, costs. Enables mathematical calculations (<code>+</code>, <code>Sum</code>, <code>&gt;</code>).</p>
+              <div class="dt-example">Example: <code>450.00</code>, <code>3.5</code> hours</div>
+            </div>
+
+            <div class="dt-card">
+              <div class="dt-badge dt-date">Date &amp; Time</div>
+              <h4>Date and Time</h4>
+              <p class="dt-desc">Timestamps, submission dates, audit logs. Enables duration tracking (<code>DateDiff</code>).</p>
+              <div class="dt-example">Example: <code>2026-10-30 14:15</code></div>
+            </div>
+
+            <div class="dt-card">
+              <div class="dt-badge dt-choice">Choice (OptionSet)</div>
+              <h4>Choice / Dropdown</h4>
+              <p class="dt-desc">Strict predefined list of options. Prevents typos and guarantees uniform sorting.</p>
+              <div class="dt-example">Example: <code>["Low", "Medium", "High", "Critical"]</code></div>
+            </div>
+
+            <div class="dt-card">
+              <div class="dt-badge dt-bool">Yes / No</div>
+              <h4>Boolean (Two States)</h4>
+              <p class="dt-desc">Binary truth state. Direct input for IF conditions and safety interlocks.</p>
+              <div class="dt-example">Example: <code>IsApproved = True</code></div>
+            </div>
+          </div>
+        </div>
+
+        <aside class="trainer-notes">
+          <h4>Data Types Explanation (30:00 – 35:00)</h4>
+          <p>Emphasize: "Why do we have Choice columns instead of Text? Because if humans type 'High', 'high', 'HIGH', 'urgent', or 'hi', a computer sees five completely different words! A Choice column forces everyone to pick from the exact same pre-approved menu."</p>
+        </aside>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 10: THE ROLE OF STATUS: THE MASTER SWITCH
+           ==================================================================== -->
+      <section class="slide" id="slide-10" data-title="Master Status Field" data-segment="Part 3: Deep Dive Theory">
+        <div class="slide-content standard-layout">
+          <div class="slide-header">
+            <span class="section-tag">State Machine Architecture</span>
+            <h2>The Master Status Field: The Engine of the App</h2>
+            <p class="subtitle">Status is not just a colored label; it is the master switch that controls permissions, visibility, and screen states.</p>
+          </div>
+
+          <div class="status-architecture-layout">
+            <div class="status-flow-diagram">
+              <div class="status-node node-draft">
+                <span class="node-num">1</span>
+                <h4>Draft</h4>
+                <p>Operator editing</p>
+                <span class="node-rule">DisplayMode: Edit</span>
+              </div>
+              <div class="status-link">➔</div>
+
+              <div class="status-node node-submitted">
+                <span class="node-num">2</span>
+                <h4>Submitted</h4>
+                <p>Waiting supervisor</p>
+                <span class="node-rule">btnApprove.Visible = True</span>
+              </div>
+              <div class="status-link">➔</div>
+
+              <div class="status-node node-progress">
+                <span class="node-num">3</span>
+                <h4>In Progress</h4>
+                <p>Technician repairing</p>
+                <span class="node-rule">Assignee: Dara</span>
+              </div>
+              <div class="status-link">➔</div>
+
+              <div class="status-node node-closed">
+                <span class="node-num">4</span>
+                <h4>Closed</h4>
+                <p>Locked &amp; archived</p>
+                <span class="node-rule">DisplayMode: View</span>
+              </div>
+            </div>
+
+            <div class="status-powerfx-box">
+              <div class="box-title">How Power Fx Uses The Status Field:</div>
+              <div class="code-snippet">
+                <span class="code-comment">// 1. Lock screen once ticket is completed</span><br>
+                <code>frmRequest.DisplayMode = If(Status = "Closed", DisplayMode.View, DisplayMode.Edit)</code><br><br>
+                <span class="code-comment">// 2. Show Approve button ONLY to Supervisor when ticket is Submitted</span><br>
+                <code>btnApprove.Visible = (UserRole = "Supervisor") &amp;&amp; (Status = "Submitted")</code>
+              </div>
+              <div class="box-note">
+                <strong>Crucial Rule:</strong> Because Status drives all application logic, it must <em>never</em> be a free-text box. It must always be a controlled Choice column!
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <aside class="trainer-notes">
+          <h4>Status Engine Protocol (35:00 – 40:00)</h4>
+          <p>Explain that Status is the "state" of the record. Walk through the Power Fx snippet: "Look at the condition: `Status = 'Closed'`. If True, DisplayMode is View (read-only). This protects company data from accidental modification after a ticket is finished."</p>
+        </aside>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 11: THE ANATOMY OF A UNIQUE ID
+           ==================================================================== -->
+      <section class="slide" id="slide-11" data-title="Unique Record ID" data-segment="Part 3: Deep Dive Theory">
+        <div class="slide-content standard-layout">
+          <div class="slide-header">
+            <span class="section-tag">Data Integrity Standard</span>
+            <h2>The Anatomy of a Unique ID: The Unchanging Birthmark</h2>
+            <p class="subtitle">Why every enterprise record must have a permanent, system-generated identifier that never changes.</p>
+          </div>
+
+          <div class="id-anatomy-grid">
+            <div class="id-card id-bad">
+              <div class="id-card-header">
+                <span class="id-badge-danger">Bad Approach: Manual Typing</span>
+                <h3>"Ticket #1", "Ticket #2"</h3>
+              </div>
+              <ul class="id-reasons-list">
+                <li>❌ Two operators create ticket #12 at the same time.</li>
+                <li>❌ An operator typos "Ticket 14B" instead of "Ticket 14".</li>
+                <li>❌ A user accidentally changes the ID to cover up a mistake.</li>
+                <li>❌ Accounting cannot link purchase orders to repair jobs.</li>
+              </ul>
+              <div class="id-verdict">Result: Collisions, lost tickets, audit failure.</div>
+            </div>
+
+            <div class="id-card id-good">
+              <div class="id-card-header">
+                <span class="id-badge-success">Enterprise Standard: Auto-Number</span>
+                <h3>REQ-2026-0042</h3>
+              </div>
+              <ul class="id-reasons-list">
+                <li>✓ <strong>Prefix:</strong> Identifies business unit (<code>REQ</code> = Maintenance Request).</li>
+                <li>✓ <strong>Year / Stamp:</strong> Prevents number overflow across decades (<code>2026</code>).</li>
+                <li>✓ <strong>Sequential Digits:</strong> Guaranteed unique counter (<code>0042</code>).</li>
+                <li>✓ <strong>Immutable:</strong> System generated at creation; read-only forever.</li>
+              </ul>
+              <div class="id-verdict">Result: 100% trace, zero duplicates, ISO compliant.</div>
+            </div>
+          </div>
+        </div>
+
+        <aside class="trainer-notes">
+          <h4>ID Immutability Protocol (40:00 – 45:00)</h4>
+          <p>Ask: "Can you change your national passport number or birth certificate number just because you feel like it? No! The record ID is the birthmark. Even if the machine name changes, or the supervisor changes, the ID stays the same forever."</p>
+        </aside>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 12: INTERACTIVE WIDGET 1: SCHEMA ARCHITECT WORKBENCH
+           ==================================================================== -->
+      <section class="slide" id="slide-12" data-title="Interactive Schema Workbench" data-segment="Part 4: Demonstrate &amp; Lab">
+        <div class="slide-content standard-layout">
+          <div class="slide-header">
+            <span class="section-tag section-tag-accent">Interactive Workbench</span>
+            <h2>Widget 1: Process-to-Schema Architect &amp; Field Type Inspector</h2>
+            <p class="subtitle">Select a process question to dynamically configure its field name, data type, and generate live Power Fx gating rules.</p>
+          </div>
+
+          <div class="schema-workbench-layout">
+            <!-- Left Panel: Process Question Picker & Field Builder -->
+            <div class="workbench-form-panel">
+              <div class="panel-header">
+                <span class="panel-icon">⚙️</span>
+                <h3>Step 1 &amp; 2: Process Input</h3>
+              </div>
+
+              <div class="form-group">
+                <label for="wb-process-step">Select Process Step:</label>
+                <select id="wb-process-step" class="fluent-select">
+                  <option value="1">Step 1: Incident Reporting (Operator)</option>
+                  <option value="2">Step 2: Supervisor Approval (Supervisor)</option>
+                  <option value="3">Step 3: Maintenance Execution (Technician)</option>
+                  <option value="4">Step 4: Quality &amp; Compliance Sign-off (QA)</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for="wb-process-question">Process Question Being Answered:</label>
+                <select id="wb-process-question" class="fluent-select">
+                  <!-- Populated dynamically by script.js -->
+                </select>
+              </div>
+
+              <div class="form-row-dual">
+                <div class="form-group">
+                  <label for="wb-field-name">Field Name (PascalCase):</label>
+                  <input type="text" id="wb-field-name" class="fluent-input" readonly>
+                </div>
+                <div class="form-group">
+                  <label for="wb-data-type">Recommended Data Type:</label>
+                  <input type="text" id="wb-data-type" class="fluent-input" readonly>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="checkbox-label">
+                  <input type="checkbox" id="wb-is-required" checked>
+                  <span><strong>Mandatory Gating Field (Required)</strong></span>
+                </label>
+              </div>
+            </div>
+
+            <!-- Right Panel: Architectural Schema Preview & Power Fx Code Generator -->
+            <div class="workbench-output-panel">
+              <div class="panel-header">
+                <span class="panel-icon">💻</span>
+                <h3>Generated Architectural Output</h3>
+              </div>
+
+              <div class="schema-inspector-card">
+                <div class="spec-row">
+                  <span class="spec-label">Storage Table:</span>
+                  <span class="spec-val" id="wb-spec-table">MaintenanceRequests</span>
+                </div>
+                <div class="spec-row">
+                  <span class="spec-label">Dataverse / SharePoint Type:</span>
+                  <span class="spec-val" id="wb-spec-type">Choice (OptionSet)</span>
+                </div>
+                <div class="spec-row">
+                  <span class="spec-label">Process Role:</span>
+                  <span class="spec-val" id="wb-spec-role">Prevents typo-based equipment misrouting</span>
+                </div>
+              </div>
+
+              <div class="powerfx-preview-box">
+                <span class="code-title">Generated Power Fx Gating Rule:</span>
+                <pre><code id="wb-powerfx-code">// Generated dynamically based on your selection</code></pre>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <aside class="trainer-notes">
+          <h4>Interactive Lab Protocol (45:00 – 55:00)</h4>
+          <p>Demonstrate this tool to the class: "Notice that when you pick 'Step 1' and 'Which machine broke?', the workbench automatically sets Field Name to `MachineID`, Data Type to `Choice`, and writes the Power Fx rule `btnSubmit.DisplayMode = If(IsBlank(cmbMachine.Selected), DisplayMode.Disabled, DisplayMode.Edit)`!"</p>
+        </aside>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 13: MAPPING APEX PLASTICS SUPPORT FLOW TO FIELDS
+           ==================================================================== -->
+      <section class="slide" id="slide-13" data-title="Apex Plastics Schema Matrix" data-segment="Part 4: Demonstrate &amp; Lab">
+        <div class="slide-content standard-layout">
+          <div class="slide-header">
+            <span class="section-tag">Production Case Blueprint</span>
+            <h2>The Complete Apex Plastics Maintenance Schema</h2>
+            <p class="subtitle">The complete 8-field master schema derived cleanly from our 4 universal workflow stages.</p>
+          </div>
+
+          <div class="schema-table-container">
+            <table class="capstone-table">
+              <thead>
+                <tr>
+                  <th>Field Name</th>
+                  <th>Data Type</th>
+                  <th>Required?</th>
+                  <th>Workflow Step</th>
+                  <th>Business Purpose / Power Fx Impact</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><code>RequestID</code></td>
+                  <td>Auto-Number Text</td>
+                  <td><span class="badge badge-yes">Yes (System)</span></td>
+                  <td>All Stages</td>
+                  <td>Unique immutable birthmark (e.g. <code>REQ-2026-0042</code>)</td>
+                </tr>
+                <tr>
+                  <td><code>MachineID</code></td>
+                  <td>Choice (Asset List)</td>
+                  <td><span class="badge badge-yes">Yes</span></td>
+                  <td>Step 1: Report</td>
+                  <td>Restricts operator selection to verified factory press assets</td>
+                </tr>
+                <tr>
+                  <td><code>IssueDescription</code></td>
+                  <td>Multiple Lines Text</td>
+                  <td><span class="badge badge-yes">Yes</span></td>
+                  <td>Step 1: Report</td>
+                  <td>Unconstrained symptom report; submit button blocked if blank</td>
+                </tr>
+                <tr>
+                  <td><code>UrgencyLevel</code></td>
+                  <td>Choice (4 Values)</td>
+                  <td><span class="badge badge-yes">Yes</span></td>
+                  <td>Step 1: Report</td>
+                  <td>Enables instant queue sorting and emergency notification routing</td>
+                </tr>
+                <tr>
+                  <td><code>EstimatedCost</code></td>
+                  <td>Currency / Number</td>
+                  <td><span class="badge badge-yes">Yes</span></td>
+                  <td>Step 2: Review</td>
+                  <td>Drives financial gate: <code>If(Cost &gt; 1000, Escalate, Approve)</code></td>
+                </tr>
+                <tr>
+                  <td><code>IsApproved</code></td>
+                  <td>Yes / No (Boolean)</td>
+                  <td><span class="badge badge-yes">Yes</span></td>
+                  <td>Step 2: Review</td>
+                  <td>Direct boolean branch advancing ticket to maintenance shop</td>
+                </tr>
+                <tr>
+                  <td><code>LaborHours</code></td>
+                  <td>Decimal Number</td>
+                  <td><span class="badge badge-no">Optional</span></td>
+                  <td>Step 3: Repair</td>
+                  <td>Logged by technician upon completion for payroll &amp; costing</td>
+                </tr>
+                <tr>
+                  <td><code>Status</code></td>
+                  <td>Choice (State Machine)</td>
+                  <td><span class="badge badge-yes">Yes</span></td>
+                  <td>All Stages</td>
+                  <td>Master traffic cop: <code>Draft ➔ Submitted ➔ In Progress ➔ Closed</code></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <aside class="trainer-notes">
+          <h4>Schema Audit Protocol (55:00 – 60:00)</h4>
+          <p>Highlight the simplicity: "Notice that we only have 8 fields! We don't have 47 columns. Every single one of these 8 fields connects directly to a human decision or a Power Fx rule. That is clean data architecture."</p>
+        </aside>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 14: DATA TYPE FAILURES: WHAT HAPPENS IF?
+           ==================================================================== -->
+      <section class="slide" id="slide-14" data-title="Data Type Failures" data-segment="Part 4: Demonstrate &amp; Lab">
+        <div class="slide-content standard-layout">
+          <div class="slide-header">
+            <span class="section-tag section-tag-danger">Cause &amp; Effect Breakdown</span>
+            <h2>What Happens When You Pick the Wrong Data Type?</h2>
+            <p class="subtitle">Real technical failures that occur inside Power Apps when citizen developers pick lazy data types.</p>
+          </div>
+
+          <div class="failure-analysis-grid">
+            <div class="failure-card">
+              <div class="fail-header">
+                <span class="fail-badge">Failure 1: Alphabetical Sorting Trap</span>
+                <h4>Text vs. Number in Comparisons</h4>
+              </div>
+              <p>You store <code>RepairCost</code> as Text. A ticket costs $120, and another costs $80.</p>
+              <div class="fail-visual">
+                <div class="fail-box-bad">
+                  <span>As Text:</span>
+                  <code>"120" &lt; "80" = True!</code>
+                  <small>(Computers compare '1' against '8')</small>
+                </div>
+                <div class="fail-box-good">
+                  <span>As Number:</span>
+                  <code>120 &lt; 80 = False!</code>
+                  <small>(Mathematical comparison works)</small>
+                </div>
+              </div>
+              <div class="fail-impact">Disaster: High-cost repairs bypass executive approval!</div>
+            </div>
+
+            <div class="failure-card">
+              <div class="fail-header">
+                <span class="fail-badge">Failure 2: The Slashed Date Trap</span>
+                <h4>Text vs. Date/Time</h4>
+              </div>
+              <p>You store <code>IncidentDate</code> as free text. Operators enter dates differently.</p>
+              <div class="fail-visual">
+                <div class="fail-box-bad">
+                  <span>As Text:</span>
+                  <code>"04/05/2026" vs "05/04/2026"</code>
+                  <small>(Is it May 4th or April 5th?)</small>
+                </div>
+                <div class="fail-box-good">
+                  <span>As Date/Time:</span>
+                  <code>DateDiff(Now(), IncidentDate, Hours)</code>
+                  <small>(Calculates exact SLA downtime)</small>
+                </div>
+              </div>
+              <div class="fail-impact">Disaster: Cannot calculate machine downtime or SLA breach!</div>
+            </div>
+          </div>
+        </div>
+
+        <aside class="trainer-notes">
+          <h4>Technical Cause &amp; Effect (55:00 – 60:00)</h4>
+          <p>Explain alphabetical sorting: "Why does `"120"` evaluate as less than `"80"` in text mode? Because text sorting looks at the first letter, and `'1'` comes before `'8'` in the alphabet! That is why you NEVER store numbers as text."</p>
+        </aside>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 15: TRAINER LIVE DEMONSTRATION
+           ==================================================================== -->
+      <section class="slide" id="slide-15" data-title="Trainer Demonstration" data-segment="Part 5: Guided Practice">
+        <div class="slide-content standard-layout">
+          <div class="slide-header">
+            <span class="section-tag">Demonstration Protocol</span>
+            <h2>Trainer Live Demo: Designing a Schema in Real Time</h2>
+            <p class="subtitle">Watch the trainer extract a clean 4-field schema from a real customer maintenance request.</p>
+          </div>
+
+          <div class="demo-protocol-steps">
+            <div class="proto-step">
+              <span class="step-num">01</span>
+              <h4>Listen to Human Need</h4>
+              <p>Supervisor says: <em>"Technicians sometimes repair the machine, but forget to log whether it passed the safety run."</em></p>
+            </div>
+
+            <div class="proto-step">
+              <span class="step-num">02</span>
+              <h4>Formulate the Question</h4>
+              <p>Ask: <em>"Did this machine pass the post-maintenance 15-minute test run?"</em></p>
+            </div>
+
+            <div class="proto-step">
+              <span class="step-num">03</span>
+              <h4>Choose Column &amp; Type</h4>
+              <p>Field Name: <code>SafetyRunPassed</code><br>Data Type: <strong>Yes/No (Boolean)</strong></p>
+            </div>
+
+            <div class="proto-step">
+              <span class="step-num">04</span>
+              <h4>Implement Safety Interlock</h4>
+              <p>Power Fx rule: Prevent closing ticket until safety test is passed:<br><code>btnComplete.DisplayMode = If(SafetyRunPassed = True, DisplayMode.Edit, DisplayMode.Disabled)</code></p>
+            </div>
+          </div>
+        </div>
+
+        <aside class="trainer-notes">
+          <h4>Live Demo Script (60:00 – 65:00)</h4>
+          <p>Act this out live. Read step 1 out loud with emotion. Ask the class: "What data type would you use for 'Did it pass safety?'" Wait for someone to say "Yes/No" or "Boolean". Then show how that directly writes the Power Fx rule on Step 4!</p>
+        </aside>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 16: GUIDED PRACTICE: AUDITING A BROKEN SCHEMA
+           ==================================================================== -->
+      <section class="slide" id="slide-16" data-title="Guided Practice Audit" data-segment="Part 5: Guided Practice">
+        <div class="slide-content standard-layout">
+          <div class="slide-header">
+            <span class="section-tag">Guided Learner Practice</span>
+            <h2>Spot the 4 Fatal Flaws in This Warehouse Scrap Schema</h2>
+            <p class="subtitle">Examine this proposed data schema created by an untrained developer. Can you find all 4 traps?</p>
+          </div>
+
+          <div class="audit-grid">
+            <div class="audit-schema-table">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Column Name</th>
+                    <th>Proposed Type</th>
+                    <th>Required?</th>
+                    <th>The Hidden Flaw</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr class="flaw-row">
+                    <td><code>PartCost</code></td>
+                    <td>Text</td>
+                    <td>Yes</td>
+                    <td>❌ Flaw 1: Cannot sum total scrap loss with <code>Sum()</code>!</td>
+                  </tr>
+                  <tr class="flaw-row">
+                    <td><code>ScrapReason</code></td>
+                    <td>Single Line Text</td>
+                    <td>No</td>
+                    <td>❌ Flaw 2: Users leave it blank; cannot analyze defects!</td>
+                  </tr>
+                  <tr class="flaw-row">
+                    <td><code>ApprovalStatus</code></td>
+                    <td>Text</td>
+                    <td>Yes</td>
+                    <td>❌ Flaw 3: Free text breaks <code>Status = "Approved"</code> logic!</td>
+                  </tr>
+                  <tr class="flaw-row">
+                    <td><code>ItemNumber</code></td>
+                    <td>Manual Text</td>
+                    <td>No</td>
+                    <td>❌ Flaw 4: Missing immutable unique ID; duplicate records!</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div class="audit-takeaway-card">
+              <h3>The 4 Golden Corrections:</h3>
+              <ul class="correction-list">
+                <li><strong>1. Currency / Number:</strong> Convert <code>PartCost</code> so Power Apps can calculate financial loss.</li>
+                <li><strong>2. Required Choice:</strong> Make <code>ScrapReason</code> mandatory with pre-set categories (e.g. "Mold Flash", "Cracked").</li>
+                <li><strong>3. Choice State Machine:</strong> Lock <code>ApprovalStatus</code> to predefined states ("Pending", "Approved", "Rejected").</li>
+                <li><strong>4. Auto-Number ID:</strong> Create <code>SCRAP-2026-0001</code> to uniquely identify every discarded part.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <aside class="trainer-notes">
+          <h4>Guided Practice Protocol (65:00 – 70:00)</h4>
+          <p>Call on different students: "Look at row 1: PartCost is Text. Why is that dangerous?" Have student A answer. Then move to row 2, 3, and 4. Validate their answers and reinforce the golden corrections.</p>
+        </aside>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 17: INDEPENDENT MINI-TASK
+           ==================================================================== -->
+      <section class="slide" id="slide-17" data-title="Independent Mini-Task" data-segment="Part 5: Guided Practice">
+        <div class="slide-content standard-layout">
+          <div class="slide-header">
+            <span class="section-tag">3-Minute Fast Drill</span>
+            <h2>Independent Mini-Task: The Oil Change Checklist</h2>
+            <p class="subtitle">In 3 minutes, convert these two workplace questions into professional data field specifications.</p>
+          </div>
+
+          <div class="mini-task-grid">
+            <div class="task-card">
+              <div class="task-num">Question 1</div>
+              <h3>"How many liters of synthetic hydraulic oil were added to Press #4?"</h3>
+              <div class="task-form-box">
+                <div class="task-item">
+                  <span class="task-q">Field Name:</span>
+                  <span class="task-ans"><code>OilLitersAdded</code></span>
+                </div>
+                <div class="task-item">
+                  <span class="task-q">Data Type:</span>
+                  <span class="task-ans"><strong>Decimal Number</strong></span>
+                </div>
+                <div class="task-item">
+                  <span class="task-q">Required?</span>
+                  <span class="task-ans">Yes</span>
+                </div>
+                <div class="task-item">
+                  <span class="task-q">Why?</span>
+                  <span class="task-ans">Needed to calculate inventory depletion and fluid balance.</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="task-card">
+              <div class="task-num">Question 2</div>
+              <h3>"Who inspected and signed off on the oil filter replacement?"</h3>
+              <div class="task-form-box">
+                <div class="task-item">
+                  <span class="task-q">Field Name:</span>
+                  <span class="task-ans"><code>InspectedBy</code></span>
+                </div>
+                <div class="task-item">
+                  <span class="task-q">Data Type:</span>
+                  <span class="task-ans"><strong>Person / User (or Choice)</strong></span>
+                </div>
+                <div class="task-item">
+                  <span class="task-q">Required?</span>
+                  <span class="task-ans">Yes</span>
+                </div>
+                <div class="task-item">
+                  <span class="task-q">Why?</span>
+                  <span class="task-ans">Provides personal accountability for equipment maintenance.</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <aside class="trainer-notes">
+          <h4>Mini-Task Timing (70:00 – 73:00)</h4>
+          <p>Give learners 90 seconds of quiet thinking time. Then ask a volunteer: "For liters of oil, what did you name the field? What data type?" Confirm that Decimal Number is superior to Whole Number because a technician might add 4.5 liters.</p>
+        </aside>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 18: INTERACTIVE WIDGET 2: 6-SCENARIO SIMULATOR
+           ==================================================================== -->
+      <section class="slide" id="slide-18" data-title="Interactive Simulator" data-segment="Part 5: Guided Practice">
+        <div class="slide-content standard-layout">
+          <div class="slide-header">
+            <span class="section-tag section-tag-accent">Interactive Simulation</span>
+            <h2>Widget 2: Multi-Scenario Schema &amp; Data Type Simulator</h2>
+            <p class="subtitle">Evaluate 6 realistic factory requirements. Select the correct architectural data type and gating rule.</p>
+          </div>
+
+          <div class="sim-workbench-container">
+            <div class="sim-header-row">
+              <span class="sim-progress-indicator" id="sim-progress-text">Scenario 1 of 6</span>
+              <span class="sim-score-counter">Score: <span id="sim-score">0</span> / 6 Solved</span>
+            </div>
+
+            <div class="sim-card-body" id="sim-card-body">
+              <div class="sim-scenario-badge" id="sim-scenario-num">SCENARIO 1</div>
+              <h3 class="sim-title" id="sim-scenario-title">Preventing Unapproved Overtime</h3>
+              <p class="sim-desc" id="sim-scenario-desc">A factory technician worked 3.5 hours on a weekend emergency. The app must store the overtime hours so payroll can calculate 1.5x pay.</p>
+              
+              <div class="sim-choices-row">
+                <button class="sim-choice-btn" data-choice="text">
+                  <span class="choice-icon">🔤</span>
+                  <span>Single Line of Text</span>
+                </button>
+                <button class="sim-choice-btn" data-choice="decimal">
+                  <span class="choice-icon">🔢</span>
+                  <span>Decimal Number</span>
+                </button>
+                <button class="sim-choice-btn" data-choice="choice">
+                  <span class="choice-icon">📋</span>
+                  <span>Choice Dropdown</span>
+                </button>
+              </div>
+
+              <div class="sim-feedback-box" id="sim-feedback" style="display: none;"></div>
+            </div>
+
+            <div class="sim-nav-row">
+              <button class="fluent-btn-secondary" id="sim-prev-btn" disabled>Previous Scenario</button>
+              <button class="fluent-btn-primary" id="sim-next-btn">Next Scenario ➔</button>
+            </div>
+          </div>
+        </div>
+
+        <aside class="trainer-notes">
+          <h4>Simulator Protocol (70:00 – 75:00)</h4>
+          <p>Guide the learners through the simulator. Have volunteers vote on choices. If someone chooses "Text" for overtime hours, let them see the immediate red error card explaining why text prevents calculating pay!</p>
+        </aside>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 19: 4 DANGEROUS MENTAL MISCONCEPTIONS
+           ==================================================================== -->
+      <section class="slide" id="slide-19" data-title="Common Misconceptions" data-segment="Part 5: Guided Practice">
+        <div class="slide-content standard-layout">
+          <div class="slide-header">
+            <span class="section-tag section-tag-danger">Pitfalls to Avoid</span>
+            <h2>4 Dangerous Mental Misconceptions &amp; Trainer Corrections</h2>
+            <p class="subtitle">Preempting the most frequent data design errors committed by citizen developers.</p>
+          </div>
+
+          <div class="misconceptions-grid">
+            <div class="misconception-card">
+              <div class="misconception-wrong">
+                <span class="wrong-badge">Wrong Mental Model 1</span>
+                <h4>"Text is best because it gives the user maximum freedom to type anything."</h4>
+              </div>
+              <div class="misconception-right">
+                <span class="right-badge">The Trainer's Correction</span>
+                <p>Freedom for the user is <strong>chaos for the system</strong>. A database is a calculation engine. Free text makes sorting, filtering, summing, and automation impossible.</p>
+              </div>
+            </div>
+
+            <div class="misconception-card">
+              <div class="misconception-wrong">
+                <span class="wrong-badge">Wrong Mental Model 2</span>
+                <h4>"Status is just a text label that the technician updates when they feel like it."</h4>
+              </div>
+              <div class="misconception-right">
+                <span class="right-badge">The Trainer's Correction</span>
+                <p>Status is the <strong>steering wheel of the application</strong>. It controls which buttons appear and who owns the step. If spelling varies by a single letter, the entire workflow derails.</p>
+              </div>
+            </div>
+
+            <div class="misconception-card">
+              <div class="misconception-wrong">
+                <span class="wrong-badge">Wrong Mental Model 3</span>
+                <h4>"We don't need an ID column; we can just search by machine name or date."</h4>
+              </div>
+              <div class="misconception-right">
+                <span class="right-badge">The Trainer's Correction</span>
+                <p>Press #4 can break three times in one week. An auto-generated <strong>Unique ID</strong> is the permanent birthmark that links purchase orders, technician logs, and audit histories without ambiguity.</p>
+              </div>
+            </div>
+
+            <div class="misconception-card">
+              <div class="misconception-wrong">
+                <span class="wrong-badge">Wrong Mental Model 4</span>
+                <h4>"Let's put 50 columns in the table now just in case someone needs them in the future."</h4>
+              </div>
+              <div class="misconception-right">
+                <span class="right-badge">The Trainer's Correction</span>
+                <p>Every field requires maintenance, validation, and screen real estate. Only create fields that directly answer a question in the <strong>active process flow</strong>.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <aside class="trainer-notes">
+          <h4>Misconception Review (73:00 – 75:00)</h4>
+          <p>Read through each wrong mental model with empathy. Say: "We've all had the impulse to make everything text or add 50 columns 'just in case'. Now you know why enterprise architects strictly forbid both."</p>
+        </aside>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 20: INTERACTIVE WIDGET 3: 5-QUESTION KNOWLEDGE CHECK
+           ==================================================================== -->
+      <section class="slide" id="slide-20" data-title="Evaluative Quiz" data-segment="Part 6: Assess &amp; Bridge">
+        <div class="slide-content standard-layout">
+          <div class="slide-header">
+            <span class="section-tag section-tag-accent">Knowledge Check</span>
+            <h2>Widget 3: 5-Question Evaluative Assessment</h2>
+            <p class="subtitle">Test your understanding of process-to-data mapping, data type selection, status roles, and ID immutability.</p>
+          </div>
+
+          <div class="quiz-container">
+            <div class="quiz-header-row">
+              <span class="quiz-q-counter" id="quiz-question-counter">Question 1 of 5</span>
+              <span class="quiz-score-badge">Score: <span id="quiz-score-display">0</span> / 5</span>
+            </div>
+
+            <div class="quiz-question-box">
+              <h3 class="quiz-question-title" id="quiz-title">Loading Question...</h3>
+              <div class="quiz-options-grid" id="quiz-options">
+                <!-- Dynamically populated by script.js -->
+              </div>
+              <div class="quiz-feedback-box" id="quiz-feedback" style="display: none;"></div>
+            </div>
+
+            <div class="quiz-footer-row">
+              <button class="fluent-btn-secondary" id="quiz-prev-btn" disabled>Previous Question</button>
+              <button class="fluent-btn-primary" id="quiz-next-btn">Next Question ➔</button>
+            </div>
+          </div>
+        </div>
+
+        <aside class="trainer-notes">
+          <h4>Quiz Protocol (75:00 – 80:00)</h4>
+          <p>Run the 5 questions. Remind learners: "Notice questions 2 and 3: they test 'what happens if' and 'why'. Focus on the cause-and-effect relationship between data types and Power Fx logic."</p>
+        </aside>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 21: CAPSTONE INDEPENDENT CHALLENGE
+           ==================================================================== -->
+      <section class="slide" id="slide-21" data-title="Capstone Challenge Brief" data-segment="Part 6: Assess &amp; Bridge">
+        <div class="slide-content standard-layout">
+          <div class="slide-header">
+            <span class="section-tag">Independent Synthesis</span>
+            <h2>Capstone Challenge: The Apex Plastics Tooling Replacement Schema</h2>
+            <p class="subtitle">Design an 8-field production data schema for a newly proposed injection mold tooling replacement process.</p>
+          </div>
+
+          <div class="capstone-brief-grid">
+            <div class="capstone-req-card">
+              <div class="req-header">
+                <span class="req-badge">The 4-Step Operational Flow</span>
+                <h3>Business Process Story:</h3>
+              </div>
+              <p>Injection tooling dies wear out after 50,000 presses. The factory needs a structured app to replace worn dies:</p>
+              <ol class="req-steps-list">
+                <li><strong>Step 1 (Toolroom Request):</strong> Toolroom technician reports worn tooling die on Press #3.</li>
+                <li><strong>Step 2 (Supervisor Review):</strong> Supervisor reviews tooling replacement quote and chooses budget category.</li>
+                <li><strong>Step 3 (Purchasing PO):</strong> Purchasing department enters PO Number and Supplier Name.</li>
+                <li><strong>Step 4 (Installation &amp; Calibration):</strong> Toolroom installs new die and certifies calibration.</li>
+              </ol>
+            </div>
+
+            <div class="capstone-tasks-card">
+              <div class="req-header">
+                <span class="req-badge">Your Deliverable Matrix</span>
+                <h3>Required Table Specification:</h3>
+              </div>
+              <p>Draft an 8-row Data Schema Table on paper or notebook:</p>
+              <ul class="deliverable-list">
+                <li>• <strong>Field Name:</strong> Clean, descriptive PascalCase names.</li>
+                <li>• <strong>Data Type:</strong> Choose from the 7 core building blocks.</li>
+                <li>• <strong>Required?</strong> Specify Yes or No for process gating.</li>
+                <li>• <strong>Workflow Step:</strong> Link to Step 1, 2, 3, or 4.</li>
+                <li>• <strong>Business Rule:</strong> Formulate at least 1 Power Fx gating condition.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <aside class="trainer-notes">
+          <h4>Capstone Briefing (80:00 – 83:00)</h4>
+          <p>Give learners 3 minutes to sketch their 8-row table on paper or on their laptop. Remind them: "Make sure you include an auto-ID and a Status column!"</p>
+        </aside>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 22: BENCHMARK SOLUTION & 4-LEVEL RUBRIC
+           ==================================================================== -->
+      <section class="slide" id="slide-22" data-title="Benchmark Solution &amp; Rubric" data-segment="Part 6: Assess &amp; Bridge">
+        <div class="slide-content standard-layout">
+          <div class="slide-header">
+            <span class="section-tag section-tag-accent">Evaluation &amp; Self-Assessment</span>
+            <h2>Widget 4: Capstone Solution Reveal &amp; 4-Level Evaluation Rubric</h2>
+            <p class="subtitle">Compare your schema against the official enterprise solution and evaluate your performance.</p>
+          </div>
+
+          <div class="solution-rubric-container">
+            <div class="solution-toggle-bar">
+              <button class="fluent-btn-primary" id="btn-reveal-solution">
+                <span id="solution-btn-icon">👁️</span>
+                <span id="solution-btn-text">Reveal Benchmark Solution Matrix</span>
+              </button>
+              <span class="rubric-hint">Click to inspect the production-standard schema table</span>
+            </div>
+
+            <!-- Collapsible Solution Drawer -->
+            <div class="solution-content-drawer collapsed" id="solution-content">
+              <table class="capstone-table solution-table">
+                <thead>
+                  <tr>
+                    <th>Field Name</th>
+                    <th>Data Type</th>
+                    <th>Required?</th>
+                    <th>Step</th>
+                    <th>Power Fx Architectural Role</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><code>ToolingID</code></td>
+                    <td>Auto-Number Text</td>
+                    <td>Yes (System)</td>
+                    <td>All</td>
+                    <td>Immutable primary key (e.g. <code>TOOL-2026-0012</code>)</td>
+                  </tr>
+                  <tr>
+                    <td><code>PressMachine</code></td>
+                    <td>Choice (Press Assets)</td>
+                    <td>Yes</td>
+                    <td>Step 1</td>
+                    <td>Restricts choice to verified machines ("Press #1" to "#8")</td>
+                  </tr>
+                  <tr>
+                    <td><code>DieSerialNumber</code></td>
+                    <td>Single Line Text</td>
+                    <td>Yes</td>
+                    <td>Step 1</td>
+                    <td>Identifies the physical worn die being discarded</td>
+                  </tr>
+                  <tr>
+                    <td><code>EstimatedCost</code></td>
+                    <td>Currency / Number</td>
+                    <td>Yes</td>
+                    <td>Step 2</td>
+                    <td>Gating rule: <code>If(EstimatedCost &gt; 2500, RouteDirector, RouteShop)</code></td>
+                  </tr>
+                  <tr>
+                    <td><code>PurchaseOrderNum</code></td>
+                    <td>Single Line Text</td>
+                    <td>Yes</td>
+                    <td>Step 3</td>
+                    <td>Purchasing order link; blocks closing until filled</td>
+                  </tr>
+                  <tr>
+                    <td><code>SupplierName</code></td>
+                    <td>Choice / Text</td>
+                    <td>Yes</td>
+                    <td>Step 3</td>
+                    <td>Approved tooling vendors (e.g. "Siam Precision Tools")</td>
+                  </tr>
+                  <tr>
+                    <td><code>CalibrationPassed</code></td>
+                    <td>Yes / No (Boolean)</td>
+                    <td>Yes</td>
+                    <td>Step 4</td>
+                    <td>Safety gate: <code>btnFinish.DisplayMode = If(CalibrationPassed, Edit, Disabled)</code></td>
+                  </tr>
+                  <tr>
+                    <td><code>Status</code></td>
+                    <td>Choice (State Machine)</td>
+                    <td>Yes</td>
+                    <td>All</td>
+                    <td><code>Requested ➔ Approved ➔ PO Issued ➔ Calibrated ➔ Closed</code></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <!-- 4-Level Evaluation Rubric -->
+            <div class="rubric-matrix-grid">
+              <div class="rubric-level-card level-4">
+                <div class="rubric-badge">Level 4: Mastery (100%)</div>
+                <h4>Flawless Architecture</h4>
+                <p>All 8 fields correctly mapped; exact data types selected; clear operational justification for required fields; valid Power Fx gating condition drafted.</p>
+              </div>
+
+              <div class="rubric-level-card level-3">
+                <div class="rubric-badge">Level 3: Proficient (75–99%)</div>
+                <h4>Solid Understanding</h4>
+                <p>7-8 fields correct; 1 minor data type mismatch (e.g. using Text for Currency); correct process step attribution; minor typo in Power Fx rule.</p>
+              </div>
+
+              <div class="rubric-level-card level-2">
+                <div class="rubric-badge">Level 2: Developing (50–74%)</div>
+                <h4>Partial Understanding</h4>
+                <p>2-3 data type errors (e.g. using Free Text for Status or Priority); omitted the Unique ID requirement; confused condition question with action.</p>
+              </div>
+
+              <div class="rubric-level-card level-1">
+                <div class="rubric-badge">Level 1: Novice (&lt;50%)</div>
+                <h4>Needs Spiral Re-teaching</h4>
+                <p>Created random columns unrelated to workflow steps; made all fields Text; unable to formulate a Power Fx validation condition.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <aside class="trainer-notes">
+          <h4>Rubric Evaluation Protocol (83:00 – 86:00)</h4>
+          <p>Click "Reveal Benchmark Solution Matrix". Have students compare their paper table against the official solution. Ask: "Who got all 8 fields with correct data types? Who included CalibrationPassed as Yes/No?" Celebrate their success.</p>
+        </aside>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 23: 15-MINUTE HOMEWORK ASSIGNMENT
+           ==================================================================== -->
+      <section class="slide" id="slide-23" data-title="15-Minute Review &amp; Homework" data-segment="Part 6: Assess &amp; Bridge">
+        <div class="slide-content standard-layout">
+          <div class="slide-header">
+            <span class="section-tag">Reinforcement Practice</span>
+            <h2>15-Minute Daily Reflection &amp; Homework Challenge</h2>
+            <p class="subtitle">Anchor today's concepts in your own real-world workplace before tomorrow's UI wireframing session.</p>
+          </div>
+
+          <div class="homework-container">
+            <div class="homework-card">
+              <div class="hw-icon">📝</div>
+              <h3>Workplace Field Mapping Exercise</h3>
+              <p>Pick one physical paper form or email-based approval in your current department (e.g. Leave Request, Travel Advance, Scrap Slip, Overtime Sheet).</p>
+              <div class="hw-steps">
+                <div class="hw-step-item">
+                  <span class="hw-bullet">1</span>
+                  <span>Write down the <strong>4 core human steps</strong> that paper travels through.</span>
+                </div>
+                <div class="hw-step-item">
+                  <span class="hw-bullet">2</span>
+                  <span>List the <strong>exact question</strong> asked at each step.</span>
+                </div>
+                <div class="hw-step-item">
+                  <span class="hw-bullet">3</span>
+                  <span>Write the <strong>Field Name</strong> and <strong>Data Type</strong> for each question.</span>
+                </div>
+                <div class="hw-step-item">
+                  <span class="hw-bullet">4</span>
+                  <span>Identify the <strong>Master Status</strong> values and the <strong>Unique ID</strong> format.</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="trainer-quote-card">
+              <span class="quote-sparkle">✨</span>
+              <p class="quote-text">"When you master the art of designing data from process questions, you will never stare at a blank database screen in fear again. The process always tells you exactly what data to store."</p>
+              <span class="quote-author">— Power Apps Foundation Trainer Note</span>
+            </div>
+          </div>
+        </div>
+
+        <aside class="trainer-notes">
+          <h4>Homework Debrief (86:00 – 88:00)</h4>
+          <p>Assign the 15-minute homework. Remind them: "Spend just 15 minutes tonight looking at a real form at your job. You'll see that every single form is just a table of records waiting to become a Power App!"</p>
+        </aside>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 24: 3-DAY BRIDGE MAP
+           ==================================================================== -->
+      <section class="slide" id="slide-24" data-title="3-Day Bridge Map to Day 12" data-segment="Part 6: Assess &amp; Bridge">
+        <div class="slide-content standard-layout">
+          <div class="slide-header">
+            <span class="section-tag section-tag-accent">Forward Bridge</span>
+            <h2>Where We've Been &amp; Where We Are Going Tomorrow</h2>
+            <p class="subtitle">Tomorrow in Day 12, we transition from backend data to frontend user interfaces: Turning Process and Data into Screens!</p>
+          </div>
+
+          <div class="three-day-bridge-grid">
+            <div class="bridge-card bridge-yesterday">
+              <span class="bridge-day">Yesterday (Day 10)</span>
+              <h4>Records and Tables: Many Cases</h4>
+              <p>Learned that a table organizes repeated business cases, rows equal records, and shared questions equal columns.</p>
+              <div class="bridge-footer">Concept: Physical Card Box</div>
+            </div>
+
+            <div class="bridge-card bridge-today">
+              <span class="bridge-day active-day">Today (Day 11)</span>
+              <h4>Design Data from the Process</h4>
+              <p>Derived fields from workflow questions, enforced strict data types, mastered the Status state machine, and established unique immutable IDs.</p>
+              <div class="bridge-footer">Concept: Questions Before Columns</div>
+            </div>
+
+            <div class="bridge-card bridge-tomorrow">
+              <span class="bridge-day">Tomorrow (Day 12)</span>
+              <h4>Turn Process &amp; Data into Screens</h4>
+              <p>We take today's 8 fields and layout the physical screens: how fields become Text Inputs, Dropdowns, Cards, and Galleries!</p>
+              <div class="bridge-footer">Concept: Wireframing the UI</div>
+            </div>
+          </div>
+
+          <div class="bridge-conclusion-banner">
+            <strong>Congratulations on completing Day 11!</strong>
+            <span>Your data architecture foundation is complete. Tomorrow, we build the visual application!</span>
+          </div>
+        </div>
+
+        <aside class="trainer-notes">
+          <h4>Forward Bridge Closing (88:00 – 90:00)</h4>
+          <p>Deliver the closing bridge: "Today we created the blueprint for our data: 8 fields, clean data types, and status rules. But right now, it's just data on paper. Tomorrow in Day 12, we turn this data into visual screens! Text fields become input boxes, Choice columns become dropdown menus, and records become beautiful cards on the screen. Thank you, and see you tomorrow on Day 12!"</p>
+        </aside>
+      </section>
+
+    </main>
+
+    <!-- Bottom Navigation Bar & Controls -->
+        <footer id="bottom-hud">
+      <div id="progress-bar-container">
+        <div id="progress-bar"></div>
+      </div>
+
+      <div class="hud-left">
+        <button class="hud-btn" id="btn-prev" onclick="prevSlide()" title="Previous Slide (Left Arrow)">&#8592; Prev</button>
+        <button class="hud-btn" id="btn-next" onclick="nextSlide()" title="Next Slide (Right Arrow / Space)">Next &#8594;</button>
+        <span id="slide-counter">Slide <span id="slide-current-num">1</span> / <span id="slide-total-count">24</span></span>
+      </div>
+
+      <div class="hud-right">
+        <button class="hud-btn" id="btn-lang" onclick="toggleLanguage()" title="Toggle Language (L)">
+          🌐 <span id="lang-label">KH</span>
+        </button>
+        <button class="hud-btn active" id="btn-laser" onclick="toggleLaser()" title="Presenter Laser Pointer (P)">
+          🔴 Laser
+        </button>
+        <button class="hud-btn" id="btn-notes" onclick="toggleNotes()" title="Trainer Notes Drawer (N)">
+          📝 Notes
+        </button>
+        <button class="hud-btn" id="btn-overview" onclick="toggleOverview()" title="Slide Overview Modal (O)">
+          🗂️ Overview
+        </button>
+        <button class="hud-btn" id="btn-timer" onclick="toggleTimer()" title="90-Min Countdown (T)">
+          ⏱️ <span id="timer-display">90:00</span>
+        </button>
+        <button class="hud-btn" id="btn-fullscreen" onclick="toggleFullscreen()" title="Fullscreen (F)">
+          ⛶
+        </button>
+        <a href="../index.html" class="hud-btn hub-btn" title="Return to Master Curriculum Hub (ត្រឡប់ទៅទំព័រដើម)" style="text-decoration: none; display: inline-flex; align-items: center; gap: 4px; color: #fcd34d; font-weight: 600;"><span>🏠</span><span>Hub</span></a>
+      </div>
+    </footer>
+
+    <!-- Presenter Notes Drawer (Toggled with 'N' or header button) -->
+    <aside id="notes-drawer" class="notes-drawer" aria-label="Trainer Notes Drawer">
+      <div class="notes-drawer-header">
+        <div class="notes-title">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+            <polyline points="14 2 14 8 20 8"/>
+          </svg>
+          <h3>Trainer Presentation Notes</h3>
+        </div>
+        <button id="notes-close-btn" class="icon-btn-tiny" title="Close Notes (Esc / N)">✕</button>
+      </div>
+      <div class="notes-drawer-content" id="notes-content">
+        <!-- Dynamically injected from active slide's <aside class="trainer-notes"> -->
+      </div>
+    </aside>
+
+    <!-- Slide Overview Modal Grid (Toggled with 'O' or 'G') -->
+    <div id="overview-modal" class="overview-modal" aria-label="Slide Overview Grid">
+      <div class="overview-header">
+        <h3>Presentation Slides Navigator (24 Scenes)</h3>
+        <button id="overview-close-btn" class="icon-btn-tiny" title="Close Grid (Esc / O)">✕</button>
+      </div>
+      <div class="overview-grid" id="overview-grid">
+        <!-- Dynamically injected cards -->
+      </div>
+    </div>
+
+    <!-- Presenter Laser Focus Pointer & Click Ripple Elements -->
+    <div id="presenter-pointer" class="presenter-laser-dot">
+      <div class="laser-halo"></div>
+    </div>
+    <div id="pointer-click-ripple" class="pointer-click-ripple"></div>
+
+  </div>
+
+  <script src="script.js"></script>
+<script>
+if (window.self !== window.top) {
+  document.documentElement.classList.add('in-iframe');
+  function hideHub() { document.querySelectorAll('.hub-btn, .back-to-hub-pill').forEach(e => e.style.display = 'none'); }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', hideHub);
+  } else {
+    hideHub();
+  }
+}
+</script>
+<style>
+.in-iframe .hub-btn, .in-iframe .back-to-hub-pill { display: none !important; }
+</style>
+</body>
+</html>
+

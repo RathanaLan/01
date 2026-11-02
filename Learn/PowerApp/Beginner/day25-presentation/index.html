@@ -1,0 +1,1376 @@
+<!DOCTYPE html>
+<html lang="en" translate="no" class="notranslate">
+<head>
+  <meta name="google" content="notranslate">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Day 25: Architecture — Problem -> Process -> Data -> UI -> Logic | Microsoft Power Apps Foundation</title>
+  <link rel="stylesheet" href="../shared/design-system.css">
+  <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=Moul&family=Kantumruy+Pro:ital,wght@0,400..700;1,400..700&family=Battambang:wght@300;400;700;900&family=Koh+Santepheap:wght@300;400;700&family=Koulen&family=Siemreap&display=swap" rel="stylesheet">
+  <style>
+    /* Strict Speaker Notes Lock: Never render on slide stage under any circumstance */
+    aside.trainer-notes,
+    .trainer-notes,
+    .slide aside,
+    aside {
+      display: none !important;
+      visibility: hidden !important;
+      height: 0 !important;
+      width: 0 !important;
+      overflow: hidden !important;
+      opacity: 0 !important;
+      position: absolute !important;
+      pointer-events: none !important;
+      margin: 0 !important;
+      padding: 0 !important;
+      border: none !important;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Presentation Stage Wrapper (Day 24 Architecture Standard) -->
+  <div id="presentation-stage">
+    
+    <!-- Ambient Aurora Orbs (60fps backdrop) -->
+    <div class="aurora-orb orb-1"></div>
+    <div class="aurora-orb orb-2"></div>
+    <div class="aurora-orb orb-3"></div>
+
+    <!-- Presenter Laser Pointer & Shockwave Click Ripple -->
+    <div id="presenter-laser"></div>
+    <div id="pointer-ripple" class="pointer-click-ripple"></div>
+
+    <!-- Viewport for 24 Slides -->
+    <main id="slides-viewport">
+
+      <!-- ====================================================================
+           SLIDE 1: HERO TITLE & SYSTEM MENTAL MODEL
+           ==================================================================== -->
+      <section class="slide active" id="slide-1" data-slide-index="0" data-title="Architecture: Problem to Logic" data-segment="Phase 8: Project Architecture">
+        <div class="slide-content hero-content">
+          <div class="hero-badge">
+            <span>Microsoft Power Apps Curriculum</span>
+            <span>&bull;</span>
+            <span>Day 25 of 27</span>
+          </div>
+          <h1 class="hero-title">Architecture: Problem &rarr; Process &rarr; Data &rarr; UI &rarr; Logic</h1>
+          <p class="hero-subtitle">
+            Synthesizing all 24 prior concepts before building. Every single button, field, variable, formula, and database column must trace directly back to an authentic business requirement.
+          </p>
+
+          <div class="model-chain">
+            <span class="chain-item">Problem</span>
+            <span class="chain-arrow">&rarr;</span>
+            <span class="chain-item">Process</span>
+            <span class="chain-arrow">&rarr;</span>
+            <span class="chain-item">Data</span>
+            <span class="chain-arrow">&rarr;</span>
+            <span class="chain-item active">UI/Screen</span>
+            <span class="chain-arrow">&rarr;</span>
+            <span class="chain-item active">Logic/Decision</span>
+            <span class="chain-arrow">&rarr;</span>
+            <span class="chain-item">Action</span>
+            <span class="chain-arrow">&rarr;</span>
+            <span class="chain-item">Storage</span>
+            <span class="chain-arrow">&rarr;</span>
+            <span class="chain-item">Feedback</span>
+            <span class="chain-arrow">&rarr;</span>
+            <span class="chain-item">Test</span>
+          </div>
+        </div>
+        <aside class="trainer-notes">
+          <h4>Trainer Speaking Script &amp; Pedagogical Cues:</h4>
+          <p><strong>Opening Hook (2 min):</strong> "Welcome to Day 25! Today marks our transition into Phase 8: Project Architecture. For the past 24 days, you learned individual carpentry tools: hammer, saw, measuring tape. Today, someone asked us to build a house. We do NOT pick up the hammer first. We open our blueprints."</p>
+          <p><strong>Core Connection:</strong> Point to the mental model chain: REAL PROBLEM -> PROCESS -> DATA -> UI/SCREEN -> LOGIC/DECISION -> ACTION -> STORAGE -> FEEDBACK -> TEST. Today is about ensuring every button, column, and formula traces back to an authentic business requirement.</p>
+        </aside>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 2: 90-MINUTE TIMED AGENDA & OBJECTIVES
+           ==================================================================== -->
+      <section class="slide" id="slide-2" data-slide-index="1" data-title="90-Minute Agenda & Objectives" data-segment="Part 1: Orientation & Goals">
+        <header class="slide-header">
+          <div class="section-tag">Part 1 &bull; Blueprint &amp; Schedule</div>
+          <h2>90-Minute Agenda &amp; Measurable Objectives</h2>
+          <p class="subtitle">Spiral learning architecture: synthesizing 24 prior concepts before writing code.</p>
+        </header>
+
+        <div class="slide-content grid-2-col">
+          <div class="card">
+            <h3 class="card-title">🎯 Today's 5 Core Objectives</h3>
+            <div class="objective-item">
+              <span class="obj-num">1</span>
+              <div>
+                <strong>Trace the 7-Layer Architecture:</strong>
+                <p>Trace any button, formula, or column from human pain down to cloud storage without skipping a step.</p>
+              </div>
+            </div>
+            <div class="objective-item">
+              <span class="obj-num">2</span>
+              <div>
+                <strong>Deconstruct Human Processes:</strong>
+                <p>Translate workplace complaints into structured hand-offs, roles, and decision gates before coding.</p>
+              </div>
+            </div>
+            <div class="objective-item">
+              <span class="obj-num">3</span>
+              <div>
+                <strong>Draft Normalized Data Schemas:</strong>
+                <p>Define correct SharePoint column types (Choice, Number, Date, Person) required by each process step.</p>
+              </div>
+            </div>
+            <div class="objective-item">
+              <span class="obj-num">4</span>
+              <div>
+                <strong>Map the 3-Screen Pattern:</strong>
+                <p>Design the standard Browse ➔ Create ➔ Detail/Edit flow with FormModes and validation rules.</p>
+              </div>
+            </div>
+            <div class="objective-item">
+              <span class="obj-num">5</span>
+              <div>
+                <strong>Defeat Blank-Canvas Traps:</strong>
+                <p>Eliminate premature UI styling, unnormalized text columns, and multi-screen bloat.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <h3 class="card-title">⏱️ 90-Minute Timed Schedule</h3>
+            <div class="agenda-timeline">
+              <div class="agenda-row">
+                <span class="agenda-time">00 - 05 min</span>
+                <div><strong>Recall &amp; Journey Synthesis:</strong> Days 1-24 recap + The Connected Curriculum</div>
+              </div>
+              <div class="agenda-row">
+                <span class="agenda-time">05 - 12 min</span>
+                <div><strong>The Workplace Problem:</strong> The $45,000 blank-canvas catastrophe at Apex Precision</div>
+              </div>
+              <div class="agenda-row">
+                <span class="agenda-time">12 - 22 min</span>
+                <div><strong>Plain Concepts &amp; Analogies:</strong> Commercial Kitchen + Hospital ER Triage analogies</div>
+              </div>
+              <div class="agenda-row">
+                <span class="agenda-time">22 - 35 min</span>
+                <div><strong>The 7-Layer Blueprint:</strong> Problem ➔ Process ➔ Data ➔ Screens ➔ Logic ➔ Storage ➔ Feedback</div>
+              </div>
+              <div class="agenda-row">
+                <span class="agenda-time">35 - 50 min</span>
+                <div><strong>Live Demo:</strong> Drafting the 1-page maintenance blueprint before opening Power Apps</div>
+              </div>
+              <div class="agenda-row">
+                <span class="agenda-time">50 - 65 min</span>
+                <div><strong>Guided Practice:</strong> Forklift safety inspection schema, screen flow &amp; validation</div>
+              </div>
+              <div class="agenda-row">
+                <span class="agenda-time">65 - 75 min</span>
+                <div><strong>Independent Task:</strong> Material Quarantine 5-layer blueprint challenge</div>
+              </div>
+              <div class="agenda-row">
+                <span class="agenda-time">75 - 90 min</span>
+                <div><strong>Checks, Rubric &amp; Bridge:</strong> 5 dual-state questions, rubric &amp; Day 26 build preview</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <aside class="trainer-notes">
+          <h4>Trainer Speaking Script &amp; Pedagogical Cues:</h4>
+          <p><strong>Agenda Overview (2 min):</strong> "Notice our 8-phase spiral schedule. We spend 15 minutes on live demonstration, 15 minutes on guided practice, and 10 minutes on independent architectural drafting. 80% of our time is spent thinking and structuring; only 20% on clicking."</p>
+        </aside>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 3: CONCEPT MAP RECAP: DAYS 1-24 SYNTHESIS
+           ==================================================================== -->
+      <section class="slide" id="slide-3" data-slide-index="2" data-title="Concept Map: Connecting the Curriculum" data-segment="Part 1: Orientation & Goals">
+        <header class="slide-header">
+          <div class="section-tag">Part 1 &bull; Curriculum Integration</div>
+          <h2>The Connected Curriculum: How Days 1 to 24 Connect Today</h2>
+          <p class="subtitle">Every concept learned previously is now assembled into a complete business workflow.</p>
+        </header>
+
+        <div class="slide-content">
+          <div class="card" style="border-left: 3px solid #06b6d4;">
+            <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.25rem;">
+              <div style="background: rgba(12, 19, 31, 0.7); padding: 1.15rem; border-radius: 8px; border: 1px solid var(--border-subtle);">
+                <span class="card-badge" style="background: rgba(6, 182, 212, 0.2); color: #67e8f9;">Days 1 - 5</span>
+                <h4 style="color: #f8fafc; margin: 0.5rem 0;">UI Controls &amp; Variables</h4>
+                <p style="color: var(--text-muted); font-size: 0.86rem; line-height: 1.5;">
+                  Buttons, labels, text inputs, and temporary memory variables (Set, UpdateContext). The user's interactive tools.
+                </p>
+              </div>
+
+              <div style="background: rgba(12, 19, 31, 0.7); padding: 1.15rem; border-radius: 8px; border: 1px solid var(--border-subtle);">
+                <span class="card-badge" style="background: rgba(245, 158, 11, 0.2); color: #fcd34d;">Days 6 - 10</span>
+                <h4 style="color: #f8fafc; margin: 0.5rem 0;">Conditions &amp; Collections</h4>
+                <p style="color: var(--text-muted); font-size: 0.86rem; line-height: 1.5;">
+                  If logic, IsBlank validation, and multi-row temporary tables (ClearCollect). The app's reactive thinking engine.
+                </p>
+              </div>
+
+              <div style="background: rgba(12, 19, 31, 0.7); padding: 1.15rem; border-radius: 8px; border: 1px solid var(--border-subtle);">
+                <span class="card-badge" style="background: rgba(16, 185, 129, 0.2); color: #86efac;">Days 17 - 20</span>
+                <h4 style="color: #f8fafc; margin: 0.5rem 0;">SharePoint &amp; Storage</h4>
+                <p style="color: var(--text-muted); font-size: 0.86rem; line-height: 1.5;">
+                  Cloud tables, typed columns, and persistent storage. Moving from temporary device RAM to permanent company records.
+                </p>
+              </div>
+
+              <div style="background: rgba(139, 92, 246, 0.15); padding: 1.15rem; border-radius: 8px; border: 1px solid rgba(139, 92, 246, 0.4);">
+                <span class="card-badge" style="background: rgba(139, 92, 246, 0.25); color: #c084fc;">Days 21 - 24</span>
+                <h4 style="color: #c084fc; margin: 0.5rem 0;">The Complete CRUD Lifecycle</h4>
+                <p style="color: #f5f3ff; font-size: 0.86rem; line-height: 1.5;">
+                  Galleries for browsing, Forms for editing, NewForm for creating, and SubmitForm for writing back without duplicates!
+                </p>
+              </div>
+            </div>
+
+            <div style="margin-top: 1.5rem; padding: 1rem; background: rgba(6, 182, 212, 0.08); border-radius: 8px; text-align: center; border: 1px dashed rgba(6, 182, 212, 0.3);">
+              <span style="color: #67e8f9; font-weight: 700; font-size: 0.95rem;">
+                The Architectural Rule: Having tools does not mean you have a house! Architecture is the blueprint that dictates where every board, nail, and pipe belongs.
+              </span>
+            </div>
+          </div>
+        </div>
+        <aside class="trainer-notes">
+          <h4>Trainer Speaking Script &amp; Pedagogical Cues:</h4>
+          <p><strong>Journey Synthesis (3 min):</strong> "Review the 4 historical eras: UI Controls (Days 1-5), Logic (Days 6-10), SharePoint (Days 17-20), and CRUD (Days 21-24). Each day added one layer of the puzzle. Today, all puzzle pieces assemble into an enterprise system."</p>
+        </aside>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 4: PREREQUISITE RETRIEVAL CHECK
+           ==================================================================== -->
+      <section class="slide" id="slide-4" data-slide-index="3" data-title="Prerequisite Retrieval Check" data-segment="Part 2: Recall & Foundations">
+        <header class="slide-header">
+          <div class="section-tag">Part 2 &bull; Retrieval Practice</div>
+          <h2>Prerequisite Retrieval: Activating Prior Knowledge</h2>
+          <p class="subtitle">Click each card to reveal the foundational architectural principle from Days 18, 22, and 23.</p>
+        </header>
+
+        <div class="slide-content grid-3-col">
+          <div class="flip-card" onclick="this.classList.toggle('flipped')">
+            <div class="flip-card-inner">
+              <div class="flip-card-front">
+                <span class="card-badge" style="background: rgba(245, 158, 11, 0.2); color: #fcd34d;">Check 1</span>
+                <h4 style="color: #f8fafc; margin-top: 1rem;">Variables vs SharePoint</h4>
+                <p style="color: var(--text-muted); font-size: 0.88rem; margin-top: 0.5rem;">
+                  What happens to a variable when you close the app? What happens to a SharePoint record?
+                </p>
+                <div class="flip-hint">Tap to flip &rarr;</div>
+              </div>
+              <div class="flip-card-back">
+                <span class="card-badge" style="background: rgba(16, 185, 129, 0.2); color: #86efac;">Principle 1</span>
+                <p style="color: #ecfdf5; font-size: 0.92rem; margin-top: 0.8rem; line-height: 1.6;">
+                  <strong>Variables vanish instantly</strong> from device RAM.<br><br>
+                  <strong>SharePoint records persist forever</strong> in the cloud, shared securely across all users!
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="flip-card" onclick="this.classList.toggle('flipped')">
+            <div class="flip-card-inner">
+              <div class="flip-card-front">
+                <span class="card-badge" style="background: rgba(6, 182, 212, 0.2); color: #67e8f9;">Check 2</span>
+                <h4 style="color: #f8fafc; margin-top: 1rem;">Items vs Item</h4>
+                <p style="color: var(--text-muted); font-size: 0.88rem; margin-top: 0.5rem;">
+                  Which property belongs to Gallery, which to Form, and how do they talk to each other?
+                </p>
+                <div class="flip-hint">Tap to flip &rarr;</div>
+              </div>
+              <div class="flip-card-back">
+                <span class="card-badge" style="background: rgba(16, 185, 129, 0.2); color: #86efac;">Principle 2</span>
+                <p style="color: #ecfdf5; font-size: 0.92rem; margin-top: 0.8rem; line-height: 1.6;">
+                  <code>Items</code> (plural) = Gallery table feed.<br><br>
+                  <code>Item</code> (singular) = Form record target.<br><br>
+                  Glued together with <code>Item = galWorkOrders.Selected</code> (or <code>galRequests.Selected</code>)!
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="flip-card" onclick="this.classList.toggle('flipped')">
+            <div class="flip-card-inner">
+              <div class="flip-card-front">
+                <span class="card-badge" style="background: rgba(239, 68, 68, 0.2); color: #fca5a5;">Check 3</span>
+                <h4 style="color: #f8fafc; margin-top: 1rem;">Why Validation Matters</h4>
+                <p style="color: var(--text-muted); font-size: 0.88rem; margin-top: 0.5rem;">
+                  Why do we check <code>IsBlank()</code> before calling <code>SubmitForm()</code>?
+                </p>
+                <div class="flip-hint">Tap to flip &rarr;</div>
+              </div>
+              <div class="flip-card-back">
+                <span class="card-badge" style="background: rgba(16, 185, 129, 0.2); color: #86efac;">Principle 3</span>
+                <p style="color: #ecfdf5; font-size: 0.92rem; margin-top: 0.8rem; line-height: 1.6;">
+                  <strong>To protect the company database!</strong><br><br>
+                  Validation prevents blank, corrupt, or invalid entries from polluting cloud reporting and causing crashes.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <aside class="trainer-notes">
+          <h4>Trainer Speaking Script &amp; Pedagogical Cues:</h4>
+          <p><strong>Active Retrieval (3 min):</strong> "Call on three different students. Check 1: Variables vanish on app close; SharePoint records live forever in the cloud. Check 2: Items (plural) = Gallery; Item (singular) = Form. Check 3: IsBlank validation stops corrupted garbage from entering the company database."</p>
+        </aside>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 5: THE WORKPLACE CRISIS: BLANK-CANVAS CATASTROPHE
+           ==================================================================== -->
+      <section class="slide" id="slide-5" data-slide-index="4" data-title="Workplace Crisis: $45,000 Meltdown" data-segment="Part 3: The 'Why' Problem">
+        <header class="slide-header">
+          <div class="section-tag" style="background: rgba(239, 68, 68, 0.2); color: #ef4444; border-color: rgba(239, 68, 68, 0.4);">Part 3 &bull; Why This Exists</div>
+          <h2>The Workplace Crisis: The $45,000 Blank-Canvas Catastrophe</h2>
+          <p class="subtitle">What happens when someone opens Power Apps Studio without an architectural plan.</p>
+        </header>
+
+        <div class="slide-content">
+          <div class="card" style="border-left: 3px solid #ef4444;">
+            <div class="crisis-banner">
+              <span class="crisis-icon">&iexcl;</span>
+              <div>
+                <strong style="color: #fca5a5; font-size: 1.1rem;">Emergency Work Order Crisis: Apex Precision Spindle Meltdown</strong>
+                <p style="color: #fecaca; font-size: 0.88rem; margin: 0.25rem 0 0 0;">Apex Precision Turbine Blades &bull; CNC Milling Facility &bull; Shift 1</p>
+              </div>
+            </div>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-top: 1.25rem;">
+              <div>
+                <h4 style="color: #f87171; margin-bottom: 0.5rem;">What the Developer Did (The Amateur Mistake):</h4>
+                <ul style="color: var(--text-muted); font-size: 0.88rem; line-height: 1.6; padding-left: 1.2rem;">
+                  <li>Opened Power Apps on Monday with zero written architecture notes.</li>
+                  <li>Created a red button and 12 unvalidated text input boxes on a blank canvas.</li>
+                  <li>Created a SharePoint list called "AppStuff" with columns <code>Col1</code>, <code>Data2</code>.</li>
+                  <li>Used free text fields for machine names: operators typed "CNC-04", "machine 4", "Unit 4".</li>
+                  <li>Had no screen to update tickets, so operators created duplicate tickets every hour.</li>
+                </ul>
+              </div>
+
+              <div>
+                <h4 style="color: #fca5a5; margin-bottom: 0.5rem;">The Catastrophic DX Result:</h4>
+                <ul style="color: var(--text-muted); font-size: 0.88rem; line-height: 1.6; padding-left: 1.2rem;">
+                  <li><strong>Ticket Lost in Duplicates:</strong> Coolant pump failure was buried under 400 conflicting tickets.</li>
+                  <li><strong>Ran Without Coolant for 3 Days:</strong> Spindle overheated and completely seized up.</li>
+                  <li><strong>$45,000 Replacement Cost:</strong> Plant halted production for 48 hours to rebuild CNC Line 2.</li>
+                  <li><strong>App Discarded by Plant Manager:</strong> The entire software project was scrapped!</li>
+                </ul>
+              </div>
+            </div>
+
+            <div style="margin-top: 1.25rem; padding: 0.85rem; background: rgba(239, 68, 68, 0.1); border-radius: 6px; border-left: 3px solid #ef4444;">
+              <p style="color: var(--text-main); font-size: 0.88rem; margin: 0;">
+                <strong>The Golden Lesson:</strong> Software development is not about dragging colorful buttons. It is about understanding human processes and structuring business truth!
+              </p>
+            </div>
+          </div>
+        </div>
+        <aside class="trainer-notes">
+          <h4>Trainer Speaking Script &amp; Pedagogical Cues:</h4>
+          <p><strong>Storytelling &amp; Emotion (4 min):</strong> "Apex Precision manufactures $8,000 turbine blades. The junior developer opened Power Apps with no plan: columns named Col1, text fields for machine names. An overheating coolant pump ticket was duplicated and lost. A $45,000 spindle melted down, halting the line for 48 hours. Software development is not dragging rectangles; it is structuring business truth."</p>
+        </aside>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 6: PLAIN-LANGUAGE CONCEPT TRANSLATION MATRIX
+           ==================================================================== -->
+      <section class="slide" id="slide-6" data-slide-index="5" data-title="Plain-Language Concept Translation" data-segment="Part 4: Concept Before Syntax">
+        <header class="slide-header">
+          <div class="section-tag">Part 4 &bull; Plain Language First</div>
+          <h2>Concept Before Syntax: Translating Human Pain to Architecture</h2>
+          <p class="subtitle">Never learn a technical term in isolation. Every technical layer is just a plain English reality.</p>
+        </header>
+
+        <div class="slide-content">
+          <div class="card">
+            <table class="matrix-table">
+              <thead>
+                <tr>
+                  <th>Plain-Language Concept</th>
+                  <th>Technical Term</th>
+                  <th>What It Means in Plain English</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>The Real Pain</strong></td>
+                  <td><span class="badge-tag tag-rose">Business Requirement</span></td>
+                  <td>The operational headache that wastes money, creates safety risks, or delays customers.</td>
+                </tr>
+                <tr>
+                  <td><strong>The Hand-Off Steps</strong></td>
+                  <td><span class="badge-tag tag-cyan">Business Process Map</span></td>
+                  <td>The sequence of who does what, when they do it, and what decision must be made next.</td>
+                </tr>
+                <tr>
+                  <td><strong>The Memory Buckets</strong></td>
+                  <td><span class="badge-tag tag-emerald">Data Schema / Columns</span></td>
+                  <td>The exact named containers and data types (Choice, Date, Number) we must remember forever.</td>
+                </tr>
+                <tr>
+                  <td><strong>The Windows &amp; Doors</strong></td>
+                  <td><span class="badge-tag tag-purple">Screen Architecture / UI</span></td>
+                  <td>The screens where people view summaries, fill out requests, or approve actions.</td>
+                </tr>
+                <tr>
+                  <td><strong>The Traffic Rules</strong></td>
+                  <td><span class="badge-tag tag-amber">Business Logic / Power Fx</span></td>
+                  <td>The formulas that prevent empty fields, calculate totals, and steer users safely.</td>
+                </tr>
+                <tr>
+                  <td><strong>The Filing Cabinet</strong></td>
+                  <td><span class="badge-tag tag-cyan">SharePoint Storage</span></td>
+                  <td>The permanent cloud database where records live across all devices and sessions.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <aside class="trainer-notes">
+          <h4>Trainer Speaking Script &amp; Pedagogical Cues:</h4>
+          <p><strong>Concept Demystification (3 min):</strong> "Go row by row. 'Business Requirement' is just 'What hurts'; 'Data Schema' is just 'Memory Buckets'; 'Power Fx' is just the 'Traffic Rules' that keep people from crashing."</p>
+        </aside>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 7: EVERYDAY ANALOGY 1: THE COMMERCIAL KITCHEN BLUEPRINT
+           ==================================================================== -->
+      <section class="slide" id="slide-7" data-slide-index="6" data-title="Analogy: The Commercial Kitchen" data-segment="Part 4: Concept Before Syntax">
+        <header class="slide-header">
+          <div class="section-tag">Part 4 &bull; Mental Model</div>
+          <h2>Everyday Analogy 1: The 5-Star Kitchen Renovation</h2>
+          <p class="subtitle">Why you never buy stainless steel stoves before drawing the chef's workflow triangle.</p>
+        </header>
+
+        <div class="slide-content grid-4-col">
+          <div class="card">
+            <span class="card-badge" style="background: rgba(239, 68, 68, 0.2); color: #fca5a5;">1. The Real Problem</span>
+            <h4 style="color: #f8fafc; margin: 0.5rem 0;">Order Delays</h4>
+            <p style="color: var(--text-muted); font-size: 0.86rem; line-height: 1.5;">
+              Guests wait 45 minutes for dinner because line cooks bump into dishwashers and pastry chefs in tight corridors.
+            </p>
+          </div>
+
+          <div class="card">
+            <span class="card-badge" style="background: rgba(6, 182, 212, 0.2); color: #67e8f9;">2. The Process Flow</span>
+            <h4 style="color: #f8fafc; margin: 0.5rem 0;">The Triangle</h4>
+            <p style="color: var(--text-muted); font-size: 0.86rem; line-height: 1.5;">
+              Raw ingredients intake ➔ Prep counter ➔ Sauté station ➔ Plating inspection ➔ Waiter pickup counter.
+            </p>
+          </div>
+
+          <div class="card">
+            <span class="card-badge" style="background: rgba(16, 185, 129, 0.2); color: #86efac;">3. Storage &amp; Bins</span>
+            <h4 style="color: #f8fafc; margin: 0.5rem 0;">Labeled Zones</h4>
+            <p style="color: var(--text-muted); font-size: 0.86rem; line-height: 1.5;">
+              Walk-in cooler with labeled temperature bins: Poultry (raw), Vegetables (prepped), Finished sauces.
+            </p>
+          </div>
+
+          <div class="card">
+            <span class="card-badge" style="background: rgba(245, 158, 11, 0.2); color: #fcd34d;">4. Safety Logic</span>
+            <h4 style="color: #f8fafc; margin: 0.5rem 0;">Inspection Gate</h4>
+            <p style="color: var(--text-muted); font-size: 0.86rem; line-height: 1.5;">
+              If meat thermometer reads below 74&deg;C, plating chef is physically blocked from releasing the dish!
+            </p>
+          </div>
+        </div>
+        <aside class="trainer-notes">
+          <h4>Trainer Speaking Script &amp; Pedagogical Cues:</h4>
+          <p><strong>Real-World Analogy (3 min):</strong> "Ask students: 'What happens if a restaurant builder installs the stove in the middle of the hallway before knowing what the chef cooks?' Chaos, collisions, and burns! Architecture ensures tools are placed where human movement is natural."</p>
+        </aside>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 8: EVERYDAY ANALOGY 2: HOSPITAL EMERGENCY ROOM TRIAGE
+           ==================================================================== -->
+      <section class="slide" id="slide-8" data-slide-index="7" data-title="Analogy: Hospital ER Triage" data-segment="Part 4: Concept Before Syntax">
+        <header class="slide-header">
+          <div class="section-tag">Part 4 &bull; Mental Model</div>
+          <h2>Everyday Analogy 2: Hospital Emergency Room Triage</h2>
+          <p class="subtitle">A life-or-death example of why data structure and logic rules must mirror human reality.</p>
+        </header>
+
+        <div class="slide-content grid-4-col">
+          <div class="card">
+            <span class="card-badge" style="background: rgba(239, 68, 68, 0.2); color: #fca5a5;">1. Real Problem</span>
+            <h4 style="color: #f8fafc; margin: 0.5rem 0;">Cardiac vs Sprain</h4>
+            <p style="color: var(--text-muted); font-size: 0.86rem; line-height: 1.5;">
+              Cardiac patients die if waiting over 8 minutes; mild sprains can wait 60 minutes. First-come-first-served causes fatalities.
+            </p>
+          </div>
+
+          <div class="card">
+            <span class="card-badge" style="background: rgba(6, 182, 212, 0.2); color: #67e8f9;">2. Process &amp; Data</span>
+            <h4 style="color: #f8fafc; margin: 0.5rem 0;">Triage Metrics</h4>
+            <p style="color: var(--text-muted); font-size: 0.86rem; line-height: 1.5;">
+              Nurse measures vitals. Data Schema: <code>HeartRate (Number)</code>, <code>TriageLevel (Choice: Red, Yellow, Green)</code>.
+            </p>
+          </div>
+
+          <div class="card">
+            <span class="card-badge" style="background: rgba(245, 158, 11, 0.2); color: #fcd34d;">3. Logic Rules</span>
+            <h4 style="color: #f8fafc; margin: 0.5rem 0;">Alarm Routing</h4>
+            <p style="color: var(--text-muted); font-size: 0.86rem; line-height: 1.5;">
+              <code>If(HeartRate &gt; 140 Or BP &lt; 90, "Red Alert", "Standard")</code>. The computer automatically routes bed assignment.
+            </p>
+          </div>
+
+          <div class="card">
+            <span class="card-badge" style="background: rgba(16, 185, 129, 0.2); color: #86efac;">4. UI Screens</span>
+            <h4 style="color: #f8fafc; margin: 0.5rem 0;">3 Workstations</h4>
+            <p style="color: var(--text-muted); font-size: 0.86rem; line-height: 1.5;">
+              Triage Tablet (Fast intake) ➔ Doctor Board (Red alerts locked at top of gallery) ➔ Bedside Monitor (Full record details).
+            </p>
+          </div>
+        </div>
+        <aside class="trainer-notes">
+          <h4>Trainer Speaking Script &amp; Pedagogical Cues:</h4>
+          <p><strong>Life-or-Death Priority (3 min):</strong> "Explain why first-come-first-served fails in an ER. A cardiac arrest patient cannot wait behind a mild sprain. This is why we have data prioritization and conditional formatting in galleries: critical items must float to the top in bright red."</p>
+        </aside>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 9: THE 7-LAYER ARCHITECTURE FRAMEWORK (MASTER DIAGRAM)
+           ==================================================================== -->
+      <section class="slide" id="slide-9" data-slide-index="8" data-title="The 7-Layer Master Framework" data-segment="Part 5: Architecture Deep Dive">
+        <header class="slide-header">
+          <div class="section-tag">Part 5 &bull; Master Mental Model</div>
+          <h2>The 7-Layer Architectural Framework</h2>
+          <p class="subtitle">The complete engineering chain that guarantees every element traces back to business value.</p>
+        </header>
+
+        <div class="slide-content">
+          <div class="card">
+            <div class="arch-pipeline">
+              <div class="arch-node">
+                <div class="arch-node-num">L1</div>
+                <div class="arch-node-title">Problem</div>
+                <div class="arch-node-sub">What hurts?</div>
+              </div>
+              <div class="arch-arrow">&rarr;</div>
+              <div class="arch-node">
+                <div class="arch-node-num">L2</div>
+                <div class="arch-node-title">Process</div>
+                <div class="arch-node-sub">Who does what?</div>
+              </div>
+              <div class="arch-arrow">&rarr;</div>
+              <div class="arch-node">
+                <div class="arch-node-num">L3</div>
+                <div class="arch-node-title">Data</div>
+                <div class="arch-node-sub">What to remember?</div>
+              </div>
+              <div class="arch-arrow">&rarr;</div>
+              <div class="arch-node active">
+                <div class="arch-node-num">L4</div>
+                <div class="arch-node-title">Screens</div>
+                <div class="arch-node-sub">Where to look?</div>
+              </div>
+              <div class="arch-arrow">&rarr;</div>
+              <div class="arch-node active">
+                <div class="arch-node-num">L5</div>
+                <div class="arch-node-title">Logic</div>
+                <div class="arch-node-sub">Traffic rules?</div>
+              </div>
+              <div class="arch-arrow">&rarr;</div>
+              <div class="arch-node">
+                <div class="arch-node-num">L6</div>
+                <div class="arch-node-title">Storage</div>
+                <div class="arch-node-sub">Cloud write</div>
+              </div>
+              <div class="arch-arrow">&rarr;</div>
+              <div class="arch-node">
+                <div class="arch-node-num">L7</div>
+                <div class="arch-node-title">Feedback</div>
+                <div class="arch-node-sub">Confirm truth</div>
+              </div>
+            </div>
+
+            <div class="callout-box" style="margin-top: 1.25rem;">
+              <strong style="color: #67e8f9;">The Architectural Law:</strong> You can NEVER build Layer 4 (Screens) or write Layer 5 (Power Fx) until Layer 1, 2, and 3 are finalized on paper! Skipping layers creates the blank-canvas catastrophe.
+            </div>
+          </div>
+        </div>
+        <aside class="trainer-notes">
+          <h4>Trainer Speaking Script &amp; Pedagogical Cues:</h4>
+          <p><strong>The 7-Layer Framework (3 min):</strong> "Walk across the 7-node pipeline. Have students chant the sequence with you: 'Problem ➔ Process ➔ Data ➔ Screen ➔ Logic ➔ Storage ➔ Test'. Drill the rule: you cannot skip a layer. Building a screen before knowing the data schema is guaranteed failure."</p>
+        </aside>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 10: LAYERS 1 & 2: PROBLEM & PROCESS
+           ==================================================================== -->
+      <section class="slide" id="slide-10" data-slide-index="9" data-title="Layers 1 &amp; 2: Problem &amp; Process" data-segment="Part 5: Architecture Deep Dive">
+        <header class="slide-header">
+          <div class="section-tag">Part 5 &bull; Foundation Layers</div>
+          <h2>Layers 1 &amp; 2: The Business Problem &amp; Human Process</h2>
+          <p class="subtitle">Software cannot solve a problem that human beings do not yet clearly understand.</p>
+        </header>
+
+        <div class="slide-content grid-2-col">
+          <div class="card">
+            <span class="card-badge" style="background: rgba(239, 68, 68, 0.2); color: #fca5a5;">Layer 1: Problem Definition</span>
+            <h4 style="color: #f8fafc; margin: 0.5rem 0;">The CNC Spindle Overheating Crisis</h4>
+            <p style="color: var(--text-muted); font-size: 0.88rem; line-height: 1.6;">
+              When Line 2 CNC coolant pump fails, operators cannot tell whether a ticket was already logged. A $45,000 spindle replacement and 48 hours downtime result if ignored.
+            </p>
+            <div style="margin-top: 1rem; padding: 0.75rem; background: rgba(0, 0, 0, 0.35); border-radius: 6px;">
+              <strong style="color: #fca5a5; font-size: 0.85rem;">Business Objective:</strong>
+              <p style="color: #cbd5e1; font-size: 0.82rem; margin-top: 0.25rem;">Allow machine operators to log overheating incidents in under 15 seconds, and allow technicians to update status without duplicate rows.</p>
+            </div>
+          </div>
+
+          <div class="card">
+            <span class="card-badge" style="background: rgba(6, 182, 212, 0.2); color: #67e8f9;">Layer 2: Human Process Map</span>
+            <h4 style="color: #f8fafc; margin: 0.5rem 0;">The 4-Step Hand-Off Chain</h4>
+            <div class="agenda-timeline" style="margin-top: 0.5rem;">
+              <div class="agenda-row">
+                <span class="agenda-time" style="color: #67e8f9;">Step 1 &bull; Op</span>
+                <div>Operator sees amber alarm ➔ Logs digital work order.</div>
+              </div>
+              <div class="agenda-row">
+                <span class="agenda-time" style="color: #fcd34d;">Step 2 &bull; Lead</span>
+                <div>Lead receives priority alert ➔ Assigns technician Dara.</div>
+              </div>
+              <div class="agenda-row">
+                <span class="agenda-time" style="color: #86efac;">Step 3 &bull; Tech</span>
+                <div>Tech repairs pump valve ➔ Logs $120 parts cost &amp; notes.</div>
+              </div>
+              <div class="agenda-row">
+                <span class="agenda-time" style="color: #c084fc;">Step 4 &bull; Sup</span>
+                <div>Supervisor inspects coolant pressure ➔ Signs off &amp; closes.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <aside class="trainer-notes">
+          <h4>Trainer Speaking Script &amp; Pedagogical Cues:</h4>
+          <p><strong>Layers 1 &amp; 2 (3 min):</strong> "Show how we interview operators. We don't ask 'What buttons do you want?' We ask: 'What is stopping you from doing your job?' Notice the 4 human roles: Operator, Lead Tech, Technician, Supervisor. Each role has a distinct responsibility."</p>
+        </aside>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 11: LAYER 3: DATA SCHEMA NORMALIZATION
+           ==================================================================== -->
+      <section class="slide" id="slide-11" data-slide-index="10" data-title="Layer 3: Normalized Data Schema" data-segment="Part 5: Architecture Deep Dive">
+        <header class="slide-header">
+          <div class="section-tag">Part 5 &bull; Data Layer</div>
+          <h2>Layer 3: Normalized Data Schema (SharePoint List)</h2>
+          <p class="subtitle">SharePoint List: EquipmentWorkOrders — Every column exists to serve a human step.</p>
+        </header>
+
+        <div class="slide-content grid-2-col">
+          <div class="card">
+            <h3 class="card-title">📋 SharePoint List Columns</h3>
+            <table class="matrix-table" style="font-size: 0.82rem;">
+              <thead>
+                <tr>
+                  <th>Column Name</th>
+                  <th>Data Type</th>
+                  <th>Role in Business Process</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><code>Title</code></td>
+                  <td><span class="badge-tag tag-cyan">Single line of text</span></td>
+                  <td>Unique Work Order ID (e.g. WO-1045)</td>
+                </tr>
+                <tr>
+                  <td><code>MachineID</code></td>
+                  <td><span class="badge-tag tag-amber">Choice</span></td>
+                  <td>CNC-01, CNC-02, CNC-03, Lathe-01</td>
+                </tr>
+                <tr>
+                  <td><code>Priority</code></td>
+                  <td><span class="badge-tag tag-rose">Choice</span></td>
+                  <td>Critical, High, Medium, Low</td>
+                </tr>
+                <tr>
+                  <td><code>Status</code></td>
+                  <td><span class="badge-tag tag-emerald">Choice</span></td>
+                  <td>New, Dispatched, In Repair, Closed</td>
+                </tr>
+                <tr>
+                  <td><code>RepairCost</code></td>
+                  <td><span class="badge-tag tag-purple">Number</span></td>
+                  <td>Dollar cost of parts for Sum()</td>
+                </tr>
+                <tr>
+                  <td><code>AssignedTech</code></td>
+                  <td><span class="badge-tag tag-cyan">Person</span></td>
+                  <td>Office 365 User Profile</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="card">
+            <h3 class="card-title">🛡️ Why Normalization Protects the App</h3>
+            <ul style="color: var(--text-muted); font-size: 0.88rem; line-height: 1.6; padding-left: 1.2rem;">
+              <li><strong>Why Choice for MachineID?</strong> If operators type free text, they type 'CNC4', 'cnc-04', 'Machine #4'. The filter <code>Filter(WorkOrders, MachineID = 'CNC-04')</code> will fail!</li>
+              <li><strong>Why Choice for Priority?</strong> Guarantees sorting and color coding rules work 100% of the time without typos.</li>
+              <li><strong>Why Number for RepairCost?</strong> You cannot calculate <code>Sum(WorkOrders, RepairCost)</code> on text fields!</li>
+              <li><strong>Why Person for AssignedTech?</strong> Automatically retrieves user email, photo, and manager from Office 365.</li>
+            </ul>
+          </div>
+        </div>
+        <aside class="trainer-notes">
+          <h4>Trainer Speaking Script &amp; Pedagogical Cues:</h4>
+          <p><strong>Layer 3 Normalization (3 min):</strong> "Explain why choice fields are mandatory for machine names and priority. If operators type free text, they type 'CNC4', 'cnc-04', 'Machine #4'. The filter will fail! Choice columns enforce business discipline."</p>
+        </aside>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 12: LAYER 4: 3-SCREEN ENTERPRISE PATTERN
+           ==================================================================== -->
+      <section class="slide" id="slide-12" data-slide-index="11" data-title="Layer 4: 3-Screen Enterprise Pattern" data-segment="Part 5: Architecture Deep Dive">
+        <header class="slide-header">
+          <div class="section-tag">Part 5 &bull; Screen Architecture</div>
+          <h2>Layer 4: The Standard 3-Screen Enterprise Pattern</h2>
+          <p class="subtitle">Never create 20 chaotic screens. 95% of all enterprise apps follow this exact 3-screen layout.</p>
+        </header>
+
+        <div class="slide-content">
+          <div class="screen-arch-grid">
+            <div class="screen-card">
+              <span class="screen-badge badge-browse">Screen 1 &bull; Browse</span>
+              <h4 style="color: #f8fafc; font-size: 1.05rem;">scr_BrowseWorkOrders</h4>
+              <p style="color: var(--text-muted); font-size: 0.85rem; line-height: 1.5;">
+                The central shop-floor dashboard. Operators and leads find active work orders instantly.
+              </p>
+              <div style="background: rgba(0, 0, 0, 0.35); padding: 0.75rem; border-radius: 6px; font-size: 0.8rem; color: #cbd5e1;">
+                &bull; <code>galWorkOrders.Items = Filter(...)</code><br>
+                &bull; Search bar by Machine ID<br>
+                &bull; <code>+ New Work Order</code> button (Navigates to Screen 2)
+              </div>
+            </div>
+
+            <div class="screen-card">
+              <span class="screen-badge badge-create">Screen 2 &bull; Create</span>
+              <h4 style="color: #f8fafc; font-size: 1.05rem;">scr_CreateWorkOrder</h4>
+              <p style="color: var(--text-muted); font-size: 0.85rem; line-height: 1.5;">
+                A clean, distraction-free intake form for shop-floor operators to report breakdowns.
+              </p>
+              <div style="background: rgba(0, 0, 0, 0.35); padding: 0.75rem; border-radius: 6px; font-size: 0.8rem; color: #cbd5e1;">
+                &bull; <code>frmCreateOrder.DataSource = WorkOrders</code><br>
+                &bull; <code>Mode = FormMode.New</code> (wipes cards blank)<br>
+                &bull; Submit button with validation lockout
+              </div>
+            </div>
+
+            <div class="screen-card">
+              <span class="screen-badge badge-edit">Screen 3 &bull; Detail &amp; Edit</span>
+              <h4 style="color: #f8fafc; font-size: 1.05rem;">scr_DetailEditWorkOrder</h4>
+              <p style="color: var(--text-muted); font-size: 0.85rem; line-height: 1.5;">
+                The technician workbench. Reads existing incident details and records repairs.
+              </p>
+              <div style="background: rgba(0, 0, 0, 0.35); padding: 0.75rem; border-radius: 6px; font-size: 0.8rem; color: #cbd5e1;">
+                &bull; <code>Item = galWorkOrders.Selected</code><br>
+                &bull; <code>Mode = FormMode.Edit</code> (updates existing row)<br>
+                &bull; <code>ResetForm()</code> cancel escape hatch
+              </div>
+            </div>
+          </div>
+        </div>
+        <aside class="trainer-notes">
+          <h4>Trainer Speaking Script &amp; Pedagogical Cues:</h4>
+          <p><strong>Layer 4 3-Screen Pattern (3 min):</strong> "Explain why 3 screens is the golden standard. Screen 1 lets you find and browse. Screen 2 gives you a clean slate to submit without distractions. Screen 3 gives technicians the full context of the selected record. It is clean, fast, and easy to maintain."</p>
+        </aside>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 13: LAYER 5: BUSINESS RULES & POWER FX
+           ==================================================================== -->
+      <section class="slide" id="slide-13" data-slide-index="12" data-title="Layer 5: Business Rules &amp; Power Fx" data-segment="Part 6: Power Fx Architecture">
+        <header class="slide-header">
+          <div class="section-tag">Part 6 &bull; Decision Logic</div>
+          <h2>Layer 5: Business Rules &amp; Power Fx Decision Logic</h2>
+          <p class="subtitle">Connecting human business rules to boolean conditions and reactive Power Fx properties.</p>
+        </header>
+
+        <div class="slide-content grid-2-col">
+          <div class="card">
+            <h3 class="card-title">⚙️ Business Rule &rarr; Power Fx Formula</h3>
+            <div style="display: flex; flex-direction: column; gap: 0.75rem; margin-top: 0.5rem;">
+              <div style="background: rgba(12, 19, 31, 0.7); padding: 0.85rem; border-radius: 6px; border-left: 3px solid #f59e0b;">
+                <strong style="color: #fcd34d; font-size: 0.85rem;">Rule 1: Never Submit Empty Requests</strong>
+                <p style="color: var(--text-muted); font-size: 0.8rem; margin: 0.25rem 0;">Lock the submit button until machine and description are filled.</p>
+                <code style="color: #67e8f9; font-size: 0.8rem;">btnSubmit.DisplayMode = If(IsBlank(txtIssue.Text) Or IsBlank(cmbMachine.Selected), DisplayMode.Disabled, DisplayMode.Edit)</code>
+              </div>
+
+              <div style="background: rgba(12, 19, 31, 0.7); padding: 0.85rem; border-radius: 6px; border-left: 3px solid #ef4444;">
+                <strong style="color: #fca5a5; font-size: 0.85rem;">Rule 2: Highlight Critical Alarms</strong>
+                <p style="color: var(--text-muted); font-size: 0.8rem; margin: 0.25rem 0;">Tag pill turns red if Priority is Critical.</p>
+                <code style="color: #67e8f9; font-size: 0.8rem;">tagPriority.Fill = If(ThisItem.Priority.Value = "Critical", ColorValue("#ef4444"), ColorValue("#06b6d4"))</code>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <h3 class="card-title">🔒 The 3 Essential Architectural Formulas</h3>
+            <ul style="color: var(--text-muted); font-size: 0.88rem; line-height: 1.6; padding-left: 1.2rem;">
+              <li><strong>Condition Chain:</strong> Every formula asks a question ➔ evaluates True/False ➔ triggers an action.</li>
+              <li><strong>Form Binding:</strong> <code>frmDetail.Item = galWorkOrders.Selected</code> guarantees zero duplicate records during editing.</li>
+              <li><strong>Safe Cancellation:</strong> <code>ResetForm(frmDetail); Back()</code> discards memory buffer changes without polluting records.</li>
+            </ul>
+          </div>
+        </div>
+        <aside class="trainer-notes">
+          <h4>Trainer Speaking Script &amp; Pedagogical Cues:</h4>
+          <p><strong>Layer 5 Logic (3 min):</strong> "Break down the formula structure. Plain-English condition ➔ Question ➔ True/False result ➔ Action. Show how btnSubmit.DisplayMode uses If(IsBlank(...)) to physically prevent empty records."</p>
+        </aside>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 14: LAYERS 6 & 7: STORAGE & AUDIT FEEDBACK
+           ==================================================================== -->
+      <section class="slide" id="slide-14" data-slide-index="13" data-title="Layers 6 &amp; 7: Storage &amp; Feedback" data-segment="Part 7: Storage &amp; Feedback">
+        <header class="slide-header">
+          <div class="section-tag">Part 7 &bull; Storage &amp; Verification</div>
+          <h2>Layers 6 &amp; 7: Cloud Storage &amp; User Feedback Hooks</h2>
+          <p class="subtitle">How data commits to SharePoint and how users receive verified reactive confirmation.</p>
+        </header>
+
+        <div class="slide-content grid-2-col">
+          <div class="card">
+            <span class="card-badge" style="background: rgba(16, 185, 129, 0.2); color: #86efac;">Layer 6: Cloud Storage</span>
+            <h4 style="color: #f8fafc; margin: 0.5rem 0;">Executing Writes via SubmitForm()</h4>
+            <p style="color: var(--text-muted); font-size: 0.88rem; line-height: 1.6;">
+              When the operator taps Save, <code>SubmitForm(frmOrder)</code> inspects <code>Form.Mode</code>:
+            </p>
+            <ul style="color: var(--text-muted); font-size: 0.84rem; line-height: 1.6; padding-left: 1.2rem; margin-top: 0.5rem;">
+              <li><strong>If New:</strong> Generates HTTP POST ➔ Creates new row &amp; new SharePoint ID.</li>
+              <li><strong>If Edit:</strong> Generates HTTP PATCH ➔ Updates existing row matching <code>Item.ID</code> without duplicating!</li>
+            </ul>
+          </div>
+
+          <div class="card">
+            <span class="card-badge" style="background: rgba(6, 182, 212, 0.2); color: #67e8f9;">Layer 7: Feedback Hooks</span>
+            <h4 style="color: #f8fafc; margin: 0.5rem 0;">Event Hooks: OnSuccess &amp; OnFailure</h4>
+            <div style="background: rgba(0, 0, 0, 0.35); padding: 0.85rem; border-radius: 6px; font-family: var(--font-code); font-size: 0.82rem; color: #86efac; margin-top: 0.5rem;">
+              // frmOrder.OnSuccess<br>
+              Notify("Work order saved to cloud!", NotificationType.Success);<br>
+              Navigate(scr_BrowseWorkOrders)
+            </div>
+            <div style="background: rgba(0, 0, 0, 0.35); padding: 0.85rem; border-radius: 6px; font-family: var(--font-code); font-size: 0.82rem; color: #fca5a5; margin-top: 0.5rem;">
+              // frmOrder.OnFailure<br>
+              Notify("Save failed: " &amp; frmOrder.Error, NotificationType.Error)
+            </div>
+          </div>
+        </div>
+        <aside class="trainer-notes">
+          <h4>Trainer Speaking Script &amp; Pedagogical Cues:</h4>
+          <p><strong>Layers 6 &amp; 7 (3 min):</strong> "Clarify that SubmitForm() does the heavy lifting. But highlight the event hooks: OnSuccess runs only when SharePoint confirms the write! Never put Notify() inside the button's OnSelect—if the internet is disconnected, the button will lie and say 'Success!' even though data was lost."</p>
+        </aside>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 15: INTERACTIVE 7-LAYER BLUEPRINT SIMULATOR
+           ==================================================================== -->
+      <section class="slide" id="slide-15" data-slide-index="14" data-title="Interactive Architecture Simulator" data-segment="Part 8: Interactive Synthesis">
+        <header class="slide-header">
+          <div class="section-tag">Part 8 &bull; Interactive Lab</div>
+          <h2>Interactive 7-Layer Architecture Simulator</h2>
+          <p class="subtitle">Click each layer tab below to inspect how machine failure transforms into software components.</p>
+        </header>
+
+        <div class="slide-content">
+          <div class="blueprint-sim">
+            <div class="sim-nav-tabs">
+              <button class="sim-tab-btn active" id="sim-tab-1" onclick="selectSimLayer(1)">1. Problem</button>
+              <button class="sim-tab-btn" id="sim-tab-2" onclick="selectSimLayer(2)">2. Process</button>
+              <button class="sim-tab-btn" id="sim-tab-3" onclick="selectSimLayer(3)">3. Data</button>
+              <button class="sim-tab-btn" id="sim-tab-4" onclick="selectSimLayer(4)">4. Screen</button>
+              <button class="sim-tab-btn" id="sim-tab-5" onclick="selectSimLayer(5)">5. Logic</button>
+              <button class="sim-tab-btn" id="sim-tab-6" onclick="selectSimLayer(6)">6. Storage</button>
+              <button class="sim-tab-btn" id="sim-tab-7" onclick="selectSimLayer(7)">7. Feedback</button>
+            </div>
+            <div class="sim-stage-content" id="sim-layer-display">
+              <!-- Dynamically populated by selectSimLayer(1) -->
+            </div>
+          </div>
+        </div>
+        <aside class="trainer-notes">
+          <h4>Trainer Speaking Script &amp; Pedagogical Cues:</h4>
+          <p><strong>Interactive Simulator (3 min):</strong> "Click through the tabs 1 to 7 on the slide. Point out how the problem of an overheating coolant pump smoothly transforms into a SharePoint column, then an EditForm card, then an If condition, and finally a green notification banner."</p>
+        </aside>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 16: TRAINER LIVE DEMONSTRATION
+           ==================================================================== -->
+      <section class="slide" id="slide-16" data-slide-index="15" data-title="Trainer Live Demonstration" data-segment="Part 9: Live Blueprinting">
+        <header class="slide-header">
+          <div class="section-tag">Part 9 &bull; Live Demonstration</div>
+          <h2>Trainer Live Demo: Drafting the 1-Page Blueprint on Paper</h2>
+          <p class="subtitle">Watch a software architect draft the full blueprint before touching Power Apps Studio.</p>
+        </header>
+
+        <div class="slide-content grid-4-col">
+          <div class="card">
+            <span class="card-badge" style="background: rgba(6, 182, 212, 0.2); color: #67e8f9;">Step 1 &bull; 3 Min</span>
+            <h4 style="color: #f8fafc; margin: 0.5rem 0;">Pain &amp; Roles</h4>
+            <p style="color: var(--text-muted); font-size: 0.85rem; line-height: 1.5;">
+              Write down the exact machine symptom and the 4 human roles: Operator, Lead, Tech, Supervisor.
+            </p>
+          </div>
+
+          <div class="card">
+            <span class="card-badge" style="background: rgba(245, 158, 11, 0.2); color: #fcd34d;">Step 2 &bull; 3 Min</span>
+            <h4 style="color: #f8fafc; margin: 0.5rem 0;">6 Columns Table</h4>
+            <p style="color: var(--text-muted); font-size: 0.85rem; line-height: 1.5;">
+              Draw a table with 6 columns. Enforce Choice fields for MachineID and Priority; Number for RepairCost.
+            </p>
+          </div>
+
+          <div class="card">
+            <span class="card-badge" style="background: rgba(16, 185, 129, 0.2); color: #86efac;">Step 3 &bull; 2 Min</span>
+            <h4 style="color: #f8fafc; margin: 0.5rem 0;">3 Screen Boxes</h4>
+            <p style="color: var(--text-muted); font-size: 0.85rem; line-height: 1.5;">
+              Sketch 3 boxes: Browse (Gallery) ➔ Create (NewForm) ➔ Detail/Edit (EditForm + galWorkOrders.Selected).
+            </p>
+          </div>
+
+          <div class="card">
+            <span class="card-badge" style="background: rgba(139, 92, 246, 0.2); color: #c084fc;">Step 4 &bull; 2 Min</span>
+            <h4 style="color: #f8fafc; margin: 0.5rem 0;">Validation Logic</h4>
+            <p style="color: var(--text-muted); font-size: 0.85rem; line-height: 1.5;">
+              Write the <code>IsBlank()</code> check for the submit button and wire <code>OnSuccess = Notify()</code>.
+            </p>
+          </div>
+        </div>
+        <aside class="trainer-notes">
+          <h4>Trainer Speaking Script &amp; Pedagogical Cues:</h4>
+          <p><strong>Live Demo Guide (3 min):</strong> "Keep Power Apps Studio closed! Use a piece of paper or digital notepad. Show students how fast you can write down the 4 headings and draft the entire app structure in 10 minutes. Emphasize: '10 minutes of thinking saves 10 hours of deleting bad controls.'"</p>
+        </aside>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 17: GUIDED PRACTICE 1: FORKLIFT SAFETY APP
+           ==================================================================== -->
+      <section class="slide" id="slide-17" data-slide-index="16" data-title="Guided Practice: Forklift Safety (1 &amp; 2)" data-segment="Part 10: Guided Practice">
+        <header class="slide-header">
+          <div class="section-tag">Part 10 &bull; Guided Practice</div>
+          <h2>Guided Practice: Forklift Safety Inspection (Problem &amp; Process)</h2>
+          <p class="subtitle">Scaffolded exercise: collaborate to map warehouse inspection from real pain to human hand-offs.</p>
+        </header>
+
+        <div class="slide-content grid-2-col">
+          <div class="card">
+            <span class="card-badge" style="background: rgba(239, 68, 68, 0.2); color: #fca5a5;">The Warehouse Pain Point</span>
+            <h4 style="color: #f8fafc; margin: 0.5rem 0;">Forklift Brake Failures in Zone B</h4>
+            <p style="color: var(--text-muted); font-size: 0.88rem; line-height: 1.6;">
+              12 forklifts operate across 3 warehouse shifts. Yesterday, Forklift #08 had failing brakes, but the paper inspection clipboard was soaked in coffee and unreadable. The next driver collided with a pallet rack!
+            </p>
+          </div>
+
+          <div class="card">
+            <span class="card-badge" style="background: rgba(6, 182, 212, 0.2); color: #67e8f9;">The 3-Step Human Hand-Off</span>
+            <div class="agenda-timeline" style="margin-top: 0.5rem;">
+              <div class="agenda-row">
+                <span class="agenda-time" style="color: #67e8f9;">Step 1 &bull; Driver</span>
+                <div>Driver begins shift ➔ Performs 5-point physical pre-check on tablet.</div>
+              </div>
+              <div class="agenda-row">
+                <span class="agenda-time" style="color: #ef4444;">Step 2 &bull; Gate</span>
+                <div>If any safety item fails (e.g. Brakes = Fail) ➔ System locks vehicle out!</div>
+              </div>
+              <div class="agenda-row">
+                <span class="agenda-time" style="color: #86efac;">Step 3 &bull; Shop</span>
+                <div>Mechanic receives immediate push alert ➔ Takes unit into maintenance.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <aside class="trainer-notes">
+          <h4>Trainer Speaking Script &amp; Pedagogical Cues:</h4>
+          <p><strong>Guided Practice 1 (3 min):</strong> "Engage the learner actively. Ask: 'Who drives the forklift? What can break?' Guide them to write the 3-step process. Ensure they understand why failing a brake test must trigger a lockout."</p>
+        </aside>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 18: GUIDED PRACTICE 2: FORKLIFT DATA SCHEMA & LOGIC
+           ==================================================================== -->
+      <section class="slide" id="slide-18" data-slide-index="17" data-title="Guided Practice: Forklift Safety (3 &amp; 5)" data-segment="Part 10: Guided Practice">
+        <header class="slide-header">
+          <div class="section-tag">Part 10 &bull; Guided Practice</div>
+          <h2>Guided Practice: Forklift Data Schema &amp; Safety Logic</h2>
+          <p class="subtitle">Specifying SharePoint column data types and writing reactive lockout formulas.</p>
+        </header>
+
+        <div class="slide-content grid-2-col">
+          <div class="card">
+            <h3 class="card-title">📋 SharePoint Schema: ForkliftInspections</h3>
+            <ul style="color: var(--text-muted); font-size: 0.86rem; line-height: 1.6; padding-left: 1.2rem;">
+              <li><code>Title</code> (Text): Inspection ID (e.g., INSP-2026-08)</li>
+              <li><code>ForkliftID</code> (Choice): FL-01 through FL-12</li>
+              <li><code>BrakeCheck</code> (Choice): Pass, Fail</li>
+              <li><code>BatteryPct</code> (Number): 0 - 100 percentage</li>
+              <li><code>InspectionStatus</code> (Choice): Safe, Locked Out, Under Repair</li>
+            </ul>
+          </div>
+
+          <div class="card">
+            <h3 class="card-title">🔒 Power Fx Reactive Lockout Logic</h3>
+            <div style="background: rgba(0, 0, 0, 0.35); padding: 0.85rem; border-radius: 6px; font-family: var(--font-code); font-size: 0.82rem; color: #fcd34d;">
+              // Lockout Status Calculation<br>
+              If(<br>
+              &nbsp;&nbsp;cmbBrakes.Selected.Value = "Fail" Or numBattery.Value &lt; 20,<br>
+              &nbsp;&nbsp;"Locked Out",<br>
+              &nbsp;&nbsp;"Safe to Operate"<br>
+              )
+            </div>
+            <p style="color: var(--text-muted); font-size: 0.84rem; margin-top: 0.5rem;">
+              Notice how the business rule (failed brakes or low battery) directly drives the data value!
+            </p>
+          </div>
+        </div>
+        <aside class="trainer-notes">
+          <h4>Trainer Speaking Script &amp; Pedagogical Cues:</h4>
+          <p><strong>Guided Practice 2 (3 min):</strong> "Have students verify column types. Why is BatteryPct a Number? Because later we want to alert when BatteryPct &lt; 20! You cannot compare text in mathematical logic."</p>
+        </aside>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 19: INDEPENDENT SOLO CHALLENGE: MATERIAL QUARANTINE
+           ==================================================================== -->
+      <section class="slide" id="slide-19" data-slide-index="18" data-title="Independent Challenge: Material Quarantine" data-segment="Part 11: Solo Challenge">
+        <header class="slide-header">
+          <div class="section-tag">Part 11 &bull; Independent Challenge</div>
+          <h2>Solo Challenge: Raw Material Quarantine Blueprint</h2>
+          <p class="subtitle">10 Minutes: Design a 5-layer architectural blueprint on your scratchpad independently.</p>
+        </header>
+
+        <div class="slide-content grid-2-col">
+          <div class="card">
+            <span class="card-badge" style="background: rgba(245, 158, 11, 0.2); color: #fcd34d;">The Challenge Brief</span>
+            <h4 style="color: #f8fafc; margin: 0.5rem 0;">Quarantine Corroded Aluminum Ingot Deliveries</h4>
+            <p style="color: var(--text-muted); font-size: 0.88rem; line-height: 1.6;">
+              When delivery trucks arrive at receiving, receiving staff must inspect incoming aluminum ingots. If corroded or deformed, staff must immediately quarantine the lot to prevent defective metal from entering melting furnaces.
+            </p>
+          </div>
+
+          <div class="card">
+            <span class="card-badge" style="background: rgba(16, 185, 129, 0.2); color: #86efac;">Your 5 Deliverables</span>
+            <ul style="color: var(--text-muted); font-size: 0.86rem; line-height: 1.6; padding-left: 1.2rem;">
+              <li><strong>Layer 1:</strong> 1-sentence business risk statement.</li>
+              <li><strong>Layer 2:</strong> 3-step hand-off chain (Receiving ➔ QA ➔ Return).</li>
+              <li><strong>Layer 3:</strong> 5 SharePoint columns with exact data types.</li>
+              <li><strong>Layer 4:</strong> Screen names for the 3 standard enterprise screens.</li>
+              <li><strong>Layer 5:</strong> 1 Power Fx validation formula on the quarantine button.</li>
+            </ul>
+          </div>
+        </div>
+        <aside class="trainer-notes">
+          <h4>Trainer Speaking Script &amp; Pedagogical Cues:</h4>
+          <p><strong>Solo Challenge Facilitation (2 min):</strong> "Give the student 10 minutes of quiet working time. Observe their progress. Check if they made Supplier a Choice column and whether they wrote an IsBlank() check on the submit button."</p>
+        </aside>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 20: 3 BEGINNER MISCONCEPTIONS DEMOLISHED
+           ==================================================================== -->
+      <section class="slide" id="slide-20" data-slide-index="19" data-title="3 Beginner Misconceptions Demolished" data-segment="Part 12: Cognitive Corrections">
+        <header class="slide-header">
+          <div class="section-tag">Part 12 &bull; Misconception Busting</div>
+          <h2>3 Beginner Architectural Misconceptions Demolished</h2>
+          <p class="subtitle">Unlearning beginner fallacies to build resilient, maintainable enterprise software.</p>
+        </header>
+
+        <div class="slide-content grid-3-col">
+          <div class="card" style="border-top: 3px solid #ef4444;">
+            <span class="card-badge" style="background: rgba(239, 68, 68, 0.2); color: #fca5a5;">Fallacy 1</span>
+            <h4 style="color: #f87171; margin: 0.5rem 0;">"Build the UI First"</h4>
+            <p style="color: var(--text-muted); font-size: 0.84rem; line-height: 1.5;">
+              <strong>The Trap:</strong> Opening Power Apps Studio to drag buttons and pick nice colors.<br><br>
+              <strong>The Truth:</strong> UI built without data schemas gets deleted 100% of the time. Design data first!
+            </p>
+          </div>
+
+          <div class="card" style="border-top: 3px solid #f59e0b;">
+            <span class="card-badge" style="background: rgba(245, 158, 11, 0.2); color: #fcd34d;">Fallacy 2</span>
+            <h4 style="color: #fbbf24; margin: 0.5rem 0;">"Use Text for Everything"</h4>
+            <p style="color: var(--text-muted); font-size: 0.84rem; line-height: 1.5;">
+              <strong>The Trap:</strong> Making all SharePoint columns 'Single line of text' for laziness.<br><br>
+              <strong>The Truth:</strong> You destroy sorting, ruin Sum() calculations, and allow typos to corrupt filters.
+            </p>
+          </div>
+
+          <div class="card" style="border-top: 3px solid #06b6d4;">
+            <span class="card-badge" style="background: rgba(6, 182, 212, 0.2); color: #67e8f9;">Fallacy 3</span>
+            <h4 style="color: #67e8f9; margin: 0.5rem 0;">"More Screens = Better App"</h4>
+            <p style="color: var(--text-muted); font-size: 0.84rem; line-height: 1.5;">
+              <strong>The Trap:</strong> Creating 20 separate screens for every small variation.<br><br>
+              <strong>The Truth:</strong> Master the 3-Screen Pattern. It handles 95% of business workflows with zero bloat.
+            </p>
+          </div>
+        </div>
+        <aside class="trainer-notes">
+          <h4>Trainer Speaking Script &amp; Pedagogical Cues:</h4>
+          <p><strong>Misconception Review (3 min):</strong> "Debunk the 3 myths: (1) UI first, (2) Text for everything, (3) 20 screens. Modern app development is about simplicity, discipline, and maintainability."</p>
+        </aside>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 21: FORMATIVE ASSESSMENT: 5 DUAL-STATE QUESTIONS
+           ==================================================================== -->
+      <section class="slide" id="slide-21" data-slide-index="20" data-title="Formative Assessment: Architecture Quiz" data-segment="Part 13: Knowledge Check">
+        <header class="slide-header">
+          <div class="section-tag">Part 13 &bull; Formative Assessment</div>
+          <h2>Architecture Knowledge Check (Dual-State Inspector)</h2>
+          <p class="subtitle">Test your architectural thinking. Click an option to inspect technical rationales.</p>
+        </header>
+
+        <div class="slide-content">
+          <div class="quiz-container">
+            <div class="quiz-card">
+              <div style="display: flex; justify-content: space-between; align-items: center;">
+                <span class="card-badge" style="background: rgba(6, 182, 212, 0.2); color: #67e8f9;" id="quiz-q-num">Question 1 of 5</span>
+                <button class="hud-btn" id="quiz-next-btn" onclick="nextQuizQuestion()" style="padding: 0.35rem 0.75rem; font-size: 0.8rem;">Next &rarr;</button>
+              </div>
+              <h3 class="card-title" id="quiz-q-text" style="margin-top: 0.75rem; font-size: 1.15rem; line-height: 1.4;">Question text</h3>
+              <div class="quiz-options" id="quiz-options-container">
+                <!-- Dynamically populated by renderQuizQuestion() -->
+              </div>
+            </div>
+
+            <div class="quiz-inspector-card" id="quiz-feedback-box">
+              <div class="feedback-placeholder" id="quiz-placeholder">
+                <span style="font-size: 2.5rem; color: var(--text-dim); margin-bottom: 0.5rem;">🔍</span>
+                <h4 style="color: var(--text-muted);">Select an Answer</h4>
+                <p style="font-size: 0.85rem; color: var(--text-dim); max-width: 280px; margin-top: 0.35rem;">
+                  Click any option on the left to verify architectural principles.
+                </p>
+              </div>
+              <div class="feedback-content" id="quiz-feedback-content">
+                <span class="card-badge" id="quiz-feedback-badge" style="margin-bottom: 0.5rem;">Result</span>
+                <h4 id="quiz-feedback-status" style="margin-bottom: 0.5rem; font-size: 1.1rem;">Status</h4>
+                <p id="quiz-feedback-text" style="font-size: 0.88rem; color: #cbd5e1; line-height: 1.6;">Explanation</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <aside class="trainer-notes">
+          <h4>Trainer Speaking Script &amp; Pedagogical Cues:</h4>
+          <p><strong>Quiz Facilitation (3 min):</strong> "Guide the student through the 5 interactive questions. When they click an answer, read the detailed explanation out loud. Highlight Question 2 (Number vs Text) and Question 4 (DataCard validation)."</p>
+        </aside>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 22: FORMATIVE ASSESSMENT REVIEW & DEEP DIVE
+           ==================================================================== -->
+      <section class="slide" id="slide-22" data-slide-index="21" data-title="Assessment Review &amp; Synthesis" data-segment="Part 13: Knowledge Check">
+        <header class="slide-header">
+          <div class="section-tag">Part 13 &bull; Deep Review</div>
+          <h2>The 5 Architectural Golden Rules Summary</h2>
+          <p class="subtitle">Key takeaways every enterprise developer must memorize before building.</p>
+        </header>
+
+        <div class="slide-content grid-2-col">
+          <div class="card">
+            <h3 class="card-title">🔑 Rules 1, 2, and 3</h3>
+            <ul style="color: var(--text-muted); font-size: 0.88rem; line-height: 1.6; padding-left: 1.2rem;">
+              <li><strong>Rule 1 (Problem First):</strong> The business problem determines the human decisions, which dictates what data facts must be recorded.</li>
+              <li><strong>Rule 2 (Typed Columns):</strong> Never store numbers or dates as text. Correct data types enable sorting, Sum(), and validation.</li>
+              <li><strong>Rule 3 (3-Screen Pattern):</strong> Standardize on Browse ➔ Create ➔ Detail/Edit for 95% of business applications.</li>
+            </ul>
+          </div>
+
+          <div class="card">
+            <h3 class="card-title">🔑 Rules 4, 5 and Core Axiom</h3>
+            <ul style="color: var(--text-muted); font-size: 0.88rem; line-height: 1.6; padding-left: 1.2rem;">
+              <li><strong>Rule 4 (OnSuccess Hooks):</strong> Put user notification inside <code>Form.OnSuccess</code>, never inside the button's <code>OnSelect</code>!</li>
+              <li><strong>Rule 5 (Logic Controller):</strong> Power Fx asks questions, evaluates True/False, and directs reactive actions safely.</li>
+              <li><strong>Core Axiom:</strong> 10 minutes of architectural drafting on paper saves 10 hours of deleting bad controls in Power Apps Studio.</li>
+            </ul>
+          </div>
+        </div>
+        <aside class="trainer-notes">
+          <h4>Trainer Speaking Script &amp; Pedagogical Cues:</h4>
+          <p><strong>Deep Review (2 min):</strong> "Synthesize the 5 golden rules. Emphasize that software engineering is an intellectual discipline of structured thought, not impulsive clicking."</p>
+        </aside>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 23: 3-TIER ARCHITECTURAL MASTERY RUBRIC
+           ==================================================================== -->
+      <section class="slide" id="slide-23" data-slide-index="22" data-title="Architectural Mastery Rubric" data-segment="Part 14: Evaluation Rubric">
+        <header class="slide-header">
+          <div class="section-tag">Part 14 &bull; Evaluation Rubric</div>
+          <h2>3-Tier Architectural Mastery Rubric</h2>
+          <p class="subtitle">Benchmark your blueprint against real-world Microsoft enterprise development standards.</p>
+        </header>
+
+        <div class="slide-content">
+          <div class="card">
+            <table class="rubric-table">
+              <thead>
+                <tr>
+                  <th>Dimension</th>
+                  <th>Level 1: Novice</th>
+                  <th>Level 2: Competent</th>
+                  <th>Level 3: Master Architect</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Problem to Schema</strong></td>
+                  <td>Creates columns named Col1 or uses text for everything.</td>
+                  <td>Maps human process to typed columns (Choice, Date, Number).</td>
+                  <td>Normalizes tables, eliminates redundancies, includes audit fields.</td>
+                </tr>
+                <tr>
+                  <td><strong>Screen Pattern</strong></td>
+                  <td>Creates 15 disconnected screens with duplicate buttons.</td>
+                  <td>Uses the standard 3-Screen Pattern (Browse, Create, Edit).</td>
+                  <td>Optimizes performance, binds gal.Selected, provides clean cancel.</td>
+                </tr>
+                <tr>
+                  <td><strong>Logic &amp; Validation</strong></td>
+                  <td>No validation; submits blank fields and crashes on empty inputs.</td>
+                  <td>Locks submit button with <code>IsBlank()</code> conditions.</td>
+                  <td>Multi-field validation, conditional color alarms, OnSuccess hooks.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <aside class="trainer-notes">
+          <h4>Trainer Speaking Script &amp; Pedagogical Cues:</h4>
+          <p><strong>Rubric Review (2 min):</strong> "Show students the 3 levels of competence: Novice, Competent, Master Architect. Encourage them that by following the 7-layer framework, they are already operating at Level 2 (Competent)!"</p>
+        </aside>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 24: WRAP-UP & BRIDGE FORWARD TO DAY 26
+           ==================================================================== -->
+      <section class="slide" id="slide-24" data-slide-index="23" data-title="Wrap-Up &amp; Bridge to Day 26" data-segment="Part 15: Synthesis &amp; Next Steps">
+        <header class="slide-header">
+          <div class="section-tag">Part 15 &bull; Synthesis &amp; Forward Bridge</div>
+          <h2>Wrap-Up: You Are Now a Software Architect!</h2>
+          <p class="subtitle">Today's architectural breakthrough and preview of tomorrow's live implementation.</p>
+        </header>
+
+        <div class="slide-content grid-2-col">
+          <div class="card" style="border-left: 3px solid #06b6d4;">
+            <h3 class="card-title">🎯 Today's Victory (Architecture)</h3>
+            <p style="color: var(--text-muted); font-size: 0.88rem; line-height: 1.6;">
+              You mastered the complete 7-layer engineering pipeline:
+            </p>
+            <div style="margin-top: 0.75rem; padding: 0.75rem; background: rgba(6, 182, 212, 0.1); border-radius: 6px; font-family: var(--font-code); font-size: 0.84rem; color: #67e8f9;">
+              Problem &rarr; Process &rarr; Data &rarr; Screens &rarr; Logic &rarr; Storage &rarr; Feedback
+            </div>
+            <p style="color: var(--text-muted); font-size: 0.85rem; line-height: 1.5; margin-top: 0.75rem;">
+              Every button, column, and formula has a reason to exist. You will never build a duplicate row or a blank-canvas disaster again.
+            </p>
+          </div>
+
+          <div class="card" style="border-left: 3px solid #f59e0b;">
+            <h3 class="card-title">🌉 Forward Bridge to Tomorrow: Day 26</h3>
+            <p style="color: var(--text-muted); font-size: 0.88rem; line-height: 1.6;">
+              Tomorrow we open Power Apps Studio and turn our paper blueprint into living software!
+            </p>
+            <div style="margin-top: 0.75rem; padding: 0.75rem; background: rgba(245, 158, 11, 0.1); border-radius: 6px; font-family: var(--font-code); font-size: 0.84rem; color: #fcd34d;">
+              Tomorrow: End-to-End Implementation (Day 26)<br>
+              We will build the 3-screen Equipment Maintenance app live from our Day 25 blueprint!
+            </div>
+            <p style="color: #fcd34d; font-size: 0.85rem; font-weight: bold; margin-top: 0.75rem;">
+              Bring your Day 25 blueprint — tomorrow we start building!
+            </p>
+          </div>
+        </div>
+        <aside class="trainer-notes">
+          <h4>Trainer Speaking Script &amp; Pedagogical Cues:</h4>
+          <p><strong>Forward Bridge (2 min):</strong> "Celebrate their completion of Day 25! Summarize: 'Today, you became an architect. Tomorrow on Day 26, we open Power Apps Studio and build this exact system from scratch. See you tomorrow!'"</p>
+        </aside>
+      </section>
+
+    </main>
+
+    <!-- ======================================================================
+         BOTTOM HUD & CONTROLS (Day 24 Standard Spec)
+         ====================================================================== -->
+    <footer id="bottom-hud">
+      <div id="progress-bar-container">
+        <div id="progress-bar"></div>
+      </div>
+
+      <div class="hud-left">
+        <button class="hud-btn" id="btn-prev" onclick="prevSlide()" title="Previous Slide (Left Arrow)">&#8592; Prev</button>
+        <button class="hud-btn" id="btn-next" onclick="nextSlide()" title="Next Slide (Right Arrow / Space)">Next &#8594;</button>
+        <span id="slide-counter">Slide 1 / 24</span>
+      </div>
+
+      <div class="hud-right">
+        <button class="hud-btn" id="btn-lang" onclick="toggleLanguage()" title="Toggle Language (L)">
+          🌐 <span id="lang-label">KH</span>
+        </button>
+        <button class="hud-btn active" id="btn-laser" onclick="toggleLaser()" title="Presenter Laser Pointer (P)">
+          🔴 Laser
+        </button>
+        <button class="hud-btn" id="btn-notes" onclick="toggleNotes()" title="Trainer Notes Drawer (N)">
+          📝 Notes
+        </button>
+        <button class="hud-btn" id="btn-overview" onclick="toggleOverview()" title="Slide Overview Modal (O)">
+          🗂️ Overview
+        </button>
+        <button class="hud-btn" id="btn-timer" onclick="toggleTimer()" title="90-Min Countdown (T)">
+          ⏱️ <span id="timer-display">90:00</span>
+        </button>
+        <button class="hud-btn" id="btn-fullscreen" onclick="toggleFullscreen()" title="Fullscreen (F)">
+          ⛶
+        </button>
+        <a href="../index.html" class="hud-btn hub-btn" title="Return to Master Curriculum Hub (ត្រឡប់ទៅទំព័រដើម)" style="text-decoration: none; display: inline-flex; align-items: center; gap: 4px; color: #fcd34d; font-weight: 600;"><span>🏠</span><span>Hub</span></a>
+      </div></footer>
+
+    <!-- ======================================================================
+         TRAINER NOTES DRAWER (Strictly Quarantined Off-Stage)
+         ====================================================================== -->
+    <div id="notes-drawer">
+      <div class="notes-header">
+        <h3 id="notes-slide-title" style="color: #fcd34d; font-size: 1.15rem;">Trainer Speaking Notes &bull; Slide 1</h3>
+        <button class="notes-close-btn" onclick="toggleNotes()">&times;</button>
+      </div>
+      <div class="notes-body" id="notes-body-content">
+        <!-- Dynamically populated from ENGLISH_NOTES -->
+      </div>
+    </div>
+
+    <!-- ======================================================================
+         SLIDE OVERVIEW MODAL
+         ====================================================================== -->
+    <div id="overview-modal">
+      <div class="overview-header">
+        <h2 style="color: #fcd34d;">24-Slide Master Navigation</h2>
+        <button class="hud-btn" onclick="toggleOverview()" style="font-size: 1.2rem; padding: 0.5rem 1rem;">Close &times;</button>
+      </div>
+      <div class="overview-grid" id="overview-grid">
+        <!-- Dynamically populated by renderOverviewGrid() -->
+      </div>
+    </div>
+
+  </div>
+
+  <script src="script.js"></script>
+<script>
+if (window.self !== window.top) {
+  document.documentElement.classList.add('in-iframe');
+  function hideHub() { document.querySelectorAll('.hub-btn, .back-to-hub-pill').forEach(e => e.style.display = 'none'); }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', hideHub);
+  } else {
+    hideHub();
+  }
+}
+</script>
+<style>
+.in-iframe .hub-btn, .in-iframe .back-to-hub-pill { display: none !important; }
+</style>
+</body>
+</html>

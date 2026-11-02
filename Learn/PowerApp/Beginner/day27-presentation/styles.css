@@ -1,0 +1,1031 @@
+/* ============================================================================
+   POWER APPS FOUNDATION: DAY 27 PRESENTATION STYLESHEET
+   Topic: Final Transfer Challenge: Explain Why It Works
+   Phase: Phase 8: Capstone Assessment & Graduation
+   Theme: Microsoft Fluent 2 Dark Mode (Amber Gold, Pipeline Cyan & Flow Violet)
+   Bilingual: English + Khmer (Google Fonts: Moul, Siemreap, Battambang)
+   Architecture: Strict Notes Lock & Anti-Clipping Typography System
+   ============================================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=Moul&family=Kantumruy+Pro:ital,wght@0,400..700;1,400..700&family=Battambang:wght@300;400;700;900&family=Koh+Santepheap:wght@300;400;700&family=Koulen&family=Siemreap&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=Moul&family=Kantumruy+Pro:ital,wght@0,400..700;1,400..700&family=Battambang:wght@300;400;700;900&family=Koh+Santepheap:wght@300;400;700&family=Koulen&family=Siemreap&display=swap');
+
+:root {
+  /* Color Palette */
+  --bg-dark: #06090e;
+  --bg-surface: #0c131f;
+  --bg-card: rgba(18, 28, 45, 0.78);
+  --bg-card-hover: rgba(30, 48, 77, 0.92);
+  --border-subtle: rgba(255, 255, 255, 0.08);
+  --border-focus: #f59e0b;
+
+  /* Neon Accents */
+  --color-primary: #0284c7;          /* Power Fx Blue */
+  --color-primary-light: #06b6d4;    /* Pipeline Cyan */
+  --color-primary-glow: rgba(6, 182, 212, 0.35);
+  --color-sharepoint: #0d9488;       /* SharePoint Teal */
+  --color-sharepoint-glow: rgba(13, 148, 136, 0.35);
+  --color-warning: #f59e0b;          /* Capstone Gold / Form Amber */
+  --color-warning-glow: rgba(245, 158, 11, 0.35);
+  --color-success: #10b981;          /* Emerald Success */
+  --color-danger: #ef4444;           /* Alert Red */
+  --color-flow: #8b5cf6;             /* Power Automate Violet */
+  --color-flow-glow: rgba(139, 92, 246, 0.35);
+
+  /* Text Colors */
+  --text-main: #f8fafc;
+  --text-muted: #94a3b8;
+  --text-dim: #64748b;
+
+  /* Typography Defaults (English) */
+  --font-title: 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-heading: 'Plus Jakarta Sans', 'Inter', system-ui, -apple-system, sans-serif;
+  --font-body: 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-code: 'JetBrains Mono', 'Cascadia Code', 'Fira Code', 'Consolas', monospace;
+
+  /* Khmer Typography Tokens */
+  --font-khmer-title: 'Plus Jakarta Sans', 'Inter', 'Moul', 'Khmer OS Muol Light', serif;
+  --font-khmer-heading: 'Plus Jakarta Sans', 'Inter', 'Kantumruy Pro', 'Battambang', sans-serif;
+  --font-khmer-body: 'Plus Jakarta Sans', 'Inter', 'Battambang', 'Koh Santepheap', sans-serif;
+
+  /* Stage & Transition Dimensions */
+  --stage-width: 1920px;
+  --stage-height: 1080px;
+  --transition-smooth: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* ============================================================================
+   RESET & FOUNDATIONAL RULES
+   ============================================================================ */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background-color: var(--bg-dark);
+  color: var(--text-main);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  line-height: 1.5;
+}
+
+/* ============================================================================
+   STRICT SPEAKER NOTES LOCK: NEVER DISPLAY ASIDE ON STAGE
+   ============================================================================ */
+aside.trainer-notes,
+.trainer-notes,
+.slide aside,
+aside {
+  display: none !important;
+  visibility: hidden !important;
+  height: 0 !important;
+  width: 0 !important;
+  overflow: hidden !important;
+  opacity: 0 !important;
+  position: absolute !important;
+  pointer-events: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: none !important;
+}
+
+/* ============================================================================
+   KHMER TYPOGRAPHY SAFEGUARDS: PREVENT VERTICAL CLIPPING OF DIACRITICS
+   ============================================================================ */
+body.khmer-mode {
+  font-family: 'Plus Jakarta Sans', 'Inter', 'Battambang', 'Kantumruy Pro', 'Koh Santepheap', 'Noto Sans Khmer', sans-serif !important;
+}
+
+body.khmer-mode h1,
+body.khmer-mode .hero-title {
+  font-family: var(--font-khmer-title);
+  line-height: 1.55;
+  padding-bottom: 0.25rem;
+  overflow: visible;
+}
+
+body.khmer-mode h2,
+body.khmer-mode .slide-header h2 {
+  font-family: var(--font-khmer-heading);
+  line-height: 1.5;
+  padding-bottom: 0.2rem;
+  overflow: visible;
+}
+
+body.khmer-mode h3,
+body.khmer-mode h4,
+body.khmer-mode .card-title {
+  font-family: var(--font-khmer-heading);
+  line-height: 1.45;
+  overflow: visible;
+}
+
+body.khmer-mode p,
+body.khmer-mode li,
+body.khmer-mode td,
+body.khmer-mode th,
+body.khmer-mode span {
+  font-family: var(--font-khmer-body);
+  line-height: 1.65;
+}
+
+body.khmer-mode code {
+  font-family: var(--font-code);
+  line-height: 1.35;
+}
+
+/* ============================================================================
+   PRESENTATION STAGE WRAPPER (16:9 FULLSCREEN SYSTEM)
+   ============================================================================ */
+#presentation-stage {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  background: radial-gradient(circle at 50% 20%, #0c1729 0%, #06090e 85%);
+}
+
+/* 60fps Ambient Aurora Backdrops */
+.aurora-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(120px);
+  pointer-events: none;
+  opacity: 0.25;
+  z-index: 1;
+  transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.aurora-orb.orb-1 {
+  width: 600px;
+  height: 600px;
+  top: -150px;
+  left: -150px;
+  background: radial-gradient(circle, rgba(245, 158, 11, 0.4), transparent 70%);
+}
+
+.aurora-orb.orb-2 {
+  width: 700px;
+  height: 700px;
+  bottom: -200px;
+  right: -200px;
+  background: radial-gradient(circle, rgba(6, 182, 212, 0.35), transparent 70%);
+}
+
+.aurora-orb.orb-3 {
+  width: 500px;
+  height: 500px;
+  top: 40%;
+  left: 60%;
+  background: radial-gradient(circle, rgba(139, 92, 246, 0.3), transparent 70%);
+}
+
+/* Presenter Laser Pointer & Shockwave Ripple */
+#presenter-laser {
+  position: fixed;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #ff2a5f;
+  box-shadow: 0 0 16px #ff2a5f, 0 0 32px #ff2a5f;
+  pointer-events: none;
+  z-index: 99999;
+  transform: translate(-50%, -50%);
+  display: block;
+  transition: opacity 0.2s ease;
+}
+
+.pointer-click-ripple {
+  position: fixed;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 2px solid #ff2a5f;
+  pointer-events: none;
+  z-index: 99998;
+  transform: translate(-50%, -50%) scale(0);
+  opacity: 0;
+  transition: transform 0.45s ease-out, opacity 0.45s ease-out;
+}
+
+.pointer-click-ripple.active {
+  transform: translate(-50%, -50%) scale(2.5);
+  opacity: 0.8;
+}
+
+/* ============================================================================
+   SLIDES VIEWPORT & SLIDE TRANSITIONS
+   ============================================================================ */
+#slides-viewport {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  z-index: 10;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.slide {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  padding: 3.5rem 5rem 6.5rem 5rem;
+  display: flex;
+  flex-direction: column;
+  opacity: 0;
+  pointer-events: none;
+  transform: scale(0.97) translateY(18px);
+  transition: opacity 0.45s cubic-bezier(0.16, 1, 0.3, 1), transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.slide.active {
+  opacity: 1;
+  pointer-events: auto;
+  transform: scale(1) translateY(0);
+}
+
+/* Slide Header */
+.slide-header {
+  margin-bottom: 1.8rem;
+  flex-shrink: 0;
+}
+
+.section-tag {
+  display: inline-block;
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #fcd34d;
+  background: rgba(245, 158, 11, 0.12);
+  border: 1px solid rgba(245, 158, 11, 0.35);
+  padding: 0.3rem 0.85rem;
+  border-radius: 9999px;
+  margin-bottom: 0.65rem;
+}
+
+.slide-header h2 {
+  font-size: 2.1rem;
+  font-weight: 700;
+  background: linear-gradient(135deg, #ffffff 40%, #fcd34d 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 0.4rem;
+}
+
+.slide-header .subtitle {
+  font-size: 1.05rem;
+  color: var(--text-muted);
+  max-width: 1200px;
+  line-height: 1.5;
+}
+
+/* Slide Content Containers */
+.slide-content {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  overflow: visible;
+}
+
+.grid-2-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.75rem;
+}
+
+.grid-3-col {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+}
+
+.grid-4-col {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.25rem;
+}
+
+/* Cards & Surfaces */
+.card {
+  background: var(--bg-card);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--border-subtle);
+  border-radius: 14px;
+  padding: 1.6rem;
+  transition: var(--transition-smooth);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.45);
+  display: flex;
+  flex-direction: column;
+}
+
+.card:hover {
+  background: var(--bg-card-hover);
+  border-color: rgba(245, 158, 11, 0.35);
+  transform: translateY(-2px);
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.55), 0 0 20px rgba(245, 158, 11, 0.15);
+}
+
+.card-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--text-main);
+  margin-bottom: 0.75rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.card-badge {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 0.2rem 0.6rem;
+  border-radius: 6px;
+  display: inline-block;
+  align-self: flex-start;
+  margin-bottom: 0.6rem;
+}
+
+/* Code Highlights */
+code {
+  font-family: var(--font-code);
+  background: rgba(0, 0, 0, 0.4);
+  padding: 0.15rem 0.4rem;
+  border-radius: 4px;
+  color: #67e8f9;
+  font-size: 0.9em;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+pre code {
+  display: block;
+  padding: 1rem;
+  line-height: 1.5;
+  overflow-x: auto;
+}
+
+/* ============================================================================
+   SPECIALIZED HERO LAYOUT (SLIDE 1)
+   ============================================================================ */
+.hero-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  height: 100%;
+}
+
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(245, 158, 11, 0.15);
+  border: 1px solid rgba(245, 158, 11, 0.4);
+  color: #fcd34d;
+  padding: 0.4rem 1.2rem;
+  border-radius: 9999px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+}
+
+.hero-title {
+  font-size: 3.2rem;
+  font-weight: 800;
+  line-height: 1.2;
+  margin-bottom: 1.2rem;
+  background: linear-gradient(135deg, #ffffff 30%, #fcd34d 70%, #06b6d4 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.hero-subtitle {
+  font-size: 1.35rem;
+  color: var(--text-muted);
+  max-width: 950px;
+  margin-bottom: 2.2rem;
+  line-height: 1.6;
+}
+
+/* Capstone 9-Step Mental Model Chain */
+.model-chain {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  background: rgba(12, 19, 31, 0.7);
+  border: 1px solid var(--border-subtle);
+  border-radius: 9999px;
+  padding: 0.75rem 1.75rem;
+  backdrop-filter: blur(12px);
+  max-width: 1400px;
+}
+
+.chain-item {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  padding: 0.35rem 0.85rem;
+  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.chain-item.active {
+  background: rgba(245, 158, 11, 0.25);
+  color: #fcd34d;
+  border: 1px solid rgba(245, 158, 11, 0.5);
+  box-shadow: 0 0 12px rgba(245, 158, 11, 0.3);
+}
+
+.chain-item.flow {
+  background: rgba(139, 92, 246, 0.25);
+  color: #c084fc;
+  border: 1px solid rgba(139, 92, 246, 0.5);
+  box-shadow: 0 0 12px rgba(139, 92, 246, 0.3);
+}
+
+.chain-arrow {
+  color: var(--text-dim);
+  font-size: 0.9rem;
+}
+
+/* ============================================================================
+   PIPELINE DIAGRAMS & CAUSE-AND-EFFECT NODES
+   ============================================================================ */
+.flow-pipeline-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 1.5rem 0;
+  overflow-x: auto;
+}
+
+.flow-step-node {
+  flex: 1;
+  background: rgba(12, 19, 31, 0.9);
+  border: 1px solid var(--border-subtle);
+  border-radius: 12px;
+  padding: 1.25rem 1rem;
+  text-align: center;
+  position: relative;
+  transition: var(--transition-smooth);
+}
+
+.flow-step-node:hover {
+  border-color: #06b6d4;
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px var(--color-primary-glow);
+}
+
+.flow-step-icon {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+}
+
+.flow-step-title {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--text-main);
+  margin-bottom: 0.35rem;
+}
+
+.flow-step-desc {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  line-height: 1.4;
+}
+
+.flow-step-arrow {
+  color: #06b6d4;
+  font-size: 1.5rem;
+  font-weight: bold;
+  padding: 0 0.5rem;
+  flex-shrink: 0;
+}
+
+/* ============================================================================
+   3-TIER TROUBLESHOOTING GRID
+   ============================================================================ */
+.troubleshoot-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+}
+
+.troubleshoot-card {
+  background: var(--bg-card);
+  border-radius: 14px;
+  padding: 1.6rem;
+  border-top: 4px solid #06b6d4;
+  border-left: 1px solid var(--border-subtle);
+  border-right: 1px solid var(--border-subtle);
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.troubleshoot-tier-a { border-top-color: #0284c7; }
+.troubleshoot-tier-b { border-top-color: #8b5cf6; }
+.troubleshoot-tier-c { border-top-color: #10b981; }
+
+.troubleshoot-badge {
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  padding: 0.25rem 0.65rem;
+  border-radius: 6px;
+  display: inline-block;
+  margin-bottom: 0.75rem;
+}
+
+.troubleshoot-check-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  margin-top: 0.75rem;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+
+/* ============================================================================
+   INTERACTIVE SIMULATOR (SLIDE 16)
+   ============================================================================ */
+.blueprint-sim {
+  background: rgba(12, 19, 31, 0.85);
+  border: 1px solid var(--border-subtle);
+  border-radius: 14px;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.sim-nav-tabs {
+  display: flex;
+  gap: 0.5rem;
+  border-bottom: 1px solid var(--border-subtle);
+  padding-bottom: 0.75rem;
+  overflow-x: auto;
+}
+
+.sim-tab-btn {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-muted);
+  padding: 0.45rem 1rem;
+  border-radius: 8px;
+  font-size: 0.84rem;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: var(--transition-smooth);
+}
+
+.sim-tab-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--text-main);
+}
+
+.sim-tab-btn.active {
+  background: rgba(245, 158, 11, 0.2);
+  border-color: #f59e0b;
+  color: #fcd34d;
+}
+
+.sim-tab-btn.flow-tab.active {
+  background: rgba(139, 92, 246, 0.25);
+  border-color: #8b5cf6;
+  color: #c084fc;
+}
+
+.sim-stage-content {
+  background: rgba(6, 9, 14, 0.9);
+  border: 1px solid var(--border-subtle);
+  border-radius: 10px;
+  padding: 1.4rem;
+  min-height: 220px;
+}
+
+/* ============================================================================
+   FORMATIVE ASSESSMENT QUIZ & INSPECTOR (SLIDE 21)
+   ============================================================================ */
+.quiz-container {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 1.75rem;
+  height: 100%;
+}
+
+.quiz-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: 14px;
+  padding: 1.6rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.quiz-options {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-top: 1.25rem;
+}
+
+.quiz-option-btn {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-main);
+  padding: 0.85rem 1.15rem;
+  border-radius: 8px;
+  font-size: 0.88rem;
+  text-align: left;
+  cursor: pointer;
+  transition: var(--transition-smooth);
+}
+
+.quiz-option-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.25);
+  transform: translateX(4px);
+}
+
+.quiz-option-btn.correct {
+  background: rgba(16, 185, 129, 0.25) !important;
+  border-color: #10b981 !important;
+  color: #ecfdf5 !important;
+}
+
+.quiz-option-btn.incorrect {
+  background: rgba(239, 68, 68, 0.25) !important;
+  border-color: #ef4444 !important;
+  color: #fef2f2 !important;
+}
+
+.quiz-inspector-card {
+  background: rgba(12, 19, 31, 0.9);
+  border: 1px dashed var(--border-subtle);
+  border-radius: 14px;
+  padding: 1.6rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  transition: var(--transition-smooth);
+}
+
+.quiz-inspector-card.answered {
+  border-style: solid;
+  border-color: rgba(245, 158, 11, 0.5);
+  text-align: left;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+
+/* Flip Cards for Active Retrieval (Slide 4) */
+.flip-card {
+  background-color: transparent;
+  perspective: 1000px;
+  height: 250px;
+  cursor: pointer;
+}
+
+.flip-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  transition: transform 0.6s cubic-bezier(0.4, 0.2, 0.2, 1);
+  transform-style: preserve-3d;
+}
+
+.flip-card.flipped .flip-card-inner {
+  transform: rotateY(180deg);
+}
+
+.flip-card-front, .flip-card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  border-radius: 12px;
+  padding: 1.4rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border: 1px solid var(--border-subtle);
+  background: var(--bg-card);
+}
+
+.flip-card-back {
+  transform: rotateY(180deg);
+  background: rgba(18, 28, 45, 0.95);
+  border-color: rgba(245, 158, 11, 0.4);
+  text-align: left;
+}
+
+.flip-hint {
+  font-size: 0.75rem;
+  color: var(--text-dim);
+  margin-top: auto;
+}
+
+/* Tables */
+.matrix-table, .rubric-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 0.5rem;
+  font-size: 0.88rem;
+}
+
+.matrix-table th, .rubric-table th {
+  background: rgba(12, 19, 31, 0.9);
+  padding: 0.75rem 1rem;
+  text-align: left;
+  color: #fcd34d;
+  border-bottom: 2px solid rgba(245, 158, 11, 0.35);
+  font-weight: 700;
+}
+
+.matrix-table td, .rubric-table td {
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid var(--border-subtle);
+  color: #cbd5e1;
+  vertical-align: top;
+}
+
+.badge-tag {
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+}
+
+.tag-cyan { background: rgba(6, 182, 212, 0.2); color: #67e8f9; }
+.tag-purple { background: rgba(139, 92, 246, 0.2); color: #c084fc; }
+.tag-amber { background: rgba(245, 158, 11, 0.2); color: #fcd34d; }
+.tag-emerald { background: rgba(16, 185, 129, 0.2); color: #86efac; }
+.tag-rose { background: rgba(239, 68, 68, 0.2); color: #fca5a5; }
+
+/* ============================================================================
+   BOTTOM HUD DOCK CONTROLS
+   ============================================================================ */
+#hud-dock {
+  position: fixed;
+  bottom: 1.25rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.45rem 1.15rem;
+  background: rgba(12, 19, 31, 0.88);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--border-subtle);
+  border-radius: 9999px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+  z-index: 1000;
+}
+
+.hud-btn {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-main);
+  padding: 0.35rem 0.85rem;
+  border-radius: 9999px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  transition: var(--transition-smooth);
+}
+
+.hud-btn:hover {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(255, 255, 255, 0.25);
+  transform: translateY(-1px);
+}
+
+.hud-btn.active {
+  background: rgba(245, 158, 11, 0.22);
+  border-color: #f59e0b;
+  color: #fcd34d;
+}
+
+#slide-counter {
+  font-family: var(--font-code);
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  padding: 0 0.5rem;
+  min-width: 80px;
+  text-align: center;
+}
+
+#timer-display {
+  font-family: var(--font-code);
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #fcd34d;
+  background: rgba(245, 158, 11, 0.15);
+  padding: 0.2rem 0.6rem;
+  border-radius: 6px;
+  border: 1px solid rgba(245, 158, 11, 0.3);
+}
+
+#progress-bar-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+#progress-bar {
+  height: 100%;
+  width: 4.16%;
+  background: linear-gradient(90deg, #f59e0b, #06b6d4, #10b981, #8b5cf6);
+  box-shadow: 0 0 10px rgba(245, 158, 11, 0.8);
+  transition: width 0.3s ease;
+}
+
+/* ============================================================================
+   TRAINER NOTES DRAWER (SLIDING FROM RIGHT)
+   ============================================================================ */
+.notes-drawer {
+  position: fixed;
+  top: 0;
+  right: -520px;
+  width: 500px;
+  height: 100vh;
+  background: rgba(12, 19, 31, 0.98);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border-left: 1px solid var(--border-subtle);
+  box-shadow: -12px 0 40px rgba(0, 0, 0, 0.7);
+  z-index: 10000;
+  transition: right 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  display: flex;
+  flex-direction: column;
+}
+
+.notes-drawer.open {
+  right: 0;
+}
+
+.notes-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.25rem 1.75rem;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.notes-header h3 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #fcd34d;
+}
+
+.notes-close-btn {
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+.notes-content {
+  padding: 1.75rem;
+  overflow-y: auto;
+  font-size: 0.92rem;
+  color: #cbd5e1;
+  line-height: 1.7;
+}
+
+.notes-content h4 {
+  color: #67e8f9;
+  margin: 1.25rem 0 0.5rem 0;
+  font-size: 0.95rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.notes-content h4:first-child {
+  margin-top: 0;
+}
+
+.notes-content p {
+  margin-bottom: 0.85rem;
+}
+
+/* ============================================================================
+   24-SLIDE OVERVIEW MODAL
+   ============================================================================ */
+.overview-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(6, 9, 14, 0.94);
+  backdrop-filter: blur(20px);
+  z-index: 10001;
+  display: none;
+  flex-direction: column;
+  padding: 3rem 5rem;
+}
+
+.overview-modal.open {
+  display: flex;
+}
+
+.overview-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.overview-header h3 {
+  font-size: 1.5rem;
+  color: var(--text-main);
+}
+
+.overview-close {
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  font-size: 2rem;
+  cursor: pointer;
+}
+
+.overview-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 1.25rem;
+  overflow-y: auto;
+  padding-bottom: 2rem;
+}
+
+.overview-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: 8px;
+  padding: 1rem;
+  cursor: pointer;
+  transition: var(--transition-smooth);
+}
+
+.overview-card:hover {
+  border-color: #f59e0b;
+  transform: scale(1.03);
+}
+
+.overview-card.active {
+  border-color: #f59e0b;
+  background: rgba(245, 158, 11, 0.2);
+}
+
+.overview-card-num {
+  font-size: 0.75rem;
+  font-family: var(--font-code);
+  color: #fcd34d;
+  margin-bottom: 0.35rem;
+}
+
+.overview-card-title {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--text-main);
+  line-height: 1.35;
+}
+

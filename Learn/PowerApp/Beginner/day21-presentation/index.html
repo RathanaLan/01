@@ -1,0 +1,1630 @@
+<!DOCTYPE html>
+<html lang="en" translate="no" class="notranslate">
+<head>
+  <meta name="google" content="notranslate">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Day 21: Gallery: Read and Select Records | Microsoft Power Apps Foundation</title>
+  <link rel="stylesheet" href="../shared/design-system.css">
+  <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=Moul&family=Kantumruy+Pro:ital,wght@0,400..700;1,400..700&family=Battambang:wght@300;400;700;900&family=Koh+Santepheap:wght@300;400;700&family=Koulen&family=Siemreap&display=swap" rel="stylesheet">
+  <style>
+    /* Strict Speaker Notes Lock: Never render on slide stage under any circumstance */
+    aside.trainer-notes,
+    .trainer-notes,
+    .slide aside,
+    aside {
+      display: none !important;
+      visibility: hidden !important;
+      height: 0 !important;
+      width: 0 !important;
+      overflow: hidden !important;
+      opacity: 0 !important;
+      position: absolute !important;
+      pointer-events: none !important;
+      margin: 0 !important;
+      padding: 0 !important;
+      border: none !important;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Presentation Stage Wrapper (Lesson 14 Architecture) -->
+  <div id="presentation-stage">
+    
+    <!-- Ambient Aurora Orbs (60fps backdrop) -->
+    <div class="aurora-orb orb-1"></div>
+    <div class="aurora-orb orb-2"></div>
+    <div class="aurora-orb orb-3"></div>
+
+    <!-- Presenter Laser Pointer & Shockwave Click Ripple -->
+    <div id="presenter-laser"></div>
+    <div id="pointer-ripple" class="pointer-click-ripple"></div>
+
+    <!-- Viewport for 24 Slides -->
+    <main id="slides-viewport">
+
+      <!-- ====================================================================
+           SLIDE 1: HERO TITLE & SYSTEM MENTAL MODEL
+           ==================================================================== -->
+      <section class="slide active" id="slide-1" data-slide-index="0" data-title="Gallery: Read and Select Records" data-segment="Phase 7: Power Apps Data">
+        <div class="slide-content hero-content">
+          <div class="hero-badge">
+            <span>Microsoft Power Apps Professional Foundation</span>
+            <span>&bull;</span>
+            <span>Day 21 of 27</span>
+          </div>
+          <h1 class="hero-title">Gallery: Read and Select Records</h1>
+          <p class="hero-subtitle">
+            A single label can only show one text value. Today we unlock repeating UI architecture: a Gallery translates an entire table of cloud records into a browsable, interactive list using a single master template.
+          </p>
+
+          <div class="model-chain">
+            <span class="chain-item">Real Problem</span>
+            <span class="chain-arrow">&rarr;</span>
+            <span class="chain-item">Process</span>
+            <span class="chain-arrow">&rarr;</span>
+            <span class="chain-item">Data</span>
+            <span class="chain-arrow">&rarr;</span>
+            <span class="chain-item active">UI / Screen [GALLERY]</span>
+            <span class="chain-arrow">&rarr;</span>
+            <span class="chain-item">Logic/Decision</span>
+            <span class="chain-arrow">&rarr;</span>
+            <span class="chain-item">Action</span>
+            <span class="chain-arrow">&rarr;</span>
+            <span class="chain-item">Storage [CONNECTED]</span>
+            <span class="chain-arrow">&rarr;</span>
+            <span class="chain-item">Feedback</span>
+            <span class="chain-arrow">&rarr;</span>
+            <span class="chain-item">Test</span>
+          </div>
+        </div>
+
+        <aside class="trainer-notes" style="display: none !important;">
+          <h4>Trainer Speaking Script &amp; Pedagogical Cues:</h4>
+          <p><strong>Opening Hook (2 min):</strong> "Welcome to Day 21! Yesterday, you built the pipe to SharePoint. Today, we turn on the faucet valve. But instead of water splashing out randomly, a Gallery organizes hundreds of rows into a beautiful, repeating visual scroll."</p>
+          <p><strong>Point to Mental Model:</strong> Emphasize that 'UI/Screen' is now actively reading from 'Storage' to create interactive row selection.</p>
+        </aside>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 2: AGENDA & 4 MEASURABLE LEARNING OBJECTIVES
+           ==================================================================== -->
+      <section class="slide" id="slide-2" data-slide-index="1" data-title="90-Minute Agenda & Learning Objectives" data-segment="Part 1: Overview & Objectives">
+        <header class="slide-header">
+          <div class="section-tag">Part 1 &bull; Blueprint &amp; Schedule</div>
+          <h2>90-Minute Agenda &amp; Measurable Objectives</h2>
+          <p class="subtitle">A structured progression from the rubber-stamp mental model to live cloud gallery binding.</p>
+        </header>
+
+        <div class="slide-content grid-2">
+          <div class="card">
+            <h3 class="card-title">4 Measurable Learning Objectives</h3>
+            <div class="objective-item">
+              <span class="obj-num">1</span>
+              <div>
+                <strong>Understand the Template Paradigm:</strong>
+                <p>Explain in plain English why editing the first row (Template Cell) automatically updates every other row.</p>
+              </div>
+            </div>
+            <div class="objective-item">
+              <span class="obj-num">2</span>
+              <div>
+                <strong>Bind Data to <code>Gallery.Items</code>:</strong>
+                <p>Insert a Vertical Gallery and set its <code>Items</code> property to <code>Apex_Maintenance_Requests</code>.</p>
+              </div>
+            </div>
+            <div class="objective-item">
+              <span class="obj-num">3</span>
+              <div>
+                <strong>Scope Data Using <code>ThisItem</code>:</strong>
+                <p>Correctly extract row data using <code>ThisItem.Title</code>, <code>ThisItem.MachineID</code>, and <code>ThisItem.Priority.Value</code>.</p>
+              </div>
+            </div>
+            <div class="objective-item">
+              <span class="obj-num">4</span>
+              <div>
+                <strong>Capture Selection via <code>Gallery.Selected</code>:</strong>
+                <p>Pass the active user tap to external labels or inspection panels using <code>galRequests.Selected</code>.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <h3 class="card-title">Timed 90-Minute Spiral Schedule</h3>
+            <div class="agenda-timeline">
+              <div class="agenda-row">
+                <span class="agenda-time">00 - 10m</span>
+                <div><strong>Recall &amp; Mental Model:</strong> Days 10, 14, 16, 20 retrieval &amp; Single-Record Dilemma.</div>
+              </div>
+              <div class="agenda-row">
+                <span class="agenda-time">10 - 25m</span>
+                <div><strong>Discover &amp; Analogies:</strong> The Rubber Stamp and Photo Album sleeve mental models.</div>
+              </div>
+              <div class="agenda-row">
+                <span class="agenda-time">25 - 40m</span>
+                <div><strong>Live Trainer Demo:</strong> Inserting Vertical Gallery, template editing &amp; <code>ThisItem</code>.</div>
+              </div>
+              <div class="agenda-row">
+                <span class="agenda-time">40 - 60m</span>
+                <div><strong>Guided Practice Lab:</strong> Building the Apex Maintenance Dispatch Gallery step-by-step.</div>
+              </div>
+              <div class="agenda-row">
+                <span class="agenda-time">60 - 72m</span>
+                <div><strong>Independent Solo Task:</strong> Formatting color-coded Priority badges with Power Fx.</div>
+              </div>
+              <div class="agenda-row">
+                <span class="agenda-time">72 - 90m</span>
+                <div><strong>Debunking &amp; Bridge Forward:</strong> 5 Misconceptions, 5 Quizzes &amp; Previewing Day 22 Forms.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <aside class="trainer-notes" style="display: none !important;">
+          <h4>Trainer Speaking Script &amp; Pedagogical Cues:</h4>
+          <p><strong>Set Expectations:</strong> "Today is the visual breakthrough lesson. For the first time, your app will look like a real, professional enterprise tool that scrolls through live database records."</p>
+        </aside>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 3: CONCEPT MAP CONTINUITY
+           ==================================================================== -->
+      <section class="slide" id="slide-3" data-slide-index="2" data-title="Curriculum Continuity: The Complete Storyline" data-segment="Part 1: Curriculum Continuity">
+        <header class="slide-header">
+          <div class="section-tag">Part 1 &bull; Curriculum Continuity</div>
+          <h2>Where We Stand in the 27-Day Master Plan</h2>
+          <p class="subtitle">Yesterday we laid the cloud pipeline. Today we display the records. Tomorrow we edit them.</p>
+        </header>
+
+        <div class="slide-content grid-3">
+          <div class="card" style="border-left: 3px solid #0d9488;">
+            <span class="card-badge" style="background: rgba(13, 148, 136, 0.2); color: #5eead4;">Day 20: Yesterday</span>
+            <h3 class="card-title">Connect to SharePoint</h3>
+            <p style="color: var(--text-muted); font-size: 0.9rem; line-height: 1.6;">
+              We added the SharePoint connector, authenticated via Microsoft Entra ID (SSO), and established <code>Apex_Maintenance_Requests</code> as an active Data Source inside Power Apps Studio.
+            </p>
+            <div style="margin-top: auto; padding-top: 1rem; color: #5eead4; font-weight: 600; font-size: 0.85rem;">
+              &check; The Cloud Pipeline is OPEN!
+            </div>
+          </div>
+
+          <div class="card" style="border-left: 3px solid var(--color-primary-light); background: rgba(6, 182, 212, 0.1);">
+            <span class="card-badge" style="background: rgba(6, 182, 212, 0.25); color: #67e8f9;">Day 21: Today</span>
+            <h3 class="card-title">Gallery: Read &amp; Select Records</h3>
+            <p style="color: var(--text-main); font-size: 0.9rem; line-height: 1.6;">
+              We feed the table into a Vertical Gallery via <code>Items</code>. We build a single master template, map fields using <code>ThisItem</code>, and track which row the operator taps using <code>Gallery.Selected</code>.
+            </p>
+            <div style="margin-top: auto; padding-top: 1rem; color: #67e8f9; font-weight: 700; font-size: 0.85rem;">
+              &bull; Translating Tables into Browsable UI
+            </div>
+          </div>
+
+          <div class="card" style="border-left: 3px solid #8b5cf6;">
+            <span class="card-badge" style="background: rgba(139, 92, 246, 0.2); color: #c084fc;">Day 22: Tomorrow</span>
+            <h3 class="card-title">Forms: View &amp; Edit One Record</h3>
+            <p style="color: var(--text-muted); font-size: 0.9rem; line-height: 1.6;">
+              Once the user selects a row in our gallery, we need a form to edit that record! Tomorrow, we set <code>Form.Item = galRequests.Selected</code> so technicians can update tickets back to SharePoint.
+            </p>
+            <div style="margin-top: auto; padding-top: 1rem; color: #c084fc; font-weight: 600; font-size: 0.85rem;">
+              &rarr; Editing the selected record
+            </div>
+          </div>
+        </div>
+
+        <aside class="trainer-notes" style="display: none !important;">
+          <h4>Trainer Speaking Script &amp; Pedagogical Cues:</h4>
+          <p><strong>Highlight Synergy:</strong> "Notice the beautiful relationship: Day 20 connects the table. Day 21 displays all rows. Day 22 edits the specific row you clicked on Day 21!"</p>
+        </aside>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 4: PREREQUISITE RETRIEVAL (4 INTERACTIVE FLIP CARDS)
+           ==================================================================== -->
+      <section class="slide" id="slide-4" data-slide-index="3" data-title="Prerequisite Retrieval: 4 Core Building Blocks" data-segment="Part 2: Prerequisite Retrieval">
+        <header class="slide-header">
+          <div class="section-tag">Part 2 &bull; Memory Activation</div>
+          <h2>Prerequisite Retrieval: 4 Foundation Concepts</h2>
+          <p class="subtitle">Click any card to flip and verify how previous lessons connect to today's Gallery engine.</p>
+        </header>
+
+        <div class="slide-content grid-4">
+          <!-- Card 1 -->
+          <div class="flip-card" onclick="this.classList.toggle('flipped')">
+            <div class="flip-card-inner">
+              <div class="flip-card-front">
+                <span class="card-badge" style="background: rgba(59, 130, 246, 0.15); color: #93c5fd;">Day 10 &bull; Tables &amp; Records</span>
+                <h4 style="color: #f8fafc; font-size: 1.05rem; margin-top: 0.5rem;">What is a Record?</h4>
+                <p style="color: var(--text-muted); font-size: 0.85rem;">How does a row differ from a table?</p>
+                <div class="flip-hint">&circlearrowright; Click to flip answer</div>
+              </div>
+              <div class="flip-card-back">
+                <span class="card-badge" style="background: rgba(6, 182, 212, 0.2); color: #67e8f9;">Foundation</span>
+                <h4 style="color: #67e8f9; font-size: 1rem; margin-top: 0.5rem;">Single Horizontal Row</h4>
+                <p style="color: #e2e8f0; font-size: 0.82rem; line-height: 1.5;">
+                  A <strong>Table</strong> is the entire collection of all rows. A <strong>Record</strong> is one single row containing fields for one specific item (e.g. Machine M-04 ticket).
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 2 -->
+          <div class="flip-card" onclick="this.classList.toggle('flipped')">
+            <div class="flip-card-inner">
+              <div class="flip-card-front">
+                <span class="card-badge" style="background: rgba(59, 130, 246, 0.15); color: #93c5fd;">Day 14 &bull; Controls</span>
+                <h4 style="color: #f8fafc; font-size: 1.05rem; margin-top: 0.5rem;">Can a Label Hold 100 Rows?</h4>
+                <p style="color: var(--text-muted); font-size: 0.85rem;">What is a Label's capacity limitation?</p>
+                <div class="flip-hint">&circlearrowright; Click to flip answer</div>
+              </div>
+              <div class="flip-card-back">
+                <span class="card-badge" style="background: rgba(6, 182, 212, 0.2); color: #67e8f9;">Foundation</span>
+                <h4 style="color: #67e8f9; font-size: 1rem; margin-top: 0.5rem;">Single Value Only</h4>
+                <p style="color: #e2e8f0; font-size: 0.82rem; line-height: 1.5;">
+                  A standard Label has one `Text` property that holds exactly one text string. To show 100 rows, you need a repeating container like a Gallery!
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 3 -->
+          <div class="flip-card" onclick="this.classList.toggle('flipped')">
+            <div class="flip-card-inner">
+              <div class="flip-card-front">
+                <span class="card-badge" style="background: rgba(59, 130, 246, 0.15); color: #93c5fd;">Day 16 &bull; Properties</span>
+                <h4 style="color: #f8fafc; font-size: 1.05rem; margin-top: 0.5rem;">How Do Controls Display Data?</h4>
+                <p style="color: var(--text-muted); font-size: 0.85rem;">What drives what appears on screen?</p>
+                <div class="flip-hint">&circlearrowright; Click to flip answer</div>
+              </div>
+              <div class="flip-card-back">
+                <span class="card-badge" style="background: rgba(6, 182, 212, 0.2); color: #67e8f9;">Foundation</span>
+                <h4 style="color: #67e8f9; font-size: 1rem; margin-top: 0.5rem;">Properties + Formulas</h4>
+                <p style="color: #e2e8f0; font-size: 0.82rem; line-height: 1.5;">
+                  Every control has properties. When you assign a formula to a property (like `Items` or `Text`), Power Apps recalculates what to show dynamically.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 4 -->
+          <div class="flip-card" onclick="this.classList.toggle('flipped')">
+            <div class="flip-card-inner">
+              <div class="flip-card-front">
+                <span class="card-badge" style="background: rgba(59, 130, 246, 0.15); color: #93c5fd;">Day 20 &bull; SharePoint</span>
+                <h4 style="color: #f8fafc; font-size: 1.05rem; margin-top: 0.5rem;">How Does Studio See the List?</h4>
+                <p style="color: var(--text-muted); font-size: 0.85rem;">What happens when you type the list name?</p>
+                <div class="flip-hint">&circlearrowright; Click to flip answer</div>
+              </div>
+              <div class="flip-card-back">
+                <span class="card-badge" style="background: rgba(6, 182, 212, 0.2); color: #67e8f9;">Foundation</span>
+                <h4 style="color: #67e8f9; font-size: 1rem; margin-top: 0.5rem;">Active Data Source Symbol</h4>
+                <p style="color: #e2e8f0; font-size: 0.82rem; line-height: 1.5;">
+                  `Apex_Maintenance_Requests` is now recognized by IntelliSense as an active cloud table containing live records ready to be fed into controls.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <aside class="trainer-notes" style="display: none !important;">
+          <h4>Trainer Speaking Script &amp; Pedagogical Cues:</h4>
+          <p><strong>Interactive Retrieval:</strong> Ask learners: "Who remembers why dragging 100 labels onto the screen is a terrible idea?" Wait for them to identify that it's unmaintainable.</p>
+        </aside>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 5: THE MANUFACTURING CRISIS: "THE SINGLE-RECORD DILEMMA"
+           ==================================================================== -->
+      <section class="slide" id="slide-5" data-slide-index="4" data-title="The Workplace Crisis: Single-Record Dilemma" data-segment="Part 3: Real Problem & Workplace Crisis">
+        <header class="slide-header">
+          <div class="section-tag">Part 3 &bull; Real Problem &amp; Workplace Crisis</div>
+          <h2>The Workplace Crisis: "The Single-Record Dilemma"</h2>
+          <p class="subtitle">Why building screens without repeating containers creates an operational bottleneck.</p>
+        </header>
+
+        <div class="slide-content grid-2">
+          <div class="card" style="border-left: 3px solid #ef4444;">
+            <span class="card-badge" style="background: rgba(239, 68, 68, 0.2); color: #fca5a5;">The Breakdown Scenario</span>
+            <h3 class="card-title">Monday 07:00 AM Maintenance Triage</h3>
+            <p style="color: var(--text-muted); font-size: 0.9rem; line-height: 1.6; margin-bottom: 1rem;">
+              Shift Supervisor Davi arrives at Apex Plastics. Over the weekend, 18 maintenance requests were logged into SharePoint across Plant 1. Davi needs to see all of them on his dispatch tablet to assign technicians.
+            </p>
+            <div style="background: rgba(239, 68, 68, 0.1); border: 1px solid rgba(239, 68, 68, 0.3); padding: 0.85rem; border-radius: 0.5rem; margin-bottom: 1rem;">
+              <strong style="color: #fca5a5; font-size: 0.88rem;">The Junior Developer's Nightmare:</strong>
+              <p style="color: #fecaca; font-size: 0.82rem; margin-top: 0.25rem;">
+                A junior developer manually dragged <strong>54 separate Labels</strong> onto the canvas (Title 1, Title 2... Priority 1, Priority 2...). When ticket #19 arrived, it was completely invisible! When ticket #3 was deleted, a giant empty hole opened up in the screen.
+              </p>
+            </div>
+            <p style="color: var(--text-muted); font-size: 0.85rem;">
+              The dispatch board looked like broken Swiss cheese. Technicians missed the overheated hydraulic valve on Machine M-04 because it was pushed off the screen.
+            </p>
+          </div>
+
+          <div class="card" style="border-left: 3px solid var(--color-primary-light);">
+            <span class="card-badge" style="background: rgba(6, 182, 212, 0.2); color: #67e8f9;">The Architectural Solution</span>
+            <h3 class="card-title">Why the Gallery is Irreplaceable</h3>
+            <div style="display: flex; flex-direction: column; gap: 0.85rem; margin-top: 0.5rem;">
+              <div style="display: flex; gap: 0.75rem; align-items: flex-start;">
+                <div style="width: 24px; height: 24px; border-radius: 50%; background: rgba(16, 185, 129, 0.2); color: #10b981; display: flex; align-items: center; justify-content: center; font-weight: bold; flex-shrink: 0;">&check;</div>
+                <div>
+                  <strong style="color: #86efac; font-size: 0.9rem;">Dynamic Row Multiplication:</strong>
+                  <p style="color: var(--text-muted); font-size: 0.82rem;">Whether SharePoint has 3 rows or 300 rows, the Gallery automatically generates the exact number of visual cards needed.</p>
+                </div>
+              </div>
+
+              <div style="display: flex; gap: 0.75rem; align-items: flex-start;">
+                <div style="width: 24px; height: 24px; border-radius: 50%; background: rgba(16, 185, 129, 0.2); color: #10b981; display: flex; align-items: center; justify-content: center; font-weight: bold; flex-shrink: 0;">&check;</div>
+                <div>
+                  <strong style="color: #86efac; font-size: 0.9rem;">Zero Empty Gaps:</strong>
+                  <p style="color: var(--text-muted); font-size: 0.82rem;">When a ticket is deleted or resolved, the remaining rows slide up smoothly. The UI stays 100% clean and compact.</p>
+                </div>
+              </div>
+
+              <div style="display: flex; gap: 0.75rem; align-items: flex-start;">
+                <div style="width: 24px; height: 24px; border-radius: 50%; background: rgba(16, 185, 129, 0.2); color: #10b981; display: flex; align-items: center; justify-content: center; font-weight: bold; flex-shrink: 0;">&check;</div>
+                <div>
+                  <strong style="color: #86efac; font-size: 0.9rem;">One Template to Rule Them All:</strong>
+                  <p style="color: var(--text-muted); font-size: 0.82rem;">You design ONE single row. Power Apps replicates your design for every record in the table automatically.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <aside class="trainer-notes" style="display: none !important;">
+          <h4>Trainer Speaking Script &amp; Pedagogical Cues:</h4>
+          <p><strong>Emphasize Scalability:</strong> "In modern app development, we NEVER hardcode controls for individual rows. That is like building a new highway lane for every car that enters the city!"</p>
+        </aside>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 6: EVERYDAY PHYSICAL ANALOGY: RUBBER STAMP & PHOTO ALBUM
+           ==================================================================== -->
+      <section class="slide" id="slide-6" data-slide-index="5" data-title="Physical Analogy: Rubber Stamp & Photo Album" data-segment="Part 3: Everyday Physical Analogy">
+        <header class="slide-header">
+          <div class="section-tag">Part 3 &bull; Real-World Mental Model</div>
+          <h2>Physical Analogy: The Rubber Stamp &amp; Photo Album</h2>
+          <p class="subtitle">Demystifying repeating UI through familiar physical tools you use every day.</p>
+        </header>
+
+        <div class="slide-content grid-2">
+          <div class="card" style="align-items: center; text-align: center;">
+            <div style="width: 64px; height: 64px; border-radius: 50%; background: rgba(2, 132, 199, 0.15); border: 1px solid #0284c7; display: flex; align-items: center; justify-content: center; font-size: 2rem; color: #38bdf8; margin-bottom: 1rem;">
+              &#128394;
+            </div>
+            <span class="card-badge" style="background: rgba(2, 132, 199, 0.2); color: #7dd3fc;">The Template Concept</span>
+            <h3 class="card-title">1. The Rubber Stamp</h3>
+            <p style="color: var(--text-muted); font-size: 0.88rem; line-height: 1.6;">
+              Imagine carving a rubber stamp with three carved cutouts: <code>[Icon] [Title] [Date]</code>. You stamp it on paper 100 times. You only carved the stamp <strong>ONCE</strong>, but you produced 100 identical frames.
+            </p>
+            <div style="margin-top: auto; padding-top: 1rem; color: #38bdf8; font-weight: 700; font-size: 0.85rem;">
+              = Gallery Master Template Cell
+            </div>
+          </div>
+
+          <div class="card" style="align-items: center; text-align: center;">
+            <div style="width: 64px; height: 64px; border-radius: 50%; background: rgba(139, 92, 246, 0.15); border: 1px solid #8b5cf6; display: flex; align-items: center; justify-content: center; font-size: 2rem; color: #c084fc; margin-bottom: 1rem;">
+              &#128218;
+            </div>
+            <span class="card-badge" style="background: rgba(139, 92, 246, 0.2); color: #c084fc;">The Row Data Concept</span>
+            <h3 class="card-title">2. The Photo Album Sleeves</h3>
+            <p style="color: var(--text-muted); font-size: 0.88rem; line-height: 1.6;">
+              A photo album has 10 plastic sleeves of identical size. Sleeve 1 holds Davi's photo; Sleeve 2 holds Bopha's photo. The sleeves are identical in shape, but the contents inside (<code>ThisItem</code>) change from sleeve to sleeve.
+            </p>
+            <div style="margin-top: auto; padding-top: 1rem; color: #c084fc; font-weight: 700; font-size: 0.85rem;">
+              = `ThisItem` Dynamic Scoping
+            </div>
+          </div>
+        </div>
+
+        <aside class="trainer-notes" style="display: none !important;">
+          <h4>Trainer Speaking Script &amp; Pedagogical Cues:</h4>
+          <p><strong>Physical Gesture:</strong> Hold up an imaginary rubber stamp. Stamp down once, twice, three times. Say: 'You only ever design the stamp. Power Apps does the stamping for you.'</p>
+        </aside>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 7: PLAIN-LANGUAGE CONCEPTS BEFORE TECHNICAL VOCABULARY
+           ==================================================================== -->
+      <section class="slide" id="slide-7" data-slide-index="6" data-title="Plain-Language Concepts Before Tech Jargon" data-segment="Part 3: Core Concepts">
+        <header class="slide-header">
+          <div class="section-tag">Part 3 &bull; Technical Vocabulary De-Mystified</div>
+          <h2>Plain-Language Concepts: The 4 Core Gallery Terms</h2>
+          <p class="subtitle">Understand their jobs in the system before looking at any Power Fx code.</p>
+        </header>
+
+        <div class="slide-content grid-4">
+          <div class="card">
+            <span class="card-badge" style="background: rgba(2, 132, 199, 0.2); color: #7dd3fc;">The Feeding Tube</span>
+            <h4 style="color: #f8fafc; font-size: 1rem;">1. Items Property</h4>
+            <p style="color: var(--text-muted); font-size: 0.85rem; line-height: 1.5; margin-top: 0.35rem;">
+              <strong>Plain English:</strong> "Feed the machine the entire table."<br><br>
+              <strong>Technical Job:</strong> The property on the Gallery that binds to your SharePoint list (e.g. <code>Apex_Maintenance_Requests</code>).
+            </p>
+          </div>
+
+          <div class="card">
+            <span class="card-badge" style="background: rgba(245, 158, 11, 0.2); color: #fcd34d;">The Master Blueprint</span>
+            <h4 style="color: #f8fafc; font-size: 1rem;">2. Template Cell</h4>
+            <p style="color: var(--text-muted); font-size: 0.85rem; line-height: 1.5; margin-top: 0.35rem;">
+              <strong>Plain English:</strong> "The rubber stamp design."<br><br>
+              <strong>Technical Job:</strong> The very first item at the top of the gallery with an orange border. Any control placed here multiplies down the list.
+            </p>
+          </div>
+
+          <div class="card">
+            <span class="card-badge" style="background: rgba(139, 92, 246, 0.2); color: #c084fc;">The Local Scope</span>
+            <h4 style="color: #f8fafc; font-size: 1rem;">3. ThisItem</h4>
+            <p style="color: var(--text-muted); font-size: 0.85rem; line-height: 1.5; margin-top: 0.35rem;">
+              <strong>Plain English:</strong> "The data for THIS specific row."<br><br>
+              <strong>Technical Job:</strong> Scopes formulas to the single record currently being rendered (e.g. <code>ThisItem.Title</code>).
+            </p>
+          </div>
+
+          <div class="card">
+            <span class="card-badge" style="background: rgba(16, 185, 129, 0.2); color: #86efac;">The User's Tap</span>
+            <h4 style="color: #f8fafc; font-size: 1rem;">4. Selected</h4>
+            <p style="color: var(--text-muted); font-size: 0.85rem; line-height: 1.5; margin-top: 0.35rem;">
+              <strong>Plain English:</strong> "Whichever card the user touched."<br><br>
+              <strong>Technical Job:</strong> Stores the entire active record chosen by the user's click (e.g. <code>galRequests.Selected</code>).
+            </p>
+          </div>
+        </div>
+
+        <aside class="trainer-notes" style="display: none !important;">
+          <h4>Trainer Speaking Script &amp; Pedagogical Cues:</h4>
+          <p><strong>Cadence Reminder:</strong> Practice the 4 words with the class: Items &rarr; Template &rarr; ThisItem &rarr; Selected. Repeat this sequence twice.</p>
+        </aside>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 8: THE ARCHITECTURAL GALLERY PIPELINE DIAGRAM
+           ==================================================================== -->
+      <section class="slide" id="slide-8" data-slide-index="7" data-title="The Architectural Gallery Pipeline Diagram" data-segment="Part 3: Visual Pipeline">
+        <header class="slide-header">
+          <div class="section-tag">Part 3 &bull; Cloud Architecture Diagram</div>
+          <h2>The Architectural Gallery Pipeline: End-to-End Data Flow</h2>
+          <p class="subtitle">How 150 rows in SharePoint become individually accessible cards on your mobile screen.</p>
+        </header>
+
+        <div class="slide-content">
+          <div class="pipeline-stage">
+            <!-- Node 1 -->
+            <div class="pipeline-node">
+              <div class="pipeline-icon icon-table">&#128196;</div>
+              <strong style="color: #5eead4; font-size: 0.95rem;">SharePoint List</strong>
+              <span style="font-size: 0.75rem; color: var(--text-muted); margin-top: 0.25rem;">Cloud Table Storage</span>
+              <p style="font-size: 0.8rem; color: #cbd5e1; margin-top: 0.5rem; line-height: 1.4;">
+                150 maintenance tickets stored as structured records in the Microsoft datacenter.
+              </p>
+            </div>
+
+            <div class="pipeline-arrow">&rarr;</div>
+
+            <!-- Node 2 -->
+            <div class="pipeline-node">
+              <div class="pipeline-icon icon-items">&#128260;</div>
+              <strong style="color: #67e8f9; font-size: 0.95rem;">Gallery.Items</strong>
+              <span style="font-size: 0.75rem; color: var(--text-muted); margin-top: 0.25rem;">Data Feeding Property</span>
+              <p style="font-size: 0.8rem; color: #cbd5e1; margin-top: 0.5rem; line-height: 1.4;">
+                Gallery pulls the 150 records through the connector into local tablet memory.
+              </p>
+            </div>
+
+            <div class="pipeline-arrow">&rarr;</div>
+
+            <!-- Node 3 -->
+            <div class="pipeline-node">
+              <div class="pipeline-icon icon-thisitem">&#128394;</div>
+              <strong style="color: #c084fc; font-size: 0.95rem;">ThisItem Scoping</strong>
+              <span style="font-size: 0.75rem; color: var(--text-muted); margin-top: 0.25rem;">Template Multiplier</span>
+              <p style="font-size: 0.8rem; color: #cbd5e1; margin-top: 0.5rem; line-height: 1.4;">
+                Power Apps loops through rows: Row 1 gets ticket 1; Row 2 gets ticket 2.
+              </p>
+            </div>
+
+            <div class="pipeline-arrow">&rarr;</div>
+
+            <!-- Node 4 -->
+            <div class="pipeline-node">
+              <div class="pipeline-icon icon-selected">&#9757;</div>
+              <strong style="color: #86efac; font-size: 0.95rem;">Gallery.Selected</strong>
+              <span style="font-size: 0.75rem; color: var(--text-muted); margin-top: 0.25rem;">Active User Touch</span>
+              <p style="font-size: 0.8rem; color: #cbd5e1; margin-top: 0.5rem; line-height: 1.4;">
+                Operator taps row #4: that exact record is highlighted and ready for Day 22 Forms!
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <aside class="trainer-notes" style="display: none !important;">
+          <h4>Trainer Speaking Script &amp; Pedagogical Cues:</h4>
+          <p><strong>Trace Data Flow:</strong> Point left to right. Trace how 150 rows in SharePoint become 150 visual cards, and how the user's tap isolates exactly 1 row into `Selected`.</p>
+        </aside>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 9: ANATOMY OF THE TEMPLATE CELL
+           ==================================================================== -->
+      <section class="slide" id="slide-9" data-slide-index="8" data-title="Anatomy of the Template Cell" data-segment="Part 3: UI Architecture">
+        <header class="slide-header">
+          <div class="section-tag">Part 3 &bull; Deep UI Anatomy</div>
+          <h2>Anatomy of the Template Cell: One Blueprint Stamped 100 Times</h2>
+          <p class="subtitle">Why you never edit the second or third row in a Power Apps Gallery.</p>
+        </header>
+
+        <div class="slide-content grid-2">
+          <div class="card">
+            <span class="card-badge" style="background: rgba(245, 158, 11, 0.2); color: #fcd34d;">The Master Row</span>
+            <h3 class="card-title">How the Template Cell Governs the Entire List</h3>
+            <p style="color: var(--text-muted); font-size: 0.9rem; line-height: 1.6; margin-bottom: 1rem;">
+              When you select a Gallery on the canvas, look at the very top row. You will see a small pencil icon (<strong>Edit gallery</strong>) and a distinctive selection boundary.
+            </p>
+            <div style="background: rgba(245, 158, 11, 0.08); border-left: 3px solid #f59e0b; padding: 0.85rem; border-radius: 0.4rem; margin-bottom: 1rem;">
+              <strong style="color: #fcd34d; font-size: 0.88rem;">The Golden Rule of Template Editing:</strong>
+              <p style="color: #fde68a; font-size: 0.82rem; margin-top: 0.2rem;">
+                Any control placed inside the first cell automatically duplicates into EVERY row below it! You cannot select row 2 or row 3 to drag controls into them directly.
+              </p>
+            </div>
+            <p style="color: var(--text-muted); font-size: 0.85rem;">
+              If you resize the template height by pulling the bottom handle down 20 pixels, every row in the gallery grows by 20 pixels in unison.
+            </p>
+          </div>
+
+          <div class="card">
+            <span class="card-badge" style="background: rgba(6, 182, 212, 0.2); color: #67e8f9;">Visual Indicators</span>
+            <h3 class="card-title">What Belongs Inside vs. Outside</h3>
+            <div style="display: flex; flex-direction: column; gap: 0.85rem; margin-top: 0.5rem;">
+              <div style="display: flex; gap: 0.75rem; align-items: flex-start;">
+                <div style="width: 24px; height: 24px; border-radius: 50%; background: rgba(16, 185, 129, 0.2); color: #10b981; display: flex; align-items: center; justify-content: center; font-weight: bold; flex-shrink: 0;">&check;</div>
+                <div>
+                  <strong style="color: var(--text-main); font-size: 0.9rem;">Inside the Template:</strong>
+                  <p style="color: var(--text-muted); font-size: 0.82rem;">Labels, badges, status icons, chevron arrows, and thumbnail images that change per record.</p>
+                </div>
+              </div>
+
+              <div style="display: flex; gap: 0.75rem; align-items: flex-start;">
+                <div style="width: 24px; height: 24px; border-radius: 50%; background: rgba(239, 68, 68, 0.2); color: #ef4444; display: flex; align-items: center; justify-content: center; font-weight: bold; flex-shrink: 0;">&cross;</div>
+                <div>
+                  <strong style="color: var(--text-main); font-size: 0.9rem;">Outside the Gallery:</strong>
+                  <p style="color: var(--text-muted); font-size: 0.82rem;">Screen headers, search bars, sort dropdowns, and master submit buttons that belong to the screen as a whole.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <aside class="trainer-notes" style="display: none !important;">
+          <h4>Trainer Speaking Script &amp; Pedagogical Cues:</h4>
+          <p><strong>Demonstrate the Mistake:</strong> Show students what happens when they accidentally drop a search bar inside the template cell: 15 search bars appear down the screen! Explain why.</p>
+        </aside>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 10: STEP-BY-STEP PROCEDURE TO INSERT & BIND A GALLERY
+           ==================================================================== -->
+      <section class="slide" id="slide-10" data-slide-index="9" data-title="Step-by-Step Procedure to Insert & Bind" data-segment="Part 4: Studio Implementation">
+        <header class="slide-header">
+          <div class="section-tag">Part 4 &bull; Studio Workflow</div>
+          <h2>Step-by-Step Procedure to Insert &amp; Bind a Gallery</h2>
+          <p class="subtitle">The exact 4-step sequence from blank screen to a populated cloud list.</p>
+        </header>
+
+        <div class="slide-content grid-4">
+          <div class="card">
+            <span class="obj-num" style="margin-bottom: 0.75rem;">1</span>
+            <h4 style="color: #f8fafc; font-size: 1rem;">Insert Vertical Gallery</h4>
+            <p style="color: var(--text-muted); font-size: 0.85rem; line-height: 1.5; margin-top: 0.35rem;">
+              Click <strong>+ Insert</strong> &rarr; expand <strong>Layout</strong> &rarr; select <strong>Vertical gallery</strong>. Drag it to fill the left half of your screen.
+            </p>
+            <div style="margin-top: auto; padding-top: 0.75rem; font-family: var(--font-code); font-size: 0.75rem; color: #67e8f9;">
+              Name: galMaintenance
+            </div>
+          </div>
+
+          <div class="card">
+            <span class="obj-num" style="margin-bottom: 0.75rem;">2</span>
+            <h4 style="color: #f8fafc; font-size: 1rem;">Set Items Property</h4>
+            <p style="color: var(--text-muted); font-size: 0.85rem; line-height: 1.5; margin-top: 0.35rem;">
+              In the formula bar (with property <code>Items</code> selected), type: <code>Apex_Maintenance_Requests</code> and press Enter.
+            </p>
+            <div style="margin-top: auto; padding-top: 0.75rem; font-family: var(--font-code); font-size: 0.75rem; color: #67e8f9;">
+              galMaintenance.Items = Table
+            </div>
+          </div>
+
+          <div class="card">
+            <span class="obj-num" style="margin-bottom: 0.75rem;">3</span>
+            <h4 style="color: #f8fafc; font-size: 1rem;">Choose Clean Layout</h4>
+            <p style="color: var(--text-muted); font-size: 0.85rem; line-height: 1.5; margin-top: 0.35rem;">
+              In the right-hand Properties pane, set <strong>Layout</strong> to <strong>Title and subtitle</strong> (or Title, subtitle, and body).
+            </p>
+            <div style="margin-top: auto; padding-top: 0.75rem; font-family: var(--font-code); font-size: 0.75rem; color: #67e8f9;">
+              Layout: Title &amp; Subtitle
+            </div>
+          </div>
+
+          <div class="card">
+            <span class="obj-num" style="margin-bottom: 0.75rem;">4</span>
+            <h4 style="color: #f8fafc; font-size: 1rem;">Bind Fields with ThisItem</h4>
+            <p style="color: var(--text-muted); font-size: 0.85rem; line-height: 1.5; margin-top: 0.35rem;">
+              Click the title label inside the first cell and write <code>ThisItem.Title</code>. Click subtitle and write <code>ThisItem.MachineID</code>.
+            </p>
+            <div style="margin-top: auto; padding-top: 0.75rem; font-family: var(--font-code); font-size: 0.75rem; color: #67e8f9;">
+              ThisItem.Title &check;
+            </div>
+          </div>
+        </div>
+
+        <aside class="trainer-notes" style="display: none !important;">
+          <h4>Trainer Speaking Script &amp; Pedagogical Cues:</h4>
+          <p><strong>Studio Tip:</strong> Point out how Power Apps often defaults to a layout with a dummy picture. Choosing 'Title and Subtitle' keeps the interface clean for manufacturing data.</p>
+        </aside>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 11: DECIPHERING THISITEM: ROW SCOPE VS TABLE ARRAYS
+           ==================================================================== -->
+      <section class="slide" id="slide-11" data-slide-index="10" data-title="Deciphering ThisItem: Row Scope" data-segment="Part 4: Power Fx Syntax">
+        <header class="slide-header">
+          <div class="section-tag">Part 4 &bull; Power Fx Deep Dive</div>
+          <h2>Deciphering <code>ThisItem</code>: Row Scope vs. Table Arrays</h2>
+          <p class="subtitle">Why writing the table name inside a gallery fails, and why ThisItem always succeeds.</p>
+        </header>
+
+        <div class="slide-content grid-2">
+          <div class="card" style="border-left: 3px solid #ef4444;">
+            <span class="card-badge" style="background: rgba(239, 68, 68, 0.2); color: #fca5a5;">The Beginner Syntax Trap</span>
+            <h3 class="card-title">Writing <code>Apex_Maintenance_Requests.Title</code></h3>
+            <p style="color: var(--text-muted); font-size: 0.88rem; line-height: 1.6; margin-bottom: 0.75rem;">
+              A beginner thinks: <em>"Title is in the table, so I'll write <code>Apex_Maintenance_Requests.Title</code> inside the label."</em>
+            </p>
+            <div style="background: #090e17; border: 1px solid var(--border-subtle); border-radius: 0.5rem; padding: 0.75rem; font-family: var(--font-code); font-size: 0.85rem; color: #fca5a5; margin-bottom: 0.75rem;">
+              &cross; Label.Text = Apex_Maintenance_Requests.Title<br>
+              <span style="color: #ef4444; font-size: 0.78rem;">// Error: Expected text, got a Table/Array!</span>
+            </div>
+            <p style="color: var(--text-muted); font-size: 0.82rem; line-height: 1.5;">
+              <strong>Why it fails:</strong> The table name refers to ALL 150 rows at once! A single Label cannot display 150 titles simultaneously; it doesn't know which row it belongs to.
+            </p>
+          </div>
+
+          <div class="card" style="border-left: 3px solid var(--color-primary-light);">
+            <span class="card-badge" style="background: rgba(6, 182, 212, 0.2); color: #67e8f9;">The Correct Solution</span>
+            <h3 class="card-title">Writing <code>ThisItem.Title</code></h3>
+            <p style="color: var(--text-muted); font-size: 0.88rem; line-height: 1.6; margin-bottom: 0.75rem;">
+              The keyword <code>ThisItem</code> tells Power Fx: <em>"Give me the Title of the specific record being stamped right now!"</em>
+            </p>
+            <div style="background: #090e17; border: 1px solid var(--border-subtle); border-radius: 0.5rem; padding: 0.75rem; font-family: var(--font-code); font-size: 0.85rem; color: #86efac; margin-bottom: 0.75rem;">
+              &check; Label.Text = ThisItem.Title<br>
+              <span style="color: #10b981; font-size: 0.78rem;">// In Row 1 -> "Machine M-04 Overheating"<br>// In Row 2 -> "Conveyor C-02 Belt Slipping"</span>
+            </div>
+            <p style="color: var(--text-muted); font-size: 0.82rem; line-height: 1.5;">
+              <strong>Why it succeeds:</strong> <code>ThisItem</code> establishes contextual row scope. The same exact formula works dynamically across every row in the dataset!
+            </p>
+          </div>
+        </div>
+
+        <aside class="trainer-notes" style="display: none !important;">
+          <h4>Trainer Speaking Script &amp; Pedagogical Cues:</h4>
+          <p><strong>Analogy:</strong> "If you walk into a classroom of 30 students and say 'Person's name!', everyone gets confused. If you point to one student and say 'THIS person's name', you get a clear answer!"</p>
+        </aside>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 12: FORMATTING COLUMNS INSIDE THE TEMPLATE
+           ==================================================================== -->
+      <section class="slide" id="slide-12" data-slide-index="11" data-title="Formatting Columns Inside Template" data-segment="Part 4: Data Types & Formatting">
+        <header class="slide-header">
+          <div class="section-tag">Part 4 &bull; Field Formatting Rules</div>
+          <h2>Formatting Columns Inside the Template: Text, Date &amp; Choice</h2>
+          <p class="subtitle">Applying the correct Power Fx syntax for different SharePoint data types.</p>
+        </header>
+
+        <div class="slide-content grid-3">
+          <div class="card">
+            <span class="card-badge" style="background: rgba(59, 130, 246, 0.2); color: #93c5fd;">Single Line of Text</span>
+            <h3 class="card-title">Title &amp; MachineID</h3>
+            <p style="color: var(--text-muted); font-size: 0.85rem; line-height: 1.6;">
+              Simple text fields require no conversion. Directly access the string value:
+            </p>
+            <div style="background: #090e17; padding: 0.75rem; border-radius: 0.4rem; font-family: var(--font-code); font-size: 0.82rem; color: #60a5fa; margin: 0.75rem 0;">
+              ThisItem.Title<br>
+              ThisItem.MachineID
+            </div>
+            <div style="font-size: 0.78rem; color: #10b981;">&check; Native text string</div>
+          </div>
+
+          <div class="card">
+            <span class="card-badge" style="background: rgba(245, 158, 11, 0.2); color: #fcd34d;">Date &amp; Time Field</span>
+            <h3 class="card-title">LoggedDate</h3>
+            <p style="color: var(--text-muted); font-size: 0.85rem; line-height: 1.6;">
+              Cloud dates look messy without formatting (e.g. 2026-10-31T07:15). Wrap in <code>Text()</code>:
+            </p>
+            <div style="background: #090e17; padding: 0.75rem; border-radius: 0.4rem; font-family: var(--font-code); font-size: 0.82rem; color: #fcd34d; margin: 0.75rem 0;">
+              Text(ThisItem.LoggedDate, "dd-mmm-yyyy")
+            </div>
+            <div style="font-size: 0.78rem; color: #10b981;">&check; Outputs: 31-Oct-2026</div>
+          </div>
+
+          <div class="card">
+            <span class="card-badge" style="background: rgba(13, 148, 136, 0.2); color: #5eead4;">SharePoint Choice Field</span>
+            <h3 class="card-title">Priority &amp; Status</h3>
+            <p style="color: var(--text-muted); font-size: 0.85rem; line-height: 1.6;">
+              Choice fields return a record object. You MUST append <code>.Value</code>:
+            </p>
+            <div style="background: #090e17; padding: 0.75rem; border-radius: 0.4rem; font-family: var(--font-code); font-size: 0.82rem; color: #5eead4; margin: 0.75rem 0;">
+              ThisItem.Priority.Value<br>
+              ThisItem.Status.Value
+            </div>
+            <div style="font-size: 0.78rem; color: #10b981;">&check; Extracts string: "High"</div>
+          </div>
+        </div>
+
+        <aside class="trainer-notes" style="display: none !important;">
+          <h4>Trainer Speaking Script &amp; Pedagogical Cues:</h4>
+          <p><strong>Reinforce Choice Rule:</strong> Remind the class: "If you type `ThisItem.Priority` and see a red squiggly line, don't panic! Just add `.Value` at the end and it turns green."</p>
+        </aside>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 13: INTERACTIVE WIDGET 1: MASTER TEMPLATE SIMULATOR
+           ==================================================================== -->
+      <section class="slide" id="slide-13" data-slide-index="12" data-title="Master Template & Rubber-Stamp Simulator" data-segment="Part 4: Interactive Simulation">
+        <header class="slide-header">
+          <div class="section-tag">Part 4 &bull; Hands-On Simulator</div>
+          <h2>Interactive Gallery Template &amp; Rubber-Stamp Simulator</h2>
+          <p class="subtitle">Tweak the master template row on the left and watch all repeating rows update in real-time.</p>
+        </header>
+
+        <div class="slide-content widget-stage">
+          <!-- Left Control Panel -->
+          <div class="studio-chrome">
+            <div class="studio-chrome-header">
+              <span>Master Template Controls</span>
+              <span>Row 1 Blueprint</span>
+            </div>
+            <div class="studio-chrome-body">
+              <label style="font-size: 0.78rem; color: var(--text-muted); text-transform: uppercase;">Title Font Size:</label>
+              <input type="range" id="sim-font-size" min="14" max="22" value="16" style="width: 100%; margin: 0.5rem 0 1rem 0;" oninput="updateSimTemplate()">
+
+              <label style="font-size: 0.78rem; color: var(--text-muted); text-transform: uppercase;">Row Padding / Height:</label>
+              <input type="range" id="sim-row-padding" min="8" max="24" value="14" style="width: 100%; margin: 0.5rem 0 1rem 0;" oninput="updateSimTemplate()">
+
+              <label style="font-size: 0.78rem; color: var(--text-muted); text-transform: uppercase;">Title Text Color:</label>
+              <select id="sim-title-color" style="width: 100%; background: #0c1524; color: #f8fafc; border: 1px solid var(--border-subtle); padding: 0.5rem; border-radius: 0.4rem; margin: 0.5rem 0 1rem 0; font-size: 0.85rem;" onchange="updateSimTemplate()">
+                <option value="#f8fafc">White (#f8fafc)</option>
+                <option value="#67e8f9">Cyan (#67e8f9)</option>
+                <option value="#fcd34d">Amber (#fcd34d)</option>
+                <option value="#86efac">Emerald (#86efac)</option>
+              </select>
+
+              <button class="hud-btn" style="width: 100%; justify-content: center; background: rgba(6, 182, 212, 0.2); border-color: var(--color-primary-light); color: #67e8f9;" onclick="resetSimTemplate()">
+                Reset Template
+              </button>
+            </div>
+          </div>
+
+          <!-- Right Display: Virtual Gallery Repeating Rows -->
+          <div class="card" style="background: rgba(12, 19, 31, 0.95); justify-content: space-between;">
+            <div>
+              <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.75rem;">
+                <span class="card-badge" style="background: rgba(6, 182, 212, 0.2); color: #67e8f9;">Virtual Gallery Preview</span>
+                <span style="font-family: var(--font-code); font-size: 0.75rem; color: var(--text-dim);">Items: Apex_Maintenance_Requests</span>
+              </div>
+              <p style="color: var(--text-muted); font-size: 0.85rem; margin-bottom: 0.75rem;">
+                Row 1 has the orange dashed border (Master Template). Notice how adjusting slider controls changes <strong>all 4 rows simultaneously</strong>!
+              </p>
+            </div>
+
+            <div class="sim-gallery-box" id="sim-gallery-container">
+              <!-- Row 1 (Master) -->
+              <div class="sim-gallery-row master-template" id="sim-row-1">
+                <span class="sim-master-pill">Master Template Cell</span>
+                <div>
+                  <div class="sim-row-title" style="font-size: 1rem; font-weight: 700; color: #f8fafc;">Hydraulic Seal Rupture</div>
+                  <div style="font-size: 0.78rem; color: var(--text-muted); margin-top: 0.2rem;">Machine M-04 &bull; 31-Oct-2026</div>
+                </div>
+                <span class="pill-priority-high">High</span>
+              </div>
+
+              <!-- Row 2 -->
+              <div class="sim-gallery-row" id="sim-row-2">
+                <div>
+                  <div class="sim-row-title" style="font-size: 1rem; font-weight: 700; color: #f8fafc;">Motor Bearing Screech</div>
+                  <div style="font-size: 0.78rem; color: var(--text-muted); margin-top: 0.2rem;">Conveyor C-02 &bull; 31-Oct-2026</div>
+                </div>
+                <span class="pill-priority-med">Medium</span>
+              </div>
+
+              <!-- Row 3 -->
+              <div class="sim-gallery-row" id="sim-row-3">
+                <div>
+                  <div class="sim-row-title" style="font-size: 1rem; font-weight: 700; color: #f8fafc;">Temperature Sensor Drift</div>
+                  <div style="font-size: 0.78rem; color: var(--text-muted); margin-top: 0.2rem;">Extruder E-01 &bull; 30-Oct-2026</div>
+                </div>
+                <span class="pill-priority-low">Low</span>
+              </div>
+
+              <!-- Row 4 -->
+              <div class="sim-gallery-row" id="sim-row-4">
+                <div>
+                  <div class="sim-row-title" style="font-size: 1rem; font-weight: 700; color: #f8fafc;">Compressor Air Leak</div>
+                  <div style="font-size: 0.78rem; color: var(--text-muted); margin-top: 0.2rem;">Compressor K-03 &bull; 29-Oct-2026</div>
+                </div>
+                <span class="pill-priority-med">Medium</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <aside class="trainer-notes" style="display: none !important;">
+          <h4>Trainer Speaking Script &amp; Pedagogical Cues:</h4>
+          <p><strong>Interactive Exercise:</strong> Drag the font size slider. Ask learners: 'Did I edit Row 4?' No! You edited the template, and Power Apps stamped the change across all rows.</p>
+        </aside>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 14: TRAINER DEMONSTRATION SCRIPT
+           ==================================================================== -->
+      <section class="slide" id="slide-14" data-slide-index="13" data-title="Trainer Demonstration: Live Click-by-Click" data-segment="Part 5: Trainer Live Demonstration">
+        <header class="slide-header">
+          <div class="section-tag">Part 5 &bull; Live Trainer Demonstration</div>
+          <h2>Trainer Demonstration: Live Click-by-Click Script</h2>
+          <p class="subtitle">Observe the exact screen actions, vocal cues, and intentional pitfalls to avoid.</p>
+        </header>
+
+        <div class="slide-content grid-3">
+          <div class="card">
+            <span class="card-badge" style="background: rgba(59, 130, 246, 0.2); color: #93c5fd;">Phase 1 &bull; 0-5 mins</span>
+            <h3 class="card-title">1. Drop &amp; Bind Gallery</h3>
+            <p style="color: var(--text-muted); font-size: 0.85rem; line-height: 1.6;">
+              <strong>Trainer Action:</strong> Click Insert &rarr; Vertical Gallery. Select <code>Apex_Maintenance_Requests</code> in the data prompt.<br><br>
+              <strong>Vocal Script:</strong> <em>"Notice how the dummy items vanish. In 2 seconds, our 18 real factory maintenance records appear on screen!"</em>
+            </p>
+          </div>
+
+          <div class="card">
+            <span class="card-badge" style="background: rgba(245, 158, 11, 0.2); color: #fcd34d;">Phase 2 &bull; 5-10 mins</span>
+            <h3 class="card-title">2. Master Template Editing</h3>
+            <p style="color: var(--text-muted); font-size: 0.85rem; line-height: 1.6;">
+              <strong>Trainer Action:</strong> Click the pencil icon on row 1. Move the title label 10 pixels to the right. Add a subtitle label.<br><br>
+              <strong>Vocal Script:</strong> <em>"See how every row shifted? We only touch Row 1. We let the Power Apps engine handle rows 2 through 150."</em>
+            </p>
+          </div>
+
+          <div class="card">
+            <span class="card-badge" style="background: rgba(16, 185, 129, 0.2); color: #86efac;">Phase 3 &bull; 10-15 mins</span>
+            <h3 class="card-title">3. The Selection Test</h3>
+            <p style="color: var(--text-muted); font-size: 0.85rem; line-height: 1.6;">
+              <strong>Trainer Action:</strong> Add a standalone label outside the gallery. Write: <code>"Active: " & galRequests.Selected.Title</code>. Click row 3.<br><br>
+              <strong>Vocal Script:</strong> <em>"Look at the external label! It immediately read row 3. That is `Gallery.Selected` in action."</em>
+            </p>
+          </div>
+        </div>
+
+        <aside class="trainer-notes" style="display: none !important;">
+          <h4>Trainer Speaking Script &amp; Pedagogical Cues:</h4>
+          <p><strong>Intentional Error:</strong> Try clicking row 2 directly and show that you can't insert a control into row 2. Emphasize that the master template in row 1 is the ONLY place where controls can be added.</p>
+        </aside>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 15: GUIDED PRACTICE: BUILDING THE DISPATCH GALLERY
+           ==================================================================== -->
+      <section class="slide" id="slide-15" data-slide-index="14" data-title="Guided Practice: Step-by-Step Exercise" data-segment="Part 5: Guided Student Practice">
+        <header class="slide-header">
+          <div class="section-tag">Part 5 &bull; Hands-On Student Lab</div>
+          <h2>Guided Practice: Building the Maintenance Dispatch Gallery</h2>
+          <p class="subtitle">Open your own browser tab and follow these 4 structured milestones right now.</p>
+        </header>
+
+        <div class="slide-content grid-2">
+          <div class="card">
+            <h3 class="card-title">Milestone Instructions</h3>
+            <div class="objective-item">
+              <span class="obj-num">A</span>
+              <div>
+                <strong>Insert &amp; Position Gallery:</strong>
+                <p>Insert a Vertical Gallery on the left half of the screen. Name it <code>galMaintenance</code>.</p>
+              </div>
+            </div>
+            <div class="objective-item">
+              <span class="obj-num">B</span>
+              <div>
+                <strong>Wire Cloud Data Source:</strong>
+                <p>Set <code>galMaintenance.Items = Apex_Maintenance_Requests</code>.</p>
+              </div>
+            </div>
+            <div class="objective-item">
+              <span class="obj-num">C</span>
+              <div>
+                <strong>Format Row Fields:</strong>
+                <p>Bind primary text to <code>ThisItem.Title</code> and secondary text to <code>ThisItem.MachineID</code>.</p>
+              </div>
+            </div>
+            <div class="objective-item">
+              <span class="obj-num">D</span>
+              <div>
+                <strong>Connect Selection Inspector:</strong>
+                <p>Drop a Label on the right half reading <code>galMaintenance.Selected.Title</code>.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="card" style="border-left: 3px solid var(--color-primary-light);">
+            <h3 class="card-title">Student Success Checklist</h3>
+            <div style="display: flex; flex-direction: column; gap: 0.85rem; margin-top: 0.5rem;">
+              <label style="display: flex; align-items: center; gap: 0.65rem; font-size: 0.9rem; color: #e2e8f0;">
+                <input type="checkbox" style="width: 18px; height: 18px;">
+                <span>Vertical Gallery displays real SharePoint maintenance rows cleanly</span>
+              </label>
+              <label style="display: flex; align-items: center; gap: 0.65rem; font-size: 0.9rem; color: #e2e8f0;">
+                <input type="checkbox" style="width: 18px; height: 18px;">
+                <span>All formulas use <code>ThisItem</code> rather than the table name</span>
+              </label>
+              <label style="display: flex; align-items: center; gap: 0.65rem; font-size: 0.9rem; color: #e2e8f0;">
+                <input type="checkbox" style="width: 18px; height: 18px;">
+                <span>Choice column references <code>ThisItem.Priority.Value</code></span>
+              </label>
+              <label style="display: flex; align-items: center; gap: 0.65rem; font-size: 0.9rem; color: #e2e8f0;">
+                <input type="checkbox" style="width: 18px; height: 18px;">
+                <span>Clicking different rows updates the external inspection label in real-time</span>
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <aside class="trainer-notes" style="display: none !important;">
+          <h4>Trainer Speaking Script &amp; Pedagogical Cues:</h4>
+          <p><strong>Troubleshooting Check:</strong> Walk the room. Make sure learners hold down the <kbd>Alt</kbd> key when testing clicks inside Power Apps Studio so they test selection rather than selection of controls.</p>
+        </aside>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 16: INTERACTIVE WIDGET 2: LIVE GALLERY SELECTOR & INSPECTOR
+           ==================================================================== -->
+      <section class="slide" id="slide-16" data-slide-index="15" data-title="Gallery Selector & Triage Inspector" data-segment="Part 6: Interactive Triage Inspector">
+        <header class="slide-header">
+          <div class="section-tag">Part 6 &bull; Interactive Triage Simulator</div>
+          <h2>Live Gallery Selection Inspector: <code>Gallery.Selected</code></h2>
+          <p class="subtitle">Click any ticket in the vertical gallery to observe how the external panel reads the active record.</p>
+        </header>
+
+        <div class="slide-content widget-stage">
+          <!-- Left: Clickable Gallery -->
+          <div class="sim-gallery-box" style="height: 100%;">
+            <div class="sim-gallery-row selected" id="triage-row-1" onclick="selectTriageRow(1, 'Machine M-04', 'Hydraulic Seal Rupture', 'High', 'Davi Santos', '31-Oct-2026')">
+              <div>
+                <strong style="color: #f8fafc; font-size: 0.92rem;">Hydraulic Seal Rupture</strong>
+                <div style="font-size: 0.75rem; color: var(--text-muted); margin-top: 0.2rem;">Machine M-04 &bull; 31-Oct-2026</div>
+              </div>
+              <span class="pill-priority-high">High</span>
+            </div>
+
+            <div class="sim-gallery-row" id="triage-row-2" onclick="selectTriageRow(2, 'Conveyor C-02', 'Motor Bearing Screech', 'Medium', 'Bopha Chen', '31-Oct-2026')">
+              <div>
+                <strong style="color: #f8fafc; font-size: 0.92rem;">Motor Bearing Screech</strong>
+                <div style="font-size: 0.75rem; color: var(--text-muted); margin-top: 0.2rem;">Conveyor C-02 &bull; 31-Oct-2026</div>
+              </div>
+              <span class="pill-priority-med">Medium</span>
+            </div>
+
+            <div class="sim-gallery-row" id="triage-row-3" onclick="selectTriageRow(3, 'Extruder E-01', 'Temperature Sensor Drift', 'Low', 'Alex Vong', '30-Oct-2026')">
+              <div>
+                <strong style="color: #f8fafc; font-size: 0.92rem;">Temperature Sensor Drift</strong>
+                <div style="font-size: 0.75rem; color: var(--text-muted); margin-top: 0.2rem;">Extruder E-01 &bull; 30-Oct-2026</div>
+              </div>
+              <span class="pill-priority-low">Low</span>
+            </div>
+
+            <div class="sim-gallery-row" id="triage-row-4" onclick="selectTriageRow(4, 'Compressor K-03', 'Pneumatic Pressure Drop', 'High', 'Sokha Ly', '29-Oct-2026')">
+              <div>
+                <strong style="color: #f8fafc; font-size: 0.92rem;">Pneumatic Pressure Drop</strong>
+                <div style="font-size: 0.75rem; color: var(--text-muted); margin-top: 0.2rem;">Compressor K-03 &bull; 29-Oct-2026</div>
+              </div>
+              <span class="pill-priority-high">High</span>
+            </div>
+          </div>
+
+          <!-- Right: Inspector Reading Gallery.Selected -->
+          <div class="card" style="background: rgba(12, 19, 31, 0.95); justify-content: space-between;">
+            <div>
+              <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.75rem;">
+                <span class="card-badge" style="background: rgba(16, 185, 129, 0.2); color: #86efac;">Active Record Inspector</span>
+                <span style="font-family: var(--font-code); font-size: 0.75rem; color: #67e8f9;">galRequests.Selected</span>
+              </div>
+              <h3 style="color: #f8fafc; font-size: 1.25rem; margin-bottom: 0.25rem;" id="triage-detail-title">Hydraulic Seal Rupture</h3>
+              <p style="color: var(--text-muted); font-size: 0.85rem;" id="triage-detail-machine">Equipment ID: Machine M-04</p>
+            </div>
+
+            <div style="background: #090e17; border: 1px solid var(--border-subtle); border-radius: 0.65rem; padding: 1rem; display: flex; flex-direction: column; gap: 0.65rem;">
+              <div style="display: flex; justify-content: space-between; font-size: 0.85rem;">
+                <span style="color: var(--text-muted);">Urgency Priority:</span>
+                <span id="triage-detail-priority" class="pill-priority-high">High</span>
+              </div>
+              <div style="display: flex; justify-content: space-between; font-size: 0.85rem;">
+                <span style="color: var(--text-muted);">Logged By Operator:</span>
+                <strong style="color: #f8fafc;" id="triage-detail-tech">Davi Santos</strong>
+              </div>
+              <div style="display: flex; justify-content: space-between; font-size: 0.85rem;">
+                <span style="color: var(--text-muted);">Timestamp:</span>
+                <span style="color: #67e8f9; font-family: var(--font-code);" id="triage-detail-date">31-Oct-2026</span>
+              </div>
+            </div>
+
+            <div style="background: rgba(255, 255, 255, 0.04); border-radius: 0.5rem; padding: 0.75rem; font-size: 0.82rem; color: #cbd5e1;">
+              <strong>Tomorrow (Day 22 Bridge):</strong> This right-hand panel will be replaced by an <strong>Edit Form</strong> with <code>Item = galRequests.Selected</code>!
+            </div>
+          </div>
+        </div>
+
+        <aside class="trainer-notes" style="display: none !important;">
+          <h4>Trainer Speaking Script &amp; Pedagogical Cues:</h4>
+          <p><strong>Demonstrate Row Switching:</strong> Click row 1, then row 3, then row 4. Show how the right-hand panel instantly updates without writing complex event handlers.</p>
+        </aside>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 17: 5 DANGEROUS MISCONCEPTIONS VS. CLOUD REALITY
+           ==================================================================== -->
+      <section class="slide" id="slide-17" data-slide-index="16" data-title="5 Dangerous Misconceptions vs. Cloud Reality" data-segment="Part 6: Pitfalls & Misconceptions">
+        <header class="slide-header">
+          <div class="section-tag">Part 6 &bull; Debugging &amp; Reality Check</div>
+          <h2>5 Dangerous Misconceptions vs. Cloud Reality</h2>
+          <p class="subtitle">Avoid these 5 common beginner traps before they cause design confusion or broken formulas.</p>
+        </header>
+
+        <div class="slide-content grid-2">
+          <div class="card">
+            <div style="display: flex; flex-direction: column; gap: 0.85rem;">
+              <div style="background: rgba(239, 68, 68, 0.08); border-left: 3px solid #ef4444; padding: 0.75rem; border-radius: 0.4rem;">
+                <strong style="color: #fca5a5; font-size: 0.88rem;">Misconception 1: "I have to write code for every row in the table."</strong>
+                <p style="color: var(--text-muted); font-size: 0.82rem; margin: 0.2rem 0 0 0;">
+                  <strong>Reality:</strong> False! You write code ONCE in the Template Cell. Power Apps repeats it for 1, 10, or 10,000 rows automatically.
+                </p>
+              </div>
+
+              <div style="background: rgba(239, 68, 68, 0.08); border-left: 3px solid #ef4444; padding: 0.75rem; border-radius: 0.4rem;">
+                <strong style="color: #fca5a5; font-size: 0.88rem;">Misconception 2: "Editing Row 3 changes only Row 3's design."</strong>
+                <p style="color: var(--text-muted); font-size: 0.82rem; margin: 0.2rem 0 0 0;">
+                  <strong>Reality:</strong> False! You cannot edit Row 3 directly. Any layout or color change made in the Template Cell applies to all rows.
+                </p>
+              </div>
+
+              <div style="background: rgba(239, 68, 68, 0.08); border-left: 3px solid #ef4444; padding: 0.75rem; border-radius: 0.4rem;">
+                <strong style="color: #fca5a5; font-size: 0.88rem;">Misconception 3: "A Gallery copies records into tablet storage."</strong>
+                <p style="color: var(--text-muted); font-size: 0.82rem; margin: 0.2rem 0 0 0;">
+                  <strong>Reality:</strong> False! The gallery is only a viewfinder (lens) displaying records fetched from the SharePoint cloud via the connector.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div style="display: flex; flex-direction: column; gap: 0.85rem;">
+              <div style="background: rgba(239, 68, 68, 0.08); border-left: 3px solid #ef4444; padding: 0.75rem; border-radius: 0.4rem;">
+                <strong style="color: #fca5a5; font-size: 0.88rem;">Misconception 4: "Writing Table.Title works inside the gallery."</strong>
+                <p style="color: var(--text-muted); font-size: 0.82rem; margin: 0.2rem 0 0 0;">
+                  <strong>Reality:</strong> Referencing the table name returns a column array. Inside a row, you MUST use <code>ThisItem.Title</code> to specify the current row.
+                </p>
+              </div>
+
+              <div style="background: rgba(239, 68, 68, 0.08); border-left: 3px solid #ef4444; padding: 0.75rem; border-radius: 0.4rem;">
+                <strong style="color: #fca5a5; font-size: 0.88rem;">Misconception 5: "ThisItem.Priority shows text on screen."</strong>
+                <p style="color: var(--text-muted); font-size: 0.82rem; margin: 0.2rem 0 0 0;">
+                  <strong>Reality:</strong> Priority is a Choice column! It returns a record object. You must write <code>ThisItem.Priority.Value</code> to extract the string.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <aside class="trainer-notes" style="display: none !important;">
+          <h4>Trainer Speaking Script &amp; Pedagogical Cues:</h4>
+          <p><strong>Emphasize Misconception 2:</strong> "Remember: the template in row 1 is the rubber stamp. When you carve the rubber stamp, every stamped image on the page reflects that carve."</p>
+        </aside>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 18: KNOWLEDGE CHECK 1 OF 5 (CORE CONCEPT)
+           ==================================================================== -->
+      <section class="slide" id="slide-18" data-slide-index="17" data-title="Knowledge Check 1: Master Template Mechanism" data-segment="Part 7: Knowledge Checks">
+        <header class="slide-header">
+          <div class="section-tag">Part 7 &bull; Knowledge Check 1 of 5</div>
+          <h2>Knowledge Check: Master Template Mechanism</h2>
+          <p class="subtitle">Testing your core understanding of how gallery layout editing propagates across records.</p>
+        </header>
+
+        <div class="slide-content">
+          <div class="quiz-container">
+            <div class="quiz-card">
+              <span class="card-badge" style="background: rgba(59, 130, 246, 0.2); color: #93c5fd;">Question 1 &bull; Core Mechanism</span>
+              <p style="color: var(--text-main); font-size: 1.05rem; line-height: 1.6; margin-top: 0.5rem;">
+                What happens to the remaining rows in a Vertical Gallery when you resize a label inside the first (top) template cell?
+              </p>
+
+              <div class="quiz-options">
+                <button class="quiz-option-btn" onclick="handleQuizAnswer(1, 'A', false, this)">
+                  <strong>A.</strong> <span>Only Row 1 changes; all other rows stay their original size</span>
+                </button>
+                <button class="quiz-option-btn" onclick="handleQuizAnswer(1, 'B', true, this)">
+                  <strong>B.</strong> <span>All other rows automatically mirror the exact same size and position instantaneously</span>
+                </button>
+                <button class="quiz-option-btn" onclick="handleQuizAnswer(1, 'C', false, this)">
+                  <strong>C.</strong> <span>Power Apps deletes the other rows from the database</span>
+                </button>
+                <button class="quiz-option-btn" onclick="handleQuizAnswer(1, 'D', false, this)">
+                  <strong>D.</strong> <span>The gallery prompts the user to confirm the resize for each record</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- Dual-State Inspector Card: NEVER EMPTY / NEVER BLANK -->
+            <div class="quiz-inspector-card" id="quiz-feedback-1">
+              <div class="feedback-placeholder">
+                <div style="width: 52px; height: 52px; border-radius: 50%; background: rgba(6, 182, 212, 0.15); border: 1px solid rgba(6, 182, 212, 0.35); display: flex; align-items: center; justify-content: center; margin: 0 auto 0.85rem auto; font-size: 1.5rem; color: #67e8f9;">
+                  &quest;
+                </div>
+                <span class="card-badge" style="background: rgba(6, 182, 212, 0.2); color: #67e8f9; margin-bottom: 0.65rem;">Awaiting Answer Selection</span>
+                <h4 style="color: #f8fafc; font-size: 1.05rem; margin-bottom: 0.5rem;">Live Architecture Inspector</h4>
+                <p style="color: var(--text-muted); font-size: 0.88rem; line-height: 1.6; max-width: 380px; margin: 0 auto;">
+                  Select an option on the left (A, B, C, or D) to submit your answer and unlock the system architecture rationale.
+                </p>
+              </div>
+              <div class="feedback-content">
+                <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.75rem;">
+                  <span class="card-badge" id="quiz-badge-1" style="background: rgba(16, 185, 129, 0.2); color: #86efac;">Correct!</span>
+                  <strong style="color: var(--text-main); font-size: 1.05rem;" id="quiz-status-1">Template Architecture Mastered!</strong>
+                </div>
+                <p style="color: var(--text-muted); font-size: 0.88rem; line-height: 1.6;">
+                  Exactly right! The top cell is the master blueprint. When you alter any visual property in the template cell, Power Apps stamps that identical change across every single record in the gallery.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <aside class="trainer-notes" style="display: none !important;">
+          <h4>Trainer Speaking Script &amp; Pedagogical Cues:</h4>
+          <p><strong>Review Option A:</strong> Explain why Option A represents the old manual way. In low-code architecture, templates guarantee visual consistency.</p>
+        </aside>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 19: KNOWLEDGE CHECK 2 OF 5 (ARCHITECTURAL WHY)
+           ==================================================================== -->
+      <section class="slide" id="slide-19" data-slide-index="18" data-title="Knowledge Check 2: The 'Why' of ThisItem" data-segment="Part 7: Knowledge Checks">
+        <header class="slide-header">
+          <div class="section-tag">Part 7 &bull; Knowledge Check 2 of 5</div>
+          <h2>Knowledge Check: The Architectural "Why" of <code>ThisItem</code></h2>
+          <p class="subtitle">Why Power Fx requires scoped row keywords rather than general table identifiers.</p>
+        </header>
+
+        <div class="slide-content">
+          <div class="quiz-container">
+            <div class="quiz-card">
+              <span class="card-badge" style="background: rgba(59, 130, 246, 0.2); color: #93c5fd;">Question 2 &bull; Architectural 'Why'</span>
+              <p style="color: var(--text-main); font-size: 1.05rem; line-height: 1.6; margin-top: 0.5rem;">
+                Why does Power Fx use the keyword <code>ThisItem</code> instead of the table name inside a gallery row formula?
+              </p>
+
+              <div class="quiz-options">
+                <button class="quiz-option-btn" onclick="handleQuizAnswer(2, 'A', false, this)">
+                  <strong>A.</strong> <span>Because Microsoft engineers thought 'ThisItem' looked cooler</span>
+                </button>
+                <button class="quiz-option-btn" onclick="handleQuizAnswer(2, 'B', false, this)">
+                  <strong>B.</strong> <span>Because table names cannot be typed on mobile phone touchscreens</span>
+                </button>
+                <button class="quiz-option-btn" onclick="handleQuizAnswer(2, 'C', true, this)">
+                  <strong>C.</strong> <span>Because the table name refers to all 150 rows, while 'ThisItem' scopes the formula to the current single record</span>
+                </button>
+                <button class="quiz-option-btn" onclick="handleQuizAnswer(2, 'D', false, this)">
+                  <strong>D.</strong> <span>Because 'ThisItem' automatically translates the text into English</span>
+                </button>
+              </div>
+            </div>
+
+            <div class="quiz-inspector-card" id="quiz-feedback-2">
+              <div class="feedback-placeholder">
+                <div style="width: 52px; height: 52px; border-radius: 50%; background: rgba(6, 182, 212, 0.15); border: 1px solid rgba(6, 182, 212, 0.35); display: flex; align-items: center; justify-content: center; margin: 0 auto 0.85rem auto; font-size: 1.5rem; color: #67e8f9;">
+                  &quest;
+                </div>
+                <span class="card-badge" style="background: rgba(6, 182, 212, 0.2); color: #67e8f9; margin-bottom: 0.65rem;">Awaiting Answer Selection</span>
+                <h4 style="color: #f8fafc; font-size: 1.05rem; margin-bottom: 0.5rem;">Live Architecture Inspector</h4>
+                <p style="color: var(--text-muted); font-size: 0.88rem; line-height: 1.6; max-width: 380px; margin: 0 auto;">
+                  Select an option on the left (A, B, C, or D) to submit your answer and unlock the system architecture rationale.
+                </p>
+              </div>
+              <div class="feedback-content">
+                <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.75rem;">
+                  <span class="card-badge" id="quiz-badge-2" style="background: rgba(16, 185, 129, 0.2); color: #86efac;">Correct!</span>
+                  <strong style="color: var(--text-main); font-size: 1.05rem;" id="quiz-status-2">Scoping Precision Mastered!</strong>
+                </div>
+                <p style="color: var(--text-muted); font-size: 0.88rem; line-height: 1.6;">
+                  Spot on! The table name references the entire 150-record dataset (an array). <code>ThisItem</code> acts as a pointer to the single record currently being rendered in that specific row of the screen.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <aside class="trainer-notes" style="display: none !important;">
+          <h4>Trainer Speaking Script &amp; Pedagogical Cues:</h4>
+          <p><strong>Reinforce Scope:</strong> Remind students of Day 10: a record is one horizontal row. `ThisItem` means 'THIS row right here'.</p>
+        </aside>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 20: KNOWLEDGE CHECK 3 OF 5 (WHAT HAPPENS IF)
+           ==================================================================== -->
+      <section class="slide" id="slide-20" data-slide-index="19" data-title="Knowledge Check 3: What Happens If" data-segment="Part 7: Knowledge Checks">
+        <header class="slide-header">
+          <div class="section-tag">Part 7 &bull; Knowledge Check 3 of 5</div>
+          <h2>Knowledge Check: "What Happens If" a Record is Deleted</h2>
+          <p class="subtitle">Investigating dynamic layout reflow when cloud database items are removed.</p>
+        </header>
+
+        <div class="slide-content">
+          <div class="quiz-container">
+            <div class="quiz-card">
+              <span class="card-badge" style="background: rgba(59, 130, 246, 0.2); color: #93c5fd;">Question 3 &bull; Dynamic Reflow</span>
+              <p style="color: var(--text-main); font-size: 1.05rem; line-height: 1.6; margin-top: 0.5rem;">
+                A technician in the shop resolves and deletes Ticket #3 in SharePoint while Davi is viewing the gallery. What happens when the gallery refreshes?
+              </p>
+
+              <div class="quiz-options">
+                <button class="quiz-option-btn" onclick="handleQuizAnswer(3, 'A', false, this)">
+                  <strong>A.</strong> <span>A blank white hole appears on the screen where Ticket #3 was</span>
+                </button>
+                <button class="quiz-option-btn" onclick="handleQuizAnswer(3, 'B', false, this)">
+                  <strong>B.</strong> <span>The app crashes and displays an error code</span>
+                </button>
+                <button class="quiz-option-btn" onclick="handleQuizAnswer(3, 'C', true, this)">
+                  <strong>C.</strong> <span>Row 3 vanishes and the rows below it slide up smoothly without leaving any empty gaps</span>
+                </button>
+                <button class="quiz-option-btn" onclick="handleQuizAnswer(3, 'D', false, this)">
+                  <strong>D.</strong> <span>All other tickets are deleted automatically</span>
+                </button>
+              </div>
+            </div>
+
+            <div class="quiz-inspector-card" id="quiz-feedback-3">
+              <div class="feedback-placeholder">
+                <div style="width: 52px; height: 52px; border-radius: 50%; background: rgba(6, 182, 212, 0.15); border: 1px solid rgba(6, 182, 212, 0.35); display: flex; align-items: center; justify-content: center; margin: 0 auto 0.85rem auto; font-size: 1.5rem; color: #67e8f9;">
+                  &quest;
+                </div>
+                <span class="card-badge" style="background: rgba(6, 182, 212, 0.2); color: #67e8f9; margin-bottom: 0.65rem;">Awaiting Answer Selection</span>
+                <h4 style="color: #f8fafc; font-size: 1.05rem; margin-bottom: 0.5rem;">Live Architecture Inspector</h4>
+                <p style="color: var(--text-muted); font-size: 0.88rem; line-height: 1.6; max-width: 380px; margin: 0 auto;">
+                  Select an option on the left (A, B, C, or D) to submit your answer and unlock the system architecture rationale.
+                </p>
+              </div>
+              <div class="feedback-content">
+                <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.75rem;">
+                  <span class="card-badge" id="quiz-badge-3" style="background: rgba(16, 185, 129, 0.2); color: #86efac;">Correct!</span>
+                  <strong style="color: var(--text-main); font-size: 1.05rem;" id="quiz-status-3">Dynamic Reflow Confirmed!</strong>
+                </div>
+                <p style="color: var(--text-muted); font-size: 0.88rem; line-height: 1.6;">
+                  Brilliant! Because the gallery is a dynamic repeating container rather than static labels, it reflows the list seamlessly whenever rows are added or deleted in SharePoint.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <aside class="trainer-notes" style="display: none !important;">
+          <h4>Trainer Speaking Script &amp; Pedagogical Cues:</h4>
+          <p><strong>Contrast with Old Methods:</strong> Remind students of the junior developer's 54 labels: if they had used static labels, deleting row 3 would leave an ugly empty gap on screen.</p>
+        </aside>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 21: KNOWLEDGE CHECK 4 OF 5 (CHOICE COLUMN TRAP)
+           ==================================================================== -->
+      <section class="slide" id="slide-21" data-slide-index="20" data-title="Knowledge Check 4: Choice Column Trap" data-segment="Part 7: Knowledge Checks">
+        <header class="slide-header">
+          <div class="section-tag">Part 7 &bull; Knowledge Check 4 of 5</div>
+          <h2>Knowledge Check: The SharePoint Choice Column Trap</h2>
+          <p class="subtitle">Recognizing data type mismatches between SharePoint OptionSets and Power Apps text labels.</p>
+        </header>
+
+        <div class="slide-content">
+          <div class="quiz-container">
+            <div class="quiz-card">
+              <span class="card-badge" style="background: rgba(59, 130, 246, 0.2); color: #93c5fd;">Question 4 &bull; Data Type Pitfall</span>
+              <p style="color: var(--text-main); font-size: 1.05rem; line-height: 1.6; margin-top: 0.5rem;">
+                Why does writing <code>ThisItem.Priority</code> produce a red squiggly error when <code>Priority</code> is a SharePoint Choice column?
+              </p>
+
+              <div class="quiz-options">
+                <button class="quiz-option-btn" onclick="handleQuizAnswer(4, 'A', false, this)">
+                  <strong>A.</strong> <span>Because SharePoint forbids Choice columns inside galleries</span>
+                </button>
+                <button class="quiz-option-btn" onclick="handleQuizAnswer(4, 'B', true, this)">
+                  <strong>B.</strong> <span>Because Choice fields return a record object; you must write 'ThisItem.Priority.Value' to get text</span>
+                </button>
+                <button class="quiz-option-btn" onclick="handleQuizAnswer(4, 'C', false, this)">
+                  <strong>C.</strong> <span>Because Priority must always be converted to a number first</span>
+                </button>
+                <button class="quiz-option-btn" onclick="handleQuizAnswer(4, 'D', false, this)">
+                  <strong>D.</strong> <span>Because you must wrap it in 'Notify()'</span>
+                </button>
+              </div>
+            </div>
+
+            <div class="quiz-inspector-card" id="quiz-feedback-4">
+              <div class="feedback-placeholder">
+                <div style="width: 52px; height: 52px; border-radius: 50%; background: rgba(6, 182, 212, 0.15); border: 1px solid rgba(6, 182, 212, 0.35); display: flex; align-items: center; justify-content: center; margin: 0 auto 0.85rem auto; font-size: 1.5rem; color: #67e8f9;">
+                  &quest;
+                </div>
+                <span class="card-badge" style="background: rgba(6, 182, 212, 0.2); color: #67e8f9; margin-bottom: 0.65rem;">Awaiting Answer Selection</span>
+                <h4 style="color: #f8fafc; font-size: 1.05rem; margin-bottom: 0.5rem;">Live Architecture Inspector</h4>
+                <p style="color: var(--text-muted); font-size: 0.88rem; line-height: 1.6; max-width: 380px; margin: 0 auto;">
+                  Select an option on the left (A, B, C, or D) to submit your answer and unlock the system architecture rationale.
+                </p>
+              </div>
+              <div class="feedback-content">
+                <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.75rem;">
+                  <span class="card-badge" id="quiz-badge-4" style="background: rgba(16, 185, 129, 0.2); color: #86efac;">Correct!</span>
+                  <strong style="color: var(--text-main); font-size: 1.05rem;" id="quiz-status-4">Type Safety Mastery!</strong>
+                </div>
+                <p style="color: var(--text-muted); font-size: 0.88rem; line-height: 1.6;">
+                  Exactly! SharePoint Choice columns are not raw strings; they are structured records containing a <code>Value</code> property. Writing <code>ThisItem.Priority.Value</code> correctly extracts the string ("High", "Medium", "Low").
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <aside class="trainer-notes" style="display: none !important;">
+          <h4>Trainer Speaking Script &amp; Pedagogical Cues:</h4>
+          <p><strong>Syntax Memory Hook:</strong> "Always remember: Choice needs .Value! Person needs .DisplayName! Never forget the dot!"</p>
+        </aside>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 22: KNOWLEDGE CHECK 5 OF 5 (SELECTION DISPATCH)
+           ==================================================================== -->
+      <section class="slide" id="slide-22" data-slide-index="21" data-title="Knowledge Check 5: Reading Gallery.Selected" data-segment="Part 7: Knowledge Checks">
+        <header class="slide-header">
+          <div class="section-tag">Part 7 &bull; Knowledge Check 5 of 5</div>
+          <h2>Knowledge Check: Reading User Selection with <code>Gallery.Selected</code></h2>
+          <p class="subtitle">Passing data from a touched gallery item to other screen elements.</p>
+        </header>
+
+        <div class="slide-content">
+          <div class="quiz-container">
+            <div class="quiz-card">
+              <span class="card-badge" style="background: rgba(59, 130, 246, 0.2); color: #93c5fd;">Question 5 &bull; Interaction State</span>
+              <p style="color: var(--text-main); font-size: 1.05rem; line-height: 1.6; margin-top: 0.5rem;">
+                How does another control on the screen (outside the gallery) know which incident ticket the operator clicked?
+              </p>
+
+              <div class="quiz-options">
+                <button class="quiz-option-btn" onclick="handleQuizAnswer(5, 'A', false, this)">
+                  <strong>A.</strong> <span>By reading the global variable 'varClicked'</span>
+                </button>
+                <button class="quiz-option-btn" onclick="handleQuizAnswer(5, 'B', true, this)">
+                  <strong>B.</strong> <span>By referencing 'GalleryName.Selected.FieldName' (e.g. galMaintenance.Selected.Title)</span>
+                </button>
+                <button class="quiz-option-btn" onclick="handleQuizAnswer(5, 'C', false, this)">
+                  <strong>C.</strong> <span>By querying SharePoint again using 'LookUp()'</span>
+                </button>
+                <button class="quiz-option-btn" onclick="handleQuizAnswer(5, 'D', false, this)">
+                  <strong>D.</strong> <span>By restarting the mobile tablet</span>
+                </button>
+              </div>
+            </div>
+
+            <div class="quiz-inspector-card" id="quiz-feedback-5">
+              <div class="feedback-placeholder">
+                <div style="width: 52px; height: 52px; border-radius: 50%; background: rgba(6, 182, 212, 0.15); border: 1px solid rgba(6, 182, 212, 0.35); display: flex; align-items: center; justify-content: center; margin: 0 auto 0.85rem auto; font-size: 1.5rem; color: #67e8f9;">
+                  &quest;
+                </div>
+                <span class="card-badge" style="background: rgba(6, 182, 212, 0.2); color: #67e8f9; margin-bottom: 0.65rem;">Awaiting Answer Selection</span>
+                <h4 style="color: #f8fafc; font-size: 1.05rem; margin-bottom: 0.5rem;">Live Architecture Inspector</h4>
+                <p style="color: var(--text-muted); font-size: 0.88rem; line-height: 1.6; max-width: 380px; margin: 0 auto;">
+                  Select an option on the left (A, B, C, or D) to submit your answer and unlock the system architecture rationale.
+                </p>
+              </div>
+              <div class="feedback-content">
+                <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.75rem;">
+                  <span class="card-badge" id="quiz-badge-5" style="background: rgba(16, 185, 129, 0.2); color: #86efac;">Correct!</span>
+                  <strong style="color: var(--text-main); font-size: 1.05rem;" id="quiz-status-5">Mastery of Interactive Selection!</strong>
+                </div>
+                <p style="color: var(--text-muted); font-size: 0.88rem; line-height: 1.6;">
+                  Flawless! The gallery automatically maintains the <code>Selected</code> property. Whichever card the user taps becomes active, allowing any label, button, or form on the screen to read its fields directly!
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <aside class="trainer-notes" style="display: none !important;">
+          <h4>Trainer Speaking Script &amp; Pedagogical Cues:</h4>
+          <p><strong>Bridge Forward Moment:</strong> "Notice that Option B is our golden bridge to Day 22! Tomorrow, our Edit Form will have `Item = galMaintenance.Selected`!"</p>
+        </aside>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 23: FINAL CAPSTONE CHALLENGE: MAINTENANCE TRIAGE CONSOLE
+           ==================================================================== -->
+      <section class="slide" id="slide-23" data-slide-index="22" data-title="Final Capstone Challenge: Triage Console" data-segment="Part 7: Practical Evaluation">
+        <header class="slide-header">
+          <div class="section-tag">Part 7 &bull; Capstone Challenge</div>
+          <h2>Final Capstone Challenge: Maintenance Triage Console</h2>
+          <p class="subtitle">Architecting the complete dispatch interface for Apex Plastics shift supervisors.</p>
+        </header>
+
+        <div class="slide-content grid-2">
+          <div class="card">
+            <span class="card-badge" style="background: rgba(6, 182, 212, 0.2); color: #67e8f9;">Factory Operational Brief</span>
+            <h3 class="card-title">The Plant Triage Challenge</h3>
+            <p style="color: var(--text-muted); font-size: 0.88rem; line-height: 1.6; margin-bottom: 1rem;">
+              Build a dual-pane triage console on a single screen:
+            </p>
+            <div style="display: flex; flex-direction: column; gap: 0.65rem;">
+              <div style="background: rgba(255, 255, 255, 0.04); padding: 0.75rem; border-radius: 0.4rem; border-left: 3px solid #0284c7;">
+                <strong style="color: #67e8f9; font-size: 0.85rem;">Left Pane (Vertical Gallery):</strong>
+                <p style="color: var(--text-muted); font-size: 0.8rem; margin-top: 0.2rem;">Displays <code>Apex_Maintenance_Requests</code> with Title, MachineID, and color-coded Priority pill.</p>
+              </div>
+              <div style="background: rgba(255, 255, 255, 0.04); padding: 0.75rem; border-radius: 0.4rem; border-left: 3px solid #10b981;">
+                <strong style="color: #86efac; font-size: 0.85rem;">Right Pane (Detail Inspection Card):</strong>
+                <p style="color: var(--text-muted); font-size: 0.8rem; margin-top: 0.2rem;">Reads <code>galMaintenance.Selected</code> to display full details, assigned technician, and formatted timestamp.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="card" style="border-left: 3px solid var(--color-primary-light);">
+            <span class="card-badge" style="background: rgba(6, 182, 212, 0.2); color: #67e8f9;">100-Point Evaluation Rubric</span>
+            <h3 class="card-title">Architectural Solution Blueprint</h3>
+            <div style="display: flex; flex-direction: column; gap: 0.75rem; margin-top: 0.5rem;">
+              <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-subtle); padding-bottom: 0.4rem;">
+                <span style="font-size: 0.85rem; color: #cbd5e1;">A. Gallery Bound to SharePoint Data Source</span>
+                <span style="font-family: var(--font-code); color: #67e8f9; font-weight: bold;">25 Pts</span>
+              </div>
+              <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-subtle); padding-bottom: 0.4rem;">
+                <span style="font-size: 0.85rem; color: #cbd5e1;">B. Template Cell Layout with Zero Overlap</span>
+                <span style="font-family: var(--font-code); color: #67e8f9; font-weight: bold;">25 Pts</span>
+              </div>
+              <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-subtle); padding-bottom: 0.4rem;">
+                <span style="font-size: 0.85rem; color: #cbd5e1;">C. Choice Column Addressed via .Value</span>
+                <span style="font-family: var(--font-code); color: #67e8f9; font-weight: bold;">25 Pts</span>
+              </div>
+              <div style="display: flex; justify-content: space-between; align-items: center; padding-bottom: 0.4rem;">
+                <span style="font-size: 0.85rem; color: #cbd5e1;">D. Detail Panel Linked via Gallery.Selected</span>
+                <span style="font-family: var(--font-code); color: #67e8f9; font-weight: bold;">25 Pts</span>
+              </div>
+            </div>
+            <div style="margin-top: auto; padding-top: 1rem; color: #86efac; font-weight: 700; font-size: 0.9rem;">
+              Total Score: 100/100 &bull; Enterprise UI Architect Certified
+            </div>
+          </div>
+        </div>
+
+        <aside class="trainer-notes" style="display: none !important;">
+          <h4>Trainer Speaking Script &amp; Pedagogical Cues:</h4>
+          <p><strong>Celebrate Achievement:</strong> "You have officially conquered the Gallery! You now know how to take hundreds of cloud rows and transform them into a sleek, browsable corporate tool."</p>
+        </aside>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 24: CONNECTION MAP & BRIDGE FORWARD TO DAY 22
+           ==================================================================== -->
+      <section class="slide" id="slide-24" data-slide-index="23" data-title="Bridge Forward: Day 22 Forms" data-segment="Part 8: Bridge Forward">
+        <header class="slide-header">
+          <div class="section-tag">Part 8 &bull; The Next Frontier</div>
+          <h2>Connection Map &amp; Bridge Forward to Day 22</h2>
+          <p class="subtitle">You can read and select records. Tomorrow, you will edit them and write back to SharePoint!</p>
+        </header>
+
+        <div class="slide-content grid-3">
+          <div class="card" style="border-left: 3px solid #0d9488;">
+            <span class="card-badge" style="background: rgba(13, 148, 136, 0.2); color: #5eead4;">Day 20 Complete</span>
+            <h3 class="card-title">SharePoint Connection</h3>
+            <p style="color: var(--text-muted); font-size: 0.85rem; line-height: 1.6;">
+              Connected the cloud pipeline and authenticated with Microsoft Entra ID. The database is listening.
+            </p>
+            <div style="margin-top: auto; padding-top: 1rem; color: #5eead4; font-weight: 700; font-size: 0.85rem;">
+              &check; Cloud Bridge Established
+            </div>
+          </div>
+
+          <div class="card" style="border-left: 3px solid var(--color-primary-light); background: rgba(6, 182, 212, 0.1);">
+            <span class="card-badge" style="background: rgba(6, 182, 212, 0.25); color: #67e8f9;">Day 21: TODAY</span>
+            <h3 class="card-title">Gallery: Read &amp; Select</h3>
+            <p style="color: var(--text-main); font-size: 0.85rem; line-height: 1.6;">
+              Vertical Gallery feeds on <code>Items</code>. Master Template Cell stamped across rows. User tap isolates active record via <code>Selected</code>.
+            </p>
+            <div style="margin-top: auto; padding-top: 1rem; color: #67e8f9; font-weight: 700; font-size: 0.85rem;">
+              &check; Repeating UI &amp; Selection Mastered
+            </div>
+          </div>
+
+          <div class="card" style="border-left: 3px solid #8b5cf6;">
+            <span class="card-badge" style="background: rgba(139, 92, 246, 0.2); color: #c084fc;">Tomorrow: Day 22</span>
+            <h3 class="card-title">Forms: Edit One Record</h3>
+            <p style="color: var(--text-muted); font-size: 0.85rem; line-height: 1.6;">
+              Tomorrow, we add an <strong>Edit Form</strong> control. Its <code>Item</code> property will be <code>galMaintenance.Selected</code>, and pressing Save will update SharePoint!
+            </p>
+            <div style="margin-top: auto; padding-top: 1rem; color: #c084fc; font-weight: 700; font-size: 0.85rem;">
+              &rarr; Day 22: Bi-Directional Editing
+            </div>
+          </div>
+        </div>
+
+        <aside class="trainer-notes" style="display: none !important;">
+          <h4>Trainer Speaking Script &amp; Pedagogical Cues:</h4>
+          <p><strong>Final Forward Bridge (2 min):</strong> "Take pride in what you built today! Tomorrow on Day 22, we take the record you tapped on your gallery and load it into a full edit form. See you tomorrow!"</p>
+        </aside>
+      </section>
+
+    </main>
+
+    <!-- Bottom HUD & Navigation Controls -->
+    <footer id="bottom-hud">
+      <div id="progress-bar-container">
+        <div id="progress-bar"></div>
+      </div>
+
+      <div class="hud-left">
+        <button id="btn-prev" class="hud-btn" onclick="prevSlide()">&larr; Prev</button>
+        <button id="btn-next" class="hud-btn" onclick="nextSlide()">Next &rarr;</button>
+        <span id="slide-counter">Slide 1 / 24</span>
+      </div>
+
+      <div class="hud-right">
+        <button id="btn-lang" class="hud-btn" onclick="toggleLanguage()"><span id="lang-label">KH</span></button>
+        <button id="btn-laser" class="hud-btn active" onclick="toggleLaser()">Laser</button>
+        <button id="btn-notes" class="hud-btn" onclick="toggleNotes()">Notes (N)</button>
+        <button id="btn-overview" class="hud-btn" onclick="toggleOverview()">Overview (O)</button>
+        <button id="btn-timer" class="hud-btn" onclick="toggleTimer()"><span id="timer-display">90:00</span></button>
+        <button id="btn-fullscreen" class="hud-btn" onclick="toggleFullscreen()">Full</button>
+        <a href="../index.html" class="hud-btn hub-btn" title="Return to Master Curriculum Hub (ត្រឡប់ទៅទំព័រដើម)" style="text-decoration: none; display: inline-flex; align-items: center; gap: 4px; color: #fcd34d; font-weight: 600;"><span>🏠</span><span>Hub</span></a>
+      </div></footer>
+
+    <!-- Slide-Out Trainer Notes Drawer (Strictly off-screen until N pressed) -->
+    <div id="notes-drawer">
+      <div class="notes-header">
+        <h3 id="notes-slide-title" style="color: #67e8f9; font-size: 1.15rem;">Trainer Speaking Notes</h3>
+        <button class="notes-close-btn" id="notes-close-btn" onclick="toggleNotes()">&times;</button>
+      </div>
+      <div class="notes-body" id="notes-body-content">
+        <!-- Dynamically populated by script.js -->
+      </div>
+    </div>
+
+    <!-- Slide Overview Grid Modal -->
+    <div id="overview-modal">
+      <div class="overview-header">
+        <h2 style="color: #f8fafc; font-size: 1.6rem;">Slide Overview (24 Slides)</h2>
+        <button class="notes-close-btn" id="overview-close-btn" onclick="toggleOverview()">&times;</button>
+      </div>
+      <div class="overview-grid" id="overview-grid">
+        <!-- Dynamically populated by script.js -->
+      </div>
+    </div>
+
+  </div>
+
+  <script src="script.js"></script>
+<script>
+if (window.self !== window.top) {
+  document.documentElement.classList.add('in-iframe');
+  function hideHub() { document.querySelectorAll('.hub-btn, .back-to-hub-pill').forEach(e => e.style.display = 'none'); }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', hideHub);
+  } else {
+    hideHub();
+  }
+}
+</script>
+<style>
+.in-iframe .hub-btn, .in-iframe .back-to-hub-pill { display: none !important; }
+</style>
+</body>
+</html>
+

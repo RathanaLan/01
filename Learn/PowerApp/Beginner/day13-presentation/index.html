@@ -1,0 +1,1454 @@
+<!DOCTYPE html>
+<html lang="en" translate="no" class="notranslate">
+<head>
+  <meta name="google" content="notranslate">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Power Apps Foundation — Day 13: Power Apps Studio: Map Design to Controls</title>
+  
+  <!-- Famous & Universally Loved Khmer Fonts (Moul for Formal Titles, Siemreap & Battambang for Easy Reading) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=Moul&family=Kantumruy+Pro:ital,wght@0,400..700;1,400..700&family=Battambang:wght@300;400;700;900&family=Koh+Santepheap:wght@300;400;700&family=Koulen&family=Siemreap&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="../shared/design-system.css">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- Master Presentation Container (16:9 Viewport Stage) -->
+  <div class="presentation-container" id="presentation-app">
+
+    <!-- Top Navigation & Control Header -->
+    <!-- Presentation Header removed to match Day 25 Standard -->
+
+    <!-- Main Presentation Stage (24 Connected Slides) -->
+    <main class="presentation-stage" id="presentation-stage">
+
+      <!-- SLIDE 1: HERO COVER SLIDE -->
+      <section class="slide active" id="slide-1" data-slide-index="0" data-title="Title: Power Apps Studio: Map Design to Controls" data-segment="Part 1: Orientation &amp; Connected Spiral">
+        <div class="slide-content hero-slide-layout">
+          <div class="hero-badge-row">
+            <span class="pill pill-phase">Phase 5: Canvas Studio Implementation</span>
+            <span class="pill pill-accent">Day 13 of 27</span>
+            <span class="pill pill-time">90-Minute Live Practical</span>
+          </div>
+          <h1 class="hero-title">Power Apps Studio: Mapping Paper Design to Canvas Controls</h1>
+          <p class="hero-subtitle">Moving from physical wireframes to real software: Turning sketched boxes into controls, dials into properties, and tree views into industrial workstations.</p>
+
+          <div class="hero-connection-card">
+            <span class="chain-label">TODAY'S CONNECTION CHAIN:</span>
+            <div class="hero-chain-steps">
+              <span class="step-pill">Paper Wireframe</span>
+              <span class="arrow">&rarr;</span>
+              <span class="step-pill">Canvas Screen</span>
+              <span class="arrow">&rarr;</span>
+              <span class="step-pill active-pill">Insert Controls</span>
+              <span class="arrow">&rarr;</span>
+              <span class="step-pill">Configure Properties</span>
+            </div>
+            <span class="chain-caption">Prior: Day 12 Screen Wireframes &bull; Today: Studio Translation &bull; Forward Bridge: Day 14 Data Binding</span>
+          </div>
+
+          <div class="hero-actions">
+            <button class="fluent-btn-primary" id="hero-start-btn">
+              <span>Begin Day 13 Journey (Space / &rarr;)</span>
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                <path d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"/>
+              </svg>
+            </button>
+          </div>
+        </div>
+        <aside class="trainer-notes">
+          <h4>Trainer Speaking Script (Day 13 Opening):</h4>
+          <p>"Welcome everyone to Day 13! Take a deep breath. Today is a massive milestone: we are finally opening Microsoft Power Apps Studio for the first time in our 27-day curriculum! But here is our golden rule: we are NOT opening Studio to guess or play around with random buttons. Everything we do inside Studio today is simply executing the paper design we created yesterday on Day 12. Remember: Software is just the digital assembly of human thinking."</p>
+        </aside>
+      </section>
+
+      <!-- SLIDE 2: CURRICULUM BLUEPRINT -->
+      <section class="slide" id="slide-2" data-slide-index="1" data-title="Curriculum Blueprint: The 27-Day Journey" data-segment="Part 1: Orientation &amp; Connected Spiral">
+        <div class="slide-content">
+          <div class="slide-header">
+            <span class="section-tag">Curriculum Architecture</span>
+            <h2>Where Today Sits in the 27-Day Master Program</h2>
+            <p class="subtitle">A connected engineering progression: we solved the problem, mapped the workflow, structured data, and wireframed screens. Today we construct them in Studio.</p>
+          </div>
+
+          <div class="curr-map-grid">
+            <div class="curr-card passed">
+              <span class="card-phase">Phase 1: Foundations</span>
+              <span class="card-days">Days 1–3</span>
+              <h4 class="card-title">Real Problems &amp; Processes</h4>
+              <p>Why apps exist, human bottlenecks, and process mapping.</p>
+            </div>
+            <div class="curr-card passed">
+              <span class="card-phase">Phase 2: Logic Foundations</span>
+              <span class="card-days">Days 4–6</span>
+              <h4 class="card-title">Conditions &amp; Decisions</h4>
+              <p>Comparing facts, Yes/No questions, and IF actions.</p>
+            </div>
+            <div class="curr-card passed">
+              <span class="card-phase">Phase 3: Data Architecture</span>
+              <span class="card-days">Days 7–10</span>
+              <h4 class="card-title">Records &amp; Tables</h4>
+              <p>Structuring incident tickets into tables, rows, and columns.</p>
+            </div>
+            <div class="curr-card passed">
+              <span class="card-phase">Phase 4: Design from Data</span>
+              <span class="card-days">Days 11–12</span>
+              <h4 class="card-title">Fields to Wireframes</h4>
+              <p>Deriving fields from process and sketching the 4-Screen Enterprise Pattern.</p>
+            </div>
+            <div class="curr-card active-card">
+              <span class="card-phase">Phase 5: Canvas Implementation</span>
+              <span class="card-days">Today: Day 13</span>
+              <h4 class="card-title">Power Apps Studio: Map to Controls</h4>
+              <p>Translating paper wireframes into Canvas screens, tree views, controls, and properties.</p>
+            </div>
+            <div class="curr-card future">
+              <span class="card-phase">Phase 6: Data Binding &amp; Formulas</span>
+              <span class="card-days">Days 14–27</span>
+              <h4 class="card-title">Formulas, Storage &amp; Deployment</h4>
+              <p>Binding controls to SharePoint/Dataverse, validation rules, and automated testing.</p>
+            </div>
+          </div>
+        </div>
+        <aside class="trainer-notes">
+          <h4>Trainer Note — The Spiral Link:</h4>
+          <p>"Point out that beginners usually make the fatal mistake of jumping directly into Phase 5 on Day 1. That is why 80% of citizen developer apps fail! Because we spent Days 1 through 12 understanding the real human problem, the sequential workflow, the database columns, and the screen sketches, today's Studio work is pure execution without panic."</p>
+        </aside>
+      </section>
+
+      <!-- SLIDE 3: MEASURABLE OBJECTIVES -->
+      <section class="slide" id="slide-3" data-slide-index="2" data-title="Measurable Objectives" data-segment="Part 1: Orientation &amp; Connected Spiral">
+        <div class="slide-content">
+          <div class="slide-header">
+            <span class="section-tag">Learning Outcomes</span>
+            <h2>What You Will Master in Today's 90 Minutes</h2>
+            <p class="subtitle">Four actionable, measurable capabilities evaluated against industrial citizen developer UI/UX standards.</p>
+          </div>
+
+          <div class="objectives-grid">
+            <div class="obj-card">
+              <div class="obj-header">
+                <span class="obj-badge bloom-l2">L2: Understand</span>
+                <span class="obj-num">01</span>
+              </div>
+              <h3>Navigate Studio's 4 Core Zones</h3>
+              <p>Deconstruct the Studio interface into the Ribbon, Tree View, Canvas, and Properties Inspector, explaining why the Tree View is your master architectural blueprint.</p>
+            </div>
+
+            <div class="obj-card">
+              <div class="obj-header">
+                <span class="obj-badge bloom-l3">L3: Apply</span>
+                <span class="obj-num">02</span>
+              </div>
+              <h3>Translate Paper Elements to Studio Controls</h3>
+              <p>Accurately select the exact Power Apps Studio control (Label, TextInput, Dropdown, Button, DatePicker) that corresponds to each element drawn on yesterday's wireframe.</p>
+            </div>
+
+            <div class="obj-card">
+              <div class="obj-header">
+                <span class="obj-badge bloom-l4">L4: Analyze</span>
+                <span class="obj-num">03</span>
+              </div>
+              <h3>Enforce Hungarian Naming Standards</h3>
+              <p>Implement professional naming conventions (`scr`, `lbl`, `txt`, `drp`, `btn`) across all objects, explaining why default names like `TextInput1` break future Power Fx formulas.</p>
+            </div>
+
+            <div class="obj-card">
+              <div class="obj-header">
+                <span class="obj-badge bloom-l5">L5: Create</span>
+                <span class="obj-num">04</span>
+              </div>
+              <h3>Configure Properties &amp; Formulate Control State</h3>
+              <p>Construct a complete maintenance intake screen (`scrNewRequest`), configuring essential properties (`Text`, `Default`, `Items`, `Visible`, `DisplayMode`, `OnSelect`) with accessible contrast.</p>
+            </div>
+          </div>
+        </div>
+        <aside class="trainer-notes">
+          <h4>Trainer Note — Bloom Levels:</h4>
+          <p>"Emphasize that we are moving from basic visual recognition of the Studio zones (L2) to applying control types (L3), analyzing naming conventions (L4), and creating a real production-grade intake screen (L5)."</p>
+        </aside>
+      </section>
+
+      <!-- SLIDE 4: 90-MINUTE AGENDA -->
+      <section class="slide" id="slide-4" data-slide-index="3" data-title="90-Minute Agenda" data-segment="Part 1: Orientation &amp; Connected Spiral">
+        <div class="slide-content">
+          <div class="slide-header">
+            <span class="section-tag">Timed Lesson Blueprint</span>
+            <h2>90-Minute Spiral Learning Schedule</h2>
+            <p class="subtitle">Every minute is structured for active engagement, physical analogies, live demonstration, and hands-on simulation.</p>
+          </div>
+
+          <div class="agenda-timeline">
+            <div class="time-block">
+              <span class="time-stamp">00:00 – 10:00 (10 Min)</span>
+              <span class="time-badge">Part 1: Recall &amp; Connect</span>
+              <p class="time-content">Recap Days 11 &amp; 12, retrieval quiz on wireframes, and framing today's Studio construction goal.</p>
+            </div>
+
+            <div class="time-block">
+              <span class="time-stamp">10:00 – 25:00 (15 Min)</span>
+              <span class="time-badge">Part 2: Discover (The Why)</span>
+              <p class="time-content">The $22,000 "Studio Panic" at Apex Plastics, and the 4 Core Zones of Power Apps Studio.</p>
+            </div>
+
+            <div class="time-block">
+              <span class="time-stamp">25:00 – 45:00 (20 Min)</span>
+              <span class="time-badge">Part 3: Deep Dive Theory</span>
+              <p class="time-content">Control-Property mental model (Noun, Adjective, Verb) and Hungarian Notation naming rules.</p>
+            </div>
+
+            <div class="time-block highlight-block">
+              <span class="time-stamp">45:00 – 60:00 (15 Min)</span>
+              <span class="time-badge">Part 4: Demonstrate &amp; Lab</span>
+              <p class="time-content">Energy stretch (45:00), Trainer live Studio build, and interactive Wireframe-to-Control Mapper (Widget 1).</p>
+            </div>
+
+            <div class="time-block">
+              <span class="time-stamp">60:00 – 75:00 (15 Min)</span>
+              <span class="time-badge">Part 5: Guided Practice</span>
+              <p class="time-content">Auditing an unorganized screen, 6-scenario Property Diagnostic Simulator (Widget 2), and 4 mental traps.</p>
+            </div>
+
+            <div class="time-block">
+              <span class="time-stamp">75:00 – 90:00 (15 Min)</span>
+              <span class="time-badge">Part 6: Assess &amp; Bridge</span>
+              <p class="time-content">5-Question Knowledge Check (Widget 3), Capstone Challenge, Solution Reveal &amp; Rubric, and Day 14 Bridge.</p>
+            </div>
+          </div>
+        </div>
+        <aside class="trainer-notes">
+          <h4>Trainer Note — Energy Pacing:</h4>
+          <p>"Notice Part 4 has an intentional energy stretch right at the 45-minute mark. When learners see a new software interface with dozens of toolbars, cognitive load peaks. The physical stretch resets working memory before we begin the live demonstration."</p>
+        </aside>
+      </section>
+
+      <!-- SLIDE 5: PREREQUISITE RETRIEVAL -->
+      <section class="slide" id="slide-5" data-slide-index="4" data-title="Prerequisite Retrieval" data-segment="Part 1: Orientation &amp; Connected Spiral">
+        <div class="slide-content">
+          <div class="slide-header">
+            <span class="section-tag">Active Recall</span>
+            <h2>Prerequisite Retrieval: Locking In Prior Knowledge</h2>
+            <p class="subtitle">Click each card to verify the foundational concepts learned on Days 11 and 12 before touching Studio.</p>
+          </div>
+
+          <div class="retrieval-deck">
+            <div class="retrieval-card" id="ret-card-1">
+              <div class="retrieval-q-badge">From Day 12: Wireframing Purpose</div>
+              <div class="card-prompt">
+                <h3>"Why did we spend yesterday drawing screens on cheap paper instead of building inside Power Apps?"</h3>
+              </div>
+              <button class="fluent-btn-secondary ret-reveal-btn" data-target="ret-ans-1">Reveal Answer</button>
+              <div class="retrieval-answer" id="ret-ans-1">
+                <strong>Correct Concept:</strong> Paper costs zero dollars and takes seconds to erase. Paper forces you to focus on the human user's task rather than getting lost in Studio buttons, colors, and properties!
+              </div>
+            </div>
+
+            <div class="retrieval-card" id="ret-card-2">
+              <div class="retrieval-q-badge">From Day 12: The 3 Control Families</div>
+              <div class="card-prompt">
+                <h3>"What are the 3 functional control families, and what does each one do?"</h3>
+              </div>
+              <button class="fluent-btn-secondary ret-reveal-btn" data-target="ret-ans-2">Reveal Answer</button>
+              <div class="retrieval-answer" id="ret-ans-2">
+                <strong>Correct Concept:</strong> 1. Input Controls (write data), 2. Display Controls (read/show data safely), and 3. Action Controls (trigger work, submit data, or navigate rooms).
+              </div>
+            </div>
+
+            <div class="retrieval-card" id="ret-card-3">
+              <div class="retrieval-q-badge">From Day 11: Data Types</div>
+              <div class="card-prompt">
+                <h3>"Why must a Machine Selection field match a Choice data type rather than open text?"</h3>
+              </div>
+              <button class="fluent-btn-secondary ret-reveal-btn" data-target="ret-ans-3">Reveal Answer</button>
+              <div class="retrieval-answer" id="ret-ans-3">
+                <strong>Correct Concept:</strong> To eliminate spelling typos! In Power Apps Studio, a Choice column translates directly to a `Dropdown` control, restricting user input to approved values only.
+              </div>
+            </div>
+          </div>
+        </div>
+        <aside class="trainer-notes">
+          <h4>Trainer Note — Facilitation:</h4>
+          <p>"Ask learners to answer verbally before you click Reveal Answer. Pay attention to anyone who hesitates on the 3 Control Families—reiterate that everything inside Power Apps is either Input, Display, or Action."</p>
+        </aside>
+      </section>
+
+      <!-- SLIDE 6: WORKPLACE CRISIS AT APEX PLASTICS -->
+      <section class="slide" id="slide-6" data-slide-index="5" data-title="Workplace Crisis: The $22,000 Studio Panic" data-segment="Part 2: Discover (The Why)">
+        <div class="slide-content">
+          <div class="slide-header">
+            <span class="section-tag section-tag-danger">Workplace Crisis Case Study</span>
+            <h2>The $22,000 "Studio Panic" at Apex Plastics</h2>
+            <p class="subtitle">What happens when an excited beginner opens Power Apps Canvas Studio without a structured translation protocol.</p>
+          </div>
+
+          <div class="crisis-story-grid">
+            <div class="crisis-card story-narrative">
+              <div class="crisis-icon">⚠️</div>
+              <h3>The Blank Canvas Trap</h3>
+              <p>Junior maintenance clerk Visal received his Power Apps license on Monday morning. Tasked with digitizing the breakdown form, he opened Canvas Studio, saw a blank white rectangle, and panicked.</p>
+              <p>He randomly dragged 8 text inputs onto the canvas, left them named <code>TextInput1</code>, <code>TextInput2</code>, and <code>TextInput3_1</code>, and scattered labels without aligning coordinates.</p>
+              <div class="quote-pill">"I thought Power Apps was like PowerPoint—just drop shapes wherever!"</div>
+            </div>
+
+            <div class="crisis-card consequence-panel">
+              <h3>The Operational Fallout</h3>
+              <div class="consequence-item">
+                <span class="consequence-num">1</span>
+                <div>
+                  <strong>Data Corruption:</strong>
+                  <p>Because fields were named `TextInput1` and `TextInput2`, Visal's submit formula saved the machine name into the repair notes column!</p>
+                </div>
+              </div>
+              <div class="consequence-item">
+                <span class="consequence-num">2</span>
+                <div>
+                  <strong>Shop-Floor Abandonment:</strong>
+                  <p>On plant tablets, text boxes overlapped and labels clipped off-screen. Operators refused to use it and went back to clipboards.</p>
+                </div>
+              </div>
+              <div class="consequence-item">
+                <span class="consequence-num">3</span>
+                <div>
+                  <strong>$22,000 Financial Loss:</strong>
+                  <p>6 weeks of delayed maintenance tickets caused an unpredicted hydraulic freeze on Molding Press #4.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <aside class="trainer-notes">
+          <h4>Trainer Speaking Script:</h4>
+          <p>"Look at this story. Visal didn't fail because he was unintelligent. He failed because he treated Power Apps Studio like a graphic design canvas instead of an industrial software workbench. In Power Apps, every control you drop is a live computational object. If you don't name it and structure it, your app collapses."</p>
+        </aside>
+      </section>
+
+      <!-- SLIDE 7: PLAIN-LANGUAGE CONCEPT & EVERYDAY ANALOGY -->
+      <section class="slide" id="slide-7" data-slide-index="6" data-title="Plain-Language Concept: Furnishing the Room" data-segment="Part 2: Discover (The Why)">
+        <div class="slide-content">
+          <div class="slide-header">
+            <span class="section-tag">Mental Model</span>
+            <h2>Everyday Analogy: Furnishing an Empty Office Suite</h2>
+            <p class="subtitle">Power Apps Studio is not a drawing pad. It is the procurement and installation catalog for your digital room.</p>
+          </div>
+
+          <div class="analogy-dual-grid">
+            <div class="analogy-card physical-world">
+              <div class="analogy-header">
+                <span class="analogy-icon">🏢</span>
+                <h3>The Physical Office Suite</h3>
+              </div>
+              <div class="analogy-step">
+                <span class="step-badge">Room</span>
+                <p>An empty concrete office with walls and a door (`Customer Intake Room`).</p>
+              </div>
+              <div class="analogy-step">
+                <span class="step-badge">Furniture</span>
+                <p>A wooden desk (`TextInput`), a wall clock (`Label`), and an emergency buzzer (`Button`).</p>
+              </div>
+              <div class="analogy-step">
+                <span class="step-badge">Settings</span>
+                <p>The sign is painted blue (`Color`), the desk tray is 3 feet high (`Height`), and the buzzer is unlocked (`Enabled`).</p>
+              </div>
+              <div class="analogy-step">
+                <span class="step-badge">Inventory</span>
+                <p>A facilities clipboard listing every piece of furniture by its barcode tag.</p>
+              </div>
+            </div>
+
+            <div class="analogy-card digital-studio">
+              <div class="analogy-header">
+                <span class="analogy-icon">💻</span>
+                <h3>Power Apps Canvas Studio</h3>
+              </div>
+              <div class="analogy-step">
+                <span class="step-badge step-blue">Screen</span>
+                <p>A blank canvas designated for one human role (`scrNewRequest`).</p>
+              </div>
+              <div class="analogy-step">
+                <span class="step-badge step-blue">Controls</span>
+                <p>Interactive objects inserted from the catalog (`TextInput`, `Label`, `Button`, `Dropdown`).</p>
+              </div>
+              <div class="analogy-step">
+                <span class="step-badge step-blue">Properties</span>
+                <p>The configuration dials in the right panel (`Text`, `Fill`, `DisplayMode`, `Visible`, `OnSelect`).</p>
+              </div>
+              <div class="analogy-step">
+                <span class="step-badge step-blue">Tree View</span>
+                <p>The architectural x-ray on the left showing every control and container in strict hierarchy.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <aside class="trainer-notes">
+          <h4>Trainer Note — Grounding:</h4>
+          <p>"Constantly bridge back to this analogy: 'Are we creating a room, adding furniture, or turning a knob?' If a student says 'My button is greyed out,' you ask: 'Which knob (property) on that appliance is turned off?' That immediately builds independence."</p>
+        </aside>
+      </section>
+
+      <!-- SLIDE 8: THE 4-LAYER TRANSLATION PIPELINE -->
+      <section class="slide" id="slide-8" data-slide-index="7" data-title="The 4-Layer Translation Pipeline" data-segment="Part 3: Deep Dive Theory">
+        <div class="slide-content">
+          <div class="slide-header">
+            <span class="section-tag">System Architecture</span>
+            <h2>The 4-Layer Studio Translation Pipeline</h2>
+            <p class="subtitle">How human business requirements transform step-by-step into operational software controls.</p>
+          </div>
+
+          <div class="pipeline-container">
+            <div class="pipeline-step-card">
+              <span class="pipe-num">1</span>
+              <h4>Human Task</h4>
+              <p>Operator Bopha reports a machine hydraulic leak in under 60 seconds.</p>
+              <div class="pipe-tag">The Real Problem</div>
+            </div>
+            <div class="pipeline-arrow">&rarr;</div>
+
+            <div class="pipeline-step-card">
+              <span class="pipe-num">2</span>
+              <h4>Paper Wireframe</h4>
+              <p>Day 12 sketch: Header bar, Machine dropdown, Notes box, and Submit button.</p>
+              <div class="pipe-tag">The Architecture</div>
+            </div>
+            <div class="pipeline-arrow">&rarr;</div>
+
+            <div class="pipeline-step-card active-pipe">
+              <span class="pipe-num">3</span>
+              <h4>Studio Controls</h4>
+              <p>Inserted into Tree View: `scrNewRequest`, `drpMachine`, `txtNotes`, `btnSubmit`.</p>
+              <div class="pipe-tag">The Studio Objects</div>
+            </div>
+            <div class="pipeline-arrow">&rarr;</div>
+
+            <div class="pipeline-step-card">
+              <span class="pipe-num">4</span>
+              <h4>Control Properties</h4>
+              <p>Configuring dials: `Items = Machines`, `Mode = MultiLine`, `DisplayMode = Edit`.</p>
+              <div class="pipe-tag">The Operational Logic</div>
+            </div>
+          </div>
+
+          <div class="pipeline-takeaway-banner">
+            <strong>Key Architectural Principle:</strong> You NEVER start at Layer 4! You only touch Studio properties after Layers 1, 2, and 3 are locked down.
+          </div>
+        </div>
+        <aside class="trainer-notes">
+          <h4>Trainer Speaking Script:</h4>
+          <p>"Walk the learners through the 4 boxes. Trace your finger from left to right. When someone gets confused in Studio, it is almost always because they jumped straight into Layer 4 without knowing their Layer 2 wireframe."</p>
+        </aside>
+      </section>
+
+      <!-- SLIDE 9: TOUR OF POWER APPS STUDIO -->
+      <section class="slide" id="slide-9" data-slide-index="8" data-title="Tour of Power Apps Studio: 4 Critical Zones" data-segment="Part 3: Deep Dive Theory">
+        <div class="slide-content">
+          <div class="slide-header">
+            <span class="section-tag">Studio Navigation</span>
+            <h2>Tour of Power Apps Studio: The 4 Critical Zones</h2>
+            <p class="subtitle">Demystifying the interface: You do not need to memorize 150 buttons—only 4 zones matter.</p>
+          </div>
+
+          <div class="studio-tour-grid">
+            <div class="studio-zone-card zone-ribbon">
+              <div class="zone-badge">Zone 1 &bull; Top</div>
+              <h4>Command Ribbon &amp; Formula Bar</h4>
+              <p>Where you switch tools, test app preview (<kbd>F5</kbd>), and select the active property dropdown and formula editor.</p>
+              <span class="zone-action">Purpose: Command &amp; Formula Entry</span>
+            </div>
+
+            <div class="studio-zone-card zone-treeview active-zone">
+              <div class="zone-badge">Zone 2 &bull; Left Panel</div>
+              <h4>The Tree View (Architectural Blueprint)</h4>
+              <p>The hierarchical list of all screens, containers, and controls. Shows parent-child relationships and layering z-order.</p>
+              <span class="zone-action">Purpose: Object Navigation &amp; Renaming</span>
+            </div>
+
+            <div class="studio-zone-card zone-canvas">
+              <div class="zone-badge">Zone 3 &bull; Center</div>
+              <h4>The Canvas Stage</h4>
+              <p>The visual viewport representing the tablet or mobile screen. Shows exact WYSIWYG rendering of your layout.</p>
+              <span class="zone-action">Purpose: Visual Placement &amp; Sizing</span>
+            </div>
+
+            <div class="studio-zone-card zone-properties">
+              <div class="zone-badge">Zone 4 &bull; Right Panel</div>
+              <h4>Properties &amp; Settings Inspector</h4>
+              <p>The configuration dials for the selected control: Text, Font, Size, Color, DisplayMode, Position, and Advanced properties.</p>
+              <span class="zone-action">Purpose: Fine-Tuning &amp; Formatting</span>
+            </div>
+          </div>
+        </div>
+        <aside class="trainer-notes">
+          <h4>Trainer Note — The Anchor:</h4>
+          <p>"Tell the class: 'Zone 2 (Tree View) is your best friend in this entire curriculum.' If you ever lose a control on the canvas, look at the Tree View. If a button is hidden behind an image, look at the Tree View. Master the Tree View, and Studio becomes completely friendly."</p>
+        </aside>
+      </section>
+
+      <!-- SLIDE 10: NOUN, ADJECTIVE, VERB: MENTAL MODEL -->
+      <section class="slide" id="slide-10" data-slide-index="9" data-title="Control-Property Model: Noun, Adjective, Verb" data-segment="Part 3: Deep Dive Theory">
+        <div class="slide-content">
+          <div class="slide-header">
+            <span class="section-tag">Mental Grammar</span>
+            <h2>Noun, Adjective, and Verb: The Studio Grammar Model</h2>
+            <p class="subtitle">Understand how software components speak to each other using familiar human language concepts.</p>
+          </div>
+
+          <div class="grammar-trio-grid">
+            <div class="grammar-card noun-card">
+              <span class="grammar-tag">The Noun (The Thing)</span>
+              <h3>The Control</h3>
+              <p class="grammar-desc">The physical object that sits inside the room.</p>
+              <div class="grammar-example">
+                <code>btnSubmit</code><br>
+                <code>txtProblemDescription</code><br>
+                <code>drpMachineList</code>
+              </div>
+              <span class="grammar-rule">Answers: "What object is this?"</span>
+            </div>
+
+            <div class="grammar-card adj-card">
+              <span class="grammar-tag">The Adjective (The State)</span>
+              <h3>The Property</h3>
+              <p class="grammar-desc">The characteristic, appearance, or behavior dial on that object.</p>
+              <div class="grammar-example">
+                <code>.Text</code> &bull; <code>.Fill</code><br>
+                <code>.DisplayMode</code><br>
+                <code>.Visible</code> &bull; <code>.Items</code>
+              </div>
+              <span class="grammar-rule">Answers: "How does it look or act?"</span>
+            </div>
+
+            <div class="grammar-card verb-card">
+              <span class="grammar-tag">The Verb (The Action)</span>
+              <h3>The Formula (Power Fx)</h3>
+              <p class="grammar-desc">The logic that calculates a result or triggers an action when an event occurs.</p>
+              <div class="grammar-example">
+                <code>SubmitForm(frmNewRequest)</code><br>
+                <code>If(IsBlank(txtNotes), Disabled, Edit)</code>
+              </div>
+              <span class="grammar-rule">Answers: "What calculation or work happens?"</span>
+            </div>
+          </div>
+        </div>
+        <aside class="trainer-notes">
+          <h4>Trainer Speaking Script:</h4>
+          <p>"Write on the whiteboard: `btnSubmit.DisplayMode = DisplayMode.Disabled`. Explain: `btnSubmit` is the noun. `.DisplayMode` is the adjective describing its state. The equal sign sets its behavior. When you think in Nouns and Adjectives, Power Apps formulas stop looking like mysterious code and start reading like plain English."</p>
+        </aside>
+      </section>
+
+      <!-- SLIDE 11: PROFESSIONAL NAMING CONVENTIONS -->
+      <section class="slide" id="slide-11" data-slide-index="10" data-title="Professional Naming Conventions: Hungarian Notation" data-segment="Part 3: Deep Dive Theory">
+        <div class="slide-content">
+          <div class="slide-header">
+            <span class="section-tag">Enterprise Standards</span>
+            <h2>Professional Control Naming: Hungarian Notation Standards</h2>
+            <p class="subtitle">Why top Power Apps developers never leave default names like `TextInput1` or `Button3`.</p>
+          </div>
+
+          <div class="naming-table-container">
+            <table class="naming-table">
+              <thead>
+                <tr>
+                  <th>Control Type</th>
+                  <th>3-Letter Prefix</th>
+                  <th>Default Bad Name ❌</th>
+                  <th>Professional Good Name ✅</th>
+                  <th>Why It Matters in Formulas</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Screen</td>
+                  <td><code>scr</code></td>
+                  <td>Screen1</td>
+                  <td><code>scrNewRequest</code></td>
+                  <td><code>Navigate(scrNewRequest, Fade)</code> is crystal clear.</td>
+                </tr>
+                <tr>
+                  <td>Text Input</td>
+                  <td><code>txt</code></td>
+                  <td>TextInput1</td>
+                  <td><code>txtIncidentNotes</code></td>
+                  <td>You know immediately it is a text box, not a label.</td>
+                </tr>
+                <tr>
+                  <td>Dropdown / Combo</td>
+                  <td><code>drp</code> / <code>cmb</code></td>
+                  <td>Dropdown1</td>
+                  <td><code>drpMachineSelect</code></td>
+                  <td>Referenced as <code>drpMachineSelect.Selected.Value</code>.</td>
+                </tr>
+                <tr>
+                  <td>Label</td>
+                  <td><code>lbl</code></td>
+                  <td>Label1</td>
+                  <td><code>lblHeaderTitle</code></td>
+                  <td>Distinguishes read-only text from writable inputs.</td>
+                </tr>
+                <tr>
+                  <td>Button</td>
+                  <td><code>btn</code></td>
+                  <td>Button1</td>
+                  <td><code>btnSubmitRequest</code></td>
+                  <td><code>btnSubmitRequest.OnSelect</code> clearly signals intent.</td>
+                </tr>
+                <tr>
+                  <td>Gallery</td>
+                  <td><code>gal</code></td>
+                  <td>Gallery1</td>
+                  <td><code>galIncidentHistory</code></td>
+                  <td><code>galIncidentHistory.Selected</code> references active row.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <aside class="trainer-notes">
+          <h4>Trainer Note — The Golden Habit:</h4>
+          <p>"Tell learners: 'The very first thing you do after dragging or inserting a control is press <kbd>F2</kbd> in the Tree View and rename it.' If you rename on Day 13, Days 14 through 27 will be a breeze. If you don't, you will spend hours hunting through `TextInput1_3` vs `TextInput1_4`."</p>
+        </aside>
+      </section>
+
+      <!-- SLIDE 12: INTERACTIVE WIDGET 1 -->
+      <section class="slide" id="slide-12" data-slide-index="11" data-title="Widget 1: Wireframe to Studio Control Mapper" data-segment="Part 4: Demonstrate &amp; Lab">
+        <div class="slide-content">
+          <div class="slide-header">
+            <span class="section-tag section-tag-accent">Interactive Workbench</span>
+            <h2>Widget 1: Paper Wireframe to Studio Control Mapper</h2>
+            <p class="subtitle">Select an element sketched on yesterday's wireframe to dynamically see its Studio control, Tree View name, and key properties.</p>
+          </div>
+
+          <div class="studio-mapper-layout">
+            <!-- Left Panel: Wireframe Element Selection -->
+            <div class="mapper-left-panel">
+              <div class="panel-header">
+                <span class="panel-icon">📐</span>
+                <h3>Step 1: Select Sketched Element</h3>
+              </div>
+
+              <div class="form-group">
+                <label for="mapper-element-select">Day 12 Wireframe Sketch Element:</label>
+                <select id="mapper-element-select" class="fluent-select">
+                  <option value="app_header">1. Top Blue Title Bar ("Incident Intake")</option>
+                  <option value="machine_picker">2. Machine Selector Box (Press 01–04)</option>
+                  <option value="urgency_level">3. Urgency Selector (Low / High / Critical)</option>
+                  <option value="incident_desc">4. Breakdown Details Free-Text Box</option>
+                  <option value="report_date">5. Incident Timestamp / Date Picker</option>
+                  <option value="submit_action">6. Green "Submit Maintenance Ticket" Action</option>
+                  <option value="cancel_action">7. "Cancel &amp; Return Home" Action</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for="mapper-target-screen">Target Studio Screen (`scr`):</label>
+                <input type="text" id="mapper-target-screen" class="fluent-input" value="scrNewRequest" readonly>
+              </div>
+
+              <div class="element-preview-card" id="mapper-element-description">
+                <!-- Dynamically populated by script.js -->
+              </div>
+            </div>
+
+            <!-- Right Panel: Studio Architecture & Properties Output -->
+            <div class="mapper-right-panel">
+              <div class="panel-header">
+                <span class="panel-icon">💻</span>
+                <h3>Step 2: Generated Studio Specification</h3>
+              </div>
+
+              <div class="spec-inspector-card">
+                <div class="spec-row">
+                  <span class="spec-label">Studio Control to Insert:</span>
+                  <span class="spec-val" id="map-control-type">Dropdown Control (`drp`)</span>
+                </div>
+                <div class="spec-row">
+                  <span class="spec-label">Professional Tree View Name:</span>
+                  <span class="spec-val code-val" id="map-control-name">drpMachineSelect</span>
+                </div>
+                <div class="spec-row">
+                  <span class="spec-label">Functional Control Family:</span>
+                  <span class="spec-val" id="map-control-family">Input Control (Captures User Data)</span>
+                </div>
+                <div class="spec-row">
+                  <span class="spec-label">Parent Container:</span>
+                  <span class="spec-val" id="map-control-parent">conFormBody</span>
+                </div>
+              </div>
+
+              <div class="property-formula-box">
+                <span class="code-title">Key Property Settings to Configure:</span>
+                <pre><code id="map-control-properties">// Initializing properties...</code></pre>
+              </div>
+            </div>
+          </div>
+        </div>
+        <aside class="trainer-notes">
+          <h4>Trainer Guided Demo Script:</h4>
+          <p>"Demonstrate this widget to the class. Select option 2 (`machine_picker`). Point out how it instantly specifies `drpMachineSelect`, maps it to the Input Control family, places it inside `conFormBody`, and writes the `Items` property formula. Switch through 3 different elements to show consistency."</p>
+        </aside>
+      </section>
+
+      <!-- SLIDE 13: APEX PLASTICS IMPLEMENTATION BLUEPRINT -->
+      <section class="slide" id="slide-13" data-slide-index="12" data-title="Apex Plastics Implementation Blueprint" data-segment="Part 4: Demonstrate &amp; Lab">
+        <div class="slide-content">
+          <div class="slide-header">
+            <span class="section-tag">Translation Matrix</span>
+            <h2>Apex Plastics: The Complete Wireframe-to-Studio Matrix</h2>
+            <p class="subtitle">The exact specification translating Bopha's Day 12 maintenance intake sketch into Studio objects.</p>
+          </div>
+
+          <div class="blueprint-table-container">
+            <table class="blueprint-matrix-table">
+              <thead>
+                <tr>
+                  <th>Wireframe Item</th>
+                  <th>Studio Control</th>
+                  <th>Control Name</th>
+                  <th>Key Properties</th>
+                  <th>Configured Value / Formula</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Screen Container</td>
+                  <td>Screen</td>
+                  <td><code>scrNewRequest</code></td>
+                  <td>Fill, LoadingScreen</td>
+                  <td><code>RGBA(6, 9, 17, 1)</code></td>
+                </tr>
+                <tr>
+                  <td>Header Bar</td>
+                  <td>Horizontal Container</td>
+                  <td><code>conHeader</code></td>
+                  <td>Height, Fill, DropShadow</td>
+                  <td><code>Height = 60, Fill = RGBA(9, 13, 22, 1)</code></td>
+                </tr>
+                <tr>
+                  <td>App Title</td>
+                  <td>Label</td>
+                  <td><code>lblHeaderTitle</code></td>
+                  <td>Text, Font, Size, Color</td>
+                  <td><code>"Apex Plastics — Incident Intake"</code></td>
+                </tr>
+                <tr>
+                  <td>Machine Selector</td>
+                  <td>Dropdown</td>
+                  <td><code>drpMachine</code></td>
+                  <td>Items, Default</td>
+                  <td><code>["Press-01", "Press-02", "Press-03", "Press-04"]</code></td>
+                </tr>
+                <tr>
+                  <td>Severity Choice</td>
+                  <td>Dropdown</td>
+                  <td><code>drpUrgency</code></td>
+                  <td>Items, Default</td>
+                  <td><code>["Low", "Medium", "High", "Critical"]</code></td>
+                </tr>
+                <tr>
+                  <td>Issue Description</td>
+                  <td>TextInput</td>
+                  <td><code>txtDescription</code></td>
+                  <td>Mode, HintText, Height</td>
+                  <td><code>Mode = MultiLine, Height = 120</code></td>
+                </tr>
+                <tr>
+                  <td>Submit Action</td>
+                  <td>Button</td>
+                  <td><code>btnSubmitTicket</code></td>
+                  <td>Text, Fill, DisplayMode</td>
+                  <td><code>DisplayMode = If(IsBlank(txtDescription), Disabled, Edit)</code></td>
+                </tr>
+                <tr>
+                  <td>Cancel Action</td>
+                  <td>Button / Icon</td>
+                  <td><code>btnCancel</code></td>
+                  <td>Text, OnSelect</td>
+                  <td><code>Back(ScreenTransition.Fade)</code></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <aside class="trainer-notes">
+          <h4>Trainer Note — The Contract:</h4>
+          <p>"This table is the developer's contract. When you have this table prepared before opening Studio, building the screen takes less than 7 minutes because there is zero hesitation about what to insert or what to name it."</p>
+        </aside>
+      </section>
+
+      <!-- SLIDE 14: 4 COMMON STUDIO TRAPS -->
+      <section class="slide" id="slide-14" data-slide-index="13" data-title="4 Common Studio Traps for Beginners" data-segment="Part 4: Demonstrate &amp; Lab">
+        <div class="slide-content">
+          <div class="slide-header">
+            <span class="section-tag section-tag-danger">Error Prevention</span>
+            <h2>4 Fatal Studio Traps for Beginners (And How to Avoid Them)</h2>
+            <p class="subtitle">Avoid the costly beginner mistakes that turn simple apps into unmaintainable nightmares.</p>
+          </div>
+
+          <div class="traps-grid-4">
+            <div class="trap-card">
+              <div class="trap-header">
+                <span class="trap-badge">Trap 01</span>
+                <h4>Late Renaming</h4>
+              </div>
+              <p class="trap-problem">Building 10 screens with default names (`TextInput1`, `Button4`) and trying to rename them later.</p>
+              <div class="trap-solution">
+                <strong>Fix:</strong> Rename immediately upon insertion using <kbd>F2</kbd>. Never leave a default name for more than 5 seconds!
+              </div>
+            </div>
+
+            <div class="trap-card">
+              <div class="trap-header">
+                <span class="trap-badge">Trap 02</span>
+                <h4>Hardcoding Choices</h4>
+              </div>
+              <p class="trap-problem">Typing machine names directly into text labels or buttons instead of using a single `Items` collection.</p>
+              <div class="trap-solution">
+                <strong>Fix:</strong> Bind dropdowns to structured array tables (`["Press-01", "Press-02"]`) so changes only happen in one place.
+              </div>
+            </div>
+
+            <div class="trap-card">
+              <div class="trap-header">
+                <span class="trap-badge">Trap 03</span>
+                <h4>Disregarding Hierarchy</h4>
+              </div>
+              <p class="trap-problem">Dropping controls directly on the canvas without containers, causing items to overlap on tablets.</p>
+              <div class="trap-solution">
+                <strong>Fix:</strong> Always place controls inside vertical or horizontal Containers (`conHeader`, `conFormBody`).
+              </div>
+            </div>
+
+            <div class="trap-card">
+              <div class="trap-header">
+                <span class="trap-badge">Trap 04</span>
+                <h4>Forgetting Escape Hatches</h4>
+              </div>
+              <p class="trap-problem">Building a screen with a Submit button but no Cancel or Back button, trapping users.</p>
+              <div class="trap-solution">
+                <strong>Fix:</strong> Every screen must have a clear `btnCancel` or `icnBack` with formula `Back(ScreenTransition.Fade)`.
+              </div>
+            </div>
+          </div>
+        </div>
+        <aside class="trainer-notes">
+          <h4>Trainer Note — The Discipline:</h4>
+          <p>"Ask learners: 'Which trap did Visal fall into on Slide 6?' Answer: Traps 1, 3, and 4 simultaneously! That is why his app cost $22,000. Following our 4 fixes prevents 100% of these problems."</p>
+        </aside>
+      </section>
+
+      <!-- SLIDE 15: TRAINER LIVE DEMONSTRATION PROTOCOL -->
+      <section class="slide" id="slide-15" data-slide-index="14" data-title="Trainer Demonstration Protocol" data-segment="Part 4: Demonstrate &amp; Lab">
+        <div class="slide-content">
+          <div class="slide-header">
+            <span class="section-tag section-tag-accent">Live Build Protocol</span>
+            <h2>Trainer Demonstration: 4 Steps from Paper to Studio</h2>
+            <p class="subtitle">Watch the trainer construct the Apex Plastics intake screen live inside Power Apps Studio.</p>
+          </div>
+
+          <div class="demo-protocol-steps">
+            <div class="demo-step-card">
+              <span class="demo-step-num">Step 1</span>
+              <h4>Rename &amp; Setup Canvas Screen</h4>
+              <p>Create new Canvas app. Select `Screen1` in Tree View, press <kbd>F2</kbd>, and rename to <code>scrNewRequest</code>. Set background fill to dark slate.</p>
+              <div class="demo-code">scrNewRequest.Fill = RGBA(6, 9, 17, 1)</div>
+            </div>
+
+            <div class="demo-step-card">
+              <span class="demo-step-num">Step 2</span>
+              <h4>Insert Header &amp; Branding</h4>
+              <p>Insert a Horizontal Container (<code>conHeader</code>). Inside it, insert <code>lblHeaderTitle</code> and <code>icnBack</code>. Align vertically centered.</p>
+              <div class="demo-code">lblHeaderTitle.Text = "Apex Plastics — Incident Intake"</div>
+            </div>
+
+            <div class="demo-step-card">
+              <span class="demo-step-num">Step 3</span>
+              <h4>Insert Input Fields from Day 11 Schema</h4>
+              <p>Insert <code>drpMachine</code> and <code>drpUrgency</code> choice dropdowns. Insert <code>txtDescription</code> with multi-line mode and clear placeholder hint text.</p>
+              <div class="demo-code">txtDescription.Mode = TextMode.MultiLine</div>
+            </div>
+
+            <div class="demo-step-card">
+              <span class="demo-step-num">Step 4</span>
+              <h4>Configure Action Buttons &amp; State Logic</h4>
+              <p>Insert <code>btnSubmitTicket</code> and <code>btnCancel</code>. Configure the submit button's DisplayMode so it disables when the description is empty.</p>
+              <div class="demo-code">DisplayMode = If(IsBlank(txtDescription.Text), Disabled, Edit)</div>
+            </div>
+          </div>
+        </div>
+        <aside class="trainer-notes">
+          <h4>Trainer Demonstration Guide:</h4>
+          <p>"Switch to Power Apps Studio on your projector or screen share. Perform these exact 4 steps in real time. Speak every action aloud: 'I am inserting a container... I am pressing F2... I am setting the HintText property.' Show them how effortless it looks when you follow a system."</p>
+        </aside>
+      </section>
+
+      <!-- SLIDE 16: GUIDED PRACTICE: AUDITING A DISORGANIZED CANVAS -->
+      <section class="slide" id="slide-16" data-slide-index="15" data-title="Guided Practice: Auditing a Disorganized Canvas" data-segment="Part 5: Guided Practice">
+        <div class="slide-content">
+          <div class="slide-header">
+            <span class="section-tag">Collaborative Inspection</span>
+            <h2>Guided Practice: Auditing an Unorganized Studio Canvas</h2>
+            <p class="subtitle">Together with the trainer, identify the 4 critical flaws on this beginner screen and prescribe the exact fixes.</p>
+          </div>
+
+          <div class="audit-workspace-container">
+            <div class="audit-table-wrapper">
+              <table class="audit-matrix-table">
+                <thead>
+                  <tr>
+                    <th>Found Issue / Flaw</th>
+                    <th>Where It Appears</th>
+                    <th>Why It Breaks in Production</th>
+                    <th>Required Fix &amp; Property</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="flaw-pill pill-danger">Flaw 1</span> Bad Naming</td>
+                    <td>Control named <code>TextInput1_2</code></td>
+                    <td>Formulas cannot identify what data this input holds.</td>
+                    <td>Rename to <code>txtOperatorBadgeID</code> via <kbd>F2</kbd>.</td>
+                  </tr>
+                  <tr>
+                    <td><span class="flaw-pill pill-danger">Flaw 2</span> Wrong Control</td>
+                    <td>Free-text box for Machine Choice</td>
+                    <td>Operators make typos ('press 1' vs 'Press-01'), breaking filters.</td>
+                    <td>Replace with <code>drpMachineSelect</code> (Dropdown).</td>
+                  </tr>
+                  <tr>
+                    <td><span class="flaw-pill pill-danger">Flaw 3</span> Invisible Contrast</td>
+                    <td>Light gray text on white button</td>
+                    <td>Fails WCAG 2.1 accessibility; operators can't read it in bright factory light.</td>
+                    <td>Set <code>Fill = RGBA(0, 120, 212, 1)</code> and <code>Color = White</code>.</td>
+                  </tr>
+                  <tr>
+                    <td><span class="flaw-pill pill-danger">Flaw 4</span> Missing Escape</td>
+                    <td>No Cancel / Back button anywhere</td>
+                    <td>Users who enter by mistake get trapped and submit empty tickets.</td>
+                    <td>Insert <code>btnCancel</code> with formula <code>Back()</code>.</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div class="audit-trainer-takeaway">
+              <strong>Trainer Rule:</strong> Professional developers spend 80% of their debugging time preventing structural errors before they write a single line of Power Fx!
+            </div>
+          </div>
+        </div>
+        <aside class="trainer-notes">
+          <h4>Trainer Guided Dialogue:</h4>
+          <p>"Ask the learners: 'Look at row 2. Why does a free text box break the factory database?' Wait for someone to say 'typos' or 'misspelling'. Praise them! Reconnect this to Day 11 data types: every choice column MUST become a dropdown control."</p>
+        </aside>
+      </section>
+
+      <!-- SLIDE 17: INDEPENDENT MINI-TASK -->
+      <section class="slide" id="slide-17" data-slide-index="16" data-title="Independent Mini-Task: QA Scrap Log" data-segment="Part 5: Guided Practice">
+        <div class="slide-content">
+          <div class="slide-header">
+            <span class="section-tag">Active Independent Practice</span>
+            <h2>Independent Mini-Task: QA Scrap Log Specification (3 Min)</h2>
+            <p class="subtitle">Apply today's translation rules to a real manufacturing scenario on your notepad.</p>
+          </div>
+
+          <div class="mini-task-grid">
+            <div class="mini-task-brief-card">
+              <span class="mini-badge">Scenario Brief</span>
+              <h3>The Quality Auditor's Scrap Screen</h3>
+              <p>Plant QA Auditor Vanna needs a screen to log defective plastic parts thrown into the scrap bin during shift changes.</p>
+              <div class="mini-requirements">
+                <strong>Required Fields on Her Paper Wireframe:</strong>
+                <ul>
+                  <li>1. Part Serial Number (Alphanumeric barcode string)</li>
+                  <li>2. Defect Category (Restricted: Cracked, Warped, Bubble, Short Shot)</li>
+                  <li>3. Scrap Quantity (Whole number of pieces)</li>
+                  <li>4. Confirm Scrap Submission Action</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="mini-task-worksheet-card">
+              <span class="mini-badge badge-accent">Your 3-Minute Challenge</span>
+              <h3>Write Down Your Studio Architecture:</h3>
+              <div class="worksheet-field">
+                <label>1. Screen Name (`scr`):</label>
+                <div class="empty-input-line">_______________________________</div>
+              </div>
+              <div class="worksheet-field">
+                <label>2. Part Serial Control &amp; Hungarian Name:</label>
+                <div class="empty-input-line">_______________________________</div>
+              </div>
+              <div class="worksheet-field">
+                <label>3. Defect Category Control &amp; Hungarian Name:</label>
+                <div class="empty-input-line">_______________________________</div>
+              </div>
+              <div class="worksheet-field">
+                <label>4. Quantity Control &amp; Hungarian Name:</label>
+                <div class="empty-input-line">_______________________________</div>
+              </div>
+              <div class="worksheet-field">
+                <label>5. Confirm Button Name:</label>
+                <div class="empty-input-line">_______________________________</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <aside class="trainer-notes">
+          <h4>Trainer Note — 3-Minute Timer:</h4>
+          <p>"Start the 3-minute lesson clock. Walk around the room or check in with remote learners. Expected solution: `scrScrapLog`, `txtPartSerial`, `drpDefectCategory`, `txtQuantity` (with Format = Number), and `btnConfirmScrap`."</p>
+        </aside>
+      </section>
+
+      <!-- SLIDE 18: INTERACTIVE WIDGET 2 -->
+      <section class="slide" id="slide-18" data-slide-index="17" data-title="Widget 2: Studio Property Diagnostic Simulator" data-segment="Part 5: Guided Practice">
+        <div class="slide-content">
+          <div class="slide-header">
+            <span class="section-tag section-tag-accent">Interactive Diagnostic Lab</span>
+            <h2>Widget 2: Studio Property Diagnostic Simulator</h2>
+            <p class="subtitle">Test your troubleshooting instincts across 6 real-world scenarios. Which control property must be adjusted?</p>
+          </div>
+
+          <div class="sim-workbench-container">
+            <!-- Scenario Card -->
+            <div class="sim-scenario-card">
+              <div class="sim-card-header">
+                <span class="sim-badge" id="sim-scenario-num">Scenario 1 of 6</span>
+                <span class="sim-score-pill">Score: <strong id="sim-score">0</strong> / 6</span>
+              </div>
+              <h3 id="sim-scenario-title">1. The Disabled Submit Button Problem</h3>
+              <p id="sim-scenario-desc">Operator Bopha filled in all required fields, but the Submit button remains grayed out and cannot be clicked. Which property on `btnSubmit` controls whether it is clickable or disabled?</p>
+
+              <div class="sim-options-grid">
+                <button class="sim-choice-btn" data-choice="DisplayMode">
+                  <span class="choice-icon">🔘</span>
+                  <span><code>DisplayMode</code> (Edit vs Disabled vs View)</span>
+                </button>
+                <button class="sim-choice-btn" data-choice="Visible">
+                  <span class="choice-icon">👁️</span>
+                  <span><code>Visible</code> (true vs false)</span>
+                </button>
+                <button class="sim-choice-btn" data-choice="Text">
+                  <span class="choice-icon">🔤</span>
+                  <span><code>Text</code> ("Submit")</span>
+                </button>
+              </div>
+
+              <div class="sim-feedback-box" id="sim-feedback" style="display: none;"></div>
+
+              <div class="sim-nav-row">
+                <button class="fluent-btn-secondary" id="sim-prev-btn" disabled>&larr; Previous Scenario</button>
+                <span class="sim-progress-indicator" id="sim-progress-text">Scenario 1 of 6</span>
+                <button class="fluent-btn-primary" id="sim-next-btn">Next Scenario &rarr;</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <aside class="trainer-notes">
+          <h4>Trainer Simulator Guide:</h4>
+          <p>"Encourage learners to try clicking different choices. When they select `DisplayMode`, praise them: 'DisplayMode is the exact knob that makes buttons active or disabled based on business rules!'"</p>
+        </aside>
+      </section>
+
+      <!-- SLIDE 19: 4 DANGEROUS MENTAL MISCONCEPTIONS -->
+      <section class="slide" id="slide-19" data-slide-index="18" data-title="4 Dangerous Mental Misconceptions" data-segment="Part 5: Guided Practice">
+        <div class="slide-content">
+          <div class="slide-header">
+            <span class="section-tag section-tag-danger">Mental Model Guardrails</span>
+            <h2>4 Dangerous Mental Misconceptions About Power Apps Studio</h2>
+            <p class="subtitle">Examine the plausible wrong mental models beginners bring, and adopt the professional mental model.</p>
+          </div>
+
+          <div class="misconceptions-grid">
+            <div class="misconception-card">
+              <div class="mis-wrong">
+                <span class="mis-badge badge-wrong">Plausible Wrong Model ❌</span>
+                <h4>"Power Apps is just drag-and-drop PowerPoint drawing."</h4>
+                <p>Believing controls are static visual shapes placed by eye wherever they look nice.</p>
+              </div>
+              <div class="mis-right">
+                <span class="mis-badge badge-right">Trainer Correction ✅</span>
+                <h4>Power Apps is a Functional State Machine.</h4>
+                <p>Every control is a live data gateway with 40+ properties that evaluate formulas, listen to events, and bind to database records.</p>
+              </div>
+            </div>
+
+            <div class="misconception-card">
+              <div class="mis-wrong">
+                <span class="mis-badge badge-wrong">Plausible Wrong Model ❌</span>
+                <h4>"Default names like `TextInput1` don't matter."</h4>
+                <p>Believing you can build the entire app first and worry about control names later.</p>
+              </div>
+              <div class="mis-right">
+                <span class="mis-badge badge-right">Trainer Correction ✅</span>
+                <h4>Names are Variables in Your Codebase.</h4>
+                <p>Formulas on Days 15–20 reference control names directly. If you leave default names, formulas become completely unreadable and prone to fatal errors.</p>
+              </div>
+            </div>
+
+            <div class="misconception-card">
+              <div class="mis-wrong">
+                <span class="mis-badge badge-wrong">Plausible Wrong Model ❌</span>
+                <h4>"Properties are only static visual styling settings."</h4>
+                <p>Believing properties only store colors, margins, and font sizes.</p>
+              </div>
+              <div class="mis-right">
+                <span class="mis-badge badge-right">Trainer Correction ✅</span>
+                <h4>Properties are Live Dynamic Calculations.</h4>
+                <p>A property can hold complex logic: `btnSubmit.DisplayMode = If(IsBlank(txtNotes), Disabled, Edit)`. It calculates dynamically in real time!</p>
+              </div>
+            </div>
+
+            <div class="misconception-card">
+              <div class="mis-wrong">
+                <span class="mis-badge badge-wrong">Plausible Wrong Model ❌</span>
+                <h4>"If a control breaks, just delete and recreate it."</h4>
+                <p>Deleting controls whenever a formula shows an error red underline.</p>
+              </div>
+              <div class="mis-right">
+                <span class="mis-badge badge-right">Trainer Correction ✅</span>
+                <h4>Deleting Causes Cascade Reference Errors.</h4>
+                <p>Deleting an object breaks all formulas pointing to it. Troubleshoot the specific property dial in the right panel instead of destroying the control.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <aside class="trainer-notes">
+          <h4>Trainer Speaking Script:</h4>
+          <p>"Read Misconception #2 carefully. 'Names are variables in your codebase.' When you type `txtDescription.Text`, Power Fx knows exactly where to pull the data from. If you have `TextInput1` through `TextInput12`, nobody on your team will know which box is which."</p>
+        </aside>
+      </section>
+
+      <!-- SLIDE 20: INTERACTIVE WIDGET 3 -->
+      <section class="slide" id="slide-20" data-slide-index="19" data-title="Widget 3: 5-Question Evaluative Knowledge Check" data-segment="Part 6: Assess &amp; Bridge">
+        <div class="slide-content">
+          <div class="slide-header">
+            <span class="section-tag section-tag-accent">Formal Evaluation</span>
+            <h2>Knowledge Check: 5 Evaluative Mastery Questions</h2>
+            <p class="subtitle">Includes conceptual recall, architectural reasoning, and real-world failure analysis.</p>
+          </div>
+
+          <div class="quiz-container" id="quiz-widget">
+            <div class="quiz-card">
+              <div class="quiz-header">
+                <span class="quiz-q-counter" id="quiz-question-counter">Question 1 of 5</span>
+                <span class="quiz-score-pill">Mastery Score: <strong id="quiz-score-display">0</strong> / 5</span>
+              </div>
+
+              <h3 class="quiz-title" id="quiz-title">Loading question...</h3>
+              <div class="quiz-options-grid" id="quiz-options">
+                <!-- Injected dynamically by script.js -->
+              </div>
+
+              <div class="quiz-feedback-box" id="quiz-feedback" style="display: none;"></div>
+
+              <div class="quiz-nav-row">
+                <button class="fluent-btn-secondary" id="quiz-prev-btn" disabled>&larr; Previous Question</button>
+                <button class="fluent-btn-primary" id="quiz-next-btn">Next Question &rarr;</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <aside class="trainer-notes">
+          <h4>Trainer Quiz Facilitation:</h4>
+          <p>"Have each student submit their answers. Track questions 3 and 4 closely ('What happens if...')—those test whether the student has internalized the cause-and-effect relationship between control choices and database integrity."</p>
+        </aside>
+      </section>
+
+      <!-- SLIDE 21: CAPSTONE CHALLENGE BRIEF -->
+      <section class="slide" id="slide-21" data-slide-index="20" data-title="Capstone Challenge Brief" data-segment="Part 6: Assess &amp; Bridge">
+        <div class="slide-content">
+          <div class="slide-header">
+            <span class="section-tag section-tag-accent">Final Hands-On Project</span>
+            <h2>Day 13 Capstone Challenge: Build the Maintenance Intake Screen</h2>
+            <p class="subtitle">Transform the Day 12 wireframe into a full Studio architecture specification and Tree View hierarchy.</p>
+          </div>
+
+          <div class="capstone-brief-grid">
+            <div class="capstone-brief-card">
+              <span class="capstone-badge">Project Mission</span>
+              <h3>The Apex Plastics Maintenance Intake Screen (`scrNewRequest`)</h3>
+              <p>You are officially hired as the Citizen Developer for Apex Plastics. You must translate the paper sketch for Molding Machine Breakdowns into an enterprise-ready Canvas Studio specification.</p>
+              <div class="capstone-deliverables-list">
+                <strong>Your 4 Core Deliverables:</strong>
+                <ol>
+                  <li><strong>Tree View Architecture:</strong> Group objects into <code>conHeader</code>, <code>conFormBody</code>, and <code>conActions</code>.</li>
+                  <li><strong>Hungarian Naming:</strong> Apply 100% correct prefixes (<code>scr</code>, <code>lbl</code>, <code>drp</code>, <code>txt</code>, <code>btn</code>).</li>
+                  <li><strong>Control Mapping:</strong> Map Machine Name and Urgency to Dropdowns; map Details to MultiLine TextInput.</li>
+                  <li><strong>Property Formulation:</strong> Formulate `DisplayMode` rule disabling submit when description is blank.</li>
+                </ol>
+              </div>
+            </div>
+
+            <div class="capstone-standards-card">
+              <span class="capstone-badge badge-accent">Industrial Standards Checklist</span>
+              <div class="checklist-items">
+                <div class="check-item">
+                  <span class="check-box">&check;</span>
+                  <span>Zero default names (No `Button1`, `TextInput1`).</span>
+                </div>
+                <div class="check-item">
+                  <span class="check-box">&check;</span>
+                  <span>Contrast ratio &ge; 4.5:1 on all text and button fills.</span>
+                </div>
+                <div class="check-item">
+                  <span class="check-box">&check;</span>
+                  <span>Clear placeholder hint text on all multi-line inputs.</span>
+                </div>
+                <div class="check-item">
+                  <span class="check-box">&check;</span>
+                  <span>Clear escape hatch (`btnCancel` with `Back()` navigation).</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <aside class="trainer-notes">
+          <h4>Trainer Note — Framing:</h4>
+          <p>"Announce the Capstone challenge. Inform learners they have 8 minutes to complete their specification. Remind them that on Slide 22, we reveal the benchmark architectural solution and grading rubric."</p>
+        </aside>
+      </section>
+
+      <!-- SLIDE 22: BENCHMARK SOLUTION & RUBRIC MATRIX -->
+      <section class="slide" id="slide-22" data-slide-index="21" data-title="Widget 4: Benchmark Solution &amp; Rubric" data-segment="Part 6: Assess &amp; Bridge">
+        <div class="slide-content">
+          <div class="slide-header">
+            <span class="section-tag section-tag-accent">Evaluation &amp; Rubric</span>
+            <h2>Widget 4: Capstone Benchmark Solution &amp; 4-Tier Rubric</h2>
+            <p class="subtitle">Reveal the enterprise architect specification and evaluate your work against industrial citizen developer standards.</p>
+          </div>
+
+          <div class="solution-rubric-container">
+            <!-- Reveal Button -->
+            <div class="solution-toggle-bar">
+              <button class="fluent-btn-primary" id="btn-reveal-solution">
+                <span id="solution-btn-icon">👁️</span>
+                <span id="solution-btn-text">Reveal Benchmark Studio Tree View &amp; Properties</span>
+              </button>
+            </div>
+
+            <!-- Benchmark Solution Drawer (Collapsed by default) -->
+            <div class="solution-content-drawer collapsed" id="solution-content">
+              <div class="benchmark-treeview-box">
+                <h4>Benchmark Tree View Architecture (`scrNewRequest`):</h4>
+                <pre><code>scrNewRequest
+  ├── conHeader (Horizontal Container, Height: 60)
+  │     ├── icnAppLogo (Icon, 32x32)
+  │     └── lblHeaderTitle (Label, Text: "Apex Plastics — Incident Intake")
+  ├── conFormBody (Vertical Container, Align: Stretch)
+  │     ├── lblMachineSelect (Label, Text: "Select Machine:")
+  │     ├── drpMachine (Dropdown, Items: ["Press-01", "Press-02", "Press-03", "Press-04"])
+  │     ├── lblUrgency (Label, Text: "Urgency Level:")
+  │     ├── drpUrgency (Dropdown, Items: ["Low", "Medium", "High", "Critical"])
+  │     ├── lblDescription (Label, Text: "Incident Symptoms / Observations:")
+  │     └── txtDescription (TextInput, Mode: MultiLine, Height: 120, HintText: "Enter noise, pressure...")
+  └── conActions (Horizontal Container, Justify: End)
+        ├── btnCancel (Button, Text: "Cancel", OnSelect: Back(ScreenTransition.Fade))
+        └── btnSubmitTicket (Button, Text: "Submit Ticket", DisplayMode: If(IsBlank(txtDescription.Text), Disabled, Edit))</code></pre>
+              </div>
+
+              <!-- 4-Tier Rubric Grid -->
+              <div class="rubric-matrix-grid">
+                <div class="rubric-card tier-1">
+                  <span class="tier-badge">Tier 1: Novice</span>
+                  <p>Kept default names (`TextInput1`); controls placed flat on canvas without containers; no `DisplayMode` state.</p>
+                </div>
+                <div class="rubric-card tier-2">
+                  <span class="tier-badge">Tier 2: Developing</span>
+                  <p>Named some controls; used free-text input for machine choice; no hint text on description.</p>
+                </div>
+                <div class="rubric-card tier-3">
+                  <span class="tier-badge">Tier 3: Proficient</span>
+                  <p>100% Hungarian naming; dropdowns used for choices; multi-line description; basic cancel button present.</p>
+                </div>
+                <div class="rubric-card tier-4 active-tier">
+                  <span class="tier-badge">Tier 4: Enterprise Architect</span>
+                  <p>Flawless 3-container hierarchy (`conHeader`, `conFormBody`, `conActions`); dynamic `DisplayMode` conditional validation; accessible contrast &ge; 4.5:1.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <aside class="trainer-notes">
+          <h4>Trainer Note — Rubric Walkthrough:</h4>
+          <p>"Click the reveal button. Walk through the benchmark Tree View. Show how the three containers (`conHeader`, `conFormBody`, `conActions`) prevent elements from ever overlapping on mobile or tablet form factors."</p>
+        </aside>
+      </section>
+
+      <!-- SLIDE 23: 15-MINUTE REVIEW & HOMEWORK -->
+      <section class="slide" id="slide-23" data-slide-index="22" data-title="15-Minute Review &amp; Homework" data-segment="Part 6: Assess &amp; Bridge">
+        <div class="slide-content">
+          <div class="slide-header">
+            <span class="section-tag">Reinforcement Practice</span>
+            <h2>15-Minute Daily Reflection &amp; Homework Challenge</h2>
+            <p class="subtitle">Consolidate today's Studio mental model before tomorrow's live data binding session.</p>
+          </div>
+
+          <div class="homework-container">
+            <div class="homework-card">
+              <div class="hw-icon">📱</div>
+              <h3>Web App Property Audit Exercise</h3>
+              <p>Open Microsoft Outlook Web, Teams, or any web app you use at work:</p>
+              <div class="hw-steps">
+                <div class="hw-step-item">
+                  <span class="hw-bullet">1</span>
+                  <span>Find an <strong>Input Control</strong> (like the Search bar or Email compose box). What is its Hungarian name? (e.g., `txtSearchBar`).</span>
+                </div>
+                <div class="hw-step-item">
+                  <span class="hw-bullet">2</span>
+                  <span>Notice what property changes on the "Send" button when your email body is completely blank vs when you type text.</span>
+                </div>
+                <div class="hw-step-item">
+                  <span class="hw-bullet">3</span>
+                  <span>Identify the <strong>Tree View structure</strong> of an email list: Container &rarr; Row &rarr; Sender Label + Subject Label + Date Label.</span>
+                </div>
+                <div class="hw-step-item">
+                  <span class="hw-bullet">4</span>
+                  <span>Sketch an imaginary screen for reserving a conference room and list all controls and properties.</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="trainer-quote-card">
+              <span class="quote-sparkle">✨</span>
+              <p class="quote-text">"A great app architect doesn't see buttons and text boxes as decoration. They see an orchestra of nouns and adjectives waiting for the conductor's baton."</p>
+              <span class="quote-author">— Power Apps Foundation Trainer Note</span>
+            </div>
+          </div>
+        </div>
+        <aside class="trainer-notes">
+          <h4>Trainer Note — Encouragement:</h4>
+          <p>"Congratulate the students warmly on completing Day 13! Remind them that they have conquered the most intimidating part of app development: opening the development studio and understanding how it functions."</p>
+        </aside>
+      </section>
+
+      <!-- SLIDE 24: 3-DAY BRIDGE MAP TO DAY 14 -->
+      <section class="slide" id="slide-24" data-slide-index="23" data-title="3-Day Bridge Map to Day 14" data-segment="Part 6: Assess &amp; Bridge">
+        <div class="slide-content">
+          <div class="slide-header">
+            <span class="section-tag section-tag-accent">Forward Bridge</span>
+            <h2>Where We've Been &amp; Where We Are Going Tomorrow</h2>
+            <p class="subtitle">Tomorrow in Day 14, we breathe data into our controls: Controls Collect &amp; Display Data!</p>
+          </div>
+
+          <div class="three-day-bridge-grid">
+            <div class="bridge-card bridge-yesterday">
+              <span class="bridge-day">Yesterday (Day 12)</span>
+              <h4>From Process + Data to App Screens</h4>
+              <p>Segregated human tasks into dedicated screen wireframes on paper, established the 4-Screen Enterprise Pattern, and mapped feedback.</p>
+              <div class="bridge-footer">Concept: Task &rarr; Paper Wireframes</div>
+            </div>
+
+            <div class="bridge-card bridge-today">
+              <span class="bridge-day active-day">Today (Day 13)</span>
+              <h4>Power Apps Studio: Map Design to Controls</h4>
+              <p>Navigated Studio's 4 zones, enforced Hungarian naming (`scr`, `txt`, `btn`), translated sketches to controls, and configured operational properties.</p>
+              <div class="bridge-footer">Concept: Paper &rarr; Studio Controls &amp; Properties</div>
+            </div>
+
+            <div class="bridge-card bridge-tomorrow">
+              <span class="bridge-day">Tomorrow (Day 14)</span>
+              <h4>Controls Collect &amp; Display Data</h4>
+              <p>We bind these controls to live data collections! You will learn how galleries display records and how forms save inputs to database columns!</p>
+              <div class="bridge-footer">Concept: Studio Controls &rarr; Live Data Binding</div>
+            </div>
+          </div>
+
+          <div class="bridge-conclusion-banner">
+            <strong>Congratulations on completing Day 13!</strong>
+            <span>Your Canvas Studio foundation is locked in. Tomorrow, we connect our controls to live database collections in Day 14!</span>
+          </div>
+        </div>
+        <aside class="trainer-notes">
+          <h4>Trainer Closing Script:</h4>
+          <p>"Today we built the physical house. Tomorrow in Day 14, we turn on the electricity and water pipes: we connect live data into these controls! Great job today, and see you tomorrow for Day 14!"</p>
+        </aside>
+      </section>
+
+    </main>
+
+    <!-- Bottom Presentation Control Bar & Slide Counter -->
+        <footer id="bottom-hud">
+      <div id="progress-bar-container">
+        <div id="progress-bar"></div>
+      </div>
+
+      <div class="hud-left">
+        <button class="hud-btn" id="btn-prev" onclick="prevSlide()" title="Previous Slide (Left Arrow)">&#8592; Prev</button>
+        <button class="hud-btn" id="btn-next" onclick="nextSlide()" title="Next Slide (Right Arrow / Space)">Next &#8594;</button>
+        <span id="slide-counter">Slide <span id="slide-current-num">1</span> / <span id="slide-total-count">24</span></span>
+      </div>
+
+      <div class="hud-right">
+        <button class="hud-btn" id="btn-lang" onclick="toggleLanguage()" title="Toggle Language (L)">
+          🌐 <span id="lang-label">KH</span>
+        </button>
+        <button class="hud-btn active" id="btn-laser" onclick="toggleLaser()" title="Presenter Laser Pointer (P)">
+          🔴 Laser
+        </button>
+        <button class="hud-btn" id="btn-notes" onclick="toggleNotes()" title="Trainer Notes Drawer (N)">
+          📝 Notes
+        </button>
+        <button class="hud-btn" id="btn-overview" onclick="toggleOverview()" title="Slide Overview Modal (O)">
+          🗂️ Overview
+        </button>
+        <button class="hud-btn" id="btn-timer" onclick="toggleTimer()" title="90-Min Countdown (T)">
+          ⏱️ <span id="timer-display">90:00</span>
+        </button>
+        <button class="hud-btn" id="btn-fullscreen" onclick="toggleFullscreen()" title="Fullscreen (F)">
+          ⛶
+        </button>
+        <a href="../index.html" class="hud-btn hub-btn" title="Return to Master Curriculum Hub (ត្រឡប់ទៅទំព័រដើម)" style="text-decoration: none; display: inline-flex; align-items: center; gap: 4px; color: #fcd34d; font-weight: 600;"><span>🏠</span><span>Hub</span></a>
+      </div>
+    </footer>
+
+    <!-- Presenter Notes Slide-Out Drawer -->
+    <div class="notes-drawer" id="notes-drawer">
+      <div class="notes-drawer-header">
+        <div class="notes-drawer-title">
+          <span class="notes-icon">📝</span>
+          <span>Trainer Speaking Script &amp; Pedagogical Guidance</span>
+        </div>
+        <button id="notes-close-btn" class="icon-btn-tiny" title="Close Notes (Esc / N)">&times;</button>
+      </div>
+      <div class="notes-drawer-content" id="notes-content">
+        <!-- Injected dynamically from active slide's <aside class="trainer-notes"> -->
+      </div>
+    </div>
+
+    <!-- 24-Slide Overview Modal Grid -->
+    <div class="overview-modal" id="overview-modal">
+      <div class="overview-modal-header">
+        <h3>Power Apps Foundation Day 13 — Complete Slide Navigator (24 Slides)</h3>
+        <button id="overview-close-btn" class="icon-btn-tiny" title="Close Grid (Esc / O)">&times;</button>
+      </div>
+      <div class="overview-grid" id="overview-grid">
+        <!-- Dynamically injected cards -->
+      </div>
+    </div>
+
+    <!-- Presenter Laser Focus Pointer & Click Ripple Elements -->
+    <div id="presenter-pointer" class="presenter-laser-dot">
+      <div class="laser-halo"></div>
+    </div>
+    <div id="pointer-click-ripple" class="pointer-click-ripple"></div>
+
+  </div>
+
+  <script src="script.js"></script>
+<script>
+if (window.self !== window.top) {
+  document.documentElement.classList.add('in-iframe');
+  function hideHub() { document.querySelectorAll('.hub-btn, .back-to-hub-pill').forEach(e => e.style.display = 'none'); }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', hideHub);
+  } else {
+    hideHub();
+  }
+}
+</script>
+<style>
+.in-iframe .hub-btn, .in-iframe .back-to-hub-pill { display: none !important; }
+</style>
+</body>
+</html>
+

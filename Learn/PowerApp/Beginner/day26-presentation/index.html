@@ -1,0 +1,1332 @@
+<!DOCTYPE html>
+<html lang="en" translate="no" class="notranslate">
+<head>
+  <meta name="google" content="notranslate">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Day 26: Build the Complete Connected App + Power Automate | Microsoft Power Apps Foundation</title>
+  <link rel="stylesheet" href="../shared/design-system.css">
+  <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=Moul&family=Kantumruy+Pro:ital,wght@0,400..700;1,400..700&family=Battambang:wght@300;400;700;900&family=Koh+Santepheap:wght@300;400;700&family=Koulen&family=Siemreap&display=swap" rel="stylesheet">
+  <style>
+    /* Strict Speaker Notes Lock: Never render on slide stage under any circumstance */
+    aside.trainer-notes,
+    .trainer-notes,
+    .slide aside,
+    aside {
+      display: none !important;
+      visibility: hidden !important;
+      height: 0 !important;
+      width: 0 !important;
+      overflow: hidden !important;
+      opacity: 0 !important;
+      position: absolute !important;
+      pointer-events: none !important;
+      margin: 0 !important;
+      padding: 0 !important;
+      border: none !important;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Presentation Stage Wrapper -->
+  <div id="presentation-stage">
+    
+    <!-- Ambient Aurora Orbs (60fps backdrop) -->
+    <div class="aurora-orb orb-1"></div>
+    <div class="aurora-orb orb-2"></div>
+    <div class="aurora-orb orb-3"></div>
+
+    <!-- Presenter Laser Pointer & Shockwave Click Ripple -->
+    <div id="presenter-laser"></div>
+    <div id="pointer-ripple" class="pointer-click-ripple"></div>
+
+    <!-- Viewport for 24 Slides -->
+    <main id="slides-viewport">
+
+      <!-- ====================================================================
+           SLIDE 1: HERO TITLE & SYSTEM MENTAL MODEL
+           ==================================================================== -->
+      <section class="slide active" id="slide-1" data-slide-index="0" data-title="Build the Connected App" data-segment="Phase 8: Project Synthesis">
+        <div class="slide-content hero-content">
+          <div class="hero-badge">
+            <span>Microsoft Power Apps Curriculum</span>
+            <span>&bull;</span>
+            <span>Day 26 of 27</span>
+          </div>
+          <h1 class="hero-title">Build the Complete Connected App</h1>
+          <p class="hero-subtitle">
+            Integrate concepts as one living, unified system rather than isolated technical features. Wire the 3-screen maintenance app and awaken Power Automate cloud alerts.
+          </p>
+
+          <div class="model-chain">
+            <span class="chain-item">Home</span>
+            <span class="chain-arrow">&rarr;</span>
+            <span class="chain-item active">New</span>
+            <span class="chain-arrow">&rarr;</span>
+            <span class="chain-item active">Validation</span>
+            <span class="chain-arrow">&rarr;</span>
+            <span class="chain-item">Save</span>
+            <span class="chain-arrow">&rarr;</span>
+            <span class="chain-item">SharePoint</span>
+            <span class="chain-arrow">&rarr;</span>
+            <span class="chain-item flow">Flow Trigger</span>
+            <span class="chain-arrow">&rarr;</span>
+            <span class="chain-item flow">Email Alert</span>
+            <span class="chain-arrow">&rarr;</span>
+            <span class="chain-item">Details / Edit</span>
+          </div>
+        </div>
+        <aside class="trainer-notes">
+          <h4>Trainer Speaking Script &amp; Pedagogical Cues:</h4>
+          <p><strong>Opening Hook (2 min):</strong> "Welcome to Day 26! For 25 days, you learned individual tools: buttons, formulas, SharePoint lists, galleries, forms, and architectural blueprints. Today, we don't build isolated buttons. Today, we bring the whole factory system to life!"</p>
+          <p><strong>The Core Connection:</strong> Walk across the mental model chain: Home ➔ New ➔ Validation ➔ Save ➔ SharePoint ➔ Flow Trigger ➔ Email Alert ➔ Details/Edit. Explain that a professional application connects humans, cloud databases, and automated background flows seamlessly.</p>
+        </aside>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 2: 90-MINUTE TIMED AGENDA & OBJECTIVES
+           ==================================================================== -->
+      <section class="slide" id="slide-2" data-slide-index="1" data-title="90-Minute Agenda & Objectives" data-segment="Part 1: Orientation & Goals">
+        <header class="slide-header">
+          <div class="section-tag">Part 1 &bull; Schedule &amp; Outcomes</div>
+          <h2>90-Minute Agenda &amp; Measurable Objectives</h2>
+          <p class="subtitle">Spiral learning architecture: synthesizing all technical layers into a single production system.</p>
+        </header>
+
+        <div class="slide-content grid-2-col">
+          <div class="card">
+            <h3 class="card-title">🎯 Today's 5 Core Objectives</h3>
+            <div style="display: flex; flex-direction: column; gap: 0.75rem; margin-top: 0.5rem;">
+              <div style="display: flex; gap: 0.65rem;">
+                <span class="card-badge" style="background: rgba(6, 182, 212, 0.2); color: #67e8f9;">1</span>
+                <div><strong>Wire 3-Screen App Navigation:</strong> Connect Home ➔ New ➔ Detail/Edit with forward, back, and cancel flows.</div>
+              </div>
+              <div style="display: flex; gap: 0.65rem;">
+                <span class="card-badge" style="background: rgba(245, 158, 11, 0.2); color: #fcd34d;">2</span>
+                <div><strong>Enforce Production Validation:</strong> Lock Submit button with <code>IsBlank()</code> and route feedback in <code>OnSuccess</code>.</div>
+              </div>
+              <div style="display: flex; gap: 0.65rem;">
+                <span class="card-badge" style="background: rgba(16, 185, 129, 0.2); color: #86efac;">3</span>
+                <div><strong>Configure Dynamic Gallery Filtering:</strong> Combine <code>Search()</code> and <code>Filter()</code> for machine and keyword lookup.</div>
+              </div>
+              <div style="display: flex; gap: 0.65rem;">
+                <span class="card-badge" style="background: rgba(139, 92, 246, 0.2); color: #c084fc;">4</span>
+                <div><strong>Build 2-Step Cloud Flow:</strong> Create an automated flow from SharePoint trigger to Outlook email alert.</div>
+              </div>
+              <div style="display: flex; gap: 0.65rem;">
+                <span class="card-badge" style="background: rgba(239, 68, 68, 0.2); color: #fca5a5;">5</span>
+                <div><strong>Master 3-Tier Troubleshooting:</strong> Distinguish App save errors, Trigger delays, and Notification delivery bugs.</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <h3 class="card-title">⏱️ Timed 90-Minute Agenda Breakdown</h3>
+            <div style="display: flex; flex-direction: column; gap: 0.6rem; font-size: 0.85rem; margin-top: 0.35rem;">
+              <div style="display: flex; justify-content: space-between; border-bottom: 1px solid var(--border-subtle); padding-bottom: 0.3rem;">
+                <span style="color: #67e8f9; font-weight: bold;">00 - 10 min</span>
+                <span><strong>Recall &amp; Connect:</strong> Review Day 25 Blueprint + 3 Retrieval Checks</span>
+              </div>
+              <div style="display: flex; justify-content: space-between; border-bottom: 1px solid var(--border-subtle); padding-bottom: 0.3rem;">
+                <span style="color: #fcd34d; font-weight: bold;">10 - 20 min</span>
+                <span><strong>Discover Pain:</strong> The $32,000 Isolated Feature Island + Pizza Analogy</span>
+              </div>
+              <div style="display: flex; justify-content: space-between; border-bottom: 1px solid var(--border-subtle); padding-bottom: 0.3rem;">
+                <span style="color: #86efac; font-weight: bold;">20 - 35 min</span>
+                <span><strong>Demonstrate App:</strong> Wiring 3 Screens + Validation &amp; OnSuccess Hooks</span>
+              </div>
+              <div style="display: flex; justify-content: space-between; border-bottom: 1px solid var(--border-subtle); padding-bottom: 0.3rem;">
+                <span style="color: #c084fc; font-weight: bold;">35 - 45 min</span>
+                <span><strong>Demonstrate Flow:</strong> Building the 2-Step Automated Cloud Flow</span>
+              </div>
+              <div style="display: flex; justify-content: space-between; border-bottom: 1px solid var(--border-subtle); padding-bottom: 0.3rem;">
+                <span style="color: #67e8f9; font-weight: bold;">45 - 60 min</span>
+                <span><strong>Guided Practice:</strong> Learner builds and tests the End-to-End Hand-Off</span>
+              </div>
+              <div style="display: flex; justify-content: space-between; border-bottom: 1px solid var(--border-subtle); padding-bottom: 0.3rem;">
+                <span style="color: #fca5a5; font-weight: bold;">60 - 72 min</span>
+                <span><strong>Independent Task:</strong> Wiring Gallery Search Filter &amp; Live Alert Test</span>
+              </div>
+              <div style="display: flex; justify-content: space-between; border-bottom: 1px solid var(--border-subtle); padding-bottom: 0.3rem;">
+                <span style="color: #fcd34d; font-weight: bold;">72 - 82 min</span>
+                <span><strong>Check &amp; Demolish:</strong> 5-Question Quiz + 3-Tier Troubleshooting Audit</span>
+              </div>
+              <div style="display: flex; justify-content: space-between; padding-bottom: 0.3rem;">
+                <span style="color: #86efac; font-weight: bold;">82 - 90 min</span>
+                <span><strong>Bridge Forward:</strong> Rubric, Homework &amp; Preview Day 27 Capstone</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <aside class="trainer-notes">
+          <h4>Trainer Speaking Script &amp; Pedagogical Cues:</h4>
+          <p><strong>Pacing Overview (2 min):</strong> "Notice our 8-part schedule. Notice that we don't start with Power Automate. We master the complete Power App first. Once our app reliably writes records to SharePoint, we introduce Power Automate as the natural next step."</p>
+        </aside>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 3: CONCEPT MAP: CONNECTING DAYS 1-25 TO TODAY
+           ==================================================================== -->
+      <section class="slide" id="slide-3" data-slide-index="2" data-title="Concept Map: Days 1-25 Synthesis" data-segment="Part 1: Curriculum Integration">
+        <header class="slide-header">
+          <div class="section-tag">Part 1 &bull; Curriculum Integration</div>
+          <h2>The Connected Curriculum: How Days 1 to 25 Assemble Today</h2>
+          <p class="subtitle">Every concept learned previously is an essential cog in today's complete enterprise engine.</p>
+        </header>
+
+        <div class="slide-content">
+          <div class="card" style="border-left: 3px solid #06b6d4;">
+            <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.25rem;">
+              <div style="background: rgba(12, 19, 31, 0.7); padding: 1.15rem; border-radius: 8px; border: 1px solid var(--border-subtle);">
+                <span class="card-badge" style="background: rgba(6, 182, 212, 0.2); color: #67e8f9;">Days 1 - 10</span>
+                <h4 style="color: #f8fafc; margin: 0.5rem 0;">Controls &amp; Logic</h4>
+                <p style="color: var(--text-muted); font-size: 0.86rem; line-height: 1.5;">
+                  Buttons, labels, TextInputs, If conditions, and IsBlank validation. The user's input and thinking tools.
+                </p>
+              </div>
+
+              <div style="background: rgba(12, 19, 31, 0.7); padding: 1.15rem; border-radius: 8px; border: 1px solid var(--border-subtle);">
+                <span class="card-badge" style="background: rgba(245, 158, 11, 0.2); color: #fcd34d;">Days 11 - 16</span>
+                <h4 style="color: #f8fafc; margin: 0.5rem 0;">Screens &amp; UX</h4>
+                <p style="color: var(--text-muted); font-size: 0.86rem; line-height: 1.5;">
+                  Multi-screen navigation, Back(), header components, and Notify() banners for operator feedback.
+                </p>
+              </div>
+
+              <div style="background: rgba(12, 19, 31, 0.7); padding: 1.15rem; border-radius: 8px; border: 1px solid var(--border-subtle);">
+                <span class="card-badge" style="background: rgba(16, 185, 129, 0.2); color: #86efac;">Days 17 - 24</span>
+                <h4 style="color: #f8fafc; margin: 0.5rem 0;">SharePoint &amp; CRUD</h4>
+                <p style="color: var(--text-muted); font-size: 0.86rem; line-height: 1.5;">
+                  Cloud database lists, Galleries (Items), Forms (Item, Mode), NewForm, and SubmitForm.
+                </p>
+              </div>
+
+              <div style="background: rgba(139, 92, 246, 0.15); padding: 1.15rem; border-radius: 8px; border: 1px solid rgba(139, 92, 246, 0.4);">
+                <span class="card-badge" style="background: rgba(139, 92, 246, 0.25); color: #c084fc;">Day 25 &amp; 26</span>
+                <h4 style="color: #c084fc; margin: 0.5rem 0;">Living System + Flow</h4>
+                <p style="color: #f5f3ff; font-size: 0.86rem; line-height: 1.5;">
+                  Blueprint to live app: 3 screens connected to 1 SharePoint list, waking up Power Automate cloud email alerts!
+                </p>
+              </div>
+            </div>
+
+            <div style="margin-top: 1.5rem; padding: 1rem; background: rgba(139, 92, 246, 0.08); border-radius: 8px; text-align: center; border: 1px dashed rgba(139, 92, 246, 0.3);">
+              <span style="color: #c084fc; font-weight: 700; font-size: 0.95rem;">
+                The System Principle: An app is not finished when screens look pretty. An app is finished when data flows without friction from human hands, through cloud storage, to automated alerts!
+              </span>
+            </div>
+          </div>
+        </div>
+        <aside class="trainer-notes">
+          <h4>Trainer Speaking Script &amp; Pedagogical Cues:</h4>
+          <p><strong>System Evolution (3 min):</strong> "Walk the student through the 4 milestones. In Days 1-10, they learned the controls. In Days 11-16, they navigated screens. In Days 17-24, they saved to SharePoint. Yesterday in Day 25, they designed the blueprint. Today, all four pillars fuse into one living system."</p>
+        </aside>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 4: PREREQUISITE RETRIEVAL CHECK
+           ==================================================================== -->
+      <section class="slide" id="slide-4" data-slide-index="3" data-title="Prerequisite Retrieval Check" data-segment="Part 2: Recall & Foundations">
+        <header class="slide-header">
+          <div class="section-tag">Part 2 &bull; Retrieval Practice</div>
+          <h2>Prerequisite Retrieval: Activating Prior Knowledge</h2>
+          <p class="subtitle">Click each card to reveal foundational principles from Days 22, 24, and 25.</p>
+        </header>
+
+        <div class="slide-content grid-3-col">
+          <div class="flip-card" onclick="this.classList.toggle('flipped')">
+            <div class="flip-card-inner">
+              <div class="flip-card-front">
+                <span class="card-badge" style="background: rgba(245, 158, 11, 0.2); color: #fcd34d;">Check 1</span>
+                <h4 style="color: #f8fafc; margin-top: 1rem;">DisplayMode Validation</h4>
+                <p style="color: var(--text-muted); font-size: 0.88rem; margin-top: 0.5rem;">
+                  Why must <code>btnSubmit.DisplayMode</code> use <code>If(IsBlank(...))</code>?
+                </p>
+                <div class="flip-hint">Tap to flip &rarr;</div>
+              </div>
+              <div class="flip-card-back">
+                <span class="card-badge" style="background: rgba(16, 185, 129, 0.2); color: #86efac;">Principle 1</span>
+                <p style="color: #ecfdf5; font-size: 0.92rem; margin-top: 0.8rem; line-height: 1.6;">
+                  <strong>To protect the company database!</strong><br><br>
+                  A disabled gray button stops blank, incomplete, or corrupted records from ever reaching cloud storage.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="flip-card" onclick="this.classList.toggle('flipped')">
+            <div class="flip-card-inner">
+              <div class="flip-card-front">
+                <span class="card-badge" style="background: rgba(6, 182, 212, 0.2); color: #67e8f9;">Check 2</span>
+                <h4 style="color: #f8fafc; margin-top: 1rem;">The Magic Glue Formula</h4>
+                <p style="color: var(--text-muted); font-size: 0.88rem; margin-top: 0.5rem;">
+                  How does the Edit screen know which specific work order the operator clicked?
+                </p>
+                <div class="flip-hint">Tap to flip &rarr;</div>
+              </div>
+              <div class="flip-card-back">
+                <span class="card-badge" style="background: rgba(16, 185, 129, 0.2); color: #86efac;">Principle 2</span>
+                <p style="color: #ecfdf5; font-size: 0.92rem; margin-top: 0.8rem; line-height: 1.6;">
+                  <code>frmEditOrder.Item = galWorkOrders.Selected</code><br><br>
+                  The gallery feeds its selected row into the form's <code>Item</code> property, loading all card fields!
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="flip-card" onclick="this.classList.toggle('flipped')">
+            <div class="flip-card-inner">
+              <div class="flip-card-front">
+                <span class="card-badge" style="background: rgba(139, 92, 246, 0.2); color: #c084fc;">Check 3</span>
+                <h4 style="color: #f8fafc; margin-top: 1rem;">OnSuccess vs OnSelect</h4>
+                <p style="color: var(--text-muted); font-size: 0.88rem; margin-top: 0.5rem;">
+                  Why do we write <code>Notify()</code> in <code>Form.OnSuccess</code> instead of the button?
+                </p>
+                <div class="flip-hint">Tap to flip &rarr;</div>
+              </div>
+              <div class="flip-card-back">
+                <span class="card-badge" style="background: rgba(16, 185, 129, 0.2); color: #86efac;">Principle 3</span>
+                <p style="color: #ecfdf5; font-size: 0.92rem; margin-top: 0.8rem; line-height: 1.6;">
+                  <strong>Truth in feedback!</strong><br><br>
+                  <code>OnSuccess</code> fires ONLY after SharePoint confirms the write. If WiFi is lost, the app will never lie.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <aside class="trainer-notes">
+          <h4>Trainer Speaking Script &amp; Pedagogical Cues:</h4>
+          <p><strong>Active Retrieval (3 min):</strong> "Have 3 different students answer each card before clicking. Praise them when they use the core concepts: 'protect the database', 'Item binds to Selected', and 'truth in feedback'."</p>
+        </aside>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 5: WORKPLACE CRISIS: THE ISOLATED FEATURE ISLAND
+           ==================================================================== -->
+      <section class="slide" id="slide-5" data-slide-index="4" data-title="Workplace Crisis: Feature Islands" data-segment="Part 3: Why This Exists">
+        <header class="slide-header">
+          <div class="section-tag" style="background: rgba(239, 68, 68, 0.15); border-color: rgba(239, 68, 68, 0.4); color: #fca5a5;">Part 3 &bull; Workplace Crisis</div>
+          <h2>The $32,000 "Isolated Feature Island" Disaster</h2>
+          <p class="subtitle">What happens when an app has great screens, but the communication chain is severed.</p>
+        </header>
+
+        <div class="slide-content">
+          <div class="card" style="border-left: 3px solid #ef4444;">
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;">
+              <div>
+                <h4 style="color: #f87171; margin-bottom: 0.5rem;">What Happened at Apex Precision:</h4>
+                <ul style="color: var(--text-muted); font-size: 0.88rem; line-height: 1.6; padding-left: 1.2rem;">
+                  <li>Developer built 3 screens: Browse, New Form, and Edit Form.</li>
+                  <li>After tapping Submit, the New Form screen never closed or reset—it stayed frozen on old text.</li>
+                  <li>Frustrated operators tapped Submit 5 times, creating 5 duplicate tickets.</li>
+                  <li>Worse: The ticket sat silently in SharePoint. The maintenance supervisor in the front office never received an alert!</li>
+                </ul>
+              </div>
+
+              <div>
+                <h4 style="color: #fca5a5; margin-bottom: 0.5rem;">The Catastrophic DX Fallout:</h4>
+                <ul style="color: var(--text-muted); font-size: 0.88rem; line-height: 1.6; padding-left: 1.2rem;">
+                  <li><strong>3 Hours of Silence:</strong> Machine CNC-02 sat smoking for 3 hours before anyone noticed.</li>
+                  <li><strong>$32,000 Missed Shipment:</strong> Turbine blades for Boeing missed the cargo flight.</li>
+                  <li><strong>Operator Mistrust:</strong> "The app didn't work, so I went back to paper!"</li>
+                </ul>
+              </div>
+            </div>
+
+            <div style="margin-top: 1.25rem; padding: 0.85rem; background: rgba(239, 68, 68, 0.1); border-radius: 6px; border-left: 3px solid #ef4444;">
+              <p style="color: var(--text-main); font-size: 0.88rem; margin: 0;">
+                <strong>Architectural Cure:</strong> A button without feedback causes duplicates. A database without automation causes silence. Today we connect the full pipeline!
+              </p>
+            </div>
+          </div>
+        </div>
+        <aside class="trainer-notes">
+          <h4>Trainer Speaking Script &amp; Pedagogical Cues:</h4>
+          <p><strong>Emotion &amp; Real-World Stakes (3 min):</strong> "Ask students: 'If you order an Uber, what happens if the screen doesn't show a driver and no car comes?' You get angry and close the app. Software is about human trust. When a machine breaks, the person who fixes it must be alerted automatically."</p>
+        </aside>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 6: PLAIN-LANGUAGE CONCEPT TRANSLATION MATRIX
+           ==================================================================== -->
+      <section class="slide" id="slide-6" data-slide-index="5" data-title="Plain-Language Concept Matrix" data-segment="Part 4: Concept Before Syntax">
+        <header class="slide-header">
+          <div class="section-tag">Part 4 &bull; Plain Language First</div>
+          <h2>Concept Before Syntax: Deconstructing the Connected System</h2>
+          <p class="subtitle">Never learn a technical term in isolation. Every technical component is just a plain English reality.</p>
+        </header>
+
+        <div class="slide-content">
+          <div class="card">
+            <table class="matrix-table">
+              <thead>
+                <tr>
+                  <th>Plain-Language Reality</th>
+                  <th>Technical Term</th>
+                  <th>What It Actually Does</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>The Connected Pipeline</strong></td>
+                  <td><span class="badge-tag tag-cyan">End-to-End System</span></td>
+                  <td>User taps button ➔ Database records ➔ Cloud wakes up ➔ Supervisor gets alerted.</td>
+                </tr>
+                <tr>
+                  <td><strong>The Automatic Alarm</strong></td>
+                  <td><span class="badge-tag tag-purple">Power Automate Cloud Flow</span></td>
+                  <td>A 24/7 assistant running in the cloud that executes chores when events happen.</td>
+                </tr>
+                <tr>
+                  <td><strong>The Spark (What Starts It)</strong></td>
+                  <td><span class="badge-tag tag-amber">Flow Trigger</span></td>
+                  <td>The specific event: "When an item is created in SharePoint list WorkOrders".</td>
+                </tr>
+                <tr>
+                  <td><strong>The Chore (What It Does)</strong></td>
+                  <td><span class="badge-tag tag-emerald">Flow Action</span></td>
+                  <td>The work performed: "Send an email (V2) to LeadTechnician@company.com".</td>
+                </tr>
+                <tr>
+                  <td><strong>The Hand-Off Cable</strong></td>
+                  <td><span class="badge-tag tag-cyan">Item = galWorkOrders.Selected</span></td>
+                  <td>Tells the Edit screen which exact machine ticket to display and update.</td>
+                </tr>
+                <tr>
+                  <td><strong>The Safety Gate</strong></td>
+                  <td><span class="badge-tag tag-rose">DisplayMode Validation</span></td>
+                  <td>Keeps the Submit button gray until all required human inputs are filled out.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <aside class="trainer-notes">
+          <h4>Trainer Speaking Script &amp; Pedagogical Cues:</h4>
+          <p><strong>Plain-Language Demystification (3 min):</strong> "Go row by row. Notice how simple Power Automate is when you define it in child-simple language: A trigger is 'What starts it'; an action is 'What it does next'. No jargon allowed!"</p>
+        </aside>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 7: EVERYDAY ANALOGY: THE PIZZA TRACKER PIPELINE
+           ==================================================================== -->
+      <section class="slide" id="slide-7" data-slide-index="6" data-title="Analogy: The Pizza Tracker" data-segment="Part 4: Concept Before Syntax">
+        <header class="slide-header">
+          <div class="section-tag">Part 4 &bull; Mental Model</div>
+          <h2>Everyday Analogy: The Automated Pizza Order &amp; Delivery</h2>
+          <p class="subtitle">How modern mobile apps connect humans, databases, kitchen screens, and notifications.</p>
+        </header>
+
+        <div class="slide-content grid-4-col">
+          <div class="card">
+            <span class="card-badge" style="background: rgba(6, 182, 212, 0.2); color: #67e8f9;">1. App Intake</span>
+            <h4 style="color: #f8fafc; margin: 0.5rem 0;">You Place Order</h4>
+            <p style="color: var(--text-muted); font-size: 0.86rem; line-height: 1.5;">
+              You choose Pepperoni on your phone. The app checks your address and credit card (Validation).
+            </p>
+          </div>
+
+          <div class="card">
+            <span class="card-badge" style="background: rgba(16, 185, 129, 0.2); color: #86efac;">2. Database Storage</span>
+            <h4 style="color: #f8fafc; margin: 0.5rem 0;">Order Saved</h4>
+            <p style="color: var(--text-muted); font-size: 0.86rem; line-height: 1.5;">
+              The order lands in the central database as ticket #419. Your app receives a green checkmark!
+            </p>
+          </div>
+
+          <div class="card">
+            <span class="card-badge" style="background: rgba(139, 92, 246, 0.2); color: #c084fc;">3. Automated Trigger</span>
+            <h4 style="color: #f8fafc; margin: 0.5rem 0;">Kitchen Bleeps</h4>
+            <p style="color: var(--text-muted); font-size: 0.86rem; line-height: 1.5;">
+              Nobody phoned the chef. The database triggered the kitchen printer automatically the second order saved!
+            </p>
+          </div>
+
+          <div class="card">
+            <span class="card-badge" style="background: rgba(245, 158, 11, 0.2); color: #fcd34d;">4. Automated Action</span>
+            <h4 style="color: #f8fafc; margin: 0.5rem 0;">Driver Dispatched</h4>
+            <p style="color: var(--text-muted); font-size: 0.86rem; line-height: 1.5;">
+              Driver Carlos gets a notification on his watch with GPS directions. You receive an SMS tracker!
+            </p>
+          </div>
+        </div>
+        <aside class="trainer-notes">
+          <h4>Trainer Speaking Script &amp; Pedagogical Cues:</h4>
+          <p><strong>Real-World Analogy (3 min):</strong> "Ask students: 'Did the customer call the driver? Did the cashier walk into the kitchen?' No! The software did the hand-off. That is what we are building today for machine breakdowns."</p>
+        </aside>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 8: MANUFACTURING DX EXAMPLE: LINE 2 BREAKDOWN APP
+           ==================================================================== -->
+      <section class="slide" id="slide-8" data-slide-index="7" data-title="DX Story: Line 2 Breakdown" data-segment="Part 4: Concept Before Syntax">
+        <header class="slide-header">
+          <div class="section-tag">Part 4 &bull; Workplace Application</div>
+          <h2>Manufacturing DX: The Line 2 Machine Breakdown System</h2>
+          <p class="subtitle">Replacing paper work orders with an unbreakable digital workflow at Apex Precision.</p>
+        </header>
+
+        <div class="slide-content grid-4-col">
+          <div class="card">
+            <span class="card-badge" style="background: rgba(239, 68, 68, 0.2); color: #fca5a5;">1. Floor Operator</span>
+            <h4 style="color: #f8fafc; margin: 0.5rem 0;">CNC Spindle Overheating</h4>
+            <p style="color: var(--text-muted); font-size: 0.86rem; line-height: 1.5;">
+              Operator sees amber 85&deg;C light. Taps <code>+ New Work Order</code>, picks CNC-02, Priority: Critical.
+            </p>
+          </div>
+
+          <div class="card">
+            <span class="card-badge" style="background: rgba(16, 185, 129, 0.2); color: #86efac;">2. Safe Cloud Write</span>
+            <h4 style="color: #f8fafc; margin: 0.5rem 0;">SubmitForm &amp; OnSuccess</h4>
+            <p style="color: var(--text-muted); font-size: 0.86rem; line-height: 1.5;">
+              SharePoint writes row #WO-1045. Green banner confirms write. Screen automatically returns to Home.
+            </p>
+          </div>
+
+          <div class="card">
+            <span class="card-badge" style="background: rgba(139, 92, 246, 0.2); color: #c084fc;">3. Cloud Automation</span>
+            <h4 style="color: #f8fafc; margin: 0.5rem 0;">Power Automate Alert</h4>
+            <p style="color: var(--text-muted); font-size: 0.86rem; line-height: 1.5;">
+              Within 45 seconds, Flow detects new row and sends high-priority email to Supervisor Sokha.
+            </p>
+          </div>
+
+          <div class="card">
+            <span class="card-badge" style="background: rgba(245, 158, 11, 0.2); color: #fcd34d;">4. Tech Workbench</span>
+            <h4 style="color: #f8fafc; margin: 0.5rem 0;">Update &amp; Resolve</h4>
+            <p style="color: var(--text-muted); font-size: 0.86rem; line-height: 1.5;">
+              Tech Dara opens tablet, clicks WO-1045 in Gallery. Form loads existing details. Dara marks "Resolved".
+            </p>
+          </div>
+        </div>
+        <aside class="trainer-notes">
+          <h4>Trainer Speaking Script &amp; Pedagogical Cues:</h4>
+          <p><strong>Factory Flow Connection (3 min):</strong> "Notice how every human persona has their exact role: The Operator reports; SharePoint stores; Power Automate alerts; the Technician resolves. This is digital transformation!"</p>
+        </aside>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 9: MASTER CAUSE-AND-EFFECT ECOSYSTEM DIAGRAM
+           ==================================================================== -->
+      <section class="slide" id="slide-9" data-slide-index="8" data-title="Master Cause-and-Effect Flow" data-segment="Part 5: Architecture Deep Dive">
+        <header class="slide-header">
+          <div class="section-tag">Part 5 &bull; System Architecture</div>
+          <h2>The Complete Cause-and-Effect Ecosystem</h2>
+          <p class="subtitle">Visualizing how human action in Power Apps ripples into cloud storage and background automation.</p>
+        </header>
+
+        <div class="slide-content">
+          <div class="card">
+            <div class="flow-pipeline-container">
+              <div class="flow-step-node">
+                <div class="flow-step-icon">📱</div>
+                <div class="flow-step-title">1. Power Apps</div>
+                <div class="flow-step-desc">Operator taps Submit<br><code>SubmitForm(frmNew)</code></div>
+              </div>
+              <div class="flow-step-arrow">&rarr;</div>
+              <div class="flow-step-node">
+                <div class="flow-step-icon">☁️</div>
+                <div class="flow-step-title">2. SharePoint</div>
+                <div class="flow-step-desc">New Item Created<br>Row ID #WO-1045</div>
+              </div>
+              <div class="flow-step-arrow">&rarr;</div>
+              <div class="flow-step-node" style="border-color: #8b5cf6;">
+                <div class="flow-step-icon">⚡</div>
+                <div class="flow-step-title" style="color: #c084fc;">3. Flow Trigger</div>
+                <div class="flow-step-desc">Cloud detects event:<br>When item is created</div>
+              </div>
+              <div class="flow-step-arrow">&rarr;</div>
+              <div class="flow-step-node" style="border-color: #8b5cf6;">
+                <div class="flow-step-icon">📧</div>
+                <div class="flow-step-title" style="color: #c084fc;">4. Flow Action</div>
+                <div class="flow-step-desc">Send an email (V2)<br>To Supervisor with link</div>
+              </div>
+              <div class="flow-step-arrow">&rarr;</div>
+              <div class="flow-step-node">
+                <div class="flow-step-icon">🛠️</div>
+                <div class="flow-step-title">5. Tech Workbench</div>
+                <div class="flow-step-desc">Tech updates status<br><code>Item = gal.Selected</code></div>
+              </div>
+            </div>
+
+            <div style="margin-top: 1.25rem; padding: 0.85rem; background: rgba(6, 182, 212, 0.08); border-radius: 6px; border-left: 3px solid #06b6d4;">
+              <strong style="color: #67e8f9;">The Mental Model:</strong> USER &rarr; POWER APPS &rarr; SHAREPOINT &rarr; POWER AUTOMATE &rarr; NOTIFICATION &rarr; PERSON.
+            </div>
+          </div>
+        </div>
+        <aside class="trainer-notes">
+          <h4>Trainer Speaking Script &amp; Pedagogical Cues:</h4>
+          <p><strong>Ecosystem Synthesis (3 min):</strong> "Have the learner recite the chain: User ➔ Power Apps ➔ SharePoint ➔ Power Automate ➔ Notification ➔ Person. Emphasize that Power Automate is not an isolated tool—it is the notification bridge triggered by SharePoint."</p>
+        </aside>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 10: SCREEN 1 ARCHITECTURE: THE MISSION CONTROL HUB
+           ==================================================================== -->
+      <section class="slide" id="slide-10" data-slide-index="9" data-title="Screen 1: scr_Home" data-segment="Part 6: Screen Implementation">
+        <header class="slide-header">
+          <div class="section-tag">Part 6 &bull; Screen 1 Architecture</div>
+          <h2>Screen 1: scr_Home — The Mission Control Hub</h2>
+          <p class="subtitle">The central landing place where workers browse, search, and initiate new tickets.</p>
+        </header>
+
+        <div class="slide-content grid-2-col">
+          <div class="card">
+            <h3 class="card-title">🖥️ UI Structure &amp; Key Controls</h3>
+            <ul style="color: var(--text-muted); font-size: 0.88rem; line-height: 1.6; padding-left: 1.2rem;">
+              <li><strong>Header Banner:</strong> Company logo, active user name, and app title.</li>
+              <li><strong>Top Action Bar:</strong>
+                <ul style="padding-left: 1rem; margin-top: 0.25rem;">
+                  <li><code>txtSearch</code>: Search by Ticket ID or Issue Description.</li>
+                  <li><code>cmbMachineFilter</code>: Dropdown filtering by machine.</li>
+                  <li><code>btnNewTicket</code>: Big amber button <code>+ New Work Order</code>.</li>
+                </ul>
+              </li>
+              <li><strong>Main Gallery (<code>galWorkOrders</code>):</strong>
+                <ul style="padding-left: 1rem; margin-top: 0.25rem;">
+                  <li>Card items displaying Machine, Priority tag, Status badge, and Created date.</li>
+                  <li>Tap chevron &rarr; navigates to Screen 3 (Workbench).</li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+
+          <div class="card">
+            <h3 class="card-title">⚡ Core Formulas on Screen 1</h3>
+            <div style="display: flex; flex-direction: column; gap: 0.75rem;">
+              <div style="background: rgba(0, 0, 0, 0.35); padding: 0.75rem; border-radius: 6px; font-family: var(--font-code); font-size: 0.8rem; color: #fcd34d;">
+                // btnNewTicket.OnSelect<br>
+                NewForm(frmNewWorkOrder);<br>
+                Navigate(scr_New, ScreenTransition.Cover)
+              </div>
+              <div style="background: rgba(0, 0, 0, 0.35); padding: 0.75rem; border-radius: 6px; font-family: var(--font-code); font-size: 0.8rem; color: #67e8f9;">
+                // galWorkOrders.OnSelect (or Chevron)<br>
+                Navigate(scr_DetailEdit, ScreenTransition.Fade)
+              </div>
+              <p style="color: var(--text-muted); font-size: 0.82rem;">
+                <strong>Key Rule:</strong> <code>NewForm()</code> must always be called BEFORE navigating to the New screen to wipe away previous inputs!
+              </p>
+            </div>
+          </div>
+        </div>
+        <aside class="trainer-notes">
+          <h4>Trainer Speaking Script &amp; Pedagogical Cues:</h4>
+          <p><strong>Screen 1 Purpose (3 min):</strong> "Demonstrate why NewForm() is on the button on Screen 1. If an operator previously typed something and cancelled, NewForm() guarantees a sparkling clean slate!"</p>
+        </aside>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 11: SCREEN 2 ARCHITECTURE: THE INTAKE GATE
+           ==================================================================== -->
+      <section class="slide" id="slide-11" data-slide-index="10" data-title="Screen 2: scr_New" data-segment="Part 6: Screen Implementation">
+        <header class="slide-header">
+          <div class="section-tag">Part 6 &bull; Screen 2 Architecture</div>
+          <h2>Screen 2: scr_New — The Zero-Distraction Intake Gate</h2>
+          <p class="subtitle">A focused, validated form designed for shop-floor operators wearing work gloves.</p>
+        </header>
+
+        <div class="slide-content grid-2-col">
+          <div class="card">
+            <h3 class="card-title">🛡️ Validation &amp; Safety Controls</h3>
+            <ul style="color: var(--text-muted); font-size: 0.88rem; line-height: 1.6; padding-left: 1.2rem;">
+              <li><strong>Single Form (<code>frmNewWorkOrder</code>):</strong> Bound to <code>DataSource = WorkOrders</code> in <code>FormMode.New</code>.</li>
+              <li><strong>Big Touch Dropdowns:</strong> MachineID (CNC-01 to 04), Priority (Critical, High, Medium, Low).</li>
+              <li><strong>Required Text Input:</strong> Issue Description.</li>
+              <li><strong>Safety Cancel Button:</strong> <code>ResetForm(frmNewWorkOrder); Back()</code>.</li>
+            </ul>
+          </div>
+
+          <div class="card">
+            <h3 class="card-title">🔒 The Gatekeeper Logic Formulas</h3>
+            <div style="display: flex; flex-direction: column; gap: 0.75rem;">
+              <div style="background: rgba(0, 0, 0, 0.35); padding: 0.75rem; border-radius: 6px; font-family: var(--font-code); font-size: 0.8rem; color: #fcd34d;">
+                // btnSubmit.DisplayMode (Validation Gate)<br>
+                If(<br>
+                &nbsp;&nbsp;IsBlank(cmbMachine.Selected) Or IsBlank(txtIssue.Text),<br>
+                &nbsp;&nbsp;DisplayMode.Disabled,<br>
+                &nbsp;&nbsp;DisplayMode.Edit<br>
+                )
+              </div>
+              <div style="background: rgba(0, 0, 0, 0.35); padding: 0.75rem; border-radius: 6px; font-family: var(--font-code); font-size: 0.8rem; color: #86efac;">
+                // frmNewWorkOrder.OnSuccess (Truth Hook)<br>
+                Notify("Work order logged successfully!", NotificationType.Success);<br>
+                Navigate(scr_Home, ScreenTransition.Uncover)
+              </div>
+            </div>
+          </div>
+        </div>
+        <aside class="trainer-notes">
+          <h4>Trainer Speaking Script &amp; Pedagogical Cues:</h4>
+          <p><strong>Screen 2 Purity (3 min):</strong> "Notice that Screen 2 has only ONE job: intake. No galleries, no unrelated stats. Just clean input, validation, and safe submission."</p>
+        </aside>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 12: SCREEN 3 ARCHITECTURE: THE TECHNICIAN WORKBENCH
+           ==================================================================== -->
+      <section class="slide" id="slide-12" data-slide-index="11" data-title="Screen 3: scr_DetailEdit" data-segment="Part 6: Screen Implementation">
+        <header class="slide-header">
+          <div class="section-tag">Part 6 &bull; Screen 3 Architecture</div>
+          <h2>Screen 3: scr_DetailEdit — The Technician Workbench</h2>
+          <p class="subtitle">Where lead technicians inspect existing records, assign staff, and log repair costs without duplicating rows.</p>
+        </header>
+
+        <div class="slide-content grid-2-col">
+          <div class="card">
+            <h3 class="card-title">🔧 Workbench Layout &amp; Card States</h3>
+            <ul style="color: var(--text-muted); font-size: 0.88rem; line-height: 1.6; padding-left: 1.2rem;">
+              <li><strong>Single Edit Form (<code>frmEditOrder</code>):</strong> Configured in <code>FormMode.Edit</code>.</li>
+              <li><strong>Bound to Selection:</strong> <code>Item = galWorkOrders.Selected</code>.</li>
+              <li><strong>Read-Only Cards:</strong> MachineID, ReportedBy, and Submission Date locked as View Mode.</li>
+              <li><strong>Editable Action Cards:</strong> AssignedTechnician, Status (In Repair, Resolved), RepairCost ($).</li>
+            </ul>
+          </div>
+
+          <div class="card">
+            <h3 class="card-title">⚡ Workbench Event Formulas</h3>
+            <div style="display: flex; flex-direction: column; gap: 0.75rem;">
+              <div style="background: rgba(0, 0, 0, 0.35); padding: 0.75rem; border-radius: 6px; font-family: var(--font-code); font-size: 0.8rem; color: #67e8f9;">
+                // frmEditOrder.Item<br>
+                galWorkOrders.Selected
+              </div>
+              <div style="background: rgba(0, 0, 0, 0.35); padding: 0.75rem; border-radius: 6px; font-family: var(--font-code); font-size: 0.8rem; color: #fcd34d;">
+                // btnSaveUpdate.OnSelect<br>
+                SubmitForm(frmEditOrder)
+              </div>
+              <div style="background: rgba(0, 0, 0, 0.35); padding: 0.75rem; border-radius: 6px; font-family: var(--font-code); font-size: 0.8rem; color: #86efac;">
+                // frmEditOrder.OnSuccess<br>
+                Notify("Work order updated!", NotificationType.Success);<br>
+                Navigate(scr_Home)
+              </div>
+            </div>
+          </div>
+        </div>
+        <aside class="trainer-notes">
+          <h4>Trainer Speaking Script &amp; Pedagogical Cues:</h4>
+          <p><strong>The Workbench (3 min):</strong> "Remind students: Why does SubmitForm() on this screen UPDATE instead of CREATE? Because FormMode is Edit and Item is galWorkOrders.Selected! It tells SharePoint: 'Don't make row 420; update row 419.'"</p>
+        </aside>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 13: THE GLUE LOGIC: DYNAMIC SEARCH & FILTER
+           ==================================================================== -->
+      <section class="slide" id="slide-13" data-slide-index="12" data-title="Glue Logic: Search & Filter" data-segment="Part 6: Screen Implementation">
+        <header class="slide-header">
+          <div class="section-tag">Part 6 &bull; Power Fx Logic</div>
+          <h2>The Glue Logic: Multi-Criteria Search &amp; Filter</h2>
+          <p class="subtitle">Allowing technicians to slice 500 tickets by machine and text query simultaneously.</p>
+        </header>
+
+        <div class="slide-content">
+          <div class="card">
+            <h3 class="card-title">🔍 The Universal Search &amp; Filter Formula</h3>
+            <div style="background: rgba(0, 0, 0, 0.45); padding: 1rem; border-radius: 8px; font-family: var(--font-code); font-size: 0.85rem; color: #67e8f9; line-height: 1.6;">
+              // galWorkOrders.Items<br>
+              Search(<br>
+              &nbsp;&nbsp;Filter(<br>
+              &nbsp;&nbsp;&nbsp;&nbsp;WorkOrders,<br>
+              &nbsp;&nbsp;&nbsp;&nbsp;IsBlank(cmbFilterMachine.Selected.Value) Or MachineID.Value = cmbFilterMachine.Selected.Value<br>
+              &nbsp;&nbsp;),<br>
+              &nbsp;&nbsp;txtSearch.Text,<br>
+              &nbsp;&nbsp;"Title",<br>
+              &nbsp;&nbsp;"Description"<br>
+              )
+            </div>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 1rem;">
+              <div style="background: rgba(245, 158, 11, 0.1); padding: 0.85rem; border-radius: 6px; border-left: 3px solid #f59e0b;">
+                <strong style="color: #fcd34d;">How Filter() Works Here:</strong>
+                <p style="color: var(--text-muted); font-size: 0.82rem; margin-top: 0.25rem;">
+                  If the dropdown is empty (`IsBlank`), the condition evaluates to `True` for every row, returning all records. If a machine is picked, only matching machines pass!
+                </p>
+              </div>
+
+              <div style="background: rgba(6, 182, 212, 0.1); padding: 0.85rem; border-radius: 6px; border-left: 3px solid #06b6d4;">
+                <strong style="color: #67e8f9;">How Search() Wraps It:</strong>
+                <p style="color: var(--text-muted); font-size: 0.82rem; margin-top: 0.25rem;">
+                  Takes the filtered table and searches for whatever letters the user types in `txtSearch` across both `Title` and `Description`.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <aside class="trainer-notes">
+          <h4>Trainer Speaking Script &amp; Pedagogical Cues:</h4>
+          <p><strong>Deconstructing the Wrapper (3 min):</strong> "Teach the Russian nesting doll analogy: The innermost layer is the SharePoint table; Filter() trims rows by machine; Search() trims rows by keyword; Gallery displays the result."</p>
+        </aside>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 14: POWER AUTOMATE BEGINNER EXTENSION: WHAT IS AUTOMATION?
+           ==================================================================== -->
+      <section class="slide" id="slide-14" data-slide-index="13" data-title="Power Automate: What Is It?" data-segment="Part 7: Cloud Automation Extension">
+        <header class="slide-header">
+          <div class="section-tag" style="background: rgba(139, 92, 246, 0.15); border-color: rgba(139, 92, 246, 0.4); color: #c084fc;">Part 7 &bull; Cloud Automation Extension</div>
+          <h2>Power Automate: What Is Automation?</h2>
+          <p class="subtitle">Child-simple definition: An invisible cloud assistant that automatically does a chore after an event occurs.</p>
+        </header>
+
+        <div class="slide-content grid-2-col">
+          <div class="card" style="border-top: 4px solid #f59e0b;">
+            <span class="card-badge" style="background: rgba(245, 158, 11, 0.2); color: #fcd34d;">The Spark</span>
+            <h3 class="card-title" style="color: #fcd34d;">1. The TRIGGER ("What Starts It")</h3>
+            <p style="color: var(--text-muted); font-size: 0.9rem; line-height: 1.6;">
+              A Trigger is the alarm clock that wakes the flow up. The flow sleeps quietly until this exact event happens in Microsoft 365.
+            </p>
+            <div style="margin-top: 1rem; padding: 0.85rem; background: rgba(0, 0, 0, 0.35); border-radius: 6px; font-family: var(--font-code); font-size: 0.84rem; color: #fcd34d;">
+              ⚡ SharePoint Connector:<br>
+              <strong>"When an item is created"</strong>
+            </div>
+          </div>
+
+          <div class="card" style="border-top: 4px solid #8b5cf6;">
+            <span class="card-badge" style="background: rgba(139, 92, 246, 0.2); color: #c084fc;">The Chore</span>
+            <h3 class="card-title" style="color: #c084fc;">2. The ACTION ("What It Does Next")</h3>
+            <p style="color: var(--text-muted); font-size: 0.9rem; line-height: 1.6;">
+              An Action is the work the flow performs after waking up. It takes the data from the trigger and carries out the task.
+            </p>
+            <div style="margin-top: 1rem; padding: 0.85rem; background: rgba(0, 0, 0, 0.35); border-radius: 6px; font-family: var(--font-code); font-size: 0.84rem; color: #c084fc;">
+              📧 Office 365 Outlook Connector:<br>
+              <strong>"Send an email (V2)"</strong>
+            </div>
+          </div>
+        </div>
+        <aside class="trainer-notes">
+          <h4>Trainer Speaking Script &amp; Pedagogical Cues:</h4>
+          <p><strong>First Introduction to Power Automate (3 min):</strong> "Do NOT use advanced jargon like JSON, webhooks, or variables! Keep it child-simple: Trigger = what starts it; Action = what it does next. That is the entire foundation of cloud automation."</p>
+        </aside>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 15: BUILDING THE 2-STEP AUTOMATED CLOUD FLOW
+           ==================================================================== -->
+      <section class="slide" id="slide-15" data-slide-index="14" data-title="Building the 2-Step Flow" data-segment="Part 7: Cloud Automation Extension">
+        <header class="slide-header">
+          <div class="section-tag" style="background: rgba(139, 92, 246, 0.15); border-color: rgba(139, 92, 246, 0.4); color: #c084fc;">Part 7 &bull; Cloud Automation Extension</div>
+          <h2>Building the 2-Step Automated Cloud Flow</h2>
+          <p class="subtitle">Connecting the SharePoint trigger directly to the Outlook email notification action.</p>
+        </header>
+
+        <div class="slide-content grid-2-col">
+          <div class="card">
+            <h3 class="card-title">⚡ Step 1: Configure the Trigger</h3>
+            <div style="background: rgba(0, 0, 0, 0.35); padding: 0.85rem; border-radius: 6px; font-size: 0.85rem; color: #cbd5e1; line-height: 1.6;">
+              <strong>Trigger Card:</strong> When an item is created<br>
+              &bull; <strong>Site Address:</strong> https://company.sharepoint.com/sites/PlantOps<br>
+              &bull; <strong>List Name:</strong> WorkOrders
+            </div>
+            <p style="color: var(--text-muted); font-size: 0.82rem; margin-top: 0.75rem;">
+              Power Automate automatically receives all column tokens (Title, MachineID, Priority, Description, CreatedBy) as dynamic data!
+            </p>
+          </div>
+
+          <div class="card">
+            <h3 class="card-title">📧 Step 2: Configure the Action</h3>
+            <div style="background: rgba(0, 0, 0, 0.35); padding: 0.85rem; border-radius: 6px; font-size: 0.85rem; color: #cbd5e1; line-height: 1.6;">
+              <strong>Action Card:</strong> Send an email (V2)<br>
+              &bull; <strong>To:</strong> Supervisor@company.com<br>
+              &bull; <strong>Subject:</strong> 🚨 New Work Order logged: <code>[Title]</code><br>
+              &bull; <strong>Body:</strong> Machine <code>[MachineID Value]</code> reported with priority <code>[Priority Value]</code> by <code>[Created By DisplayName]</code>.
+            </div>
+            <p style="color: var(--text-muted); font-size: 0.82rem; margin-top: 0.75rem;">
+              Dynamic content tokens in brackets `[ ]` automatically pull values from the exact row saved by Power Apps!
+            </p>
+          </div>
+        </div>
+        <aside class="trainer-notes">
+          <h4>Trainer Speaking Script &amp; Pedagogical Cues:</h4>
+          <p><strong>Dynamic Content Tokens (3 min):</strong> "Show students the dynamic content lightning bolt. Explain: 'We don't type CNC-02 manually in the email template. We select the MachineID token, so the email is personalized for whichever machine broke!'"</p>
+        </aside>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 16: INTERACTIVE END-TO-END PIPELINE SIMULATOR
+           ==================================================================== -->
+      <section class="slide" id="slide-16" data-slide-index="15" data-title="Interactive Pipeline Simulator" data-segment="Part 8: Interactive Simulator">
+        <header class="slide-header">
+          <div class="section-tag">Part 8 &bull; Interactive Simulator</div>
+          <h2>Interactive Pipeline Simulator: Trace the Full Lifecycle</h2>
+          <p class="subtitle">Click each step tab below to simulate how data moves from tablet screen to automated email alert.</p>
+        </header>
+
+        <div class="slide-content">
+          <div class="blueprint-sim">
+            <div class="sim-nav-tabs">
+              <button class="sim-tab-btn active" id="sim-tab-1" onclick="selectDay26Sim(1)">1. Home</button>
+              <button class="sim-tab-btn" id="sim-tab-2" onclick="selectDay26Sim(2)">2. New Intake</button>
+              <button class="sim-tab-btn" id="sim-tab-3" onclick="selectDay26Sim(3)">3. Validation Gate</button>
+              <button class="sim-tab-btn" id="sim-tab-4" onclick="selectDay26Sim(4)">4. Save to Cloud</button>
+              <button class="sim-tab-btn flow-tab" id="sim-tab-5" onclick="selectDay26Sim(5)">5. Flow Trigger</button>
+              <button class="sim-tab-btn flow-tab" id="sim-tab-6" onclick="selectDay26Sim(6)">6. Email Action</button>
+              <button class="sim-tab-btn" id="sim-tab-7" onclick="selectDay26Sim(7)">7. Tech Workbench</button>
+            </div>
+            <div class="sim-stage-content" id="sim-day26-display">
+              <!-- Dynamically populated by JS selectDay26Sim(1) -->
+            </div>
+          </div>
+        </div>
+        <aside class="trainer-notes">
+          <h4>Trainer Speaking Script &amp; Pedagogical Cues:</h4>
+          <p><strong>Simulator Exploration (3 min):</strong> "Click from tab 1 to 7 on the slide. Ask the learner: 'Which steps happen inside Power Apps? Which happen in SharePoint? Which happen in Power Automate?' Verify they see the hand-offs clearly."</p>
+        </aside>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 17: TRAINER DEMONSTRATION: ZERO-TO-ONE ASSEMBLY
+           ==================================================================== -->
+      <section class="slide" id="slide-17" data-slide-index="16" data-title="Trainer Live Demonstration" data-segment="Part 9: Demonstration">
+        <header class="slide-header">
+          <div class="section-tag">Part 9 &bull; Live Demonstration</div>
+          <h2>Trainer Live Demo: 15-Minute Zero-to-One Assembly</h2>
+          <p class="subtitle">Watch the trainer build and wire the connected 3-screen app and 2-step cloud flow.</p>
+        </header>
+
+        <div class="slide-content grid-4-col">
+          <div class="card">
+            <span class="card-badge" style="background: rgba(6, 182, 212, 0.2); color: #67e8f9;">Step 1 &bull; 4 min</span>
+            <h4 style="color: #f8fafc; margin: 0.5rem 0;">Wire Navigation</h4>
+            <p style="color: var(--text-muted); font-size: 0.85rem; line-height: 1.5;">
+              Create 3 screens. Add buttons with <code>NewForm(); Navigate()</code> and <code>ResetForm(); Back()</code>.
+            </p>
+          </div>
+
+          <div class="card">
+            <span class="card-badge" style="background: rgba(245, 158, 11, 0.2); color: #fcd34d;">Step 2 &bull; 3 min</span>
+            <h4 style="color: #f8fafc; margin: 0.5rem 0;">Form Binding &amp; Item</h4>
+            <p style="color: var(--text-muted); font-size: 0.85rem; line-height: 1.5;">
+              Bind <code>frmNewOrder</code> in New mode; bind <code>frmEditOrder</code> in Edit mode with <code>Item = galWorkOrders.Selected</code>.
+            </p>
+          </div>
+
+          <div class="card">
+            <span class="card-badge" style="background: rgba(16, 185, 129, 0.2); color: #86efac;">Step 3 &bull; 3 min</span>
+            <h4 style="color: #f8fafc; margin: 0.5rem 0;">Validation &amp; Hooks</h4>
+            <p style="color: var(--text-muted); font-size: 0.85rem; line-height: 1.5;">
+              Set <code>btnSubmit.DisplayMode</code> with <code>If(IsBlank(...))</code> and put <code>Notify()</code> in <code>OnSuccess</code>.
+            </p>
+          </div>
+
+          <div class="card">
+            <span class="card-badge" style="background: rgba(139, 92, 246, 0.2); color: #c084fc;">Step 4 &bull; 5 min</span>
+            <h4 style="color: #f8fafc; margin: 0.5rem 0;">Create Cloud Flow</h4>
+            <p style="color: var(--text-muted); font-size: 0.85rem; line-height: 1.5;">
+              Open Power Automate, create Automated cloud flow: "When item is created" ➔ "Send an email (V2)". Test live!
+            </p>
+          </div>
+        </div>
+        <aside class="trainer-notes">
+          <h4>Trainer Speaking Script &amp; Pedagogical Cues:</h4>
+          <p><strong>Live Demo Script (15 min):</strong> "Keep studio actions calm and deliberate. Show students how fast you assemble the app when following the Day 25 blueprint. Submit a live test ticket and watch the Outlook email arrive in real-time!"</p>
+        </aside>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 18: GUIDED PRACTICE: CONNECTING HOME TO NEW WORK ORDER
+           ==================================================================== -->
+      <section class="slide" id="slide-18" data-slide-index="17" data-title="Guided Practice: Home to New" data-segment="Part 10: Guided Practice">
+        <header class="slide-header">
+          <div class="section-tag">Part 10 &bull; Hands-On Lab</div>
+          <h2>Guided Practice: Connecting Home Screen to New Work Order</h2>
+          <p class="subtitle">Follow these 4 structured steps with your trainer to build the first half of the pipeline.</p>
+        </header>
+
+        <div class="slide-content grid-2-col">
+          <div class="card">
+            <h3 class="card-title">📝 Step-by-Step Lab Checklist</h3>
+            <ol style="color: var(--text-muted); font-size: 0.88rem; line-height: 1.7; padding-left: 1.2rem;">
+              <li>Add a button <code>btnNewTicket</code> on <code>scr_Home</code>. Set <code>Text = "+ New Work Order"</code>.</li>
+              <li>Set <code>btnNewTicket.OnSelect = NewForm(frmNewWorkOrder); Navigate(scr_New)</code>.</li>
+              <li>On <code>scr_New</code>, select <code>btnSubmit</code> and configure <code>DisplayMode</code> with <code>IsBlank()</code> validation.</li>
+              <li>Select <code>frmNewWorkOrder</code> and configure <code>OnSuccess</code> to display a green success notification and navigate home.</li>
+            </ol>
+          </div>
+
+          <div class="card">
+            <h3 class="card-title">🔍 Verification Test</h3>
+            <div style="background: rgba(0, 0, 0, 0.35); padding: 0.85rem; border-radius: 6px; font-size: 0.85rem; color: #cbd5e1; line-height: 1.6;">
+              &bull; <strong>Test 1:</strong> Click "+ New Work Order" &rarr; Does form open empty?<br>
+              &bull; <strong>Test 2:</strong> Is Submit button grayed out until you pick a machine?<br>
+              &bull; <strong>Test 3:</strong> Fill fields and click Submit &rarr; Does green banner appear and return to Home?
+            </div>
+            <p style="color: #86efac; font-size: 0.82rem; margin-top: 0.75rem;">
+              If all 3 tests pass, your app's intake pipeline is 100% certified!
+            </p>
+          </div>
+        </div>
+        <aside class="trainer-notes">
+          <h4>Trainer Speaking Script &amp; Pedagogical Cues:</h4>
+          <p><strong>Guided Coaching (15 min):</strong> "Walk around and ensure students write NewForm() on the button. Watch out for typos in IsBlank(). Confirm that the green banner appears and returns them home smoothly."</p>
+        </aside>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 19: INDEPENDENT MINI-TASK: SEARCH FILTER & FLOW ALERT
+           ==================================================================== -->
+      <section class="slide" id="slide-19" data-slide-index="18" data-title="Independent Mini-Task" data-segment="Part 11: Independent Task">
+        <header class="slide-header">
+          <div class="section-tag">Part 11 &bull; Independent Practice</div>
+          <h2>Independent Mini-Task: Search Filter &amp; Notification Flow</h2>
+          <p class="subtitle">12 Minutes: Wire the gallery search filter and build the automated email flow independently.</p>
+        </header>
+
+        <div class="slide-content grid-2-col">
+          <div class="card">
+            <span class="card-badge" style="background: rgba(245, 158, 11, 0.2); color: #fcd34d;">Challenge Requirements</span>
+            <h4 style="color: #f8fafc; margin: 0.5rem 0;">Two Tasks to Complete Solo:</h4>
+            <ul style="color: var(--text-muted); font-size: 0.88rem; line-height: 1.6; padding-left: 1.2rem;">
+              <li><strong>Task 1 (App):</strong> Add a Text Input (<code>txtSearch</code>) on `scr_Home` and wrap `galWorkOrders.Items` with `Search()` so typing "spindle" filters the gallery.</li>
+              <li><strong>Task 2 (Flow):</strong> Go to make.powerautomate.com, create a flow starting with "When an item is created", and send an email alert to your own email address.</li>
+            </ul>
+          </div>
+
+          <div class="card">
+            <span class="card-badge" style="background: rgba(16, 185, 129, 0.2); color: #86efac;">Expected Outcome</span>
+            <p style="color: var(--text-muted); font-size: 0.88rem; line-height: 1.6;">
+              When you submit a new ticket for machine "Lathe-01" with description "Oil pressure sensor failure", you should receive an email alert in your inbox within 2 minutes!
+            </p>
+            <div style="margin-top: 1rem; padding: 0.75rem; background: rgba(16, 185, 129, 0.1); border-radius: 6px; font-size: 0.82rem; color: #86efac;">
+              ✓ Ticket visible in Gallery &nbsp;&bull;&nbsp; ✓ Email received in Inbox
+            </div>
+          </div>
+        </div>
+        <aside class="trainer-notes">
+          <h4>Trainer Speaking Script &amp; Pedagogical Cues:</h4>
+          <p><strong>Independent Facilitation (12 min):</strong> "Give students quiet focus time. Observe their screens. Check if they put their own email address in the 'To' field of the email action."</p>
+        </aside>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 20: 3-TIER TROUBLESHOOTING: WHERE DID THE CHAIN BREAK?
+           ==================================================================== -->
+      <section class="slide" id="slide-20" data-slide-index="19" data-title="3-Tier Troubleshooting" data-segment="Part 12: Troubleshooting">
+        <header class="slide-header">
+          <div class="section-tag" style="background: rgba(239, 68, 68, 0.15); border-color: rgba(239, 68, 68, 0.4); color: #fca5a5;">Part 12 &bull; Systematic Debugging</div>
+          <h2>The 3-Tier Troubleshooting Audit: Where Did It Break?</h2>
+          <p class="subtitle">When someone says "I didn't get an email!", follow this systematic sequence without guessing.</p>
+        </header>
+
+        <div class="slide-content">
+          <div class="troubleshoot-grid">
+            <div class="troubleshoot-card troubleshoot-tier-a">
+              <span class="troubleshoot-badge" style="background: rgba(2, 132, 199, 0.2); color: #38bdf8;">Tier A &bull; Power Apps Layer</span>
+              <h4 style="color: #f8fafc; margin-bottom: 0.5rem;">Did SharePoint Get the Row?</h4>
+              <p style="color: var(--text-muted); font-size: 0.82rem; line-height: 1.5;">
+                Open SharePoint list in browser. Look for the new ticket row.
+              </p>
+              <div class="troubleshoot-check-item">
+                <span style="color: #f87171;">✕ Row Missing:</span>
+                <span>Power Apps failed to save. Check Form.Error, OnFailure, and button validation.</span>
+              </div>
+              <div class="troubleshoot-check-item">
+                <span style="color: #34d399;">✓ Row Exists:</span>
+                <span>Power Apps succeeded! <strong>DO NOT TOUCH YOUR APP CODE!</strong> Move to Tier B.</span>
+              </div>
+            </div>
+
+            <div class="troubleshoot-card troubleshoot-tier-b">
+              <span class="troubleshoot-badge" style="background: rgba(139, 92, 246, 0.2); color: #c084fc;">Tier B &bull; Flow Trigger Layer</span>
+              <h4 style="color: #f8fafc; margin-bottom: 0.5rem;">Did the Flow Wake Up?</h4>
+              <p style="color: var(--text-muted); font-size: 0.82rem; line-height: 1.5;">
+                Open Power Automate portal &rarr; Click Flow &rarr; Check Run History.
+              </p>
+              <div class="troubleshoot-check-item">
+                <span style="color: #f87171;">✕ No Runs Listed:</span>
+                <span>Trigger failed to detect row. Check if Flow is turned "On" or credentials expired.</span>
+              </div>
+              <div class="troubleshoot-check-item">
+                <span style="color: #34d399;">✓ Run Succeeded:</span>
+                <span>Flow detected the item and woke up! Move to Tier C.</span>
+              </div>
+            </div>
+
+            <div class="troubleshoot-card troubleshoot-tier-c">
+              <span class="troubleshoot-badge" style="background: rgba(16, 185, 129, 0.2); color: #86efac;">Tier C &bull; Action / Delivery Layer</span>
+              <h4 style="color: #f8fafc; margin-bottom: 0.5rem;">Did the Email Actually Send?</h4>
+              <p style="color: var(--text-muted); font-size: 0.82rem; line-height: 1.5;">
+                Click the run in history to inspect the "Send an email (V2)" action card.
+              </p>
+              <div class="troubleshoot-check-item">
+                <span style="color: #f87171;">✕ Red Exclamation:</span>
+                <span>Action failed. Invalid email address or recipient mailbox full.</span>
+              </div>
+              <div class="troubleshoot-check-item">
+                <span style="color: #34d399;">✓ Green Checkmark:</span>
+                <span>Email sent successfully! Check recipient's Outlook Junk/Spam folder.</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <aside class="trainer-notes">
+          <h4>Trainer Speaking Script &amp; Pedagogical Cues:</h4>
+          <p><strong>Systematic Debugging (3 min):</strong> "Emphasize this golden rule: Never touch Power Apps code if the row exists in SharePoint! Beginners waste hours breaking their apps when the issue was just a typo in an email address."</p>
+        </aside>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 21: 3 BEGINNER MISCONCEPTIONS DEMOLISHED
+           ==================================================================== -->
+      <section class="slide" id="slide-21" data-slide-index="20" data-title="Misconceptions Demolished" data-segment="Part 12: Demolishing Myths">
+        <header class="slide-header">
+          <div class="section-tag">Part 12 &bull; Demolishing Myths</div>
+          <h2>3 Beginner Misconceptions Demolished</h2>
+          <p class="subtitle">Replacing flawed mental models with enterprise engineering discipline.</p>
+        </header>
+
+        <div class="slide-content grid-3-col">
+          <div class="card" style="border-top: 3px solid #ef4444;">
+            <span class="card-badge" style="background: rgba(239, 68, 68, 0.2); color: #fca5a5;">Myth 1</span>
+            <h4 style="color: #f87171; margin: 0.5rem 0;">"Power Automate replaces Power Apps"</h4>
+            <p style="color: var(--text-muted); font-size: 0.84rem; line-height: 1.5;">
+              <strong>Wrong:</strong> Thinking one is an upgrade of the other.<br><br>
+              <strong>Reality:</strong> Power Apps is the UI (humans touch it). Power Automate is the nervous system (background cloud jobs). They work as partners!
+            </p>
+          </div>
+
+          <div class="card" style="border-top: 3px solid #f59e0b;">
+            <span class="card-badge" style="background: rgba(245, 158, 11, 0.2); color: #fcd34d;">Myth 2</span>
+            <h4 style="color: #fbbf24; margin: 0.5rem 0;">"Put SendEmail() in the Button"</h4>
+            <p style="color: var(--text-muted); font-size: 0.84rem; line-height: 1.5;">
+              <strong>Wrong:</strong> Putting email code inside the button's OnSelect.<br><br>
+              <strong>Reality:</strong> If the user closes the app immediately, the email fails! Cloud flows run 24/7 on cloud servers regardless of device state.
+            </p>
+          </div>
+
+          <div class="card" style="border-top: 3px solid #06b6d4;">
+            <span class="card-badge" style="background: rgba(6, 182, 212, 0.2); color: #67e8f9;">Myth 3</span>
+            <h4 style="color: #67e8f9; margin: 0.5rem 0;">"Make separate lists for New and Edit"</h4>
+            <p style="color: var(--text-muted); font-size: 0.84rem; line-height: 1.5;">
+              <strong>Wrong:</strong> Creating duplicate tables for intake and editing.<br><br>
+              <strong>Reality:</strong> Both forms point to <code>WorkOrders</code>! NewForm adds rows; EditForm updates existing rows without duplicates.
+            </p>
+          </div>
+        </div>
+        <aside class="trainer-notes">
+          <h4>Trainer Speaking Script &amp; Pedagogical Cues:</h4>
+          <p><strong>Myth Busting (3 min):</strong> "Drill down on Myth 2. Explain why in-app emails are fragile on mobile devices and why cloud flows provide bulletproof reliability."</p>
+        </aside>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 22: FORMATIVE ASSESSMENT: DUAL-STATE QUIZ
+           ==================================================================== -->
+      <section class="slide" id="slide-22" data-slide-index="21" data-title="Knowledge Check Quiz" data-segment="Part 13: Knowledge Check">
+        <header class="slide-header">
+          <div class="section-tag">Part 13 &bull; Formative Assessment</div>
+          <h2>System Knowledge Check: Dual-State Inspector</h2>
+          <p class="subtitle">Test your architectural understanding. Click any option on the left to verify principles.</p>
+        </header>
+
+        <div class="slide-content">
+          <div class="quiz-container">
+            <div class="quiz-card">
+              <div style="display: flex; justify-content: space-between; align-items: center;">
+                <span class="card-badge" style="background: rgba(6, 182, 212, 0.2); color: #67e8f9;" id="quiz-day26-q-num">Question 1 of 5</span>
+                <button class="hud-btn" id="quiz-day26-next-btn" onclick="nextDay26QuizQuestion()" style="padding: 0.35rem 0.75rem; font-size: 0.8rem;">Next &rarr;</button>
+              </div>
+              <h3 class="card-title" id="quiz-day26-q-text" style="margin-top: 0.75rem; font-size: 1.15rem; line-height: 1.4;">Question text</h3>
+              <div class="quiz-options" id="quiz-day26-options-container">
+                <!-- Dynamically populated by JS renderDay26QuizQuestion() -->
+              </div>
+            </div>
+
+            <div class="quiz-inspector-card" id="quiz-day26-feedback-box">
+              <div class="feedback-placeholder" id="quiz-day26-placeholder">
+                <span style="font-size: 2.5rem; color: var(--text-dim); margin-bottom: 0.5rem;">🔍</span>
+                <h4 style="color: var(--text-muted);">Select an Answer</h4>
+                <p style="font-size: 0.85rem; color: var(--text-dim); max-width: 280px; margin-top: 0.35rem;">
+                  Click any option on the left to verify architectural principles.
+                </p>
+              </div>
+              <div class="feedback-content" id="quiz-day26-feedback-content" style="display: none; flex-direction: column;">
+                <span class="card-badge" id="quiz-day26-feedback-badge" style="margin-bottom: 0.5rem;">Outcome</span>
+                <h4 id="quiz-day26-feedback-status" style="margin-bottom: 0.5rem; font-size: 1.1rem;">Status</h4>
+                <p id="quiz-day26-feedback-text" style="font-size: 0.88rem; color: #cbd5e1; line-height: 1.6;">Detailed explanation</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <aside class="trainer-notes">
+          <h4>Trainer Speaking Script &amp; Pedagogical Cues:</h4>
+          <p><strong>Quiz Facilitation (3 min):</strong> "Read the questions aloud. Have the learner explain WHY they picked an answer before clicking. Highlight Question 5 (Troubleshooting)."</p>
+        </aside>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 23: FINAL CHALLENGE, RUBRIC & EXPECTED RESULT
+           ==================================================================== -->
+      <section class="slide" id="slide-23" data-slide-index="22" data-title="Final Challenge & Rubric" data-segment="Part 14: Final Challenge">
+        <header class="slide-header">
+          <div class="section-tag">Part 14 &bull; Evaluation Rubric</div>
+          <h2>Final Challenge: The Flawless Shop-Floor Hand-off</h2>
+          <p class="subtitle">Demonstrate the complete, unbreakable end-to-end operational cycle.</p>
+        </header>
+
+        <div class="slide-content">
+          <div class="card">
+            <table class="rubric-table">
+              <thead>
+                <tr>
+                  <th>Dimension</th>
+                  <th>Level 1: Novice</th>
+                  <th>Level 2: Competent</th>
+                  <th>Level 3: Master Engineer</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>App Flow &amp; Navigation</strong></td>
+                  <td>Screens exist but buttons dead-end; user gets stuck on forms.</td>
+                  <td>Home ➔ New ➔ Detail/Edit navigates cleanly with <code>NewForm()</code> and <code>Back()</code>.</td>
+                  <td>Flawless UX. <code>OnSuccess</code> routes back to Home with green confirmation banner; gallery refreshes immediately.</td>
+                </tr>
+                <tr>
+                  <td><strong>Validation &amp; Binding</strong></td>
+                  <td>No validation; empty tickets save; edit form uses hardcoded ID.</td>
+                  <td><code>btnSubmit.DisplayMode</code> disabled on blanks; EditForm bound to <code>galWorkOrders.Selected</code>.</td>
+                  <td>Robust validation on all required fields; seamless editing with zero duplicate row creation.</td>
+                </tr>
+                <tr>
+                  <td><strong>Cloud Automation (Flow)</strong></td>
+                  <td>No flow, or email address is hardcoded in Power Apps button.</td>
+                  <td>Automated flow triggers on SharePoint item creation; sends basic email.</td>
+                  <td>Flow triggers dynamically, formats email with ticket tokens (ID, Machine, Priority), and student explains 3-Tier troubleshooting.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <aside class="trainer-notes">
+          <h4>Trainer Speaking Script &amp; Pedagogical Cues:</h4>
+          <p><strong>Rubric Review (2 min):</strong> "Show students the 3 levels. Congratulate them that by connecting the 3 screens and Power Automate, they have achieved Level 2 and are reaching for Level 3!"</p>
+        </aside>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 24: WRAP-UP, HOMEWORK & CONNECTION MAP
+           ==================================================================== -->
+      <section class="slide" id="slide-24" data-slide-index="23" data-title="Wrap-Up & Bridge Forward" data-segment="Part 15: Bridge Forward">
+        <header class="slide-header">
+          <div class="section-tag">Part 15 &bull; Synthesis &amp; Forward Bridge</div>
+          <h2>Day 26 Synthesis: You Built an Enterprise Ecosystem!</h2>
+          <p class="subtitle">Looking back at what we achieved today, and preparing for the Day 27 Independent Capstone.</p>
+        </header>
+
+        <div class="slide-content grid-2-col">
+          <div class="card" style="border-left: 3px solid #06b6d4;">
+            <h3 class="card-title">🎯 Today's Victory (Day 26)</h3>
+            <p style="color: var(--text-muted); font-size: 0.88rem; line-height: 1.6;">
+              You didn't just learn another Power Apps function. You connected an entire business ecosystem:
+            </p>
+            <div style="margin-top: 0.75rem; padding: 0.75rem; background: rgba(6, 182, 212, 0.1); border-radius: 6px; font-family: var(--font-code); font-size: 0.82rem; color: #67e8f9;">
+              Home &rarr; New &rarr; Validate &rarr; Save &rarr; SharePoint &rarr; Flow Trigger &rarr; Email Alert &rarr; Edit
+            </div>
+            <p style="color: var(--text-muted); font-size: 0.84rem; line-height: 1.5; margin-top: 0.75rem;">
+              You have eliminated duplicate tickets, stopped blank entries, and ensured supervisors are automatically notified in seconds.
+            </p>
+          </div>
+
+          <div class="card" style="border-left: 3px solid #f59e0b;">
+            <h3 class="card-title">🌉 Bridge to Tomorrow: Day 27 Capstone</h3>
+            <p style="color: var(--text-muted); font-size: 0.88rem; line-height: 1.6;">
+              Tomorrow is our graduation milestone: <strong>Independent Transfer</strong>.
+            </p>
+            <div style="margin-top: 0.75rem; padding: 0.75rem; background: rgba(245, 158, 11, 0.1); border-radius: 6px; font-family: var(--font-code); font-size: 0.82rem; color: #fcd34d;">
+              Day 27: Independent Capstone Certification<br>
+              You will design and build a complete enterprise solution from scratch without trainer scaffolding!
+            </div>
+            <p style="color: #fcd34d; font-size: 0.85rem; font-weight: bold; margin-top: 0.75rem;">
+              You are ready. Get a good night's rest—tomorrow you prove your mastery!
+            </p>
+          </div>
+        </div>
+        <aside class="trainer-notes">
+          <h4>Trainer Speaking Script &amp; Pedagogical Cues:</h4>
+          <p><strong>Closing Celebration (2 min):</strong> "Celebrate their massive achievement! Review the before ➔ today ➔ next connection. Tomorrow in Day 27, they will demonstrate their mastery completely independently. See you tomorrow!"</p>
+        </aside>
+      </section>
+
+    </main>
+
+    <!-- Bottom Presentation HUD Dock Controls -->
+        <footer id="bottom-hud">
+      <div id="progress-bar-container">
+        <div id="progress-bar"></div>
+      </div>
+
+      <div class="hud-left">
+        <button class="hud-btn" id="btn-prev" onclick="prevSlide()" title="Previous Slide (Left Arrow)">&#8592; Prev</button>
+        <button class="hud-btn" id="btn-next" onclick="nextSlide()" title="Next Slide (Right Arrow / Space)">Next &#8594;</button>
+        <span id="slide-counter">Slide <span id="slide-current-num">1</span> / <span id="slide-total-count">24</span></span>
+      </div>
+
+      <div class="hud-right">
+        <button class="hud-btn" id="btn-lang" onclick="toggleLanguage()" title="Toggle Language (L)">
+          🌐 <span id="lang-label">KH</span>
+        </button>
+        <button class="hud-btn active" id="btn-laser" onclick="toggleLaser()" title="Presenter Laser Pointer (P)">
+          🔴 Laser
+        </button>
+        <button class="hud-btn" id="btn-notes" onclick="toggleNotes()" title="Trainer Notes Drawer (N)">
+          📝 Notes
+        </button>
+        <button class="hud-btn" id="btn-overview" onclick="toggleOverview()" title="Slide Overview Modal (O)">
+          🗂️ Overview
+        </button>
+        <button class="hud-btn" id="btn-timer" onclick="toggleTimer()" title="90-Min Countdown (T)">
+          ⏱️ <span id="timer-display">90:00</span>
+        </button>
+        <button class="hud-btn" id="btn-fullscreen" onclick="toggleFullscreen()" title="Fullscreen (F)">
+          ⛶
+        </button>
+        <a href="../index.html" class="hud-btn hub-btn" title="Return to Master Curriculum Hub (ត្រឡប់ទៅទំព័រដើម)" style="text-decoration: none; display: inline-flex; align-items: center; gap: 4px; color: #fcd34d; font-weight: 600;"><span>🏠</span><span>Hub</span></a>
+      </div>
+    </footer>
+
+    
+
+    <!-- Trainer Notes Drawer (Strictly Off-Stage, Slides from Right) -->
+    <div class="notes-drawer" id="notes-drawer">
+      <div class="notes-header">
+        <h3 id="notes-slide-title">Trainer Speaking Notes &bull; Slide 1</h3>
+        <button class="notes-close-btn" onclick="toggleNotes()">&times;</button>
+      </div>
+      <div class="notes-content" id="notes-body-content">
+        <!-- Dynamically filled with active slide's speaking cues -->
+      </div>
+    </div>
+
+    <!-- 24-Slide Overview Modal -->
+    <div class="overview-modal" id="overview-modal">
+      <div class="overview-header">
+        <h3>24-Slide Master Navigation</h3>
+        <button class="overview-close" onclick="toggleOverview()">&times;</button>
+      </div>
+      <div class="overview-grid" id="overview-grid">
+        <!-- 24 cards populated by JS -->
+      </div>
+    </div>
+
+  </div>
+
+  <script src="script.js"></script>
+<script>
+if (window.self !== window.top) {
+  document.documentElement.classList.add('in-iframe');
+  function hideHub() { document.querySelectorAll('.hub-btn, .back-to-hub-pill').forEach(e => e.style.display = 'none'); }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', hideHub);
+  } else {
+    hideHub();
+  }
+}
+</script>
+<style>
+.in-iframe .hub-btn, .in-iframe .back-to-hub-pill { display: none !important; }
+</style>
+</body>
+</html>
+

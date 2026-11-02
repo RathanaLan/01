@@ -1,0 +1,1604 @@
+<!DOCTYPE html>
+<html lang="en" translate="no" class="notranslate">
+<head>
+  <meta name="google" content="notranslate">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Day 17: Conditions + IF in Power Fx: Validation | Microsoft Power Apps Foundation</title>
+  <link rel="stylesheet" href="../shared/design-system.css">
+  <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=Moul&family=Kantumruy+Pro:ital,wght@0,400..700;1,400..700&family=Battambang:wght@300;400;700;900&family=Koh+Santepheap:wght@300;400;700&family=Koulen&family=Siemreap&display=swap" rel="stylesheet">
+  <style>
+    /* Strict Speaker Notes Lock: Never render on slide stage under any circumstance */
+    aside.trainer-notes,
+    .trainer-notes,
+    .slide aside {
+      display: none !important;
+      visibility: hidden !important;
+      height: 0 !important;
+      width: 0 !important;
+      overflow: hidden !important;
+      opacity: 0 !important;
+      pointer-events: none !important;
+      margin: 0 !important;
+      padding: 0 !important;
+      border: none !important;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Presentation Stage Wrapper (Lesson 14 Architecture) -->
+  <div id="presentation-stage">
+    
+    <!-- Ambient Aurora Orbs (60fps backdrop) -->
+    <div class="aurora-orb orb-1"></div>
+    <div class="aurora-orb orb-2"></div>
+    <div class="aurora-orb orb-3"></div>
+
+    <!-- Presenter Laser Pointer & Shockwave Click Ripple -->
+    <div id="presenter-laser"></div>
+    <div id="pointer-ripple" class="pointer-click-ripple"></div>
+
+    <!-- Viewport for 24 Slides -->
+    <main id="slides-viewport">
+
+      <!-- Slide 1: Hero -->
+      <section class="slide active" id="slide-1" data-slide-index="0" data-title="Conditions + IF in Power Fx: Validation" data-segment="Phase 6: Power Fx Fundamentals">
+        <div class="slide-content hero-content">
+          <div class="hero-badge">
+            <span>Microsoft Power Apps Professional Foundation</span>
+            <span>&bull;</span>
+            <span>Day 17 of 27</span>
+          </div>
+          <h1 class="hero-title">Conditions + IF in Power Fx: Validation</h1>
+          <p class="hero-subtitle">
+            Reconnect logic foundation to real Power Apps behavior. Discover how True/False decisions act as an intelligent security gatekeeper, stopping blank "Ghost Tickets" before they ever pollute your database.
+          </p>
+
+          <div class="model-chain">
+            <span class="chain-item">Real Problem</span>
+            <span class="chain-arrow">&rarr;</span>
+            <span class="chain-item">Process</span>
+            <span class="chain-arrow">&rarr;</span>
+            <span class="chain-item">Data</span>
+            <span class="chain-arrow">&rarr;</span>
+            <span class="chain-item">UI / Screen</span>
+            <span class="chain-arrow">&rarr;</span>
+            <span class="chain-item active">Logic / Decision</span>
+            <span class="chain-arrow">&rarr;</span>
+            <span class="chain-item active">Action (Notify)</span>
+            <span class="chain-arrow">&rarr;</span>
+            <span class="chain-item">Storage</span>
+            <span class="chain-arrow">&rarr;</span>
+            <span class="chain-item">Feedback</span>
+            <span class="chain-arrow">&rarr;</span>
+            <span class="chain-item">Test</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Slide 2: 90-Min Agenda & Objectives -->
+      <section class="slide" id="slide-2" data-slide-index="1" data-title="90-Minute Agenda & Measurable Objectives" data-segment="Part 1: Objectives & Structure">
+        <header class="slide-header">
+          <div class="section-tag">Part 1 &bull; Objectives &amp; Structure</div>
+          <h2>90-Minute Agenda &amp; Measurable Objectives</h2>
+          <p class="subtitle">Spiral learning path: Connecting logic to data safety through structured hands-on milestones.</p>
+        </header>
+
+        <div class="slide-content grid-2">
+          <div class="card">
+            <h3 class="card-title">4 Measurable Learning Objectives</h3>
+            <div class="objective-item">
+              <span class="obj-num">1</span>
+              <div>
+                <strong>Identify Empty Inputs with <code>IsBlank()</code>:</strong>
+                <p>Inspect text controls and accurately evaluate whether a field contains user text or empty space, producing a clean True/False result.</p>
+              </div>
+            </div>
+            <div class="objective-item">
+              <span class="obj-num">2</span>
+              <div>
+                <strong>Construct 3-Part <code>If()</code> Decision Forks:</strong>
+                <p>Write bulletproof Power Fx formulas following the <code>If(Condition, TrueAction, FalseAction)</code> syntax without confusing arguments.</p>
+              </div>
+            </div>
+            <div class="objective-item">
+              <span class="obj-num">3</span>
+              <div>
+                <strong>Trigger Instant Visual Feedback with <code>Notify()</code>:</strong>
+                <p>Display floating color-coded toast banners (Error vs. Success) so users immediately understand why submission was stopped or approved.</p>
+              </div>
+            </div>
+            <div class="objective-item">
+              <span class="obj-num">4</span>
+              <div>
+                <strong>Shield Multiple Fields using <code>||</code> (OR Operator):</strong>
+                <p>Combine multiple input checks into a single unified validation gatekeeper to protect SharePoint from partial or blank submissions.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <h3 class="card-title">Strict 90-Minute Timed Schedule</h3>
+            <div class="agenda-timeline">
+              <div class="agenda-block">
+                <span class="agenda-time">00 - 10m</span>
+                <span class="agenda-name">1. Recall &amp; Concept Map</span>
+                <span class="agenda-desc">Connecting Days 4-6 &amp; 16 to Day 17</span>
+              </div>
+              <div class="agenda-block">
+                <span class="agenda-time">10 - 20m</span>
+                <span class="agenda-name">2. The "Why This Exists" Problem</span>
+                <span class="agenda-desc">The $22,000 Ghost Ticket Crisis</span>
+              </div>
+              <div class="agenda-block">
+                <span class="agenda-time">20 - 35m</span>
+                <span class="agenda-name">3. Core Logic &amp; Mental Models</span>
+                <span class="agenda-desc">Cause-and-effect &amp; ATM analogy</span>
+              </div>
+              <div class="agenda-block">
+                <span class="agenda-time">35 - 50m</span>
+                <span class="agenda-name">4. Power Fx Syntax Dissection</span>
+                <span class="agenda-desc">Deconstructing IsBlank, If, &amp; Notify</span>
+              </div>
+              <div class="agenda-block">
+                <span class="agenda-time">50 - 65m</span>
+                <span class="agenda-name">5. Trainer Demo &amp; Guided Practice</span>
+                <span class="agenda-desc">Wiring the Submit button guard</span>
+              </div>
+              <div class="agenda-block">
+                <span class="agenda-time">65 - 78m</span>
+                <span class="agenda-name">6. Interactive Lab &amp; Misconceptions</span>
+                <span class="agenda-desc">Live simulation &amp; mental model fixes</span>
+              </div>
+              <div class="agenda-block">
+                <span class="agenda-time">78 - 86m</span>
+                <span class="agenda-name">7. Knowledge Checks (5 Quizzes)</span>
+                <span class="agenda-desc">Interactive checks with live feedback</span>
+              </div>
+              <div class="agenda-block">
+                <span class="agenda-time">86 - 90m</span>
+                <span class="agenda-name">8. Capstone Challenge &amp; Forward Bridge</span>
+                <span class="agenda-desc">100-pt rubric &amp; preview to Day 18</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Slide 3: Concept Map Recap -->
+      <section class="slide" id="slide-3" data-slide-index="2" data-title="5-Minute Concept-Map: The Spiral Curriculum" data-segment="Part 1: Recall & Connection">
+        <header class="slide-header">
+          <div class="section-tag">Part 1 &bull; Spiral Connection</div>
+          <h2>5-Minute Concept-Map: The Spiral Curriculum</h2>
+          <p class="subtitle">Every new lesson stands directly on the shoulders of concepts you already mastered.</p>
+        </header>
+
+        <div class="slide-content grid-3">
+          <div class="card">
+            <div class="card-badge" style="background: rgba(59, 130, 246, 0.2); color: #93c5fd;">Days 4 - 6: Logic Foundation</div>
+            <h3 class="card-title">Questions &amp; True/False</h3>
+            <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 1rem;">
+              You learned that computer logic is not mysterious math; it is simply asking a question that evaluates to <strong>TRUE</strong> or <strong>FALSE</strong>.
+            </p>
+            <ul style="color: var(--text-muted); font-size: 0.88rem; padding-left: 1.2rem; line-height: 1.7;">
+              <li>Condition asks a question.</li>
+              <li>Question produces True or False.</li>
+              <li><code>If()</code> chooses path A or path B.</li>
+            </ul>
+          </div>
+
+          <div class="card">
+            <div class="card-badge" style="background: rgba(139, 92, 246, 0.2); color: #c4b5fd;">Day 16: Properties &amp; Formulas</div>
+            <h3 class="card-title">Live Spreadsheet Reactivity</h3>
+            <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 1rem;">
+              Yesterday you discovered how controls read values from each other using the Dot Operator (<code>Control.Property</code>) and calculate results dynamically.
+            </p>
+            <ul style="color: var(--text-muted); font-size: 0.88rem; padding-left: 1.2rem; line-height: 1.7;">
+              <li><code>txtDescription.Text</code> grabs live input.</li>
+              <li>Labels recalculate automatically.</li>
+              <li>Reactivity mirrors an Excel sheet.</li>
+            </ul>
+          </div>
+
+          <div class="card" style="border-color: var(--color-cyan); box-shadow: 0 0 25px rgba(6, 182, 212, 0.2);">
+            <div class="card-badge" style="background: rgba(6, 182, 212, 0.2); color: #67e8f9;">Today (Day 17): Real Validation</div>
+            <h3 class="card-title">The Intelligent Gatekeeper</h3>
+            <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 1rem;">
+              We unite Days 4-6 Logic with Day 16 Properties! We inspect control values, ask if they are blank, and STOP dangerous actions before submission.
+            </p>
+            <ul style="color: #67e8f9; font-size: 0.88rem; padding-left: 1.2rem; line-height: 1.7;">
+              <li>Inspect: <code>IsBlank(txtDescription.Text)</code></li>
+              <li>Evaluate: Does it equal True?</li>
+              <li>Act: <code>If(...) &rarr; Notify(Error)</code></li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- Slide 4: Prerequisite Retrieval (Interactive 3D Flip Cards) -->
+      <section class="slide" id="slide-4" data-slide-index="3" data-title="Prerequisite Retrieval: 4 Memory Checks" data-segment="Part 1: Prerequisite Retrieval">
+        <header class="slide-header">
+          <div class="section-tag">Part 1 &bull; Knowledge Retrieval</div>
+          <h2>Prerequisite Retrieval: 4 Memory Checks</h2>
+          <p class="subtitle">Click each card to flip and verify your understanding of core concepts before we build today's formulas.</p>
+        </header>
+
+        <div class="slide-content grid-4">
+          <!-- Flip Card 1 -->
+          <div class="flip-card" onclick="this.classList.toggle('flipped')">
+            <div class="flip-inner">
+              <div class="flip-front">
+                <span class="card-badge" style="background: rgba(59, 130, 246, 0.2); color: #93c5fd;">Question 1</span>
+                <h4 style="color: var(--text-main); margin-top: 1rem; font-size: 1.05rem;">What does a condition in logic ALWAYS evaluate to?</h4>
+                <p style="color: var(--text-muted); font-size: 0.85rem; margin-top: 0.5rem;">Think back to Day 4 Boolean principles...</p>
+                <span class="flip-prompt">Click to reveal answer &rarr;</span>
+              </div>
+              <div class="flip-back">
+                <span class="card-badge" style="background: rgba(16, 185, 129, 0.2); color: #86efac;">Answer 1</span>
+                <p style="color: #ecfdf5; font-size: 0.95rem; margin-top: 0.8rem; line-height: 1.6;">
+                  Either <strong>TRUE</strong> or <strong>FALSE</strong>! Never "maybe", never a number, and never half-true. In computer logic, a condition is a strict yes-or-no question.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Flip Card 2 -->
+          <div class="flip-card" onclick="this.classList.toggle('flipped')">
+            <div class="flip-inner">
+              <div class="flip-front">
+                <span class="card-badge" style="background: rgba(59, 130, 246, 0.2); color: #93c5fd;">Question 2</span>
+                <h4 style="color: var(--text-main); margin-top: 1rem; font-size: 1.05rem;">How do you read text from a TextInput box named txtDept?</h4>
+                <p style="color: var(--text-muted); font-size: 0.85rem; margin-top: 0.5rem;">Recall yesterday's Dot Operator syntax...</p>
+                <span class="flip-prompt">Click to reveal answer &rarr;</span>
+              </div>
+              <div class="flip-back">
+                <span class="card-badge" style="background: rgba(16, 185, 129, 0.2); color: #86efac;">Answer 2</span>
+                <p style="color: #ecfdf5; font-size: 0.95rem; margin-top: 0.8rem; line-height: 1.6;">
+                  <code>txtDept.Text</code><br><br>
+                  The control name is <code>txtDept</code>; the dot accesses its properties; <code>Text</code> retrieves whatever characters the user typed.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Flip Card 3 -->
+          <div class="flip-card" onclick="this.classList.toggle('flipped')">
+            <div class="flip-inner">
+              <div class="flip-front">
+                <span class="card-badge" style="background: rgba(59, 130, 246, 0.2); color: #93c5fd;">Question 3</span>
+                <h4 style="color: var(--text-main); margin-top: 1rem; font-size: 1.05rem;">What happens if you click a button with no formula in OnSelect?</h4>
+                <p style="color: var(--text-muted); font-size: 0.85rem; margin-top: 0.5rem;">Day 15 action triggers review...</p>
+                <span class="flip-prompt">Click to reveal answer &rarr;</span>
+              </div>
+              <div class="flip-back">
+                <span class="card-badge" style="background: rgba(16, 185, 129, 0.2); color: #86efac;">Answer 3</span>
+                <p style="color: #ecfdf5; font-size: 0.95rem; margin-top: 0.8rem; line-height: 1.6;">
+                  <strong>Nothing at all!</strong><br><br>
+                  Buttons are completely passive until a developer programs their <code>OnSelect</code> event with an action formula.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Flip Card 4 -->
+          <div class="flip-card" onclick="this.classList.toggle('flipped')">
+            <div class="flip-inner">
+              <div class="flip-front">
+                <span class="card-badge" style="background: rgba(59, 130, 246, 0.2); color: #93c5fd;">Question 4</span>
+                <h4 style="color: var(--text-main); margin-top: 1rem; font-size: 1.05rem;">Why do we never want empty records in SharePoint lists?</h4>
+                <p style="color: var(--text-muted); font-size: 0.85rem; margin-top: 0.5rem;">Days 9-11 data design review...</p>
+                <span class="flip-prompt">Click to reveal answer &rarr;</span>
+              </div>
+              <div class="flip-back">
+                <span class="card-badge" style="background: rgba(16, 185, 129, 0.2); color: #86efac;">Answer 4</span>
+                <p style="color: #ecfdf5; font-size: 0.95rem; margin-top: 0.8rem; line-height: 1.6;">
+                  Empty records corrupt data integrity, break automated email workflows, cause technician confusion, and ruin analytics dashboards!
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Slide 5: The "Why This Exists" Problem -->
+      <section class="slide" id="slide-5" data-slide-index="4" data-title="The 'Why This Exists' Problem: The $22,000 Ghost Ticket Crisis" data-segment="Part 2: The Workplace Crisis">
+        <header class="slide-header">
+          <div class="section-tag">Part 2 &bull; Workplace Crisis</div>
+          <h2>The "Why This Exists" Problem: The $22,000 Ghost Ticket Crisis</h2>
+          <p class="subtitle">What happens when an app trusts human operators without validating their input?</p>
+        </header>
+
+        <div class="slide-content grid-2">
+          <div class="card">
+            <div class="crisis-banner">
+              <span class="crisis-icon">&iexcl;</span>
+              <div>
+                <strong style="color: #fca5a5; font-size: 1.1rem;">Incident Report: Apex Plastics Production Facility</strong>
+                <p style="color: #fecaca; font-size: 0.88rem; margin: 0.25rem 0 0 0;">Shift B &bull; October 14 &bull; Maintenance Dispatch Log</p>
+              </div>
+            </div>
+
+            <p style="color: var(--text-main); font-size: 0.98rem; line-height: 1.7; margin-bottom: 1rem;">
+              On October 14, machine operators on Line 3 were rushing during a shift changeover. To speed up their tasks, several operators tapped the <strong style="color: #60a5fa;">Submit Request</strong> button repeatedly on the tablet before typing their problem description or selecting their department.
+            </p>
+
+            <p style="color: var(--text-muted); font-size: 0.92rem; line-height: 1.7;">
+              Because the app had <strong>no validation check</strong>, Power Apps faithfully transmitted 47 completely blank rows into the SharePoint database. The system assigned ticket numbers, but every single ticket had blank fields!
+            </p>
+          </div>
+
+          <div class="card">
+            <h3 class="card-title" style="color: #fca5a5;">The Cascade of Industrial Consequences</h3>
+            
+            <div class="consequence-row">
+              <span class="consequence-badge">Tech Chaos</span>
+              <div>
+                <strong style="color: var(--text-main); font-size: 0.9rem;">Technicians Wandering Factory Floor:</strong>
+                <p style="color: var(--text-muted); font-size: 0.84rem; margin: 0.15rem 0 0 0;">Maintenance engineers received automated pager alerts with no machine ID, wasting 6.5 hours searching across 12 injection moulding bays.</p>
+              </div>
+            </div>
+
+            <div class="consequence-row">
+              <span class="consequence-badge">Cost &dollar;22k</span>
+              <div>
+                <strong style="color: var(--text-main); font-size: 0.9rem;">$22,000 in Unrecorded Machine Downtime:</strong>
+                <p style="color: var(--text-muted); font-size: 0.84rem; margin: 0.15rem 0 0 0;">An actual hydraulic leak on Press #4 went unattended for 3 hours because technicians were chasing "Ghost Tickets".</p>
+              </div>
+            </div>
+
+            <div class="consequence-row">
+              <span class="consequence-badge">Root Cause</span>
+              <div>
+                <strong style="color: var(--text-main); font-size: 0.9rem;">The App Had No Guard at the Gate:</strong>
+                <p style="color: var(--text-muted); font-size: 0.84rem; margin: 0.15rem 0 0 0;">The button blindly executed submission without checking: <em>"Did the operator actually provide the mandatory details?"</em></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Slide 6: Visual Cause-and-Effect Diagram -->
+      <section class="slide" id="slide-6" data-slide-index="5" data-title="Visual Cause-and-Effect: The Validation Fork Circuit" data-segment="Part 3: Mental Models">
+        <header class="slide-header">
+          <div class="section-tag">Part 3 &bull; Mental Models</div>
+          <h2>Visual Cause-and-Effect: The Validation Fork Circuit</h2>
+          <p class="subtitle">How a single condition splits app behavior into two mutually exclusive outcomes.</p>
+        </header>
+
+        <div class="slide-content">
+          <!-- Flow Chain -->
+          <div class="validation-flow">
+            <div class="flow-step-box">
+              <span style="font-size: 0.75rem; text-transform: uppercase; color: var(--color-cyan); font-weight: 700;">Step 1: Event Trigger</span>
+              <strong style="color: var(--text-main); margin-top: 0.35rem; font-size: 1rem;">User Taps "Submit"</strong>
+              <span style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.2rem;"><code>btnSubmit.OnSelect</code> fires</span>
+            </div>
+
+            <div class="flow-arrow-indicator">&rarr;</div>
+
+            <div class="flow-step-box" style="border-color: var(--color-warning);">
+              <span style="font-size: 0.75rem; text-transform: uppercase; color: var(--color-warning); font-weight: 700;">Step 2: Gatekeeper Question</span>
+              <strong style="color: #fbbf24; margin-top: 0.35rem; font-size: 1rem;"><code>IsBlank(txtDescription.Text)</code></strong>
+              <span style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.2rem;">Is the description empty?</span>
+            </div>
+
+            <div class="flow-arrow-indicator">&rarr;</div>
+
+            <div class="flow-step-box" style="border-color: var(--color-primary);">
+              <span style="font-size: 0.75rem; text-transform: uppercase; color: #93c5fd; font-weight: 700;">Step 3: The Fork in the Road</span>
+              <strong style="color: var(--text-main); margin-top: 0.35rem; font-size: 1rem;"><code>If()</code> Function Decides</strong>
+              <span style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.2rem;">Evaluates to TRUE or FALSE</span>
+            </div>
+          </div>
+
+          <!-- Split Branches -->
+          <div class="branch-fork-grid">
+            <div class="branch-card branch-fail">
+              <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.5rem;">
+                <span style="font-weight: 700; color: #ef4444; font-size: 0.95rem;">BRANCH A: Result is TRUE (Field is Blank!)</span>
+                <span class="card-badge" style="background: rgba(239, 68, 68, 0.2); color: #fca5a5;">HALT &amp; WARN</span>
+              </div>
+              <p style="color: var(--text-main); font-size: 0.9rem; margin-bottom: 0.5rem;">
+                The condition evaluated to <strong>TRUE</strong>. The description is missing! The guard immediately stops the submission flow.
+              </p>
+              <div style="background: rgba(0, 0, 0, 0.4); padding: 0.75rem; border-radius: 0.5rem; font-family: var(--font-code); color: #fca5a5; font-size: 0.85rem;">
+                Notify("Description is required! Please enter details.", NotificationType.Error)
+              </div>
+              <p style="color: var(--text-muted); font-size: 0.8rem; margin-top: 0.5rem;">
+                &bull; Red toast banner appears at top of screen.<br>
+                &bull; SharePoint is NOT touched.<br>
+                &bull; User stays on the screen to fix their error.
+              </p>
+            </div>
+
+            <div class="branch-card branch-pass">
+              <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.5rem;">
+                <span style="font-weight: 700; color: #10b981; font-size: 0.95rem;">BRANCH B: Result is FALSE (Field is Valid!)</span>
+                <span class="card-badge" style="background: rgba(16, 185, 129, 0.2); color: #86efac;">PROCEED &amp; SAVE</span>
+              </div>
+              <p style="color: var(--text-main); font-size: 0.9rem; margin-bottom: 0.5rem;">
+                The condition evaluated to <strong>FALSE</strong>. The description is NOT blank! The guard grants full permission to proceed.
+              </p>
+              <div style="background: rgba(0, 0, 0, 0.4); padding: 0.75rem; border-radius: 0.5rem; font-family: var(--font-code); color: #86efac; font-size: 0.85rem;">
+                Notify("Request submitted successfully!", NotificationType.Success)
+              </div>
+              <p style="color: var(--text-muted); font-size: 0.8rem; margin-top: 0.5rem;">
+                &bull; Green confirmation toast appears.<br>
+                &bull; Data safely commits to SharePoint storage.<br>
+                &bull; Form clears or navigates to success screen.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Slide 7: Everyday Analogy: The Bank ATM & Building Security Guard -->
+      <section class="slide" id="slide-7" data-slide-index="6" data-title="Everyday Analogy: The Bank ATM & Security Guard" data-segment="Part 3: Real-World Analogies">
+        <header class="slide-header">
+          <div class="section-tag">Part 3 &bull; Real-World Analogies</div>
+          <h2>Everyday Analogy: The Bank ATM &amp; Security Guard</h2>
+          <p class="subtitle">Connecting abstract computer validation to familiar physical gatekeepers.</p>
+        </header>
+
+        <div class="slide-content grid-2">
+          <div class="card">
+            <div class="card-badge" style="background: rgba(59, 130, 246, 0.2); color: #93c5fd;">Analogy 1 &bull; Financial ATM</div>
+            <h3 class="card-title">The Cash Withdrawal Gatekeeper</h3>
+            <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 1rem;">
+              When you insert your debit card and ask an ATM for $500, what happens inside the machine before the cash slot opens?
+            </p>
+
+            <div style="background: rgba(15, 23, 42, 0.7); border-radius: 0.5rem; padding: 1rem; border: 1px solid var(--border-subtle); margin-bottom: 1rem;">
+              <strong style="color: #60a5fa; font-size: 0.9rem;">The ATM's Internal Question:</strong>
+              <p style="color: var(--text-main); font-size: 0.9rem; margin: 0.25rem 0 0 0;">
+                <em>"Does the account balance have at least $500?"</em>
+              </p>
+            </div>
+
+            <ul style="color: var(--text-muted); font-size: 0.88rem; padding-left: 1.2rem; line-height: 1.7;">
+              <li><strong>If FALSE (Not enough money):</strong> It beeps loudly, refuses to open the dispenser, and shows an error: <em>"Insufficient Funds"</em>.</li>
+              <li><strong>If TRUE (Funds available):</strong> It deducts the balance and dispenses the bills.</li>
+              <li><strong>The Lesson:</strong> The machine NEVER dispenses money first and checks your balance later! Validation always happens BEFORE the irreversible action.</li>
+            </ul>
+          </div>
+
+          <div class="card">
+            <div class="card-badge" style="background: rgba(16, 185, 129, 0.2); color: #86efac;">Analogy 2 &bull; Factory Security Guard</div>
+            <h3 class="card-title">The ID Badge Gatekeeper</h3>
+            <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 1rem;">
+              Imagine walking up to the security turnstile at the Apex Plastics manufacturing plant entrance.
+            </p>
+
+            <div style="background: rgba(15, 23, 42, 0.7); border-radius: 0.5rem; padding: 1rem; border: 1px solid var(--border-subtle); margin-bottom: 1rem;">
+              <strong style="color: #34d399; font-size: 0.9rem;">The Guard's Question:</strong>
+              <p style="color: var(--text-main); font-size: 0.9rem; margin: 0.25rem 0 0 0;">
+                <em>"Are you wearing a valid security badge?"</em>
+              </p>
+            </div>
+
+            <ul style="color: var(--text-muted); font-size: 0.88rem; padding-left: 1.2rem; line-height: 1.7;">
+              <li><strong>If FALSE (No badge):</strong> Guard halts you, points to the visitor desk, and says <em>"Access Denied. Register here first."</em></li>
+              <li><strong>If TRUE (Badge scanned):</strong> Turnstile unlatches and welcomes you inside.</li>
+              <li><strong>In Power Apps:</strong> The <code>If()</code> function is your digital security guard. The <code>IsBlank()</code> check is the guard checking for the badge!</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- Slide 8: Plain-Language to Power Fx Translation Ladder -->
+      <section class="slide" id="slide-8" data-slide-index="7" data-title="Plain-Language to Power Fx Translation Ladder" data-segment="Part 3: Translation Ladder">
+        <header class="slide-header">
+          <div class="section-tag">Part 3 &bull; Translation Ladder</div>
+          <h2>Plain-Language to Power Fx Translation Ladder</h2>
+          <p class="subtitle">Never memorize code syntax! Follow this 5-rung ladder from human thought to Power Fx.</p>
+        </header>
+
+        <div class="slide-content grid-2">
+          <div class="card">
+            <h3 class="card-title">The 5-Rung Translation Ladder</h3>
+
+            <div style="display: flex; flex-direction: column; gap: 0.75rem;">
+              <div style="background: rgba(15, 23, 42, 0.7); border-left: 4px solid #3b82f6; padding: 0.65rem 1rem; border-radius: 0.4rem;">
+                <span style="font-size: 0.72rem; text-transform: uppercase; color: #93c5fd; font-weight: 700;">Rung 1: Business Requirement</span>
+                <p style="color: var(--text-main); font-size: 0.88rem; margin: 0.2rem 0 0 0;">"Prevent operators from submitting empty support requests."</p>
+              </div>
+
+              <div style="background: rgba(15, 23, 42, 0.7); border-left: 4px solid #06b6d4; padding: 0.65rem 1rem; border-radius: 0.4rem;">
+                <span style="font-size: 0.72rem; text-transform: uppercase; color: #67e8f9; font-weight: 700;">Rung 2: Plain-English Question</span>
+                <p style="color: var(--text-main); font-size: 0.88rem; margin: 0.2rem 0 0 0;">"Is the text description box completely empty?"</p>
+              </div>
+
+              <div style="background: rgba(15, 23, 42, 0.7); border-left: 4px solid #f59e0b; padding: 0.65rem 1rem; border-radius: 0.4rem;">
+                <span style="font-size: 0.72rem; text-transform: uppercase; color: #fde68a; font-weight: 700;">Rung 3: The Power Fx Question</span>
+                <p style="color: var(--text-main); font-family: var(--font-code); font-size: 0.88rem; margin: 0.2rem 0 0 0;">IsBlank(txtDescription.Text)</p>
+              </div>
+
+              <div style="background: rgba(15, 23, 42, 0.7); border-left: 4px solid #a855f7; padding: 0.65rem 1rem; border-radius: 0.4rem;">
+                <span style="font-size: 0.72rem; text-transform: uppercase; color: #d8b4fe; font-weight: 700;">Rung 4: Resulting Boolean Value</span>
+                <p style="color: var(--text-main); font-size: 0.88rem; margin: 0.2rem 0 0 0;">Evaluates dynamically to <strong>true</strong> or <strong>false</strong></p>
+              </div>
+
+              <div style="background: rgba(15, 23, 42, 0.7); border-left: 4px solid #10b981; padding: 0.65rem 1rem; border-radius: 0.4rem;">
+                <span style="font-size: 0.72rem; text-transform: uppercase; color: #86efac; font-weight: 700;">Rung 5: The Decision Formula</span>
+                <p style="color: var(--text-main); font-family: var(--font-code); font-size: 0.85rem; margin: 0.2rem 0 0 0;">If(IsBlank(txtDesc.Text), Notify(Error), Notify(Success))</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <h3 class="card-title">The Absolute Zero Golden Rule</h3>
+            <div style="background: rgba(59, 130, 246, 0.1); border: 1px solid rgba(59, 130, 246, 0.3); border-radius: 0.75rem; padding: 1.25rem; margin-bottom: 1.25rem;">
+              <strong style="color: #93c5fd; font-size: 1.05rem;">"Think in Plain English First, Code Second!"</strong>
+              <p style="color: var(--text-muted); font-size: 0.9rem; line-height: 1.7; margin-top: 0.5rem;">
+                Novice developers often freeze because they try to write code directly into the formula bar. Professional architects NEVER do this. They formulate the business question in spoken language first, then translate it word-by-word into Power Fx.
+              </p>
+            </div>
+
+            <div style="background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.3); border-radius: 0.75rem; padding: 1.25rem;">
+              <strong style="color: #86efac; font-size: 0.95rem;">Why this eliminates syntax anxiety:</strong>
+              <p style="color: var(--text-muted); font-size: 0.88rem; line-height: 1.6; margin-top: 0.4rem;">
+                When you understand that <code>IsBlank()</code> is simply the English phrase <em>"Is this empty?"</em>, you no longer feel like you are memorizing an alien programming dialect.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Slide 9: Syntax Dissection 1: IsBlank() Anatomy -->
+      <section class="slide" id="slide-9" data-slide-index="8" data-title="Syntax Dissection 1: The IsBlank() Truth Tester" data-segment="Part 4: Syntax Dissection">
+        <header class="slide-header">
+          <div class="section-tag">Part 4 &bull; Syntax Dissection</div>
+          <h2>Syntax Dissection 1: The <code>IsBlank()</code> Truth Tester</h2>
+          <p class="subtitle">Anatomy of the function that tests whether user inputs contain data.</p>
+        </header>
+
+        <div class="slide-content">
+          <div class="syntax-dissection-grid">
+            <div class="syntax-visual-chain">
+              <div class="syntax-token-pill token-keyword">
+                <span>IsBlank</span>
+                <span class="token-desc">Function Name</span>
+              </div>
+              <span style="font-size: 1.8rem; color: #94a3b8; font-weight: 300;">(</span>
+              <div class="syntax-token-pill token-condition">
+                <span>txtDescription.Text</span>
+                <span class="token-desc">The Target Value</span>
+              </div>
+              <span style="font-size: 1.8rem; color: #94a3b8; font-weight: 300;">)</span>
+              <span style="font-size: 1.5rem; color: var(--color-cyan);">&rarr;</span>
+              <div class="syntax-token-pill token-false" style="min-width: 130px;">
+                <span>true / false</span>
+                <span class="token-desc">Boolean Return</span>
+              </div>
+            </div>
+
+            <div class="grid-3" style="margin-top: 0.5rem;">
+              <div class="card" style="padding: 1.15rem;">
+                <strong style="color: #60a5fa; font-size: 0.95rem;">1. What is <code>IsBlank</code>?</strong>
+                <p style="color: var(--text-muted); font-size: 0.85rem; line-height: 1.6; margin-top: 0.4rem;">
+                  It is a built-in Power Fx inspection function. Its sole mission in life is to look at a value and determine whether it is empty or absent.
+                </p>
+              </div>
+
+              <div class="card" style="padding: 1.15rem;">
+                <strong style="color: #fbbf24; font-size: 0.95rem;">2. What goes inside the <code>( )</code>?</strong>
+                <p style="color: var(--text-muted); font-size: 0.85rem; line-height: 1.6; margin-top: 0.4rem;">
+                  The argument you want to inspect! Here, we pass <code>txtDescription.Text</code>, which pulls the current typed characters from our text input box.
+                </p>
+              </div>
+
+              <div class="card" style="padding: 1.15rem;">
+                <strong style="color: #86efac; font-size: 0.95rem;">3. What comes out?</strong>
+                <p style="color: var(--text-muted); font-size: 0.85rem; line-height: 1.6; margin-top: 0.4rem;">
+                  A clean Boolean answer: returns <strong>true</strong> if the box has 0 characters; returns <strong>false</strong> if the user typed even a single character.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Slide 10: Syntax Dissection 2: If() 3-Argument Anatomy -->
+      <section class="slide" id="slide-10" data-slide-index="9" data-title="Syntax Dissection 2: The If() Decision Engine" data-segment="Part 4: Syntax Dissection">
+        <header class="slide-header">
+          <div class="section-tag">Part 4 &bull; Syntax Dissection</div>
+          <h2>Syntax Dissection 2: The <code>If()</code> Decision Engine</h2>
+          <p class="subtitle">Every decision in Power Apps uses the exact same 3-argument blueprint.</p>
+        </header>
+
+        <div class="slide-content">
+          <div class="syntax-dissection-grid">
+            <div class="syntax-visual-chain">
+              <div class="syntax-token-pill token-keyword">
+                <span>If</span>
+                <span class="token-desc">Decision Trigger</span>
+              </div>
+              <span style="font-size: 1.6rem; color: #94a3b8;">(</span>
+              <div class="syntax-token-pill token-condition">
+                <span>IsBlank(txtDept.Text)</span>
+                <span class="token-desc">Arg 1: Condition (Question)</span>
+              </div>
+              <span style="font-size: 1.8rem; color: #94a3b8; font-weight: 700;">,</span>
+              <div class="syntax-token-pill token-true">
+                <span>Notify("Select Dept!", Error)</span>
+                <span class="token-desc">Arg 2: Action if TRUE</span>
+              </div>
+              <span style="font-size: 1.8rem; color: #94a3b8; font-weight: 700;">,</span>
+              <div class="syntax-token-pill token-false">
+                <span>Notify("Success!", Success)</span>
+                <span class="token-desc">Arg 3: Action if FALSE</span>
+              </div>
+              <span style="font-size: 1.6rem; color: #94a3b8;">)</span>
+            </div>
+
+            <div class="grid-3" style="margin-top: 0.5rem;">
+              <div class="card" style="padding: 1.15rem; border-color: rgba(245, 158, 11, 0.4);">
+                <strong style="color: #fbbf24; font-size: 0.95rem;">Argument 1: The Question</strong>
+                <p style="color: var(--text-muted); font-size: 0.85rem; line-height: 1.6; margin-top: 0.4rem;">
+                  A condition that evaluates to True or False. Here: <em>"Is the department text box empty?"</em>
+                </p>
+              </div>
+
+              <div class="card" style="padding: 1.15rem; border-color: rgba(239, 68, 68, 0.4);">
+                <strong style="color: #fca5a5; font-size: 0.95rem;">Argument 2: The True Action</strong>
+                <p style="color: var(--text-muted); font-size: 0.85rem; line-height: 1.6; margin-top: 0.4rem;">
+                  What the app executes IF the condition is True. Here: show a red error notification stopping the user.
+                </p>
+              </div>
+
+              <div class="card" style="padding: 1.15rem; border-color: rgba(16, 185, 129, 0.4);">
+                <strong style="color: #86efac; font-size: 0.95rem;">Argument 3: The False Action</strong>
+                <p style="color: var(--text-muted); font-size: 0.85rem; line-height: 1.6; margin-top: 0.4rem;">
+                  What the app executes IF the condition is False. Here: the field is valid, so proceed with success!
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Slide 11: Syntax Dissection 3: Notify() Engine & Types -->
+      <section class="slide" id="slide-11" data-slide-index="10" data-title="Syntax Dissection 3: The Notify() Toast Engine" data-segment="Part 4: Syntax Dissection">
+        <header class="slide-header">
+          <div class="section-tag">Part 4 &bull; Syntax Dissection</div>
+          <h2>Syntax Dissection 3: The <code>Notify()</code> Toast Engine</h2>
+          <p class="subtitle">Communicating clearly with users using color-coded floating notification banners.</p>
+        </header>
+
+        <div class="slide-content grid-2">
+          <div class="card">
+            <h3 class="card-title">Anatomy of the <code>Notify()</code> Function</h3>
+            <p style="color: var(--text-muted); font-size: 0.95rem; line-height: 1.6; margin-bottom: 1rem;">
+              The <code>Notify()</code> function displays a temporary banner across the top of the user's screen. It takes two essential parameters:
+            </p>
+
+            <div style="background: rgba(15, 23, 42, 0.85); padding: 1rem; border-radius: 0.65rem; border: 1px solid var(--border-subtle); margin-bottom: 1rem;">
+              <code style="color: #93c5fd; font-size: 0.95rem;">Notify("Your Message Here", NotificationType.Error)</code>
+            </div>
+
+            <div style="display: flex; flex-direction: column; gap: 0.65rem;">
+              <div style="background: rgba(15, 23, 42, 0.6); padding: 0.65rem; border-radius: 0.4rem; border-left: 3px solid #3b82f6;">
+                <strong style="color: #93c5fd; font-size: 0.88rem;">1. Message String (in quotes):</strong>
+                <p style="color: var(--text-muted); font-size: 0.82rem; margin: 0.2rem 0 0 0;">Text that explains clearly what happened or how to fix it.</p>
+              </div>
+
+              <div style="background: rgba(15, 23, 42, 0.6); padding: 0.65rem; border-radius: 0.4rem; border-left: 3px solid #f59e0b;">
+                <strong style="color: #fde68a; font-size: 0.88rem;">2. NotificationType (Enum):</strong>
+                <p style="color: var(--text-muted); font-size: 0.82rem; margin: 0.2rem 0 0 0;">Controls the banner color, icon, and urgency level.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <h3 class="card-title">The 4 Official Notification Types</h3>
+
+            <div class="toast-sim-banner toast-error">
+              <span>&cross;</span>
+              <div>
+                <strong>NotificationType.Error (Red)</strong>
+                <p style="font-size: 0.8rem; margin: 0; font-weight: normal; opacity: 0.9;">Used for validation failures, missing inputs, and blocking errors.</p>
+              </div>
+            </div>
+
+            <div class="toast-sim-banner toast-success">
+              <span>&check;</span>
+              <div>
+                <strong>NotificationType.Success (Green)</strong>
+                <p style="font-size: 0.8rem; margin: 0; font-weight: normal; opacity: 0.9;">Used when data successfully saves or records submit to SharePoint.</p>
+              </div>
+            </div>
+
+            <div class="toast-sim-banner toast-warning">
+              <span>&excl;</span>
+              <div>
+                <strong>NotificationType.Warning (Amber)</strong>
+                <p style="font-size: 0.8rem; margin: 0; font-weight: normal; opacity: 0.9;">Used to alert the user of non-blocking risks (e.g. low stock).</p>
+              </div>
+            </div>
+
+            <div class="toast-sim-banner toast-info">
+              <span>&starf;</span>
+              <div>
+                <strong>NotificationType.Information (Blue)</strong>
+                <p style="font-size: 0.8rem; margin: 0; font-weight: normal; opacity: 0.9;">General status tips, sync updates, and helpful guidance.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Slide 12: Multi-Field Validation with || (OR Operator) -->
+      <section class="slide" id="slide-12" data-slide-index="11" data-title="Multi-Field Validation with || (OR Operator)" data-segment="Part 4: Multi-Field Validation">
+        <header class="slide-header">
+          <div class="section-tag">Part 4 &bull; Multi-Field Validation</div>
+          <h2>Multi-Field Validation with <code>||</code> (OR Operator)</h2>
+          <p class="subtitle">Guarding against partial submissions when an app requires multiple mandatory fields.</p>
+        </header>
+
+        <div class="slide-content grid-2">
+          <div class="card">
+            <h3 class="card-title">The Real Factory Dilemma</h3>
+            <p style="color: var(--text-muted); font-size: 0.95rem; line-height: 1.6; margin-bottom: 1rem;">
+              At Apex Plastics, a support request requires <strong>BOTH</strong> the Department and the Description. If an operator types the department but leaves the description empty, the ticket is still useless!
+            </p>
+
+            <div style="background: rgba(245, 158, 11, 0.1); border: 1px solid rgba(245, 158, 11, 0.3); border-radius: 0.65rem; padding: 1rem; margin-bottom: 1rem;">
+              <strong style="color: #fbbf24; font-size: 0.95rem;">The Business Rule:</strong>
+              <p style="color: var(--text-main); font-size: 0.88rem; margin-top: 0.35rem;">
+                <em>"If the Department is blank <strong>OR</strong> the Description is blank, halt submission!"</em>
+              </p>
+            </div>
+
+            <p style="color: var(--text-muted); font-size: 0.88rem; line-height: 1.6;">
+              In Power Fx, the logical OR operator is written as two vertical pipes: <code>||</code> (found above the Enter key on standard keyboards).
+            </p>
+          </div>
+
+          <div class="card">
+            <h3 class="card-title">The Combined Multi-Field Guard</h3>
+            
+            <div style="background: #070a12; border: 1px solid rgba(59, 130, 246, 0.3); border-radius: 0.75rem; padding: 1.15rem; font-family: var(--font-code); font-size: 0.88rem; line-height: 1.65; margin-bottom: 1rem;">
+              <span style="color: #60a5fa;">If</span>(<br>
+              &nbsp;&nbsp;<span style="color: #fbbf24;">IsBlank(txtDept.Text)</span> <span style="color: #f43f5e; font-weight: bold;">||</span> <span style="color: #fbbf24;">IsBlank(txtDescription.Text)</span>,<br>
+              &nbsp;&nbsp;<span style="color: #fca5a5;">Notify("Both Department and Description are mandatory!", NotificationType.Error)</span>,<br>
+              &nbsp;&nbsp;<span style="color: #86efac;">Notify("Request verified! Submitting ticket...", NotificationType.Success)</span><br>
+              )
+            </div>
+
+            <div style="background: rgba(15, 23, 42, 0.7); border-radius: 0.65rem; padding: 0.85rem; border: 1px solid var(--border-subtle);">
+              <strong style="color: #67e8f9; font-size: 0.85rem;">How Power Apps Evaluates This:</strong>
+              <ul style="color: var(--text-muted); font-size: 0.82rem; padding-left: 1.2rem; margin-top: 0.35rem; line-height: 1.6;">
+                <li>If Dept is blank &rarr; Entire condition is <strong>True</strong> &rarr; Shows Error.</li>
+                <li>If Desc is blank &rarr; Entire condition is <strong>True</strong> &rarr; Shows Error.</li>
+                <li>Only if <strong>NEITHER</strong> is blank does it evaluate to <strong>False</strong> &rarr; Proceeds with Success!</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Slide 13: Interactive Widget 1: Validation Decision Circuit Inspector -->
+      <section class="slide" id="slide-13" data-slide-index="12" data-title="Interactive Widget 1: Validation Circuit Inspector" data-segment="Part 4: Interactive Circuit Inspector">
+        <header class="slide-header">
+          <div class="section-tag">Part 4 &bull; Interactive Circuit</div>
+          <h2>Interactive Widget 1: Validation Circuit Inspector</h2>
+          <p class="subtitle">Select different form states to watch the Power Fx decision circuit evaluate in real time.</p>
+        </header>
+
+        <div class="slide-content">
+          <div class="widget-stage">
+            <!-- Scenario Selector Menu -->
+            <div class="inspector-menu">
+              <div class="inspector-tab active" data-scenario="empty-both" onclick="selectInspectorScenario('empty-both')">
+                <span style="font-size: 1.2rem; color: #ef4444;">&cross;</span>
+                <div>
+                  <strong style="font-size: 0.88rem; color: var(--text-main);">Scenario 1: Both Blank</strong>
+                  <p style="font-size: 0.75rem; color: var(--text-muted); margin: 0;">Dept: "" | Desc: ""</p>
+                </div>
+              </div>
+
+              <div class="inspector-tab" data-scenario="dept-only" onclick="selectInspectorScenario('dept-only')">
+                <span style="font-size: 1.2rem; color: #f59e0b;">&excl;</span>
+                <div>
+                  <strong style="font-size: 0.88rem; color: var(--text-main);">Scenario 2: Desc Blank</strong>
+                  <p style="font-size: 0.75rem; color: var(--text-muted); margin: 0;">Dept: "Molding" | Desc: ""</p>
+                </div>
+              </div>
+
+              <div class="inspector-tab" data-scenario="desc-only" onclick="selectInspectorScenario('desc-only')">
+                <span style="font-size: 1.2rem; color: #f59e0b;">&excl;</span>
+                <div>
+                  <strong style="font-size: 0.88rem; color: var(--text-main);">Scenario 3: Dept Blank</strong>
+                  <p style="font-size: 0.75rem; color: var(--text-muted); margin: 0;">Dept: "" | Desc: "Oil leak"</p>
+                </div>
+              </div>
+
+              <div class="inspector-tab" data-scenario="both-valid" onclick="selectInspectorScenario('both-valid')">
+                <span style="font-size: 1.2rem; color: #10b981;">&check;</span>
+                <div>
+                  <strong style="font-size: 0.88rem; color: var(--text-main);">Scenario 4: Both Valid</strong>
+                  <p style="font-size: 0.75rem; color: var(--text-muted); margin: 0;">Dept: "Molding" | Desc: "Leak"</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Dynamic Inspector Output Stage -->
+            <div class="inspector-display" id="inspector-display-panel">
+              <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem;">
+                <h4 style="color: var(--color-cyan); margin: 0;" id="circuit-scenario-title">Scenario 1: Both Fields Completely Blank</h4>
+                <span class="card-badge" id="circuit-outcome-badge" style="background: rgba(239, 68, 68, 0.2); color: #fca5a5;">GATE CLOSED: SUBMISSION BLOCKED</span>
+              </div>
+
+              <!-- Live Formula Highlighting -->
+              <div style="background: #070a12; border-radius: 0.65rem; padding: 1.15rem; font-family: var(--font-code); font-size: 0.9rem; line-height: 1.6; margin-bottom: 1.2rem;" id="circuit-code-box">
+                <span style="color: #60a5fa;">If</span>(<br>
+                &nbsp;&nbsp;<span id="eval-dept" style="background: rgba(239, 68, 68, 0.3); color: #fca5a5; padding: 2px 6px; border-radius: 4px;">IsBlank(txtDept.Text) &rarr; TRUE</span><br>
+                &nbsp;&nbsp;<span style="color: #f43f5e; font-weight: bold;">||</span> <span id="eval-desc" style="background: rgba(239, 68, 68, 0.3); color: #fca5a5; padding: 2px 6px; border-radius: 4px;">IsBlank(txtDescription.Text) &rarr; TRUE</span>,<br>
+                &nbsp;&nbsp;<span id="eval-action-true" style="color: #f87171; font-weight: bold; text-decoration: underline;">Notify("Both fields required!", Error) &larr; [EXECUTING]</span>,<br>
+                &nbsp;&nbsp;<span id="eval-action-false" style="color: #475569; opacity: 0.4;">Notify("Success!", Success) [BYPASSED]</span><br>
+                )
+              </div>
+
+              <!-- Simulated Toast Output -->
+              <div id="circuit-simulated-toast" class="toast-sim-banner toast-error">
+                <span>&cross;</span>
+                <span id="circuit-toast-text">Both Department and Description are mandatory!</span>
+              </div>
+
+              <p style="color: var(--text-muted); font-size: 0.85rem; margin-top: auto; line-height: 1.6;" id="circuit-explanation-text">
+                Because both inputs are empty, <code>IsBlank()</code> returns True for both sides. The logical OR condition succeeds on the True branch, firing the red error toast and protecting SharePoint storage.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Slide 14: Trainer Demonstration: Wiring the Submit Button -->
+      <section class="slide" id="slide-14" data-slide-index="13" data-title="Trainer Demonstration: Wiring the Submit Button" data-segment="Part 5: Trainer Demonstration">
+        <header class="slide-header">
+          <div class="section-tag">Part 5 &bull; Trainer Demonstration</div>
+          <h2>Trainer Demonstration: Wiring the Submit Button</h2>
+          <p class="subtitle">Watch step-by-step as the trainer programs the OnSelect validation guard in Power Apps Studio.</p>
+        </header>
+
+        <div class="slide-content grid-2">
+          <div class="card">
+            <h3 class="card-title">The 5 Demonstration Steps</h3>
+
+            <div style="display: flex; flex-direction: column; gap: 0.8rem;">
+              <div style="display: flex; gap: 0.85rem; align-items: flex-start;">
+                <span class="obj-num">1</span>
+                <div>
+                  <strong style="color: var(--text-main); font-size: 0.9rem;">Select <code>btnSubmit</code> in Tree View:</strong>
+                  <p style="color: var(--text-muted); font-size: 0.82rem; margin: 0.15rem 0 0 0;">Ensure the button control is highlighted on the canvas or left-hand tree view.</p>
+                </div>
+              </div>
+
+              <div style="display: flex; gap: 0.85rem; align-items: flex-start;">
+                <span class="obj-num">2</span>
+                <div>
+                  <strong style="color: var(--text-main); font-size: 0.9rem;">Switch Property to <code>OnSelect</code>:</strong>
+                  <p style="color: var(--text-muted); font-size: 0.82rem; margin: 0.15rem 0 0 0;">Use the top-left property dropdown to target the click action event.</p>
+                </div>
+              </div>
+
+              <div style="display: flex; gap: 0.85rem; align-items: flex-start;">
+                <span class="obj-num">3</span>
+                <div>
+                  <strong style="color: var(--text-main); font-size: 0.9rem;">Type the Validation Formula:</strong>
+                  <p style="color: var(--text-muted); font-size: 0.82rem; margin: 0.15rem 0 0 0;">Write the <code>If(IsBlank(...), Notify(...), Notify(...))</code> structure carefully.</p>
+                </div>
+              </div>
+
+              <div style="display: flex; gap: 0.85rem; align-items: flex-start;">
+                <span class="obj-num">4</span>
+                <div>
+                  <strong style="color: var(--text-main); font-size: 0.9rem;">Hold <kbd style="background: #1e293b; padding: 2px 6px; border-radius: 4px; border: 1px solid #475569;">Alt</kbd> to Test Live:</strong>
+                  <p style="color: var(--text-muted); font-size: 0.82rem; margin: 0.15rem 0 0 0;">Press and hold the Alt key to activate canvas testing mode without leaving the studio.</p>
+                </div>
+              </div>
+
+              <div style="display: flex; gap: 0.85rem; align-items: flex-start;">
+                <span class="obj-num">5</span>
+                <div>
+                  <strong style="color: var(--text-main); font-size: 0.9rem;">Verify Toast Banner Behavior:</strong>
+                  <p style="color: var(--text-muted); font-size: 0.82rem; margin: 0.15rem 0 0 0;">Test with empty fields (red banner) and filled fields (green banner).</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <h3 class="card-title">Studio Formula Bar View</h3>
+
+            <div style="background: #0f172a; border: 1px solid var(--border-subtle); border-radius: 0.75rem; padding: 1rem; margin-bottom: 1rem;">
+              <div style="display: flex; align-items: center; gap: 0.75rem; border-bottom: 1px solid rgba(255, 255, 255, 0.08); padding-bottom: 0.5rem; margin-bottom: 0.75rem;">
+                <span style="font-size: 0.8rem; font-weight: 700; color: var(--color-cyan);">Property:</span>
+                <span style="font-family: var(--font-code); font-size: 0.85rem; color: #93c5fd;">OnSelect</span>
+              </div>
+              <pre style="margin: 0; font-family: var(--font-code); font-size: 0.85rem; color: #e2e8f0; line-height: 1.6;"><code>If(
+  IsBlank(txtDescription.Text),
+  Notify(
+    "Please enter a description before submitting!",
+    NotificationType.Error
+  ),
+  Notify(
+    "Support ticket submitted successfully!",
+    NotificationType.Success
+  )
+)</code></pre>
+            </div>
+
+            <div style="background: rgba(59, 130, 246, 0.1); border-radius: 0.5rem; padding: 0.75rem; border: 1px solid rgba(59, 130, 246, 0.25);">
+              <strong style="color: #93c5fd; font-size: 0.85rem;">Trainer Pro-Tip:</strong>
+              <p style="color: var(--text-muted); font-size: 0.8rem; margin: 0.2rem 0 0 0;">
+                Press <kbd style="background: #0f172a; padding: 1px 4px; border-radius: 3px;">Shift + Enter</kbd> inside the Power Apps formula bar to format your code across multiple lines. Clean indentation prevents parenthesis errors!
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Slide 15: Guided Practice: Building the Dual-Field Shield -->
+      <section class="slide" id="slide-15" data-slide-index="14" data-title="Guided Practice: Building the Dual-Field Shield" data-segment="Part 5: Guided Practice">
+        <header class="slide-header">
+          <div class="section-tag">Part 5 &bull; Guided Practice</div>
+          <h2>Guided Practice: Building the Dual-Field Shield</h2>
+          <p class="subtitle">Now open your Power Apps canvas and code along with the trainer step-by-step.</p>
+        </header>
+
+        <div class="slide-content grid-2">
+          <div class="card">
+            <h3 class="card-title">Your Task Instructions</h3>
+            <p style="color: var(--text-muted); font-size: 0.92rem; line-height: 1.6; margin-bottom: 1rem;">
+              You will add a dual-validation shield to your Apex Plastics Maintenance Request form:
+            </p>
+
+            <div style="display: flex; flex-direction: column; gap: 0.75rem;">
+              <div style="background: rgba(15, 23, 42, 0.7); padding: 0.75rem; border-radius: 0.5rem; border: 1px solid var(--border-subtle);">
+                <strong style="color: var(--text-main); font-size: 0.88rem;">Step 1: Check Control Names</strong>
+                <p style="color: var(--text-muted); font-size: 0.82rem; margin: 0.15rem 0 0 0;">Ensure your department box is named <code>txtDept</code> and description box is named <code>txtDesc</code>.</p>
+              </div>
+
+              <div style="background: rgba(15, 23, 42, 0.7); padding: 0.75rem; border-radius: 0.5rem; border: 1px solid var(--border-subtle);">
+                <strong style="color: var(--text-main); font-size: 0.88rem;">Step 2: Open OnSelect Property</strong>
+                <p style="color: var(--text-muted); font-size: 0.82rem; margin: 0.15rem 0 0 0;">Select your Submit button and navigate to its <code>OnSelect</code> property.</p>
+              </div>
+
+              <div style="background: rgba(15, 23, 42, 0.7); padding: 0.75rem; border-radius: 0.5rem; border: 1px solid var(--border-subtle);">
+                <strong style="color: var(--text-main); font-size: 0.88rem;">Step 3: Insert the Dual Guard</strong>
+                <p style="color: var(--text-muted); font-size: 0.82rem; margin: 0.15rem 0 0 0;">Use the logical OR operator <code>||</code> to check both fields.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <h3 class="card-title">Target Formula to Implement</h3>
+
+            <div style="background: #070a12; border: 1px solid rgba(59, 130, 246, 0.35); border-radius: 0.75rem; padding: 1.15rem; font-family: var(--font-code); font-size: 0.85rem; line-height: 1.65; margin-bottom: 1rem;">
+              <span style="color: #60a5fa;">If</span>(<br>
+              &nbsp;&nbsp;<span style="color: #fbbf24;">IsBlank(txtDept.Text)</span> <span style="color: #f43f5e; font-weight: bold;">||</span> <span style="color: #fbbf24;">IsBlank(txtDesc.Text)</span>,<br>
+              &nbsp;&nbsp;<span style="color: #fca5a5;">Notify(</span><br>
+              &nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #fdba74;">"Missing required fields! Please check Dept &amp; Description."</span>,<br>
+              &nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #ef4444;">NotificationType.Error</span><br>
+              &nbsp;&nbsp;<span style="color: #fca5a5;">)</span>,<br>
+              &nbsp;&nbsp;<span style="color: #86efac;">Notify(</span><br>
+              &nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #a7f3d0;">"All fields verified! Ticket sent to maintenance."</span>,<br>
+              &nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #10b981;">NotificationType.Success</span><br>
+              &nbsp;&nbsp;<span style="color: #86efac;">)</span><br>
+              )
+            </div>
+
+            <div style="background: rgba(16, 185, 129, 0.1); border-radius: 0.5rem; padding: 0.75rem; border: 1px solid rgba(16, 185, 129, 0.25);">
+              <strong style="color: #86efac; font-size: 0.85rem;">Verification Checklist:</strong>
+              <p style="color: var(--text-muted); font-size: 0.8rem; margin: 0.2rem 0 0 0;">
+                Does the red error banner show if either field is missing? Does the green success banner show ONLY when both are filled? If yes, give yourself a thumbs up!
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Slide 16: Interactive Widget 2: Live Form Validation Lab -->
+      <section class="slide" id="slide-16" data-slide-index="15" data-title="Interactive Widget 2: Live Form Validation Lab" data-segment="Part 6: Interactive Lab">
+        <header class="slide-header">
+          <div class="section-tag">Part 6 &bull; Interactive Lab</div>
+          <h2>Interactive Widget 2: Live Form Validation Lab</h2>
+          <p class="subtitle">Experience real Power Apps form behavior with a live interactive simulator right in this presentation.</p>
+        </header>
+
+        <div class="slide-content grid-2">
+          <!-- Left: Simulated Form -->
+          <div class="card">
+            <h3 class="card-title">Apex Plastics Support Request Form</h3>
+
+            <div style="display: flex; flex-direction: column; gap: 1rem; margin-top: 0.5rem;">
+              <div>
+                <label style="display: block; font-size: 0.85rem; font-weight: 600; color: var(--text-muted); margin-bottom: 0.35rem;">
+                  Department Name: <span style="color: #ef4444;">*</span>
+                </label>
+                <input type="text" id="sim-input-dept" class="sample-input-control" placeholder="e.g. Injection Molding Line 3" oninput="updateSimForm()">
+              </div>
+
+              <div>
+                <label style="display: block; font-size: 0.85rem; font-weight: 600; color: var(--text-muted); margin-bottom: 0.35rem;">
+                  Problem Description: <span style="color: #ef4444;">*</span>
+                </label>
+                <textarea id="sim-input-desc" class="sample-input-control" rows="3" placeholder="Describe the breakdown or maintenance need..." oninput="updateSimForm()"></textarea>
+              </div>
+
+              <div style="display: flex; gap: 0.75rem; margin-top: 0.5rem;">
+                <button type="button" id="sim-btn-submit" class="sample-button-control" onclick="simulateFormSubmit()" style="flex: 1;">
+                  Submit Request (OnSelect)
+                </button>
+                <button type="button" class="hud-btn" onclick="clearSimForm()" style="padding: 0.75rem 1rem;">
+                  Reset
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right: Simulated Canvas Screen Output -->
+          <div class="card" style="position: relative; overflow: hidden; background: #070a12;">
+            <h3 class="card-title" style="color: var(--color-cyan);">Simulated Power Apps Canvas Output</h3>
+
+            <!-- Simulated Floating Toast Banner -->
+            <div id="sim-toast-banner" class="toast-sim-banner toast-info" style="display: none;">
+              <span id="sim-toast-icon">&starf;</span>
+              <span id="sim-toast-msg">Ready for testing</span>
+            </div>
+
+            <div style="background: rgba(15, 23, 42, 0.85); border-radius: 0.65rem; padding: 1rem; border: 1px solid var(--border-subtle); margin-top: 0.5rem; flex: 1; display: flex; flex-direction: column;">
+              <strong style="color: #93c5fd; font-size: 0.85rem;">Formula Execution Telemetry:</strong>
+              
+              <div id="sim-telemetry-log" style="font-family: var(--font-code); font-size: 0.82rem; color: #cbd5e1; line-height: 1.6; margin-top: 0.5rem; flex: 1; overflow-y: auto;">
+                <p style="color: var(--text-dim);">&bull; Awaiting user click on Submit Request button...</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Slide 17: 5 Dangerous Misconceptions vs Power Fx Reality -->
+      <section class="slide" id="slide-17" data-slide-index="16" data-title="5 Dangerous Misconceptions vs Power Fx Reality" data-segment="Part 6: Misconceptions">
+        <header class="slide-header">
+          <div class="section-tag">Part 6 &bull; Misconceptions</div>
+          <h2>5 Dangerous Misconceptions vs Power Fx Reality</h2>
+          <p class="subtitle">Avoid these 5 common beginner traps before they lead to corrupted production data.</p>
+        </header>
+
+        <div class="slide-content grid-2">
+          <div class="card">
+            <div style="display: flex; flex-direction: column; gap: 0.85rem;">
+              <div style="background: rgba(239, 68, 68, 0.08); border-left: 3px solid #ef4444; padding: 0.75rem; border-radius: 0.4rem;">
+                <strong style="color: #fca5a5; font-size: 0.88rem;">Misconception 1: "Power Apps will automatically know a field is required."</strong>
+                <p style="color: var(--text-muted); font-size: 0.82rem; margin: 0.2rem 0 0 0;">
+                  <strong>Reality:</strong> False! Unchecked custom canvas controls will happily submit blank strings to your database unless you explicitly build validation rules.
+                </p>
+              </div>
+
+              <div style="background: rgba(239, 68, 68, 0.08); border-left: 3px solid #ef4444; padding: 0.75rem; border-radius: 0.4rem;">
+                <strong style="color: #fca5a5; font-size: 0.88rem;">Misconception 2: "If() needs to say = true at the end."</strong>
+                <p style="color: var(--text-muted); font-size: 0.82rem; margin: 0.2rem 0 0 0;">
+                  <strong>Reality:</strong> Writing <code>If(IsBlank(txt.Text) = true, ...)</code> is redundant! <code>IsBlank()</code> already returns true or false on its own. Keep it clean.
+                </p>
+              </div>
+
+              <div style="background: rgba(239, 68, 68, 0.08); border-left: 3px solid #ef4444; padding: 0.75rem; border-radius: 0.4rem;">
+                <strong style="color: #fca5a5; font-size: 0.88rem;">Misconception 3: "Notify() saves data to SharePoint."</strong>
+                <p style="color: var(--text-muted); font-size: 0.82rem; margin: 0.2rem 0 0 0;">
+                  <strong>Reality:</strong> <code>Notify()</code> only talks to the human eye! It displays a message banner. It never writes a single byte to database storage.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div style="display: flex; flex-direction: column; gap: 0.85rem;">
+              <div style="background: rgba(239, 68, 68, 0.08); border-left: 3px solid #ef4444; padding: 0.75rem; border-radius: 0.4rem;">
+                <strong style="color: #fca5a5; font-size: 0.88rem;">Misconception 4: "Checking one field automatically protects the others."</strong>
+                <p style="color: var(--text-muted); font-size: 0.82rem; margin: 0.2rem 0 0 0;">
+                  <strong>Reality:</strong> If you only check <code>IsBlank(txtDept.Text)</code>, an empty Description will slip right past your guard. You must validate every mandatory input!
+                </p>
+              </div>
+
+              <div style="background: rgba(239, 68, 68, 0.08); border-left: 3px solid #ef4444; padding: 0.75rem; border-radius: 0.4rem;">
+                <strong style="color: #fca5a5; font-size: 0.88rem;">Misconception 5: "Validation errors should just say 'Error!'."</strong>
+                <p style="color: var(--text-muted); font-size: 0.82rem; margin: 0.2rem 0 0 0;">
+                  <strong>Reality:</strong> Poor error messages frustrate users. Great validation tells the user exactly <em>what</em> is missing and <em>how</em> to fix it immediately.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Slide 18: Knowledge Check 1 (Q1) -->
+      <section class="slide" id="slide-18" data-slide-index="17" data-title="Knowledge Check 1: IsBlank Return Value" data-segment="Part 7: Knowledge Checks">
+        <header class="slide-header">
+          <div class="section-tag">Part 7 &bull; Knowledge Check 1 of 5</div>
+          <h2>Knowledge Check: What does <code>IsBlank()</code> return?</h2>
+          <p class="subtitle">Test your fundamental understanding of Boolean truth evaluation.</p>
+        </header>
+
+        <div class="slide-content">
+          <div class="quiz-container">
+            <div class="quiz-card">
+              <span class="card-badge" style="background: rgba(59, 130, 246, 0.2); color: #93c5fd;">Question 1</span>
+              <p style="color: var(--text-main); font-size: 1.05rem; line-height: 1.6; margin-top: 0.5rem;">
+                An operator has NOT typed anything into the text box named <code>txtIssue</code>. What does the formula <code>IsBlank(txtIssue.Text)</code> evaluate to?
+              </p>
+
+              <div class="quiz-options">
+                <button class="quiz-option-btn" onclick="handleQuizAnswer(1, 'A', false, this)">
+                  <strong>A.</strong> <span>It returns 0 (zero)</span>
+                </button>
+                <button class="quiz-option-btn" onclick="handleQuizAnswer(1, 'B', true, this)">
+                  <strong>B.</strong> <span>It returns <strong>true</strong></span>
+                </button>
+                <button class="quiz-option-btn" onclick="handleQuizAnswer(1, 'C', false, this)">
+                  <strong>C.</strong> <span>It throws a red formula syntax error</span>
+                </button>
+                <button class="quiz-option-btn" onclick="handleQuizAnswer(1, 'D', false, this)">
+                  <strong>D.</strong> <span>It returns false</span>
+                </button>
+              </div>
+            </div>
+
+            <div class="quiz-feedback" id="quiz-feedback-1">
+              <div class="feedback-placeholder">
+                <div style="width: 52px; height: 52px; border-radius: 50%; background: rgba(59, 130, 246, 0.15); border: 1px solid rgba(59, 130, 246, 0.35); display: flex; align-items: center; justify-content: center; margin: 0 auto 0.85rem auto; font-size: 1.5rem; color: #60a5fa;">
+                  &quest;
+                </div>
+                <span class="card-badge" style="background: rgba(59, 130, 246, 0.2); color: #93c5fd; margin-bottom: 0.65rem;">Awaiting Selection</span>
+                <h4 style="color: #f8fafc; font-size: 1.05rem; margin-bottom: 0.5rem;">Live UX Architecture Inspector</h4>
+                <p style="color: var(--text-muted); font-size: 0.88rem; line-height: 1.6; max-width: 380px; margin: 0 auto;">
+                  Select an option on the left (A, B, C, or D) to submit your answer and unlock the system architecture rationale.
+                </p>
+              </div>
+              <div class="feedback-content">
+                <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.75rem;">
+                  <span class="card-badge" id="quiz-badge-1" style="background: rgba(16, 185, 129, 0.2); color: #86efac;">Correct!</span>
+                  <strong style="color: var(--text-main); font-size: 1.05rem;" id="quiz-status-1">Great Job!</strong>
+                </div>
+                <p style="color: var(--text-muted); font-size: 0.88rem; line-height: 1.6;">
+                  Because the input box is empty, <code>IsBlank()</code> confirms that the value is indeed blank by returning <strong>true</strong>! This True result triggers the first action branch of our <code>If()</code> function.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Slide 19: Knowledge Check 2 (Q2 - Why Question) -->
+      <section class="slide" id="slide-19" data-slide-index="18" data-title="Knowledge Check 2: The 'Why' of User Feedback" data-segment="Part 7: Knowledge Checks">
+        <header class="slide-header">
+          <div class="section-tag">Part 7 &bull; Knowledge Check 2 of 5</div>
+          <h2>Knowledge Check: Why is <code>Notify()</code> essential?</h2>
+          <p class="subtitle">Evaluating the psychological importance of immediate user feedback in UX design.</p>
+        </header>
+
+        <div class="slide-content">
+          <div class="quiz-container">
+            <div class="quiz-card">
+              <span class="card-badge" style="background: rgba(59, 130, 246, 0.2); color: #93c5fd;">Question 2 &bull; Architectural 'Why'</span>
+              <p style="color: var(--text-main); font-size: 1.05rem; line-height: 1.6; margin-top: 0.5rem;">
+                Why should a developer NEVER silently stop a button without displaying a <code>Notify()</code> message when validation fails?
+              </p>
+
+              <div class="quiz-options">
+                <button class="quiz-option-btn" onclick="handleQuizAnswer(2, 'A', false, this)">
+                  <strong>A.</strong> <span>Because Power Apps Studio will refuse to save the app</span>
+                </button>
+                <button class="quiz-option-btn" onclick="handleQuizAnswer(2, 'B', false, this)">
+                  <strong>B.</strong> <span>Because SharePoint lists require a Notify token to accept data</span>
+                </button>
+                <button class="quiz-option-btn" onclick="handleQuizAnswer(2, 'C', true, this)">
+                  <strong>C.</strong> <span>Without feedback, the user assumes the app is frozen or already submitted, causing duplicate taps</span>
+                </button>
+                <button class="quiz-option-btn" onclick="handleQuizAnswer(2, 'D', false, this)">
+                  <strong>D.</strong> <span>Because silent validation slows down device battery life</span>
+                </button>
+              </div>
+            </div>
+
+            <div class="quiz-feedback" id="quiz-feedback-2">
+              <div class="feedback-placeholder">
+                <div style="width: 52px; height: 52px; border-radius: 50%; background: rgba(59, 130, 246, 0.15); border: 1px solid rgba(59, 130, 246, 0.35); display: flex; align-items: center; justify-content: center; margin: 0 auto 0.85rem auto; font-size: 1.5rem; color: #60a5fa;">
+                  &quest;
+                </div>
+                <span class="card-badge" style="background: rgba(59, 130, 246, 0.2); color: #93c5fd; margin-bottom: 0.65rem;">Awaiting Selection</span>
+                <h4 style="color: #f8fafc; font-size: 1.05rem; margin-bottom: 0.5rem;">Live UX Architecture Inspector</h4>
+                <p style="color: var(--text-muted); font-size: 0.88rem; line-height: 1.6; max-width: 380px; margin: 0 auto;">
+                  Select an option on the left (A, B, C, or D) to submit your answer and unlock the system architecture rationale.
+                </p>
+              </div>
+              <div class="feedback-content">
+                <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.75rem;">
+                  <span class="card-badge" id="quiz-badge-2" style="background: rgba(16, 185, 129, 0.2); color: #86efac;">Correct!</span>
+                  <strong style="color: var(--text-main); font-size: 1.05rem;" id="quiz-status-2">UX Principle Confirmed!</strong>
+                </div>
+                <p style="color: var(--text-muted); font-size: 0.88rem; line-height: 1.6;">
+                  The <strong>Feedback Principle</strong> is paramount! If a user taps a button and nothing visibly reacts, they will tap it 5 more times, get frustrated, or assume their data was saved when it wasn't. Clear feedback builds user trust.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Slide 20: Knowledge Check 3 (Q3) -->
+      <section class="slide" id="slide-20" data-slide-index="19" data-title="Knowledge Check 3: If() 3-Part Argument Structure" data-segment="Part 7: Knowledge Checks">
+        <header class="slide-header">
+          <div class="section-tag">Part 7 &bull; Knowledge Check 3 of 5</div>
+          <h2>Knowledge Check: The 3 Core Arguments of <code>If()</code></h2>
+          <p class="subtitle">Verifying your mastery of Power Fx decision syntax structure.</p>
+        </header>
+
+        <div class="slide-content">
+          <div class="quiz-container">
+            <div class="quiz-card">
+              <span class="card-badge" style="background: rgba(59, 130, 246, 0.2); color: #93c5fd;">Question 3</span>
+              <p style="color: var(--text-main); font-size: 1.05rem; line-height: 1.6; margin-top: 0.5rem;">
+                What are the three core arguments of the standard <code>If()</code> function in their exact order?
+              </p>
+
+              <div class="quiz-options">
+                <button class="quiz-option-btn" onclick="handleQuizAnswer(3, 'A', false, this)">
+                  <strong>A.</strong> <span>True Action, False Action, Condition Question</span>
+                </button>
+                <button class="quiz-option-btn" onclick="handleQuizAnswer(3, 'B', true, this)">
+                  <strong>B.</strong> <span>Condition (Question), Action if True, Action if False</span>
+                </button>
+                <button class="quiz-option-btn" onclick="handleQuizAnswer(3, 'C', false, this)">
+                  <strong>C.</strong> <span>Control Name, Property Name, Formula Text</span>
+                </button>
+                <button class="quiz-option-btn" onclick="handleQuizAnswer(3, 'D', false, this)">
+                  <strong>D.</strong> <span>Notification Message, Notification Type, Delay Time</span>
+                </button>
+              </div>
+            </div>
+
+            <div class="quiz-feedback" id="quiz-feedback-3">
+              <div class="feedback-placeholder">
+                <div style="width: 52px; height: 52px; border-radius: 50%; background: rgba(59, 130, 246, 0.15); border: 1px solid rgba(59, 130, 246, 0.35); display: flex; align-items: center; justify-content: center; margin: 0 auto 0.85rem auto; font-size: 1.5rem; color: #60a5fa;">
+                  &quest;
+                </div>
+                <span class="card-badge" style="background: rgba(59, 130, 246, 0.2); color: #93c5fd; margin-bottom: 0.65rem;">Awaiting Selection</span>
+                <h4 style="color: #f8fafc; font-size: 1.05rem; margin-bottom: 0.5rem;">Live UX Architecture Inspector</h4>
+                <p style="color: var(--text-muted); font-size: 0.88rem; line-height: 1.6; max-width: 380px; margin: 0 auto;">
+                  Select an option on the left (A, B, C, or D) to submit your answer and unlock the system architecture rationale.
+                </p>
+              </div>
+              <div class="feedback-content">
+                <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.75rem;">
+                  <span class="card-badge" id="quiz-badge-3" style="background: rgba(16, 185, 129, 0.2); color: #86efac;">Correct!</span>
+                  <strong style="color: var(--text-main); font-size: 1.05rem;" id="quiz-status-3">Syntax Mastered!</strong>
+                </div>
+                <p style="color: var(--text-muted); font-size: 0.88rem; line-height: 1.6;">
+                  Always: <code>If( Condition , DoIfTrue , DoIfFalse )</code>. Argument 1 asks the question; Argument 2 handles the True result; Argument 3 handles the False result.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Slide 21: Knowledge Check 4 (Q4 - What Happens If) -->
+      <section class="slide" id="slide-21" data-slide-index="20" data-title="Knowledge Check 4: What Happens If 3rd Arg is Omitted?" data-segment="Part 7: Knowledge Checks">
+        <header class="slide-header">
+          <div class="section-tag">Part 7 &bull; Knowledge Check 4 of 5</div>
+          <h2>Knowledge Check: What happens if Argument 3 is omitted?</h2>
+          <p class="subtitle">Investigating Power Fx behavior when the developer only provides a True action.</p>
+        </header>
+
+        <div class="slide-content">
+          <div class="quiz-container">
+            <div class="quiz-card">
+              <span class="card-badge" style="background: rgba(59, 130, 246, 0.2); color: #93c5fd;">Question 4 &bull; 'What Happens If'</span>
+              <p style="color: var(--text-main); font-size: 1.05rem; line-height: 1.6; margin-top: 0.5rem;">
+                A developer writes: <code>If(IsBlank(txtDept.Text), Notify("Dept required!", Error))</code> with <strong>NO third argument</strong>. What happens when the user clicks Submit and the field IS filled?
+              </p>
+
+              <div class="quiz-options">
+                <button class="quiz-option-btn" onclick="handleQuizAnswer(4, 'A', false, this)">
+                  <strong>A.</strong> <span>Power Apps crashes and logs the user out</span>
+                </button>
+                <button class="quiz-option-btn" onclick="handleQuizAnswer(4, 'B', false, this)">
+                  <strong>B.</strong> <span>It shows the error anyway because there was no else statement</span>
+                </button>
+                <button class="quiz-option-btn" onclick="handleQuizAnswer(4, 'C', true, this)">
+                  <strong>C.</strong> <span>Nothing happens; Power Fx simply finishes without taking any action</span>
+                </button>
+                <button class="quiz-option-btn" onclick="handleQuizAnswer(4, 'D', false, this)">
+                  <strong>D.</strong> <span>The app automatically clears the text box</span>
+                </button>
+              </div>
+            </div>
+
+            <div class="quiz-feedback" id="quiz-feedback-4">
+              <div class="feedback-placeholder">
+                <div style="width: 52px; height: 52px; border-radius: 50%; background: rgba(59, 130, 246, 0.15); border: 1px solid rgba(59, 130, 246, 0.35); display: flex; align-items: center; justify-content: center; margin: 0 auto 0.85rem auto; font-size: 1.5rem; color: #60a5fa;">
+                  &quest;
+                </div>
+                <span class="card-badge" style="background: rgba(59, 130, 246, 0.2); color: #93c5fd; margin-bottom: 0.65rem;">Awaiting Selection</span>
+                <h4 style="color: #f8fafc; font-size: 1.05rem; margin-bottom: 0.5rem;">Live UX Architecture Inspector</h4>
+                <p style="color: var(--text-muted); font-size: 0.88rem; line-height: 1.6; max-width: 380px; margin: 0 auto;">
+                  Select an option on the left (A, B, C, or D) to submit your answer and unlock the system architecture rationale.
+                </p>
+              </div>
+              <div class="feedback-content">
+                <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.75rem;">
+                  <span class="card-badge" id="quiz-badge-4" style="background: rgba(16, 185, 129, 0.2); color: #86efac;">Correct!</span>
+                  <strong style="color: var(--text-main); font-size: 1.05rem;" id="quiz-status-4">Deep Logic Insight!</strong>
+                </div>
+                <p style="color: var(--text-muted); font-size: 0.88rem; line-height: 1.6;">
+                  In Power Fx action formulas, the third argument is optional! If the condition evaluates to False and you provided no False action, Power Fx safely does nothing. (Later, you will chain subsequent actions using semicolons!)
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Slide 22: Knowledge Check 5 (Q5) -->
+      <section class="slide" id="slide-22" data-slide-index="21" data-title="Knowledge Check 5: Logical OR Operator" data-segment="Part 7: Knowledge Checks">
+        <header class="slide-header">
+          <div class="section-tag">Part 7 &bull; Knowledge Check 5 of 5</div>
+          <h2>Knowledge Check: Which operator combines multiple checks?</h2>
+          <p class="subtitle">Checking your mastery of multi-field condition operators.</p>
+        </header>
+
+        <div class="slide-content">
+          <div class="quiz-container">
+            <div class="quiz-card">
+              <span class="card-badge" style="background: rgba(59, 130, 246, 0.2); color: #93c5fd;">Question 5</span>
+              <p style="color: var(--text-main); font-size: 1.05rem; line-height: 1.6; margin-top: 0.5rem;">
+                Which operator should you use if you want the alarm to trigger when <em>either</em> Department is blank <strong>OR</strong> Description is blank?
+              </p>
+
+              <div class="quiz-options">
+                <button class="quiz-option-btn" onclick="handleQuizAnswer(5, 'A', false, this)">
+                  <strong>A.</strong> <span><code>&amp;&amp;</code> (Logical AND)</span>
+                </button>
+                <button class="quiz-option-btn" onclick="handleQuizAnswer(5, 'B', true, this)">
+                  <strong>B.</strong> <span><code>||</code> (Logical OR)</span>
+                </button>
+                <button class="quiz-option-btn" onclick="handleQuizAnswer(5, 'C', false, this)">
+                  <strong>C.</strong> <span><code>&amp;</code> (Text Concatenation)</span>
+                </button>
+                <button class="quiz-option-btn" onclick="handleQuizAnswer(5, 'D', false, this)">
+                  <strong>D.</strong> <span><code>==</code> (Double Equals)</span>
+                </button>
+              </div>
+            </div>
+
+            <div class="quiz-feedback" id="quiz-feedback-5">
+              <div class="feedback-placeholder">
+                <div style="width: 52px; height: 52px; border-radius: 50%; background: rgba(59, 130, 246, 0.15); border: 1px solid rgba(59, 130, 246, 0.35); display: flex; align-items: center; justify-content: center; margin: 0 auto 0.85rem auto; font-size: 1.5rem; color: #60a5fa;">
+                  &quest;
+                </div>
+                <span class="card-badge" style="background: rgba(59, 130, 246, 0.2); color: #93c5fd; margin-bottom: 0.65rem;">Awaiting Selection</span>
+                <h4 style="color: #f8fafc; font-size: 1.05rem; margin-bottom: 0.5rem;">Live UX Architecture Inspector</h4>
+                <p style="color: var(--text-muted); font-size: 0.88rem; line-height: 1.6; max-width: 380px; margin: 0 auto;">
+                  Select an option on the left (A, B, C, or D) to submit your answer and unlock the system architecture rationale.
+                </p>
+              </div>
+              <div class="feedback-content">
+                <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.75rem;">
+                  <span class="card-badge" id="quiz-badge-5" style="background: rgba(16, 185, 129, 0.2); color: #86efac;">Correct!</span>
+                  <strong style="color: var(--text-main); font-size: 1.05rem;" id="quiz-status-5">Mastery Achieved!</strong>
+                </div>
+                <p style="color: var(--text-muted); font-size: 0.88rem; line-height: 1.6;">
+                  The double pipe <code>||</code> is the logical OR operator. If either input is blank, the entire statement becomes True, halting the submission and demanding operator attention.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Slide 23: Final Capstone Challenge with 100-pt Rubric & Homework -->
+      <section class="slide" id="slide-23" data-slide-index="22" data-title="Final Challenge: Equipment Downtime Incident Form" data-segment="Part 8: Capstone & Rubric">
+        <header class="slide-header">
+          <div class="section-tag">Part 8 &bull; Capstone Challenge</div>
+          <h2>Final Challenge: Equipment Downtime Incident Form</h2>
+          <p class="subtitle">Prove your skills by building a complete validation guard for an extruder breakdown incident.</p>
+        </header>
+
+        <div class="slide-content grid-2">
+          <div class="card">
+            <h3 class="card-title">Challenge Mission Brief</h3>
+            <p style="color: var(--text-muted); font-size: 0.92rem; line-height: 1.6; margin-bottom: 0.75rem;">
+              You are assigned to build the validation guard for the Line 4 Extruder Breakdown Log at Apex Plastics.
+            </p>
+
+            <div style="background: rgba(15, 23, 42, 0.7); border-radius: 0.5rem; padding: 0.85rem; border: 1px solid var(--border-subtle); margin-bottom: 0.75rem;">
+              <strong style="color: var(--color-cyan); font-size: 0.88rem;">Requirements:</strong>
+              <ul style="color: var(--text-muted); font-size: 0.82rem; padding-left: 1.2rem; margin-top: 0.35rem; line-height: 1.6;">
+                <li>Validate two inputs: <code>txtMachineId</code> and <code>txtMinutesDown</code>.</li>
+                <li>If either is blank, stop and display: <code>NotificationType.Error</code> with message: <em>"Machine ID and Minutes Down are mandatory!"</em></li>
+                <li>If both are filled, display: <code>NotificationType.Success</code> with message: <em>"Incident logged successfully!"</em></li>
+              </ul>
+            </div>
+
+            <div style="background: rgba(245, 158, 11, 0.1); border-radius: 0.5rem; padding: 0.75rem; border: 1px solid rgba(245, 158, 11, 0.25);">
+              <strong style="color: #fbbf24; font-size: 0.85rem;">Optional Homework (&le; 15 mins):</strong>
+              <p style="color: var(--text-muted); font-size: 0.8rem; margin: 0.2rem 0 0 0;">
+                Add a second check: what if an operator types a negative number for minutes? Use <code>Value(txtMinutesDown.Text) &lt;= 0</code> to prevent negative downtime!
+              </p>
+            </div>
+          </div>
+
+          <div class="card">
+            <h3 class="card-title">100-Point Assessment Rubric</h3>
+            
+            <table style="width: 100%; font-size: 0.82rem; border-collapse: collapse; margin-top: 0.25rem;">
+              <thead>
+                <tr style="border-bottom: 1px solid rgba(255, 255, 255, 0.15); text-align: left; color: #93c5fd;">
+                  <th style="padding: 0.5rem 0.25rem;">Criteria</th>
+                  <th style="padding: 0.5rem 0.25rem;">Points</th>
+                  <th style="padding: 0.5rem 0.25rem;">Expected Standard</th>
+                </tr>
+              </thead>
+              <tbody style="color: var(--text-muted); line-height: 1.5;">
+                <tr style="border-bottom: 1px solid rgba(255, 255, 255, 0.06);">
+                  <td style="padding: 0.5rem 0.25rem; color: var(--text-main); font-weight: 600;">Condition Accuracy</td>
+                  <td style="padding: 0.5rem 0.25rem; font-family: var(--font-code); color: var(--color-cyan);">30 pts</td>
+                  <td style="padding: 0.5rem 0.25rem;">Correct use of <code>IsBlank()</code> with <code>||</code> operator on both controls.</td>
+                </tr>
+                <tr style="border-bottom: 1px solid rgba(255, 255, 255, 0.06);">
+                  <td style="padding: 0.5rem 0.25rem; color: var(--text-main); font-weight: 600;">If() Structure</td>
+                  <td style="padding: 0.5rem 0.25rem; font-family: var(--font-code); color: var(--color-cyan);">30 pts</td>
+                  <td style="padding: 0.5rem 0.25rem;">All 3 arguments correctly partitioned with commas and closed parentheses.</td>
+                </tr>
+                <tr style="border-bottom: 1px solid rgba(255, 255, 255, 0.06);">
+                  <td style="padding: 0.5rem 0.25rem; color: var(--text-main); font-weight: 600;">Notify Feedback</td>
+                  <td style="padding: 0.5rem 0.25rem; font-family: var(--font-code); color: var(--color-cyan);">20 pts</td>
+                  <td style="padding: 0.5rem 0.25rem;">Error toast for blank inputs; Success toast when valid. Strings in quotes.</td>
+                </tr>
+                <tr>
+                  <td style="padding: 0.5rem 0.25rem; color: var(--text-main); font-weight: 600;">Canvas Testing</td>
+                  <td style="padding: 0.5rem 0.25rem; font-family: var(--font-code); color: var(--color-cyan);">20 pts</td>
+                  <td style="padding: 0.5rem 0.25rem;">Verified live in Canvas Studio using <kbd>Alt</kbd> click across all test cases.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- Slide 24: Curriculum Connection Map -->
+      <section class="slide" id="slide-24" data-slide-index="23" data-title="Curriculum Connection Map: Past, Present, Future" data-segment="Part 8: Bridge Forward">
+        <header class="slide-header">
+          <div class="section-tag">Part 8 &bull; Bridge Forward</div>
+          <h2>Curriculum Connection Map: Past, Present, Future</h2>
+          <p class="subtitle">Where we came from, what we conquered today, and where we journey tomorrow.</p>
+        </header>
+
+        <div class="slide-content grid-3">
+          <div class="card">
+            <div class="card-badge" style="background: rgba(59, 130, 246, 0.2); color: #93c5fd;">BEFORE (Days 4-6 &amp; 16)</div>
+            <h3 class="card-title">Foundations Laid</h3>
+            <p style="color: var(--text-muted); font-size: 0.92rem; line-height: 1.6; margin-bottom: 0.75rem;">
+              You mastered the theory of Boolean conditions (True/False) and connected properties so controls calculate live values.
+            </p>
+            <ul style="color: var(--text-muted); font-size: 0.82rem; padding-left: 1.2rem; line-height: 1.6;">
+              <li>True/False logic questions.</li>
+              <li>Dot operator: <code>Control.Property</code>.</li>
+              <li>Spreadsheet reactivity.</li>
+            </ul>
+          </div>
+
+          <div class="card" style="border-color: var(--color-cyan); box-shadow: 0 0 25px rgba(6, 182, 212, 0.2);">
+            <div class="card-badge" style="background: rgba(6, 182, 212, 0.2); color: #67e8f9;">TODAY (Day 17)</div>
+            <h3 class="card-title">Validation Gatekeeper</h3>
+            <p style="color: var(--text-muted); font-size: 0.92rem; line-height: 1.6; margin-bottom: 0.75rem;">
+              You combined logic with live properties to build intelligent validation guards that stop bad data before submission.
+            </p>
+            <ul style="color: #67e8f9; font-size: 0.82rem; padding-left: 1.2rem; line-height: 1.6;">
+              <li><code>IsBlank()</code> truth inspection.</li>
+              <li><code>If()</code> 3-part decision branching.</li>
+              <li><code>Notify()</code> instant toast feedback.</li>
+              <li>Multi-field protection with <code>||</code>.</li>
+            </ul>
+          </div>
+
+          <div class="card" style="border-color: var(--color-purple); box-shadow: 0 0 25px rgba(139, 92, 246, 0.2);">
+            <div class="card-badge" style="background: rgba(139, 92, 246, 0.2); color: #c4b5fd;">NEXT: DAY 18</div>
+            <h3 class="card-title">App Memory: Variables</h3>
+            <p style="color: var(--text-muted); font-size: 0.92rem; line-height: 1.6; margin-bottom: 0.75rem;">
+              What if your app needs to REMEMBER a value across different screens, or count how many times an error occurred?
+            </p>
+            <ul style="color: #c4b5fd; font-size: 0.82rem; padding-left: 1.2rem; line-height: 1.6;">
+              <li>Giving your app long-term memory.</li>
+              <li>Context Variables: <code>UpdateContext()</code>.</li>
+              <li>Global Variables: <code>Set()</code>.</li>
+              <li>Remembering user state across screens!</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- Bottom HUD & Navigation Controls -->
+        <footer id="bottom-hud">
+      <div id="progress-bar-container">
+        <div id="progress-bar"></div>
+      </div>
+
+      <div class="hud-left">
+        <button class="hud-btn" id="btn-prev" onclick="prevSlide()" title="Previous Slide (Left Arrow)">&#8592; Prev</button>
+        <button class="hud-btn" id="btn-next" onclick="nextSlide()" title="Next Slide (Right Arrow / Space)">Next &#8594;</button>
+        <span id="slide-counter">Slide <span id="slide-current-num">1</span> / <span id="slide-total-count">24</span></span>
+      </div>
+
+      <div class="hud-right">
+        <button class="hud-btn" id="btn-lang" onclick="toggleLanguage()" title="Toggle Language (L)">
+          🌐 <span id="lang-label">KH</span>
+        </button>
+        <button class="hud-btn active" id="btn-laser" onclick="toggleLaser()" title="Presenter Laser Pointer (P)">
+          🔴 Laser
+        </button>
+        <button class="hud-btn" id="btn-notes" onclick="toggleNotes()" title="Trainer Notes Drawer (N)">
+          📝 Notes
+        </button>
+        <button class="hud-btn" id="btn-overview" onclick="toggleOverview()" title="Slide Overview Modal (O)">
+          🗂️ Overview
+        </button>
+        <button class="hud-btn" id="btn-timer" onclick="toggleTimer()" title="90-Min Countdown (T)">
+          ⏱️ <span id="timer-display">90:00</span>
+        </button>
+        <button class="hud-btn" id="btn-fullscreen" onclick="toggleFullscreen()" title="Fullscreen (F)">
+          ⛶
+        </button>
+        <a href="../index.html" class="hud-btn hub-btn" title="Return to Master Curriculum Hub (ត្រឡប់ទៅទំព័រដើម)" style="text-decoration: none; display: inline-flex; align-items: center; gap: 4px; color: #fcd34d; font-weight: 600;"><span>🏠</span><span>Hub</span></a>
+      </div>
+    </footer>
+
+    <!-- Slide-Out Trainer Notes Drawer (Hotkey: N) -->
+    <div id="notes-drawer">
+      <div class="notes-header">
+        <h3 style="margin: 0;">Trainer Notes &bull; <span id="notes-slide-title" style="color: var(--color-cyan);">Day 17</span></h3>
+        <button id="notes-close-btn" class="notes-close-btn" onclick="toggleNotes()">&times;</button>
+      </div>
+      <div class="notes-body" id="notes-body-content">
+        <!-- Injected dynamically from active slide aside.trainer-notes -->
+      </div>
+    </div>
+
+    <!-- Slide Grid Overview Modal (Hotkey: O) -->
+    <div id="overview-modal">
+      <div class="overview-header">
+        <h2 style="margin: 0; color: var(--text-main);">Slide Grid Overview &bull; Day 17 (24 Slides)</h2>
+        <button id="overview-close-btn" class="hud-btn" onclick="toggleOverview()">Close (Esc / O)</button>
+      </div>
+      <div class="overview-grid" id="overview-grid-container">
+        <!-- Rendered dynamically by script.js -->
+      </div>
+    </div>
+
+  </div>
+
+  <script src="script.js"></script>
+<script>
+if (window.self !== window.top) {
+  document.documentElement.classList.add('in-iframe');
+  function hideHub() { document.querySelectorAll('.hub-btn, .back-to-hub-pill').forEach(e => e.style.display = 'none'); }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', hideHub);
+  } else {
+    hideHub();
+  }
+}
+</script>
+<style>
+.in-iframe .hub-btn, .in-iframe .back-to-hub-pill { display: none !important; }
+</style>
+</body>
+</html>

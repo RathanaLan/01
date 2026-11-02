@@ -1,0 +1,1613 @@
+<!DOCTYPE html>
+<html lang="en" translate="no" class="notranslate">
+<head>
+  <meta name="google" content="notranslate">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Power Apps Foundation — Day 10: Records and Tables: Storing Many Cases</title>
+  
+    <!-- Famous & Universally Loved Khmer Fonts (Moul for Formal Titles, Siemreap & Battambang for Easy Reading) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=Moul&family=Kantumruy+Pro:ital,wght@0,400..700;1,400..700&family=Battambang:wght@300;400;700;900&family=Koh+Santepheap:wght@300;400;700&family=Koulen&family=Siemreap&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="../shared/design-system.css">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="fluent-dark-theme">
+
+  <!-- Main Presentation Stage Container (16:9 Viewport Constrained) -->
+  <div id="presentation-container" class="presentation-container">
+
+    <!-- Top Status Bar: Branding, Segment Indicator, Timer & Controls -->
+    <!-- Presentation Header removed to match Day 25 Standard -->
+
+    <!-- Main Viewport Stage -->
+    <main class="presentation-stage" id="presentation-stage">
+
+      <!-- ====================================================================
+           SLIDE 1: WELCOME & HERO TITLE
+           ==================================================================== -->
+      <section class="slide active" id="slide-1" data-title="Welcome &amp; Hero" data-segment="Part 1: Welcome &amp; Spiral Recall">
+        <div class="slide-content hero-slide-layout">
+          <div class="hero-badge-row">
+            <span class="pill pill-phase">Phase 4: Data Architecture</span>
+            <span class="pill pill-accent">Citizen Developer Foundation</span>
+            <span class="pill pill-time">⏱️ Exactly 90 Minutes</span>
+          </div>
+          
+          <h1 class="hero-title">Records &amp; Tables: Storing Many Cases</h1>
+          <p class="hero-subtitle">
+            How apps organize repeated workplace cases into structured, queryable data storage without overwriting past history.
+          </p>
+
+          <div class="hero-connection-card">
+            <span class="chain-label">TODAY'S CORE CONNECTION CHAIN</span>
+            <div class="chain-nodes">
+              <span class="chain-node">1 Business Case = 1 Record</span>
+              <span class="chain-arrow">➔</span>
+              <span class="chain-node">Shared Fields = Columns</span>
+              <span class="chain-arrow">➔</span>
+              <span class="chain-node active">Many Records = Table</span>
+            </div>
+          </div>
+
+          <div class="hero-action-row">
+            <button class="fluent-btn-primary" id="btn-start-presentation">
+              <span>Begin Lesson (Space / ➔)</span>
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                <path d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"/>
+              </svg>
+            </button>
+            <span class="hero-hint">Press <strong>L</strong> for Khmer • <strong>P</strong> for Laser Pointer • <strong>N</strong> for Trainer Script</span>
+          </div>
+        </div>
+
+        <aside class="trainer-notes">
+          <h4>Trainer Script &amp; Delivery Strategy (00:00 – 02:00)</h4>
+          <p><strong>Goal:</strong> Welcome absolute beginners and deliver the foundational insight of Day 10.</p>
+          <p><strong>Talking Points:</strong> "Welcome everyone to Day 10! Yesterday, we mapped one complete business flow for a broken machine from problem to completion. But here is the massive question: In a busy factory, is there ever just ONE repair ticket? Never! There are 50 machines running. If our app can only remember one machine at a time, every new ticket erases the previous ticket! Today, we solve that forever by learning how to store many cases at once in Tables."</p>
+        </aside>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 2: 27-DAY MASTER BLUEPRINT JOURNEY
+           ==================================================================== -->
+      <section class="slide" id="slide-2" data-title="Curriculum Blueprint" data-segment="Part 1: Welcome &amp; Spiral Recall">
+        <div class="slide-content standard-layout">
+          <div class="slide-header">
+            <span class="section-tag">27-Day Master Curriculum Journey</span>
+            <h2>Where We Stand: Entering Phase 4 (Data)</h2>
+            <p class="subtitle">From Business Thinking to Enterprise Data Architecture.</p>
+          </div>
+
+          <div class="curr-map-grid">
+            <div class="curr-card passed">
+              <div class="card-phase">Phase 1: Foundations</div>
+              <div class="card-days">Days 1 – 3</div>
+              <div class="card-title">Real Problem, Sequence &amp; Data Types</div>
+              <div class="card-status">✓ Completed</div>
+            </div>
+            <div class="curr-card passed">
+              <div class="card-phase">Phase 2: Logic &amp; Decisions</div>
+              <div class="card-days">Days 4 – 6</div>
+              <div class="card-title">Conditions, Single IF &amp; Combined Gates</div>
+              <div class="card-status">✓ Completed</div>
+            </div>
+            <div class="curr-card passed">
+              <div class="card-phase">Phase 3: Business Thinking</div>
+              <div class="card-days">Days 7 – 9</div>
+              <div class="card-title">Opportunity, Statuses &amp; End-to-End Flow</div>
+              <div class="card-status">✓ Completed</div>
+            </div>
+            <div class="curr-card active-card">
+              <div class="card-phase">Phase 4: Data (TODAY!)</div>
+              <div class="card-days">Days 10 – 12</div>
+              <div class="card-title">Records &amp; Tables: Storing Many Cases</div>
+              <div class="card-status">▶ Active Today</div>
+            </div>
+            <div class="curr-card future">
+              <div class="card-phase">Phase 5: UI &amp; Galleries</div>
+              <div class="card-days">Days 13 – 16</div>
+              <div class="card-title">Displaying Tables with Galleries &amp; Forms</div>
+              <div class="card-status">🔒 Next Week</div>
+            </div>
+            <div class="curr-card future">
+              <div class="card-phase">Phase 6 &amp; 7: App Engine</div>
+              <div class="card-days">Days 17 – 27</div>
+              <div class="card-title">Power Fx Logic, Storage, Testing &amp; Production</div>
+              <div class="card-status">🔒 Capstone</div>
+            </div>
+          </div>
+        </div>
+
+        <aside class="trainer-notes">
+          <h4>Trainer Script: Curriculum Continuity (02:00 – 04:00)</h4>
+          <p><strong>Goal:</strong> Validate learner progress and show how Day 10 is the bridge to building real multi-user apps.</p>
+          <p><strong>Talking Points:</strong> "Look how far we have climbed! In Phase 1 we learned data types. In Phase 2 we learned how computers make decisions. In Phase 3 we thought like business process analysts. Now, in Phase 4, we step into DATA. Without tables, apps are just fancy calculators that forget everything the moment you close them. With tables, your app becomes a permanent corporate nervous system."</p>
+        </aside>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 3: 4 MEASURABLE LEARNING OBJECTIVES
+           ==================================================================== -->
+      <section class="slide" id="slide-3" data-title="Learning Objectives" data-segment="Part 1: Welcome &amp; Spiral Recall">
+        <div class="slide-content standard-layout">
+          <div class="slide-header">
+            <span class="section-tag">Bloom's Revised Taxonomy</span>
+            <h2>Today's 4 Measurable Learning Objectives</h2>
+            <p class="subtitle">What every absolute zero beginner will independently accomplish by minute 90:00.</p>
+          </div>
+
+          <div class="objectives-grid">
+            <div class="obj-card">
+              <div class="obj-header">
+                <span class="obj-badge bloom-l4">Bloom L4: Analysis</span>
+                <span class="obj-num">01</span>
+              </div>
+              <h3>Structural Distinction</h3>
+              <p>Differentiate with 100% accuracy between a <strong>Single Value</strong>, a <strong>Single Record</strong> (one case), and a <strong>Table</strong> (collection of cases).</p>
+            </div>
+
+            <div class="obj-card">
+              <div class="obj-header">
+                <span class="obj-badge bloom-l3">Bloom L3: Application</span>
+                <span class="obj-num">02</span>
+              </div>
+              <h3>Case-to-Record Translation</h3>
+              <p>Translate any paper factory form (repair ticket, purchase order, visitor slip) into a structured <strong>Record</strong> with explicit columns and data types.</p>
+            </div>
+
+            <div class="obj-card">
+              <div class="obj-header">
+                <span class="obj-badge bloom-l3">Bloom L3: Application</span>
+                <span class="obj-num">03</span>
+              </div>
+              <h3>Power Fx Syntax Grammar</h3>
+              <p>Read and formulate beginner Power Fx syntax using curly braces <code>{ }</code> for records, square brackets <code>[ ]</code> for tables, and the dot <code>.</code> for field access.</p>
+            </div>
+
+            <div class="obj-card">
+              <div class="obj-header">
+                <span class="obj-badge bloom-l5">Bloom L5: Evaluation</span>
+                <span class="obj-num">04</span>
+              </div>
+              <h3>Multi-Case Storage Schema</h3>
+              <p>Architect a 5-column Dataverse Table blueprint for Apex Plastics that safely stores hundreds of concurrent work orders without data loss.</p>
+            </div>
+          </div>
+        </div>
+
+        <aside class="trainer-notes">
+          <h4>Trainer Script: Setting Expectations (04:00 – 06:00)</h4>
+          <p><strong>Goal:</strong> Clearly communicate achievable outcomes to eliminate intimidation.</p>
+          <p><strong>Talking Points:</strong> "Do not worry if curly braces or database schemas sound intimidating right now. By the end of this 90 minutes, every single one of you will be able to look at any paper clipboard in your workplace and immediately tell me: What are the columns? What is one record? And how do we stack them into a table?"</p>
+        </aside>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 4: 90-MINUTE TIMED AGENDA
+           ==================================================================== -->
+      <section class="slide" id="slide-4" data-title="Timed Agenda" data-segment="Part 1: Welcome &amp; Spiral Recall">
+        <div class="slide-content standard-layout">
+          <div class="slide-header">
+            <span class="section-tag">Lesson Time Budget</span>
+            <h2>The 90-Minute Spiral Learning Agenda</h2>
+            <p class="subtitle">Strictly timed pedagogical structure with built-in active engagement and stretch break.</p>
+          </div>
+
+          <div class="agenda-timeline">
+            <div class="time-block">
+              <div class="time-stamp">00:00 – 10:00 (10 min)</div>
+              <div class="time-badge phase-recall">Part 1: Recall &amp; Connect</div>
+              <div class="time-content">
+                <strong>Spiral Review &amp; Retrieval:</strong> Reconnecting Day 3 values and Day 9 workflows to the need for permanent multi-case storage.
+              </div>
+            </div>
+
+            <div class="time-block">
+              <div class="time-stamp">10:00 – 25:00 (15 min)</div>
+              <div class="time-badge phase-discover">Part 2: Discover (The Why)</div>
+              <div class="time-content">
+                <strong>The $64,000 Catastrophe:</strong> Why single variables fail. The Restaurant Order Ticket Rail &amp; Index Card Box analogies.
+              </div>
+            </div>
+
+            <div class="time-block">
+              <div class="time-stamp">25:00 – 45:00 (20 min)</div>
+              <div class="time-badge phase-theory">Part 3: Deep Dive Theory</div>
+              <div class="time-content">
+                <strong>Anatomy of Data &amp; Power Fx Syntax:</strong> Cells ➔ Columns ➔ Records ➔ Tables. Curly braces <code>{ }</code> and dot notation.
+              </div>
+            </div>
+
+            <div class="time-block">
+              <div class="time-stamp">45:00 – 60:00 (15 min)</div>
+              <div class="time-badge phase-demo">Part 4: Demonstrate &amp; Lab</div>
+              <div class="time-content">
+                <strong>Mid-Session Reset &amp; Constructor Demo:</strong> Live stacking of records into a table, applying <code>Filter()</code> and <code>CountRows()</code>.
+              </div>
+            </div>
+
+            <div class="time-block">
+              <div class="time-stamp">60:00 – 75:00 (15 min)</div>
+              <div class="time-badge phase-practice">Part 5: Guided Practice</div>
+              <div class="time-content">
+                <strong>6-Scenario Diagnostics:</strong> Interactive class practice identifying Values vs Records vs Tables. 4 beginner misconceptions.
+              </div>
+            </div>
+
+            <div class="time-block">
+              <div class="time-stamp">75:00 – 90:00 (15 min)</div>
+              <div class="time-badge phase-assess">Part 6: Assess &amp; Bridge</div>
+              <div class="time-content">
+                <strong>5-Question Quiz &amp; Capstone Challenge:</strong> Independent schema creation for Apex Plastics, rubric evaluation &amp; forward bridge.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <aside class="trainer-notes">
+          <h4>Trainer Script: Pacing Management (06:00 – 08:00)</h4>
+          <p><strong>Goal:</strong> Orient learners to the session structure and emphasize the mid-session break at 45:00.</p>
+          <p><strong>Talking Points:</strong> "Notice that at minute 45:00, we have an intentional physical reset. Learning data architecture requires mental focus, so we keep our theory tight, our analogies vivid, and our interactive practice immediate."</p>
+        </aside>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 5: PREREQUISITE RETRIEVAL (SPIRALING BACK)
+           ==================================================================== -->
+      <section class="slide" id="slide-5" data-title="Prerequisite Retrieval" data-segment="Part 1: Welcome &amp; Spiral Recall">
+        <div class="slide-content standard-layout">
+          <div class="slide-header">
+            <span class="section-tag">Spiral Learning Retrieval</span>
+            <h2>Activating What You Already Know (Days 3 &amp; 9)</h2>
+            <p class="subtitle">Answer these 3 retrieval questions to bridge your memory directly into today's lesson.</p>
+          </div>
+
+          <div class="retrieval-deck">
+            <div class="retrieval-card">
+              <div class="card-prompt">
+                <span class="retrieval-q-badge">Question 1 (Day 3 Recall)</span>
+                <h3>What is a single piece of typed data, and what are its standard types?</h3>
+              </div>
+              <button class="fluent-btn-secondary btn-reveal-answer" data-target="ret-ans-1">Reveal Master Answer</button>
+              <div class="retrieval-answer" id="ret-ans-1">
+                <p><strong>Answer:</strong> A <strong>Value</strong>. It can be Text (<code>"Press #6"</code>), Number (<code>42</code>), Date/Time (<code>2026-10-30</code>), Boolean (<code>True/False</code>), or Choice (<code>Submitted</code>). It represents just one isolated fact.</p>
+              </div>
+            </div>
+
+            <div class="retrieval-card">
+              <div class="card-prompt">
+                <span class="retrieval-q-badge">Question 2 (Day 9 Recall)</span>
+                <h3>In yesterday's flow, what information did an operator capture when submitting a request?</h3>
+              </div>
+              <button class="fluent-btn-secondary btn-reveal-answer" data-target="ret-ans-2">Reveal Master Answer</button>
+              <div class="retrieval-answer" id="ret-ans-2">
+                <p><strong>Answer:</strong> Machine ID, Problem Description, Defect Photo, Priority Level, Estimated Cost, and Initial Status (<code>Submitted</code>). All these facts belonged together!</p>
+              </div>
+            </div>
+
+            <div class="retrieval-card">
+              <div class="card-prompt">
+                <span class="retrieval-q-badge">Question 3 (The Critical Bridge)</span>
+                <h3>If an app stores Machine ID in a single variable <code>varMachine</code>, what happens when a second operator submits a ticket?</h3>
+              </div>
+              <button class="fluent-btn-secondary btn-reveal-answer" data-target="ret-ans-3">Reveal Master Answer</button>
+              <div class="retrieval-answer" id="ret-ans-3">
+                <p><strong>Answer:</strong> <strong>Catastrophic Overwrite!</strong> The second ticket wipes out the first ticket from memory. The first machine's problem is permanently forgotten and lost!</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <aside class="trainer-notes">
+          <h4>Trainer Script: Active Recall Check (08:00 – 10:00)</h4>
+          <p><strong>Goal:</strong> Prime learner minds for the danger of single variables.</p>
+          <p><strong>Talking Points:</strong> "Look at Question 3! If you remember only one thing from this recap, remember this: A variable is like a single whiteboard with space for only one sentence. If Jane writes her machine problem, and then Bob comes along and writes his machine problem, what happened to Jane's problem? Erased! Gone! That brings us to our real-world horror story."</p>
+        </aside>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 6: THE "WHY THIS EXISTS" DISASTER
+           ==================================================================== -->
+      <section class="slide" id="slide-6" data-title="The $64,000 Disaster" data-segment="Part 2: Discover (The Why)">
+        <div class="slide-content standard-layout">
+          <div class="slide-header">
+            <span class="section-tag section-tag-danger">Real Workplace Case Study</span>
+            <h2>The $64,000 "Overwritten Work Order" at Apex Plastics</h2>
+            <p class="subtitle">What happens when an amateur app tries to manage a factory using single global variables.</p>
+          </div>
+
+          <div class="crisis-story-grid">
+            <div class="crisis-timeline-card">
+              <div class="crisis-event">
+                <span class="event-time">08:15 AM</span>
+                <div class="event-desc">
+                  <strong>The Critical Safety Alert:</strong> Line 1 Operator Sothea notices cooling fluid spraying from the main chiller tower. She types <code>Tool: "Chiller Alpha"</code>, <code>Issue: "Impeller cavitation - urgent"</code> and clicks Submit. App saves it into <code>varMachine</code> and <code>varIssue</code>.
+                </div>
+              </div>
+              <div class="crisis-event">
+                <span class="event-time">08:25 AM</span>
+                <div class="event-desc">
+                  <strong>The Minor Request:</strong> 10 minutes later, Operator Chan on Line 14 notices a burnt-out $15 indicator bulb. He types <code>Tool: "Station 14"</code>, <code>Issue: "Replace 12V LED"</code> and clicks Submit.
+                </div>
+              </div>
+              <div class="crisis-event fatal">
+                <span class="event-time">08:26 AM</span>
+                <div class="event-desc">
+                  <strong>The Data Disaster:</strong> Because the app used single variables instead of a <strong>Table of Records</strong>, Chan's lightbulb <strong>completely overwrote</strong> Sothea's chiller alert!
+                </div>
+              </div>
+              <div class="crisis-event fatal">
+                <span class="event-time">11:30 AM</span>
+                <div class="event-desc">
+                  <strong>The Catastrophe:</strong> Chiller overheats and cracks its housing. Hall A shuts down. Repair cost: $28,000. Customer late delivery penalty: $36,000. <strong>Total avoidable loss: $64,000!</strong>
+                </div>
+              </div>
+            </div>
+
+            <div class="crisis-lesson-card">
+              <div class="loss-badge">$64,000 Loss</div>
+              <h3>The Root Architectural Failure</h3>
+              <p>The junior developer thought: <em>"A variable holds text, so I will just hold the machine name in a variable."</em></p>
+              <div class="flaw-box">
+                <span class="flaw-icon">⚠️</span>
+                <span>A single variable can only hold <strong>ONE CASE AT A TIME</strong>. Businesses have hundreds of simultaneous cases!</span>
+              </div>
+              <div class="solution-preview">
+                <strong>The Architectural Fix:</strong>
+                <p>Never store business requests in loose variables. Every request must be stored as an independent row inside a <strong>Table of Records</strong>.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <aside class="trainer-notes">
+          <h4>Trainer Script: Dramatic Storytelling (10:00 – 16:00)</h4>
+          <p><strong>Goal:</strong> Create emotional resonance and respect for data architecture.</p>
+          <p><strong>Talking Points:</strong> "Tell this story with intensity. Ask: 'Has anyone here ever submitted a paper ticket or email, only to be told days later: Oh, we never saw it, it got buried under newer requests?' Everyone in the room will nod. Explain: This wasn't human laziness—it was software malpractice. When you store requests in single variable containers, the latest request kills the previous one."</p>
+        </aside>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 7: PLAIN-LANGUAGE CONCEPT
+           ==================================================================== -->
+      <section class="slide" id="slide-7" data-title="Plain-Language Concept" data-segment="Part 2: Discover (The Why)">
+        <div class="slide-content standard-layout">
+          <div class="slide-header">
+            <span class="section-tag">Plain-Language Mental Model</span>
+            <h2>Record vs. Column vs. Table: The Physical Card Box</h2>
+            <p class="subtitle">Before looking at computers or code, understand how physical filing systems work.</p>
+          </div>
+
+          <div class="analogy-cards-trio">
+            <div class="concept-trio-card">
+              <div class="trio-badge">The Slot</div>
+              <div class="trio-icon">🏷️</div>
+              <h3>The Column (Field)</h3>
+              <p class="trio-def">A <strong>labeled category</strong> printed on the card.</p>
+              <ul class="trio-points">
+                <li>Defines what question is being asked.</li>
+                <li>Defines what type of answer is allowed (Text, Number, Date).</li>
+                <li>Example: <code>EstimatedCost</code> (Must be currency).</li>
+              </ul>
+            </div>
+
+            <div class="concept-trio-card active-trio">
+              <div class="trio-badge highlight">The Card</div>
+              <div class="trio-icon">🪪</div>
+              <h3>The Record (One Case)</h3>
+              <p class="trio-def">An <strong>individual index card</strong> or driver's license.</p>
+              <ul class="trio-points">
+                <li>Contains all facts about <strong>one specific incident</strong>.</li>
+                <li>Travels together as a complete bundle.</li>
+                <li>Example: <code>{ Machine: "Press 6", Cost: 850, Status: "Submitted" }</code>.</li>
+              </ul>
+            </div>
+
+            <div class="concept-trio-card">
+              <div class="trio-badge">The Box</div>
+              <div class="trio-icon">🗃️</div>
+              <h3>The Table (The Collection)</h3>
+              <p class="trio-def">The <strong>card file box or binder</strong> holding all cards.</p>
+              <ul class="trio-points">
+                <li>Every card inside shares the exact same printed categories.</li>
+                <li>Stores hundreds of independent cases safely.</li>
+                <li>Can be sorted, counted, or filtered by supervisor.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <aside class="trainer-notes">
+          <h4>Trainer Script: The Card Box Metaphor (16:00 – 20:00)</h4>
+          <p><strong>Goal:</strong> Provide a tactile physical anchor for abstract database terms.</p>
+          <p><strong>Talking Points:</strong> "Hold up an imaginary index card. If I show you a driver's license, that is ONE record. It has fields: Name, Date of Birth, Height. Does my height overwrite your height? No, because your height is on YOUR card, and my height is on MY card. And where does the police officer keep all the drivers? In a Table!"</p>
+        </aside>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 8: EVERYDAY PHYSICAL ANALOGY
+           ==================================================================== -->
+      <section class="slide" id="slide-8" data-title="Restaurant Ticket Rail" data-segment="Part 2: Discover (The Why)">
+        <div class="slide-content standard-layout">
+          <div class="slide-header">
+            <span class="section-tag">Everyday Analogy</span>
+            <h2>The Restaurant Order Ticket Rail</h2>
+            <p class="subtitle">How a busy kitchen manages 50 orders simultaneously without losing a single meal.</p>
+          </div>
+
+          <div class="kitchen-analogy-layout">
+            <div class="kitchen-stage-visual">
+              <div class="ticket-rail-bar">
+                <span class="rail-label">STAINLESS STEEL TICKET RAIL (THE TABLE)</span>
+                <div class="rail-clips">
+                  <div class="paper-ticket">
+                    <div class="ticket-head">Order #101 • Table 4</div>
+                    <div class="ticket-body">
+                      <span>• Burger (Medium)</span>
+                      <span>• Fries</span>
+                      <span class="ticket-price">$16.50</span>
+                    </div>
+                    <div class="ticket-status-pill status-cooking">Cooking</div>
+                  </div>
+                  <div class="paper-ticket urgent-ticket">
+                    <div class="ticket-head">Order #102 • Table 12</div>
+                    <div class="ticket-body">
+                      <span>• Ribeye Steak</span>
+                      <span>• Red Wine</span>
+                      <span class="ticket-price">$45.00</span>
+                    </div>
+                    <div class="ticket-status-pill status-urgent">VIP Urgent</div>
+                  </div>
+                  <div class="paper-ticket">
+                    <div class="ticket-head">Order #103 • Table 2</div>
+                    <div class="ticket-body">
+                      <span>• Caesar Salad</span>
+                      <span>• Iced Tea</span>
+                      <span class="ticket-price">$12.00</span>
+                    </div>
+                    <div class="ticket-status-pill status-ready">Ready</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="kitchen-takeaways-grid">
+              <div class="relay-card">
+                <span class="relay-num">1</span>
+                <h4>One Paper Slip = One Record</h4>
+                <p>Represents one customer's meal. If Table 12 changes their wine order, it has zero effect on Table 4's burger.</p>
+              </div>
+              <div class="relay-card">
+                <span class="relay-num">2</span>
+                <h4>Printed Sections = Columns</h4>
+                <p>Every slip has the same printed sections: Table #, Server, Items, Price, and Notes.</p>
+              </div>
+              <div class="relay-card">
+                <span class="relay-num">3</span>
+                <h4>The Rail = The Table</h4>
+                <p>The chef glances at the rail and instantly executes: <code>CountRows(Orders) = 3</code> and <code>Filter(Orders, Priority = "VIP")</code>.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <aside class="trainer-notes">
+          <h4>Trainer Script: Everyday Kitchen Analogy (20:00 – 25:00)</h4>
+          <p><strong>Goal:</strong> Cement the mental model with a familiar real-world operation.</p>
+          <p><strong>Talking Points:</strong> "Imagine if a diner kitchen had only ONE small magnetic whiteboard on the wall. The waiter writes 'Table 4: 2 Burgers'. Five minutes later, another waiter runs in, erases the whiteboard with a sponge, and writes 'Table 12: 1 Salad'. What will the chef cook? Only the salad! Table 4 waits for 2 hours and walks out furious. That is why kitchens use a ticket rail—a Table of Records!"</p>
+        </aside>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 9: THE ANATOMY OF DATA
+           ==================================================================== -->
+      <section class="slide" id="slide-9" data-title="Anatomy of Data" data-segment="Part 3: Deep Dive Theory">
+        <div class="slide-content standard-layout">
+          <div class="slide-header">
+            <span class="section-tag">Data Architecture Theory</span>
+            <h2>The Visual Anatomy of Data: Cell ➔ Column ➔ Record ➔ Table</h2>
+            <p class="subtitle">How simple individual values combine into an enterprise-grade data model.</p>
+          </div>
+
+          <div class="anatomy-hierarchy-grid">
+            <div class="anatomy-step">
+              <div class="step-badge">Level 1</div>
+              <h3>1. The Value (Cell)</h3>
+              <div class="anatomy-box box-value">
+                <code>"Press #6"</code>
+              </div>
+              <p>A single raw piece of data with zero context. It is just text.</p>
+            </div>
+
+            <div class="anatomy-arrow">➔</div>
+
+            <div class="anatomy-step">
+              <div class="step-badge">Level 2</div>
+              <h3>2. The Column (Field)</h3>
+              <div class="anatomy-box box-column">
+                <div class="col-header">MachineName : Text</div>
+                <div class="col-cell">Press #6</div>
+                <div class="col-cell">Press #2</div>
+              </div>
+              <p>A vertical category defining the question and permitted data type.</p>
+            </div>
+
+            <div class="anatomy-arrow">➔</div>
+
+            <div class="anatomy-step">
+              <div class="step-badge">Level 3</div>
+              <h3>3. The Record (Row)</h3>
+              <div class="anatomy-box box-record">
+                <div class="rec-field">ID: <span>WO-101</span></div>
+                <div class="rec-field">Machine: <span>Press #6</span></div>
+                <div class="rec-field">Cost: <span>$850</span></div>
+                <div class="rec-field">Status: <span>Submitted</span></div>
+              </div>
+              <p>A horizontal bundle of all facts about <strong>one specific business case</strong>.</p>
+            </div>
+
+            <div class="anatomy-arrow">➔</div>
+
+            <div class="anatomy-step">
+              <div class="step-badge">Level 4</div>
+              <h3>4. The Table (Grid)</h3>
+              <div class="anatomy-box box-table">
+                <table>
+                  <tr><th>ID</th><th>Machine</th><th>Cost</th><th>Status</th></tr>
+                  <tr><td>WO-101</td><td>Press #6</td><td>$850</td><td>Submitted</td></tr>
+                  <tr><td>WO-102</td><td>Press #2</td><td>$2,400</td><td>Approved</td></tr>
+                  <tr><td>WO-103</td><td>Cooling</td><td>$12,000</td><td>Submitted</td></tr>
+                </table>
+              </div>
+              <p>The structured collection holding hundreds of independent cases.</p>
+            </div>
+          </div>
+        </div>
+
+        <aside class="trainer-notes">
+          <h4>Trainer Script: Visual Hierarchy (25:00 – 30:00)</h4>
+          <p><strong>Goal:</strong> Walk students through the 4 progressive levels of data structure.</p>
+          <p><strong>Talking Points:</strong> "Trace the hierarchy with your laser pointer: Start with the Cell ('Press #6'). By itself, does the computer know if that's a machine, a button, or a book title? No! Level 2 gives it a Column name: MachineName. Level 3 bundles that with its cost, issue, and status into a Record. Level 4 stacks all records into a Table. Now we have an enterprise database!"</p>
+        </aside>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 10: WHY SINGLE VARIABLES FAIL
+           ==================================================================== -->
+      <section class="slide" id="slide-10" data-title="Variables vs Tables" data-segment="Part 3: Deep Dive Theory">
+        <div class="slide-content standard-layout">
+          <div class="slide-header">
+            <span class="section-tag section-tag-danger">Architectural Comparison</span>
+            <h2>Why Variables Fail for Business Cases: The Concurrency Crisis</h2>
+            <p class="subtitle">Direct contrast between single memory slots and multi-row tables.</p>
+          </div>
+
+          <div class="comparison-dual-grid">
+            <div class="comp-card card-fail">
+              <div class="comp-header">
+                <span class="comp-icon">❌</span>
+                <h3>Single Variable Storage</h3>
+              </div>
+              <div class="comp-code-snippet">
+                <code>Set(varMachine, "Press #6");</code>
+                <code>Set(varMachine, "Station 14"); // OVERWRITTEN!</code>
+              </div>
+              <ul class="comp-list">
+                <li><strong>Capacity:</strong> Holds exactly 1 value at any time.</li>
+                <li><strong>Concurrency:</strong> When User B saves data, User A's data is erased forever.</li>
+                <li><strong>Historical Querying:</strong> Impossible to run <code>Filter()</code> or <code>Sort()</code>.</li>
+                <li><strong>Calculations:</strong> Cannot calculate <code>Sum()</code> or <code>CountRows()</code>.</li>
+                <li><strong>Best Used For:</strong> Temporary screen state (e.g. <code>varIsMenuOpen</code>).</li>
+              </ul>
+            </div>
+
+            <div class="comp-card card-success">
+              <div class="comp-header">
+                <span class="comp-icon">✅</span>
+                <h3>Table Storage (Dataverse / SharePoint)</h3>
+              </div>
+              <div class="comp-code-snippet">
+                <code>Collect(WorkOrders, { Machine: "Press #6" });</code>
+                <code>Collect(WorkOrders, { Machine: "Station 14" }); // ROW APPENDED!</code>
+              </div>
+              <ul class="comp-list">
+                <li><strong>Capacity:</strong> Stores millions of independent records.</li>
+                <li><strong>Concurrency:</strong> 500 operators can submit simultaneously without interference.</li>
+                <li><strong>Historical Querying:</strong> Instant search, filtering, and reporting.</li>
+                <li><strong>Calculations:</strong> Real-time aggregates: <code>Sum(WorkOrders, Cost)</code>.</li>
+                <li><strong>Best Used For:</strong> Real business processes, work orders, invoices, inventory.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <aside class="trainer-notes">
+          <h4>Trainer Script: Concurrency Breakdown (30:00 – 35:00)</h4>
+          <p><strong>Goal:</strong> Teach learners when to use variables versus when to use tables.</p>
+          <p><strong>Talking Points:</strong> "Make this rule crystal clear: Variables are for the APP'S temporary state—like whether a dark mode toggle is on, or whether a popup window is open. But any real BUSINESS DATA—anything about a customer, a product, a machine, or a repair ticket—MUST LIVE IN A TABLE!"</p>
+        </aside>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 11: POWER FX GRAMMAR & SYNTAX
+           ==================================================================== -->
+      <section class="slide" id="slide-11" data-title="Power Fx Grammar" data-segment="Part 3: Deep Dive Theory">
+        <div class="slide-content standard-layout">
+          <div class="slide-header">
+            <span class="section-tag section-tag-accent">Formula Language Foundation</span>
+            <h2>Power Fx Syntax Grammar: Braces, Brackets &amp; The Dot</h2>
+            <p class="subtitle">The three essential punctuation marks that govern records, tables, and column access.</p>
+          </div>
+
+          <div class="grammar-trio-grid">
+            <div class="grammar-card">
+              <div class="grammar-symbol">{ }</div>
+              <h3>Curly Braces: A Record</h3>
+              <p>Groups multiple named fields into <strong>one single business case</strong>.</p>
+              <div class="fx-code-box">
+                <code>{ TicketID: "WO-101", Machine: "Press #6", Cost: 850 }</code>
+              </div>
+              <span class="grammar-note">Notice: <code>Field: Value</code> separated by commas.</span>
+            </div>
+
+            <div class="grammar-card">
+              <div class="grammar-symbol">[ ]</div>
+              <h3>Square Brackets: A Table</h3>
+              <p>Encloses a collection or list of multiple records.</p>
+              <div class="fx-code-box">
+                <code>[ "High", "Medium", "Low" ] // Choice list</code>
+                <code>[ { ID: 1 }, { ID: 2 } ] // Multi-row table</code>
+              </div>
+              <span class="grammar-note">Represents an iterable list or grid of items.</span>
+            </div>
+
+            <div class="grammar-card highlight-card">
+              <div class="grammar-symbol">.</div>
+              <h3>The Dot Operator: Field Access</h3>
+              <p>Reaches inside a record and extracts one specific column value.</p>
+              <div class="fx-code-box">
+                <code>ThisItem.Status // Returns "Submitted"</code>
+                <code>ThisItem.Cost // Returns 850</code>
+              </div>
+              <span class="grammar-note">Reads as: "Take this item, give me its Status".</span>
+            </div>
+          </div>
+        </div>
+
+        <aside class="trainer-notes">
+          <h4>Trainer Script: Power Fx Syntax Fluency (35:00 – 40:00)</h4>
+          <p><strong>Goal:</strong> De-mystify code symbols so beginners feel confident writing formulas.</p>
+          <p><strong>Talking Points:</strong> "Curly braces { } hug a single record. Square brackets [ ] hold a list. And the dot . is your pointer finger! When you write 'ThisItem.Status', the dot is your finger pointing into the record and pulling out just the word 'Submitted'. You will use ThisItem dot column name hundreds of times in every app you ever build!"</p>
+        </aside>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 12: INTERACTIVE DECISION WORKBENCH (WIDGET 1)
+           ==================================================================== -->
+      <section class="slide" id="slide-12" data-title="Records &amp; Tables Constructor" data-segment="Part 4: Demonstrate &amp; Lab">
+        <div class="slide-content standard-layout">
+          <div class="slide-header">
+            <span class="section-tag">Interactive Workbench 1</span>
+            <h2>Interactive Decision Workbench: Records &amp; Tables Constructor</h2>
+            <p class="subtitle">Build individual records, append them to a live table, and observe dynamic Power Fx operations.</p>
+          </div>
+
+          <div class="constructor-workbench-layout">
+            <!-- Left: Record Creator Form -->
+            <div class="creator-panel">
+              <div class="panel-header">
+                <span class="panel-icon">📝</span>
+                <h3>Create Single Record <code>{ }</code></h3>
+              </div>
+              
+              <div class="form-group">
+                <label for="wb-machine">Machine Name:</label>
+                <input type="text" id="wb-machine" class="fluent-input" value="Press #6">
+              </div>
+
+              <div class="form-group">
+                <label for="wb-issue">Issue Description:</label>
+                <input type="text" id="wb-issue" class="fluent-input" value="Hydraulic cylinder seal leak">
+              </div>
+
+              <div class="form-row-dual">
+                <div class="form-group">
+                  <label for="wb-cost">Estimated Cost ($):</label>
+                  <input type="number" id="wb-cost" class="fluent-input" value="850">
+                </div>
+                <div class="form-group">
+                  <label for="wb-priority">Priority Level:</label>
+                  <select id="wb-priority" class="fluent-select">
+                    <option value="High">High</option>
+                    <option value="Critical Safety">Critical Safety</option>
+                    <option value="Medium">Medium</option>
+                    <option value="Low">Low</option>
+                  </select>
+                </div>
+              </div>
+
+              <button id="wb-btn-add-record" class="fluent-btn-primary full-width">
+                <span>➕ Add Record to Table</span>
+              </button>
+
+              <div class="record-preview-box">
+                <span class="preview-title">Power Fx Record In-Memory:</span>
+                <pre id="wb-record-json"><code>{ Machine: "Press #6", Cost: 850, Priority: "High", Status: "Submitted" }</code></pre>
+              </div>
+            </div>
+
+            <!-- Right: Live Table Grid & Operations -->
+            <div class="table-view-panel">
+              <div class="table-panel-header">
+                <div class="table-stats">
+                  <span class="stat-badge">Table: <code>WorkOrders</code></span>
+                  <span class="stat-badge" id="wb-row-count">CountRows: 3</span>
+                  <span class="stat-badge highlight-stat" id="wb-sum-cost">Sum(Cost): $15,250</span>
+                </div>
+                <div class="table-filter-controls">
+                  <button class="filter-btn active" data-filter="All">All</button>
+                  <button class="filter-btn" data-filter="Submitted">Submitted</button>
+                  <button class="filter-btn" data-filter="Critical Safety">Critical Safety</button>
+                  <button class="filter-btn" data-filter="Approved">Approved</button>
+                </div>
+              </div>
+
+              <div class="table-scroll-container">
+                <table class="live-power-table" id="wb-live-table">
+                  <thead>
+                    <tr>
+                      <th>TicketID</th>
+                      <th>Machine</th>
+                      <th>Issue</th>
+                      <th>Cost</th>
+                      <th>Priority</th>
+                      <th>Status</th>
+                    </tr>
+                  </thead>
+                  <tbody id="wb-table-body">
+                    <!-- Initial rows rendered by script.js -->
+                  </tbody>
+                </table>
+              </div>
+
+              <div class="table-operation-fx">
+                <span class="fx-label">Active Power Fx Formula:</span>
+                <code id="wb-active-formula">Filter(WorkOrders, true)</code>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <aside class="trainer-notes">
+          <h4>Trainer Script &amp; Lab Protocol (45:00 – 55:00)</h4>
+          <p><strong>Goal:</strong> Mid-session break at 45:00, then live demonstration of adding records to a table.</p>
+          <p><strong>Protocol:</strong> "1. Stand up, stretch shoulders, take a sip of water. 2. Demonstrate typing a new record. Show how curly braces group the fields. 3. Click 'Add Record to Table'. Watch row append! 4. Click 'Critical Safety' filter button. Show how Filter() hides non-matching rows without deleting them!"</p>
+        </aside>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 13: CONNECTING TABLES TO POWER APPS SCREENS
+           ==================================================================== -->
+      <section class="slide" id="slide-13" data-title="Galleries &amp; Forms" data-segment="Part 4: Demonstrate &amp; Lab">
+        <div class="slide-content standard-layout">
+          <div class="slide-header">
+            <span class="section-tag">UI Architecture Preview</span>
+            <h2>Connecting Tables to Screens: The Gallery &amp; Form Architecture</h2>
+            <p class="subtitle">How Power Apps visually displays multi-row tables and single records on screen.</p>
+          </div>
+
+          <div class="gallery-form-preview-grid">
+            <div class="ui-arch-card">
+              <div class="ui-arch-header">
+                <span class="ui-icon">🖼️</span>
+                <h3>The Gallery: Displays the TABLE</h3>
+              </div>
+              <p>A scrolling list where <strong>each row of the table becomes one visual card</strong>.</p>
+              <div class="ui-mockup-box gallery-mock">
+                <div class="mock-card selected">
+                  <strong>WO-101 • Press #6</strong>
+                  <span>Cost: $850 • Status: Submitted</span>
+                </div>
+                <div class="mock-card">
+                  <strong>WO-102 • Press #2</strong>
+                  <span>Cost: $2,400 • Status: Approved</span>
+                </div>
+                <div class="mock-card">
+                  <strong>WO-103 • Cooling Tower</strong>
+                  <span>Cost: $12,000 • Status: Submitted</span>
+                </div>
+              </div>
+              <div class="ui-fx-binding">
+                <code>Gallery.Items = WorkOrders</code>
+              </div>
+            </div>
+
+            <div class="ui-arch-arrow">
+              <span>User Clicks Card ➔</span>
+            </div>
+
+            <div class="ui-arch-card">
+              <div class="ui-arch-header">
+                <span class="ui-icon">📋</span>
+                <h3>The Form: Displays ONE RECORD</h3>
+              </div>
+              <p>Detailed view showing all editable columns for the <strong>selected single case</strong>.</p>
+              <div class="ui-mockup-box form-mock">
+                <div class="form-field-row">
+                  <label>Machine:</label>
+                  <span>Press #6</span>
+                </div>
+                <div class="form-field-row">
+                  <label>Estimated Cost:</label>
+                  <span>$850.00</span>
+                </div>
+                <div class="form-field-row">
+                  <label>Status:</label>
+                  <span class="status-pill status-submitted">Submitted</span>
+                </div>
+              </div>
+              <div class="ui-fx-binding">
+                <code>Form.Item = Gallery.Selected</code>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <aside class="trainer-notes">
+          <h4>Trainer Script: Connecting Data to UI (55:00 – 60:00)</h4>
+          <p><strong>Goal:</strong> Preview how Phase 4 (Data) powers Phase 5 (UI &amp; Galleries).</p>
+          <p><strong>Talking Points:</strong> "This is the 'Aha!' moment for citizen developers! A Gallery takes a TABLE and repeats a card for every row. When you tap a card, the Form receives that ONE RECORD! The formula is so simple: Gallery.Items = WorkOrders, and Form.Item = Gallery.Selected!"</p>
+        </aside>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 14: POWER FX TABLE OPERATIONS
+           ==================================================================== -->
+      <section class="slide" id="slide-14" data-title="Table Operations" data-segment="Part 4: Demonstrate &amp; Lab">
+        <div class="slide-content standard-layout">
+          <div class="slide-header">
+            <span class="section-tag section-tag-accent">Formula Mastery</span>
+            <h2>Four Essential Power Fx Table Operations</h2>
+            <p class="subtitle">The core functions used in every Power Apps application to query and analyze records.</p>
+          </div>
+
+          <div class="table-ops-grid">
+            <div class="op-card">
+              <div class="op-badge op-filter">Filter()</div>
+              <h3>Filter: Search &amp; Subset</h3>
+              <p>Evaluates a condition across all rows and returns only matching records.</p>
+              <div class="op-code">
+                <code>Filter(WorkOrders, Status = "Submitted")</code>
+              </div>
+              <span class="op-expl">"Show me only pending work orders."</span>
+            </div>
+
+            <div class="op-card">
+              <div class="op-badge op-count">CountRows()</div>
+              <h3>CountRows: Measure Volume</h3>
+              <p>Counts the total number of records currently in the table or filtered subset.</p>
+              <div class="op-code">
+                <code>CountRows(Filter(WorkOrders, Priority = "High"))</code>
+              </div>
+              <span class="op-expl">"How many high priority tickets exist right now?"</span>
+            </div>
+
+            <div class="op-card">
+              <div class="op-badge op-sort">Sort()</div>
+              <h3>Sort: Organize Order</h3>
+              <p>Re-orders records by a specific column in ascending or descending order.</p>
+              <div class="op-code">
+                <code>Sort(WorkOrders, EstimatedCost, SortOrder.Descending)</code>
+              </div>
+              <span class="op-expl">"Put the most expensive repair tickets at the top."</span>
+            </div>
+
+            <div class="op-card">
+              <div class="op-badge op-lookup">LookUp()</div>
+              <h3>LookUp: Find Exactly One</h3>
+              <p>Finds and extracts the FIRST single record matching a specific condition.</p>
+              <div class="op-code">
+                <code>LookUp(WorkOrders, TicketID = "WO-101")</code>
+              </div>
+              <span class="op-expl">"Fetch the specific record for Ticket WO-101."</span>
+            </div>
+          </div>
+        </div>
+
+        <aside class="trainer-notes">
+          <h4>Trainer Script: Table Functions (55:00 – 60:00)</h4>
+          <p><strong>Goal:</strong> Introduce the 4 primary table query functions.</p>
+          <p><strong>Talking Points:</strong> "Notice how Filter returns a TABLE (multiple rows), while LookUp returns a RECORD (one single row). If you need to fill a gallery, use Filter. If you need to inspect one specific machine ticket, use LookUp!"</p>
+        </aside>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 15: APEX PLASTICS SCHEMA MATRIX
+           ==================================================================== -->
+      <section class="slide" id="slide-15" data-title="Schema Matrix" data-segment="Part 5: Guided Practice">
+        <div class="slide-content standard-layout">
+          <div class="slide-header">
+            <span class="section-tag">Enterprise Schema Architecture</span>
+            <h2>The Apex Plastics Maintenance Schema Matrix</h2>
+            <p class="subtitle">How 5 structured columns prevent data loss across 16 factory injection presses.</p>
+          </div>
+
+          <div class="schema-table-container">
+            <table class="capstone-table">
+              <thead>
+                <tr>
+                  <th>Column Name</th>
+                  <th>Data Type</th>
+                  <th>Required?</th>
+                  <th>Purpose in Business Flow</th>
+                  <th>Sample Value</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><code>WorkOrderID</code></td>
+                  <td>Text (Unique Key)</td>
+                  <td><span class="badge badge-yes">Yes</span></td>
+                  <td>Uniquely identifies each independent case forever</td>
+                  <td><code>"WO-1004"</code></td>
+                </tr>
+                <tr>
+                  <td><code>MachineName</code></td>
+                  <td>Choice / Text</td>
+                  <td><span class="badge badge-yes">Yes</span></td>
+                  <td>Specifies which of 16 presses triggered the alarm</td>
+                  <td><code>"Press #6"</code></td>
+                </tr>
+                <tr>
+                  <td><code>EstimatedCost</code></td>
+                  <td>Currency / Number</td>
+                  <td><span class="badge badge-yes">Yes</span></td>
+                  <td>Drives the $2,000 budget escalation approval gate</td>
+                  <td><code>$850.00</code></td>
+                </tr>
+                <tr>
+                  <td><code>Priority</code></td>
+                  <td>Choice</td>
+                  <td><span class="badge badge-yes">Yes</span></td>
+                  <td>Immediately routes safety emergencies to technicians</td>
+                  <td><code>"High"</code></td>
+                </tr>
+                <tr>
+                  <td><code>Status</code></td>
+                  <td>Choice</td>
+                  <td><span class="badge badge-yes">Yes</span></td>
+                  <td>Controls active lifecycle state across the 6 stages</td>
+                  <td><code>"Submitted"</code></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <aside class="trainer-notes">
+          <h4>Trainer Script: Schema Integrity (60:00 – 63:00)</h4>
+          <p><strong>Goal:</strong> Teach schema precision and why column data types matter.</p>
+          <p><strong>Talking Points:</strong> "Look at Column 1: WorkOrderID. Why do we need a unique ID? Because if two different operators submit tickets for Press #6 on the same day, how do we tell them apart? By their unique WorkOrderID! Every table in enterprise software requires a primary key."</p>
+        </aside>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 16: TRAINER LIVE DEMONSTRATION PROTOCOL
+           ==================================================================== -->
+      <section class="slide" id="slide-16" data-title="Demonstration Protocol" data-segment="Part 5: Guided Practice">
+        <div class="slide-content standard-layout">
+          <div class="slide-header">
+            <span class="section-tag">Trainer Demonstration</span>
+            <h2>Demonstration Protocol: Disconnected Paper to Dataverse Table</h2>
+            <p class="subtitle">Step-by-step methodology for converting messy paper forms into clean structured tables.</p>
+          </div>
+
+          <div class="demo-protocol-steps">
+            <div class="proto-step">
+              <span class="step-num">1</span>
+              <h4>Find the Boundaries of One Case</h4>
+              <p>Pick up a paper clipboard. Identify where Case #1 begins and where it ends. That boundary defines your <strong>Record</strong>.</p>
+            </div>
+            <div class="proto-step">
+              <span class="step-num">2</span>
+              <h4>List the Shared Questions (Columns)</h4>
+              <p>Look across 10 paper sheets. What questions are printed on every single sheet? Machine? Date? Cost? These are your <strong>Columns</strong>.</p>
+            </div>
+            <div class="proto-step">
+              <span class="step-num">3</span>
+              <h4>Assign Rigid Data Types</h4>
+              <p>Lock down data integrity: Never allow text in a Cost column; never allow arbitrary sentences in a Status choice field.</p>
+            </div>
+            <div class="proto-step">
+              <span class="step-num">4</span>
+              <h4>Store in a Single Table Container</h4>
+              <p>Combine all records into one Dataverse table so Power Apps can search, filter, and audit every case in real-time.</p>
+            </div>
+          </div>
+        </div>
+
+        <aside class="trainer-notes">
+          <h4>Trainer Script: Methodology (63:00 – 66:00)</h4>
+          <p><strong>Goal:</strong> Reinforce the mental conversion recipe for real factory workflows.</p>
+          <p><strong>Talking Points:</strong> "When you walk onto your factory floor tomorrow, look at any clipboard. Ask yourself these 4 questions: Where does one ticket end? What questions are repeated on every page? What type of data goes into each box? And how do we stack them? That is the entire secret of database modeling!"</p>
+        </aside>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 17: GUIDED PRACTICE: STRUCTURE IDENTIFICATION
+           ==================================================================== -->
+      <section class="slide" id="slide-17" data-title="Structure Identification" data-segment="Part 5: Guided Practice">
+        <div class="slide-content standard-layout">
+          <div class="slide-header">
+            <span class="section-tag">Guided Class Practice</span>
+            <h2>Guided Practice: Single Value vs. Record vs. Table</h2>
+            <p class="subtitle">Class diagnostic: Examine these 4 workplace items and categorize their data structure.</p>
+          </div>
+
+          <div class="practice-items-grid">
+            <div class="practice-item-card">
+              <span class="item-tag">Item A</span>
+              <div class="item-icon">🏷️</div>
+              <h3>A Metal Machine Barcode</h3>
+              <p>The barcode etched onto Press #6 reading <code>"APX-MCH-06"</code>.</p>
+              <div class="practice-result val-result">
+                <span>Data Structure: <strong>Single Value (Text)</strong></span>
+              </div>
+            </div>
+
+            <div class="practice-item-card">
+              <span class="item-tag">Item B</span>
+              <div class="item-icon">📋</div>
+              <h3>One Completed Inspection Form</h3>
+              <p>Operator Sothea's morning safety checklist for Press #6 with 8 checklist items and date.</p>
+              <div class="practice-result rec-result">
+                <span>Data Structure: <strong>Single Record</strong></span>
+              </div>
+            </div>
+
+            <div class="practice-item-card">
+              <span class="item-tag">Item C</span>
+              <div class="item-icon">🗃️</div>
+              <h3>All 42 Maintenance Requests Filed This Month</h3>
+              <p>The historical archive of every repair slip submitted across all machines in Hall A.</p>
+              <div class="practice-result tab-result">
+                <span>Data Structure: <strong>Table of Records</strong></span>
+              </div>
+            </div>
+
+            <div class="practice-item-card">
+              <span class="item-tag">Item D</span>
+              <div class="item-icon">🔢</div>
+              <h3>Total Repair Money Spent This Year</h3>
+              <p>The single dollar figure calculated across all repair tickets: <code>$48,500</code>.</p>
+              <div class="practice-result val-result">
+                <span>Data Structure: <strong>Single Value (Currency Aggregate)</strong></span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <aside class="trainer-notes">
+          <h4>Trainer Script: Guided Class Diagnostic (66:00 – 70:00)</h4>
+          <p><strong>Goal:</strong> Engage the whole room in rapid-fire structural identification.</p>
+          <p><strong>Talking Points:</strong> "Point to Item D with the laser pointer. Ask: 'Is Item D a Table?' Some students will say yes because it came from a table. Correct them gently: 'No, Item D is the SUM of a table, but the final answer ($48,500) is just ONE SINGLE NUMBER!' That distinction is critical."</p>
+        </aside>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 18: MULTI-SCENARIO DATA STRUCTURE SIMULATOR (WIDGET 2)
+           ==================================================================== -->
+      <section class="slide" id="slide-18" data-title="Data Structure Simulator" data-segment="Part 5: Guided Practice">
+        <div class="slide-content standard-layout">
+          <div class="slide-header">
+            <span class="section-tag">Interactive Workbench 2</span>
+            <h2>Multi-Scenario Data Structure Diagnostics Simulator</h2>
+            <p class="subtitle">Test your architectural judgment across 6 factory operational requests.</p>
+          </div>
+
+          <div class="sim-workbench-container">
+            <div class="sim-header-row">
+              <div class="sim-progress-indicator">
+                Scenario <span id="sim-current-num">1</span> of 6
+              </div>
+              <div class="sim-score-counter">
+                Correct: <span id="sim-score">0</span> / 6
+              </div>
+            </div>
+
+            <div class="sim-card-body" id="sim-card-body">
+              <div class="sim-scenario-badge" id="sim-badge">Scenario 1: User Identity</div>
+              <h3 id="sim-title" class="sim-title">Where do we store the full name of the employee currently logged into the app?</h3>
+              <p id="sim-desc" class="sim-desc">The mobile app needs to display "Welcome, Bopha!" in the top corner of the screen.</p>
+              
+              <div class="sim-choices-row">
+                <button class="sim-choice-btn" data-choice="value">
+                  <span class="choice-icon">🏷️</span>
+                  <span>Single Value</span>
+                </button>
+                <button class="sim-choice-btn" data-choice="record">
+                  <span class="choice-icon">🪪</span>
+                  <span>Single Record</span>
+                </button>
+                <button class="sim-choice-btn" data-choice="table">
+                  <span class="choice-icon">🗃️</span>
+                  <span>Table of Records</span>
+                </button>
+              </div>
+
+              <div class="sim-feedback-box" id="sim-feedback" style="display: none;">
+                <!-- Feedback injected by JS -->
+              </div>
+            </div>
+
+            <div class="sim-footer-controls">
+              <button id="sim-btn-prev" class="fluent-btn-secondary" disabled>Previous Scenario</button>
+              <button id="sim-btn-next" class="fluent-btn-primary" disabled>Next Scenario ➔</button>
+            </div>
+          </div>
+        </div>
+
+        <aside class="trainer-notes">
+          <h4>Trainer Script &amp; Simulator Protocol (70:00 – 75:00)</h4>
+          <p><strong>Goal:</strong> Independent tactile practice with instant evaluative feedback.</p>
+          <p><strong>Talking Points:</strong> "Have students click through all 6 scenarios. Walk around the room. If someone clicks 'Table' for user name, guide them to notice that the logged-in user is just one text string (User().FullName). But for shift logs over 30 days, that MUST be a Table!"</p>
+        </aside>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 19: FOUR DANGEROUS BEGINNER MISCONCEPTIONS
+           ==================================================================== -->
+      <section class="slide" id="slide-19" data-title="Common Misconceptions" data-segment="Part 5: Guided Practice">
+        <div class="slide-content standard-layout">
+          <div class="slide-header">
+            <span class="section-tag section-tag-danger">Architectural Guardrails</span>
+            <h2>Four Dangerous Beginner Misconceptions &amp; Trainer Corrections</h2>
+            <p class="subtitle">Avoid the costly mistakes that cause citizen-developer apps to crash or corrupt data.</p>
+          </div>
+
+          <div class="misconceptions-deck">
+            <div class="misconception-card">
+              <div class="misconception-wrong">
+                <span class="status-cross">❌</span>
+                <div>
+                  <strong>Wrong Mental Model:</strong> "A Table is just a loose Microsoft Excel sheet where I can merge cells and add random notes anywhere."
+                </div>
+              </div>
+              <div class="misconception-right">
+                <span class="status-check">✓</span>
+                <div>
+                  <strong>Trainer Correction:</strong> Database tables require <strong>rigid schema typing</strong>. Every row has identical columns; column types (Number, Text) never change.
+                </div>
+              </div>
+            </div>
+
+            <div class="misconception-card">
+              <div class="misconception-wrong">
+                <span class="status-cross">❌</span>
+                <div>
+                  <strong>Wrong Mental Model:</strong> "We can save multiple ticket numbers in one variable with commas: <code>varTickets = 'WO-101, WO-102'</code>."
+                </div>
+              </div>
+              <div class="misconception-right">
+                <span class="status-check">✓</span>
+                <div>
+                  <strong>Trainer Correction:</strong> Power Apps cannot run <code>Filter()</code> or <code>Sum()</code> on a comma-separated sentence. Store each case as a separate <strong>Record in a Table</strong>!
+                </div>
+              </div>
+            </div>
+
+            <div class="misconception-card">
+              <div class="misconception-wrong">
+                <span class="status-cross">❌</span>
+                <div>
+                  <strong>Wrong Mental Model:</strong> "A Record and a Column are the exact same thing."
+                </div>
+              </div>
+              <div class="misconception-right">
+                <span class="status-check">✓</span>
+                <div>
+                  <strong>Trainer Correction:</strong> A <strong>Column</strong> is vertical (a category like <code>Status</code>). A <strong>Record</strong> is horizontal (one specific repair case with all its fields).
+                </div>
+              </div>
+            </div>
+
+            <div class="misconception-card">
+              <div class="misconception-wrong">
+                <span class="status-cross">❌</span>
+                <div>
+                  <strong>Wrong Mental Model:</strong> "We don't need a table; we can just email a PDF for each request."
+                </div>
+              </div>
+              <div class="misconception-right">
+                <span class="status-check">✓</span>
+                <div>
+                  <strong>Trainer Correction:</strong> Emails are data black holes. You cannot search, count, or filter 500 emails to find out which machine is failing most frequently.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <aside class="trainer-notes">
+          <h4>Trainer Script: Misconception Corrections (70:00 – 75:00)</h4>
+          <p><strong>Goal:</strong> Eradicate dangerous beginner mental models before they enter code.</p>
+          <p><strong>Talking Points:</strong> "Pay special attention to Misconception 2! Beginners always want to combine multiple things into one text variable with commas. Emphasize: Power Fx is a calculator for tables. If you give it a comma-separated text string, you break all its superpowers!"</p>
+        </aside>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 20: EVALUATIVE KNOWLEDGE CHECK (WIDGET 3)
+           ==================================================================== -->
+      <section class="slide" id="slide-20" data-title="Knowledge Check" data-segment="Part 6: Assess &amp; Bridge">
+        <div class="slide-content standard-layout">
+          <div class="slide-header">
+            <span class="section-tag">Interactive Evaluation</span>
+            <h2>5-Question Evaluative Knowledge Check</h2>
+            <p class="subtitle">Instant diagnostic check with deep architectural feedback and 'Why' questions.</p>
+          </div>
+
+          <div class="quiz-container-card" id="quiz-container">
+            <div class="quiz-nav-row">
+              <span class="quiz-step-label">Question <span id="quiz-current-num">1</span> of 5</span>
+              <div class="quiz-progress-dots">
+                <span class="dot active" data-q="0"></span>
+                <span class="dot" data-q="1"></span>
+                <span class="dot" data-q="2"></span>
+                <span class="dot" data-q="3"></span>
+                <span class="dot" data-q="4"></span>
+              </div>
+            </div>
+
+            <div class="quiz-question-box">
+              <h3 id="quiz-question-title" class="quiz-question-title">What is the structural relationship between a Record, a Column, and a Table?</h3>
+              <div class="quiz-options-grid" id="quiz-options-container">
+                <!-- Injected dynamically by JS -->
+              </div>
+              <div class="quiz-feedback-box" id="quiz-feedback" style="display: none;">
+                <!-- Injected feedback -->
+              </div>
+            </div>
+
+            <div class="quiz-footer-row">
+              <button id="quiz-btn-prev" class="fluent-btn-secondary" disabled>Previous</button>
+              <button id="quiz-btn-next" class="fluent-btn-primary" disabled>Next Question ➔</button>
+            </div>
+          </div>
+        </div>
+
+        <aside class="trainer-notes">
+          <h4>Trainer Script &amp; Quiz Facilitation (75:00 – 82:00)</h4>
+          <p><strong>Goal:</strong> Formative evaluation. Check whether the whole class grasps core concepts.</p>
+          <p><strong>Talking Points:</strong> "Question 2 and Question 3 are our deep-thinking questions. Make sure students explain WHY Apex Plastics lost $64,000, and WHAT HAPPENS IF you write WorkOrders.Status instead of ThisItem.Status inside a gallery card."</p>
+        </aside>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 21: CAPSTONE INDEPENDENT CHALLENGE
+           ==================================================================== -->
+      <section class="slide" id="slide-21" data-title="Capstone Challenge" data-segment="Part 6: Assess &amp; Bridge">
+        <div class="slide-content standard-layout">
+          <div class="slide-header">
+            <span class="section-tag section-tag-accent">Capstone Independent Challenge</span>
+            <h2>Apex Plastics Multi-Case Table Architecture</h2>
+            <p class="subtitle">Design the production schema to manage hundreds of concurrent factory maintenance requests.</p>
+          </div>
+
+          <div class="capstone-brief-grid">
+            <div class="capstone-req-card">
+              <h3>The Mission Brief</h3>
+              <p>Plant Manager Dave has fired junior developer Ken. He promotes YOU to lead the Power Apps modernization. You must design the <strong>5 Core Columns</strong> for the new <code>MaintenanceWorkOrders</code> table so no repair order is ever overwritten again.</p>
+              
+              <div class="req-checklist">
+                <h4>Architecture Requirements:</h4>
+                <ul>
+                  <li>✓ <strong>Unique Case Identity:</strong> Every case must have an unchangeable key.</li>
+                  <li>✓ <strong>Machine Identification:</strong> Track which of the 16 injection presses is broken.</li>
+                  <li>✓ <strong>Cost Interlock:</strong> Store estimated cost for the $2,000 approval gate.</li>
+                  <li>✓ <strong>Emergency Routing:</strong> Identify safety-critical repairs immediately.</li>
+                  <li>✓ <strong>Workflow State:</strong> Track lifecycle progress across all 6 stages.</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="capstone-instructions-card">
+              <h3>Your Deliverable (Paper or Screen)</h3>
+              <p>Write out your schema table with the 5 columns, their explicit data types, and explain which Power Fx formula your supervisor will use to see all <strong>High Priority</strong> tickets.</p>
+              <div class="time-limit-box">
+                <span class="clock-icon">⏱️</span>
+                <span>Time Allowed: <strong>6 Minutes</strong> (Minutes 82:00 – 88:00)</span>
+              </div>
+              <button class="fluent-btn-primary full-width" id="btn-reveal-solution">
+                <span>View Benchmark Solution &amp; Rubric (Slide 22) ➔</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <aside class="trainer-notes">
+          <h4>Trainer Script: Independent Challenge (82:00 – 85:00)</h4>
+          <p><strong>Goal:</strong> Independent execution without trainer scaffolding.</p>
+          <p><strong>Talking Points:</strong> "Now it is your turn! On your notepad, draft the 5 columns. Make sure each column has a clear name, a rigid data type, and a business purpose. No more overwritten work orders at Apex Plastics!"</p>
+        </aside>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 22: BENCHMARK SOLUTION & 4-LEVEL RUBRIC
+           ==================================================================== -->
+      <section class="slide" id="slide-22" data-title="Benchmark &amp; Rubric" data-segment="Part 6: Assess &amp; Bridge">
+        <div class="slide-content standard-layout">
+          <div class="slide-header">
+            <span class="section-tag">Evaluation &amp; Self-Audit</span>
+            <h2>Benchmark Solution &amp; 4-Level Evaluation Rubric</h2>
+            <p class="subtitle">Compare your schema design against enterprise best practices and score your readiness.</p>
+          </div>
+
+          <div class="rubric-solution-grid">
+            <div class="benchmark-table-box">
+              <div class="benchmark-header">
+                <h3>Enterprise Benchmark Schema: <code>MaintenanceWorkOrders</code></h3>
+              </div>
+              <table class="capstone-table small-table">
+                <thead>
+                  <tr><th>Column</th><th>Type</th><th>Purpose</th><th>Formula</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td><code>WorkOrderID</code></td><td>Text</td><td>Unique Case Key</td><td><code>"WO-" &amp; ID</code></td></tr>
+                  <tr><td><code>MachineName</code></td><td>Choice</td><td>Line Asset</td><td><code>ThisItem.MachineName</code></td></tr>
+                  <tr><td><code>EstimatedCost</code></td><td>Currency</td><td>$2,000 Gate</td><td><code>Sum(WorkOrders, Cost)</code></td></tr>
+                  <tr><td><code>Priority</code></td><td>Choice</td><td>Safety Route</td><td><code>Filter(WorkOrders, Priority="High")</code></td></tr>
+                  <tr><td><code>Status</code></td><td>Choice</td><td>Flow State</td><td><code>ThisItem.Status</code></td></tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div class="rubric-levels-card">
+              <h3>4-Level Citizen Developer Rubric</h3>
+              <div class="rubric-tier tier-4">
+                <span class="rubric-badge badge-mastery">Level 4: Mastery</span>
+                <p>Identifies all 5 columns with proper types; distinguishes Primary ID from attributes; formulates exact <code>Filter()</code> and <code>ThisItem.</code> syntax.</p>
+              </div>
+              <div class="rubric-tier tier-3">
+                <span class="rubric-badge badge-proficient">Level 3: Proficient</span>
+                <p>Identifies 5 columns and types; minor ambiguity in Choice vs Text; understands why tables prevent data overwriting.</p>
+              </div>
+              <div class="rubric-tier tier-2">
+                <span class="rubric-badge badge-developing">Level 2: Developing</span>
+                <p>Treats columns as informal labels; confuses records with tables; suggests comma-separated strings for multiple items.</p>
+              </div>
+              <div class="rubric-tier tier-1">
+                <span class="rubric-badge badge-novice">Level 1: Novice</span>
+                <p>Cannot distinguish a single value from a table; believes global variables are sufficient for multi-case tracking.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <aside class="trainer-notes">
+          <h4>Trainer Script: Rubric Debrief (85:00 – 88:00)</h4>
+          <p><strong>Goal:</strong> Provide clear self-evaluation and celebrate learner growth.</p>
+          <p><strong>Talking Points:</strong> "Walk students through the 4 levels. Highlight that reaching Level 3 or 4 means they are already designing data better than Ken, who cost his company $64,000! They are now real citizen database architects."</p>
+        </aside>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 23: 15-MINUTE WORKPLACE HOMEWORK
+           ==================================================================== -->
+      <section class="slide" id="slide-23" data-title="Workplace Homework" data-segment="Part 6: Assess &amp; Bridge">
+        <div class="slide-content standard-layout">
+          <div class="slide-header">
+            <span class="section-tag">Workplace Transfer Assignment</span>
+            <h2>15-Minute Optional Review &amp; Factory Floor Homework</h2>
+            <p class="subtitle">Bridge today's classroom concepts directly to your actual job tomorrow morning.</p>
+          </div>
+
+          <div class="homework-dual-grid">
+            <div class="homework-card">
+              <div class="homework-badge">Tomorrow's 15-Minute Task</div>
+              <h3>The Factory Clipboard Audit</h3>
+              <p>Find <strong>ONE real paper clipboard or logbook</strong> in your workplace (e.g. Forklift Pre-Shift Inspection, Visitor Log, Defect Logbook, Tool Checkout Sheet).</p>
+              
+              <div class="homework-steps">
+                <div class="hw-step">
+                  <span class="hw-num">1</span>
+                  <span>Name your table (e.g. <code>ForkliftInspections</code>).</span>
+                </div>
+                <div class="hw-step">
+                  <span class="hw-num">2</span>
+                  <span>Identify the <strong>4 columns</strong> that appear on every line.</span>
+                </div>
+                <div class="hw-step">
+                  <span class="hw-num">3</span>
+                  <span>Write out <strong>2 sample records</strong> using Power Fx curly braces:</span>
+                  <div class="hw-code-snippet">
+                    <code>{ Equipment: "Forklift #3", Inspector: "Visal", BatteryPct: 88, Status: "Passed" }</code>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="homework-self-audit">
+              <h3>Tonight's 3-Minute Self-Audit</h3>
+              <div class="audit-check-row">
+                <span class="audit-icon">✅</span>
+                <span>Can I explain to a coworker why a paper slip is a Record and the metal ticket rail is a Table?</span>
+              </div>
+              <div class="audit-check-row">
+                <span class="audit-icon">✅</span>
+                <span>Can I write a record with curly braces <code>{ }</code> and extract a field with the dot <code>.</code>?</span>
+              </div>
+              <div class="audit-check-row">
+                <span class="audit-icon">✅</span>
+                <span>Do I understand why global variables erase past work orders?</span>
+              </div>
+              <div class="audit-footer">
+                <strong>Bring your homework sheet to Day 11!</strong> We will configure the exact Dataverse field constraints and choices for it.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <aside class="trainer-notes">
+          <h4>Trainer Script: Transfer to Real Work (88:00 – 89:00)</h4>
+          <p><strong>Goal:</strong> Ensure immediate transfer of learning to real workplace artifacts.</p>
+          <p><strong>Talking Points:</strong> "Take 15 minutes tomorrow. Don't look at Power Apps on your computer—walk over to a real paper clipboard in your department. Translate it into a Table. When you do that, the software stops being abstract theory and becomes your superpower."</p>
+        </aside>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 24: 3-DAY CONNECTION MAP & FORWARD BRIDGE
+           ==================================================================== -->
+      <section class="slide" id="slide-24" data-title="Connection Map &amp; Bridge" data-segment="Part 6: Assess &amp; Bridge">
+        <div class="slide-content standard-layout">
+          <div class="slide-header">
+            <span class="section-tag section-tag-accent">Curriculum Spiral Connection</span>
+            <h2>The 3-Day Connection Map &amp; Forward Bridge</h2>
+            <p class="subtitle">Where we came from, what we unlocked today, and what awaits us on Day 11.</p>
+          </div>
+
+          <div class="bridge-three-grid">
+            <div class="bridge-card past-bridge">
+              <div class="bridge-tag">YESTERDAY (DAY 9)</div>
+              <h3>Model a Complete Flow</h3>
+              <ul class="bridge-list">
+                <li>• 6 universal business stages</li>
+                <li>• Swimlanes, owners &amp; handoffs</li>
+                <li>• Happy paths &amp; rework loops</li>
+                <li>• Role-based security gates</li>
+              </ul>
+              <div class="bridge-footer">Result: The Business Process</div>
+            </div>
+
+            <div class="bridge-card active-bridge">
+              <div class="bridge-tag">TODAY (DAY 10)</div>
+              <h3>Records &amp; Tables</h3>
+              <ul class="bridge-list">
+                <li>• 1 Case = 1 Record <code>{ }</code></li>
+                <li>• Shared Fields = Columns</li>
+                <li>• Collection = Table <code>[ ]</code></li>
+                <li>• Field Access with Dot <code>ThisItem.</code></li>
+              </ul>
+              <div class="bridge-footer">Result: Multi-Case Data Storage</div>
+            </div>
+
+            <div class="bridge-card next-bridge">
+              <div class="bridge-tag">TOMORROW (DAY 11)</div>
+              <h3>Designing Field Types</h3>
+              <ul class="bridge-list">
+                <li>• Choice Sets vs. Free Text</li>
+                <li>• Whole Numbers vs. Currency</li>
+                <li>• Date Only vs. Date &amp; Time</li>
+                <li>• Mandatory vs. Optional Rules</li>
+              </ul>
+              <div class="bridge-footer">Next: Schema Precision &amp; Rules</div>
+            </div>
+          </div>
+
+          <div class="bridge-conclusion-banner">
+            <strong>Lesson Complete! Exactly 90 Minutes.</strong>
+            <span>Press <strong>R</strong> to restart • <strong>O</strong> for overview grid • <strong>L</strong> for bilingual review</span>
+          </div>
+        </div>
+
+        <aside class="trainer-notes">
+          <h4>Trainer Script: Forward Bridge &amp; Close (89:00 – 90:00)</h4>
+          <p><strong>Goal:</strong> Final affirmation, forward bridge to Day 11, and timely dismissal at exactly 90:00.</p>
+          <p><strong>Talking Points:</strong> "Congratulations on conquering Day 10! You now understand the heart of enterprise apps: Tables store repeated cases; Records store one case; Columns store categories. Tomorrow, on Day 11, we will zoom in on the Columns: What happens when someone enters a word into a cost field? How do we prevent typos with Choice sets? See you tomorrow on Day 11!"</p>
+        </aside>
+      </section>
+
+    </main>
+
+    <!-- Bottom Navigation Bar & Slide Indicator -->
+        <footer id="bottom-hud">
+      <div id="progress-bar-container">
+        <div id="progress-bar"></div>
+      </div>
+
+      <div class="hud-left">
+        <button class="hud-btn" id="btn-prev" onclick="prevSlide()" title="Previous Slide (Left Arrow)">&#8592; Prev</button>
+        <button class="hud-btn" id="btn-next" onclick="nextSlide()" title="Next Slide (Right Arrow / Space)">Next &#8594;</button>
+        <span id="slide-counter">Slide <span id="slide-current-num">1</span> / <span id="slide-total-count">24</span></span>
+      </div>
+
+      <div class="hud-right">
+        <button class="hud-btn" id="btn-lang" onclick="toggleLanguage()" title="Toggle Language (L)">
+          🌐 <span id="lang-label">KH</span>
+        </button>
+        <button class="hud-btn active" id="btn-laser" onclick="toggleLaser()" title="Presenter Laser Pointer (P)">
+          🔴 Laser
+        </button>
+        <button class="hud-btn" id="btn-notes" onclick="toggleNotes()" title="Trainer Notes Drawer (N)">
+          📝 Notes
+        </button>
+        <button class="hud-btn" id="btn-overview" onclick="toggleOverview()" title="Slide Overview Modal (O)">
+          🗂️ Overview
+        </button>
+        <button class="hud-btn" id="btn-timer" onclick="toggleTimer()" title="90-Min Countdown (T)">
+          ⏱️ <span id="timer-display">90:00</span>
+        </button>
+        <button class="hud-btn" id="btn-fullscreen" onclick="toggleFullscreen()" title="Fullscreen (F)">
+          ⛶
+        </button>
+        <a href="../index.html" class="hud-btn hub-btn" title="Return to Master Curriculum Hub (ត្រឡប់ទៅទំព័រដើម)" style="text-decoration: none; display: inline-flex; align-items: center; gap: 4px; color: #fcd34d; font-weight: 600;"><span>🏠</span><span>Hub</span></a>
+      </div>
+    </footer>
+
+    <!-- Presenter Notes Drawer (Toggled by 'N' or Notes Icon) -->
+    <div id="notes-drawer" class="notes-drawer">
+      <div class="notes-drawer-header">
+        <div class="notes-title">
+          <span class="notes-icon">📝</span>
+          <h3>Trainer Script &amp; Pedagogical Notes</h3>
+        </div>
+        <button id="notes-close-btn" class="icon-btn-tiny" title="Close Notes Drawer (N)">✕</button>
+      </div>
+      <div class="notes-drawer-content" id="notes-content">
+        <!-- Injected dynamically by script.js -->
+      </div>
+    </div>
+
+    <!-- Slide Overview Grid Modal (Toggled by 'O', 'G', or Grid Icon) -->
+    <div id="overview-modal" class="overview-modal">
+      <div class="overview-header">
+        <div class="overview-title">
+          <span class="overview-icon">🗂️</span>
+          <h3>Slide Overview Navigation (Press 'O' or 'ESC' to exit)</h3>
+        </div>
+        <button id="overview-close-btn" class="icon-btn-tiny" title="Close Overview">✕</button>
+      </div>
+      <div class="overview-grid" id="overview-grid">
+        <!-- 24 Clickable Slide Thumbnails Injected by JS -->
+      </div>
+    </div>
+
+    <!-- Presenter Focus Spotlight & Laser Pointer Elements -->
+    <div id="presenter-pointer" class="presenter-pointer">
+      <div class="pointer-core"></div>
+      <div class="pointer-halo"></div>
+    </div>
+    <div id="pointer-click-ripple" class="pointer-click-ripple"></div>
+
+  </div>
+
+  <script src="script.js"></script>
+<script>
+if (window.self !== window.top) {
+  document.documentElement.classList.add('in-iframe');
+  function hideHub() { document.querySelectorAll('.hub-btn, .back-to-hub-pill').forEach(e => e.style.display = 'none'); }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', hideHub);
+  } else {
+    hideHub();
+  }
+}
+</script>
+<style>
+.in-iframe .hub-btn, .in-iframe .back-to-hub-pill { display: none !important; }
+</style>
+</body>
+</html>
+

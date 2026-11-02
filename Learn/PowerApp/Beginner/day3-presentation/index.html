@@ -1,0 +1,1523 @@
+<!DOCTYPE html>
+<html lang="en" translate="no" class="notranslate">
+<head>
+  <meta name="google" content="notranslate">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Power Apps Foundation — Day 3: Data (What an App Knows &amp; Remembers)</title>
+  
+    <!-- Famous & Universally Loved Khmer Fonts (Moul for Formal Titles, Siemreap & Battambang for Easy Reading) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=Moul&family=Kantumruy+Pro:ital,wght@0,400..700;1,400..700&family=Battambang:wght@300;400;700;900&family=Koh+Santepheap:wght@300;400;700&family=Koulen&family=Siemreap&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="../shared/design-system.css">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="fluent-dark-theme">
+
+  <!-- Main Presentation Stage Container (16:9 Viewport Constrained) -->
+  <div id="presentation-container" class="presentation-container">
+
+    <!-- Top Status Bar: Branding, Segment Indicator, Timer & Controls -->
+    <!-- Presentation Header removed to match Day 25 Standard -->
+
+    <!-- Presentation Visual Stage (16:9 Canvas) -->
+    <main id="stage" class="stage" role="region" aria-label="Slide Presentation Stage">
+
+      <!-- =================================================================== -->
+      <!-- SLIDE 1: Title & Mental Model Anchor                                -->
+      <!-- =================================================================== -->
+      <section class="slide active" id="slide-1" 
+        data-title="Day 3: Data (What an App Knows &amp; Remembers)" 
+        data-segment="Part 1: Welcome &amp; Spiral Recall (00:00 - 10:00)"
+        data-notes="TRAINER SPEAKING SCRIPT:
+'Welcome back to Day 3 of our Microsoft Power Apps Foundation course!
+On Day 1, we learned that apps exist to solve human problems using Input, Process, and Output.
+On Day 2, we looked inside the Process box and learned that computers follow strict instructions in a strict sequence.
+Today on Day 3, we ask the vital question: WHAT do those instructions actually work on?
+Every instruction needs information!
+A printer cannot print nothing. A calculator cannot calculate without numbers. A form cannot submit without values!
+Today's mental chain is: information ➔ value ➔ type ➔ stored data.
+By the end of today's 90 minutes, you will confidently identify the 4 fundamental data types, know why treating numbers as text caused a $24,000 disaster at Apex Plastics, and master the Power Apps data containers!'">
+        <div class="slide-content">
+          <div class="hero-layout">
+            <div class="hero-pill-group">
+              <span class="hero-pill">Phase 1: Foundation</span>
+              <span class="hero-pill teal-pill">Day 3 of 27</span>
+              <span class="hero-pill blue-pill">90 Minutes</span>
+            </div>
+            <h1 class="hero-title">
+              <span class="gradient-text">Data: What an App Knows &amp; Remembers</span><br>
+              Values, Containers, Types, and Digital Memory
+            </h1>
+            <p class="hero-subtitle">
+              Instructions cannot operate in a vacuum. Every calculation, filter, and button click relies on stored values. Master the four building blocks of digital business data.
+            </p>
+
+            <div class="title-feature-grid">
+              <div class="feature-item">
+                <span class="feature-icon">&#128196;</span>
+                <div class="feature-info">
+                  <h4>1. The Value</h4>
+                  <p>The raw piece of information: a name, a count, a timestamp, or a flag.</p>
+                </div>
+              </div>
+              <div class="feature-item">
+                <span class="feature-icon">&#128279;</span>
+                <div class="feature-info">
+                  <h4>2. The Data Type</h4>
+                  <p>The digital container shape determining what operations are physically possible.</p>
+                </div>
+              </div>
+              <div class="feature-item">
+                <span class="feature-icon">&#128190;</span>
+                <div class="feature-info">
+                  <h4>3. Memory &amp; Storage</h4>
+                  <p>How Power Apps remembers values across screens and stores them forever.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- =================================================================== -->
+      <!-- SLIDE 2: 5-Minute Concept-Map Recap (Master Mental Model)            -->
+      <!-- =================================================================== -->
+      <section class="slide" id="slide-2" 
+        data-title="Master Curriculum Concept Map" 
+        data-segment="Part 1: Welcome &amp; Spiral Recall (00:00 - 10:00)"
+        data-notes="TRAINER SPEAKING SCRIPT:
+'Look at our Master Mental Model map on screen. Notice how every single day builds directly on the previous day.
+On Day 1, we anchored the Real Problem and the core business goal.
+On Day 2, we mapped the Process: instructions executed in sequence.
+Today on Day 3, we zoom into the DATA block highlighted in radiant purple!
+Without data, your process has no raw materials.
+And look at what comes right after Data tomorrow on Day 4: Logic &amp; Decision!
+How can an app make a decision? By inspecting DATA! Is quantity > 100? Is status = 'Approved'?
+Never see data as an abstract computer science theory. Data is simply what your business process knows and remembers.'">
+        <div class="slide-content">
+          <div class="slide-header">
+            <span class="slide-badge purple-badge">Curriculum Architecture</span>
+            <h2 class="slide-title">Where Today Fits in the 27-Day Master Mental Model</h2>
+            <p class="slide-lead">We never teach isolated features. Every day uncovers the next essential link in the business automation chain.</p>
+          </div>
+
+          <div class="mental-model-chain">
+            <div class="chain-step step-completed">
+              <span class="step-num">Day 1</span>
+              <span class="step-name">Real Problem</span>
+              <span class="step-status">&#10003; Done</span>
+            </div>
+            <span class="chain-arrow">&#8594;</span>
+            <div class="chain-step step-completed">
+              <span class="step-num">Day 2</span>
+              <span class="step-name">Process / Sequence</span>
+              <span class="step-status">&#10003; Done</span>
+            </div>
+            <span class="chain-arrow">&#8594;</span>
+            <div class="chain-step step-active-day3">
+              <span class="step-num">TODAY (Day 3)</span>
+              <span class="step-name">DATA &amp; TYPES</span>
+              <span class="step-status">&#9733; Current Focus</span>
+            </div>
+            <span class="chain-arrow">&#8594;</span>
+            <div class="chain-step step-future">
+              <span class="step-num">Day 4</span>
+              <span class="step-name">Logic / Decisions</span>
+              <span class="step-status">Tomorrow</span>
+            </div>
+            <span class="chain-arrow">&#8594;</span>
+            <div class="chain-step step-future">
+              <span class="step-num">Days 5-27</span>
+              <span class="step-name">UI &#8594; Action &#8594; Store</span>
+              <span class="step-status">Ahead</span>
+            </div>
+          </div>
+
+          <div class="grid-2-col" style="margin-top: 1.5rem;">
+            <div class="info-card border-blue">
+              <div class="card-header-icon">&#128260; How Day 2 Connects to Day 3</div>
+              <p>On Day 2, we learned that instructions follow an ordered sequence: <code>Step 1 ; Step 2 ; Step 3</code>. But what is being processed in those steps? <strong>Information!</strong> A step cannot calculate, validate, or store without actual values to work with.</p>
+            </div>
+            <div class="info-card border-purple">
+              <div class="card-header-icon">&#128301; Why Day 4 Requires Day 3</div>
+              <p>Tomorrow on Day 4, our apps will learn how to make decisions (<code>If / Else</code>). But an app cannot make a decision in the dark. It must ask questions about <strong>Data</strong>: <em>"Is this quantity greater than zero?"</em>, <em>"Is this date in the past?"</em></p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- =================================================================== -->
+      <!-- SLIDE 3: Prerequisite Retrieval (Active Recall)                     -->
+      <!-- =================================================================== -->
+      <section class="slide" id="slide-3" 
+        data-title="Prerequisite Retrieval Check" 
+        data-segment="Part 1: Welcome &amp; Spiral Recall (00:00 - 10:00)"
+        data-notes="TRAINER SPEAKING SCRIPT:
+'Let's warm up our brains with 3 quick retrieval questions from Day 1 and Day 2!
+Question 1: What are the three core stages of any digital application we mastered on Day 1?
+(Pause for learner response: Input, Process, Output!)
+Question 2: Why will a computer produce a wrong result even if all instructions are correct?
+(Learner response: If the sequence or order is wrong!)
+Question 3: In Power Fx, what symbol connects multiple instructions together in a sequence?
+(Learner response: The semicolon ';' which means 'do this, then do that'!)
+Excellent! You have solid foundations. Now let's explore what feeds those instructions.'">
+        <div class="slide-content">
+          <div class="slide-header">
+            <span class="slide-badge blue-badge">Spiral Active Recall</span>
+            <h2 class="slide-title">Testing Prior Knowledge: Day 1 &amp; Day 2 Check</h2>
+            <p class="slide-lead">Retrieve the fundamental principles from memory before we layer today's data concepts on top.</p>
+          </div>
+
+          <div class="grid-3-col">
+            <div class="retrieval-card">
+              <div class="retrieval-num">01</div>
+              <h4>From Day 1: Foundation</h4>
+              <p class="retrieval-q">What are the three core stages of every business application?</p>
+              <div class="retrieval-answer">
+                <strong>Answer:</strong> Input &#8594; Process &#8594; Output. Real problems are solved when human input is processed into useful output.
+              </div>
+            </div>
+            <div class="retrieval-card">
+              <div class="retrieval-num">02</div>
+              <h4>From Day 2: Sequence</h4>
+              <p class="retrieval-q">What happens if all individual instructions are correct, but their order is swapped?</p>
+              <div class="retrieval-answer">
+                <strong>Answer:</strong> The app produces a catastrophic failure or wrong result (e.g., sending an email before saving the record).
+              </div>
+            </div>
+            <div class="retrieval-card">
+              <div class="retrieval-num">03</div>
+              <h4>From Day 2: Syntax</h4>
+              <p class="retrieval-q">What Power Fx punctuation links multiple actions in chronological sequence?</p>
+              <div class="retrieval-answer">
+                <strong>Answer:</strong> The semicolon (<code>;</code>), representing the human concept <em>"do this step, then do the next step"</em>.
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- =================================================================== -->
+      <!-- SLIDE 4: Measurable Learning Objectives                             -->
+      <!-- =================================================================== -->
+      <section class="slide" id="slide-4" 
+        data-title="Measurable Learning Objectives" 
+        data-segment="Part 1: Welcome &amp; Spiral Recall (00:00 - 10:00)"
+        data-notes="TRAINER SPEAKING SCRIPT:
+'Here are our 4 measurable learning targets for the next 80 minutes.
+By 90:00 today, you won't just memorize definitions. You will:
+1. Explain the difference between raw data and actionable information using simple everyday analogies.
+2. Accurately classify any business field into one of the 4 fundamental types: Text, Number, Date/Time, or Yes/No.
+3. Diagnose and resolve data type collisions, like when numbers are treated as text and concatenate instead of adding.
+4. Apply Power Fx conversion and validation functions such as Value(), Text(), and IsBlank().' ">
+        <div class="slide-content">
+          <div class="slide-header">
+            <span class="slide-badge green-badge">Target Competencies</span>
+            <h2 class="slide-title">4 Measurable Learning Objectives for Day 3</h2>
+            <p class="slide-lead">By the end of this 90-minute session, you will independently demonstrate these four practical competencies:</p>
+          </div>
+
+          <div class="grid-2-col">
+            <div class="objective-card">
+              <div class="obj-badge">OBJ 1 • Comprehension</div>
+              <h3>Distinguish Data vs. Information</h3>
+              <p>Define raw data as unorganized values and information as structured, contextualized data that humans and apps use to make business decisions.</p>
+              <div class="obj-outcome">&#10004; Evaluated via Pantry Jar Analogy &amp; Case Study</div>
+            </div>
+
+            <div class="objective-card">
+              <div class="obj-badge">OBJ 2 • Classification</div>
+              <h3>Classify the 4 Fundamental Types</h3>
+              <p>Categorize business workplace values into <strong>Text (String)</strong>, <strong>Number</strong>, <strong>Date/Time</strong>, and <strong>Yes/No (Boolean)</strong> with 100% precision, including the Phone Number rule.</p>
+              <div class="obj-outcome">&#10004; Evaluated via 6-Field Interactive Classifier</div>
+            </div>
+
+            <div class="objective-card">
+              <div class="obj-badge">OBJ 3 • Diagnosis</div>
+              <h3>Predict &amp; Prevent Type Collisions</h3>
+              <p>Identify the dangerous consequences of type mismatches (such as string concatenation <code>"10" + "20" = "1020"</code>) and explain why digital containers must match values.</p>
+              <div class="obj-outcome">&#10004; Evaluated via Apex $24k Crash Post-Mortem</div>
+            </div>
+
+            <div class="objective-card">
+              <div class="obj-badge">OBJ 4 • Application</div>
+              <h3>Map Fields to Power Apps Controls</h3>
+              <p>Map each data type to its appropriate Power Apps input control (Text input, Date picker, Toggle/Checkbox) and basic Power Fx validation functions (<code>IsBlank</code>, <code>Value</code>).</p>
+              <div class="obj-outcome">&#10004; Evaluated via Equipment Maintenance Challenge</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- =================================================================== -->
+      <!-- SLIDE 5: Exact 90-Minute Timed Agenda                               -->
+      <!-- =================================================================== -->
+      <section class="slide" id="slide-5" 
+        data-title="90-Minute Timed Agenda" 
+        data-segment="Part 1: Welcome &amp; Spiral Recall (00:00 - 10:00)"
+        data-notes="TRAINER SPEAKING SCRIPT:
+'Here is our strict, disciplined 90-minute roadmap.
+We spend 10 minutes on orientation and spiral recall.
+From 10 to 25 minutes, we examine the $24,000 workplace catastrophe at Apex Plastics and learn the kitchen pantry analogy.
+From 25 to 45 minutes, we deep-dive into each of the 4 data types and solve the phone number puzzle.
+From 45 to 60 minutes, I will demonstrate the live Data Inspector.
+From 60 to 75 minutes, you will do hands-on practice classifying fields.
+And our final 15 minutes is our knowledge check, final challenge rubric, and bridge to Day 4.'">
+        <div class="slide-content">
+          <div class="slide-header">
+            <span class="slide-badge purple-badge">Lesson Structure</span>
+            <h2 class="slide-title">Master 90-Minute Spiral Agenda</h2>
+            <p class="slide-lead">A balanced pedagogical progression from concrete workplace failure to hands-on mastery.</p>
+          </div>
+
+          <div class="agenda-timeline-grid">
+            <div class="agenda-row">
+              <div class="agenda-time">00:00 - 10:00 (10m)</div>
+              <div class="agenda-topic">
+                <strong>Part 1: Welcome &amp; Spiral Recall</strong>
+                <span>Concept-map anchor, active recall of Day 1 IPO and Day 2 Sequence, 4 learning objectives.</span>
+              </div>
+              <div class="agenda-milestone">Milestone: Mental Anchor</div>
+            </div>
+            <div class="agenda-row">
+              <div class="agenda-time">10:00 - 25:00 (15m)</div>
+              <div class="agenda-topic">
+                <strong>Part 2: Why Data Exists &amp; Everyday Analogy</strong>
+                <span>Apex Plastics $24,000 inventory crash, Data vs. Information, and the Labeled Pantry Jar analogy.</span>
+              </div>
+              <div class="agenda-milestone">Milestone: Problem Clarity</div>
+            </div>
+            <div class="agenda-row">
+              <div class="agenda-time">25:00 - 45:00 (20m)</div>
+              <div class="agenda-topic">
+                <strong>Part 3: The 4 Fundamental Data Types</strong>
+                <span>Text, Number, Date/Time, Yes/No. The Phone Number &amp; ZIP code rule. Type collision diagram.</span>
+              </div>
+              <div class="agenda-milestone">Milestone: Core Schema Theory</div>
+            </div>
+            <div class="agenda-row">
+              <div class="agenda-time">45:00 - 60:00 (15m)</div>
+              <div class="agenda-topic">
+                <strong>Part 4: Trainer Live Demonstration &amp; Data Lab</strong>
+                <span>Live interactive Data Inspector: inspecting containers, legal vs. illegal operations, Power Fx connections.</span>
+              </div>
+              <div class="agenda-milestone">Milestone: Visual Modeling</div>
+            </div>
+            <div class="agenda-row">
+              <div class="agenda-time">60:00 - 75:00 (15m)</div>
+              <div class="agenda-topic">
+                <strong>Part 5: Guided Learner Practice &amp; Classifier</strong>
+                <span>Learner hands-on classification board: sorting 6 manufacturing fields into correct data bins with instant validation.</span>
+              </div>
+              <div class="agenda-milestone">Milestone: Independent Competence</div>
+            </div>
+            <div class="agenda-row">
+              <div class="agenda-time">75:00 - 90:00 (15m)</div>
+              <div class="agenda-topic">
+                <strong>Part 6: Knowledge Check, Final Challenge &amp; Bridge</strong>
+                <span>5-question quiz, Apex Maintenance Log challenge, 4-level rubric, homework, and bridge to Day 4 Decisions.</span>
+              </div>
+              <div class="agenda-milestone">Milestone: Master Assessment</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- =================================================================== -->
+      <!-- SLIDE 6: Workplace Problem: The $24,000 Inventory Crash             -->
+      <!-- =================================================================== -->
+      <section class="slide" id="slide-6" 
+        data-title="Workplace Problem: The $24,000 Crash" 
+        data-segment="Part 2: Why Data Exists (10:00 - 25:00)"
+        data-notes="TRAINER SPEAKING SCRIPT:
+'Let's step into the warehouse at Apex Plastics Manufacturing.
+The warehouse team built a simple intake app to order raw polymer resin pellets.
+Shift 1 ordered 10 pallets. Shift 2 ordered 20 pallets.
+The supervisor clicked 'Calculate Total Needed'.
+What did they expect? 10 + 20 = 30 pallets!
+What did the supplier truck deliver the next morning? 1,020 pallets!
+The loading dock was completely blocked, production halted, and freight penalties cost $24,000!
+Why did this happen?
+Because the field in the app was created as TEXT instead of a NUMBER!
+When you add two pieces of text, a computer does not do math — it glues words together: '10' + '20' = '1020'!
+This is why data types exist. They are safety rails for your business!'">
+        <div class="slide-content">
+          <div class="slide-header">
+            <span class="slide-badge red-badge">Workplace Case Study</span>
+            <h2 class="slide-title">Apex Plastics: The $24,000 Text-Math Disaster</h2>
+            <p class="slide-lead">How a single misconfigured field crippled production and delivered 1,020 pallets instead of 30.</p>
+          </div>
+
+          <div class="story-case-box">
+            <div class="story-header">
+              <span class="warning-icon">&#9888;</span>
+              <div>
+                <h3 style="margin:0; color:#fb7185;">INCIDENT REPORT: Resin Pellet Reorder Catastrophe</h3>
+                <span style="font-size:0.85rem; color:#cbd5e1;">Apex Plastics Injection Molding Facility • Plant #3 Dock B</span>
+              </div>
+            </div>
+            <div class="story-grid">
+              <div class="story-panel">
+                <h4>What the Human Intended:</h4>
+                <div class="math-card math-expected">
+                  <span>Shift 1 Request: <strong>10 Pallets</strong></span>
+                  <span>Shift 2 Request: <strong>20 Pallets</strong></span>
+                  <div class="calc-divider"></div>
+                  <span class="result-line">Expected Order: <strong>30 Pallets ($6,000)</strong></span>
+                </div>
+              </div>
+              <div class="story-panel">
+                <h4>What the Computer Executed (Text Concatenation):</h4>
+                <div class="math-card math-actual">
+                  <span>Field Type: <code>Text (String)</code></span>
+                  <span>Operation: <code>"10" &amp; "20"</code></span>
+                  <div class="calc-divider"></div>
+                  <span class="result-line-fail">Delivered: <strong>1,020 Pallets ($204,000)</strong></span>
+                </div>
+              </div>
+            </div>
+            <div class="story-footer">
+              <strong>Root Cause:</strong> The app creator used a generic Text input without enforcing a <code>Number</code> data type. To a computer, <code>"Cat" + "Dog" = "CatDog"</code>, and <code>"10" + "20" = "1020"</code>!
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- =================================================================== -->
+      <!-- SLIDE 7: Plain Concept: What is "Data" vs. "Information"?           -->
+      <!-- =================================================================== -->
+      <section class="slide" id="slide-7" 
+        data-title="Data vs. Information" 
+        data-segment="Part 2: Why Data Exists (10:00 - 25:00)"
+        data-notes="TRAINER SPEAKING SCRIPT:
+'Before we talk about computer syntax, let's establish plain-language clarity.
+People often use the words 'Data' and 'Information' as if they are the same thing. They are not!
+Think of DATA as raw ingredients in your kitchen: a bowl of flour, a cup of sugar, two raw eggs. By themselves, raw eggs sitting on the counter don't feed your family.
+INFORMATION is the baked, delicious chocolate cake!
+Data is raw, unorganized facts: '42', 'Red', '2026-10-29'.
+Information is data that has been given meaning, labels, and purpose: 'Machine #42 has a Temperature of 200°C on October 29'.
+An app takes raw data, understands what type it is, and turns it into useful information for managers!'">
+        <div class="slide-content">
+          <div class="slide-header">
+            <span class="slide-badge blue-badge">Core Mental Model</span>
+            <h2 class="slide-title">Plain Language: Data vs. Information</h2>
+            <p class="slide-lead">Never confuse raw ingredients with the finished meal. Digital systems transform raw values into context.</p>
+          </div>
+
+          <div class="grid-2-col" style="gap: 1.5rem;">
+            <div class="concept-card">
+              <div class="concept-badge blue-badge">&#129370; Raw Data</div>
+              <h3>Unprocessed Facts &amp; Values</h3>
+              <p>Individual, raw, isolated items without context or labels. The computer stores them, but alone they tell no story.</p>
+              <div class="concept-examples">
+                <div class="example-item"><code>"45"</code> &bull; Is it 45 seconds? 45 dollars? 45 degrees?</div>
+                <div class="example-item"><code>"John Doe"</code> &bull; Is it a customer, an employee, or a doctor?</div>
+                <div class="example-item"><code>true</code> &bull; Is the machine running? Is an invoice paid?</div>
+              </div>
+            </div>
+
+            <div class="concept-card">
+              <div class="concept-badge green-badge">&#127829; Meaningful Information</div>
+              <h3>Data Structured with Context</h3>
+              <p>Data that has been labeled, typed, organized, and presented so humans can understand and act upon it.</p>
+              <div class="concept-examples">
+                <div class="example-item">&#10004; <strong>Downtime:</strong> 45 Minutes (Line 2 Stoppage)</div>
+                <div class="example-item">&#10004; <strong>Operator:</strong> John Doe (Logged into Press #4)</div>
+                <div class="example-item">&#10004; <strong>Emergency Stop:</strong> TRUE (Requires Maintenance)</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="takeaway-banner">
+            <strong>Key Insight:</strong> An app exists to collect <strong>Raw Data</strong> through forms, store it accurately, and present it as <strong>Actionable Information</strong> to solve human problems.
+          </div>
+        </div>
+      </section>
+
+      <!-- =================================================================== -->
+      <!-- SLIDE 8: Everyday Analogy: The Labeled Kitchen Pantry Jars           -->
+      <!-- =================================================================== -->
+      <section class="slide" id="slide-8" 
+        data-title="Everyday Analogy: The Kitchen Pantry" 
+        data-segment="Part 2: Why Data Exists (10:00 - 25:00)"
+        data-notes="TRAINER SPEAKING SCRIPT:
+'To make data types unforgettable, think of a home kitchen pantry.
+In your pantry, you have different containers for different things.
+You have a glass jar for Flour. You have an egg carton for Eggs. You have a jug for Milk.
+What happens if you try to pour 1 liter of fresh milk into a cardboard egg carton?
+It leaks all over the floor! Disaster!
+What happens if you try to crack 12 raw eggs into a narrow salt shaker?
+It jams and breaks!
+In a computer, a DATA TYPE is simply the physical shape of the container!
+You cannot pour text sentences into a number container.
+You cannot perform multiplication on a jar containing letters!
+When you choose a data type in Power Apps, you are telling the computer which jar to prepare.'">
+        <div class="slide-content">
+          <div class="slide-header">
+            <span class="slide-badge gold-badge">Mental Metaphor</span>
+            <h2 class="slide-title">Everyday Analogy: The Labeled Kitchen Pantry Jars</h2>
+            <p class="slide-lead">A digital container must match the substance it holds. You cannot store soup in an egg carton!</p>
+          </div>
+
+          <div class="pantry-grid">
+            <div class="pantry-jar border-text">
+              <div class="jar-icon">&#127850;</div>
+              <h4>Text Container</h4>
+              <span class="jar-substance">The Cookie Tin</span>
+              <p>Holds any shapes, letters, punctuation, or words. Flexible, but you cannot do arithmetic on cookies!</p>
+              <div class="jar-example"><code>"Molding Line A"</code></div>
+            </div>
+
+            <div class="pantry-jar border-num">
+              <div class="jar-icon">&#129378;</div>
+              <h4>Number Container</h4>
+              <span class="jar-substance">The Measuring Cup</span>
+              <p>Strictly calibrated for quantities and amounts. Ready for addition, subtraction, and averages.</p>
+              <div class="jar-example"><code>150.5</code> kg</div>
+            </div>
+
+            <div class="pantry-jar border-date">
+              <div class="jar-icon">&#128197;</div>
+              <h4>Date Container</h4>
+              <span class="jar-substance">The Freshness Clock</span>
+              <p>Tracks calendar days and exact clock ticks. Knows leap years, days of the week, and intervals.</p>
+              <div class="jar-example"><code>2026-10-29 08:30</code></div>
+            </div>
+
+            <div class="pantry-jar border-bool">
+              <div class="jar-icon">&#128161;</div>
+              <h4>Yes/No Container</h4>
+              <span class="jar-substance">The Light Switch</span>
+              <p>Has exactly TWO states: ON or OFF. No third option exists. Zero ambiguity.</p>
+              <div class="jar-example"><code>true / false</code></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- =================================================================== -->
+      <!-- SLIDE 9: The 4 Fundamental Data Types                               -->
+      <!-- =================================================================== -->
+      <section class="slide" id="slide-9" 
+        data-title="The 4 Fundamental Data Types" 
+        data-segment="Part 3: Fundamental Data Types (25:00 - 45:00)"
+        data-notes="TRAINER SPEAKING SCRIPT:
+'Now let's formally introduce the 4 pillars of all business software.
+Whether you build in Power Apps, Excel, SharePoint, SQL Server, or Python, these 4 pillars never change:
+1. TEXT (also called String): Characters, names, notes, sentences. Enclosed in double quotes in Power Fx: "Apex Plastics".
+2. NUMBER: Quantities, prices, weights, measurements. Written directly as digits without quotes: 45 or 199.99.
+3. DATE / TIME: A calendar point in time: Today(), 2026-10-29.
+4. YES / NO (also called Boolean): Pure binary truth. Either true or false.
+Every field you ever put into an app belongs to one of these four families!'">
+        <div class="slide-content">
+          <div class="slide-header">
+            <span class="slide-badge purple-badge">Technical Foundation</span>
+            <h2 class="slide-title">The 4 Fundamental Business Data Types</h2>
+            <p class="slide-lead">95% of all business apps are powered by these four essential data containers.</p>
+          </div>
+
+          <div class="types-table-wrapper">
+            <table class="types-table">
+              <thead>
+                <tr>
+                  <th>Data Type</th>
+                  <th>Technical Name</th>
+                  <th>What It Holds</th>
+                  <th>Power Fx Syntax Example</th>
+                  <th>Allowed Operations</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><span class="type-pill pill-text">&#128221; Text</span></td>
+                  <td><code>String / Text</code></td>
+                  <td>Letters, symbols, words, sentences</td>
+                  <td><code>"Press Machine 04"</code></td>
+                  <td>Join (<code>&amp;</code>), Upper, Lower, Search</td>
+                </tr>
+                <tr>
+                  <td><span class="type-pill pill-num">&#128290; Number</span></td>
+                  <td><code>Decimal / Integer</code></td>
+                  <td>Counts, measurements, prices, weights</td>
+                  <td><code>450.75</code></td>
+                  <td>Add (<code>+</code>), Subtract (<code>-</code>), Multiply, Sum</td>
+                </tr>
+                <tr>
+                  <td><span class="type-pill pill-date">&#128197; Date/Time</span></td>
+                  <td><code>DateTime</code></td>
+                  <td>Calendar days, clock timestamps</td>
+                  <td><code>Today()</code> or <code>Date(2026,10,29)</code></td>
+                  <td>DateAdd, DateDiff, Weekday</td>
+                </tr>
+                <tr>
+                  <td><span class="type-pill pill-bool">&#9989; Yes/No</span></td>
+                  <td><code>Boolean</code></td>
+                  <td>True or False condition flags</td>
+                  <td><code>true</code> or <code>false</code></td>
+                  <td><code>And</code>, <code>Or</code>, <code>Not (!)</code></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- =================================================================== -->
+      <!-- SLIDE 10: Deep-Dive: When is a Number NOT a Number?                 -->
+      <!-- =================================================================== -->
+      <section class="slide" id="slide-10" 
+        data-title="When is a Number NOT a Number?" 
+        data-segment="Part 3: Fundamental Data Types (25:00 - 45:00)"
+        data-notes="TRAINER SPEAKING SCRIPT:
+'Now comes one of the most critical rules in all of data architecture.
+Ask your students: Is a Phone Number a Number?
+Is an Employee ID (like 00482) a Number?
+Is a ZIP Code (like 02138) a Number?
+The answer is an emphatic NO! They are TEXT!
+Why? Because of the Golden Rule:
+'Will you ever perform mathematical calculations on this value?'
+Will you ever take the average of two phone numbers? No!
+Will you ever multiply two employee IDs together? No!
+Furthermore, if you store ZIP Code '02138' as a number, the computer drops the leading zero, turning it into '2138'—now your shipping mail fails!
+If it has leading zeros, hyphens, or is never added, it is TEXT!'">
+        <div class="slide-content">
+          <div class="slide-header">
+            <span class="slide-badge gold-badge">Golden Rule of Data Modeling</span>
+            <h2 class="slide-title">When is a Number NOT a Number?</h2>
+            <p class="slide-lead">Just because a value contains digits does NOT make it a mathematical Number.</p>
+          </div>
+
+          <div class="golden-rule-banner">
+            <div class="rule-icon">&#127942;</div>
+            <div class="rule-text">
+              <h3>The Golden Test: <em>"Will you ever calculate with it?"</em></h3>
+              <p>If you will never add, subtract, multiply, or average the value, it belongs in a <strong>Text</strong> container!</p>
+            </div>
+          </div>
+
+          <div class="grid-2-col" style="margin-top: 1.25rem;">
+            <div class="contrast-card card-fail">
+              <h4 style="color: #fb7185;">&#10060; Dangers of Storing as a Number:</h4>
+              <ul class="danger-list">
+                <li><strong>Loss of Leading Zeros:</strong> Boston ZIP <code>"02138"</code> becomes <code>2138</code>.</li>
+                <li><strong>Stripping Formatting:</strong> Phone <code>"+855-23-888"</code> throws a math error!</li>
+                <li><strong>Serial Numbers:</strong> Part ID <code>"007-B"</code> crashes if forced to numeric.</li>
+              </ul>
+            </div>
+            <div class="contrast-card card-pass">
+              <h4 style="color: #4ade80;">&#10004; True Numbers vs. Text Digits:</h4>
+              <ul class="success-list">
+                <li><strong>True Numbers:</strong> Hourly Rate ($25.50), Scrap Quantity (14), Downtime Hours (2.5).</li>
+                <li><strong>Text Digits:</strong> Phone Number, National ID, Badge Number, Postal Code, Serial Tag.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- =================================================================== -->
+      <!-- SLIDE 11: Visual Cause-and-Effect Diagram: Data Collisions           -->
+      <!-- =================================================================== -->
+      <section class="slide" id="slide-11" 
+        data-title="Cause &amp; Effect: Data Collisions" 
+        data-segment="Part 3: Fundamental Data Types (25:00 - 45:00)"
+        data-notes="TRAINER SPEAKING SCRIPT:
+'Look at this cause-and-effect flow.
+On the left: an operator types '50' into a text box.
+If the app treats it as Text, and we add '10', the result is '5010'.
+If the app treats it as a Number, and we add 10, the result is 60!
+Look at what happens when types collide:
+Attempting to multiply 'Apex' by 5 throws a hard crash: Incompatible types.
+Attempting to save the text 'Urgent' into a Yes/No toggle breaks the database save!
+Understanding data types prevents runtime errors before they ever reach your users.'">
+        <div class="slide-content">
+          <div class="slide-header">
+            <span class="slide-badge red-badge">Visual Cause &amp; Effect</span>
+            <h2 class="slide-title">What Happens When Data Types Collide?</h2>
+            <p class="slide-lead">Tracing the digital reaction when an operation meets the wrong data container.</p>
+          </div>
+
+          <div class="collision-diagram">
+            <div class="diagram-branch">
+              <div class="diag-node node-input">
+                <span class="node-tag">User Input</span>
+                <code>"50"</code> &amp; <code>"10"</code>
+              </div>
+              <div class="diag-arrow">&#8594;</div>
+              <div class="diag-node node-text-op">
+                <span class="node-tag">Treated as Text</span>
+                Operation: <code>&amp;</code> (Join)
+              </div>
+              <div class="diag-arrow">&#8594;</div>
+              <div class="diag-node node-fail">
+                <span class="node-tag">Unintended Result</span>
+                <strong>"5010"</strong> (Pallets!)
+              </div>
+            </div>
+
+            <div class="diagram-divider">VS</div>
+
+            <div class="diagram-branch">
+              <div class="diag-node node-input">
+                <span class="node-tag">User Input</span>
+                <code>Value("50")</code> &amp; <code>Value("10")</code>
+              </div>
+              <div class="diag-arrow">&#8594;</div>
+              <div class="diag-node node-num-op">
+                <span class="node-tag">Treated as Number</span>
+                Operation: <code>+</code> (Math)
+              </div>
+              <div class="diag-arrow">&#8594;</div>
+              <div class="diag-node node-success">
+                <span class="node-tag">Correct Business Result</span>
+                <strong>60</strong> (Pallets)
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- =================================================================== -->
+      <!-- SLIDE 12: Trainer Interactive Demo: The Data Inspector Lab          -->
+      <!-- =================================================================== -->
+      <section class="slide" id="slide-12" 
+        data-title="Trainer Demo: The Data Inspector" 
+        data-segment="Part 4: Trainer Demonstration (45:00 - 60:00)"
+        data-notes="TRAINER SPEAKING SCRIPT:
+'Now let's open the interactive Data Inspector Lab!
+I will click on several different sample values from our factory floor.
+Watch what the inspector reveals:
+1. When I click 'Line 04', it shows Type: Text, Container: String, Allowed: Concatenation and Searching.
+2. When I click '150.25', it shows Type: Number, Container: Float/Decimal, Allowed: +, -, *, Average.
+3. When I click '2026-10-29', it shows Type: Date/Time, Allowed: DateAdd, DateDiff.
+4. When I click 'True', it shows Type: Yes/No, Allowed: If(), And, Or.
+Look at what happens when we try an illegal operation: trying to do math on text lights up the red collision warning!'">
+        <div class="slide-content">
+          <div class="slide-header">
+            <span class="slide-badge blue-badge">Interactive Simulation</span>
+            <h2 class="slide-title">Trainer Demonstration: The Live Data Inspector Lab</h2>
+            <p class="slide-lead">Select sample factory data values below to inspect their container shape, memory usage, and legal operations.</p>
+          </div>
+
+          <div class="inspector-sandbox">
+            <div class="inspector-picker">
+              <span class="picker-label">Select Workplace Sample Value:</span>
+              <div class="sample-btn-group" id="lab-btn-group">
+                <button class="sample-btn active" data-val="sample-text">"Injection Press #2"</button>
+                <button class="sample-btn" data-val="sample-num">485.50</button>
+                <button class="sample-btn" data-val="sample-phone">"+855-23-999-111"</button>
+                <button class="sample-btn" data-val="sample-date">Today()</button>
+                <button class="sample-btn" data-val="sample-bool">true</button>
+              </div>
+            </div>
+
+            <div class="inspector-display-panel" id="inspector-display">
+              <div class="panel-row">
+                <span class="panel-label">Detected Type:</span>
+                <span class="panel-value type-highlight" id="disp-type">Text (String)</span>
+              </div>
+              <div class="panel-row">
+                <span class="panel-label">Container Syntax:</span>
+                <code class="panel-code" id="disp-syntax">"Injection Press #2" (Enclosed in quotes)</code>
+              </div>
+              <div class="panel-row">
+                <span class="panel-label">Allowed Operations:</span>
+                <span class="panel-value" id="disp-allowed">&#10004; Concatenation (&amp;), Search, Upper, Lower, Len</span>
+              </div>
+              <div class="panel-row">
+                <span class="panel-label">Prohibited Operations:</span>
+                <span class="panel-value text-danger" id="disp-prohibited">&#10060; Addition (+), Subtraction, Multiplication, Sum</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- =================================================================== -->
+      <!-- SLIDE 13: Mid-Session Pulse Checkpoint & Hydration                  -->
+      <!-- =================================================================== -->
+      <section class="slide" id="slide-13" 
+        data-title="Mid-Session Pulse Check" 
+        data-segment="Part 4: Trainer Demonstration (45:00 - 60:00)"
+        data-notes="TRAINER SPEAKING SCRIPT:
+'We have reached the 45-minute mark! Halfway through Day 3!
+Let's pause for a quick 60-second breathing and posture reset.
+Take a sip of water.
+Quick thumb check for everyone in the room:
+Thumbs UP if you clearly see why a phone number is Text and why '10' + '20' made 1,020.
+Thumbs SIDEWAYS if you still wonder why Power Apps doesn't just guess what we mean.
+Remember: Computers never guess. Precision is what makes software reliable!'">
+        <div class="slide-content">
+          <div class="checkpoint-card">
+            <div class="checkpoint-icon">&#9749;</div>
+            <h2 class="checkpoint-title">Mid-Session Pulse Checkpoint (45:00 Elapsed)</h2>
+            <p class="checkpoint-subtitle">Take a breath, hydrate, and verify your mental foundation before we start building.</p>
+
+            <div class="checkpoint-grid">
+              <div class="check-item">
+                <div class="check-icon">&#128077;</div>
+                <h4>Thumbs Up: Clear</h4>
+                <p>I know the 4 data types and know why numbers with leading zeros or dashes are stored as Text.</p>
+              </div>
+              <div class="check-item">
+                <div class="check-icon">&#9995;</div>
+                <h4>Thumbs Sideways: Unsure</h4>
+                <p>I understand Text and Numbers, but I want to see how Power Apps handles Date and Yes/No toggles.</p>
+              </div>
+              <div class="check-item">
+                <div class="check-icon">&#128161;</div>
+                <h4>The Golden Rule Remembered</h4>
+                <p><em>"If I never do math on it, it's Text!"</em></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- =================================================================== -->
+      <!-- SLIDE 14: Workplace Case Study: The Support Request Form            -->
+      <!-- =================================================================== -->
+      <section class="slide" id="slide-14" 
+        data-title="Case Study: Apex Support Request Form" 
+        data-segment="Part 5: Guided Learner Practice (60:00 - 75:00)"
+        data-notes="TRAINER SPEAKING SCRIPT:
+'Now let's look at the actual Power App we are building for Apex Plastics: The Factory Support &amp; Maintenance Form!
+Look at the 5 fields on this screen:
+1. Operator Name: 'Sophea Chem' -> What type? Text!
+2. Department Code: 'PLAST-04' -> Contains letters and hyphens: Text!
+3. Machine Downtime: '2.5' -> Hours lost: We need to sum and average this: Number!
+4. Incident Date: '2026-10-29' -> Date/Time!
+5. Production Halted?: Toggle switch: Yes/No (Boolean)!
+When you design an app, your FIRST task is always to map every single field to its correct data type.'">
+        <div class="slide-content">
+          <div class="slide-header">
+            <span class="slide-badge teal-badge">Workplace DX Architecture</span>
+            <h2 class="slide-title">Apex Plastics: Deconstructing the Support Form</h2>
+            <p class="slide-lead">Every input on a production screen maps directly to an underlying data container.</p>
+          </div>
+
+          <div class="form-blueprint-grid">
+            <div class="form-preview-card">
+              <div class="form-title-bar">Apex Plastics Maintenance Incident Form</div>
+              <div class="form-field-row">
+                <label>Operator Name</label>
+                <div class="mock-input">Sophea Chem</div>
+              </div>
+              <div class="form-field-row">
+                <label>Department Code</label>
+                <div class="mock-input">DEPT-PLAST-04</div>
+              </div>
+              <div class="form-field-row">
+                <label>Downtime (Hours)</label>
+                <div class="mock-input">2.5</div>
+              </div>
+              <div class="form-field-row">
+                <label>Incident Date</label>
+                <div class="mock-input">&#128197; 2026-10-29</div>
+              </div>
+              <div class="form-field-row">
+                <label>Safety Hazard Present?</label>
+                <div class="mock-toggle"><span class="toggle-switch on"></span> YES</div>
+              </div>
+            </div>
+
+            <div class="schema-mapping-card">
+              <h4 style="margin-top:0; color:#38bdf8;">Data Type Specification:</h4>
+              <div class="mapping-row">
+                <span class="field-name">Operator Name</span>
+                <span class="type-pill pill-text">Text</span>
+                <span class="ui-ctrl">TextInput (Text)</span>
+              </div>
+              <div class="mapping-row">
+                <span class="field-name">Department Code</span>
+                <span class="type-pill pill-text">Text</span>
+                <span class="ui-ctrl">Dropdown / Text</span>
+              </div>
+              <div class="mapping-row">
+                <span class="field-name">Downtime (Hours)</span>
+                <span class="type-pill pill-num">Number</span>
+                <span class="ui-ctrl">TextInput (Number)</span>
+              </div>
+              <div class="mapping-row">
+                <span class="field-name">Incident Date</span>
+                <span class="type-pill pill-date">Date/Time</span>
+                <span class="ui-ctrl">DatePicker</span>
+              </div>
+              <div class="mapping-row">
+                <span class="field-name">Safety Hazard?</span>
+                <span class="type-pill pill-bool">Yes/No</span>
+                <span class="ui-ctrl">Toggle / Checkbox</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- =================================================================== -->
+      <!-- SLIDE 15: Power Apps Data Types & Power Fx Connection               -->
+      <!-- =================================================================== -->
+      <section class="slide" id="slide-15" 
+        data-title="Power Fx &amp; Data Types" 
+        data-segment="Part 5: Guided Learner Practice (60:00 - 75:00)"
+        data-notes="TRAINER SPEAKING SCRIPT:
+'How does Microsoft Power Apps handle these data types in code?
+In Power Fx, every control on screen has properties that hold data:
+- A text box called txtOperator has a property: txtOperator.Text. It is always of type Text!
+- A date picker has: dpIncidentDate.SelectedDate. It is of type Date!
+- A toggle switch has: chkHazard.Value. It is of type Boolean (true or false)!
+Power Fx has built-in helper functions to inspect data:
+- IsBlank(txtOperator.Text) checks if the user forgot to enter data!
+- Today() fetches the current date!
+- Value(txtHours.Text) converts text digits into real math numbers!'">
+        <div class="slide-content">
+          <div class="slide-header">
+            <span class="slide-badge purple-badge">Power Fx Connection</span>
+            <h2 class="slide-title">How Power Apps Reads and Checks Data</h2>
+            <p class="slide-lead">Connecting screen UI controls to Power Fx properties and validation functions.</p>
+          </div>
+
+          <div class="grid-2-col">
+            <div class="code-card">
+              <div class="code-header">Reading Values from Screen Controls</div>
+              <pre class="powerfx-code">
+<span class="comment">// 1. Reading Text from an input box</span>
+<span class="keyword">Set</span>(varOperator, txtOperator.<span class="prop">Text</span>);
+
+<span class="comment">// 2. Reading a Date from a date picker</span>
+<span class="keyword">Set</span>(varReportDate, dpDate.<span class="prop">SelectedDate</span>);
+
+<span class="comment">// 3. Reading a True/False from a Toggle</span>
+<span class="keyword">Set</span>(varIsUrgent, chkUrgent.<span class="prop">Value</span>);
+              </pre>
+            </div>
+
+            <div class="code-card">
+              <div class="code-header">Inspecting &amp; Validating Data</div>
+              <pre class="powerfx-code">
+<span class="comment">// Check if a text field was left empty</span>
+<span class="func">IsBlank</span>(txtOperator.<span class="prop">Text</span>)  <span class="comment">// returns true/false</span>
+
+<span class="comment">// Fetch current system calendar date</span>
+<span class="func">Today</span>()                      <span class="comment">// returns 2026-10-29</span>
+
+<span class="comment">// Convert text input into real math number</span>
+<span class="func">Value</span>(txtDowntime.<span class="prop">Text</span>)     <span class="comment">// "2.5" ➔ 2.5</span>
+              </pre>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- =================================================================== -->
+      <!-- SLIDE 16: Converting Data Types: The Conversion Bridges             -->
+      <!-- =================================================================== -->
+      <section class="slide" id="slide-16" 
+        data-title="Converting Types: Value() &amp; Text()" 
+        data-segment="Part 5: Guided Learner Practice (60:00 - 75:00)"
+        data-notes="TRAINER SPEAKING SCRIPT:
+'What if an operator types numbers into a standard text box?
+By default, everything typed into a TextInput control is TEXT! Even if they type 50, it is '50' with quotes!
+How do we convert it into a real number so we can safely add it?
+We use the Power Fx function: Value()!
+Value('50') converts the string '50' into the number 50!
+And what if we want to take a number or date and display it nicely with currency or formatting?
+We use the Text() function!
+Text(1250, '$#,###.00') turns 1250 into '$1,250.00'!
+Think of Value() and Text() as conversion bridges between the pantry jars.'">
+        <div class="slide-content">
+          <div class="slide-header">
+            <span class="slide-badge blue-badge">Data Conversion Bridges</span>
+            <h2 class="slide-title">Converting Data: The <code>Value()</code> &amp; <code>Text()</code> Bridges</h2>
+            <p class="slide-lead">Moving safely between text strings, mathematical numbers, and calendar dates.</p>
+          </div>
+
+          <div class="conversion-bridge-grid">
+            <div class="bridge-card bridge-to-num">
+              <div class="bridge-direction">
+                <span class="type-pill pill-text">Text</span>
+                <span class="bridge-arrow">&#10142;</span>
+                <span class="type-pill pill-num">Number</span>
+              </div>
+              <h3>The <code>Value()</code> Function</h3>
+              <p>Extracts numeric digits from a text string so you can perform safe arithmetic.</p>
+              <div class="code-box">
+                <code>Value("45.5") + Value("10") = <strong>55.5</strong></code>
+              </div>
+              <div class="bridge-note">&#9888; If the text contains letters like "abc", Value() returns Blank/Error.</div>
+            </div>
+
+            <div class="bridge-card bridge-to-text">
+              <div class="bridge-direction">
+                <span class="type-pill pill-num">Number / Date</span>
+                <span class="bridge-arrow">&#10142;</span>
+                <span class="type-pill pill-text">Text</span>
+              </div>
+              <h3>The <code>Text()</code> Function</h3>
+              <p>Formats numbers or dates into human-readable text strings for labels and emails.</p>
+              <div class="code-box">
+                <code>Text(Today(), "dd-mmm-yyyy") = <strong>"29-Oct-2026"</strong></code><br>
+                <code>Text(5420, "$#,###") = <strong>"$5,420"</strong></code>
+              </div>
+              <div class="bridge-note">&#10004; Perfect for clean executive reports and UI feedback.</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- =================================================================== -->
+      <!-- SLIDE 17: Guided Learner Practice Brief: Parts Inventory            -->
+      <!-- =================================================================== -->
+      <section class="slide" id="slide-17" 
+        data-title="Guided Practice Brief" 
+        data-segment="Part 5: Guided Learner Practice (60:00 - 75:00)"
+        data-notes="TRAINER SPEAKING SCRIPT:
+'Now it is time for your hands-on practice!
+You are the lead app designer for Apex Plastics Spare Parts Store.
+The plant manager gives you 6 fields on an index card:
+1. Part Serial Number ('SN-8841-A')
+2. Quantity in Stock ('25')
+3. Unit Replacement Cost ($120.50)
+4. Last Inspection Date ('2026-10-15')
+5. Needs Immediate Reorder? (True/False)
+6. Warehouse Bay Location Code ('BAY-04-NORTH')
+On the next slide, you will interactively classify each field into its proper container bin!'">
+        <div class="slide-content">
+          <div class="slide-header">
+            <span class="slide-badge teal-badge">Guided Challenge Brief</span>
+            <h2 class="slide-title">Guided Practice: Apex Spare Parts Inventory</h2>
+            <p class="slide-lead">Analyze the 6 inventory fields below before placing them into their digital containers.</p>
+          </div>
+
+          <div class="parts-brief-grid">
+            <div class="brief-item">
+              <span class="brief-num">1</span>
+              <div>
+                <strong>Part Serial Number</strong>
+                <p>Sample: <code>"SN-8841-A"</code> (Unique metal tag stamped on extruder screw).</p>
+              </div>
+            </div>
+            <div class="brief-item">
+              <span class="brief-num">2</span>
+              <div>
+                <strong>Quantity in Stock</strong>
+                <p>Sample: <code>25</code> (Physical count of parts on shelf; decrements when used).</p>
+              </div>
+            </div>
+            <div class="brief-item">
+              <span class="brief-num">3</span>
+              <div>
+                <strong>Unit Replacement Cost</strong>
+                <p>Sample: <code>$120.50</code> (Purchase price used for inventory balance valuation).</p>
+              </div>
+            </div>
+            <div class="brief-item">
+              <span class="brief-num">4</span>
+              <div>
+                <strong>Last Inspection Date</strong>
+                <p>Sample: <code>2026-10-15</code> (Calendar date when quality control certified part).</p>
+              </div>
+            </div>
+            <div class="brief-item">
+              <span class="brief-num">5</span>
+              <div>
+                <strong>Needs Immediate Reorder?</strong>
+                <p>Sample: <code>true</code> (Supplier alert trigger if count falls below safety threshold).</p>
+              </div>
+            </div>
+            <div class="brief-item">
+              <span class="brief-num">6</span>
+              <div>
+                <strong>Warehouse Bay Location</strong>
+                <p>Sample: <code>"BAY-04-NORTH"</code> (Physical shelf coordinate in building C).</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- =================================================================== -->
+      <!-- SLIDE 18: Interactive Hands-On Practice Board: 6-Field Classifier    -->
+      <!-- =================================================================== -->
+      <section class="slide" id="slide-18" 
+        data-title="Interactive Classifier Board" 
+        data-segment="Part 5: Guided Learner Practice (60:00 - 75:00)"
+        data-notes="TRAINER SPEAKING SCRIPT:
+'Here is your live classification board!
+Click each of the 6 fields on the left, then click the correct container bin on the right.
+Watch: If you try to put 'Part Serial Number' into Number, the board will warn you that serial numbers contain letters and dashes.
+Let's see if you can achieve a 6 out of 6 perfect score!'">
+        <div class="slide-content">
+          <div class="slide-header">
+            <span class="slide-badge green-badge">Hands-On Practice</span>
+            <h2 class="slide-title">Interactive 6-Field Data Classifier</h2>
+            <p class="slide-lead">Click a field on the left, then click the matching container bin on the right to categorize.</p>
+          </div>
+
+          <div class="classifier-container" id="classifier-widget">
+            <div class="classifier-left">
+              <h4>Unassigned Fields:</h4>
+              <div class="field-chips-list" id="field-chips">
+                <button class="field-chip active" data-field="f-serial" data-correct="text">Part Serial ("SN-8841-A")</button>
+                <button class="field-chip" data-field="f-qty" data-correct="number">Quantity in Stock (25)</button>
+                <button class="field-chip" data-field="f-cost" data-correct="number">Unit Cost ($120.50)</button>
+                <button class="field-chip" data-field="f-date" data-correct="date">Inspection Date (2026-10-15)</button>
+                <button class="field-chip" data-field="f-reorder" data-correct="boolean">Needs Reorder? (True/False)</button>
+                <button class="field-chip" data-field="f-bay" data-correct="text">Bay Location ("BAY-04-NORTH")</button>
+              </div>
+              <div class="classifier-score-box">
+                Score: <span id="classifier-score">0</span> / 6 Correct
+              </div>
+            </div>
+
+            <div class="classifier-right">
+              <h4>Container Bins:</h4>
+              <div class="target-bins-grid">
+                <button class="target-bin bin-text" data-target="text">
+                  <div class="bin-header">&#128221; Text (String)</div>
+                  <div class="bin-contents" id="bin-text-content">Empty</div>
+                </button>
+                <button class="target-bin bin-num" data-target="number">
+                  <div class="bin-header">&#128290; Number</div>
+                  <div class="bin-contents" id="bin-number-content">Empty</div>
+                </button>
+                <button class="target-bin bin-date" data-target="date">
+                  <div class="bin-header">&#128197; Date/Time</div>
+                  <div class="bin-contents" id="bin-date-content">Empty</div>
+                </button>
+                <button class="target-bin bin-bool" data-target="boolean">
+                  <div class="bin-header">&#9989; Yes/No (Boolean)</div>
+                  <div class="bin-contents" id="bin-boolean-content">Empty</div>
+                </button>
+              </div>
+              <div class="classifier-feedback" id="classifier-feedback">Click a field chip on the left, then click a target container above.</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- =================================================================== -->
+      <!-- SLIDE 19: 4 Common Beginner Misconceptions & Corrections            -->
+      <!-- =================================================================== -->
+      <section class="slide" id="slide-19" 
+        data-title="Common Beginner Misconceptions" 
+        data-segment="Part 6: Assessment &amp; Forward Bridge (75:00 - 90:00)"
+        data-notes="TRAINER SPEAKING SCRIPT:
+'Let's examine 4 common misconceptions beginners make:
+Misconception 1: 'All numbers are Number data types.'
+Correction: Phone numbers, postal codes, and serial numbers are TEXT because we never calculate with them and they need leading zeros!
+Misconception 2: 'Yes/No is just the words 'Yes' and 'No'.'
+Correction: In computer memory, Yes/No is Boolean true and false!
+Misconception 3: 'Power Apps will automatically convert text to numbers for me.'
+Correction: Power Apps will throw an error or concatenate unless you explicitly use Value() or set the input format to Number!
+Misconception 4: 'Today's date is just text like 'October 29'.'
+Correction: Storing a date as text prevents you from sorting chronologically or calculating elapsed days!'">
+        <div class="slide-content">
+          <div class="slide-header">
+            <span class="slide-badge red-badge">Mental Model Corrections</span>
+            <h2 class="slide-title">4 Common Beginner Misconceptions &amp; Trainer Fixes</h2>
+            <p class="slide-lead">Correcting plausible but dangerous wrong mental models before they become bad habits.</p>
+          </div>
+
+          <div class="grid-2-col">
+            <div class="misconception-card">
+              <div class="misc-bad">&#10060; Wrong Mental Model #1</div>
+              <h4>"If it has digits, it must be a Number."</h4>
+              <p class="misc-fix"><strong>Trainer Correction:</strong> Phone numbers, employee badge IDs, and postal codes are <strong>Text</strong>. True numbers are reserved exclusively for mathematical quantities.</p>
+            </div>
+
+            <div class="misconception-card">
+              <div class="misc-bad">&#10060; Wrong Mental Model #2</div>
+              <h4>"Yes/No is just typing the words 'Yes' or 'No'."</h4>
+              <p class="misc-fix"><strong>Trainer Correction:</strong> Yes/No is a binary <strong>Boolean</strong> state: <code>true</code> or <code>false</code>. Storing it as text wastes storage and breaks conditional logic.</p>
+            </div>
+
+            <div class="misconception-card">
+              <div class="misc-bad">&#10060; Wrong Mental Model #3</div>
+              <h4>"The app will guess what I mean and do math."</h4>
+              <p class="misc-fix"><strong>Trainer Correction:</strong> Computers never guess. A text box outputs <code>"10"</code>. To add it, you must use <code>Value(TextInput.Text)</code> or configure the control as Numeric.</p>
+            </div>
+
+            <div class="misconception-card">
+              <div class="misc-bad">&#10060; Wrong Mental Model #4</div>
+              <h4>"I can just store dates as simple text words."</h4>
+              <p class="misc-fix"><strong>Trainer Correction:</strong> Storing <code>"29-Oct-2026"</code> as text means the computer cannot calculate expiration dates, check past-due status, or sort chronologically.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- =================================================================== -->
+      <!-- SLIDE 20: 5-Question Knowledge Check (Interactive Quiz)             -->
+      <!-- =================================================================== -->
+      <section class="slide" id="slide-20" 
+        data-title="5-Question Knowledge Check" 
+        data-segment="Part 6: Assessment &amp; Forward Bridge (75:00 - 90:00)"
+        data-notes="TRAINER SPEAKING SCRIPT:
+'Time for our 5-Question Knowledge Check!
+Notice questions 2 and 4 specifically ask 'Why' and 'What happens if'.
+Take your time, select the best answer for each question, and let's review the rationale together.'">
+        <div class="slide-content">
+          <div class="slide-header">
+            <span class="slide-badge blue-badge">Knowledge Verification</span>
+            <h2 class="slide-title">Day 3 Evaluative Knowledge Check</h2>
+            <p class="slide-lead">Answer all 5 questions to verify your mastery of data types, containers, and conversion logic.</p>
+          </div>
+
+          <div class="quiz-container" id="quiz-widget">
+            <div class="quiz-header-bar">
+              <span id="quiz-question-counter">Question 1 of 5</span>
+              <span id="quiz-score-display">Score: 0 / 5</span>
+            </div>
+
+            <div class="quiz-body" id="quiz-body">
+              <!-- Dynamically rendered via script.js -->
+            </div>
+
+            <div class="quiz-navigation">
+              <button class="btn-subtle" id="quiz-prev-btn" disabled>&#8592; Previous</button>
+              <button class="btn-primary" id="quiz-next-btn">Next Question &#8594;</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- =================================================================== -->
+      <!-- SLIDE 21: Final Challenge: Equipment Maintenance Log (8 Fields)     -->
+      <!-- =================================================================== -->
+      <section class="slide" id="slide-21" 
+        data-title="Final Challenge: Maintenance Log" 
+        data-segment="Part 6: Assessment &amp; Forward Bridge (75:00 - 90:00)"
+        data-notes="TRAINER SPEAKING SCRIPT:
+'Here is your Day 3 Capstone Challenge:
+Apex Plastics needs a brand-new digital Equipment Maintenance Log.
+You have 8 business fields:
+1. Equipment Asset ID ('P-402')
+2. Technician Phone Number ('+855-12-345-678')
+3. Hydraulic Pressure Reading (185.4 PSI)
+4. Service Maintenance Date (Today)
+5. Machine Safe to Operate? (True/False)
+6. Parts Replaced Count (3)
+7. Repair Cost USD ($450.00)
+8. Technician Detailed Notes ('Cleaned filter and replaced valve')
+On your worksheet, assign each field its Data Type, its Power Apps UI Control, and justify why it belongs there!'">
+        <div class="slide-content">
+          <div class="slide-header">
+            <span class="slide-badge purple-badge">Independent Capstone</span>
+            <h2 class="slide-title">Final Challenge: Apex Equipment Maintenance Log</h2>
+            <p class="slide-lead">Design the complete data schema and UI control mapping for 8 production maintenance fields.</p>
+          </div>
+
+          <div class="challenge-table-wrapper">
+            <table class="challenge-table">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Field Name</th>
+                  <th>Sample Data Value</th>
+                  <th>Target Data Type</th>
+                  <th>Recommended UI Control</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td>1</td><td>Equipment Asset ID</td><td><code>"P-402-EXTRUDER"</code></td><td>?</td><td>?</td></tr>
+                <tr><td>2</td><td>Technician Phone</td><td><code>"+855-12-345-678"</code></td><td>?</td><td>?</td></tr>
+                <tr><td>3</td><td>Hydraulic Pressure</td><td><code>185.4</code> (PSI)</td><td>?</td><td>?</td></tr>
+                <tr><td>4</td><td>Service Date</td><td><code>Today()</code></td><td>?</td><td>?</td></tr>
+                <tr><td>5</td><td>Safe to Operate?</td><td><code>true</code></td><td>?</td><td>?</td></tr>
+                <tr><td>6</td><td>Parts Replaced</td><td><code>3</code></td><td>?</td><td>?</td></tr>
+                <tr><td>7</td><td>Repair Cost</td><td><code>450.00</code> ($)</td><td>?</td><td>?</td></tr>
+                <tr><td>8</td><td>Work Notes</td><td><code>"Cleaned filter and replaced seal"</code></td><td>?</td><td>?</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- =================================================================== -->
+      <!-- SLIDE 22: Challenge Solution Reveal & Evaluation Rubric              -->
+      <!-- =================================================================== -->
+      <section class="slide" id="slide-22" 
+        data-title="Challenge Solution &amp; Rubric" 
+        data-segment="Part 6: Assessment &amp; Forward Bridge (75:00 - 90:00)"
+        data-notes="TRAINER SPEAKING SCRIPT:
+'Let's reveal the exemplar solution!
+Click the 'Reveal Solution' button to inspect the answer key.
+Notice: Technician Phone is TEXT because of the plus sign and leading zeros!
+Hydraulic Pressure, Parts Replaced, and Repair Cost are NUMBERS because we calculate averages and sums.
+Check your work against our 4-level evaluation rubric:
+Level 4 Mastery means all 8 fields are correctly typed with complete justification!'">
+        <div class="slide-content">
+          <div class="slide-header">
+            <span class="slide-badge green-badge">Exemplar &amp; Rubric</span>
+            <h2 class="slide-title">Final Challenge Solution &amp; 4-Level Evaluation Rubric</h2>
+            <p class="slide-lead">Compare your schema against the production standard and evaluate your performance.</p>
+          </div>
+
+          <div class="grid-2-col">
+            <div class="solution-card">
+              <div class="solution-header">
+                <h4>Exemplar Schema Specification</h4>
+                <button class="btn-reveal" id="btn-reveal-solution">Reveal Solution</button>
+              </div>
+              <div class="solution-body collapsed" id="solution-content">
+                <ul class="solution-list">
+                  <li><strong>Asset ID:</strong> <code>Text</code> &#8594; TextInput (Alphanumeric identifier)</li>
+                  <li><strong>Tech Phone:</strong> <code>Text</code> &#8594; TextInput (Golden Rule: no math!)</li>
+                  <li><strong>Pressure (PSI):</strong> <code>Number</code> &#8594; TextInput (Format: Number)</li>
+                  <li><strong>Service Date:</strong> <code>Date/Time</code> &#8594; DatePicker control</li>
+                  <li><strong>Safe to Run?:</strong> <code>Yes/No</code> &#8594; Toggle switch (Boolean)</li>
+                  <li><strong>Parts Count:</strong> <code>Number</code> &#8594; TextInput (Format: Number)</li>
+                  <li><strong>Repair Cost:</strong> <code>Number</code> &#8594; TextInput (Format: Number)</li>
+                  <li><strong>Work Notes:</strong> <code>Text</code> &#8594; TextInput (Multiline mode)</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="rubric-card">
+              <h4>Evaluation Rubric (4 Performance Levels)</h4>
+              <div class="rubric-levels">
+                <div class="level-item level-4">
+                  <span class="lvl-title">Level 4: Mastery (100%)</span>
+                  <p>All 8 fields correctly typed; Phone correctly identified as Text; controls matched.</p>
+                </div>
+                <div class="level-item level-3">
+                  <span class="lvl-title">Level 3: Proficient (75-99%)</span>
+                  <p>6-7 fields correct; understands Text vs Number; minor control mismatch.</p>
+                </div>
+                <div class="level-item level-2">
+                  <span class="lvl-title">Level 2: Developing (50-74%)</span>
+                  <p>Mistook Phone or Asset ID as Number; confused Boolean with text "Yes".</p>
+                </div>
+                <div class="level-item level-1">
+                  <span class="lvl-title">Level 1: Novice (&lt;50%)</span>
+                  <p>Unable to distinguish Text from Number; treats all values as generic strings.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- =================================================================== -->
+      <!-- SLIDE 23: The Connection Map (Before -> Today -> Next)              -->
+      <!-- =================================================================== -->
+      <section class="slide" id="slide-23" 
+        data-title="Curriculum Connection Map" 
+        data-segment="Part 6: Assessment &amp; Forward Bridge (75:00 - 90:00)"
+        data-notes="TRAINER SPEAKING SCRIPT:
+'Look at our 3-day Connection Map.
+BEFORE on Day 2: We learned instructions follow a sequence.
+TODAY on Day 3: We learned instructions operate on typed data containers.
+NEXT on Day 4: Apps need to make DECISIONS!
+How does an app make a decision?
+It compares DATA!
+If (RepairCost > 500, RequireManagerApproval(), AutoApprove())!
+Without today's Data types, tomorrow's Conditions and Decisions would be completely impossible!
+Everything in this course connects.'">
+        <div class="slide-content">
+          <div class="slide-header">
+            <span class="slide-badge purple-badge">Curriculum Bridge</span>
+            <h2 class="slide-title">The Three-Day Connection Map</h2>
+            <p class="slide-lead">How yesterday's sequence, today's data, and tomorrow's decisions form a seamless chain.</p>
+          </div>
+
+          <div class="bridge-three-col">
+            <div class="bridge-col before-col">
+              <span class="bridge-time-tag">YESTERDAY (Day 2)</span>
+              <h3>Instructions &amp; Sequence</h3>
+              <div class="bridge-summary">
+                Apps perform actions in a strict chronological order. Semicolons (<code>;</code>) chain instructions step by step.
+              </div>
+              <div class="bridge-flow-arrow">&#10142; Operates on...</div>
+            </div>
+
+            <div class="bridge-col today-col">
+              <span class="bridge-time-tag">TODAY (Day 3)</span>
+              <h3>Data &amp; Containers</h3>
+              <div class="bridge-summary">
+                Instructions require values: Text, Number, Date, and Yes/No. Container shapes determine what operations are legal.
+              </div>
+              <div class="bridge-flow-arrow">&#10142; Inspected by...</div>
+            </div>
+
+            <div class="bridge-col next-col">
+              <span class="bridge-time-tag">TOMORROW (Day 4)</span>
+              <h3>Conditions &amp; Decisions</h3>
+              <div class="bridge-summary">
+                Apps inspect data to make business choices: <code>If(Downtime &gt; 2, NotifySupervisor())</code>. Questions yield True/False.
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- =================================================================== -->
+      <!-- SLIDE 24: Homework, Bilingual Glossary & Session Wrap-Up            -->
+      <!-- =================================================================== -->
+      <section class="slide" id="slide-24" 
+        data-title="Homework &amp; Glossary" 
+        data-segment="Part 6: Assessment &amp; Forward Bridge (75:00 - 90:00)"
+        data-notes="TRAINER SPEAKING SCRIPT:
+'Congratulations on completing Day 3!
+Here is your 15-minute optional review homework: 'The Workplace Data Detective'.
+Find one paper form or Excel sheet at your workplace. Pick 5 columns. Write down their data type and whether they contain any tricky fields like phone numbers or serial tags.
+Also review the bilingual English-Khmer glossary below.
+Thank you for your fantastic energy today. Tomorrow on Day 4, we teach our apps how to make decisions!'">
+        <div class="slide-content">
+          <div class="slide-header">
+            <span class="slide-badge blue-badge">Session Wrap-Up</span>
+            <h2 class="slide-title">15-Minute Homework &amp; Bilingual Glossary</h2>
+            <p class="slide-lead">Reinforce today's concepts in your daily work environment and master the technical vocabulary.</p>
+          </div>
+
+          <div class="grid-2-col">
+            <div class="homework-card">
+              <div class="hw-icon">&#128269;</div>
+              <div class="hw-content">
+                <h4>Homework: "The Workplace Data Detective" (&le; 15 Mins)</h4>
+                <p>1. Open any existing Excel sheet, paper clipboard form, or ERP screen at your workplace.</p>
+                <p>2. Select <strong>5 columns or fields</strong> and classify them into Text, Number, Date, or Yes/No.</p>
+                <p>3. Identify if any numeric-looking field is actually <strong>Text</strong> (e.g., Badge #, ZIP, Phone).</p>
+                <div class="hw-outcome">Expected Result: 5 classified fields ready to share tomorrow morning!</div>
+              </div>
+            </div>
+
+            <div class="glossary-card">
+              <h4>Bilingual Technical Glossary (Day 3)</h4>
+              <div class="glossary-list">
+                <div class="gloss-item">
+                  <span class="en-term">Data / Value</span>
+                  <span class="kh-term">ទិន្នន័យ / តម្លៃ</span>
+                </div>
+                <div class="gloss-item">
+                  <span class="en-term">Data Type</span>
+                  <span class="kh-term">ប្រភេទនៃទិន្នន័យ</span>
+                </div>
+                <div class="gloss-item">
+                  <span class="en-term">Text / String</span>
+                  <span class="kh-term">អត្ថបទ / ខ្សែអក្សរ</span>
+                </div>
+                <div class="gloss-item">
+                  <span class="en-term">Number / Numeric</span>
+                  <span class="kh-term">លេខ / តម្លៃលេខ</span>
+                </div>
+                <div class="gloss-item">
+                  <span class="en-term">Date and Time</span>
+                  <span class="kh-term">កាលបរិច្ឆេទ និង ពេលវេលា</span>
+                </div>
+                <div class="gloss-item">
+                  <span class="en-term">Boolean / Yes/No</span>
+                  <span class="kh-term">តក្កវិទ្យា (ពិត / មិនពិត)</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- Bottom Controls & Navigation Bar -->
+        <footer id="bottom-hud">
+      <div id="progress-bar-container">
+        <div id="progress-bar"></div>
+      </div>
+
+      <div class="hud-left">
+        <button class="hud-btn" id="btn-prev" onclick="prevSlide()" title="Previous Slide (Left Arrow)">&#8592; Prev</button>
+        <button class="hud-btn" id="btn-next" onclick="nextSlide()" title="Next Slide (Right Arrow / Space)">Next &#8594;</button>
+        <span id="slide-counter">Slide <span id="slide-current-num">1</span> / <span id="slide-total-count">24</span></span>
+      </div>
+
+      <div class="hud-right">
+        <button class="hud-btn" id="btn-lang" onclick="toggleLanguage()" title="Toggle Language (L)">
+          🌐 <span id="lang-label">KH</span>
+        </button>
+        <button class="hud-btn active" id="btn-laser" onclick="toggleLaser()" title="Presenter Laser Pointer (P)">
+          🔴 Laser
+        </button>
+        <button class="hud-btn" id="btn-notes" onclick="toggleNotes()" title="Trainer Notes Drawer (N)">
+          📝 Notes
+        </button>
+        <button class="hud-btn" id="btn-overview" onclick="toggleOverview()" title="Slide Overview Modal (O)">
+          🗂️ Overview
+        </button>
+        <button class="hud-btn" id="btn-timer" onclick="toggleTimer()" title="90-Min Countdown (T)">
+          ⏱️ <span id="timer-display">90:00</span>
+        </button>
+        <button class="hud-btn" id="btn-fullscreen" onclick="toggleFullscreen()" title="Fullscreen (F)">
+          ⛶
+        </button>
+        <a href="../index.html" class="hud-btn hub-btn" title="Return to Master Curriculum Hub (ត្រឡប់ទៅទំព័រដើម)" style="text-decoration: none; display: inline-flex; align-items: center; gap: 4px; color: #fcd34d; font-weight: 600;"><span>🏠</span><span>Hub</span></a>
+      </div>
+    </footer>
+
+    
+
+  </div> <!-- /#presentation-container -->
+
+  <!-- Presenter Notes Bottom Drawer -->
+  <aside id="presenter-notes-panel" class="presenter-notes-panel" aria-label="Trainer Notes and Speaking Script">
+    <div class="notes-header">
+      <div class="notes-title">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+          <path d="M2.5 1A1.5 1.5 0 0 0 1 2.5v11A1.5 1.5 0 0 0 2.5 15h6.086a1.5 1.5 0 0 0 1.06-.44l4.915-4.914A1.5 1.5 0 0 0 15 8.586V2.5A1.5 1.5 0 0 0 13.5 1h-11zM2 2.5a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 .5.5v6H9.5A1.5 1.5 0 0 0 8 10v4.5H2.5a.5.5 0 0 1-.5-.5v-11zm7 7.5v4.379L13.379 10H9z"/>
+        </svg>
+        <span>Trainer Delivery Script &amp; Pedagogical Notes</span>
+      </div>
+      <button id="btn-close-notes" class="icon-btn-close" aria-label="Close Notes Panel">&times;</button>
+    </div>
+    <div class="notes-body" id="notes-content">
+      <!-- Dynamically filled with data-notes of current slide -->
+    </div>
+  </aside>
+
+  <!-- Floating Notes Tab (When panel is closed) -->
+  <button id="notes-floating-tab" class="notes-floating-tab" title="Open Trainer Script (Press N)">
+    <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor">
+      <path d="M2.5 1A1.5 1.5 0 0 0 1 2.5v11A1.5 1.5 0 0 0 2.5 15h6.086a1.5 1.5 0 0 0 1.06-.44l4.915-4.914A1.5 1.5 0 0 0 15 8.586V2.5A1.5 1.5 0 0 0 13.5 1h-11zM2 2.5a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 .5.5v6H9.5A1.5 1.5 0 0 0 8 10v4.5H2.5a.5.5 0 0 1-.5-.5v-11zm7 7.5v4.379L13.379 10H9z"/>
+    </svg>
+    <span>Trainer Notes (N)</span>
+  </button>
+
+  <!-- Slide Grid Overview Modal (Press O) -->
+  <div id="overview-modal" class="overview-modal hidden" aria-hidden="true" role="dialog" aria-label="Slide Navigation Grid">
+    <div class="overview-backdrop" id="overview-backdrop"></div>
+    <div class="overview-dialog">
+      <div class="overview-header">
+        <h3>Lesson Slide Grid Navigator (24 Slides)</h3>
+        <button id="btn-close-overview" class="icon-btn-close" aria-label="Close Overview">&times;</button>
+      </div>
+      <div class="overview-grid" id="overview-grid">
+        <!-- Dynamically rendered by script.js -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Presentation Engine & Bilingual Logic -->
+  <script src="script.js"></script>
+
+    <!-- Presenter Laser Focus Pointer & Click Ripple Elements -->
+    <div id="presenter-pointer" class="presenter-laser-dot">
+      <div class="laser-halo"></div>
+    </div>
+    <div id="pointer-click-ripple" class="pointer-click-ripple"></div>
+  <script>
+if (window.self !== window.top) {
+  document.documentElement.classList.add('in-iframe');
+  function hideHub() { document.querySelectorAll('.hub-btn, .back-to-hub-pill').forEach(e => e.style.display = 'none'); }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', hideHub);
+  } else {
+    hideHub();
+  }
+}
+</script>
+<style>
+.in-iframe .hub-btn, .in-iframe .back-to-hub-pill { display: none !important; }
+</style>
+</body>
+</html>

@@ -1,0 +1,1683 @@
+<!DOCTYPE html>
+<html lang="en" translate="no" class="notranslate">
+<head>
+  <meta name="google" content="notranslate">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Day 19: SharePoint List: Persistent Business Data | Microsoft Power Apps Foundation</title>
+  <link rel="stylesheet" href="../shared/design-system.css">
+  <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=Moul&family=Kantumruy+Pro:ital,wght@0,400..700;1,400..700&family=Battambang:wght@300;400;700;900&family=Koh+Santepheap:wght@300;400;700&family=Koulen&family=Siemreap&display=swap" rel="stylesheet">
+  <style>
+    /* Strict Speaker Notes Lock: Never render on slide stage under any circumstance */
+    aside.trainer-notes,
+    .trainer-notes,
+    .slide aside {
+      display: none !important;
+      visibility: hidden !important;
+      height: 0 !important;
+      width: 0 !important;
+      overflow: hidden !important;
+      opacity: 0 !important;
+      pointer-events: none !important;
+      margin: 0 !important;
+      padding: 0 !important;
+      border: none !important;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Presentation Stage Wrapper (Lesson 14 Architecture) -->
+  <div id="presentation-stage">
+    
+    <!-- Ambient Aurora Orbs (60fps backdrop) -->
+    <div class="aurora-orb orb-1"></div>
+    <div class="aurora-orb orb-2"></div>
+    <div class="aurora-orb orb-3"></div>
+
+    <!-- Presenter Laser Pointer & Shockwave Click Ripple -->
+    <div id="presenter-laser"></div>
+    <div id="pointer-ripple" class="pointer-click-ripple"></div>
+
+    <!-- Viewport for 24 Slides -->
+    <main id="slides-viewport">
+
+      <!-- Slide 1: Hero -->
+      <section class="slide active" id="slide-1" data-slide-index="0" data-title="SharePoint List: Persistent Business Data" data-segment="Phase 7: SharePoint Data Integration">
+        <div class="slide-content hero-content">
+          <div class="hero-badge">
+            <span>Microsoft Power Apps Professional Foundation</span>
+            <span>&bull;</span>
+            <span>Day 19 of 27</span>
+          </div>
+          <h1 class="hero-title">SharePoint List: Persistent Business Data</h1>
+          <p class="hero-subtitle">
+            Graduate from temporary app memory to permanent cloud storage. Learn how SharePoint lists serve as the indestructible steel filing cabinet that preserves business records across shifts, users, and app restarts.
+          </p>
+
+          <div class="model-chain">
+            <span class="chain-item">Real Problem</span>
+            <span class="chain-arrow">&rarr;</span>
+            <span class="chain-item">Process</span>
+            <span class="chain-arrow">&rarr;</span>
+            <span class="chain-item">Data</span>
+            <span class="chain-arrow">&rarr;</span>
+            <span class="chain-item">UI / Screen</span>
+            <span class="chain-arrow">&rarr;</span>
+            <span class="chain-item">Logic / Decision</span>
+            <span class="chain-arrow">&rarr;</span>
+            <span class="chain-item">Action</span>
+            <span class="chain-arrow">&rarr;</span>
+            <span class="chain-item active">Storage (SharePoint)</span>
+            <span class="chain-arrow">&rarr;</span>
+            <span class="chain-item">Feedback</span>
+            <span class="chain-arrow">&rarr;</span>
+            <span class="chain-item">Test</span>
+          </div>
+        </div>
+
+        <aside class="trainer-notes" style="display: none !important;">
+          <h4>Trainer Speaking Script &amp; Pedagogical Cues:</h4>
+          <p><strong>Opening Hook (2 min):</strong> "Welcome to Day 19! Yesterday on Day 18, we gave our app temporary memory using Variables. But variables have one fatal weakness: the moment you close the browser tab or lock your phone, that memory evaporates into thin air!"</p>
+          <p><strong>The Core Transformation:</strong> "Today, we cross the bridge into the STORAGE phase of our 9-step mental model. We are creating our company's permanent, indestructible cloud database using SharePoint Lists."</p>
+          <p><strong>Today's Connection Chain:</strong> <code>app data fields &rarr; SharePoint columns &rarr; records/items</code>. We connect what the user types to where the company stores records forever.</p>
+        </aside>
+      </section>
+
+      <!-- Slide 2: 90-Min Agenda & Objectives -->
+      <section class="slide" id="slide-2" data-slide-index="1" data-title="90-Minute Agenda & Measurable Objectives" data-segment="Part 1: Objectives & Structure">
+        <header class="slide-header">
+          <div class="section-tag">Part 1 &bull; Objectives &amp; Structure</div>
+          <h2>90-Minute Agenda &amp; Measurable Objectives</h2>
+          <p class="subtitle">Spiral learning path: Establishing permanent enterprise cloud storage through structured milestones.</p>
+        </header>
+
+        <div class="slide-content grid-2">
+          <div class="card">
+            <h3 class="card-title">4 Measurable Learning Objectives</h3>
+            <div class="objective-item">
+              <span class="obj-num">1</span>
+              <div>
+                <strong>Distinguish Temporary RAM vs. Persistent Cloud Storage:</strong>
+                <p>Explain why business workflows require permanent SharePoint records rather than volatile app variables.</p>
+              </div>
+            </div>
+            <div class="objective-item">
+              <span class="obj-num">2</span>
+              <div>
+                <strong>Map UI Form Fields to SharePoint Column Types:</strong>
+                <p>Correctly match text inputs, date pickers, and dropdowns to Single Line of Text, Date &amp; Time, and Choice columns.</p>
+              </div>
+            </div>
+            <div class="objective-item">
+              <span class="obj-num">3</span>
+              <div>
+                <strong>Enforce Controlled Vocabularies with Choice Columns:</strong>
+                <p>Configure predefined dropdown values to eliminate typos, spelling mismatches, and reporting chaos.</p>
+              </div>
+            </div>
+            <div class="objective-item">
+              <span class="obj-num">4</span>
+              <div>
+                <strong>Architect the Production Maintenance Request List:</strong>
+                <p>Build the full <code>Apex_Maintenance_Requests</code> SharePoint list with appropriate column constraints and defaults.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <h3 class="card-title">Timed 90-Minute Agenda Breakdown</h3>
+            <div class="agenda-item">
+              <span class="agenda-time">00 - 15 min</span>
+              <div>
+                <strong>Part 1: Recall, Contrast &amp; The Workplace Crisis</strong>
+                <p>Prerequisite retrieval, Day 18 variable contrast, and the "Vanishing Reports" disaster at Apex Plastics.</p>
+              </div>
+            </div>
+            <div class="agenda-item">
+              <span class="agenda-time">15 - 35 min</span>
+              <div>
+                <strong>Part 2: Concepts, Column Anatomy &amp; Data Types</strong>
+                <p>The Sacred Title column, Choice columns, Date &amp; Time, and avoiding the Rich Text trap.</p>
+              </div>
+            </div>
+            <div class="agenda-item">
+              <span class="agenda-time">35 - 55 min</span>
+              <div>
+                <strong>Part 3: Trainer Live Demonstration &amp; Matrix Mapping</strong>
+                <p>Click-by-click SharePoint list creation and interactive column mapping matrix inspection.</p>
+              </div>
+            </div>
+            <div class="agenda-item">
+              <span class="agenda-time">55 - 75 min</span>
+              <div>
+                <strong>Part 4: Guided Hands-On Practice &amp; Live Vault Testing</strong>
+                <p>Students build the production list and simulate data persistence through simulated app reboots.</p>
+              </div>
+            </div>
+            <div class="agenda-item">
+              <span class="agenda-time">75 - 90 min</span>
+              <div>
+                <strong>Part 5: Checks for Understanding &amp; Bridge Forward</strong>
+                <p>5 interactive quizzes, 5 common traps, capstone challenge, and preview of Day 20 App UI connection.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <aside class="trainer-notes" style="display: none !important;">
+          <h4>Trainer Speaking Script &amp; Pedagogical Cues:</h4>
+          <p><strong>Set Expectations:</strong> "Today is a milestone day. We are not writing code in Power Apps today; we are building the FOUNDATION that Power Apps will talk to tomorrow. A house built on bad soil collapses. An app built on bad data structures fails."</p>
+          <p><strong>Time Allocation:</strong> Keep the concept explanations under 20 minutes so students have plenty of time inside SharePoint during Guided Practice.</p>
+        </aside>
+      </section>
+
+      <!-- Slide 3: Spiral Concept Map -->
+      <section class="slide" id="slide-3" data-slide-index="2" data-title="Curriculum Spiral Map: Days 11 & 18 to Day 19" data-segment="Part 1: Spiral Connection">
+        <header class="slide-header">
+          <div class="section-tag">Part 1 &bull; Spiral Connection</div>
+          <h2>Curriculum Spiral Map: The Evolution to Storage</h2>
+          <p class="subtitle">Witnessing how each prior milestone links directly to today's cloud data vault.</p>
+        </header>
+
+        <div class="slide-content grid-3">
+          <div class="card">
+            <span class="card-badge" style="background: rgba(59, 130, 246, 0.2); color: #93c5fd;">Day 11 &bull; Data Design</span>
+            <h3 class="card-title">The Blueprint</h3>
+            <p style="color: var(--text-muted); font-size: 0.9rem; line-height: 1.6; margin-bottom: 1rem;">
+              On Day 11, we designed tables on paper. We learned that every table has fields (columns) and records (rows), and every field requires a strict data type.
+            </p>
+            <div style="background: rgba(15, 23, 42, 0.6); padding: 0.75rem; border-radius: 0.5rem; border-left: 3px solid #3b82f6;">
+              <strong style="color: #93c5fd; font-size: 0.82rem;">Lesson Learned:</strong>
+              <p style="color: var(--text-main); font-size: 0.8rem; margin: 0.2rem 0 0 0;">Computers cannot mix numbers with text or dates with sentences.</p>
+            </div>
+          </div>
+
+          <div class="card">
+            <span class="card-badge" style="background: rgba(245, 158, 11, 0.2); color: #fde68a;">Day 18 &bull; Variables</span>
+            <h3 class="card-title">The Scratchpad (RAM)</h3>
+            <p style="color: var(--text-muted); font-size: 0.9rem; line-height: 1.6; margin-bottom: 1rem;">
+              Yesterday on Day 18, we used <code>Set(gblTicketNumber, "TKT-101")</code> to hold information in device memory. It was fast, but completely temporary.
+            </p>
+            <div style="background: rgba(15, 23, 42, 0.6); padding: 0.75rem; border-radius: 0.5rem; border-left: 3px solid #f59e0b;">
+              <strong style="color: #fde68a; font-size: 0.82rem;">The Limitation:</strong>
+              <p style="color: var(--text-main); font-size: 0.8rem; margin: 0.2rem 0 0 0;">When the app closes, memory resets to zero. Other users cannot see it.</p>
+            </div>
+          </div>
+
+          <div class="card" style="border-color: var(--color-primary); box-shadow: 0 0 25px var(--color-primary-glow);">
+            <span class="card-badge" style="background: rgba(13, 148, 136, 0.25); color: #5eead4;">Day 19 &bull; TODAY</span>
+            <h3 class="card-title">The Permanent Vault</h3>
+            <p style="color: var(--text-muted); font-size: 0.9rem; line-height: 1.6; margin-bottom: 1rem;">
+              Today, we combine Day 11's data architecture with enterprise cloud persistence. SharePoint Lists store multi-user data safely for decades in the Microsoft 365 cloud.
+            </p>
+            <div style="background: rgba(15, 23, 42, 0.6); padding: 0.75rem; border-radius: 0.5rem; border-left: 3px solid #14b8a6;">
+              <strong style="color: #5eead4; font-size: 0.82rem;">Forward Bridge to Day 20:</strong>
+              <p style="color: var(--text-main); font-size: 0.8rem; margin: 0.2rem 0 0 0;">Tomorrow, we connect our Power Apps UI directly to this list!</p>
+            </div>
+          </div>
+        </div>
+
+        <aside class="trainer-notes" style="display: none !important;">
+          <h4>Trainer Speaking Script &amp; Pedagogical Cues:</h4>
+          <p><strong>Spiral Reinforcement:</strong> "Ask students: 'Who remembers what happens to a variable when you close your browser?' Let them answer: 'It disappears!' Then ask: 'Where should company data live?' Answer: 'In a database or SharePoint list!' Connect the dots clearly."</p>
+        </aside>
+      </section>
+
+      <!-- Slide 4: Prerequisite Retrieval (4 Interactive Flip Cards) -->
+      <section class="slide" id="slide-4" data-slide-index="3" data-title="Prerequisite Retrieval: Activate Prior Knowledge" data-segment="Part 1: Prerequisite Check">
+        <header class="slide-header">
+          <div class="section-tag">Part 1 &bull; Prerequisite Check</div>
+          <h2>Prerequisite Retrieval: Activate Prior Knowledge</h2>
+          <p class="subtitle">Click each card to reveal the foundational concept before introducing today's storage architecture.</p>
+        </header>
+
+        <div class="slide-content grid-4">
+          <div class="flip-card" onclick="this.classList.toggle('flipped')">
+            <div class="flip-card-inner">
+              <div class="flip-card-front">
+                <span class="obj-num">Q1</span>
+                <strong style="color: var(--text-main); font-size: 0.95rem; margin-top: 0.75rem;">What is RAM memory?</strong>
+                <p style="color: var(--text-muted); font-size: 0.82rem; margin-top: 0.5rem;">Why is a variable stored in RAM not permanent?</p>
+                <span class="card-prompt">Click to reveal answer &rarr;</span>
+              </div>
+              <div class="flip-card-back">
+                <strong style="color: #5eead4; font-size: 0.92rem;">Volatile Memory</strong>
+                <p style="color: #cbd5e1; font-size: 0.82rem; line-height: 1.5; margin-top: 0.4rem;">
+                  RAM holds active data only while electric power runs through the chip. When the app exits or device restarts, RAM is wiped clean.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="flip-card" onclick="this.classList.toggle('flipped')">
+            <div class="flip-card-inner">
+              <div class="flip-card-front">
+                <span class="obj-num">Q2</span>
+                <strong style="color: var(--text-main); font-size: 0.95rem; margin-top: 0.75rem;">What is a Table Record?</strong>
+                <p style="color: var(--text-muted); font-size: 0.82rem; margin-top: 0.5rem;">How does a record relate to a column in a database?</p>
+                <span class="card-prompt">Click to reveal answer &rarr;</span>
+              </div>
+              <div class="flip-card-back">
+                <strong style="color: #5eead4; font-size: 0.92rem;">Rows vs. Columns</strong>
+                <p style="color: #cbd5e1; font-size: 0.82rem; line-height: 1.5; margin-top: 0.4rem;">
+                  A <strong>Column</strong> defines an attribute (like Department or Date). A <strong>Record (Row)</strong> is one complete business event containing all those attributes.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="flip-card" onclick="this.classList.toggle('flipped')">
+            <div class="flip-card-inner">
+              <div class="flip-card-front">
+                <span class="obj-num">Q3</span>
+                <strong style="color: var(--text-main); font-size: 0.95rem; margin-top: 0.75rem;">Why use Choice Types?</strong>
+                <p style="color: var(--text-muted); font-size: 0.82rem; margin-top: 0.5rem;">Why not let users type department names as free text?</p>
+                <span class="card-prompt">Click to reveal answer &rarr;</span>
+              </div>
+              <div class="flip-card-back">
+                <strong style="color: #5eead4; font-size: 0.92rem;">Controlled Vocabulary</strong>
+                <p style="color: #cbd5e1; font-size: 0.82rem; line-height: 1.5; margin-top: 0.4rem;">
+                  Free text leads to spelling mistakes like "Molding", "moulding", and "moldng". Choice columns force users to pick from verified options.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="flip-card" onclick="this.classList.toggle('flipped')">
+            <div class="flip-card-inner">
+              <div class="flip-card-front">
+                <span class="obj-num">Q4</span>
+                <strong style="color: var(--text-main); font-size: 0.95rem; margin-top: 0.75rem;">What is Multi-User Sync?</strong>
+                <p style="color: var(--text-muted); font-size: 0.82rem; margin-top: 0.5rem;">Can two workers see the same variable on two phones?</p>
+                <span class="card-prompt">Click to reveal answer &rarr;</span>
+              </div>
+              <div class="flip-card-back">
+                <strong style="color: #5eead4; font-size: 0.92rem;">Shared Cloud State</strong>
+                <p style="color: #cbd5e1; font-size: 0.82rem; line-height: 1.5; margin-top: 0.4rem;">
+                  No! Variables exist only inside one person's device. A SharePoint list is in the Microsoft Cloud, allowing 500 workers to see the same tickets live.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <aside class="trainer-notes" style="display: none !important;">
+          <h4>Trainer Speaking Script &amp; Pedagogical Cues:</h4>
+          <p><strong>Interactive Check (3 min):</strong> Have 4 students volunteer to answer each card before clicking to flip. Congratulate accurate mental models. Emphasize card 4: "Power Apps without SharePoint is like a walkie-talkie with no battery."</p>
+        </aside>
+      </section>
+
+      <!-- Slide 5: Workplace Crisis: The "Vanishing Reports" Disaster -->
+      <section class="slide" id="slide-5" data-slide-index="4" data-title="Workplace Crisis: The Vanishing Reports" data-segment="Part 1: Why This Exists">
+        <header class="slide-header">
+          <div class="section-tag">Part 1 &bull; Why This Exists</div>
+          <h2>Workplace Crisis: The "Vanishing Reports" at Apex Plastics</h2>
+          <p class="subtitle">The \$42,000 breakdown that proved why apps require persistent cloud data vaults.</p>
+        </header>
+
+        <div class="slide-content grid-2">
+          <div class="card" style="border-left: 4px solid var(--color-danger);">
+            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.75rem;">
+              <span class="card-badge" style="background: rgba(239, 68, 68, 0.2); color: #fca5a5;">The Incident</span>
+              <span style="font-size: 0.8rem; color: #ef4444; font-weight: 700;">Friday, 4:45 PM</span>
+            </div>
+            <h3 class="card-title" style="color: #fca5a5;">Extruder Line 3 Motor Overheating</h3>
+            <p style="color: var(--text-muted); font-size: 0.9rem; line-height: 1.6; margin-bottom: 0.75rem;">
+              Operator Sarah noticed high vibration and burning smell on Extruder Line 3. She dutifully opened her new Power App, typed the warning, and tapped Submit.
+            </p>
+            <p style="color: var(--text-muted); font-size: 0.9rem; line-height: 1.6;">
+              Because the app only saved the ticket into a Day 18 variable (<code>Set(varLastTicket, ...)</code>), the data was held in her tablet's memory. At 5:00 PM, she powered down her tablet and went home.
+            </p>
+            <div style="background: rgba(239, 68, 68, 0.1); border: 1px dashed rgba(239, 68, 68, 0.4); border-radius: 0.5rem; padding: 0.75rem; margin-top: 1rem;">
+              <strong style="color: #fca5a5; font-size: 0.85rem;">The Result on Monday Morning:</strong>
+              <p style="color: #fca5a5; font-size: 0.82rem; margin: 0.2rem 0 0 0;">
+                Maintenance arrived with zero tickets. The motor seized at 6:15 AM. 14 hours of production lost. Total damage: <strong>\$42,000</strong>.
+              </p>
+            </div>
+          </div>
+
+          <div class="card" style="border-left: 4px solid var(--color-primary);">
+            <span class="card-badge" style="background: rgba(13, 148, 136, 0.2); color: #5eead4;">Architectural Root Cause</span>
+            <h3 class="card-title">Memory Volatility vs. Enterprise Persistence</h3>
+            
+            <div style="display: flex; flex-direction: column; gap: 0.75rem; margin-top: 0.75rem;">
+              <div style="background: rgba(15, 23, 42, 0.7); padding: 0.75rem; border-radius: 0.5rem; border: 1px solid var(--border-subtle);">
+                <strong style="color: #f87171; font-size: 0.85rem;">Flaw 1: Variable Scope is Single-Session</strong>
+                <p style="color: var(--text-muted); font-size: 0.8rem; margin: 0.15rem 0 0 0;">Variables die when the session terminates. They cannot survive an app restart.</p>
+              </div>
+
+              <div style="background: rgba(15, 23, 42, 0.7); padding: 0.75rem; border-radius: 0.5rem; border: 1px solid var(--border-subtle);">
+                <strong style="color: #f87171; font-size: 0.85rem;">Flaw 2: Zero Cross-Device Sharing</strong>
+                <p style="color: var(--text-muted); font-size: 0.8rem; margin: 0.15rem 0 0 0;">Sarah's tablet could not communicate with the maintenance supervisor's desktop.</p>
+              </div>
+
+              <div style="background: rgba(15, 23, 42, 0.7); padding: 0.75rem; border-radius: 0.5rem; border: 1px solid var(--border-subtle);">
+                <strong style="color: #5eead4; font-size: 0.85rem;">The Fix: SharePoint List Cloud Repository</strong>
+                <p style="color: var(--text-muted); font-size: 0.8rem; margin: 0.15rem 0 0 0;">SharePoint writes every record immediately to Microsoft data centers with geo-redundancy and instant multi-user synchronization.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <aside class="trainer-notes" style="display: none !important;">
+          <h4>Trainer Speaking Script &amp; Pedagogical Cues:</h4>
+          <p><strong>Deliver with Drama:</strong> "Make the story vivid. Sarah did nothing wrong! She followed instructions. The ARCHITECT made the mistake of confusing temporary memory with permanent storage. When you design an app, lives and plant safety depend on data actually reaching the database."</p>
+        </aside>
+      </section>
+
+      <!-- Slide 6: Visual Cause-and-Effect: The Persistence Pipeline -->
+      <section class="slide" id="slide-6" data-slide-index="5" data-title="Visual Cause-and-Effect: The Persistence Pipeline" data-segment="Part 1: Architecture">
+        <header class="slide-header">
+          <div class="section-tag">Part 1 &bull; Architecture</div>
+          <h2>Visual Cause-and-Effect: The Persistence Pipeline</h2>
+          <p class="subtitle">Tracing the complete journey of data from glass screen to Microsoft enterprise cloud.</p>
+        </header>
+
+        <div class="slide-content">
+          <div class="pipeline-flow">
+            <div class="pipeline-step">
+              <span class="step-badge">1. UI Input</span>
+              <strong>User Entry</strong>
+              <p>Operator fills text input &amp; picks choices.</p>
+            </div>
+            <div class="pipeline-arrow">&rarr;</div>
+            <div class="pipeline-step">
+              <span class="step-badge">2. Power Fx</span>
+              <strong>Validation</strong>
+              <p><code>If(!IsBlank)</code> confirms data completeness.</p>
+            </div>
+            <div class="pipeline-arrow">&rarr;</div>
+            <div class="pipeline-step">
+              <span class="step-badge">3. Action</span>
+              <strong>Submit Call</strong>
+              <p><code>SubmitForm()</code> packages data packet.</p>
+            </div>
+            <div class="pipeline-arrow">&rarr;</div>
+            <div class="pipeline-step">
+              <span class="step-badge">4. Connector</span>
+              <strong>Encrypted Pipe</strong>
+              <p>HTTPS cloud pipe transmits payload.</p>
+            </div>
+            <div class="pipeline-arrow">&rarr;</div>
+            <div class="pipeline-step active">
+              <span class="step-badge">5. SharePoint</span>
+              <strong>Permanent Vault</strong>
+              <p>Stored as immutable row in cloud list forever.</p>
+            </div>
+          </div>
+
+          <div class="grid-2" style="margin-top: 1.5rem; flex: 1;">
+            <div class="card">
+              <h3 class="card-title" style="color: #f59e0b;">Temporary RAM (Day 18 Variables)</h3>
+              <ul style="color: var(--text-muted); font-size: 0.88rem; line-height: 1.7; padding-left: 1.2rem; margin: 0;">
+                <li>Stored in local device memory chips (RAM).</li>
+                <li>Accessible ONLY to the current app session.</li>
+                <li>Disappears immediately on browser refresh or app close.</li>
+                <li>Zero audit trail, zero backup, zero sharing.</li>
+              </ul>
+            </div>
+
+            <div class="card" style="border-color: var(--color-primary);">
+              <h3 class="card-title" style="color: #5eead4;">Persistent Cloud Vault (SharePoint List)</h3>
+              <ul style="color: var(--text-muted); font-size: 0.88rem; line-height: 1.7; padding-left: 1.2rem; margin: 0;">
+                <li>Stored on high-availability Microsoft 365 cloud servers.</li>
+                <li>Simultaneously accessible by hundreds of licensed team members.</li>
+                <li>Permanent survival: survives tablet reboots, app uninstalls, and device loss.</li>
+                <li>Built-in version history, created-by audit stamps, and security permissions.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <aside class="trainer-notes" style="display: none !important;">
+          <h4>Trainer Speaking Script &amp; Pedagogical Cues:</h4>
+          <p><strong>Trace the Pipeline:</strong> Walk students through steps 1 through 5. "Notice that step 5 is where data becomes real. Up until step 5, data is just light traveling through glass and electricity in RAM. Once it lands in SharePoint, it is official company record."</p>
+        </aside>
+      </section>
+
+      <!-- Slide 7: Everyday Analogy: Sticky Notes vs. Steel Guest Ledger -->
+      <section class="slide" id="slide-7" data-slide-index="6" data-title="Everyday Analogy: Sticky Note vs. Hotel Guest Ledger" data-segment="Part 2: Mental Model">
+        <header class="slide-header">
+          <div class="section-tag">Part 2 &bull; Mental Model</div>
+          <h2>Everyday Analogy: Sticky Notes vs. The Steel Guest Ledger</h2>
+          <p class="subtitle">Anchor your intuition using familiar real-world physical record keeping systems.</p>
+        </header>
+
+        <div class="slide-content grid-2">
+          <div class="card">
+            <div style="font-size: 2.4rem; margin-bottom: 0.5rem;">📝</div>
+            <h3 class="card-title" style="color: #fde68a;">The Yellow Sticky Note (Variables)</h3>
+            <p style="color: var(--text-muted); font-size: 0.9rem; line-height: 1.6; margin-bottom: 0.75rem;">
+              Imagine a hotel receptionist writing guest phone numbers on little yellow post-it notes stuck to the edge of the computer monitor.
+            </p>
+            <ul style="color: var(--text-muted); font-size: 0.85rem; line-height: 1.6; padding-left: 1.2rem;">
+              <li>If the window opens, a gust of wind blows the note into the trash.</li>
+              <li>The night shift receptionist cannot see the note from the back office.</li>
+              <li>If water spills on the desk, the handwriting dissolves.</li>
+              <li>Great for remembering a room number for 30 seconds; terrible for official bills.</li>
+            </ul>
+          </div>
+
+          <div class="card" style="border-color: var(--color-primary);">
+            <div style="font-size: 2.4rem; margin-bottom: 0.5rem;">🏛️</div>
+            <h3 class="card-title" style="color: #5eead4;">The Hotel Master Guest Ledger (SharePoint)</h3>
+            <p style="color: var(--text-muted); font-size: 0.9rem; line-height: 1.6; margin-bottom: 0.75rem;">
+              Now imagine a leather-bound, fireproof master ledger locked inside the hotel's steel reception counter with numbered pages.
+            </p>
+            <ul style="color: var(--text-muted); font-size: 0.85rem; line-height: 1.6; padding-left: 1.2rem;">
+              <li>Every guest check-in is logged on an immutable row with date and signature.</li>
+              <li>Both morning and evening shifts read and update the exact same book.</li>
+              <li>Government tax auditors and managers can inspect entries 5 years later.</li>
+              <li><strong>SharePoint Lists are that exact fireproof master ledger in digital form!</strong></li>
+            </ul>
+          </div>
+        </div>
+
+        <aside class="trainer-notes" style="display: none !important;">
+          <h4>Trainer Speaking Script &amp; Pedagogical Cues:</h4>
+          <p><strong>Physical Anchoring:</strong> "Whenever you find yourself asking 'Should I use a Variable or SharePoint?', remember this picture: Is this a 30-second post-it note for one person, or is this an official check-in entry for the whole company?"</p>
+        </aside>
+      </section>
+
+      <!-- Slide 8: Plain-Language to SharePoint Translation Ladder -->
+      <section class="slide" id="slide-8" data-slide-index="7" data-title="Plain-Language to SharePoint Translation Ladder" data-segment="Part 2: Core Vocabulary">
+        <header class="slide-header">
+          <div class="section-tag">Part 2 &bull; Core Vocabulary</div>
+          <h2>Plain-Language to SharePoint Translation Ladder</h2>
+          <p class="subtitle">Climbing the 5 rungs from human thought to professional enterprise database terminology.</p>
+        </header>
+
+        <div class="slide-content grid-2">
+          <div class="card">
+            <h3 class="card-title">The 5-Step Translation Ladder</h3>
+            <div style="display: flex; flex-direction: column; gap: 0.65rem;">
+              <div style="background: rgba(15, 23, 42, 0.7); border-left: 4px solid #3b82f6; padding: 0.55rem 0.9rem; border-radius: 0.4rem;">
+                <span style="font-size: 0.72rem; text-transform: uppercase; color: #93c5fd; font-weight: 700;">Rung 1: Plain English Thought</span>
+                <p style="color: var(--text-main); font-size: 0.85rem; margin: 0.15rem 0 0 0;">"Where can our factory store all broken machine reports permanently?"</p>
+              </div>
+
+              <div style="background: rgba(15, 23, 42, 0.7); border-left: 4px solid #06b6d4; padding: 0.55rem 0.9rem; border-radius: 0.4rem;">
+                <span style="font-size: 0.72rem; text-transform: uppercase; color: #67e8f9; font-weight: 700;">Rung 2: Generic Database Concept</span>
+                <p style="color: var(--text-main); font-size: 0.85rem; margin: 0.15rem 0 0 0;">"A database table with structured fields and unique rows."</p>
+              </div>
+
+              <div style="background: rgba(15, 23, 42, 0.7); border-left: 4px solid #f59e0b; padding: 0.55rem 0.9rem; border-radius: 0.4rem;">
+                <span style="font-size: 0.72rem; text-transform: uppercase; color: #fde68a; font-weight: 700;">Rung 3: SharePoint Architecture</span>
+                <p style="color: var(--text-main); font-size: 0.85rem; margin: 0.15rem 0 0 0;">"A <strong>SharePoint List</strong> hosted on the department intranet site."</p>
+              </div>
+
+              <div style="background: rgba(15, 23, 42, 0.7); border-left: 4px solid #a855f7; padding: 0.55rem 0.9rem; border-radius: 0.4rem;">
+                <span style="font-size: 0.72rem; text-transform: uppercase; color: #d8b4fe; font-weight: 700;">Rung 4: Column Definitions</span>
+                <p style="color: var(--text-main); font-size: 0.85rem; margin: 0.15rem 0 0 0;">"Title (Ticket ID), Department (Choice), Urgency (Choice), Description (Text)."</p>
+              </div>
+
+              <div style="background: rgba(15, 23, 42, 0.7); border-left: 4px solid #10b981; padding: 0.55rem 0.9rem; border-radius: 0.4rem;">
+                <span style="font-size: 0.72rem; text-transform: uppercase; color: #86efac; font-weight: 700;">Rung 5: List Items (Records)</span>
+                <p style="color: var(--text-main); font-size: 0.85rem; margin: 0.15rem 0 0 0;">"Individual entries: { ID: 1, Title: 'TKT-101', Dept: 'Molding', Status: 'New' }."</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <h3 class="card-title">SharePoint Vocabulary Glossary</h3>
+            <div style="display: flex; flex-direction: column; gap: 0.75rem;">
+              <div>
+                <strong style="color: #5eead4; font-size: 0.9rem;">SharePoint List:</strong>
+                <p style="color: var(--text-muted); font-size: 0.82rem; margin: 0.15rem 0 0 0;">A structured collection of data rows. Similar to an Excel spreadsheet, but with strict database rules, security, and cloud APIs.</p>
+              </div>
+              <div>
+                <strong style="color: #5eead4; font-size: 0.9rem;">Column / Field:</strong>
+                <p style="color: var(--text-muted); font-size: 0.82rem; margin: 0.15rem 0 0 0;">A single data property with an enforced type (e.g., Department must be a Choice, Date must be a Date).</p>
+              </div>
+              <div>
+                <strong style="color: #5eead4; font-size: 0.9rem;">Item / Record:</strong>
+                <p style="color: var(--text-muted); font-size: 0.82rem; margin: 0.15rem 0 0 0;">A horizontal row in the list representing one specific incident, maintenance request, or customer order.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <aside class="trainer-notes" style="display: none !important;">
+          <h4>Trainer Speaking Script &amp; Pedagogical Cues:</h4>
+          <p><strong>De-mystify the Tech:</strong> "Students get terrified when Microsoft uses words like 'List Items' and 'Column Metadata'. Reassure them: A list is just a grid. Columns are vertical. Rows are horizontal. That is all!"</p>
+        </aside>
+      </section>
+
+      <!-- Slide 9: Column Anatomy 1: The Sacred "Title" Column -->
+      <section class="slide" id="slide-9" data-slide-index="8" data-title="Column Anatomy 1: The Sacred Title Column" data-segment="Part 2: Column Anatomy">
+        <header class="slide-header">
+          <div class="section-tag">Part 2 &bull; Column Anatomy</div>
+          <h2>Column Anatomy 1: The Sacred "Title" Column</h2>
+          <p class="subtitle">Understanding why SharePoint mandates one special primary text column in every list.</p>
+        </header>
+
+        <div class="slide-content syntax-dissection-grid">
+          <div class="syntax-breakdown-card">
+            <h3 class="card-title" style="color: #5eead4;">The Unbreakable Rule of SharePoint</h3>
+            <p style="color: var(--text-muted); font-size: 0.92rem; line-height: 1.6; margin-bottom: 1rem;">
+              Every time you create a SharePoint list in Microsoft 365, SharePoint automatically creates a default column called <code>Title</code>.
+            </p>
+            <div style="background: rgba(239, 68, 68, 0.1); border-left: 4px solid #ef4444; padding: 0.75rem; border-radius: 0.5rem; margin-bottom: 1rem;">
+              <strong style="color: #fca5a5; font-size: 0.88rem;">WARNING: You CANNOT Delete the Title Column!</strong>
+              <p style="color: var(--text-muted); font-size: 0.82rem; margin: 0.2rem 0 0 0;">
+                If you try to delete it in SharePoint settings, there is no Delete button. It is the architectural anchor used by Microsoft search, indexing, and mobile views.
+              </p>
+            </div>
+            <p style="color: var(--text-main); font-size: 0.9rem; line-height: 1.6;">
+              Beginners often panic because they don't have a field named "Title". They try to create a second column called "Ticket Number" and leave "Title" blank, which creates errors!
+            </p>
+          </div>
+
+          <div class="syntax-breakdown-card">
+            <h3 class="card-title" style="color: #5eead4;">The Professional Best Practice: Rename It!</h3>
+            <p style="color: var(--text-muted); font-size: 0.88rem; line-height: 1.6; margin-bottom: 1rem;">
+              Instead of fighting SharePoint, adopt the industry standard pattern: <strong>Rename its display name</strong> to match your primary identifier!
+            </p>
+
+            <div style="display: flex; flex-direction: column; gap: 0.75rem;">
+              <div style="background: rgba(15, 23, 42, 0.7); padding: 0.75rem; border-radius: 0.5rem; border: 1px solid var(--border-subtle);">
+                <strong style="color: #5eead4; font-size: 0.85rem;">For Maintenance Apps:</strong>
+                <p style="color: var(--text-muted); font-size: 0.82rem; margin: 0.15rem 0 0 0;">Rename <code>Title</code> &rarr; <strong>Ticket ID</strong> (e.g., TKT-1001)</p>
+              </div>
+              <div style="background: rgba(15, 23, 42, 0.7); padding: 0.75rem; border-radius: 0.5rem; border: 1px solid var(--border-subtle);">
+                <strong style="color: #5eead4; font-size: 0.85rem;">For Asset Tracking Apps:</strong>
+                <p style="color: var(--text-muted); font-size: 0.82rem; margin: 0.15rem 0 0 0;">Rename <code>Title</code> &rarr; <strong>Serial Number</strong> (e.g., SN-99482)</p>
+              </div>
+              <div style="background: rgba(15, 23, 42, 0.7); padding: 0.75rem; border-radius: 0.5rem; border: 1px solid var(--border-subtle);">
+                <strong style="color: #5eead4; font-size: 0.85rem;">For HR Expense Apps:</strong>
+                <p style="color: var(--text-muted); font-size: 0.82rem; margin: 0.15rem 0 0 0;">Rename <code>Title</code> &rarr; <strong>Claim Reference</strong> (e.g., EXP-2026-04)</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <aside class="trainer-notes" style="display: none !important;">
+          <h4>Trainer Speaking Script &amp; Pedagogical Cues:</h4>
+          <p><strong>Emphasize the Golden Rule:</strong> "Write this on the physical whiteboard or highlight it strongly: 'NEVER FIGHT THE TITLE COLUMN. RENAME IT TO YOUR TICKET ID.' If a student ever comes to you saying their app is failing to save, 90% of the time they left the Title column blank because they didn't know it was required."</p>
+        </aside>
+      </section>
+
+      <!-- Slide 10: Column Anatomy 2: Choice Columns & Controlled Vocabulary -->
+      <section class="slide" id="slide-10" data-slide-index="9" data-title="Column Anatomy 2: Choice Columns & Controlled Vocabulary" data-segment="Part 2: Column Anatomy">
+        <header class="slide-header">
+          <div class="section-tag">Part 2 &bull; Column Anatomy</div>
+          <h2>Column Anatomy 2: Choice Columns &amp; Controlled Vocabulary</h2>
+          <p class="subtitle">Eliminating typos and reporting disasters by enforcing fixed dropdown selections.</p>
+        </header>
+
+        <div class="slide-content grid-2">
+          <div class="card" style="border-left: 4px solid var(--color-danger);">
+            <h3 class="card-title" style="color: #fca5a5;">The Disaster of Free-Text Columns</h3>
+            <p style="color: var(--text-muted); font-size: 0.9rem; line-height: 1.6; margin-bottom: 0.75rem;">
+              Suppose you make the Department column a standard "Single Line of Text". Five different operators type in their department:
+            </p>
+
+            <div style="background: rgba(15, 23, 42, 0.8); padding: 0.75rem; border-radius: 0.5rem; font-family: var(--font-code); font-size: 0.82rem; color: #f87171; line-height: 1.6;">
+              Row 1: "Molding"<br>
+              Row 2: "molding" (lowercase)<br>
+              Row 3: "Moulding" (British spelling)<br>
+              Row 4: "Moldng" (typo)<br>
+              Row 5: "Plastic Molding Dept" (verbose)
+            </div>
+
+            <p style="color: var(--text-muted); font-size: 0.85rem; line-height: 1.6; margin-top: 0.75rem;">
+              When the Plant Manager asks: <em>"How many breakdowns happened in Molding this month?"</em>, Power Apps and Power BI see <strong>5 completely different departments</strong>! Your monthly report is ruined.
+            </p>
+          </div>
+
+          <div class="card" style="border-left: 4px solid var(--color-primary);">
+            <h3 class="card-title" style="color: #5eead4;">The Solution: SharePoint Choice Columns</h3>
+            <p style="color: var(--text-muted); font-size: 0.9rem; line-height: 1.6; margin-bottom: 0.75rem;">
+              A Choice column locks the options into a strict, validated list. Users can only select from authorized options:
+            </p>
+
+            <div style="display: flex; flex-direction: column; gap: 0.6rem;">
+              <div style="background: rgba(13, 148, 136, 0.15); border: 1px solid rgba(13, 148, 136, 0.35); padding: 0.6rem; border-radius: 0.4rem;">
+                <strong style="color: #5eead4; font-size: 0.85rem;">Department Choices:</strong>
+                <p style="color: var(--text-main); font-size: 0.82rem; margin: 0.15rem 0 0 0;">Molding, Extrusion, Packaging, Quality, Maintenance</p>
+              </div>
+
+              <div style="background: rgba(245, 158, 11, 0.15); border: 1px solid rgba(245, 158, 11, 0.35); padding: 0.6rem; border-radius: 0.4rem;">
+                <strong style="color: #fde68a; font-size: 0.85rem;">Urgency Level Choices:</strong>
+                <p style="color: var(--text-main); font-size: 0.82rem; margin: 0.15rem 0 0 0;">Low, Medium, High, Critical</p>
+              </div>
+
+              <div style="background: rgba(16, 185, 129, 0.15); border: 1px solid rgba(16, 185, 129, 0.35); padding: 0.6rem; border-radius: 0.4rem;">
+                <strong style="color: #86efac; font-size: 0.85rem;">Status Choices:</strong>
+                <p style="color: var(--text-main); font-size: 0.82rem; margin: 0.15rem 0 0 0;">New, In Progress, Resolved</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <aside class="trainer-notes" style="display: none !important;">
+          <h4>Trainer Speaking Script &amp; Pedagogical Cues:</h4>
+          <p><strong>Interactive Question:</strong> "Ask the class: 'What happens in Excel when 10 different people type the name of a supplier?' The class will laugh and say: 'Chaos!' Tell them: 'In professional software, we eliminate human typing errors at the database layer using Choice columns.'"</p>
+        </aside>
+      </section>
+
+      <!-- Slide 11: Column Anatomy 3: Date/Time, Numbers, & Multi-Line Text -->
+      <section class="slide" id="slide-11" data-slide-index="10" data-title="Column Anatomy 3: Other Core Column Types" data-segment="Part 2: Column Anatomy">
+        <header class="slide-header">
+          <div class="section-tag">Part 2 &bull; Column Anatomy</div>
+          <h2>Column Anatomy 3: Date/Time, Numbers &amp; Multi-Line Text</h2>
+          <p class="subtitle">Selecting the exact right column type for every business data attribute.</p>
+        </header>
+
+        <div class="slide-content grid-3">
+          <div class="card">
+            <span class="card-badge" style="background: rgba(59, 130, 246, 0.2); color: #93c5fd;">Date &amp; Time</span>
+            <h3 class="card-title">ReportedDate</h3>
+            <p style="color: var(--text-muted); font-size: 0.85rem; line-height: 1.6; margin-bottom: 0.75rem;">
+              Stores standardized calendar timestamps.
+            </p>
+            <ul style="color: var(--text-muted); font-size: 0.8rem; line-height: 1.6; padding-left: 1.1rem; margin: 0;">
+              <li>Format: Date Only vs. Date &amp; Time.</li>
+              <li>Default Value: <code>Today's Date</code>.</li>
+              <li>Allows chronological sorting and SLA calculations (e.g., tickets open &gt; 24h).</li>
+            </ul>
+          </div>
+
+          <div class="card">
+            <span class="card-badge" style="background: rgba(16, 185, 129, 0.2); color: #86efac;">Multiple Lines of Text</span>
+            <h3 class="card-title">ProblemDescription</h3>
+            <p style="color: var(--text-muted); font-size: 0.85rem; line-height: 1.6; margin-bottom: 0.75rem;">
+              Allows paragraphs up to 63,999 characters.
+            </p>
+            <div style="background: rgba(239, 68, 68, 0.1); border-left: 3px solid #ef4444; padding: 0.5rem; border-radius: 0.4rem; margin-bottom: 0.5rem;">
+              <strong style="color: #fca5a5; font-size: 0.75rem;">THE RICH TEXT TRAP:</strong>
+              <p style="color: #cbd5e1; font-size: 0.75rem; margin: 0.1rem 0 0 0;">
+                ALWAYS pick <strong>Plain Text</strong>! Rich Text injects ugly HTML tags like <code>&lt;div&gt;</code> into your Power Apps inputs!
+              </p>
+            </div>
+          </div>
+
+          <div class="card">
+            <span class="card-badge" style="background: rgba(245, 158, 11, 0.2); color: #fde68a;">Number</span>
+            <h3 class="card-title">DowntimeMinutes</h3>
+            <p style="color: var(--text-muted); font-size: 0.85rem; line-height: 1.6; margin-bottom: 0.75rem;">
+              Strictly enforces numerical values.
+            </p>
+            <ul style="color: var(--text-muted); font-size: 0.8rem; line-height: 1.6; padding-left: 1.1rem; margin: 0;">
+              <li>Prevents typing letters like "twenty".</li>
+              <li>Allows mathematical calculations: <code>Sum()</code>, <code>Average()</code>.</li>
+              <li>Can set minimum and maximum constraints (e.g., 0 to 1440 mins).</li>
+            </ul>
+          </div>
+        </div>
+
+        <aside class="trainer-notes" style="display: none !important;">
+          <h4>Trainer Speaking Script &amp; Pedagogical Cues:</h4>
+          <p><strong>Emphasize the Plain Text Warning:</strong> "I want everyone to look at the center card. When creating a Multiple Lines of Text column, SharePoint offers a radio button: 'Plain text' vs 'Use enhanced rich text'. You MUST choose Plain Text. If you pick Rich Text, your users will see messy HTML code inside Power Apps."</p>
+        </aside>
+      </section>
+
+      <!-- Slide 12: Data Schema Blueprint: Apex_Maintenance_Requests -->
+      <section class="slide" id="slide-12" data-slide-index="11" data-title="Data Schema Blueprint: Apex Maintenance Requests" data-segment="Part 3: Schema Design">
+        <header class="slide-header">
+          <div class="section-tag">Part 3 &bull; Schema Design</div>
+          <h2>Data Schema Blueprint: <code>Apex_Maintenance_Requests</code></h2>
+          <p class="subtitle">The complete engineering blueprint of our production SharePoint database table.</p>
+        </header>
+
+        <div class="slide-content">
+          <div class="card" style="padding: 1.25rem;">
+            <table class="sp-data-table">
+              <thead>
+                <tr>
+                  <th>Display Name</th>
+                  <th>SharePoint Internal Name</th>
+                  <th>Data Type</th>
+                  <th>Required?</th>
+                  <th>Choices / Constraints</th>
+                  <th>Purpose</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong style="color: #5eead4;">Ticket ID</strong> (renamed)</td>
+                  <td><code>Title</code></td>
+                  <td>Single line of text</td>
+                  <td><span class="sp-pill" style="background: rgba(239, 68, 68, 0.2); color: #fca5a5;">Yes</span></td>
+                  <td>Max 255 chars</td>
+                  <td>Unique ticket identifier (e.g., TKT-1001)</td>
+                </tr>
+                <tr>
+                  <td><strong>Department</strong></td>
+                  <td><code>Department</code></td>
+                  <td>Choice</td>
+                  <td><span class="sp-pill" style="background: rgba(239, 68, 68, 0.2); color: #fca5a5;">Yes</span></td>
+                  <td>Molding, Extrusion, Packaging, Quality, Maintenance</td>
+                  <td>Responsible manufacturing unit</td>
+                </tr>
+                <tr>
+                  <td><strong>Shift</strong></td>
+                  <td><code>Shift</code></td>
+                  <td>Choice</td>
+                  <td><span class="sp-pill" style="background: rgba(239, 68, 68, 0.2); color: #fca5a5;">Yes</span></td>
+                  <td>Shift A (Morning), Shift B (Evening), Weekend</td>
+                  <td>Operational working shift</td>
+                </tr>
+                <tr>
+                  <td><strong>Urgency</strong></td>
+                  <td><code>Urgency</code></td>
+                  <td>Choice</td>
+                  <td><span class="sp-pill" style="background: rgba(239, 68, 68, 0.2); color: #fca5a5;">Yes</span></td>
+                  <td>Low, Medium, High, Critical</td>
+                  <td>Priority triage indicator</td>
+                </tr>
+                <tr>
+                  <td><strong>Problem Description</strong></td>
+                  <td><code>ProblemDescription</code></td>
+                  <td>Multiple lines of text</td>
+                  <td><span class="sp-pill" style="background: rgba(239, 68, 68, 0.2); color: #fca5a5;">Yes</span></td>
+                  <td>Plain text only (no HTML)</td>
+                  <td>Detailed breakdown observation</td>
+                </tr>
+                <tr>
+                  <td><strong>Reported Date</strong></td>
+                  <td><code>ReportedDate</code></td>
+                  <td>Date and Time</td>
+                  <td><span class="sp-pill" style="background: rgba(16, 185, 129, 0.2); color: #86efac;">Default</span></td>
+                  <td>Date Only; Default: Today</td>
+                  <td>Incident discovery date</td>
+                </tr>
+                <tr>
+                  <td><strong>Status</strong></td>
+                  <td><code>Status</code></td>
+                  <td>Choice</td>
+                  <td><span class="sp-pill" style="background: rgba(16, 185, 129, 0.2); color: #86efac;">Default</span></td>
+                  <td>New, In Progress, Resolved; Default: New</td>
+                  <td>Workflow ticket lifecycle</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <aside class="trainer-notes" style="display: none !important;">
+          <h4>Trainer Speaking Script &amp; Pedagogical Cues:</h4>
+          <p><strong>Explain Internal vs. Display Names:</strong> "Notice column 2 in this table: 'SharePoint Internal Name'. When you name a column, SharePoint creates an internal identifier behind the scenes. Best practice: never use spaces when first creating the column (e.g., name it <code>ProblemDescription</code>, then rename the display label to <code>Problem Description</code>). This avoids ugly URLs."</p>
+        </aside>
+      </section>
+
+      <!-- Slide 13: Interactive Widget 1: Field-to-Column Mapping Matrix Inspector -->
+      <section class="slide" id="slide-13" data-slide-index="12" data-title="Interactive Widget: Field-to-Column Mapping Inspector" data-segment="Part 3: Interactive Exploration">
+        <header class="slide-header">
+          <div class="section-tag">Part 3 &bull; Interactive Exploration</div>
+          <h2>Interactive Widget: Field-to-Column Mapping Inspector</h2>
+          <p class="subtitle">Select any form field on the left to inspect its exact SharePoint column configuration and disaster prevention role.</p>
+        </header>
+
+        <div class="slide-content widget-stage">
+          <div class="mapping-selector-panel">
+            <span style="font-size: 0.78rem; text-transform: uppercase; color: var(--color-cyan); font-weight: 700; letter-spacing: 1px;">App UI Form Fields:</span>
+            <div class="mapping-field-btn active" onclick="inspectField('ticket')">
+              <strong>Ticket ID</strong>
+              <small style="color: var(--text-muted); display: block;">Primary Key &bull; Text</small>
+            </div>
+            <div class="mapping-field-btn" onclick="inspectField('dept')">
+              <strong>Department</strong>
+              <small style="color: var(--text-muted); display: block;">Dropdown &bull; Single Choice</small>
+            </div>
+            <div class="mapping-field-btn" onclick="inspectField('shift')">
+              <strong>Operating Shift</strong>
+              <small style="color: var(--text-muted); display: block;">Radio / Dropdown &bull; Choice</small>
+            </div>
+            <div class="mapping-field-btn" onclick="inspectField('desc')">
+              <strong>Problem Description</strong>
+              <small style="color: var(--text-muted); display: block;">Multi-line Box &bull; Long Text</small>
+            </div>
+            <div class="mapping-field-btn" onclick="inspectField('urgency')">
+              <strong>Urgency Level</strong>
+              <small style="color: var(--text-muted); display: block;">Priority Triage &bull; Choice</small>
+            </div>
+            <div class="mapping-field-btn" onclick="inspectField('date')">
+              <strong>Reported Date</strong>
+              <small style="color: var(--text-muted); display: block;">Calendar Picker &bull; Date</small>
+            </div>
+          </div>
+
+          <div class="inspector-display" id="inspector-display-box">
+            <div style="display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid var(--border-subtle); padding-bottom: 0.75rem; margin-bottom: 1rem;">
+              <h3 id="inspector-field-title" style="margin: 0; color: #5eead4;">Field: Ticket ID</h3>
+              <span id="inspector-type-badge" class="card-badge" style="background: rgba(13, 148, 136, 0.25); color: #5eead4;">Single line of text (Title)</span>
+            </div>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem;">
+              <div style="background: rgba(15, 23, 42, 0.6); padding: 0.85rem; border-radius: 0.5rem;">
+                <strong style="color: var(--text-muted); font-size: 0.78rem; text-transform: uppercase;">SharePoint Settings:</strong>
+                <p id="inspector-settings" style="color: var(--text-main); font-size: 0.88rem; margin: 0.3rem 0 0 0; line-height: 1.5;">
+                  Column: Built-in <code>Title</code> renamed to "Ticket ID".<br>
+                  Required: Yes &bull; Max Length: 255 chars &bull; Unique values: Recommended.
+                </p>
+              </div>
+
+              <div style="background: rgba(15, 23, 42, 0.6); padding: 0.85rem; border-radius: 0.5rem;">
+                <strong style="color: var(--text-muted); font-size: 0.78rem; text-transform: uppercase;">Power Apps UI Match:</strong>
+                <p id="inspector-uimatch" style="color: var(--text-main); font-size: 0.88rem; margin: 0.3rem 0 0 0; line-height: 1.5;">
+                  Matches: <code>TextInput</code> control or automated formula generator (e.g., "TKT-" &amp; Text(RandBetween(1000,9999))).
+                </p>
+              </div>
+            </div>
+
+            <div style="background: rgba(20, 184, 166, 0.1); border: 1px solid rgba(20, 184, 166, 0.3); border-radius: 0.5rem; padding: 0.85rem; flex: 1;">
+              <strong style="color: #5eead4; font-size: 0.85rem;">Disaster Prevented:</strong>
+              <p id="inspector-disaster" style="color: var(--text-main); font-size: 0.85rem; margin: 0.3rem 0 0 0; line-height: 1.6;">
+                Prevents unidentifiable "orphan records". In any manufacturing incident log, every ticket must have a distinct identifier so managers can track maintenance resolution across shifts.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <aside class="trainer-notes" style="display: none !important;">
+          <h4>Trainer Speaking Script &amp; Pedagogical Cues:</h4>
+          <p><strong>Interactive Walkthrough (4 min):</strong> Click through each field button one by one. Ask students: "Why do we set Urgency to Choice instead of text?" "Why do we make Problem Description Plain Text?" Reinforce the 'Disaster Prevented' section on each click.</p>
+        </aside>
+      </section>
+
+      <!-- Slide 14: Trainer Demonstration Script -->
+      <section class="slide" id="slide-14" data-slide-index="13" data-title="Trainer Demonstration: Creating the SharePoint List" data-segment="Part 3: Demonstration">
+        <header class="slide-header">
+          <div class="section-tag">Part 3 &bull; Demonstration</div>
+          <h2>Trainer Demonstration: Creating the List in SharePoint Online</h2>
+          <p class="subtitle">Watch the trainer build the list live in Microsoft 365 before you touch your keyboard.</p>
+        </header>
+
+        <div class="slide-content grid-2">
+          <div class="card">
+            <h3 class="card-title">Click-by-Click Trainer Script</h3>
+            <div style="display: flex; flex-direction: column; gap: 0.75rem;">
+              <div style="background: rgba(15, 23, 42, 0.7); padding: 0.65rem 0.85rem; border-radius: 0.4rem; border-left: 3px solid #0d9488;">
+                <strong style="color: #5eead4; font-size: 0.82rem;">Step 1: Navigate to Site Contents</strong>
+                <p style="color: var(--text-muted); font-size: 0.78rem; margin: 0.1rem 0 0 0;">Open your team SharePoint site &rarr; Click <strong>Gear Icon</strong> &rarr; Click <strong>Site contents</strong>.</p>
+              </div>
+
+              <div style="background: rgba(15, 23, 42, 0.7); padding: 0.65rem 0.85rem; border-radius: 0.4rem; border-left: 3px solid #0d9488;">
+                <strong style="color: #5eead4; font-size: 0.82rem;">Step 2: Create Blank List</strong>
+                <p style="color: var(--text-muted); font-size: 0.78rem; margin: 0.1rem 0 0 0;">Click <strong>+ New</strong> &rarr; Select <strong>List</strong> &rarr; Click <strong>Blank list</strong> &rarr; Name: <code>Apex_Maintenance_Requests</code>.</p>
+              </div>
+
+              <div style="background: rgba(15, 23, 42, 0.7); padding: 0.65rem 0.85rem; border-radius: 0.4rem; border-left: 3px solid #0d9488;">
+                <strong style="color: #5eead4; font-size: 0.82rem;">Step 3: Rename Title Column</strong>
+                <p style="color: var(--text-muted); font-size: 0.78rem; margin: 0.1rem 0 0 0;">Click Title header &rarr; Column settings &rarr; Rename &rarr; Type <code>Ticket ID</code> &rarr; Save.</p>
+              </div>
+
+              <div style="background: rgba(15, 23, 42, 0.7); padding: 0.65rem 0.85rem; border-radius: 0.4rem; border-left: 3px solid #0d9488;">
+                <strong style="color: #5eead4; font-size: 0.82rem;">Step 4: Add Choice Columns</strong>
+                <p style="color: var(--text-muted); font-size: 0.78rem; margin: 0.1rem 0 0 0;">Click <strong>+ Add column</strong> &rarr; Choice &rarr; Enter Department choices &rarr; Uncheck 'Allow multiple selections'.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <h3 class="card-title">What to Watch Closely on the Screen</h3>
+            <div style="background: rgba(59, 130, 246, 0.1); border: 1px solid rgba(59, 130, 246, 0.3); border-radius: 0.5rem; padding: 1rem; margin-bottom: 1rem;">
+              <strong style="color: #93c5fd; font-size: 0.9rem;">Trainer Demonstration Checklist:</strong>
+              <ul style="color: var(--text-muted); font-size: 0.82rem; line-height: 1.6; padding-left: 1.2rem; margin: 0.4rem 0 0 0;">
+                <li>Watch how the browser URL changes when creating a list.</li>
+                <li>Notice how Choice options can be given custom color pills.</li>
+                <li>Observe the 'Require that this column contains information' toggle.</li>
+                <li>See how adding a sample row immediately displays the data grid.</li>
+              </ul>
+            </div>
+            <p style="color: var(--text-dim); font-size: 0.82rem; line-height: 1.5;">
+              "Notice that we do not type spaces in list names (use underscores like <code>Apex_Maintenance_Requests</code>). This keeps SharePoint web service URLs clean and avoids ugly '%20' characters."
+            </p>
+          </div>
+        </div>
+
+        <aside class="trainer-notes" style="display: none !important;">
+          <h4>Trainer Speaking Script &amp; Pedagogical Cues:</h4>
+          <p><strong>Screen Projection Cue:</strong> Switch screen to your live browser. Demonstrate slowly. Point with your mouse: 'Notice where I click + Add column. Don't rush. Watch how SharePoint gives us a live sidebar on the right.'</p>
+        </aside>
+      </section>
+
+      <!-- Slide 15: Guided Practice: Building the Maintenance Requests List -->
+      <section class="slide" id="slide-15" data-slide-index="14" data-title="Guided Practice: Hands-On List Construction" data-segment="Part 4: Guided Practice">
+        <header class="slide-header">
+          <div class="section-tag">Part 4 &bull; Guided Practice</div>
+          <h2>Guided Practice: Building the Maintenance Requests List</h2>
+          <p class="subtitle">Open your SharePoint team site and follow the trainer step-by-step.</p>
+        </header>
+
+        <div class="slide-content grid-2">
+          <div class="card">
+            <h3 class="card-title">Student Hands-On Instructions</h3>
+            <div style="display: flex; flex-direction: column; gap: 0.65rem;">
+              <div style="background: rgba(15, 23, 42, 0.7); padding: 0.65rem; border-radius: 0.4rem; border: 1px solid var(--border-subtle);">
+                <strong style="color: var(--text-main); font-size: 0.82rem;">Task 1: Create Blank List</strong>
+                <p style="color: var(--text-muted); font-size: 0.78rem; margin: 0.1rem 0 0 0;">Name it <code>[YourInitials]_Maintenance_Requests</code>.</p>
+              </div>
+
+              <div style="background: rgba(15, 23, 42, 0.7); padding: 0.65rem; border-radius: 0.4rem; border: 1px solid var(--border-subtle);">
+                <strong style="color: var(--text-main); font-size: 0.82rem;">Task 2: Rename Title Column</strong>
+                <p style="color: var(--text-muted); font-size: 0.78rem; margin: 0.1rem 0 0 0;">Rename the default Title column to <code>Ticket ID</code>.</p>
+              </div>
+
+              <div style="background: rgba(15, 23, 42, 0.7); padding: 0.65rem; border-radius: 0.4rem; border: 1px solid var(--border-subtle);">
+                <strong style="color: var(--text-main); font-size: 0.82rem;">Task 3: Add Department Choice Column</strong>
+                <p style="color: var(--text-muted); font-size: 0.78rem; margin: 0.1rem 0 0 0;">Add choices: Molding, Extrusion, Packaging, Quality, Maintenance.</p>
+              </div>
+
+              <div style="background: rgba(15, 23, 42, 0.7); padding: 0.65rem; border-radius: 0.4rem; border: 1px solid var(--border-subtle);">
+                <strong style="color: var(--text-main); font-size: 0.82rem;">Task 4: Add Urgency Choice Column</strong>
+                <p style="color: var(--text-muted); font-size: 0.78rem; margin: 0.1rem 0 0 0;">Add choices: Low, Medium, High, Critical.</p>
+              </div>
+
+              <div style="background: rgba(15, 23, 42, 0.7); padding: 0.65rem; border-radius: 0.4rem; border: 1px solid var(--border-subtle);">
+                <strong style="color: var(--text-main); font-size: 0.82rem;">Task 5: Add Problem Description</strong>
+                <p style="color: var(--text-muted); font-size: 0.78rem; margin: 0.1rem 0 0 0;">Multiple lines of text &rarr; Select <strong>Plain text</strong>!</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <h3 class="card-title">Trainer Coaching &amp; Verification Gates</h3>
+            <div style="background: rgba(20, 184, 166, 0.1); border: 1px solid rgba(20, 184, 166, 0.3); border-radius: 0.5rem; padding: 1rem; margin-bottom: 1rem;">
+              <strong style="color: #5eead4; font-size: 0.88rem;">Verification Gate:</strong>
+              <p style="color: var(--text-muted); font-size: 0.82rem; margin: 0.3rem 0 0 0; line-height: 1.5;">
+                Before proceeding, click <strong>+ New</strong> in your SharePoint list. Enter a test ticket (e.g., TKT-1001, Molding, High, "Test description"). Verify that your test row appears in the grid!
+              </p>
+            </div>
+            <p style="color: var(--text-dim); font-size: 0.8rem; line-height: 1.5;">
+              If a student accidentally creates a second column called "Ticket ID" instead of renaming Title, show them how to delete their custom column and rename Title properly.
+            </p>
+          </div>
+        </div>
+
+        <aside class="trainer-notes" style="display: none !important;">
+          <h4>Trainer Speaking Script &amp; Pedagogical Cues:</h4>
+          <p><strong>Circulate the Room (10 min):</strong> Walk around or monitor student screens. Ensure every student prefixes their list name with their initials so they don't overwrite each other in a shared lab tenant.</p>
+        </aside>
+      </section>
+
+      <!-- Slide 16: Interactive Widget 2: Live SharePoint Data Vault Simulator -->
+      <section class="slide" id="slide-16" data-slide-index="15" data-title="Interactive Widget: Live SharePoint Data Vault Simulator" data-segment="Part 4: Interactive Simulation">
+        <header class="slide-header">
+          <div class="section-tag">Part 4 &bull; Interactive Simulation</div>
+          <h2>Interactive Widget: Live SharePoint Data Vault Simulator</h2>
+          <p class="subtitle">Experience true data persistence! Submit tickets to the vault, then simulate app reboots.</p>
+        </header>
+
+        <div class="slide-content sp-grid-container">
+          <div class="sp-command-bar">
+            <div style="display: flex; gap: 0.5rem; align-items: center;">
+              <input id="vault-input-id" class="sample-input-control" style="width: 130px;" type="text" placeholder="Ticket ID (Title)" value="TKT-1042">
+              <select id="vault-input-dept" class="sample-input-control" style="width: 140px;">
+                <option value="Molding">Molding</option>
+                <option value="Extrusion">Extrusion</option>
+                <option value="Packaging">Packaging</option>
+                <option value="Maintenance">Maintenance</option>
+              </select>
+              <select id="vault-input-urgency" class="sample-input-control" style="width: 120px;">
+                <option value="Low">Low</option>
+                <option value="Medium">Medium</option>
+                <option value="High" selected>High</option>
+                <option value="Critical">Critical</option>
+              </select>
+              <input id="vault-input-desc" class="sample-input-control" style="width: 240px;" type="text" placeholder="Problem description..." value="Hydraulic arm seal leaking fluid">
+              <button class="sample-button-control" onclick="submitToVault()">+ Commit to SharePoint</button>
+            </div>
+
+            <div style="display: flex; gap: 0.5rem;">
+              <button class="hud-btn" style="border-color: #f59e0b; color: #fde68a;" onclick="simulateAppRestart()">Simulate App Restart (Clear RAM)</button>
+              <button class="hud-btn" onclick="resetVaultDemo()">Reset Demo</button>
+            </div>
+          </div>
+
+          <div class="sp-table-scroll">
+            <table class="sp-data-table" id="vault-table">
+              <thead>
+                <tr>
+                  <th>Ticket ID (Title)</th>
+                  <th>Department</th>
+                  <th>Urgency</th>
+                  <th>Description</th>
+                  <th>Status</th>
+                  <th>Created At</th>
+                  <th>Persistence State</th>
+                </tr>
+              </thead>
+              <tbody id="vault-tbody">
+                <tr>
+                  <td><strong style="color: #5eead4;">TKT-1001</strong></td>
+                  <td>Molding</td>
+                  <td><span class="sp-pill" style="background: rgba(239, 68, 68, 0.2); color: #fca5a5;">Critical</span></td>
+                  <td>Extruder heater band blown on Line 2</td>
+                  <td><span class="sp-pill" style="background: rgba(245, 158, 11, 0.2); color: #fde68a;">In Progress</span></td>
+                  <td>Today, 08:30 AM</td>
+                  <td><span class="sp-pill" style="background: rgba(16, 185, 129, 0.2); color: #86efac;">Safe in Cloud</span></td>
+                </tr>
+                <tr>
+                  <td><strong style="color: #5eead4;">TKT-1002</strong></td>
+                  <td>Packaging</td>
+                  <td><span class="sp-pill" style="background: rgba(245, 158, 11, 0.2); color: #fde68a;">Medium</span></td>
+                  <td>Conveyor belt sensor dirty, false jam alarms</td>
+                  <td><span class="sp-pill" style="background: rgba(16, 185, 129, 0.2); color: #86efac;">Resolved</span></td>
+                  <td>Today, 09:15 AM</td>
+                  <td><span class="sp-pill" style="background: rgba(16, 185, 129, 0.2); color: #86efac;">Safe in Cloud</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div id="vault-toast-banner" style="display: none; background: rgba(13, 148, 136, 0.2); border: 1px solid #14b8a6; padding: 0.65rem 1rem; border-radius: 0.5rem; color: #5eead4; font-size: 0.85rem; align-items: center; justify-content: space-between;">
+            <span id="vault-toast-msg">Record committed to SharePoint List vault!</span>
+            <span style="font-size: 0.75rem; color: #cbd5e1;">Geo-replicated across 3 Microsoft cloud availability zones.</span>
+          </div>
+        </div>
+
+        <aside class="trainer-notes" style="display: none !important;">
+          <h4>Trainer Speaking Script &amp; Pedagogical Cues:</h4>
+          <p><strong>Demonstrate the Power of Persistence (4 min):</strong> Type a new ticket and click '+ Commit to SharePoint'. Point to the new row. Now click the yellow button: 'Simulate App Restart'. Point to the table: 'Look! The app was restarted, the local tablet memory died, but every single row in our SharePoint table is STILL HERE!' This moment cements the concept forever.</p>
+        </aside>
+      </section>
+
+      <!-- Slide 17: 5 Dangerous Misconceptions vs. SharePoint Reality -->
+      <section class="slide" id="slide-17" data-slide-index="16" data-title="5 Dangerous Misconceptions vs. SharePoint Reality" data-segment="Part 5: Common Traps">
+        <header class="slide-header">
+          <div class="section-tag">Part 5 &bull; Common Traps</div>
+          <h2>5 Dangerous Misconceptions vs. SharePoint Reality</h2>
+          <p class="subtitle">Avoid the costly traps that break beginner Power Apps projects.</p>
+        </header>
+
+        <div class="slide-content grid-2">
+          <div class="card" style="border-left: 4px solid var(--color-danger);">
+            <h3 class="card-title" style="color: #fca5a5;">The Beginner Misconception</h3>
+            
+            <div style="display: flex; flex-direction: column; gap: 0.6rem; font-size: 0.82rem;">
+              <div style="background: rgba(15, 23, 42, 0.6); padding: 0.55rem; border-radius: 0.4rem;">
+                <strong style="color: #fca5a5;">1. "I don't need Title, so I'll just delete it."</strong>
+                <p style="color: var(--text-muted); margin: 0.1rem 0 0 0;">They get frustrated when SharePoint refuses to delete Title.</p>
+              </div>
+
+              <div style="background: rgba(15, 23, 42, 0.6); padding: 0.55rem; border-radius: 0.4rem;">
+                <strong style="color: #fca5a5;">2. "Rich text is prettier for descriptions."</strong>
+                <p style="color: var(--text-muted); margin: 0.1rem 0 0 0;">They pick Rich Text and end up with HTML junk inside their Power App.</p>
+              </div>
+
+              <div style="background: rgba(15, 23, 42, 0.6); padding: 0.55rem; border-radius: 0.4rem;">
+                <strong style="color: #fca5a5;">3. "SharePoint List is just an Excel file in the cloud."</strong>
+                <p style="color: var(--text-muted); margin: 0.1rem 0 0 0;">They treat it like Excel and accidentally break multi-user locking.</p>
+              </div>
+
+              <div style="background: rgba(15, 23, 42, 0.6); padding: 0.55rem; border-radius: 0.4rem;">
+                <strong style="color: #fca5a5;">4. "Naming columns with spaces like 'Ticket Number' is fine."</strong>
+                <p style="color: var(--text-muted); margin: 0.1rem 0 0 0;">SharePoint generates ugly internal names like <code>Ticket_x0020_Number</code>.</p>
+              </div>
+
+              <div style="background: rgba(15, 23, 42, 0.6); padding: 0.55rem; border-radius: 0.4rem;">
+                <strong style="color: #fca5a5;">5. "Sharing the Power App automatically shares the list."</strong>
+                <p style="color: var(--text-muted); margin: 0.1rem 0 0 0;">Users get permission denied errors because list permissions were forgotten.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="card" style="border-left: 4px solid var(--color-primary);">
+            <h3 class="card-title" style="color: #5eead4;">The Production Architect Reality</h3>
+            
+            <div style="display: flex; flex-direction: column; gap: 0.6rem; font-size: 0.82rem;">
+              <div style="background: rgba(15, 23, 42, 0.6); padding: 0.55rem; border-radius: 0.4rem;">
+                <strong style="color: #5eead4;">1. Always RENAME Title to your primary ID.</strong>
+                <p style="color: var(--text-muted); margin: 0.1rem 0 0 0;">Rename it to Ticket ID, Asset Tag, or Order Number.</p>
+              </div>
+
+              <div style="background: rgba(15, 23, 42, 0.6); padding: 0.55rem; border-radius: 0.4rem;">
+                <strong style="color: #5eead4;">2. ALWAYS select Plain Text for multi-line inputs.</strong>
+                <p style="color: var(--text-muted); margin: 0.1rem 0 0 0;">Plain text cleanly integrates with Power Apps text input controls.</p>
+              </div>
+
+              <div style="background: rgba(15, 23, 42, 0.6); padding: 0.55rem; border-radius: 0.4rem;">
+                <strong style="color: #5eead4;">3. SharePoint is a true transactional cloud database.</strong>
+                <p style="color: var(--text-muted); margin: 0.1rem 0 0 0;">It handles simultaneous multi-user writes without file corruption.</p>
+              </div>
+
+              <div style="background: rgba(15, 23, 42, 0.6); padding: 0.55rem; border-radius: 0.4rem;">
+                <strong style="color: #5eead4;">4. Create column names without spaces first, then rename display.</strong>
+                <p style="color: var(--text-muted); margin: 0.1rem 0 0 0;">Creates clean, readable internal schemas for Power Fx formulas.</p>
+              </div>
+
+              <div style="background: rgba(15, 23, 42, 0.6); padding: 0.55rem; border-radius: 0.4rem;">
+                <strong style="color: #5eead4;">5. Grant Microsoft 365 security group permissions on the List.</strong>
+                <p style="color: var(--text-muted); margin: 0.1rem 0 0 0;">App users must have at least 'Contribute' or 'Edit' rights on the list.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <aside class="trainer-notes" style="display: none !important;">
+          <h4>Trainer Speaking Script &amp; Pedagogical Cues:</h4>
+          <p><strong>Highlight Trap #5:</strong> "Trap #5 is the #1 reason why corporate app rollouts fail on day one! The developer builds a fantastic app, shares it with 200 users, and all 200 users get a gray error screen saying: 'You don't have permission to view this list'. Always remember: Power Apps permissions and SharePoint list permissions are two separate keys to two separate doors!"</p>
+        </aside>
+      </section>
+
+      <!-- Slide 18: Knowledge Check 1 (Q1 - Core Difference) -->
+      <section class="slide" id="slide-18" data-slide-index="17" data-title="Knowledge Check 1: Variables vs. SharePoint" data-segment="Part 5: Knowledge Checks">
+        <header class="slide-header">
+          <div class="section-tag">Part 5 &bull; Knowledge Check 1 of 5</div>
+          <h2>Knowledge Check: Variables vs. SharePoint Lists</h2>
+          <p class="subtitle">Verifying your understanding of volatile RAM versus persistent cloud storage.</p>
+        </header>
+
+        <div class="slide-content">
+          <div class="quiz-container">
+            <div class="quiz-card">
+              <span class="card-badge" style="background: rgba(59, 130, 246, 0.2); color: #93c5fd;">Question 1 &bull; Conceptual Foundation</span>
+              <p style="color: var(--text-main); font-size: 1.05rem; line-height: 1.6; margin-top: 0.5rem;">
+                What is the fundamental difference between saving a ticket into a Power Apps <strong>Variable</strong> versus submitting it to a <strong>SharePoint List</strong>?
+              </p>
+
+              <div class="quiz-options">
+                <button class="quiz-option-btn" onclick="handleQuizAnswer(1, 'A', false, this)">
+                  <strong>A.</strong> <span>Variables can only store numbers; SharePoint can only store text</span>
+                </button>
+                <button class="quiz-option-btn" onclick="handleQuizAnswer(1, 'B', true, this)">
+                  <strong>B.</strong> <span>Variables live temporarily in device RAM; SharePoint permanently stores multi-user data in the cloud</span>
+                </button>
+                <button class="quiz-option-btn" onclick="handleQuizAnswer(1, 'C', false, this)">
+                  <strong>C.</strong> <span>SharePoint lists automatically delete themselves when the user logs out</span>
+                </button>
+                <button class="quiz-option-btn" onclick="handleQuizAnswer(1, 'D', false, this)">
+                  <strong>D.</strong> <span>There is no difference; they are two different names for the same feature</span>
+                </button>
+              </div>
+            </div>
+
+            <div class="quiz-feedback" id="quiz-feedback-1">
+              <div class="feedback-placeholder">
+                <div style="width: 52px; height: 52px; border-radius: 50%; background: rgba(20, 184, 166, 0.15); border: 1px solid rgba(20, 184, 166, 0.35); display: flex; align-items: center; justify-content: center; margin: 0 auto 0.85rem auto; font-size: 1.5rem; color: #5eead4;">
+                  &quest;
+                </div>
+                <span class="card-badge" style="background: rgba(20, 184, 166, 0.2); color: #5eead4; margin-bottom: 0.65rem;">Awaiting Answer</span>
+                <h4 style="color: #f8fafc; font-size: 1.05rem; margin-bottom: 0.5rem;">Live Architecture Inspector</h4>
+                <p style="color: var(--text-muted); font-size: 0.88rem; line-height: 1.6; max-width: 380px; margin: 0 auto;">
+                  Select an option on the left (A, B, C, or D) to test your understanding and unlock the system architecture rationale.
+                </p>
+              </div>
+              <div class="feedback-content">
+                <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.75rem;">
+                  <span class="card-badge" id="quiz-badge-1" style="background: rgba(16, 185, 129, 0.2); color: #86efac;">Correct!</span>
+                  <strong style="color: var(--text-main); font-size: 1.05rem;" id="quiz-status-1">Mastery Demonstrated!</strong>
+                </div>
+                <p style="color: var(--text-muted); font-size: 0.88rem; line-height: 1.6;">
+                  Spot on! Variables are volatile scratchpads inside local device memory. SharePoint Lists are resilient enterprise databases in the Microsoft 365 cloud, accessible by your entire team across app restarts.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <aside class="trainer-notes" style="display: none !important;">
+          <h4>Trainer Speaking Script &amp; Pedagogical Cues:</h4>
+          <p><strong>Check Understanding:</strong> Ensure all students understand why option B is the only correct answer. Reinforce the concept of RAM vs. Cloud.</p>
+        </aside>
+      </section>
+
+      <!-- Slide 19: Knowledge Check 2 (Q2 - The Title Column) -->
+      <section class="slide" id="slide-19" data-slide-index="18" data-title="Knowledge Check 2: The Sacred Title Column" data-segment="Part 5: Knowledge Checks">
+        <header class="slide-header">
+          <div class="section-tag">Part 5 &bull; Knowledge Check 2 of 5</div>
+          <h2>Knowledge Check: The Sacred "Title" Column</h2>
+          <p class="subtitle">Checking your mastery of SharePoint list schema constraints.</p>
+        </header>
+
+        <div class="slide-content">
+          <div class="quiz-container">
+            <div class="quiz-card">
+              <span class="card-badge" style="background: rgba(59, 130, 246, 0.2); color: #93c5fd;">Question 2 &bull; Architectural Rule</span>
+              <p style="color: var(--text-main); font-size: 1.05rem; line-height: 1.6; margin-top: 0.5rem;">
+                Why can a developer NEVER delete the default built-in <strong>Title</strong> column when creating a new SharePoint list?
+              </p>
+
+              <div class="quiz-options">
+                <button class="quiz-option-btn" onclick="handleQuizAnswer(2, 'A', false, this)">
+                  <strong>A.</strong> <span>Because Microsoft charges a \$50 fee to unlock the delete button</span>
+                </button>
+                <button class="quiz-option-btn" onclick="handleQuizAnswer(2, 'B', false, this)">
+                  <strong>B.</strong> <span>Because Power Apps Studio will refuse to launch on Windows</span>
+                </button>
+                <button class="quiz-option-btn" onclick="handleQuizAnswer(2, 'C', true, this)">
+                  <strong>C.</strong> <span>It is an essential system anchor used for indexing, search, and core list operations</span>
+                </button>
+                <button class="quiz-option-btn" onclick="handleQuizAnswer(2, 'D', false, this)">
+                  <strong>D.</strong> <span>You actually can delete it by holding down the Shift key</span>
+                </button>
+              </div>
+            </div>
+
+            <div class="quiz-feedback" id="quiz-feedback-2">
+              <div class="feedback-placeholder">
+                <div style="width: 52px; height: 52px; border-radius: 50%; background: rgba(20, 184, 166, 0.15); border: 1px solid rgba(20, 184, 166, 0.35); display: flex; align-items: center; justify-content: center; margin: 0 auto 0.85rem auto; font-size: 1.5rem; color: #5eead4;">
+                  &quest;
+                </div>
+                <span class="card-badge" style="background: rgba(20, 184, 166, 0.2); color: #5eead4; margin-bottom: 0.65rem;">Awaiting Answer</span>
+                <h4 style="color: #f8fafc; font-size: 1.05rem; margin-bottom: 0.5rem;">Live Architecture Inspector</h4>
+                <p style="color: var(--text-muted); font-size: 0.88rem; line-height: 1.6; max-width: 380px; margin: 0 auto;">
+                  Select an option on the left (A, B, C, or D) to test your understanding and unlock the system architecture rationale.
+                </p>
+              </div>
+              <div class="feedback-content">
+                <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.75rem;">
+                  <span class="card-badge" id="quiz-badge-2" style="background: rgba(16, 185, 129, 0.2); color: #86efac;">Correct!</span>
+                  <strong style="color: var(--text-main); font-size: 1.05rem;" id="quiz-status-2">SharePoint Rule Confirmed!</strong>
+                </div>
+                <p style="color: var(--text-muted); font-size: 0.88rem; line-height: 1.6;">
+                  Exactly right! The Title column is hardcoded into SharePoint's database core. Never fight it: always rename its display name to your primary ID (such as Ticket ID or Serial Number)!
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <aside class="trainer-notes" style="display: none !important;">
+          <h4>Trainer Speaking Script &amp; Pedagogical Cues:</h4>
+          <p><strong>Emphasize the Architecture:</strong> Reiterate that Title is required by SharePoint's foundational schema. Professional developers embrace it and rename it.</p>
+        </aside>
+      </section>
+
+      <!-- Slide 20: Knowledge Check 3 (Q3 - Controlled Vocabulary) -->
+      <section class="slide" id="slide-20" data-slide-index="19" data-title="Knowledge Check 3: Choice vs. Text Columns" data-segment="Part 5: Knowledge Checks">
+        <header class="slide-header">
+          <div class="section-tag">Part 5 &bull; Knowledge Check 3 of 5</div>
+          <h2>Knowledge Check: Choice vs. Free-Text Columns</h2>
+          <p class="subtitle">Validating your data integrity and governance judgment.</p>
+        </header>
+
+        <div class="slide-content">
+          <div class="quiz-container">
+            <div class="quiz-card">
+              <span class="card-badge" style="background: rgba(59, 130, 246, 0.2); color: #93c5fd;">Question 3 &bull; Data Integrity</span>
+              <p style="color: var(--text-main); font-size: 1.05rem; line-height: 1.6; margin-top: 0.5rem;">
+                Why should fields like <strong>Department</strong> and <strong>Urgency Level</strong> be configured as <strong>Choice</strong> columns rather than Single Line of Text?
+              </p>
+
+              <div class="quiz-options">
+                <button class="quiz-option-btn" onclick="handleQuizAnswer(3, 'A', false, this)">
+                  <strong>A.</strong> <span>Because Choice columns use less cloud server storage space</span>
+                </button>
+                <button class="quiz-option-btn" onclick="handleQuizAnswer(3, 'B', true, this)">
+                  <strong>B.</strong> <span>To enforce a controlled vocabulary and eliminate spelling errors, typos, and fragmented reporting</span>
+                </button>
+                <button class="quiz-option-btn" onclick="handleQuizAnswer(3, 'C', false, this)">
+                  <strong>C.</strong> <span>Because Single Line of Text columns cannot be read by mobile phones</span>
+                </button>
+                <button class="quiz-option-btn" onclick="handleQuizAnswer(3, 'D', false, this)">
+                  <strong>D.</strong> <span>Because Power Apps cannot display dropdown controls without Choice columns</span>
+                </button>
+              </div>
+            </div>
+
+            <div class="quiz-feedback" id="quiz-feedback-3">
+              <div class="feedback-placeholder">
+                <div style="width: 52px; height: 52px; border-radius: 50%; background: rgba(20, 184, 166, 0.15); border: 1px solid rgba(20, 184, 166, 0.35); display: flex; align-items: center; justify-content: center; margin: 0 auto 0.85rem auto; font-size: 1.5rem; color: #5eead4;">
+                  &quest;
+                </div>
+                <span class="card-badge" style="background: rgba(20, 184, 166, 0.2); color: #5eead4; margin-bottom: 0.65rem;">Awaiting Answer</span>
+                <h4 style="color: #f8fafc; font-size: 1.05rem; margin-bottom: 0.5rem;">Live Architecture Inspector</h4>
+                <p style="color: var(--text-muted); font-size: 0.88rem; line-height: 1.6; max-width: 380px; margin: 0 auto;">
+                  Select an option on the left (A, B, C, or D) to test your understanding and unlock the system architecture rationale.
+                </p>
+              </div>
+              <div class="feedback-content">
+                <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.75rem;">
+                  <span class="card-badge" id="quiz-badge-3" style="background: rgba(16, 185, 129, 0.2); color: #86efac;">Correct!</span>
+                  <strong style="color: var(--text-main); font-size: 1.05rem;" id="quiz-status-3">Data Governance Mastered!</strong>
+                </div>
+                <p style="color: var(--text-muted); font-size: 0.88rem; line-height: 1.6;">
+                  Spot on! A controlled vocabulary prevents operators from typing "Molding", "moulding", and "moldng", guaranteeing clean business metrics and reliable filters.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <aside class="trainer-notes" style="display: none !important;">
+          <h4>Trainer Speaking Script &amp; Pedagogical Cues:</h4>
+          <p><strong>Connect to Reporting:</strong> Remind students that dirty data entered into Power Apps creates dirty dashboards in Power BI. Choice columns protect data quality at the source.</p>
+        </aside>
+      </section>
+
+      <!-- Slide 21: Knowledge Check 4 (Q4 - The Rich Text Trap) -->
+      <section class="slide" id="slide-21" data-slide-index="20" data-title="Knowledge Check 4: The Rich Text Trap" data-segment="Part 5: Knowledge Checks">
+        <header class="slide-header">
+          <div class="section-tag">Part 5 &bull; Knowledge Check 4 of 5</div>
+          <h2>Knowledge Check: The Rich Text Trap</h2>
+          <p class="subtitle">Testing your practical awareness of cross-platform formatting issues.</p>
+        </header>
+
+        <div class="slide-content">
+          <div class="quiz-container">
+            <div class="quiz-card">
+              <span class="card-badge" style="background: rgba(59, 130, 246, 0.2); color: #93c5fd;">Question 4 &bull; Practical Trap</span>
+              <p style="color: var(--text-main); font-size: 1.05rem; line-height: 1.6; margin-top: 0.5rem;">
+                When creating a <strong>Multiple lines of text</strong> column for Power Apps descriptions, why MUST you choose <strong>Plain text</strong> instead of "Enhanced rich text"?
+              </p>
+
+              <div class="quiz-options">
+                <button class="quiz-option-btn" onclick="handleQuizAnswer(4, 'A', false, this)">
+                  <strong>A.</strong> <span>Plain text encrypts the data so hackers cannot read it</span>
+                </button>
+                <button class="quiz-option-btn" onclick="handleQuizAnswer(4, 'B', false, this)">
+                  <strong>B.</strong> <span>Rich text slows down the tablet's processor by 90%</span>
+                </button>
+                <button class="quiz-option-btn" onclick="handleQuizAnswer(4, 'C', true, this)">
+                  <strong>C.</strong> <span>Rich text stores hidden HTML tags (like &lt;div&gt;&lt;p&gt;) that clutter standard Power Apps text boxes</span>
+                </button>
+                <button class="quiz-option-btn" onclick="handleQuizAnswer(4, 'D', false, this)">
+                  <strong>D.</strong> <span>SharePoint lists only permit Plain text on Tuesdays and Thursdays</span>
+                </button>
+              </div>
+            </div>
+
+            <div class="quiz-feedback" id="quiz-feedback-4">
+              <div class="feedback-placeholder">
+                <div style="width: 52px; height: 52px; border-radius: 50%; background: rgba(20, 184, 166, 0.15); border: 1px solid rgba(20, 184, 166, 0.35); display: flex; align-items: center; justify-content: center; margin: 0 auto 0.85rem auto; font-size: 1.5rem; color: #5eead4;">
+                  &quest;
+                </div>
+                <span class="card-badge" style="background: rgba(20, 184, 166, 0.2); color: #5eead4; margin-bottom: 0.65rem;">Awaiting Answer</span>
+                <h4 style="color: #f8fafc; font-size: 1.05rem; margin-bottom: 0.5rem;">Live Architecture Inspector</h4>
+                <p style="color: var(--text-muted); font-size: 0.88rem; line-height: 1.6; max-width: 380px; margin: 0 auto;">
+                  Select an option on the left (A, B, C, or D) to test your understanding and unlock the system architecture rationale.
+                </p>
+              </div>
+              <div class="feedback-content">
+                <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.75rem;">
+                  <span class="card-badge" id="quiz-badge-4" style="background: rgba(16, 185, 129, 0.2); color: #86efac;">Correct!</span>
+                  <strong style="color: var(--text-main); font-size: 1.05rem;" id="quiz-status-4">Crucial Pitfall Avoided!</strong>
+                </div>
+                <p style="color: var(--text-muted); font-size: 0.88rem; line-height: 1.6;">
+                  Brilliant! Enhanced rich text injects HTML markup like <code>&lt;div&gt;&lt;strong&gt;</code> into the raw string. In Power Apps standard text inputs, users end up seeing messy HTML tags instead of clean sentences.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <aside class="trainer-notes" style="display: none !important;">
+          <h4>Trainer Speaking Script &amp; Pedagogical Cues:</h4>
+          <p><strong>Practical Demonstration:</strong> Mention that fixing a rich text column after 500 rows are entered requires painful data migration. Always choose Plain Text from day one!</p>
+        </aside>
+      </section>
+
+      <!-- Slide 22: Knowledge Check 5 (Q5 - Persistence Reality) -->
+      <section class="slide" id="slide-22" data-slide-index="21" data-title="Knowledge Check 5: Persistence Under Disaster" data-segment="Part 5: Knowledge Checks">
+        <header class="slide-header">
+          <div class="section-tag">Part 5 &bull; Knowledge Check 5 of 5</div>
+          <h2>Knowledge Check: Persistence Under Real-World Chaos</h2>
+          <p class="subtitle">Validating your operational confidence in enterprise cloud architecture.</p>
+        </header>
+
+        <div class="slide-content">
+          <div class="quiz-container">
+            <div class="quiz-card">
+              <span class="card-badge" style="background: rgba(59, 130, 246, 0.2); color: #93c5fd;">Question 5 &bull; Disaster Recovery</span>
+              <p style="color: var(--text-main); font-size: 1.05rem; line-height: 1.6; margin-top: 0.5rem;">
+                An operator taps "Submit Request" to commit a ticket to SharePoint. Two seconds later, their tablet falls into a tank of cooling water and is destroyed. Is the ticket lost?
+              </p>
+
+              <div class="quiz-options">
+                <button class="quiz-option-btn" onclick="handleQuizAnswer(5, 'A', true, this)">
+                  <strong>A.</strong> <span>NO. The data was already transmitted to Microsoft's cloud servers and safely saved in the list</span>
+                </button>
+                <button class="quiz-option-btn" onclick="handleQuizAnswer(5, 'B', false, this)">
+                  <strong>B.</strong> <span>YES. SharePoint data only exists on the physical tablet that created it</span>
+                </button>
+                <button class="quiz-option-btn" onclick="handleQuizAnswer(5, 'C', false, this)">
+                  <strong>C.</strong> <span>YES, unless the tablet is dried in rice within 24 hours</span>
+                </button>
+                <button class="quiz-option-btn" onclick="handleQuizAnswer(5, 'D', false, this)">
+                  <strong>D.</strong> <span>Only the Title is saved; the description drowns with the tablet</span>
+                </button>
+              </div>
+            </div>
+
+            <div class="quiz-feedback" id="quiz-feedback-5">
+              <div class="feedback-placeholder">
+                <div style="width: 52px; height: 52px; border-radius: 50%; background: rgba(20, 184, 166, 0.15); border: 1px solid rgba(20, 184, 166, 0.35); display: flex; align-items: center; justify-content: center; margin: 0 auto 0.85rem auto; font-size: 1.5rem; color: #5eead4;">
+                  &quest;
+                </div>
+                <span class="card-badge" style="background: rgba(20, 184, 166, 0.2); color: #5eead4; margin-bottom: 0.65rem;">Awaiting Answer</span>
+                <h4 style="color: #f8fafc; font-size: 1.05rem; margin-bottom: 0.5rem;">Live Architecture Inspector</h4>
+                <p style="color: var(--text-muted); font-size: 0.88rem; line-height: 1.6; max-width: 380px; margin: 0 auto;">
+                  Select an option on the left (A, B, C, or D) to test your understanding and unlock the system architecture rationale.
+                </p>
+              </div>
+              <div class="feedback-content">
+                <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.75rem;">
+                  <span class="card-badge" id="quiz-badge-5" style="background: rgba(16, 185, 129, 0.2); color: #86efac;">Correct!</span>
+                  <strong style="color: var(--text-main); font-size: 1.05rem;" id="quiz-status-5">Enterprise Cloud Resilience!</strong>
+                </div>
+                <p style="color: var(--text-muted); font-size: 0.88rem; line-height: 1.6;">
+                  100% correct! Once the HTTPS packet is confirmed by SharePoint, the record lives securely in Microsoft's enterprise data center. A supervisor can view that exact ticket on their desktop 5 seconds later!
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <aside class="trainer-notes" style="display: none !important;">
+          <h4>Trainer Speaking Script &amp; Pedagogical Cues:</h4>
+          <p><strong>Celebrate 5/5:</strong> Congratulate the student on completing all 5 checks. Point out how this question directly contrasts with Slide 5's crisis where variables were wiped out.</p>
+        </aside>
+      </section>
+
+      <!-- Slide 23: Final Capstone Challenge: Equipment Preventive Maintenance Log -->
+      <section class="slide" id="slide-23" data-slide-index="22" data-title="Final Capstone Challenge: Equipment Registry" data-segment="Part 5: Independent Practice">
+        <header class="slide-header">
+          <div class="section-tag">Part 5 &bull; Independent Practice</div>
+          <h2>Final Capstone Challenge: Equipment Preventive Maintenance Log</h2>
+          <p class="subtitle">Apply your skills independently: Architect the master equipment registry list.</p>
+        </header>
+
+        <div class="slide-content grid-2">
+          <div class="card">
+            <h3 class="card-title">Challenge Mission Brief</h3>
+            <p style="color: var(--text-muted); font-size: 0.9rem; line-height: 1.6; margin-bottom: 0.75rem;">
+              Apex Plastics needs a second list called <code>Apex_Equipment_Registry</code> to catalog every machine on the plant floor.
+            </p>
+
+            <div style="background: rgba(15, 23, 42, 0.7); border: 1px solid var(--border-subtle); border-radius: 0.5rem; padding: 0.75rem; margin-bottom: 0.75rem;">
+              <strong style="color: #5eead4; font-size: 0.85rem;">Required Columns:</strong>
+              <ol style="color: var(--text-muted); font-size: 0.82rem; line-height: 1.6; margin: 0.3rem 0 0 0; padding-left: 1.2rem;">
+                <li><code>Equipment Tag</code> (Rename default Title &bull; Single line of text)</li>
+                <li><code>Machine Category</code> (Choice: Injection Molder, Extruder, Chiller, Compressor)</li>
+                <li><code>Installation Date</code> (Date &amp; Time &bull; Date Only)</li>
+                <li><code>Operating Voltage</code> (Number &bull; Volts)</li>
+                <li><code>Operational Status</code> (Choice: Operational, Maintenance Required, Decommissioned)</li>
+              </ol>
+            </div>
+
+            <p style="color: var(--text-main); font-size: 0.82rem;">
+              Add at least 2 sample machines to your list (e.g., EXT-03, Extruder, 480V, Operational).
+            </p>
+          </div>
+
+          <div class="card">
+            <h3 class="card-title">100-Point Assessment Rubric</h3>
+            <div style="display: flex; flex-direction: column; gap: 0.55rem; font-size: 0.82rem;">
+              <div style="display: flex; justify-content: space-between; border-bottom: 1px solid var(--border-subtle); padding-bottom: 0.35rem;">
+                <span>Title Renamed to 'Equipment Tag'</span>
+                <strong style="color: #5eead4;">20 pts</strong>
+              </div>
+              <div style="display: flex; justify-content: space-between; border-bottom: 1px solid var(--border-subtle); padding-bottom: 0.35rem;">
+                <span>Machine Category Choice Column Enforced</span>
+                <strong style="color: #5eead4;">20 pts</strong>
+              </div>
+              <div style="display: flex; justify-content: space-between; border-bottom: 1px solid var(--border-subtle); padding-bottom: 0.35rem;">
+                <span>Installation Date Configured as Date Only</span>
+                <strong style="color: #5eead4;">20 pts</strong>
+              </div>
+              <div style="display: flex; justify-content: space-between; border-bottom: 1px solid var(--border-subtle); padding-bottom: 0.35rem;">
+                <span>Operating Voltage Enforced as Number</span>
+                <strong style="color: #5eead4;">20 pts</strong>
+              </div>
+              <div style="display: flex; justify-content: space-between; border-bottom: 1px solid var(--border-subtle); padding-bottom: 0.35rem;">
+                <span>Two Sample Records Committed Successfully</span>
+                <strong style="color: #5eead4;">20 pts</strong>
+              </div>
+            </div>
+
+            <div style="background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.3); border-radius: 0.5rem; padding: 0.75rem; margin-top: 1rem;">
+              <strong style="color: #86efac; font-size: 0.85rem;">Mastery Milestone:</strong>
+              <p style="color: var(--text-muted); font-size: 0.78rem; margin: 0.2rem 0 0 0;">
+                Completing this rubric means you are fully ready for Day 20, where we will bind this exact list to a live Power Apps gallery and edit form!
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <aside class="trainer-notes" style="display: none !important;">
+          <h4>Trainer Speaking Script &amp; Pedagogical Cues:</h4>
+          <p><strong>Independent Practice (10 min):</strong> Give students uninterrupted time to build this second list. Remind them: 'Look at the rubric. Verify each column type before creating sample rows.'</p>
+        </aside>
+      </section>
+
+      <!-- Slide 24: Curriculum Connection Map & Bridge Forward to Day 20 -->
+      <section class="slide" id="slide-24" data-slide-index="23" data-title="Curriculum Connection Map & Bridge Forward" data-segment="Part 5: Bridge Forward">
+        <header class="slide-header">
+          <div class="section-tag">Part 5 &bull; Bridge Forward</div>
+          <h2>Curriculum Connection Map &amp; Bridge Forward to Day 20</h2>
+          <p class="subtitle">How today's cloud data vault unlocks the magic of Power Apps forms tomorrow.</p>
+        </header>
+
+        <div class="slide-content grid-2">
+          <div class="card">
+            <h3 class="card-title">The Grand Architecture So Far</h3>
+            <div style="display: flex; flex-direction: column; gap: 0.65rem;">
+              <div style="background: rgba(15, 23, 42, 0.7); padding: 0.65rem; border-radius: 0.4rem; border-left: 3px solid #3b82f6;">
+                <strong style="color: #93c5fd; font-size: 0.82rem;">Days 14 - 15 &bull; UI Screens &amp; Controls:</strong>
+                <p style="color: var(--text-muted); font-size: 0.78rem; margin: 0.1rem 0 0 0;">Built buttons, labels, and text inputs.</p>
+              </div>
+
+              <div style="background: rgba(15, 23, 42, 0.7); padding: 0.65rem; border-radius: 0.4rem; border-left: 3px solid #06b6d4;">
+                <strong style="color: #67e8f9; font-size: 0.82rem;">Days 16 - 17 &bull; Logic &amp; Validation:</strong>
+                <p style="color: var(--text-muted); font-size: 0.78rem; margin: 0.1rem 0 0 0;">Coded <code>If()</code> formulas, <code>IsBlank()</code>, and error notifications.</p>
+              </div>
+
+              <div style="background: rgba(15, 23, 42, 0.7); padding: 0.65rem; border-radius: 0.4rem; border-left: 3px solid #f59e0b;">
+                <strong style="color: #fde68a; font-size: 0.82rem;">Day 18 &bull; Variables:</strong>
+                <p style="color: var(--text-muted); font-size: 0.78rem; margin: 0.1rem 0 0 0;">Captured temporary values in RAM across screen transitions.</p>
+              </div>
+
+              <div style="background: rgba(15, 23, 42, 0.7); padding: 0.65rem; border-radius: 0.4rem; border-left: 3px solid #10b981;">
+                <strong style="color: #86efac; font-size: 0.82rem;">Day 19 (TODAY) &bull; SharePoint Storage:</strong>
+                <p style="color: var(--text-muted); font-size: 0.78rem; margin: 0.1rem 0 0 0;">Established permanent multi-user cloud records with typed columns.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="card" style="border-color: var(--color-primary); box-shadow: 0 0 25px var(--color-primary-glow);">
+            <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem;">
+              <span class="card-badge" style="background: rgba(13, 148, 136, 0.25); color: #5eead4;">TOMORROW</span>
+              <strong style="color: #5eead4;">DAY 20 SNEAK PEEK</strong>
+            </div>
+            <h3 class="card-title" style="color: #5eead4;">Connecting Power Apps UI to SharePoint</h3>
+            <p style="color: var(--text-muted); font-size: 0.88rem; line-height: 1.6; margin-bottom: 1rem;">
+              Right now, our Power App lives in Power Apps Studio, and our data lives in SharePoint. They have never spoken to each other!
+            </p>
+
+            <div style="background: rgba(15, 23, 42, 0.7); padding: 0.85rem; border-radius: 0.5rem; border: 1px solid var(--border-subtle); margin-bottom: 1rem;">
+              <strong style="color: var(--text-main); font-size: 0.85rem;">Tomorrow on Day 20, we will:</strong>
+              <ul style="color: var(--text-muted); font-size: 0.8rem; line-height: 1.6; margin: 0.3rem 0 0 0; padding-left: 1.2rem;">
+                <li>Add the <strong>SharePoint Data Connector</strong> into Power Apps Studio.</li>
+                <li>Generate an automatic <strong>Edit Form</strong> with 1 click.</li>
+                <li>Write <code>SubmitForm(frmMaintenance)</code> to wire the button to the cloud!</li>
+              </ul>
+            </div>
+
+            <p style="color: #5eead4; font-weight: 600; font-size: 0.85rem;">
+              Congratulations on completing Day 19 of the Microsoft Power Apps Foundation!
+            </p>
+          </div>
+        </div>
+
+        <aside class="trainer-notes" style="display: none !important;">
+          <h4>Trainer Speaking Script &amp; Pedagogical Cues:</h4>
+          <p><strong>Closing Send-Off (2 min):</strong> "Congratulate everyone. Today, you didn't just learn a tool; you learned enterprise data architecture. Tomorrow on Day 20, all the puzzle pieces come together when we marry our Power Apps screens to our SharePoint list. See you all tomorrow!"</p>
+        </aside>
+      </section>
+
+    </main>
+
+    <!-- Bottom HUD & Navigation Controls -->
+        <footer id="bottom-hud">
+      <div id="progress-bar-container">
+        <div id="progress-bar"></div>
+      </div>
+
+      <div class="hud-left">
+        <button class="hud-btn" id="btn-prev" onclick="prevSlide()" title="Previous Slide (Left Arrow)">&#8592; Prev</button>
+        <button class="hud-btn" id="btn-next" onclick="nextSlide()" title="Next Slide (Right Arrow / Space)">Next &#8594;</button>
+        <span id="slide-counter">Slide <span id="slide-current-num">1</span> / <span id="slide-total-count">24</span></span>
+      </div>
+
+      <div class="hud-right">
+        <button class="hud-btn" id="btn-lang" onclick="toggleLanguage()" title="Toggle Language (L)">
+          🌐 <span id="lang-label">KH</span>
+        </button>
+        <button class="hud-btn active" id="btn-laser" onclick="toggleLaser()" title="Presenter Laser Pointer (P)">
+          🔴 Laser
+        </button>
+        <button class="hud-btn" id="btn-notes" onclick="toggleNotes()" title="Trainer Notes Drawer (N)">
+          📝 Notes
+        </button>
+        <button class="hud-btn" id="btn-overview" onclick="toggleOverview()" title="Slide Overview Modal (O)">
+          🗂️ Overview
+        </button>
+        <button class="hud-btn" id="btn-timer" onclick="toggleTimer()" title="90-Min Countdown (T)">
+          ⏱️ <span id="timer-display">90:00</span>
+        </button>
+        <button class="hud-btn" id="btn-fullscreen" onclick="toggleFullscreen()" title="Fullscreen (F)">
+          ⛶
+        </button>
+        <a href="../index.html" class="hud-btn hub-btn" title="Return to Master Curriculum Hub (ត្រឡប់ទៅទំព័រដើម)" style="text-decoration: none; display: inline-flex; align-items: center; gap: 4px; color: #fcd34d; font-weight: 600;"><span>🏠</span><span>Hub</span></a>
+      </div>
+    </footer>
+
+    <!-- Slide-Out Trainer Notes Drawer (Hotkey: N) -->
+    <div id="notes-drawer">
+      <div class="notes-header">
+        <h3 style="margin: 0;">Trainer Notes &bull; <span id="notes-slide-title" style="color: var(--color-primary);">Day 19</span></h3>
+        <button id="notes-close-btn" class="notes-close-btn" onclick="toggleNotes()">&times;</button>
+      </div>
+      <div class="notes-body" id="notes-body-content">
+        <!-- Injected dynamically from active slide aside.trainer-notes -->
+      </div>
+    </div>
+
+    <!-- Slide Grid Overview Modal (Hotkey: O) -->
+    <div id="overview-modal">
+      <div class="overview-header">
+        <h2 style="margin: 0; color: var(--text-main);">Slide Grid Overview &bull; Day 19 (24 Slides)</h2>
+        <button id="overview-close-btn" class="hud-btn" onclick="toggleOverview()">Close (Esc / O)</button>
+      </div>
+      <div class="overview-grid" id="overview-grid-container">
+        <!-- Rendered dynamically by script.js -->
+      </div>
+    </div>
+
+  </div>
+
+  <script src="script.js"></script>
+<script>
+if (window.self !== window.top) {
+  document.documentElement.classList.add('in-iframe');
+  function hideHub() { document.querySelectorAll('.hub-btn, .back-to-hub-pill').forEach(e => e.style.display = 'none'); }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', hideHub);
+  } else {
+    hideHub();
+  }
+}
+</script>
+<style>
+.in-iframe .hub-btn, .in-iframe .back-to-hub-pill { display: none !important; }
+</style>
+</body>
+</html>
+

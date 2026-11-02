@@ -1,0 +1,1609 @@
+<!DOCTYPE html>
+<html lang="en" translate="no" class="notranslate">
+<head>
+  <meta name="google" content="notranslate">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Day 20: Connect Power Apps to SharePoint | Microsoft Power Apps Foundation</title>
+  <link rel="stylesheet" href="../shared/design-system.css">
+  <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=Moul&family=Kantumruy+Pro:ital,wght@0,400..700;1,400..700&family=Battambang:wght@300;400;700;900&family=Koh+Santepheap:wght@300;400;700&family=Koulen&family=Siemreap&display=swap" rel="stylesheet">
+  <style>
+    /* Strict Speaker Notes Lock: Never render on slide stage under any circumstance */
+    aside.trainer-notes,
+    .trainer-notes,
+    .slide aside,
+    aside {
+      display: none !important;
+      visibility: hidden !important;
+      height: 0 !important;
+      width: 0 !important;
+      overflow: hidden !important;
+      opacity: 0 !important;
+      position: absolute !important;
+      pointer-events: none !important;
+      margin: 0 !important;
+      padding: 0 !important;
+      border: none !important;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Presentation Stage Wrapper (Lesson 14 Architecture) -->
+  <div id="presentation-stage">
+    
+    <!-- Ambient Aurora Orbs (60fps backdrop) -->
+    <div class="aurora-orb orb-1"></div>
+    <div class="aurora-orb orb-2"></div>
+    <div class="aurora-orb orb-3"></div>
+
+    <!-- Presenter Laser Pointer & Shockwave Click Ripple -->
+    <div id="presenter-laser"></div>
+    <div id="pointer-ripple" class="pointer-click-ripple"></div>
+
+    <!-- Viewport for 24 Slides -->
+    <main id="slides-viewport">
+
+      <!-- ====================================================================
+           SLIDE 1: HERO TITLE & SYSTEM MENTAL MODEL
+           ==================================================================== -->
+      <section class="slide active" id="slide-1" data-slide-index="0" data-title="Connect Power Apps to SharePoint" data-segment="Phase 7: SharePoint Integration">
+        <div class="slide-content hero-content">
+          <div class="hero-badge">
+            <span>Microsoft Power Apps Professional Foundation</span>
+            <span>&bull;</span>
+            <span>Day 20 of 27</span>
+          </div>
+          <h1 class="hero-title">Connect Power Apps to SharePoint</h1>
+          <p class="hero-subtitle">
+            Controls on a glass screen cannot talk to a cloud database on their own. Today we build the architectural bridge: adding the SharePoint data source so your app controls can read, display, and update live business records.
+          </p>
+
+          <div class="model-chain">
+            <span class="chain-item">Real Problem</span>
+            <span class="chain-arrow">&rarr;</span>
+            <span class="chain-item">Process</span>
+            <span class="chain-arrow">&rarr;</span>
+            <span class="chain-item">Data</span>
+            <span class="chain-arrow">&rarr;</span>
+            <span class="chain-item">UI / Screen</span>
+            <span class="chain-arrow">&rarr;</span>
+            <span class="chain-item">Logic/Decision</span>
+            <span class="chain-arrow">&rarr;</span>
+            <span class="chain-item">Action</span>
+            <span class="chain-arrow">&rarr;</span>
+            <span class="chain-item active">Storage [CONNECTED]</span>
+            <span class="chain-arrow">&rarr;</span>
+            <span class="chain-item">Feedback</span>
+            <span class="chain-arrow">&rarr;</span>
+            <span class="chain-item">Test</span>
+          </div>
+        </div>
+
+        <aside class="trainer-notes" style="display: none !important;">
+          <h4>Trainer Speaking Script &amp; Pedagogical Cues:</h4>
+          <p><strong>Opening Hook (2 min):</strong> "Welcome to Day 20! For the last few weeks, you built beautiful screens and wrote formulas. Yesterday, you created a pristine SharePoint List. But right now, they are like two strangers in different rooms who have never met. Today, we introduce them."</p>
+          <p><strong>Core Connection:</strong> Point to the mental model chain. Emphasize that 'Storage' was isolated; today it becomes actively wired into the UI.</p>
+        </aside>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 2: AGENDA & 4 MEASURABLE LEARNING OBJECTIVES
+           ==================================================================== -->
+      <section class="slide" id="slide-2" data-slide-index="1" data-title="90-Minute Agenda & Learning Objectives" data-segment="Part 1: Overview & Objectives">
+        <header class="slide-header">
+          <div class="section-tag">Part 1 &bull; Blueprint &amp; Schedule</div>
+          <h2>90-Minute Agenda &amp; Measurable Objectives</h2>
+          <p class="subtitle">A structured, spiral-learning progression from physical plumbing to live cloud data binding.</p>
+        </header>
+
+        <div class="slide-content grid-2">
+          <div class="card">
+            <h3 class="card-title">4 Measurable Learning Objectives</h3>
+            <div class="objective-item">
+              <span class="obj-num">1</span>
+              <div>
+                <strong>Navigate Studio Data Rail:</strong>
+                <p>Open the Data cylinder icon on the left rail and search for the SharePoint connector without hesitation.</p>
+              </div>
+            </div>
+            <div class="objective-item">
+              <span class="obj-num">2</span>
+              <div>
+                <strong>Select Site &amp; Authorize Connection:</strong>
+                <p>Pick the exact team site, authenticate via Entra ID (SSO), and select <code>Apex_Maintenance_Requests</code>.</p>
+              </div>
+            </div>
+            <div class="objective-item">
+              <span class="obj-num">3</span>
+              <div>
+                <strong>Verify Data Source in IntelliSense:</strong>
+                <p>Type the list name into the formula bar and verify that Power Fx recognizes it as a valid table symbol.</p>
+              </div>
+            </div>
+            <div class="objective-item">
+              <span class="obj-num">4</span>
+              <div>
+                <strong>Perform Connection Diagnostics:</strong>
+                <p>Use the Data panel context menu to Refresh, View Data, and resolve schema mismatch warnings.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <h3 class="card-title">Timed 90-Minute Spiral Schedule</h3>
+            <div class="agenda-timeline">
+              <div class="agenda-row">
+                <span class="agenda-time">00 - 10m</span>
+                <div><strong>Recall &amp; Mental Model:</strong> Days 11, 16, 18, 19 retrieval &amp; "Two Strangers" crisis.</div>
+              </div>
+              <div class="agenda-row">
+                <span class="agenda-time">10 - 25m</span>
+                <div><strong>Physical Analogy &amp; Concepts:</strong> Faucet, reservoir &amp; copper plumbing pipe.</div>
+              </div>
+              <div class="agenda-row">
+                <span class="agenda-time">25 - 40m</span>
+                <div><strong>Architectural Demonstration:</strong> Studio data rail, SSO credentials &amp; schema inspection.</div>
+              </div>
+              <div class="agenda-row">
+                <span class="agenda-time">40 - 65m</span>
+                <div><strong>Guided &amp; Independent Practice:</strong> Connecting the list and testing IntelliSense.</div>
+              </div>
+              <div class="agenda-row">
+                <span class="agenda-time">65 - 80m</span>
+                <div><strong>Diagnostics &amp; Misconceptions:</strong> Refreshing schemas &amp; debunking data import myths.</div>
+              </div>
+              <div class="agenda-row">
+                <span class="agenda-time">80 - 90m</span>
+                <div><strong>Knowledge Checks &amp; Bridge:</strong> 5 quiz questions and previewing Day 21 Galleries.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <aside class="trainer-notes" style="display: none !important;">
+          <h4>Trainer Speaking Script &amp; Pedagogical Cues:</h4>
+          <p><strong>Set Expectations:</strong> "Today is NOT about writing 50 lines of code. It is about establishing trust between two Microsoft cloud services. If this bridge is solid, everything in Days 21 to 27 works like magic."</p>
+        </aside>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 3: CONCEPT MAP CONTINUITY
+           ==================================================================== -->
+      <section class="slide" id="slide-3" data-slide-index="2" data-title="Curriculum Continuity: The Complete Storyline" data-segment="Part 1: Curriculum Continuity">
+        <header class="slide-header">
+          <div class="section-tag">Part 1 &bull; Curriculum Continuity</div>
+          <h2>Where We Stand in the 27-Day Master Plan</h2>
+          <p class="subtitle">Every lesson builds on yesterday's output to prepare tomorrow's breakthrough.</p>
+        </header>
+
+        <div class="slide-content grid-3">
+          <div class="card" style="border-left: 3px solid #3b82f6;">
+            <span class="card-badge" style="background: rgba(59, 130, 246, 0.2); color: #93c5fd;">Day 19: Yesterday</span>
+            <h3 class="card-title">Persistent Business Data</h3>
+            <p style="color: var(--text-muted); font-size: 0.9rem; line-height: 1.6;">
+              We designed and created the <code>Apex_Maintenance_Requests</code> SharePoint List with structured typed columns (Single line text, Choice, Number, Date, Person). The data lives safely in the Microsoft cloud.
+            </p>
+            <div style="margin-top: auto; padding-top: 1rem; color: #60a5fa; font-weight: 600; font-size: 0.85rem;">
+              &check; Schema established &amp; waiting
+            </div>
+          </div>
+
+          <div class="card" style="border-left: 3px solid var(--color-primary-light); background: rgba(20, 184, 166, 0.1);">
+            <span class="card-badge" style="background: rgba(20, 184, 166, 0.25); color: #5eead4;">Day 20: Today</span>
+            <h3 class="card-title">Connect Power Apps to SharePoint</h3>
+            <p style="color: var(--text-main); font-size: 0.9rem; line-height: 1.6;">
+              We construct the live pipeline. We open Power Apps Studio, add the SharePoint connector, authenticate via Entra ID, and bind the cloud list as an active Data Source inside the canvas app engine.
+            </p>
+            <div style="margin-top: auto; padding-top: 1rem; color: #5eead4; font-weight: 700; font-size: 0.85rem;">
+              &bull; Establishing the Live Bridge
+            </div>
+          </div>
+
+          <div class="card" style="border-left: 3px solid #8b5cf6;">
+            <span class="card-badge" style="background: rgba(139, 92, 246, 0.2); color: #c084fc;">Day 21: Tomorrow</span>
+            <h3 class="card-title">Show Many Records: Galleries</h3>
+            <p style="color: var(--text-muted); font-size: 0.9rem; line-height: 1.6;">
+              Once the pipe is open, we need a container to display all rows! Tomorrow, we will add a Gallery control whose <code>Items</code> property will simply be: <code>Apex_Maintenance_Requests</code>.
+            </p>
+            <div style="margin-top: auto; padding-top: 1rem; color: #c084fc; font-weight: 600; font-size: 0.85rem;">
+              &rarr; Populating screens with records
+            </div>
+          </div>
+        </div>
+
+        <aside class="trainer-notes" style="display: none !important;">
+          <h4>Trainer Speaking Script &amp; Pedagogical Cues:</h4>
+          <p><strong>Reinforce Chain:</strong> "Remember: you cannot build a Gallery tomorrow if you don't connect the data source today! A Gallery without a data source is an empty picture frame with no photo."</p>
+        </aside>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 4: PREREQUISITE RETRIEVAL (4 INTERACTIVE FLIP CARDS)
+           ==================================================================== -->
+      <section class="slide" id="slide-4" data-slide-index="3" data-title="Prerequisite Retrieval: 4 Core Building Blocks" data-segment="Part 2: Prerequisite Retrieval">
+        <header class="slide-header">
+          <div class="section-tag">Part 2 &bull; Memory Activation</div>
+          <h2>Prerequisite Retrieval: 4 Foundation Concepts</h2>
+          <p class="subtitle">Click any card to flip and verify how previous lessons connect to today's data bridge.</p>
+        </header>
+
+        <div class="slide-content grid-4">
+          <!-- Card 1 -->
+          <div class="flip-card" onclick="this.classList.toggle('flipped')">
+            <div class="flip-card-inner">
+              <div class="flip-card-front">
+                <span class="card-badge" style="background: rgba(59, 130, 246, 0.15); color: #93c5fd;">Day 11 &bull; Data Design</span>
+                <h4 style="color: #f8fafc; font-size: 1.05rem; margin-top: 0.5rem;">What is a Table, Record, and Field?</h4>
+                <p style="color: var(--text-muted); font-size: 0.85rem;">How does structured data organize information?</p>
+                <div class="flip-hint">&circlearrowright; Click to flip answer</div>
+              </div>
+              <div class="flip-card-back">
+                <span class="card-badge" style="background: rgba(20, 184, 166, 0.2); color: #5eead4;">Foundation</span>
+                <h4 style="color: #5eead4; font-size: 1rem; margin-top: 0.5rem;">The Organization Matrix</h4>
+                <p style="color: #e2e8f0; font-size: 0.82rem; line-height: 1.5;">
+                  A <strong>Table</strong> is the entire collection (like a list); a <strong>Record</strong> is one single row (one maintenance incident); a <strong>Field</strong> is one specific column (e.g. Priority).
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 2 -->
+          <div class="flip-card" onclick="this.classList.toggle('flipped')">
+            <div class="flip-card-inner">
+              <div class="flip-card-front">
+                <span class="card-badge" style="background: rgba(59, 130, 246, 0.15); color: #93c5fd;">Day 16 &bull; Controls</span>
+                <h4 style="color: #f8fafc; font-size: 1.05rem; margin-top: 0.5rem;">What is a Control Property?</h4>
+                <p style="color: var(--text-muted); font-size: 0.85rem;">How do controls decide what to show?</p>
+                <div class="flip-hint">&circlearrowright; Click to flip answer</div>
+              </div>
+              <div class="flip-card-back">
+                <span class="card-badge" style="background: rgba(20, 184, 166, 0.2); color: #5eead4;">Foundation</span>
+                <h4 style="color: #5eead4; font-size: 1rem; margin-top: 0.5rem;">Property = Setting</h4>
+                <p style="color: #e2e8f0; font-size: 0.82rem; line-height: 1.5;">
+                  Every control has properties (like <code>Text</code>, <code>Items</code>, <code>Visible</code>). Formulas calculate what value that property should hold at any millisecond.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 3 -->
+          <div class="flip-card" onclick="this.classList.toggle('flipped')">
+            <div class="flip-card-inner">
+              <div class="flip-card-front">
+                <span class="card-badge" style="background: rgba(59, 130, 246, 0.15); color: #93c5fd;">Day 18 &bull; Variables</span>
+                <h4 style="color: #f8fafc; font-size: 1.05rem; margin-top: 0.5rem;">Variables vs. Persistent Data</h4>
+                <p style="color: var(--text-muted); font-size: 0.85rem;">Why wasn't Set(varUser, ...) enough?</p>
+                <div class="flip-hint">&circlearrowright; Click to flip answer</div>
+              </div>
+              <div class="flip-card-back">
+                <span class="card-badge" style="background: rgba(20, 184, 166, 0.2); color: #5eead4;">Foundation</span>
+                <h4 style="color: #5eead4; font-size: 1rem; margin-top: 0.5rem;">Memory vs. Hard Drive</h4>
+                <p style="color: #e2e8f0; font-size: 0.82rem; line-height: 1.5;">
+                  Variables live only in the device RAM! When the user closes the app, variables vanish. Persistent business data must live in an external database like SharePoint.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 4 -->
+          <div class="flip-card" onclick="this.classList.toggle('flipped')">
+            <div class="flip-card-inner">
+              <div class="flip-card-front">
+                <span class="card-badge" style="background: rgba(59, 130, 246, 0.15); color: #93c5fd;">Day 19 &bull; SharePoint</span>
+                <h4 style="color: #f8fafc; font-size: 1.05rem; margin-top: 0.5rem;">What is a SharePoint List?</h4>
+                <p style="color: var(--text-muted); font-size: 0.85rem;">Where are our columns stored?</p>
+                <div class="flip-hint">&circlearrowright; Click to flip answer</div>
+              </div>
+              <div class="flip-card-back">
+                <span class="card-badge" style="background: rgba(20, 184, 166, 0.2); color: #5eead4;">Foundation</span>
+                <h4 style="color: #5eead4; font-size: 1rem; margin-top: 0.5rem;">Cloud Table Storage</h4>
+                <p style="color: #e2e8f0; font-size: 0.82rem; line-height: 1.5;">
+                  A SharePoint List is a secure, cloud-hosted relational table inside Microsoft 365. It enforces data types, multi-user permissions, and audit history.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <aside class="trainer-notes" style="display: none !important;">
+          <h4>Trainer Speaking Script &amp; Pedagogical Cues:</h4>
+          <p><strong>Interactive Check:</strong> Ask learners to explain Card 3 before flipping. Emphasize: "Variables are temporary sticky notes; SharePoint is a permanent metal filing cabinet."</p>
+        </aside>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 5: THE MANUFACTURING CRISIS: "TWO STRANGERS AT APEX PLASTICS"
+           ==================================================================== -->
+      <section class="slide" id="slide-5" data-slide-index="4" data-title="The Manufacturing Crisis: Two Strangers" data-segment="Part 3: Real Problem & Workplace Crisis">
+        <header class="slide-header">
+          <div class="section-tag">Part 3 &bull; Real Problem &amp; Workplace Crisis</div>
+          <h2>The Manufacturing Crisis: "Two Strangers at Apex Plastics"</h2>
+          <p class="subtitle">Why building screens and creating databases separately produces zero business value.</p>
+        </header>
+
+        <div class="slide-content grid-2">
+          <div class="card" style="border-left: 3px solid #ef4444;">
+            <span class="card-badge" style="background: rgba(239, 68, 68, 0.2); color: #fca5a5;">The Breakdown Scenario</span>
+            <h3 class="card-title">Machine M-04 Overheats at 2:15 PM</h3>
+            <p style="color: var(--text-muted); font-size: 0.9rem; line-height: 1.6; margin-bottom: 1rem;">
+              Operator Davi sees steam billowing from injection molding machine M-04. He grabs the rugged factory tablet, opens the Power Apps maintenance screen, types "Overheating hydraulic valve", and presses <strong>Submit</strong>.
+            </p>
+            <div style="background: rgba(239, 68, 68, 0.1); border: 1px solid rgba(239, 68, 68, 0.3); padding: 0.85rem; border-radius: 0.5rem; margin-bottom: 1rem;">
+              <strong style="color: #fca5a5; font-size: 0.88rem;">The Fatal Defect:</strong>
+              <p style="color: #fecaca; font-size: 0.82rem; margin-top: 0.25rem;">
+                The button flashed. The screen looked great. But the developer forgot to connect the app to the SharePoint list! The text typed by Davi evaporated into thin air the second the app closed.
+              </p>
+            </div>
+            <p style="color: var(--text-muted); font-size: 0.85rem;">
+              Meanwhile, the maintenance supervisor sat in the office staring at an empty SharePoint list. No technician was dispatched. Machine M-04 seized, costing \$45,000 in ruined plastic molds.
+            </p>
+          </div>
+
+          <div class="card" style="border-left: 3px solid var(--color-primary-light);">
+            <span class="card-badge" style="background: rgba(20, 184, 166, 0.2); color: #5eead4;">Architectural Diagnosis</span>
+            <h3 class="card-title">Why Did This Disaster Occur?</h3>
+            <div style="display: flex; flex-direction: column; gap: 0.85rem; margin-top: 0.5rem;">
+              <div style="display: flex; gap: 0.75rem; align-items: flex-start;">
+                <div style="width: 24px; height: 24px; border-radius: 50%; background: rgba(239, 68, 68, 0.2); color: #ef4444; display: flex; align-items: center; justify-content: center; font-weight: bold; flex-shrink: 0;">&cross;</div>
+                <div>
+                  <strong style="color: var(--text-main); font-size: 0.9rem;">No Physical Pipeline Existed:</strong>
+                  <p style="color: var(--text-muted); font-size: 0.82rem;">Power Apps controls do not possess telepathy. They cannot transmit text to SharePoint without an explicitly attached Connector.</p>
+                </div>
+              </div>
+
+              <div style="display: flex; gap: 0.75rem; align-items: flex-start;">
+                <div style="width: 24px; height: 24px; border-radius: 50%; background: rgba(239, 68, 68, 0.2); color: #ef4444; display: flex; align-items: center; justify-content: center; font-weight: bold; flex-shrink: 0;">&cross;</div>
+                <div>
+                  <strong style="color: var(--text-main); font-size: 0.9rem;">Two Independent Cloud Silos:</strong>
+                  <p style="color: var(--text-muted); font-size: 0.82rem;">Power Apps Studio was running in one browser tab; SharePoint lived in another. Neither service knew the other existed.</p>
+                </div>
+              </div>
+
+              <div style="display: flex; gap: 0.75rem; align-items: flex-start;">
+                <div style="width: 24px; height: 24px; border-radius: 50%; background: rgba(16, 185, 129, 0.2); color: #10b981; display: flex; align-items: center; justify-content: center; font-weight: bold; flex-shrink: 0;">&check;</div>
+                <div>
+                  <strong style="color: #86efac; font-size: 0.9rem;">The Day 20 Solution:</strong>
+                  <p style="color: var(--text-muted); font-size: 0.82rem;">By binding <code>Apex_Maintenance_Requests</code> into Studio, any formula can write rows directly into SharePoint using verified cloud protocols.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <aside class="trainer-notes" style="display: none !important;">
+          <h4>Trainer Speaking Script &amp; Pedagogical Cues:</h4>
+          <p><strong>Emphasize Business Stakes:</strong> "In corporate IT, this is the #1 beginner mistake. A beginner builds an entire app with 10 screens and buttons, only to realize on launch day that no data is being saved anywhere."</p>
+        </aside>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 6: EVERYDAY PHYSICAL ANALOGY: FAUCET, RESERVOIR & PIPE
+           ==================================================================== -->
+      <section class="slide" id="slide-6" data-slide-index="5" data-title="Physical Analogy: Faucet, Reservoir & Pipe" data-segment="Part 3: Everyday Physical Analogy">
+        <header class="slide-header">
+          <div class="section-tag">Part 3 &bull; Real-World Mental Model</div>
+          <h2>Physical Analogy: Faucet, Reservoir &amp; Copper Pipe</h2>
+          <p class="subtitle">Understanding cloud architecture through the plumbing in your kitchen sink.</p>
+        </header>
+
+        <div class="slide-content grid-3">
+          <div class="card" style="text-align: center; align-items: center;">
+            <div style="width: 64px; height: 64px; border-radius: 50%; background: rgba(59, 130, 246, 0.15); border: 1px solid #3b82f6; display: flex; align-items: center; justify-content: center; font-size: 2rem; color: #60a5fa; margin-bottom: 1rem;">
+              &#128167;
+            </div>
+            <span class="card-badge" style="background: rgba(59, 130, 246, 0.2); color: #93c5fd;">The UI (Front-End)</span>
+            <h3 class="card-title">1. The Kitchen Faucet</h3>
+            <p style="color: var(--text-muted); font-size: 0.88rem; line-height: 1.6;">
+              The faucet is mounted on your kitchen counter. It has handles and a spout. But the faucet does NOT create water! It only controls the flow and displays water to the human being standing in front of it.
+            </p>
+            <div style="margin-top: auto; padding-top: 1rem; color: #60a5fa; font-weight: 700; font-size: 0.85rem;">
+              = Power Apps Controls (UI)
+            </div>
+          </div>
+
+          <div class="card" style="text-align: center; align-items: center; background: rgba(20, 184, 166, 0.1); border-color: var(--color-primary-light);">
+            <div style="width: 64px; height: 64px; border-radius: 50%; background: rgba(20, 184, 166, 0.2); border: 1px solid var(--color-primary-light); display: flex; align-items: center; justify-content: center; font-size: 2rem; color: #5eead4; margin-bottom: 1rem;">
+              &#128295;
+            </div>
+            <span class="card-badge" style="background: rgba(20, 184, 166, 0.25); color: #5eead4;">The Connection (Bridge)</span>
+            <h3 class="card-title">2. The Copper Pipe</h3>
+            <p style="color: var(--text-main); font-size: 0.88rem; line-height: 1.6;">
+              Without a pipe connecting the faucet to the water main, turning the handle produces nothing but air! The copper pipe carries the liquid back and forth across distance, pressure, and valves.
+            </p>
+            <div style="margin-top: auto; padding-top: 1rem; color: #5eead4; font-weight: 700; font-size: 0.85rem;">
+              = SharePoint Connector (Today!)
+            </div>
+          </div>
+
+          <div class="card" style="text-align: center; align-items: center;">
+            <div style="width: 64px; height: 64px; border-radius: 50%; background: rgba(16, 185, 129, 0.15); border: 1px solid #10b981; display: flex; align-items: center; justify-content: center; font-size: 2rem; color: #86efac; margin-bottom: 1rem;">
+              &#127970;
+            </div>
+            <span class="card-badge" style="background: rgba(16, 185, 129, 0.2); color: #86efac;">The Storage (Back-End)</span>
+            <h3 class="card-title">3. The City Reservoir</h3>
+            <p style="color: var(--text-muted); font-size: 0.88rem; line-height: 1.6;">
+              Miles away, millions of gallons of water are secured, filtered, and pressurized in a reservoir. Even if someone smashes your kitchen faucet with a hammer, the water reservoir remains completely safe.
+            </p>
+            <div style="margin-top: auto; padding-top: 1rem; color: #86efac; font-weight: 700; font-size: 0.85rem;">
+              = SharePoint List (Day 19)
+            </div>
+          </div>
+        </div>
+
+        <aside class="trainer-notes" style="display: none !important;">
+          <h4>Trainer Speaking Script &amp; Pedagogical Cues:</h4>
+          <p><strong>Physical Demonstration:</strong> Mime turning a kitchen faucet handle with no pipe attached. Ask learners: 'What happens if you turn the handle?' Nothing! That is exactly what happens when you press a Submit button before connecting SharePoint.</p>
+        </aside>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 7: PLAIN-LANGUAGE CONCEPTS: DATA SOURCE & CONNECTOR
+           ==================================================================== -->
+      <section class="slide" id="slide-7" data-slide-index="6" data-title="Plain-Language Concepts: Data Source & Connector" data-segment="Part 3: Core Concepts">
+        <header class="slide-header">
+          <div class="section-tag">Part 3 &bull; Technical Vocabulary De-Mystified</div>
+          <h2>Plain-Language Concepts: What is a Data Source vs. Connector?</h2>
+          <p class="subtitle">Never learn a technical term as an isolated definition. Understand their roles in the system.</p>
+        </header>
+
+        <div class="slide-content grid-2">
+          <div class="card">
+            <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.75rem;">
+              <span class="card-badge" style="background: rgba(6, 182, 212, 0.2); color: #67e8f9; margin-bottom: 0;">Architecture Term</span>
+              <h3 class="card-title" style="margin-bottom: 0;">What is a "Connector"?</h3>
+            </div>
+            <p style="color: var(--text-muted); font-size: 0.9rem; line-height: 1.6; margin-bottom: 1rem;">
+              A <strong>Connector</strong> is a pre-built software translation bridge created by Microsoft. It knows how to speak two languages: Power Apps formulas on the inside, and REST API cloud requests on the outside.
+            </p>
+            <div style="background: rgba(6, 182, 212, 0.08); border-left: 3px solid #06b6d4; padding: 0.85rem; border-radius: 0.4rem;">
+              <strong style="color: #67e8f9; font-size: 0.85rem;">Why Microsoft Built It:</strong>
+              <p style="color: var(--text-muted); font-size: 0.82rem; margin-top: 0.2rem;">
+                Without connectors, you would need to write 500 lines of complex C# or JavaScript network code, parse JSON packets, and handle SSL handshake cryptography. The Connector turns all of that into 1 click.
+              </p>
+            </div>
+          </div>
+
+          <div class="card">
+            <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.75rem;">
+              <span class="card-badge" style="background: rgba(20, 184, 166, 0.2); color: #5eead4; margin-bottom: 0;">Architecture Term</span>
+              <h3 class="card-title" style="margin-bottom: 0;">What is a "Data Source"?</h3>
+            </div>
+            <p style="color: var(--text-muted); font-size: 0.9rem; line-height: 1.6; margin-bottom: 1rem;">
+              A <strong>Data Source</strong> is the specific instance of business storage you attach to your app. While "SharePoint" is the connector type, <code>Apex_Maintenance_Requests</code> is your specific Data Source.
+            </p>
+            <div style="background: rgba(20, 184, 166, 0.08); border-left: 3px solid var(--color-primary-light); padding: 0.85rem; border-radius: 0.4rem;">
+              <strong style="color: #5eead4; font-size: 0.85rem;">How Power Fx Sees It:</strong>
+              <p style="color: var(--text-muted); font-size: 0.82rem; margin-top: 0.2rem;">
+                The moment you add a Data Source, its name becomes a living keyword in Power Fx. You can type <code>Apex_Maintenance_Requests</code> into any formula just like you type an Excel table name!
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <aside class="trainer-notes" style="display: none !important;">
+          <h4>Trainer Speaking Script &amp; Pedagogical Cues:</h4>
+          <p><strong>Analogy Extension:</strong> "Think of the Connector as the electrical power cord, and the Data Source as the specific wall outlet in your living room. The cord allows power to flow, but it must be plugged into an exact outlet."</p>
+        </aside>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 8: THE ARCHITECTURAL DATA BRIDGE PIPELINE DIAGRAM
+           ==================================================================== -->
+      <section class="slide" id="slide-8" data-slide-index="7" data-title="The Architectural Data Bridge Diagram" data-segment="Part 3: Visual Pipeline">
+        <header class="slide-header">
+          <div class="section-tag">Part 3 &bull; Cloud Architecture Diagram</div>
+          <h2>The Architectural Data Bridge: End-to-End Pipeline</h2>
+          <p class="subtitle">How a user tap travels from the glass touchscreen to the Microsoft datacenter and back.</p>
+        </header>
+
+        <div class="slide-content">
+          <div class="pipeline-stage">
+            <!-- Node 1 -->
+            <div class="pipeline-node">
+              <div class="pipeline-icon icon-app">&#128241;</div>
+              <strong style="color: #93c5fd; font-size: 0.95rem;">Power Apps Studio</strong>
+              <span style="font-size: 0.75rem; color: var(--text-muted); margin-top: 0.25rem;">Front-End Canvas UI</span>
+              <p style="font-size: 0.8rem; color: #cbd5e1; margin-top: 0.5rem; line-height: 1.4;">
+                Controls, Buttons, TextInputs &amp; Power Fx formulas running locally on the tablet browser.
+              </p>
+            </div>
+
+            <div class="pipeline-arrow">&rarr;</div>
+
+            <!-- Node 2 -->
+            <div class="pipeline-node">
+              <div class="pipeline-icon icon-connector">&#128260;</div>
+              <strong style="color: #67e8f9; font-size: 0.95rem;">SharePoint Connector</strong>
+              <span style="font-size: 0.75rem; color: var(--text-muted); margin-top: 0.25rem;">Translation Layer</span>
+              <p style="font-size: 0.8rem; color: #cbd5e1; margin-top: 0.5rem; line-height: 1.4;">
+                Converts Power Fx formulas into secure HTTPS REST API calls formatted for Microsoft 365.
+              </p>
+            </div>
+
+            <div class="pipeline-arrow">&rarr;</div>
+
+            <!-- Node 3 -->
+            <div class="pipeline-node">
+              <div class="pipeline-icon icon-auth">&#128274;</div>
+              <strong style="color: #c084fc; font-size: 0.95rem;">Microsoft Entra ID</strong>
+              <span style="font-size: 0.75rem; color: var(--text-muted); margin-top: 0.25rem;">Security &amp; SSO Gate</span>
+              <p style="font-size: 0.8rem; color: #cbd5e1; margin-top: 0.5rem; line-height: 1.4;">
+                Validates the signed-in user's corporate credentials and checks permissions before granting entry.
+              </p>
+            </div>
+
+            <div class="pipeline-arrow">&rarr;</div>
+
+            <!-- Node 4 -->
+            <div class="pipeline-node">
+              <div class="pipeline-icon icon-sharepoint">&#128196;</div>
+              <strong style="color: #5eead4; font-size: 0.95rem;">Apex Maintenance List</strong>
+              <span style="font-size: 0.75rem; color: var(--text-muted); margin-top: 0.25rem;">SharePoint Online Table</span>
+              <p style="font-size: 0.8rem; color: #cbd5e1; margin-top: 0.5rem; line-height: 1.4;">
+                Structured cloud rows permanently written into datacenter disk with versioning and backups.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <aside class="trainer-notes" style="display: none !important;">
+          <h4>Trainer Speaking Script &amp; Pedagogical Cues:</h4>
+          <p><strong>Trace the Flow:</strong> Walk learners left-to-right. Trace what happens when Davi presses Submit: Tablet -> Connector converts -> Entra ID checks 'Is Davi allowed?' -> SharePoint commits row to disk.</p>
+        </aside>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 9: CONNECTORS & SINGLE SIGN-ON (ENTRA ID)
+           ==================================================================== -->
+      <section class="slide" id="slide-9" data-slide-index="8" data-title="Connectors & Single Sign-On (SSO)" data-segment="Part 3: Security & Identity">
+        <header class="slide-header">
+          <div class="section-tag">Part 3 &bull; Enterprise Security &amp; Identity</div>
+          <h2>Connectors &amp; Single Sign-On: Microsoft Entra ID</h2>
+          <p class="subtitle">Why you never need to hardcode database passwords inside Power Apps.</p>
+        </header>
+
+        <div class="slide-content grid-2">
+          <div class="card">
+            <span class="card-badge" style="background: rgba(139, 92, 246, 0.2); color: #c084fc;">Zero Password Prompts</span>
+            <h3 class="card-title">Single Sign-On (SSO) In Action</h3>
+            <p style="color: var(--text-muted); font-size: 0.9rem; line-height: 1.6; margin-bottom: 1rem;">
+              When Davi logs into his Windows tablet or opens Power Apps in the Edge browser, he has already authenticated with his corporate Microsoft 365 account.
+            </p>
+            <p style="color: var(--text-muted); font-size: 0.9rem; line-height: 1.6;">
+              When the SharePoint connector activates, it passes an encrypted security token behind the scenes. Power Apps never asks Davi: <em>"Enter your database username and password."</em> The identity travels seamlessly through the Microsoft Entra ID trust boundary.
+            </p>
+          </div>
+
+          <div class="card">
+            <span class="card-badge" style="background: rgba(20, 184, 166, 0.2); color: #5eead4;">Enterprise Security Principle</span>
+            <h3 class="card-title">Whose Permissions Apply?</h3>
+            <div style="background: rgba(20, 184, 166, 0.08); border-left: 3px solid var(--color-primary-light); padding: 1rem; border-radius: 0.5rem; margin-bottom: 1rem;">
+              <strong style="color: #5eead4; font-size: 0.95rem;">Rule of Inherited Permissions:</strong>
+              <p style="color: #cbd5e1; font-size: 0.85rem; margin-top: 0.35rem; line-height: 1.5;">
+                Power Apps NEVER bypasses SharePoint permissions! If an operator does not have Read permission to the SharePoint list, the app will refuse to display records for that operator.
+              </p>
+            </div>
+            <p style="color: var(--text-muted); font-size: 0.85rem; line-height: 1.5;">
+              As a developer, this protects you. You don't have to write custom security firewall code; SharePoint's native security guards the door automatically.
+            </p>
+          </div>
+        </div>
+
+        <aside class="trainer-notes" style="display: none !important;">
+          <h4>Trainer Speaking Script &amp; Pedagogical Cues:</h4>
+          <p><strong>Safety Clarification:</strong> Make sure learners understand: 'If you build an app that connects to Payroll, normal employees cannot see CEO salaries unless they already have permission in SharePoint!'</p>
+        </aside>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 10: STEP-BY-STEP ANATOMY OF CONNECTING DATA IN STUDIO
+           ==================================================================== -->
+      <section class="slide" id="slide-10" data-slide-index="9" data-title="Step-by-Step Anatomy of Connecting Data" data-segment="Part 4: Studio Implementation">
+        <header class="slide-header">
+          <div class="section-tag">Part 4 &bull; Studio Workflow</div>
+          <h2>Step-by-Step Anatomy of Connecting Data in Studio</h2>
+          <p class="subtitle">The exact 5-click procedure to attach any SharePoint list to your Power App.</p>
+        </header>
+
+        <div class="slide-content grid-4">
+          <div class="card">
+            <span class="obj-num" style="margin-bottom: 0.75rem;">1</span>
+            <h4 style="color: #f8fafc; font-size: 1rem;">Open Left Rail</h4>
+            <p style="color: var(--text-muted); font-size: 0.85rem; line-height: 1.5; margin-top: 0.35rem;">
+              On the far left navigation bar of Power Apps Studio, click the <strong>Data cylinder icon</strong> (three stacked discs).
+            </p>
+            <div style="margin-top: auto; padding-top: 0.75rem; font-family: var(--font-code); font-size: 0.75rem; color: #5eead4;">
+              Icon: Cylinder &equiv;
+            </div>
+          </div>
+
+          <div class="card">
+            <span class="obj-num" style="margin-bottom: 0.75rem;">2</span>
+            <h4 style="color: #f8fafc; font-size: 1rem;">Click "Add data"</h4>
+            <p style="color: var(--text-muted); font-size: 0.85rem; line-height: 1.5; margin-top: 0.35rem;">
+              Click the purple/blue <strong>+ Add data</strong> button at the top of the Data panel to open the connector catalog.
+            </p>
+            <div style="margin-top: auto; padding-top: 0.75rem; font-family: var(--font-code); font-size: 0.75rem; color: #5eead4;">
+              Search: "SharePoint"
+            </div>
+          </div>
+
+          <div class="card">
+            <span class="obj-num" style="margin-bottom: 0.75rem;">3</span>
+            <h4 style="color: #f8fafc; font-size: 1rem;">Pick Team Site</h4>
+            <p style="color: var(--text-muted); font-size: 0.85rem; line-height: 1.5; margin-top: 0.35rem;">
+              Select the exact SharePoint Team Site (e.g. <code>Apex Manufacturing Plant</code>) from Recent Sites or paste its URL.
+            </p>
+            <div style="margin-top: auto; padding-top: 0.75rem; font-family: var(--font-code); font-size: 0.75rem; color: #5eead4;">
+              Site: Apex Plant 1
+            </div>
+          </div>
+
+          <div class="card">
+            <span class="obj-num" style="margin-bottom: 0.75rem;">4</span>
+            <h4 style="color: #f8fafc; font-size: 1rem;">Check List &amp; Connect</h4>
+            <p style="color: var(--text-muted); font-size: 0.85rem; line-height: 1.5; margin-top: 0.35rem;">
+              Find <code>Apex_Maintenance_Requests</code> in the checklist, tick the checkbox, and click the blue <strong>Connect</strong> button.
+            </p>
+            <div style="margin-top: auto; padding-top: 0.75rem; font-family: var(--font-code); font-size: 0.75rem; color: #5eead4;">
+              Status: Connected &check;
+            </div>
+          </div>
+        </div>
+
+        <aside class="trainer-notes" style="display: none !important;">
+          <h4>Trainer Speaking Script &amp; Pedagogical Cues:</h4>
+          <p><strong>Common Slip:</strong> Point out that learners sometimes click the wrong site if their company has 'Apex Test' and 'Apex Production'. Always verify the site title before picking the list.</p>
+        </aside>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 11: WHAT CHANGES IN STUDIO ONCE CONNECTED
+           ==================================================================== -->
+      <section class="slide" id="slide-11" data-slide-index="10" data-title="What Changes in Studio Once Connected" data-segment="Part 4: Studio Feedback & Intelligence">
+        <header class="slide-header">
+          <div class="section-tag">Part 4 &bull; Studio Intelligence</div>
+          <h2>What Changes in Studio Once Connected: IntelliSense</h2>
+          <p class="subtitle">How Power Fx immediately absorbs your SharePoint schema into its autocomplete brain.</p>
+        </header>
+
+        <div class="slide-content grid-2">
+          <div class="card">
+            <span class="card-badge" style="background: rgba(59, 130, 246, 0.2); color: #93c5fd;">Instant Formula Intelligence</span>
+            <h3 class="card-title">Power Fx Autocomplete (IntelliSense)</h3>
+            <p style="color: var(--text-muted); font-size: 0.9rem; line-height: 1.6; margin-bottom: 1rem;">
+              The exact millisecond the connection succeeds, Power Apps downloads the metadata schema. When you click any formula bar and type <code>Ap...</code>, Power Fx suggests:
+            </p>
+            <div style="background: #090e17; border: 1px solid var(--border-subtle); border-radius: 0.5rem; padding: 1rem; font-family: var(--font-code); font-size: 0.95rem; color: #60a5fa; margin-bottom: 1rem;">
+              <span style="color: #94a3b8;">// Autocomplete dropdown appears:</span><br>
+              &bull; <strong>Apex_Maintenance_Requests</strong> &nbsp;<span style="color: #10b981; font-size: 0.8rem;">[SharePoint Table]</span>
+            </div>
+            <p style="color: var(--text-muted); font-size: 0.85rem;">
+              Furthermore, typing <code>Apex_Maintenance_Requests.</code> will immediately reveal every single column name: <code>Title</code>, <code>MachineID</code>, <code>Priority</code>, <code>Status</code>, and <code>LoggedDate</code>!
+            </p>
+          </div>
+
+          <div class="card">
+            <span class="card-badge" style="background: rgba(20, 184, 166, 0.2); color: #5eead4;">Studio Verification Signposts</span>
+            <h3 class="card-title">2 Visual Clues That Confirm Success</h3>
+            <div style="display: flex; flex-direction: column; gap: 1rem; margin-top: 0.5rem;">
+              <div style="display: flex; gap: 0.75rem; align-items: flex-start;">
+                <div style="width: 28px; height: 28px; border-radius: 50%; background: rgba(20, 184, 166, 0.2); color: #5eead4; display: flex; align-items: center; justify-content: center; font-weight: bold; flex-shrink: 0;">1</div>
+                <div>
+                  <strong style="color: var(--text-main); font-size: 0.9rem;">Listed in the Data Tree:</strong>
+                  <p style="color: var(--text-muted); font-size: 0.82rem;">Under the left rail Data tab, <code>Apex_Maintenance_Requests</code> appears with a green SharePoint emblem.</p>
+                </div>
+              </div>
+
+              <div style="display: flex; gap: 0.75rem; align-items: flex-start;">
+                <div style="width: 28px; height: 28px; border-radius: 50%; background: rgba(20, 184, 166, 0.2); color: #5eead4; display: flex; align-items: center; justify-content: center; font-weight: bold; flex-shrink: 0;">2</div>
+                <div>
+                  <strong style="color: var(--text-main); font-size: 0.9rem;">"View data" Context Action:</strong>
+                  <p style="color: var(--text-muted); font-size: 0.82rem;">Clicking the three dots (...) next to the data source gives you <strong>View data</strong>, allowing you to preview real live rows directly inside Studio without opening SharePoint.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <aside class="trainer-notes" style="display: none !important;">
+          <h4>Trainer Speaking Script &amp; Pedagogical Cues:</h4>
+          <p><strong>Live Wow-Moment:</strong> Show learners how IntelliSense autocompletes column names. 'You don't need to memorize column spelling. Power Apps read your SharePoint list and memorized it for you!'</p>
+        </aside>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 12: ARCHITECTURAL SCHEMA VERIFICATION CHECKLIST
+           ==================================================================== -->
+      <section class="slide" id="slide-12" data-slide-index="11" data-title="Architectural Schema Verification Checklist" data-segment="Part 4: Data Governance & Schema">
+        <header class="slide-header">
+          <div class="section-tag">Part 4 &bull; Data Governance</div>
+          <h2>Architectural Schema Verification Checklist</h2>
+          <p class="subtitle">Validating that every column type translated faithfully from SharePoint into Power Fx.</p>
+        </header>
+
+        <div class="slide-content grid-4">
+          <div class="card">
+            <span class="card-badge" style="background: rgba(59, 130, 246, 0.2); color: #93c5fd;">Text Field</span>
+            <h4 style="color: #f8fafc; font-size: 1rem;">Title</h4>
+            <p style="font-size: 0.82rem; color: var(--text-muted); margin-top: 0.25rem;">
+              <strong>SharePoint:</strong> Single line of text<br>
+              <strong>Power Fx Type:</strong> Text (String)<br>
+              <strong>Purpose:</strong> Incident Summary
+            </p>
+            <div style="margin-top: auto; padding-top: 0.5rem; color: #10b981; font-size: 0.78rem;">&check; Mapped 1-to-1</div>
+          </div>
+
+          <div class="card">
+            <span class="card-badge" style="background: rgba(20, 184, 166, 0.2); color: #5eead4;">Choice Field</span>
+            <h4 style="color: #f8fafc; font-size: 1rem;">Priority</h4>
+            <p style="font-size: 0.82rem; color: var(--text-muted); margin-top: 0.25rem;">
+              <strong>SharePoint:</strong> Choice (Low/Med/High)<br>
+              <strong>Power Fx Type:</strong> Record / OptionSet<br>
+              <strong>Access:</strong> <code>Priority.Value</code>
+            </p>
+            <div style="margin-top: auto; padding-top: 0.5rem; color: #10b981; font-size: 0.78rem;">&check; Requires .Value</div>
+          </div>
+
+          <div class="card">
+            <span class="card-badge" style="background: rgba(245, 158, 11, 0.2); color: #fcd34d;">Date Field</span>
+            <h4 style="color: #f8fafc; font-size: 1rem;">LoggedDate</h4>
+            <p style="font-size: 0.82rem; color: var(--text-muted); margin-top: 0.25rem;">
+              <strong>SharePoint:</strong> Date and Time<br>
+              <strong>Power Fx Type:</strong> DateTime<br>
+              <strong>Format:</strong> ISO 8601 Cloud standard
+            </p>
+            <div style="margin-top: auto; padding-top: 0.5rem; color: #10b981; font-size: 0.78rem;">&check; Auto-Localized</div>
+          </div>
+
+          <div class="card">
+            <span class="card-badge" style="background: rgba(139, 92, 246, 0.2); color: #c084fc;">Person Field</span>
+            <h4 style="color: #f8fafc; font-size: 1rem;">Technician</h4>
+            <p style="font-size: 0.82rem; color: var(--text-muted); margin-top: 0.25rem;">
+              <strong>SharePoint:</strong> Person or Group<br>
+              <strong>Power Fx Type:</strong> Complex Record<br>
+              <strong>Sub-properties:</strong> DisplayName, Email
+            </p>
+            <div style="margin-top: auto; padding-top: 0.5rem; color: #10b981; font-size: 0.78rem;">&check; Linked to Entra ID</div>
+          </div>
+        </div>
+
+        <aside class="trainer-notes" style="display: none !important;">
+          <h4>Trainer Speaking Script &amp; Pedagogical Cues:</h4>
+          <p><strong>Crucial Rule on Choice Fields:</strong> Remind students of Day 19: Choice columns in SharePoint return a record in Power Fx. To display text on screen, you must write <code>.Value</code>.</p>
+        </aside>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 13: INTERACTIVE WIDGET 1: STUDIO DATA BRIDGE SIMULATOR
+           ==================================================================== -->
+      <section class="slide" id="slide-13" data-slide-index="12" data-title="Studio Data Bridge Simulator" data-segment="Part 4: Interactive Simulation">
+        <header class="slide-header">
+          <div class="section-tag">Part 4 &bull; Hands-On Simulator</div>
+          <h2>Interactive Studio Data Bridge Simulator</h2>
+          <p class="subtitle">Experience connecting SharePoint live inside this simulated Power Apps Studio interface.</p>
+        </header>
+
+        <div class="slide-content widget-stage">
+          <!-- Left Control Panel -->
+          <div class="studio-chrome">
+            <div class="studio-chrome-header">
+              <span>Studio Navigation Rail</span>
+              <span>Power Apps v3.24</span>
+            </div>
+            <div class="studio-chrome-body">
+              <div class="studio-nav-item" onclick="selectSimTab('tree')">&#128193; Tree View</div>
+              <div class="studio-nav-item" onclick="selectSimTab('insert')">&#10133; Insert Controls</div>
+              <div class="studio-nav-item active" id="sim-data-nav" onclick="selectSimTab('data')">&#128451; Data Sources</div>
+              <div class="studio-nav-item" onclick="selectSimTab('media')">&#127912; Media &amp; Assets</div>
+              
+              <div style="margin-top: 1.5rem; border-top: 1px solid var(--border-subtle); padding-top: 1rem;">
+                <label style="font-size: 0.78rem; color: var(--text-muted); text-transform: uppercase;">Select SharePoint Site:</label>
+                <select id="sim-site-select" style="width: 100%; background: #0c1524; color: #f8fafc; border: 1px solid var(--border-subtle); padding: 0.5rem; border-radius: 0.4rem; margin-top: 0.35rem; font-size: 0.85rem;">
+                  <option value="apex">Apex Manufacturing Plant 1</option>
+                  <option value="hq">Apex Global Corporate HQ</option>
+                  <option value="test">Sandbox Developer Zone</option>
+                </select>
+
+                <div style="margin-top: 1rem;">
+                  <label style="display: flex; align-items: center; gap: 0.5rem; font-size: 0.85rem; color: #cbd5e1; cursor: pointer;">
+                    <input type="checkbox" id="sim-list-check" checked>
+                    <span>Apex_Maintenance_Requests</span>
+                  </label>
+                </div>
+
+                <button class="sim-btn-connect" onclick="runSimConnection()">
+                  <span>Establish Data Bridge</span> &rarr;
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right Display & Live Telemetry -->
+          <div class="card" style="background: rgba(12, 19, 31, 0.95); justify-content: space-between;">
+            <div>
+              <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem;">
+                <span class="card-badge" id="sim-status-badge" style="background: rgba(20, 184, 166, 0.2); color: #5eead4;">Status: Ready to Connect</span>
+                <span style="font-family: var(--font-code); font-size: 0.75rem; color: var(--text-dim);">Latency: 42ms</span>
+              </div>
+              <h3 style="color: #f8fafc; font-size: 1.15rem; margin-bottom: 0.5rem;" id="sim-stage-title">Live Connection Telemetry</h3>
+              <p style="color: var(--text-muted); font-size: 0.88rem; line-height: 1.6; margin-bottom: 1rem;" id="sim-stage-desc">
+                Click <strong>"Establish Data Bridge"</strong> on the left to simulate authentication, REST API handshaking, and schema binding.
+              </p>
+            </div>
+
+            <div class="diag-console" id="sim-diag-log">
+              &gt; Power Apps Studio runtime initialized.<br>
+              &gt; Microsoft Entra ID token: ACTIVE (user: davi@apexplastics.com)<br>
+              &gt; Awaiting data source binding command...
+            </div>
+
+            <div style="display: flex; gap: 1rem; margin-top: 1rem; align-items: center;">
+              <span style="font-size: 0.82rem; color: var(--text-muted);">IntelliSense Autocomplete Test:</span>
+              <code style="background: #090e17; padding: 0.35rem 0.75rem; border-radius: 0.4rem; color: #5eead4;" id="sim-code-preview">
+                Apex_Maintenance_Requests.Title
+              </code>
+            </div>
+          </div>
+        </div>
+
+        <aside class="trainer-notes" style="display: none !important;">
+          <h4>Trainer Speaking Script &amp; Pedagogical Cues:</h4>
+          <p><strong>Classroom Interaction:</strong> Have a student click 'Establish Data Bridge'. Watch the diagnostic console log each phase: Token validation -> REST call -> Metadata mapping -> IntelliSense active.</p>
+        </aside>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 14: TRAINER DEMONSTRATION SCRIPT
+           ==================================================================== -->
+      <section class="slide" id="slide-14" data-slide-index="13" data-title="Trainer Demonstration: Live Click-by-Click" data-segment="Part 5: Trainer Live Demonstration">
+        <header class="slide-header">
+          <div class="section-tag">Part 5 &bull; Live Trainer Demonstration</div>
+          <h2>Trainer Demonstration: Live Click-by-Click Script</h2>
+          <p class="subtitle">Observe the exact screen actions, vocal cues, and intentional pitfalls to avoid.</p>
+        </header>
+
+        <div class="slide-content grid-3">
+          <div class="card">
+            <span class="card-badge" style="background: rgba(59, 130, 246, 0.2); color: #93c5fd;">Phase 1 &bull; 0-5 mins</span>
+            <h3 class="card-title">1. The Left Rail Discovery</h3>
+            <p style="color: var(--text-muted); font-size: 0.85rem; line-height: 1.6;">
+              <strong>Trainer Action:</strong> Move mouse to the left vertical sidebar. Hover over the cylinder icon until the tooltip reads "Data".<br><br>
+              <strong>Vocal Script:</strong> <em>"Notice this cylinder. In computer science, a cylinder has symbolized a database for 50 years. Click it to open your app's data cockpit."</em>
+            </p>
+          </div>
+
+          <div class="card">
+            <span class="card-badge" style="background: rgba(20, 184, 166, 0.2); color: #5eead4;">Phase 2 &bull; 5-10 mins</span>
+            <h3 class="card-title">2. Picking the Connector &amp; Site</h3>
+            <p style="color: var(--text-muted); font-size: 0.85rem; line-height: 1.6;">
+              <strong>Trainer Action:</strong> Click "+ Add data". Type "SharePoint" in the search box. Select the green SharePoint connector. Pick "Apex Manufacturing Plant 1".<br><br>
+              <strong>Vocal Script:</strong> <em>"Notice there are 1,000 connectors here: SAP, Salesforce, SQL. We choose SharePoint because that is where our list lives."</em>
+            </p>
+          </div>
+
+          <div class="card">
+            <span class="card-badge" style="background: rgba(16, 185, 129, 0.2); color: #86efac;">Phase 3 &bull; 10-15 mins</span>
+            <h3 class="card-title">3. Verification &amp; View Data</h3>
+            <p style="color: var(--text-muted); font-size: 0.85rem; line-height: 1.6;">
+              <strong>Trainer Action:</strong> Tick <code>Apex_Maintenance_Requests</code>. Click Connect. Click the three dots (...) and choose "View data".<br><br>
+              <strong>Vocal Script:</strong> <em>"Look at that! The three sample rows Davi entered yesterday in SharePoint are appearing right inside our studio canvas!"</em>
+            </p>
+          </div>
+        </div>
+
+        <aside class="trainer-notes" style="display: none !important;">
+          <h4>Trainer Speaking Script &amp; Pedagogical Cues:</h4>
+          <p><strong>Intentional Error Demo:</strong> Show learners what happens if you type the list name with a spelling mistake in the formula bar. It turns red! Then show how typing the exact name turns it green.</p>
+        </aside>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 15: GUIDED PRACTICE: CONNECTING APEX_MAINTENANCE_REQUESTS
+           ==================================================================== -->
+      <section class="slide" id="slide-15" data-slide-index="14" data-title="Guided Practice: Step-by-Step Exercise" data-segment="Part 5: Guided Student Practice">
+        <header class="slide-header">
+          <div class="section-tag">Part 5 &bull; Hands-On Student Lab</div>
+          <h2>Guided Practice: Connecting <code>Apex_Maintenance_Requests</code></h2>
+          <p class="subtitle">Open your own browser tab and follow these 4 structured milestones right now.</p>
+        </header>
+
+        <div class="slide-content grid-2">
+          <div class="card">
+            <h3 class="card-title">Milestone Instructions</h3>
+            <div class="objective-item">
+              <span class="obj-num">A</span>
+              <div>
+                <strong>Navigate to Data Tab:</strong>
+                <p>Click the Data Cylinder on the left rail of your Power Apps Studio window.</p>
+              </div>
+            </div>
+            <div class="objective-item">
+              <span class="obj-num">B</span>
+              <div>
+                <strong>Add SharePoint Connection:</strong>
+                <p>Click <code>+ Add data</code> &rarr; search <code>SharePoint</code> &rarr; click the connector.</p>
+              </div>
+            </div>
+            <div class="objective-item">
+              <span class="obj-num">C</span>
+              <div>
+                <strong>Select Your Team Site:</strong>
+                <p>Select your assigned plant team site from the list of available sites.</p>
+              </div>
+            </div>
+            <div class="objective-item">
+              <span class="obj-num">D</span>
+              <div>
+                <strong>Connect Your Table:</strong>
+                <p>Check <code>Apex_Maintenance_Requests</code> and click <strong>Connect</strong>.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="card" style="border-left: 3px solid var(--color-primary-light);">
+            <h3 class="card-title">Student Success Checklist</h3>
+            <div style="display: flex; flex-direction: column; gap: 0.85rem; margin-top: 0.5rem;">
+              <label style="display: flex; align-items: center; gap: 0.65rem; font-size: 0.9rem; color: #e2e8f0;">
+                <input type="checkbox" style="width: 18px; height: 18px;">
+                <span>Data panel displays green SharePoint icon next to the list name</span>
+              </label>
+              <label style="display: flex; align-items: center; gap: 0.65rem; font-size: 0.9rem; color: #e2e8f0;">
+                <input type="checkbox" style="width: 18px; height: 18px;">
+                <span>No yellow exclamation mark (!) appears beside the connection</span>
+              </label>
+              <label style="display: flex; align-items: center; gap: 0.65rem; font-size: 0.9rem; color: #e2e8f0;">
+                <input type="checkbox" style="width: 18px; height: 18px;">
+                <span>Clicking (...) &rarr; "View data" displays your 3 sample records</span>
+              </label>
+              <label style="display: flex; align-items: center; gap: 0.65rem; font-size: 0.9rem; color: #e2e8f0;">
+                <input type="checkbox" style="width: 18px; height: 18px;">
+                <span>Typing <code>Apex</code> into formula bar suggests the full table name</span>
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <aside class="trainer-notes" style="display: none !important;">
+          <h4>Trainer Speaking Script &amp; Pedagogical Cues:</h4>
+          <p><strong>Circulate Room:</strong> Walk the room or check breakout screens. Look for students who accidentally selected the root company site instead of Plant 1 site.</p>
+        </aside>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 16: INTERACTIVE WIDGET 2: LIVE CONNECTION DIAGNOSTICS & PING TESTER
+           ==================================================================== -->
+      <section class="slide" id="slide-16" data-slide-index="15" data-title="Connection Diagnostics & Ping Tester" data-segment="Part 6: Diagnostics & Troubleshooting">
+        <header class="slide-header">
+          <div class="section-tag">Part 6 &bull; Diagnostics Lab</div>
+          <h2>Interactive Connection Diagnostics &amp; Ping Tester</h2>
+          <p class="subtitle">Troubleshoot real-world cloud connection glitches, schema changes, and refresh cycles.</p>
+        </header>
+
+        <div class="slide-content widget-stage">
+          <!-- Control Column -->
+          <div class="studio-chrome">
+            <div class="studio-chrome-header">
+              <span>Diagnostic Controls</span>
+              <span>Cloud Ping Tool</span>
+            </div>
+            <div class="studio-chrome-body">
+              <button class="hud-btn" style="width: 100%; margin-bottom: 0.75rem; justify-content: flex-start;" onclick="runDiagAction('ping')">
+                &#128225; Ping SharePoint API (Latency Test)
+              </button>
+              <button class="hud-btn" style="width: 100%; margin-bottom: 0.75rem; justify-content: flex-start;" onclick="runDiagAction('schema')">
+                &#128196; Check Column Schema Sync
+              </button>
+              <button class="hud-btn" style="width: 100%; margin-bottom: 0.75rem; justify-content: flex-start;" onclick="runDiagAction('refresh')">
+                &#128260; Force Data Source Refresh
+              </button>
+              <button class="hud-btn" style="width: 100%; margin-bottom: 0.75rem; justify-content: flex-start; color: #fca5a5;" onclick="runDiagAction('simulate_break')">
+                &#9888; Simulate Broken Column Bug
+              </button>
+
+              <div style="margin-top: auto; padding-top: 1rem; border-top: 1px solid var(--border-subtle);">
+                <span style="font-size: 0.75rem; color: var(--text-muted);">Current Active Host:</span>
+                <div style="font-family: var(--font-code); font-size: 0.75rem; color: #5eead4; margin-top: 0.2rem;">
+                  apexplastics.sharepoint.com
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Output Display Column -->
+          <div class="card" style="background: rgba(12, 19, 31, 0.95); justify-content: space-between;">
+            <div>
+              <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.75rem;">
+                <span class="card-badge" id="diag-status-badge" style="background: rgba(16, 185, 129, 0.2); color: #86efac;">Health: Optimal (200 OK)</span>
+                <span style="font-family: var(--font-code); font-size: 0.78rem; color: #94a3b8;" id="diag-timestamp">Time: 14:22:04 UTC</span>
+              </div>
+              <h3 style="color: #f8fafc; font-size: 1.15rem; margin-bottom: 0.5rem;" id="diag-title">Diagnostic System Output</h3>
+              <p style="color: var(--text-muted); font-size: 0.88rem; line-height: 1.5;" id="diag-desc">
+                Select a diagnostic action on the left to test communication health between the client app and the cloud tenant.
+              </p>
+            </div>
+
+            <div class="diag-console" id="diag-output-console">
+              [SYSTEM OK] SharePoint REST endpoint reachable.<br>
+              [PING] GET /_api/web/lists/getbytitle('Apex_Maintenance_Requests') -> 38ms<br>
+              [AUTH] Bearer token valid for next 7 hours 45 minutes.<br>
+              [SCHEMA] 5 columns synced: Title, MachineID, Priority, Status, LoggedDate.
+            </div>
+
+            <div style="background: rgba(255, 255, 255, 0.04); border-radius: 0.5rem; padding: 0.75rem; font-size: 0.82rem; color: #cbd5e1;">
+              <strong>Pro-Tip:</strong> Whenever someone adds or renames a column in SharePoint, you MUST right-click the data source in Power Apps and click <strong>Refresh</strong>!
+            </div>
+          </div>
+        </div>
+
+        <aside class="trainer-notes" style="display: none !important;">
+          <h4>Trainer Speaking Script &amp; Pedagogical Cues:</h4>
+          <p><strong>Explain Refresh:</strong> 'Power Apps does not continuously poll SharePoint for schema changes. If your manager adds a new column 'Cost' during lunch, you will not see it in Power Apps until you click Refresh!'</p>
+        </aside>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 17: 5 DANGEROUS MISCONCEPTIONS VS. CLOUD REALITY
+           ==================================================================== -->
+      <section class="slide" id="slide-17" data-slide-index="16" data-title="5 Dangerous Misconceptions vs. Cloud Reality" data-segment="Part 6: Pitfalls & Misconceptions">
+        <header class="slide-header">
+          <div class="section-tag">Part 6 &bull; Debugging &amp; Reality Check</div>
+          <h2>5 Dangerous Misconceptions vs. Cloud Reality</h2>
+          <p class="subtitle">Avoid these 5 common beginner traps before they cause data corruption or app failures.</p>
+        </header>
+
+        <div class="slide-content grid-2">
+          <div class="card">
+            <div style="display: flex; flex-direction: column; gap: 0.85rem;">
+              <div style="background: rgba(239, 68, 68, 0.08); border-left: 3px solid #ef4444; padding: 0.75rem; border-radius: 0.4rem;">
+                <strong style="color: #fca5a5; font-size: 0.88rem;">Misconception 1: "Connecting imports a copy of the data into the app."</strong>
+                <p style="color: var(--text-muted); font-size: 0.82rem; margin: 0.2rem 0 0 0;">
+                  <strong>Reality:</strong> False! Connecting creates a live reference pipeline. It does NOT download the table permanently. The data remains in SharePoint.
+                </p>
+              </div>
+
+              <div style="background: rgba(239, 68, 68, 0.08); border-left: 3px solid #ef4444; padding: 0.75rem; border-radius: 0.4rem;">
+                <strong style="color: #fca5a5; font-size: 0.88rem;">Misconception 2: "If I rename a SharePoint column, Power Apps updates automatically."</strong>
+                <p style="color: var(--text-muted); font-size: 0.82rem; margin: 0.2rem 0 0 0;">
+                  <strong>Reality:</strong> Never! Power Apps caches the schema. If you change columns in SharePoint, your app formulas will break until you click <strong>Refresh</strong>.
+                </p>
+              </div>
+
+              <div style="background: rgba(239, 68, 68, 0.08); border-left: 3px solid #ef4444; padding: 0.75rem; border-radius: 0.4rem;">
+                <strong style="color: #fca5a5; font-size: 0.88rem;">Misconception 3: "Users can edit data in Power Apps even if they lack SharePoint rights."</strong>
+                <p style="color: var(--text-muted); font-size: 0.82rem; margin: 0.2rem 0 0 0;">
+                  <strong>Reality:</strong> Power Apps inherits the user's Entra ID rights. If they don't have Edit permissions in SharePoint, their submit button will throw an access error.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div style="display: flex; flex-direction: column; gap: 0.85rem;">
+              <div style="background: rgba(239, 68, 68, 0.08); border-left: 3px solid #ef4444; padding: 0.75rem; border-radius: 0.4rem;">
+                <strong style="color: #fca5a5; font-size: 0.88rem;">Misconception 4: "Connecting to SharePoint works offline automatically."</strong>
+                <p style="color: var(--text-muted); font-size: 0.82rem; margin: 0.2rem 0 0 0;">
+                  <strong>Reality:</strong> Standard connectors require active internet access to reach cloud endpoints. Offline caching requires explicit local table formulas.
+                </p>
+              </div>
+
+              <div style="background: rgba(239, 68, 68, 0.08); border-left: 3px solid #ef4444; padding: 0.75rem; border-radius: 0.4rem;">
+                <strong style="color: #fca5a5; font-size: 0.88rem;">Misconception 5: "I can connect 50 different lists without slowing down the app."</strong>
+                <p style="color: var(--text-muted); font-size: 0.82rem; margin: 0.2rem 0 0 0;">
+                  <strong>Reality:</strong> Every data source requires an API authentication handshake on app boot. Best practice: connect only the specific tables required for that screen flow.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <aside class="trainer-notes" style="display: none !important;">
+          <h4>Trainer Speaking Script &amp; Pedagogical Cues:</h4>
+          <p><strong>Emphasize Misconception 1:</strong> "Make sure students write down: 'A connector is a window to look at SharePoint, not a suitcase to take it home.'"</p>
+        </aside>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 18: KNOWLEDGE CHECK 1 OF 5 (FUNDAMENTAL ROLE)
+           ==================================================================== -->
+      <section class="slide" id="slide-18" data-slide-index="17" data-title="Knowledge Check 1: Fundamental Role of a Connector" data-segment="Part 7: Knowledge Checks">
+        <header class="slide-header">
+          <div class="section-tag">Part 7 &bull; Knowledge Check 1 of 5</div>
+          <h2>Knowledge Check: Fundamental Role of a Connector</h2>
+          <p class="subtitle">Testing your core understanding of how Power Apps communicates with external databases.</p>
+        </header>
+
+        <div class="slide-content">
+          <div class="quiz-container">
+            <div class="quiz-card">
+              <span class="card-badge" style="background: rgba(59, 130, 246, 0.2); color: #93c5fd;">Question 1 &bull; Core Definition</span>
+              <p style="color: var(--text-main); font-size: 1.05rem; line-height: 1.6; margin-top: 0.5rem;">
+                What is the primary architectural job of a <strong>Connector</strong> in Microsoft Power Apps?
+              </p>
+
+              <div class="quiz-options">
+                <button class="quiz-option-btn" onclick="handleQuizAnswer(1, 'A', false, this)">
+                  <strong>A.</strong> <span>It permanently copies all database rows into the tablet's local storage</span>
+                </button>
+                <button class="quiz-option-btn" onclick="handleQuizAnswer(1, 'B', true, this)">
+                  <strong>B.</strong> <span>It acts as a secure translation bridge between Power Fx formulas and cloud REST APIs</span>
+                </button>
+                <button class="quiz-option-btn" onclick="handleQuizAnswer(1, 'C', false, this)">
+                  <strong>C.</strong> <span>It automatically creates new columns whenever a user types into a text input</span>
+                </button>
+                <button class="quiz-option-btn" onclick="handleQuizAnswer(1, 'D', false, this)">
+                  <strong>D.</strong> <span>It replaces the need for Microsoft Entra ID authentication</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- Dual-State Inspector Card: NEVER EMPTY / NEVER BLANK -->
+            <div class="quiz-inspector-card" id="quiz-feedback-1">
+              <div class="feedback-placeholder">
+                <div style="width: 52px; height: 52px; border-radius: 50%; background: rgba(20, 184, 166, 0.15); border: 1px solid rgba(20, 184, 166, 0.35); display: flex; align-items: center; justify-content: center; margin: 0 auto 0.85rem auto; font-size: 1.5rem; color: #5eead4;">
+                  &quest;
+                </div>
+                <span class="card-badge" style="background: rgba(20, 184, 166, 0.2); color: #5eead4; margin-bottom: 0.65rem;">Awaiting Answer Selection</span>
+                <h4 style="color: #f8fafc; font-size: 1.05rem; margin-bottom: 0.5rem;">Live Architecture Inspector</h4>
+                <p style="color: var(--text-muted); font-size: 0.88rem; line-height: 1.6; max-width: 380px; margin: 0 auto;">
+                  Select an option on the left (A, B, C, or D) to submit your answer and unlock the system architecture rationale.
+                </p>
+              </div>
+              <div class="feedback-content">
+                <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.75rem;">
+                  <span class="card-badge" id="quiz-badge-1" style="background: rgba(16, 185, 129, 0.2); color: #86efac;">Correct!</span>
+                  <strong style="color: var(--text-main); font-size: 1.05rem;" id="quiz-status-1">Architecture Mastered!</strong>
+                </div>
+                <p style="color: var(--text-muted); font-size: 0.88rem; line-height: 1.6;">
+                  Exactly right! A connector does not copy the database. It is a translator: turning your Power Fx commands (like Filter, LookUp, Patch) into authenticated cloud API requests that SharePoint understands.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <aside class="trainer-notes" style="display: none !important;">
+          <h4>Trainer Speaking Script &amp; Pedagogical Cues:</h4>
+          <p><strong>Review Option A:</strong> Emphasize why Option A is false: if Power Apps imported the database locally, your tablet would run out of disk space with large enterprise tables.</p>
+        </aside>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 19: KNOWLEDGE CHECK 2 OF 5 (ARCHITECTURAL WHY)
+           ==================================================================== -->
+      <section class="slide" id="slide-19" data-slide-index="18" data-title="Knowledge Check 2: Architectural 'Why'" data-segment="Part 7: Knowledge Checks">
+        <header class="slide-header">
+          <div class="section-tag">Part 7 &bull; Knowledge Check 2 of 5</div>
+          <h2>Knowledge Check: Architectural "Why" of Data Binding</h2>
+          <p class="subtitle">Investigating why external data sources are necessary instead of storing data in formulas.</p>
+        </header>
+
+        <div class="slide-content">
+          <div class="quiz-container">
+            <div class="quiz-card">
+              <span class="card-badge" style="background: rgba(59, 130, 246, 0.2); color: #93c5fd;">Question 2 &bull; Architectural 'Why'</span>
+              <p style="color: var(--text-main); font-size: 1.05rem; line-height: 1.6; margin-top: 0.5rem;">
+                Why can't a developer simply store maintenance requests inside a Power Apps variable using <code>Set(varRequest, ...)</code> instead of connecting to SharePoint?
+              </p>
+
+              <div class="quiz-options">
+                <button class="quiz-option-btn" onclick="handleQuizAnswer(2, 'A', false, this)">
+                  <strong>A.</strong> <span>Because variables cannot hold text longer than 10 characters</span>
+                </button>
+                <button class="quiz-option-btn" onclick="handleQuizAnswer(2, 'B', false, this)">
+                  <strong>B.</strong> <span>Because Power Apps charges \$5 for every variable created</span>
+                </button>
+                <button class="quiz-option-btn" onclick="handleQuizAnswer(2, 'C', true, this)">
+                  <strong>C.</strong> <span>Because variables are temporary device RAM memory and disappear when the app is closed</span>
+                </button>
+                <button class="quiz-option-btn" onclick="handleQuizAnswer(2, 'D', false, this)">
+                  <strong>D.</strong> <span>Because variables cannot be displayed inside a Label control</span>
+                </button>
+              </div>
+            </div>
+
+            <div class="quiz-inspector-card" id="quiz-feedback-2">
+              <div class="feedback-placeholder">
+                <div style="width: 52px; height: 52px; border-radius: 50%; background: rgba(20, 184, 166, 0.15); border: 1px solid rgba(20, 184, 166, 0.35); display: flex; align-items: center; justify-content: center; margin: 0 auto 0.85rem auto; font-size: 1.5rem; color: #5eead4;">
+                  &quest;
+                </div>
+                <span class="card-badge" style="background: rgba(20, 184, 166, 0.2); color: #5eead4; margin-bottom: 0.65rem;">Awaiting Answer Selection</span>
+                <h4 style="color: #f8fafc; font-size: 1.05rem; margin-bottom: 0.5rem;">Live Architecture Inspector</h4>
+                <p style="color: var(--text-muted); font-size: 0.88rem; line-height: 1.6; max-width: 380px; margin: 0 auto;">
+                  Select an option on the left (A, B, C, or D) to submit your answer and unlock the system architecture rationale.
+                </p>
+              </div>
+              <div class="feedback-content">
+                <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.75rem;">
+                  <span class="card-badge" id="quiz-badge-2" style="background: rgba(16, 185, 129, 0.2); color: #86efac;">Correct!</span>
+                  <strong style="color: var(--text-main); font-size: 1.05rem;" id="quiz-status-2">Memory Distinction Mastered!</strong>
+                </div>
+                <p style="color: var(--text-muted); font-size: 0.88rem; line-height: 1.6;">
+                  Brilliant! Variables only live in the local device's temporary memory. If Davi records an incident in a variable and closes the app, the incident is gone forever. SharePoint provides persistent, shared, enterprise-grade storage.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <aside class="trainer-notes" style="display: none !important;">
+          <h4>Trainer Speaking Script &amp; Pedagogical Cues:</h4>
+          <p><strong>Reinforce Spiral Connection:</strong> This reconnects Day 18 (Variables) with Day 19/20 (SharePoint). Always highlight the difference between RAM and Cloud Disk.</p>
+        </aside>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 20: KNOWLEDGE CHECK 3 OF 5 (SCHEMA EVOLUTION)
+           ==================================================================== -->
+      <section class="slide" id="slide-20" data-slide-index="19" data-title="Knowledge Check 3: Schema Evolution & Refresh" data-segment="Part 7: Knowledge Checks">
+        <header class="slide-header">
+          <div class="section-tag">Part 7 &bull; Knowledge Check 3 of 5</div>
+          <h2>Knowledge Check: Schema Evolution &amp; Refresh</h2>
+          <p class="subtitle">What happens when the database structure changes after your app is already connected?</p>
+        </header>
+
+        <div class="slide-content">
+          <div class="quiz-container">
+            <div class="quiz-card">
+              <span class="card-badge" style="background: rgba(59, 130, 246, 0.2); color: #93c5fd;">Question 3 &bull; Schema Maintenance</span>
+              <p style="color: var(--text-main); font-size: 1.05rem; line-height: 1.6; margin-top: 0.5rem;">
+                A plant manager adds a new column called <code>EstimatedDowntimeHours</code> to SharePoint. Why doesn't it appear in Power Apps autocomplete immediately?
+              </p>
+
+              <div class="quiz-options">
+                <button class="quiz-option-btn" onclick="handleQuizAnswer(3, 'A', false, this)">
+                  <strong>A.</strong> <span>Power Apps only allows 5 columns per table</span>
+                </button>
+                <button class="quiz-option-btn" onclick="handleQuizAnswer(3, 'B', true, this)">
+                  <strong>B.</strong> <span>Studio caches schema metadata; you must right-click the data source and click "Refresh"</span>
+                </button>
+                <button class="quiz-option-btn" onclick="handleQuizAnswer(3, 'C', false, this)">
+                  <strong>C.</strong> <span>Because new columns take 48 hours to replicate across Microsoft 365</span>
+                </button>
+                <button class="quiz-option-btn" onclick="handleQuizAnswer(3, 'D', false, this)">
+                  <strong>D.</strong> <span>You have to delete your app and rebuild it from scratch</span>
+                </button>
+              </div>
+            </div>
+
+            <div class="quiz-inspector-card" id="quiz-feedback-3">
+              <div class="feedback-placeholder">
+                <div style="width: 52px; height: 52px; border-radius: 50%; background: rgba(20, 184, 166, 0.15); border: 1px solid rgba(20, 184, 166, 0.35); display: flex; align-items: center; justify-content: center; margin: 0 auto 0.85rem auto; font-size: 1.5rem; color: #5eead4;">
+                  &quest;
+                </div>
+                <span class="card-badge" style="background: rgba(20, 184, 166, 0.2); color: #5eead4; margin-bottom: 0.65rem;">Awaiting Answer Selection</span>
+                <h4 style="color: #f8fafc; font-size: 1.05rem; margin-bottom: 0.5rem;">Live Architecture Inspector</h4>
+                <p style="color: var(--text-muted); font-size: 0.88rem; line-height: 1.6; max-width: 380px; margin: 0 auto;">
+                  Select an option on the left (A, B, C, or D) to submit your answer and unlock the system architecture rationale.
+                </p>
+              </div>
+              <div class="feedback-content">
+                <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.75rem;">
+                  <span class="card-badge" id="quiz-badge-3" style="background: rgba(16, 185, 129, 0.2); color: #86efac;">Correct!</span>
+                  <strong style="color: var(--text-main); font-size: 1.05rem;" id="quiz-status-3">Schema Synchronization Mastered!</strong>
+                </div>
+                <p style="color: var(--text-muted); font-size: 0.88rem; line-height: 1.6;">
+                  Spot on! Power Apps freezes the schema snapshot during connection to optimize performance. When SharePoint schema changes, a manual <strong>Refresh</strong> forces Studio to download the updated column definitions.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <aside class="trainer-notes" style="display: none !important;">
+          <h4>Trainer Speaking Script &amp; Pedagogical Cues:</h4>
+          <p><strong>Gold Standard Habit:</strong> 'Whenever you modify SharePoint, your next reflex in Power Apps should be: Right click -> Refresh. Never forget this reflex!'</p>
+        </aside>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 21: KNOWLEDGE CHECK 4 OF 5 (SECURITY & CREDENTIALS)
+           ==================================================================== -->
+      <section class="slide" id="slide-21" data-slide-index="20" data-title="Knowledge Check 4: Security & Permissions" data-segment="Part 7: Knowledge Checks">
+        <header class="slide-header">
+          <div class="section-tag">Part 7 &bull; Knowledge Check 4 of 5</div>
+          <h2>Knowledge Check: Security &amp; Permissions</h2>
+          <p class="subtitle">Understanding how corporate identity governs data access across the connector.</p>
+        </header>
+
+        <div class="slide-content">
+          <div class="quiz-container">
+            <div class="quiz-card">
+              <span class="card-badge" style="background: rgba(59, 130, 246, 0.2); color: #93c5fd;">Question 4 &bull; Security Model</span>
+              <p style="color: var(--text-main); font-size: 1.05rem; line-height: 1.6; margin-top: 0.5rem;">
+                If a temporary worker is given access to the Power App, but their corporate account has <strong>NO permissions</strong> to the underlying SharePoint list, what happens?
+              </p>
+
+              <div class="quiz-options">
+                <button class="quiz-option-btn" onclick="handleQuizAnswer(4, 'A', false, this)">
+                  <strong>A.</strong> <span>Power Apps bypasses SharePoint and lets them edit anyway</span>
+                </button>
+                <button class="quiz-option-btn" onclick="handleQuizAnswer(4, 'B', false, this)">
+                  <strong>B.</strong> <span>The app prompts them to enter the IT administrator's password</span>
+                </button>
+                <button class="quiz-option-btn" onclick="handleQuizAnswer(4, 'C', true, this)">
+                  <strong>C.</strong> <span>SharePoint denies access and Power Apps displays an authorization error</span>
+                </button>
+                <button class="quiz-option-btn" onclick="handleQuizAnswer(4, 'D', false, this)">
+                  <strong>D.</strong> <span>The worker's tablet automatically uninstalls the app</span>
+                </button>
+              </div>
+            </div>
+
+            <div class="quiz-inspector-card" id="quiz-feedback-4">
+              <div class="feedback-placeholder">
+                <div style="width: 52px; height: 52px; border-radius: 50%; background: rgba(20, 184, 166, 0.15); border: 1px solid rgba(20, 184, 166, 0.35); display: flex; align-items: center; justify-content: center; margin: 0 auto 0.85rem auto; font-size: 1.5rem; color: #5eead4;">
+                  &quest;
+                </div>
+                <span class="card-badge" style="background: rgba(20, 184, 166, 0.2); color: #5eead4; margin-bottom: 0.65rem;">Awaiting Answer Selection</span>
+                <h4 style="color: #f8fafc; font-size: 1.05rem; margin-bottom: 0.5rem;">Live Architecture Inspector</h4>
+                <p style="color: var(--text-muted); font-size: 0.88rem; line-height: 1.6; max-width: 380px; margin: 0 auto;">
+                  Select an option on the left (A, B, C, or D) to submit your answer and unlock the system architecture rationale.
+                </p>
+              </div>
+              <div class="feedback-content">
+                <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.75rem;">
+                  <span class="card-badge" id="quiz-badge-4" style="background: rgba(16, 185, 129, 0.2); color: #86efac;">Correct!</span>
+                  <strong style="color: var(--text-main); font-size: 1.05rem;" id="quiz-status-4">Enterprise Security Understood!</strong>
+                </div>
+                <p style="color: var(--text-muted); font-size: 0.88rem; line-height: 1.6;">
+                  Exactly! Power Apps uses the signed-in user's delegated credentials. It cannot grant higher privileges than what the user already has in SharePoint. Security is always enforced at the database layer!
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <aside class="trainer-notes" style="display: none !important;">
+          <h4>Trainer Speaking Script &amp; Pedagogical Cues:</h4>
+          <p><strong>Crucial Rule:</strong> 'Sharing a Power App with someone does NOT automatically share the SharePoint list! You must share both the app AND grant read/write access to the list.'</p>
+        </aside>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 22: KNOWLEDGE CHECK 5 OF 5 (DEBUGGING WARNING TRIANGLES)
+           ==================================================================== -->
+      <section class="slide" id="slide-22" data-slide-index="21" data-title="Knowledge Check 5: Resolving Connection Warnings" data-segment="Part 7: Knowledge Checks">
+        <header class="slide-header">
+          <div class="section-tag">Part 7 &bull; Knowledge Check 5 of 5</div>
+          <h2>Knowledge Check: Resolving Connection Warnings</h2>
+          <p class="subtitle">Diagnosing and repairing the dreaded yellow warning triangle in the Data panel.</p>
+        </header>
+
+        <div class="slide-content">
+          <div class="quiz-container">
+            <div class="quiz-card">
+              <span class="card-badge" style="background: rgba(59, 130, 246, 0.2); color: #93c5fd;">Question 5 &bull; Practical Troubleshooting</span>
+              <p style="color: var(--text-main); font-size: 1.05rem; line-height: 1.6; margin-top: 0.5rem;">
+                A yellow warning triangle appears next to your SharePoint connection in Studio, and formulas show red squiggly lines. What is the most reliable first step to fix it?
+              </p>
+
+              <div class="quiz-options">
+                <button class="quiz-option-btn" onclick="handleQuizAnswer(5, 'A', false, this)">
+                  <strong>A.</strong> <span>Restart your computer and buy a new tablet</span>
+                </button>
+                <button class="quiz-option-btn" onclick="handleQuizAnswer(5, 'B', true, this)">
+                  <strong>B.</strong> <span>Click the three dots (...) beside the data source &rarr; click "Refresh", or remove and re-add the connection</span>
+                </button>
+                <button class="quiz-option-btn" onclick="handleQuizAnswer(5, 'C', false, this)">
+                  <strong>C.</strong> <span>Change all your formulas to use numbers instead of text</span>
+                </button>
+                <button class="quiz-option-btn" onclick="handleQuizAnswer(5, 'D', false, this)">
+                  <strong>D.</strong> <span>Rename the SharePoint list to "Database1"</span>
+                </button>
+              </div>
+            </div>
+
+            <div class="quiz-inspector-card" id="quiz-feedback-5">
+              <div class="feedback-placeholder">
+                <div style="width: 52px; height: 52px; border-radius: 50%; background: rgba(20, 184, 166, 0.15); border: 1px solid rgba(20, 184, 166, 0.35); display: flex; align-items: center; justify-content: center; margin: 0 auto 0.85rem auto; font-size: 1.5rem; color: #5eead4;">
+                  &quest;
+                </div>
+                <span class="card-badge" style="background: rgba(20, 184, 166, 0.2); color: #5eead4; margin-bottom: 0.65rem;">Awaiting Answer Selection</span>
+                <h4 style="color: #f8fafc; font-size: 1.05rem; margin-bottom: 0.5rem;">Live Architecture Inspector</h4>
+                <p style="color: var(--text-muted); font-size: 0.88rem; line-height: 1.6; max-width: 380px; margin: 0 auto;">
+                  Select an option on the left (A, B, C, or D) to submit your answer and unlock the system architecture rationale.
+                </p>
+              </div>
+              <div class="feedback-content">
+                <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.75rem;">
+                  <span class="card-badge" id="quiz-badge-5" style="background: rgba(16, 185, 129, 0.2); color: #86efac;">Correct!</span>
+                  <strong style="color: var(--text-main); font-size: 1.05rem;" id="quiz-status-5">Troubleshooting Instinct Validated!</strong>
+                </div>
+                <p style="color: var(--text-muted); font-size: 0.88rem; line-height: 1.6;">
+                  Flawless! A yellow warning triangle almost always means the authentication token expired or the schema is out of sync. Right-click &rarr; Refresh or re-adding the data source resolves 99% of connector warning triangles instantly.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <aside class="trainer-notes" style="display: none !important;">
+          <h4>Trainer Speaking Script &amp; Pedagogical Cues:</h4>
+          <p><strong>Panic Prevention:</strong> 'When students see a yellow triangle or red squiggly lines, they often panic. Remind them: the connection is just sleeping. A quick Refresh wakes it up.'</p>
+        </aside>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 23: FINAL CAPSTONE CHALLENGE: MULTI-SOURCE SCENARIO
+           ==================================================================== -->
+      <section class="slide" id="slide-23" data-slide-index="22" data-title="Final Capstone Challenge: Multi-Source Scenario" data-segment="Part 7: Practical Evaluation">
+        <header class="slide-header">
+          <div class="section-tag">Part 7 &bull; Capstone Challenge</div>
+          <h2>Final Capstone Challenge: Multi-Source Factory Architecture</h2>
+          <p class="subtitle">Architecting the complete connection topology for Apex Plastics' maintenance system.</p>
+        </header>
+
+        <div class="slide-content grid-2">
+          <div class="card">
+            <span class="card-badge" style="background: rgba(20, 184, 166, 0.2); color: #5eead4;">Factory Expansion Scenario</span>
+            <h3 class="card-title">The Plant Operations Challenge</h3>
+            <p style="color: var(--text-muted); font-size: 0.88rem; line-height: 1.6; margin-bottom: 1rem;">
+              Apex Plastics is expanding. In addition to <code>Apex_Maintenance_Requests</code>, the plant manager asks you to connect two more SharePoint lists into the same Power App:
+            </p>
+            <div style="display: flex; flex-direction: column; gap: 0.65rem;">
+              <div style="background: rgba(255, 255, 255, 0.04); padding: 0.75rem; border-radius: 0.4rem; border-left: 3px solid #3b82f6;">
+                <strong style="color: #93c5fd; font-size: 0.85rem;">1. Machine_Master_Directory:</strong>
+                <p style="color: var(--text-muted); font-size: 0.8rem; margin-top: 0.2rem;">Holds machine IDs, serial numbers, manufacture year, and location.</p>
+              </div>
+              <div style="background: rgba(255, 255, 255, 0.04); padding: 0.75rem; border-radius: 0.4rem; border-left: 3px solid #10b981;">
+                <strong style="color: #86efac; font-size: 0.85rem;">2. Technician_Skill_Roster:</strong>
+                <p style="color: var(--text-muted); font-size: 0.8rem; margin-top: 0.2rem;">Lists certified technicians, shift hours, and electrical/hydraulic badges.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="card" style="border-left: 3px solid var(--color-primary-light);">
+            <span class="card-badge" style="background: rgba(20, 184, 166, 0.2); color: #5eead4;">100-Point Evaluation Rubric</span>
+            <h3 class="card-title">Architectural Solution Blueprint</h3>
+            <div style="display: flex; flex-direction: column; gap: 0.75rem; margin-top: 0.5rem;">
+              <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-subtle); padding-bottom: 0.4rem;">
+                <span style="font-size: 0.85rem; color: #cbd5e1;">A. Open Data Panel &amp; Add SharePoint Connector</span>
+                <span style="font-family: var(--font-code); color: #5eead4; font-weight: bold;">25 Pts</span>
+              </div>
+              <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-subtle); padding-bottom: 0.4rem;">
+                <span style="font-size: 0.85rem; color: #cbd5e1;">B. Connect All 3 Lists Under Same Plant Site</span>
+                <span style="font-family: var(--font-code); color: #5eead4; font-weight: bold;">25 Pts</span>
+              </div>
+              <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-subtle); padding-bottom: 0.4rem;">
+                <span style="font-size: 0.85rem; color: #cbd5e1;">C. Verify Schema Autocomplete in Formula Bar</span>
+                <span style="font-family: var(--font-code); color: #5eead4; font-weight: bold;">25 Pts</span>
+              </div>
+              <div style="display: flex; justify-content: space-between; align-items: center; padding-bottom: 0.4rem;">
+                <span style="font-size: 0.85rem; color: #cbd5e1;">D. Execute Refresh Diagnostics &amp; Inspect Rows</span>
+                <span style="font-family: var(--font-code); color: #5eead4; font-weight: bold;">25 Pts</span>
+              </div>
+            </div>
+            <div style="margin-top: auto; padding-top: 1rem; color: #86efac; font-weight: 700; font-size: 0.9rem;">
+              Total Score: 100/100 &bull; Enterprise Data Architect Certified
+            </div>
+          </div>
+        </div>
+
+        <aside class="trainer-notes" style="display: none !important;">
+          <h4>Trainer Speaking Script &amp; Pedagogical Cues:</h4>
+          <p><strong>Wrap-up Challenge:</strong> Congratulate the class. They have officially connected an enterprise cloud database to their frontend app.</p>
+        </aside>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 24: CONNECTION MAP & BRIDGE FORWARD TO DAY 21
+           ==================================================================== -->
+      <section class="slide" id="slide-24" data-slide-index="23" data-title="Bridge Forward: Day 21 Galleries" data-segment="Part 8: Bridge Forward">
+        <header class="slide-header">
+          <div class="section-tag">Part 8 &bull; The Next Frontier</div>
+          <h2>Connection Map &amp; Bridge Forward to Day 21</h2>
+          <p class="subtitle">The plumbing pipe is laid. Tomorrow, we turn on the water to show hundreds of records!</p>
+        </header>
+
+        <div class="slide-content grid-3">
+          <div class="card" style="border-left: 3px solid #3b82f6;">
+            <span class="card-badge" style="background: rgba(59, 130, 246, 0.2); color: #93c5fd;">Completed Chain</span>
+            <h3 class="card-title">What We Accomplished Today</h3>
+            <p style="color: var(--text-muted); font-size: 0.85rem; line-height: 1.6;">
+              We demystified the connector, attached <code>Apex_Maintenance_Requests</code>, authenticated via Microsoft Entra ID, verified schema autocomplete, and mastered live refresh diagnostics.
+            </p>
+            <div style="margin-top: auto; padding-top: 1rem; color: #60a5fa; font-weight: 700; font-size: 0.85rem;">
+              &check; The Live Pipeline is OPEN!
+            </div>
+          </div>
+
+          <div class="card" style="border-left: 3px solid #f59e0b;">
+            <span class="card-badge" style="background: rgba(245, 158, 11, 0.2); color: #fcd34d;">The Looming Problem</span>
+            <h3 class="card-title">The Single-Record Dilemma</h3>
+            <p style="color: var(--text-muted); font-size: 0.85rem; line-height: 1.6;">
+              A single Label control can only show ONE text value. But our SharePoint list has 150 maintenance requests! How does a mobile screen show 150 different rows without crashing?
+            </p>
+            <div style="margin-top: auto; padding-top: 1rem; color: #fcd34d; font-weight: 700; font-size: 0.85rem;">
+              ? How to display repeating rows?
+            </div>
+          </div>
+
+          <div class="card" style="border-left: 3px solid var(--color-primary-light); background: rgba(20, 184, 166, 0.1);">
+            <span class="card-badge" style="background: rgba(20, 184, 166, 0.25); color: #5eead4;">Tomorrow: Day 21</span>
+            <h3 class="card-title">Galleries: Showing Many Records</h3>
+            <p style="color: var(--text-main); font-size: 0.85rem; line-height: 1.6;">
+              Tomorrow, we introduce the <strong>Gallery</strong> control. We will set its <code>Items</code> property to <code>Apex_Maintenance_Requests</code> and watch 150 rows populate automatically with images, badges, and status colors!
+            </p>
+            <div style="margin-top: auto; padding-top: 1rem; color: #5eead4; font-weight: 700; font-size: 0.85rem;">
+              &rarr; Day 21: Visual Repeating Lists
+            </div>
+          </div>
+        </div>
+
+        <aside class="trainer-notes" style="display: none !important;">
+          <h4>Trainer Speaking Script &amp; Pedagogical Cues:</h4>
+          <p><strong>Final Forward Bridge (2 min):</strong> "Take a breath! You built the pipeline today. Tomorrow on Day 21, we turn on the valve and let the data flood into a beautiful scrolling Gallery. See you tomorrow!"</p>
+        </aside>
+      </section>
+
+    </main>
+
+    <!-- Bottom HUD & Navigation Controls -->
+    <footer id="bottom-hud">
+      <div id="progress-bar-container">
+        <div id="progress-bar"></div>
+      </div>
+
+      <div class="hud-left">
+        <button id="btn-prev" class="hud-btn" onclick="prevSlide()">&larr; Prev</button>
+        <button id="btn-next" class="hud-btn" onclick="nextSlide()">Next &rarr;</button>
+        <span id="slide-counter">Slide 1 / 24</span>
+      </div>
+
+      <div class="hud-right">
+        <button id="btn-lang" class="hud-btn" onclick="toggleLanguage()"><span id="lang-label">KH</span></button>
+        <button id="btn-laser" class="hud-btn active" onclick="toggleLaser()">Laser</button>
+        <button id="btn-notes" class="hud-btn" onclick="toggleNotes()">Notes (N)</button>
+        <button id="btn-overview" class="hud-btn" onclick="toggleOverview()">Overview (O)</button>
+        <button id="btn-timer" class="hud-btn" onclick="toggleTimer()"><span id="timer-display">90:00</span></button>
+        <button id="btn-fullscreen" class="hud-btn" onclick="toggleFullscreen()">Full</button>
+        <a href="../index.html" class="hud-btn hub-btn" title="Return to Master Curriculum Hub (ត្រឡប់ទៅទំព័រដើម)" style="text-decoration: none; display: inline-flex; align-items: center; gap: 4px; color: #fcd34d; font-weight: 600;"><span>🏠</span><span>Hub</span></a>
+      </div></footer>
+
+    <!-- Slide-Out Trainer Notes Drawer (Strictly off-screen until N pressed) -->
+    <div id="notes-drawer">
+      <div class="notes-header">
+        <h3 id="notes-slide-title" style="color: #5eead4; font-size: 1.15rem;">Trainer Speaking Notes</h3>
+        <button class="notes-close-btn" id="notes-close-btn" onclick="toggleNotes()">&times;</button>
+      </div>
+      <div class="notes-body" id="notes-body-content">
+        <!-- Dynamically populated by script.js -->
+      </div>
+    </div>
+
+    <!-- Slide Overview Grid Modal -->
+    <div id="overview-modal">
+      <div class="overview-header">
+        <h2 style="color: #f8fafc; font-size: 1.6rem;">Slide Overview (24 Slides)</h2>
+        <button class="notes-close-btn" id="overview-close-btn" onclick="toggleOverview()">&times;</button>
+      </div>
+      <div class="overview-grid" id="overview-grid">
+        <!-- Dynamically populated by script.js -->
+      </div>
+    </div>
+
+  </div>
+
+  <script src="script.js"></script>
+<script>
+if (window.self !== window.top) {
+  document.documentElement.classList.add('in-iframe');
+  function hideHub() { document.querySelectorAll('.hub-btn, .back-to-hub-pill').forEach(e => e.style.display = 'none'); }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', hideHub);
+  } else {
+    hideHub();
+  }
+}
+</script>
+<style>
+.in-iframe .hub-btn, .in-iframe .back-to-hub-pill { display: none !important; }
+</style>
+</body>
+</html>
+

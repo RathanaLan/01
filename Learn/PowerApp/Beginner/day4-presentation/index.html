@@ -1,0 +1,1564 @@
+<!DOCTYPE html>
+<html lang="en" translate="no" class="notranslate">
+<head>
+  <meta name="google" content="notranslate">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Power Apps Foundation — Day 4: Questions, Conditions, True &amp; False</title>
+  
+    <!-- Famous & Universally Loved Khmer Fonts (Moul for Formal Titles, Siemreap & Battambang for Easy Reading) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=Moul&family=Kantumruy+Pro:ital,wght@0,400..700;1,400..700&family=Battambang:wght@300;400;700;900&family=Koh+Santepheap:wght@300;400;700&family=Koulen&family=Siemreap&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="../shared/design-system.css">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="fluent-dark-theme">
+
+  <!-- Main Presentation Stage Container (16:9 Viewport Constrained) -->
+  <div id="presentation-container" class="presentation-container">
+
+    <!-- Top Status Bar: Branding, Segment Indicator, Timer & Controls -->
+    <!-- Presentation Header removed to match Day 25 Standard -->
+
+    <!-- Presentation Visual Stage (16:9 Canvas) -->
+    <main id="stage" class="stage" role="region" aria-label="Slide Presentation Stage">
+
+      <!-- =================================================================== -->
+      <!-- SLIDE 1: Title & Mental Model Anchor                                -->
+      <!-- =================================================================== -->
+      <section class="slide active" id="slide-1" data-title="Day 4: Questions, Conditions, True &amp;amp; False" data-segment="Part 1: Welcome &amp;amp; Spiral Recall (00:00 - 10:00)" data-notes="TRAINER SPEAKING SCRIPT:
+'Welcome to Day 4 of our Microsoft Power Apps curriculum!
+Let's anchor where we are in our journey.
+On Day 1, we learned that apps solve human problems using Input, Process, and Output.
+On Day 2, we learned that computers follow steps in strict Sequence.
+On Day 3, we discovered Data: the typed values held inside containers (Text, Number, Date, Yes/No).
+Today on Day 4, we step into the heart of application intelligence: LOGIC!
+Notice our connection chain for today:
+data ➔ comparison/question ➔ condition ➔ True/False.
+Here is the core truth you must remember:
+True and False is NOT the whole logic. True and False is simply the ANSWER produced when a condition asks a question about data!
+By the end of today's 90 minutes, you will look at any business requirement and immediately see the question, the condition, and the resulting truth!'">
+        <div class="slide-content">
+          <div class="hero-layout">
+            <div class="hero-pill-group">
+              <span class="hero-pill">Phase 2: Logic &amp; Decisions</span>
+              <span class="hero-pill teal-pill">Day 4 of 27</span>
+              <span class="hero-pill blue-pill">90 Minutes</span>
+            </div>
+            <h1 class="hero-title">
+              <span class="gradient-text">Questions, Conditions, True &amp; False</span><br>
+              How an App Inspects Data to Discover Truth
+            </h1>
+            <p class="hero-subtitle">
+              An app cannot make decisions in the dark. Before it can choose an action, it must ask a question about its data. That question is a <strong>Condition</strong>, and its only possible answer is <strong>True</strong> or <strong>False</strong>.
+            </p>
+
+            <div class="title-feature-grid">
+              <div class="feature-item">
+                <span class="feature-icon">&#128196;</span>
+                <div class="feature-info">
+                  <h4>1. The Data</h4>
+                  <p>Yesterday's stored values: a hydraulic pressure reading, a user name, an inspection date.</p>
+                </div>
+              </div>
+              <div class="feature-item">
+                <span class="feature-icon">&#10067;</span>
+                <div class="feature-info">
+                  <h4>2. The Comparison (Condition)</h4>
+                  <p>The question we ask about the data: <em>"Is Pressure &gt; 200?"</em>, <em>"Is Name empty?"</em></p>
+                </div>
+              </div>
+              <div class="feature-item">
+                <span class="feature-icon">&#9989;</span>
+                <div class="feature-info">
+                  <h4>3. The Boolean Result</h4>
+                  <p>The definitive verdict produced: strictly <strong>TRUE</strong> or strictly <strong>FALSE</strong>.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- =================================================================== -->
+      <!-- SLIDE 2: 5-Minute Concept-Map Recap (Master Mental Model)            -->
+      <!-- =================================================================== -->
+      <section class="slide" id="slide-2" data-title="Master Curriculum Concept Map" data-segment="Part 1: Welcome &amp;amp; Spiral Recall (00:00 - 10:00)" data-notes="TRAINER SPEAKING SCRIPT:
+'Look at our Master Mental Model map on screen. Notice how every single lesson builds directly on the foundation of the previous day.
+On Day 1, we anchored the Real Problem.
+On Day 2, we mapped the Process: instructions in sequence.
+On Day 3, we mastered Data: values inside containers.
+Today on Day 4, we enter LOGIC &amp; DECISION!
+How does an app make a decision?
+It compares DATA!
+A condition asks: Is Quantity &amp;gt; 100? Is Status = 'Approved'?
+The answer is either TRUE or FALSE!
+And look at tomorrow on Day 5: IF uses that True/False result to choose an ACTION!
+Never view True and False as random computer words. They are the answers to your business questions.'">
+        <div class="slide-content">
+          <div class="slide-header">
+            <span class="slide-badge purple-badge">Curriculum Architecture</span>
+            <h2 class="slide-title">Where Today Fits in the 27-Day Master Mental Model</h2>
+            <p class="slide-lead">We never teach isolated features. Every day connects directly to what you know and previews what comes next.</p>
+          </div>
+
+          <div class="mental-model-chain">
+            <div class="chain-step step-completed">
+              <span class="step-num">Days 1-2</span>
+              <span class="step-name">Problem &amp; Sequence</span>
+              <span class="step-status">&#10003; Foundation</span>
+            </div>
+            <span class="chain-arrow">&#8594;</span>
+            <div class="chain-step step-completed">
+              <span class="step-num">Day 3</span>
+              <span class="step-name">Data &amp; Types</span>
+              <span class="step-status">&#10003; Values Stored</span>
+            </div>
+            <span class="chain-arrow">&#8594;</span>
+            <div class="chain-step step-active-day4">
+              <span class="step-num">TODAY (Day 4)</span>
+              <span class="step-name">CONDITIONS (T / F)</span>
+              <span class="step-status">&#9733; Current Focus</span>
+            </div>
+            <span class="chain-arrow">&#8594;</span>
+            <div class="chain-step step-future">
+              <span class="step-num">Day 5</span>
+              <span class="step-name">IF / Decisions</span>
+              <span class="step-status">Tomorrow</span>
+            </div>
+            <span class="chain-arrow">&#8594;</span>
+            <div class="chain-step step-future">
+              <span class="step-num">Days 6-27</span>
+              <span class="step-name">Action ➔ Store ➔ Test</span>
+              <span class="step-status">Ahead</span>
+            </div>
+          </div>
+
+          <div class="grid-2-col" style="margin-top: 1.25rem;">
+            <div class="info-card border-blue">
+              <div class="card-header-icon">&#128260; How Day 3 Connects to Day 4</div>
+              <p>Yesterday, we learned that an app holds typed data: numbers, text, dates, and flags. But holding data is passive! Today, we teach the app to <strong>inspect and compare</strong> that data using relational questions (<code>=</code>, <code>&gt;</code>, <code>&lt;</code>, <code>&lt;&gt;</code>).</p>
+            </div>
+            <div class="info-card border-purple">
+              <div class="card-header-icon">&#128301; Why Day 5 Requires Day 4</div>
+              <p>Tomorrow on Day 5, our apps will learn the famous <code>If()</code> function to execute different actions. But <code>If()</code> is powerless without a condition! <code>If()</code> simply listens to the <strong>True/False verdict</strong> we master today.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- =================================================================== -->
+      <!-- SLIDE 3: Prerequisite Active Recall Check                           -->
+      <!-- =================================================================== -->
+      <section class="slide" id="slide-3" data-title="Prerequisite Retrieval Check" data-segment="Part 1: Welcome &amp;amp; Spiral Recall (00:00 - 10:00)" data-notes="TRAINER SPEAKING SCRIPT:
+'Let's warm up our brains with 3 quick retrieval questions from Day 3!
+Question 1: What are the 4 fundamental data types we mastered yesterday?
+(Learner response: Text, Number, Date/Time, Yes/No or Boolean!)
+Question 2: Why is an employee phone number like +855-12-345-678 stored as Text instead of a Number?
+(Learner response: Because of the Golden Rule: We never do math on it, and storing as number drops plus signs and leading zeros!)
+Question 3: What happened at Apex Plastics when the intake app treated '10' and '20' as Text?
+(Learner response: It concatenated them into '1020' pallets instead of adding them to 30!)
+Terrific recall! Now let's see how an app evaluates these values.'">
+        <div class="slide-content">
+          <div class="slide-header">
+            <span class="slide-badge blue-badge">Spiral Active Recall</span>
+            <h2 class="slide-title">Testing Prior Knowledge: Day 3 Data Recall</h2>
+            <p class="slide-lead">Retrieve the fundamental data principles from memory before we learn how to ask questions about them.</p>
+          </div>
+
+          <div class="grid-3-col">
+            <div class="retrieval-card">
+              <div class="retrieval-num">01</div>
+              <h4>From Day 3: Pillars</h4>
+              <p class="retrieval-q">What are the 4 fundamental data containers of business apps?</p>
+              <div class="retrieval-answer">
+                <strong>Answer:</strong> <code>Text</code> (letters/words), <code>Number</code> (math quantities), <code>Date/Time</code> (calendar moments), and <code>Yes/No</code> (Boolean binary state).
+              </div>
+            </div>
+            <div class="retrieval-card">
+              <div class="retrieval-num">02</div>
+              <h4>From Day 3: Golden Rule</h4>
+              <p class="retrieval-q">Why is a Phone Number or ZIP Code stored as Text?</p>
+              <div class="retrieval-answer">
+                <strong>Answer:</strong> The Golden Test: *"Will you ever calculate with it?"* If no, it is Text. Numbers drop leading zeros and crash on symbols like <code>+</code> and <code>-</code>.
+              </div>
+            </div>
+            <div class="retrieval-card">
+              <div class="retrieval-num">03</div>
+              <h4>From Day 3: Type Collision</h4>
+              <p class="retrieval-q">What happens if you use the <code>&amp;</code> operator on numbers?</p>
+              <div class="retrieval-answer">
+                <strong>Answer:</strong> It concatenates characters together (<code>"10" &amp; "20" = "1020"</code>) rather than performing arithmetic addition (<code>30</code>).
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- =================================================================== -->
+      <!-- SLIDE 4: Measurable Learning Objectives                             -->
+      <!-- =================================================================== -->
+      <section class="slide" id="slide-4" data-title="Measurable Learning Objectives" data-segment="Part 1: Welcome &amp;amp; Spiral Recall (00:00 - 10:00)" data-notes="TRAINER SPEAKING SCRIPT:
+'Here are our 4 measurable learning targets for Day 4.
+By 90:00 today, you will:
+1. Explain the relationship between Data, a Comparison Question, and the resulting True/False verdict.
+2. Master the 6 fundamental comparison operators: =, &lt;&gt;, &gt;, &lt;, &gt;=, &lt;= across numbers, text, and dates.
+3. Diagnose the danger of unasked conditions—like why a pressure gauge at Apex Plastics ruptured because nobody wrote a condition!
+4. Write clean, correct Power Fx condition expressions and explain what each side of the equation evaluates to.'">
+        <div class="slide-content">
+          <div class="slide-header">
+            <span class="slide-badge green-badge">Target Competencies</span>
+            <h2 class="slide-title">4 Measurable Learning Objectives for Day 4</h2>
+            <p class="slide-lead">By the end of this 90-minute session, you will independently demonstrate these four practical competencies:</p>
+          </div>
+
+          <div class="grid-2-col">
+            <div class="objective-card">
+              <div class="obj-badge">OBJ 1 • Comprehension</div>
+              <h3>Define a "Condition" as a Question</h3>
+              <p>Explain that a condition is not an action or decision; it is a question comparing data against a benchmark that produces strictly <strong>True</strong> or <strong>False</strong>.</p>
+              <div class="obj-outcome">&#10004; Evaluated via Rollercoaster Height Metaphor</div>
+            </div>
+
+            <div class="objective-card">
+              <div class="obj-badge">OBJ 2 • Comparison Operators</div>
+              <h3>Apply the 6 Comparison Operators</h3>
+              <p>Use the 6 relational operators (<code>=</code>, <code>&lt;&gt;</code>, <code>&gt;</code>, <code>&lt;</code>, <code>&gt;=</code>, <code>&lt;=</code>) across numbers, text strings, and dates to formulate precise business rules.</p>
+              <div class="obj-outcome">&#10004; Evaluated via 6-Condition Truth Evaluator</div>
+            </div>
+
+            <div class="objective-card">
+              <div class="obj-badge">OBJ 3 • Diagnosis</div>
+              <h3>Identify the "Unasked Question" Hazard</h3>
+              <p>Diagnose what happens when software displays raw numbers without asking safety questions, leading to ignored alarms and equipment failure.</p>
+              <div class="obj-outcome">&#10004; Evaluated via Apex $42k Mold Burst Case Study</div>
+            </div>
+
+            <div class="objective-card">
+              <div class="obj-badge">OBJ 4 • Application</div>
+              <h3>Author Power Fx Validation Conditions</h3>
+              <p>Write syntactic Power Fx conditions comparing form inputs (<code>IsBlank(txtOperator.Text)</code>, <code>txtPSI.Text &gt; 200</code>) that will feed tomorrow's <code>If()</code> decisions.</p>
+              <div class="obj-outcome">&#10004; Evaluated via Quality Inspection Gate Challenge</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- =================================================================== -->
+      <!-- SLIDE 5: 90-Minute Timed Agenda                                     -->
+      <!-- =================================================================== -->
+      <section class="slide" id="slide-5" data-title="90-Minute Timed Agenda" data-segment="Part 1: Welcome &amp;amp; Spiral Recall (00:00 - 10:00)" data-notes="TRAINER SPEAKING SCRIPT:
+'Here is our strict, disciplined 90-minute roadmap.
+We spend 10 minutes on orientation and spiral recall.
+From 10 to 25 minutes, we examine the $42,000 workplace catastrophe at Apex Plastics and explore the Rollercoaster Height Stick analogy.
+From 25 to 45 minutes, we master the 6 comparison questions and how to compare numbers, text, and dates.
+From 45 to 60 minutes, I will demonstrate the live Condition Workbench.
+From 60 to 75 minutes, you will do hands-on practice evaluating manufacturing conditions.
+And our final 15 minutes is our knowledge check, final challenge rubric, and bridge to Day 5 IF statements.'">
+        <div class="slide-content">
+          <div class="slide-header">
+            <span class="slide-badge purple-badge">Lesson Structure</span>
+            <h2 class="slide-title">Master 90-Minute Spiral Agenda</h2>
+            <p class="slide-lead">A balanced pedagogical progression from concrete workplace failure to hands-on condition mastery.</p>
+          </div>
+
+          <div class="agenda-timeline-grid">
+            <div class="agenda-row">
+              <div class="agenda-time">00:00 - 10:00 (10m)</div>
+              <div class="agenda-topic">
+                <strong>Part 1: Welcome &amp; Spiral Recall</strong>
+                <span>Master mental model anchor, active retrieval of Days 1–3, 4 measurable learning objectives.</span>
+              </div>
+              <div class="agenda-milestone">Milestone: Mental Anchor</div>
+            </div>
+            <div class="agenda-row">
+              <div class="agenda-time">10:00 - 25:00 (15m)</div>
+              <div class="agenda-topic">
+                <strong>Part 2: Why Conditions Exist &amp; Everyday Analogy</strong>
+                <span>Apex Plastics $42,000 hydraulic mold burst, plain concept of a Condition, and the Rollercoaster Height Stick.</span>
+              </div>
+              <div class="agenda-milestone">Milestone: Problem Clarity</div>
+            </div>
+            <div class="agenda-row">
+              <div class="agenda-time">25:00 - 45:00 (20m)</div>
+              <div class="agenda-topic">
+                <strong>Part 3: The 6 Comparison Questions &amp; Data Types</strong>
+                <span>Operators: =, &lt;&gt;, &gt;, &lt;, &gt;=, &lt;=. Comparing text strings vs numbers vs dates. The Anatomy of a Question.</span>
+              </div>
+              <div class="agenda-milestone">Milestone: Core Logic Grammar</div>
+            </div>
+            <div class="agenda-row">
+              <div class="agenda-time">45:00 - 60:00 (15m)</div>
+              <div class="agenda-topic">
+                <strong>Part 4: Trainer Demonstration &amp; Condition Lab</strong>
+                <span>Interactive Condition Workbench: live sliders and inputs evaluating conditions into True/False in real time.</span>
+              </div>
+              <div class="agenda-milestone">Milestone: Visual Modeling</div>
+            </div>
+            <div class="agenda-row">
+              <div class="agenda-time">60:00 - 75:00 (15m)</div>
+              <div class="agenda-topic">
+                <strong>Part 5: Guided Learner Practice &amp; Evaluator Board</strong>
+                <span>Deconstructing Apex Support Form rules; hands-on practice testing 6 factory safety conditions.</span>
+              </div>
+              <div class="agenda-milestone">Milestone: Independent Practice</div>
+            </div>
+            <div class="agenda-row">
+              <div class="agenda-time">75:00 - 90:00 (15m)</div>
+              <div class="agenda-topic">
+                <strong>Part 6: Knowledge Check, Capstone &amp; Forward Bridge</strong>
+                <span>5-question quiz, 8-condition Quality Inspection Gate challenge, rubric, homework &amp; bridge to Day 5 IF.</span>
+              </div>
+              <div class="agenda-milestone">Milestone: Master Assessment</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- =================================================================== -->
+      <!-- SLIDE 6: Workplace Problem: The $42,000 Unasked Question            -->
+      <!-- =================================================================== -->
+      <section class="slide" id="slide-6" data-title="Workplace Problem: The $42,000 Burst" data-segment="Part 2: Why Conditions Exist (10:00 - 25:00)" data-notes="TRAINER SPEAKING SCRIPT:
+'Let's return to Apex Plastics at 02:00 AM on the night shift.
+Injection Molding Press #4 has a digital tablet displaying machine data.
+The screen showed: Hydraulic Pressure: 245 PSI.
+The machine held the DATA. The data was accurate.
+So why did the hydraulic cylinder burst 20 minutes later, cracking a $42,000 hardened steel mold and shutting down the entire plant?
+Because the app was merely displaying data!
+The app NEVER ASKED A QUESTION!
+Nobody programmed the condition: Is Pressure &amp;gt; 200?
+Because the question was never asked, the answer TRUE was never generated!
+And because TRUE was never generated, the emergency alarm never sounded!
+Data sitting passively on a screen saves no one. An app must constantly ASK QUESTIONS about its data.'">
+        <div class="slide-content">
+          <div class="slide-header">
+            <span class="slide-badge red-badge">Workplace Case Study</span>
+            <h2 class="slide-title">Apex Plastics: The $42,000 "Unasked Question" Disaster</h2>
+            <p class="slide-lead">How having accurate data but failing to ask a condition led to a catastrophic mold burst.</p>
+          </div>
+
+          <div class="story-case-box">
+            <div class="story-header">
+              <span class="warning-icon">&#9888;</span>
+              <div>
+                <h3 style="margin:0; color:#fb7185;">INCIDENT REPORT: Catastrophic Cylinder Rupture &amp; Mold Fracture</h3>
+                <span style="font-size:0.85rem; color:#cbd5e1;">Apex Plastics Injection Molding Facility • Press #4 Night Shift</span>
+              </div>
+            </div>
+            <div class="story-grid">
+              <div class="story-panel">
+                <h4>What the App Did (Passive Data):</h4>
+                <div class="math-card math-actual">
+                  <span>Sensor Reading: <code>Pressure = 245 PSI</code></span>
+                  <span>Screen Display: <code>"245 PSI"</code></span>
+                  <div class="calc-divider"></div>
+                  <span class="result-line-fail">Question Asked: <strong>NONE (Passive Display)</strong></span>
+                </div>
+              </div>
+              <div class="story-panel">
+                <h4>What the App Should Have Done (Active Condition):</h4>
+                <div class="math-card math-expected">
+                  <span>Condition: <code>Pressure &gt; 200</code></span>
+                  <span>Evaluation: <code>245 &gt; 200 ➔ TRUE</code></span>
+                  <div class="calc-divider"></div>
+                  <span class="result-line">Result: <strong>Emergency Valve Cutoff Triggered!</strong></span>
+                </div>
+              </div>
+            </div>
+            <div class="story-footer">
+              <strong>Root Cause:</strong> Data without a condition is blind. An app must compare data against a threshold to produce a <strong>True/False verdict</strong> that triggers protective action.
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- =================================================================== -->
+      <!-- SLIDE 7: Plain Concept: What is a "Condition"?                      -->
+      <!-- =================================================================== -->
+      <section class="slide" id="slide-7" data-title="Plain Concept: What is a Condition?" data-segment="Part 2: Why Conditions Exist (10:00 - 25:00)" data-notes="TRAINER SPEAKING SCRIPT:
+'Before we look at computer code, let's understand what a Condition is in plain English.
+A Condition is simply a QUESTION asked about data that can only have TWO possible answers:
+YES or NO.
+TRUE or FALSE.
+Notice: A condition is NOT an action. A condition does not send an email. A condition does not shut off a valve.
+A condition is just the question:
+Is the temperature greater than 100 degrees?
+Is the user's name box empty?
+Is the delivery date earlier than today?
+If you ask 'What is your favorite color?', that is NOT a condition because there are thousands of answers!
+A condition is strictly a closed question that yields TRUE or FALSE.'">
+        <div class="slide-content">
+          <div class="slide-header">
+            <span class="slide-badge blue-badge">Core Mental Model</span>
+            <h2 class="slide-title">Plain Language: What is a "Condition"?</h2>
+            <p class="slide-lead">A condition is not an action or a decision. It is a question that yields strictly True or False.</p>
+          </div>
+
+          <div class="grid-2-col" style="gap: 1.5rem;">
+            <div class="concept-card">
+              <div class="concept-badge red-badge">&#10060; Open Questions (NOT Conditions)</div>
+              <h3>Subjective Questions with Infinite Answers</h3>
+              <p>Questions that ask for opinions, descriptions, or creative responses cannot be evaluated by computer logic.</p>
+              <div class="concept-examples">
+                <div class="example-item"><em>"What is the operator's mood today?"</em></div>
+                <div class="example-item"><em>"Why did the machine make that funny squeak?"</em></div>
+                <div class="example-item"><em>"How do you feel about the factory temperature?"</em></div>
+              </div>
+            </div>
+
+            <div class="concept-card">
+              <div class="concept-badge green-badge">&#10004; Comparison Questions (TRUE CONDITIONS)</div>
+              <h3>Precise Comparisons with Only 2 Answers</h3>
+              <p>Questions comparing a piece of data against a benchmark. The outcome is 100% binary: True or False.</p>
+              <div class="concept-examples">
+                <div class="example-item">&#10004; <strong>Is Pressure &gt; 200?</strong> ➔ <code>TRUE</code> or <code>FALSE</code></div>
+                <div class="example-item">&#10004; <strong>Is Operator Name Empty?</strong> ➔ <code>TRUE</code> or <code>FALSE</code></div>
+                <div class="example-item">&#10004; <strong>Is Inspection Date &lt; Today?</strong> ➔ <code>TRUE</code> or <code>FALSE</code></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="takeaway-banner">
+            <strong>Key Insight:</strong> <strong>True</strong> and <strong>False</strong> are not mysterious programming symbols; they are simply the two universal answers to every comparison question an app will ever ask!
+          </div>
+        </div>
+      </section>
+
+      <!-- =================================================================== -->
+      <!-- SLIDE 8: Everyday Analogy: The Rollercoaster Height Stick           -->
+      <!-- =================================================================== -->
+      <section class="slide" id="slide-8" data-title="Everyday Analogy: Rollercoaster Height Stick" data-segment="Part 2: Why Conditions Exist (10:00 - 25:00)" data-notes="TRAINER SPEAKING SCRIPT:
+'To make conditions unforgettable, picture the entrance to a giant theme park rollercoaster.
+At the gate stands a wooden pole with a painted red line at exactly 48 inches tall.
+A 7-year-old child walks up to the pole.
+What is the child's height? That is the DATA: 50 inches!
+What is the painted line? That is the BENCHMARK: 48 inches!
+What does the ride attendant do? They ask the CONDITION:
+Is Child Height &amp;gt;= 48 inches?
+50 &amp;gt;= 48 evaluates to: TRUE!
+Because the answer is TRUE, the child steps onto the ride!
+What if a toddler walks up who is 40 inches tall?
+40 &amp;gt;= 48 evaluates to: FALSE!
+Because the answer is FALSE, the attendant says 'Sorry, you cannot ride today.'
+Notice: The height stick doesn't pull the child onto the ride. The height stick only asks the question!'">
+        <div class="slide-content">
+          <div class="slide-header">
+            <span class="slide-badge gold-badge">Everyday Metaphor</span>
+            <h2 class="slide-title">Everyday Analogy: The Rollercoaster Height Stick</h2>
+            <p class="slide-lead">A condition compares real-world data against a strict benchmark to produce an instant pass/fail verdict.</p>
+          </div>
+
+          <div class="rollercoaster-analogy-box">
+            <div class="analogy-step">
+              <div class="step-circle blue-circle">1</div>
+              <div class="step-desc">
+                <strong>The Data (Child)</strong>
+                <span>Height = <code>50 inches</code></span>
+                <p>The variable information brought to the gate.</p>
+              </div>
+            </div>
+
+            <div class="analogy-arrow">&#10142;</div>
+
+            <div class="analogy-step">
+              <div class="step-circle purple-circle">2</div>
+              <div class="step-desc">
+                <strong>The Condition (Height Stick)</strong>
+                <span>Question: <code>Height &gt;= 48</code></span>
+                <p>Comparing the data against the safety mark.</p>
+              </div>
+            </div>
+
+            <div class="analogy-arrow">&#10142;</div>
+
+            <div class="analogy-step">
+              <div class="step-circle green-circle">3</div>
+              <div class="step-desc">
+                <strong>The Verdict (Truth)</strong>
+                <span>Result: <code>TRUE</code></span>
+                <p>The definitive boolean answer produced.</p>
+              </div>
+            </div>
+
+            <div class="analogy-arrow">&#10142;</div>
+
+            <div class="analogy-step">
+              <div class="step-circle gold-circle">4</div>
+              <div class="step-desc">
+                <strong>The Next Action (Tomorrow's IF)</strong>
+                <span>Action: <code>Allow Entry</code></span>
+                <p>What the operator decides based on True.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- =================================================================== -->
+      <!-- SLIDE 9: The 6 Comparison Questions                                -->
+      <!-- =================================================================== -->
+      <section class="slide" id="slide-9" data-title="The 6 Comparison Questions" data-segment="Part 3: The 6 Comparison Questions (25:00 - 45:00)" data-notes="TRAINER SPEAKING SCRIPT:
+'How does an app ask questions about data?
+Through the 6 universal comparison operators!
+Every programming language, every Excel formula, and Power Apps uses these exact 6 symbols:
+1. Equal to: = (Is status equal to 'Approved'?)
+2. Not equal to: &lt;&gt; (Is status not equal to 'Closed'?)
+3. Greater than: &gt; (Is pressure greater than 200?)
+4. Less than: &lt; (Is quantity in stock less than 10?)
+5. Greater than or equal to: &gt;= (Is age 18 or older?)
+6. Less than or equal to: &lt;= (Is temperature 100 or below?)
+Every single condition you will ever write in your citizen developer career is built from these 6 questions!'">
+        <div class="slide-content">
+          <div class="slide-header">
+            <span class="slide-badge purple-badge">Technical Grammar</span>
+            <h2 class="slide-title">The 6 Fundamental Comparison Questions</h2>
+            <p class="slide-lead">In Power Apps and Excel, every condition is formed using one of these six relational operators.</p>
+          </div>
+
+          <div class="types-table-wrapper">
+            <table class="types-table">
+              <thead>
+                <tr>
+                  <th>Symbol</th>
+                  <th>Plain-English Question</th>
+                  <th>Workplace Example</th>
+                  <th>Sample Data</th>
+                  <th>Evaluates To</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><code class="op-pill">=</code></td>
+                  <td>Is it exactly <strong>equal to</strong>?</td>
+                  <td><code>txtDept.Text = "Molding"</code></td>
+                  <td><code>"Molding" = "Molding"</code></td>
+                  <td><span class="type-pill pill-bool">TRUE</span></td>
+                </tr>
+                <tr>
+                  <td><code class="op-pill">&lt;&gt;</code></td>
+                  <td>Is it <strong>different from (not equal)</strong>?</td>
+                  <td><code>txtStatus.Text &lt;&gt; "Completed"</code></td>
+                  <td><code>"In Progress" &lt;&gt; "Completed"</code></td>
+                  <td><span class="type-pill pill-bool">TRUE</span></td>
+                </tr>
+                <tr>
+                  <td><code class="op-pill">&gt;</code></td>
+                  <td>Is it strictly <strong>greater than</strong>?</td>
+                  <td><code>txtPressure.Text &gt; 200</code></td>
+                  <td><code>245 &gt; 200</code></td>
+                  <td><span class="type-pill pill-bool">TRUE</span></td>
+                </tr>
+                <tr>
+                  <td><code class="op-pill">&lt;</code></td>
+                  <td>Is it strictly <strong>less than</strong>?</td>
+                  <td><code>txtInventory.Text &lt; 5</code></td>
+                  <td><code>12 &lt; 5</code></td>
+                  <td><span class="type-pill pill-red">FALSE</span></td>
+                </tr>
+                <tr>
+                  <td><code class="op-pill">&gt;=</code></td>
+                  <td>Is it <strong>greater than or equal to</strong>?</td>
+                  <td><code>txtTemperature.Text &gt;= 100</code></td>
+                  <td><code>100 &gt;= 100</code></td>
+                  <td><span class="type-pill pill-bool">TRUE</span></td>
+                </tr>
+                <tr>
+                  <td><code class="op-pill">&lt;=</code></td>
+                  <td>Is it <strong>less than or equal to</strong>?</td>
+                  <td><code>txtDowntime.Text &lt;= 0.5</code></td>
+                  <td><code>2.5 &lt;= 0.5</code></td>
+                  <td><span class="type-pill pill-red">FALSE</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- =================================================================== -->
+      <!-- SLIDE 10: Deep-Dive: Comparing Different Data Types                 -->
+      <!-- =================================================================== -->
+      <section class="slide" id="slide-10" data-title="Comparing Different Data Types" data-segment="Part 3: The 6 Comparison Questions (25:00 - 45:00)" data-notes="TRAINER SPEAKING SCRIPT:
+'Now let's connect today's comparison questions directly to yesterday's 4 data types!
+How do you compare Numbers?
+Using math operators: 245 &gt; 200 evaluates to True.
+How do you compare Text strings?
+Always enclose text in double quotes: txtDepartment.Text = 'Plastics'.
+What if you compare text with different capitalization? In Power Apps, 'apex' = 'APEX' evaluates to True because text comparisons are case-insensitive by default!
+How do you compare Dates?
+Dates can be earlier or later: dpIncidentDate.SelectedDate &lt; Today() asks: Was this incident in the past?
+How do you compare Booleans?
+chkEmergency.Value = true asks: Is the emergency switch flipped ON?
+Notice: You must compare like with like. You cannot ask if 50 is greater than 'Apple'!'">
+        <div class="slide-content">
+          <div class="slide-header">
+            <span class="slide-badge gold-badge">Cross-Type Rules</span>
+            <h2 class="slide-title">How Different Data Types Answer Questions</h2>
+            <p class="slide-lead">Conditions work across numbers, text strings, calendar dates, and switches.</p>
+          </div>
+
+          <div class="pantry-grid">
+            <div class="pantry-jar border-num">
+              <div class="jar-icon">&#128290;</div>
+              <h4>Number Comparisons</h4>
+              <span class="jar-substance">Quantities &amp; Counts</span>
+              <p>Compares mathematical magnitude.</p>
+              <div class="jar-example"><code>245 &gt; 200 ➔ TRUE</code></div>
+            </div>
+
+            <div class="pantry-jar border-text">
+              <div class="jar-icon">&#128221;</div>
+              <h4>Text Comparisons</h4>
+              <span class="jar-substance">Words &amp; Codes</span>
+              <p>Compares exact character strings.</p>
+              <div class="jar-example"><code>"Molding" = "Molding" ➔ TRUE</code></div>
+            </div>
+
+            <div class="pantry-jar border-date">
+              <div class="jar-icon">&#128197;</div>
+              <h4>Date Comparisons</h4>
+              <span class="jar-substance">Chronological Time</span>
+              <p>Compares before (&lt;) and after (&gt;).</p>
+              <div class="jar-example"><code>Date &lt; Today() ➔ TRUE</code></div>
+            </div>
+
+            <div class="pantry-jar border-bool">
+              <div class="jar-icon">&#9989;</div>
+              <h4>Boolean Comparisons</h4>
+              <span class="jar-substance">Binary States</span>
+              <p>Compares True/False flags.</p>
+              <div class="jar-example"><code>chkHazard.Value = true ➔ TRUE</code></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- =================================================================== -->
+      <!-- SLIDE 11: Visual Cause-and-Effect Diagram: Anatomy of a Condition   -->
+      <!-- =================================================================== -->
+      <section class="slide" id="slide-11" data-title="Anatomy of a Condition Flow" data-segment="Part 3: The 6 Comparison Questions (25:00 - 45:00)" data-notes="TRAINER SPEAKING SCRIPT:
+'Look at the three-part anatomy of every condition on screen:
+Part 1: The LEFT SIDE — This is the live data from your app (e.g., txtDowntime.Text).
+Part 2: The OPERATOR — This is the question mark (e.g., &gt;).
+Part 3: The RIGHT SIDE — This is the benchmark or threshold (e.g., 4).
+When the computer evaluates this equation:
+Is 5.5 greater than 4?
+It produces ONE single value in memory: TRUE!
+And that single TRUE is what unlocks the gate to next actions!'">
+        <div class="slide-content">
+          <div class="slide-header">
+            <span class="slide-badge blue-badge">Logical Anatomy</span>
+            <h2 class="slide-title">Visual Cause &amp; Effect: The Anatomy of a Condition</h2>
+            <p class="slide-lead">Every condition consists of three distinct elements that collapse into a single Boolean truth.</p>
+          </div>
+
+          <div class="condition-anatomy-container">
+            <div class="anatomy-equation-row">
+              <div class="anatomy-box left-side">
+                <span class="part-tag">PART 1: DATA (Left Side)</span>
+                <div class="part-val"><code>txtDowntime.Text</code></div>
+                <p class="part-sub">Current live value: <strong>"5.5"</strong></p>
+              </div>
+
+              <div class="anatomy-operator">
+                <span class="part-tag">PART 2: OPERATOR</span>
+                <div class="operator-symbol">&gt;</div>
+                <p class="part-sub">Question: <em>"Greater Than?"</em></p>
+              </div>
+
+              <div class="anatomy-box right-side">
+                <span class="part-tag">PART 3: BENCHMARK (Right Side)</span>
+                <div class="part-val"><code>4.0</code></div>
+                <p class="part-sub">Safety limit: <strong>4.0 Hours</strong></p>
+              </div>
+            </div>
+
+            <div class="anatomy-arrow-down">&darr; Evaluates in Computer Memory &darr;</div>
+
+            <div class="anatomy-result-box">
+              <div class="result-badge-col">
+                <span class="res-tag">THE RESULT (Boolean)</span>
+                <div class="verdict-pill verdict-true">TRUE</div>
+              </div>
+              <div class="result-desc-col">
+                <p class="res-desc">Because live downtime <strong>5.5</strong> is strictly greater than limit <strong>4.0</strong>, this condition produces exactly one boolean truth: <strong>TRUE</strong>!</p>
+              </div>
+            </div>
+          </div>
+          
+        </div>
+      </section>
+
+      <!-- =================================================================== -->
+      <!-- SLIDE 12: Trainer Demo: Interactive Condition Workbench            -->
+      <!-- =================================================================== -->
+      <section class="slide" id="slide-12" data-title="Trainer Demo: Condition Workbench" data-segment="Part 4: Trainer Demonstration (45:00 - 60:00)" data-notes="TRAINER SPEAKING SCRIPT:
+'Now let's open our live Interactive Condition Workbench!
+Watch as I drag the Pressure Slider:
+When Pressure is 140 PSI, look at Condition 1: 'Pressure &gt; 200'.
+Is 140 &gt; 200? The verdict displays FALSE in cool slate!
+Now watch what happens when I drag the slider up to 215 PSI:
+BOOM! The badge instantly turns radiant EMERALD GREEN and flashes TRUE!
+Look at Condition 2: 'Operator Name is blank'.
+When text is typed, IsBlank() evaluates to FALSE.
+When I clear the box, IsBlank() immediately evaluates to TRUE!
+This is how modern apps think: values change, conditions re-evaluate, and the boolean answers guide the software!'">
+        <div class="slide-content">
+          <div class="slide-header">
+            <span class="slide-badge blue-badge">Interactive Simulation</span>
+            <h2 class="slide-title">Trainer Demonstration: The Condition Workbench</h2>
+            <p class="slide-lead">Adjust the live factory controls on the left to see how conditions evaluate to True or False in real time.</p>
+          </div>
+
+          <div class="workbench-grid">
+            <div class="workbench-inputs">
+              <h4>Live Machine Sensor Controls:</h4>
+              <div class="input-control-row">
+                <label>Hydraulic Pressure: <strong id="wb-psi-val">150</strong> PSI</label>
+                <input type="range" id="wb-psi-slider" min="50" max="300" value="150" class="fluent-slider">
+              </div>
+              <div class="input-control-row">
+                <label>Operator Name Input:</label>
+                <input type="text" id="wb-name-input" value="Sophea Chem" class="fluent-text-input" placeholder="Type operator name...">
+              </div>
+              <div class="input-control-row">
+                <label>Emergency Switch Flipped?</label>
+                <button type="button" id="wb-hazard-toggle" class="workbench-toggle-btn">
+                  <span class="toggle-indicator off"></span> OFF (false)
+                </button>
+              </div>
+            </div>
+
+            <div class="workbench-evaluations">
+              <h4>Real-Time Condition Truth Table:</h4>
+              <div class="eval-card" id="eval-card-psi">
+                <div class="eval-left">
+                  <span class="eval-condition"><code>Pressure &gt; 200</code></span>
+                  <span class="eval-calc" id="calc-psi">150 &gt; 200</span>
+                </div>
+                <div class="verdict-badge verdict-false" id="verdict-psi">FALSE</div>
+              </div>
+
+              <div class="eval-card" id="eval-card-name">
+                <div class="eval-left">
+                  <span class="eval-condition"><code>IsBlank(OperatorName)</code></span>
+                  <span class="eval-calc" id="calc-name">"Sophea Chem" is empty?</span>
+                </div>
+                <div class="verdict-badge verdict-false" id="verdict-name">FALSE</div>
+              </div>
+
+              <div class="eval-card" id="eval-card-hazard">
+                <div class="eval-left">
+                  <span class="eval-condition"><code>EmergencySwitch = true</code></span>
+                  <span class="eval-calc" id="calc-hazard">false = true</span>
+                </div>
+                <div class="verdict-badge verdict-false" id="verdict-hazard">FALSE</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- =================================================================== -->
+      <!-- SLIDE 13: Mid-Session Pulse Checkpoint & Hydration                  -->
+      <!-- =================================================================== -->
+      <section class="slide" id="slide-13" data-title="Mid-Session Pulse Check" data-segment="Part 4: Trainer Demonstration (45:00 - 60:00)" data-notes="TRAINER SPEAKING SCRIPT:
+'We have reached the 45-minute mark! Halfway through Day 4!
+Let's pause for a quick 60-second breathing and posture reset.
+Take a sip of water.
+Quick thumb check for everyone in the room:
+Thumbs UP if you clearly understand that a condition is a question, and True/False is simply the answer.
+Thumbs SIDEWAYS if you still wonder how this connects to clicking buttons.
+Remember: Tomorrow, button clicks will use these exact True/False answers to decide whether to save, alert, or block!'">
+        <div class="slide-content">
+          <div class="checkpoint-card">
+            <div class="checkpoint-icon">&#9749;</div>
+            <h2 class="checkpoint-title">Mid-Session Pulse Checkpoint (45:00 Elapsed)</h2>
+            <p class="checkpoint-subtitle">Take a breath, hydrate, and verify your mental foundation before we practice writing conditions.</p>
+
+            <div class="checkpoint-grid">
+              <div class="check-item">
+                <div class="check-icon">&#128077;</div>
+                <h4>Thumbs Up: Clear</h4>
+                <p>I understand that a condition is a question that collapses into strictly TRUE or FALSE.</p>
+              </div>
+              <div class="check-item">
+                <div class="check-icon">&#9995;</div>
+                <h4>Thumbs Sideways: Unsure</h4>
+                <p>I know the 6 comparison symbols, but I want to practice comparing text and dates.</p>
+              </div>
+              <div class="check-item">
+                <div class="check-icon">&#128161;</div>
+                <h4>The Golden Rule Remembered</h4>
+                <p><em>"A condition is the question; True or False is the answer."</em></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- =================================================================== -->
+      <!-- SLIDE 14: Workplace Case Study: The Support Request Form            -->
+      <!-- =================================================================== -->
+      <section class="slide" id="slide-14" data-title="Case Study: Apex Support Form Conditions" data-segment="Part 5: Guided Learner Practice (60:00 - 75:00)" data-notes="TRAINER SPEAKING SCRIPT:
+'Now let's examine how conditions protect our Apex Plastics Support Form!
+Look at the 3 business requirements on this screen:
+Requirement 1: 'The operator must fill in their name before submitting.'
+What is the condition? IsBlank(txtOperator.Text) = false!
+Requirement 2: 'If downtime exceeds 4 hours, mark ticket as Critical.'
+What is the condition? Value(txtDowntime.Text) &gt; 4!
+Requirement 3: 'Ensure the incident date is not set in the future.'
+What is the condition? dpDate.SelectedDate &lt;= Today()!
+Notice: Every single business requirement translates into a clean, simple comparison question.'">
+        <div class="slide-content">
+          <div class="slide-header">
+            <span class="slide-badge teal-badge">Workplace DX Architecture</span>
+            <h2 class="slide-title">Apex Plastics: Deconstructing Form Conditions</h2>
+            <p class="slide-lead">Translating real business rules into syntactic comparison questions.</p>
+          </div>
+
+          <div class="form-blueprint-grid">
+            <div class="form-preview-card">
+              <div class="form-title-bar">Apex Maintenance Intake Validation Rules</div>
+              <div class="form-field-row">
+                <label>Rule 1: Name Required</label>
+                <div class="mock-input"><code>IsBlank(txtOperator.Text) = false</code></div>
+              </div>
+              <div class="form-field-row">
+                <label>Rule 2: High Downtime Alert Threshold</label>
+                <div class="mock-input"><code>Value(txtDowntime.Text) &gt; 4.0</code></div>
+              </div>
+              <div class="form-field-row">
+                <label>Rule 3: Non-Future Incident Date</label>
+                <div class="mock-input"><code>dpIncidentDate.SelectedDate &lt;= Today()</code></div>
+              </div>
+              <div class="form-field-row">
+                <label>Rule 4: Emergency Machine Shutdown</label>
+                <div class="mock-input"><code>chkEmergency.Value = true</code></div>
+              </div>
+            </div>
+
+            <div class="schema-mapping-card">
+              <h4 style="margin-top:0; color:#38bdf8;">Question Decomposition:</h4>
+              <div class="mapping-row">
+                <span class="field-name">Name entered?</span>
+                <span class="type-pill pill-bool">True / False</span>
+                <span class="ui-ctrl">Controls Form Submit</span>
+              </div>
+              <div class="mapping-row">
+                <span class="field-name">Downtime &gt; 4 hrs?</span>
+                <span class="type-pill pill-bool">True / False</span>
+                <span class="ui-ctrl">Controls Ticket Priority</span>
+              </div>
+              <div class="mapping-row">
+                <span class="field-name">Date valid?</span>
+                <span class="type-pill pill-bool">True / False</span>
+                <span class="ui-ctrl">Controls Date Error Banner</span>
+              </div>
+              <div class="mapping-row">
+                <span class="field-name">Emergency active?</span>
+                <span class="type-pill pill-bool">True / False</span>
+                <span class="ui-ctrl">Controls Siren Dispatch</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- =================================================================== -->
+      <!-- SLIDE 15: Power Fx Connection: How Power Apps Asks Questions        -->
+      <!-- =================================================================== -->
+      <section class="slide" id="slide-15" data-title="Power Fx Conditions" data-segment="Part 5: Guided Learner Practice (60:00 - 75:00)" data-notes="TRAINER SPEAKING SCRIPT:
+'How do we write these conditions in Microsoft Power Fx?
+Notice on screen the 5-step pattern we always follow:
+1. Business Requirement: The manager wants an alert if repair cost is over $500.
+2. Plain-English Rule: Is the repair cost greater than five hundred dollars?
+3. Condition / Question: Value(txtCost.Text) &gt; 500.
+4. Resulting Boolean: Evaluates to TRUE or FALSE.
+5. Decision / Action: Tomorrow on Day 5, If() will take that True and route for approval!
+Look at the specialized validation functions:
+IsBlank(TextInput.Text) checks if a field is empty.
+IsEmpty(Collection) checks if a table has zero rows.
+Today() returns the current calendar date.'">
+        <div class="slide-content">
+          <div class="slide-header">
+            <span class="slide-badge purple-badge">Power Fx Connection</span>
+            <h2 class="slide-title">How Power Fx Asks Questions About Data</h2>
+            <p class="slide-lead">From human business requirement to syntactic comparison formula.</p>
+          </div>
+
+          <div class="grid-2-col">
+            <div class="code-card">
+              <div class="code-header">
+                <span>💻 Foundational Comparison Formulas</span>
+                <span class="slide-badge purple-badge" style="float: right;">Power Fx</span>
+              </div>
+              <pre class="powerfx-code">
+<span class="comment">// 1. Numeric Comparison (True or False)</span>
+<span class="func">Value</span>(txtDowntime.<span class="prop">Text</span>) &gt; 4.0
+
+<span class="comment">// 2. Exact Text Equality (Case-Insensitive)</span>
+txtDepartment.<span class="prop">Text</span> = "Injection Molding"
+
+<span class="comment">// 3. Checking if text box is empty</span>
+<span class="func">IsBlank</span>(txtOperatorName.<span class="prop">Text</span>)
+
+<span class="comment">// 4. Date Comparison (Past vs Future)</span>
+dpIncidentDate.<span class="prop">SelectedDate</span> &lt;= <span class="func">Today</span>()
+              </pre>
+              <div class="code-footer">Every condition evaluates to a single Boolean: <code>TRUE</code> or <code>FALSE</code></div>
+            </div>
+
+            <div class="chain-explain-card">
+              <div class="chain-header">
+                <span>🧠 The 5-Step Logic Chain</span>
+                <span class="slide-badge teal-badge">Process Flow</span>
+              </div>
+              <div class="chain-body">
+                <ol class="five-step-chain">
+                  <li>
+                    <span class="step-chain-badge">1</span>
+                    <div class="step-chain-content">
+                      <strong>Business Requirement:</strong>
+                      <div style="color: #cbd5e1; font-size: 0.86rem;">Alert manager if repair cost exceeds $500.</div>
+                    </div>
+                  </li>
+                  <li>
+                    <span class="step-chain-badge">2</span>
+                    <div class="step-chain-content">
+                      <strong>Plain-English Rule:</strong>
+                      <div style="color: #cbd5e1; font-size: 0.88rem;">Is the repair cost greater than five hundred dollars?</div>
+                    </div>
+                  </li>
+                  <li>
+                    <span class="step-chain-badge">3</span>
+                    <div class="step-chain-content">
+                      <strong>Condition / Question:</strong>
+                      <div><code>Value(txtCost.Text) &gt; 500</code></div>
+                    </div>
+                  </li>
+                  <li>
+                    <span class="step-chain-badge">4</span>
+                    <div class="step-chain-content">
+                      <strong>Boolean Result:</strong>
+                      <div style="color: #cbd5e1; font-size: 0.86rem;">Computer evaluates strictly to <strong style="color: #86efac;">TRUE</strong> or <strong style="color: #f87171;">FALSE</strong></div>
+                    </div>
+                  </li>
+                  <li>
+                    <span class="step-chain-badge">5</span>
+                    <div class="step-chain-content">
+                      <strong>Action (Day 5 Forward Bridge):</strong>
+                      <div><code>If(True, Navigate(scrApproval))</code></div>
+                    </div>
+                  </li>
+                </ol>
+              </div>
+              <div class="chain-footer">
+                <span>🔗 <strong>Day 5 Forward Bridge:</strong> The condition dictates which branch the app executes!</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- =================================================================== -->
+      <!-- SLIDE 16: The Anatomy of a Question                                -->
+      <!-- =================================================================== -->
+      <section class="slide" id="slide-16" data-title="The Anatomy of a Question" data-segment="Part 5: Guided Learner Practice (60:00 - 75:00)" data-notes="TRAINER SPEAKING SCRIPT:
+'Let's reinforce the golden rule of comparison:
+A question MUST compare compatible data types!
+You can compare a Number to a Number (245 &gt; 200).
+You can compare Text to Text ('Molding' = 'Molding').
+You can compare a Date to a Date (Today() &gt; Date(2026,1,1)).
+What happens if you try to ask: Is 'John' &gt; 50?
+Power Apps displays a red squiggly line and says: Incompatible types. You cannot compare text to numbers!
+Always make sure both sides of your operator come from the same pantry jar.'">
+        <div class="slide-content">
+          <div class="slide-header">
+            <span class="slide-badge blue-badge">Data Type Compatibility</span>
+            <h2 class="slide-title">The Golden Compatibility Rule for Conditions</h2>
+            <p class="slide-lead">Both sides of a comparison operator must belong to the exact same data family.</p>
+          </div>
+
+          <div class="conversion-bridge-grid">
+            <div class="bridge-card bridge-to-num">
+              <div class="bridge-direction">
+                <span class="type-pill pill-num">Number</span>
+                <span class="bridge-arrow">&#8596;</span>
+                <span class="type-pill pill-num">Number</span>
+              </div>
+              <h3>Legal Numeric Comparisons</h3>
+              <p>Both sides must be raw numbers. Use <code>Value()</code> to convert text digits first.</p>
+              <div class="code-box">
+                <code>Value(txtHours.Text) &gt;= 8.0 ➔ <strong>TRUE / FALSE</strong></code>
+              </div>
+              <div class="bridge-note">&#10004; Compares quantities, prices, measurements.</div>
+            </div>
+
+            <div class="bridge-card bridge-to-text">
+              <div class="bridge-direction">
+                <span class="type-pill pill-text">Text</span>
+                <span class="bridge-arrow">&#8596;</span>
+                <span class="type-pill pill-text">Text</span>
+              </div>
+              <h3>Legal Text Comparisons</h3>
+              <p>Both sides must be strings enclosed in double quotes.</p>
+              <div class="code-box">
+                <code>txtRole.Text = "Supervisor" ➔ <strong>TRUE / FALSE</strong></code>
+              </div>
+              <div class="bridge-note">&#9888; Never compare text to a bare number without conversion!</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- =================================================================== -->
+      <!-- SLIDE 17: Guided Learner Practice Brief: Extruder Line 4            -->
+      <!-- =================================================================== -->
+      <section class="slide" id="slide-17" data-title="Guided Practice Brief" data-segment="Part 5: Guided Learner Practice (60:00 - 75:00)" data-notes="TRAINER SPEAKING SCRIPT: Now it is time for your hands-on practice! You are auditing the safety sensors on Apex Plastics Extruder Line 4. The plant safety manager gives you 6 live sensor conditions to evaluate: 1. Barrel Temp exceeds 230C (Reading: 245C), 2. Safety Gate Closed is true, 3. Hopper Resin Level is under 10% (Reading: 8%), 4. Hydraulic Pressure is at most 180 PSI (Reading: 195 PSI), 5. Technician Assigned is not blank (Sophea), 6. Next Calibration Date is valid. On the next slide, you will evaluate each condition to see if it yields TRUE or FALSE!">
+        <div class="slide-content">
+          <div class="slide-header">
+            <span class="slide-badge teal-badge">Guided Challenge Brief</span>
+            <h2 class="slide-title">Guided Practice: Extruder Line 4 Safety Audit</h2>
+            <p class="slide-lead">Analyze the 6 manufacturing safety conditions before evaluating their truth values.</p>
+          </div>
+
+          <div class="parts-brief-grid">
+            <div class="brief-item">
+              <span class="brief-num">1</span>
+              <div>
+                <strong>Overheating Check</strong>
+                <p>Formula: <code>Temp &gt; 230</code> (Reading: 245°C) &bull; Is the heating barrel in danger?</p>
+              </div>
+            </div>
+            <div class="brief-item">
+              <span class="brief-num">2</span>
+              <div>
+                <strong>Safety Gate Interlock</strong>
+                <p>Formula: <code>GateClosed = true</code> (State: true) &bull; Is the mechanical barrier locked?</p>
+              </div>
+            </div>
+            <div class="brief-item">
+              <span class="brief-num">3</span>
+              <div>
+                <strong>Hopper Low Resin Alert</strong>
+                <p>Formula: <code>PelletStock &lt; 10</code> (Reading: 8%) &bull; Does the machine risk running dry?</p>
+              </div>
+            </div>
+            <div class="brief-item">
+              <span class="brief-num">4</span>
+              <div>
+                <strong>Hydraulic Safe Pressure</strong>
+                <p>Formula: <code>Pressure &lt;= 180</code> (Reading: 195 PSI) &bull; Is the pressure within safe limits?</p>
+              </div>
+            </div>
+            <div class="brief-item">
+              <span class="brief-num">5</span>
+              <div>
+                <strong>Technician Assigned</strong>
+                <p>Formula: <code>TechName &lt;&gt; ""</code> (Current: "Sophea") &bull; Is an operator logged in?</p>
+              </div>
+            </div>
+            <div class="brief-item">
+              <span class="brief-num">6</span>
+              <div>
+                <strong>Calibration Still Valid</strong>
+                <p>Formula: <code>CalibDate &gt;= Today()</code> (Cert Date: 2026-10-15) &bull; Is QA certification active?</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- =================================================================== -->
+      <!-- SLIDE 18: Interactive Practice Board: 6-Condition Truth Evaluator   -->
+      <!-- =================================================================== -->
+      <section class="slide" id="slide-18" data-title="Interactive Truth Evaluator Board" data-segment="Part 5: Guided Learner Practice (60:00 - 75:00)" data-notes="TRAINER SPEAKING SCRIPT:
+'Here is your live Truth Evaluator Board!
+For each of the 6 conditions, read the sensor value and click whether the condition evaluates to TRUE or FALSE.
+Notice:
+When Temp is 245, 245 &gt; 230 is TRUE!
+When Pressure is 195, 195 &lt;= 180 is FALSE!
+Let's see if you can achieve a 6 out of 6 perfect score!'">
+        <div class="slide-content">
+          <div class="slide-header">
+            <span class="slide-badge green-badge">Hands-On Practice</span>
+            <h2 class="slide-title">Interactive 6-Condition Truth Evaluator</h2>
+            <p class="slide-lead">Evaluate each factory condition below. Click TRUE or FALSE to test your logic.</p>
+          </div>
+
+          <div class="evaluator-grid-container" id="evaluator-widget">
+            <div class="evaluator-card" data-cond-id="c1" data-correct="true">
+              <div class="cond-title">1. Overheating: <code>245 &gt; 230</code></div>
+              <div class="cond-btn-pair">
+                <button class="cond-btn" data-choice="true">TRUE</button>
+                <button class="cond-btn" data-choice="false">FALSE</button>
+              </div>
+              <div class="cond-status-text">Select True or False</div>
+            </div>
+
+            <div class="evaluator-card" data-cond-id="c2" data-correct="true">
+              <div class="cond-title">2. Safety Gate: <code>true = true</code></div>
+              <div class="cond-btn-pair">
+                <button class="cond-btn" data-choice="true">TRUE</button>
+                <button class="cond-btn" data-choice="false">FALSE</button>
+              </div>
+              <div class="cond-status-text">Select True or False</div>
+            </div>
+
+            <div class="evaluator-card" data-cond-id="c3" data-correct="true">
+              <div class="cond-title">3. Low Resin: <code>8 &lt; 10</code></div>
+              <div class="cond-btn-pair">
+                <button class="cond-btn" data-choice="true">TRUE</button>
+                <button class="cond-btn" data-choice="false">FALSE</button>
+              </div>
+              <div class="cond-status-text">Select True or False</div>
+            </div>
+
+            <div class="evaluator-card" data-cond-id="c4" data-correct="false">
+              <div class="cond-title">4. Safe Pressure: <code>195 &lt;= 180</code></div>
+              <div class="cond-btn-pair">
+                <button class="cond-btn" data-choice="true">TRUE</button>
+                <button class="cond-btn" data-choice="false">FALSE</button>
+              </div>
+              <div class="cond-status-text">Select True or False</div>
+            </div>
+
+            <div class="evaluator-card" data-cond-id="c5" data-correct="true">
+              <div class="cond-title">5. Tech Assigned: <code>"Sophea" &lt;&gt; ""</code></div>
+              <div class="cond-btn-pair">
+                <button class="cond-btn" data-choice="true">TRUE</button>
+                <button class="cond-btn" data-choice="false">FALSE</button>
+              </div>
+              <div class="cond-status-text">Select True or False</div>
+            </div>
+
+            <div class="evaluator-card" data-cond-id="c6" data-correct="false">
+              <div class="cond-title">6. Valid QA: <code>"2026-10-15" &gt;= "Today"</code></div>
+              <div class="cond-btn-pair">
+                <button class="cond-btn" data-choice="true">TRUE</button>
+                <button class="cond-btn" data-choice="false">FALSE</button>
+              </div>
+              <div class="cond-status-text">Select True or False</div>
+            </div>
+          </div>
+
+          <div class="evaluator-footer-bar">
+            <span>Score: <strong id="eval-score">0</strong> / 6 Correct</span>
+            <span id="eval-feedback">Evaluate all 6 conditions above.</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- =================================================================== -->
+      <!-- SLIDE 19: 4 Common Beginner Misconceptions & Corrections            -->
+      <!-- =================================================================== -->
+      <section class="slide" id="slide-19" data-title="Common Beginner Misconceptions" data-segment="Part 6: Assessment &amp;amp; Forward Bridge (75:00 - 90:00)" data-notes="TRAINER SPEAKING SCRIPT:
+'Let's examine 4 common misconceptions beginners make about conditions:
+Misconception 1: 'True/False is the whole logic.'
+Correction: True/False is merely the answer! The condition is the question. Tomorrow, IF uses that answer to make a decision.
+Misconception 2: 'A single equal sign means make it equal.'
+Correction: In Power Fx, = is a question ('Are these two equal?'), while Set() assigns values!
+Misconception 3: 'I need to write 'true' in quotes.'
+Correction: Boolean true and false are pure keywords. If you put quotes around 'true', it becomes a text string and breaks logic!
+Misconception 4: 'A condition can do an action.'
+Correction: A condition only compares; it never changes data or navigates screens!'">
+        <div class="slide-content">
+          <div class="slide-header">
+            <span class="slide-badge red-badge">Mental Model Corrections</span>
+            <h2 class="slide-title">4 Common Beginner Misconceptions &amp; Trainer Fixes</h2>
+            <p class="slide-lead">Correcting plausible but dangerous wrong mental models before they become bad habits.</p>
+          </div>
+
+          <div class="grid-2-col">
+            <div class="misconception-card">
+              <div class="misc-bad">&#10060; Wrong Mental Model #1</div>
+              <h4>"True and False is the decision."</h4>
+              <p class="misc-fix"><strong>Trainer Correction:</strong> True/False is just the <strong>answer</strong> produced by a comparison question. Tomorrow on Day 5, the <code>If()</code> function will use that answer to make an actual business decision.</p>
+            </div>
+
+            <div class="misconception-card">
+              <div class="misc-bad">&#10060; Wrong Mental Model #2</div>
+              <h4>"Writing = means set this value."</h4>
+              <p class="misc-fix"><strong>Trainer Correction:</strong> In Power Fx conditions, <code>=</code> is an inquiry: <em>"Is Left equal to Right?"</em>. It never changes data. Changing data uses functions like <code>Set()</code> or <code>UpdateContext()</code>.</p>
+            </div>
+
+            <div class="misconception-card">
+              <div class="misc-bad">&#10060; Wrong Mental Model #3</div>
+              <h4>"True and False must be written with quotes."</h4>
+              <p class="misc-fix"><strong>Trainer Correction:</strong> Writing <code>"true"</code> creates a <strong>Text</strong> string. Pure Boolean logic uses bare keywords: <code>true</code> and <code>false</code> without quotes.</p>
+            </div>
+
+            <div class="misconception-card">
+              <div class="misc-bad">&#10060; Wrong Mental Model #4</div>
+              <h4>"Conditions can execute actions by themselves."</h4>
+              <p class="misc-fix"><strong>Trainer Correction:</strong> A condition is completely passive. It evaluates truth, but it cannot send emails, save records, or navigate screens without an enclosing <code>If()</code> action wrapper.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- =================================================================== -->
+      <!-- SLIDE 20: 5-Question Knowledge Check (Interactive Quiz)             -->
+      <!-- =================================================================== -->
+      <section class="slide" id="slide-20" data-title="5-Question Knowledge Check" data-segment="Part 6: Assessment &amp;amp; Forward Bridge (75:00 - 90:00)" data-notes="TRAINER SPEAKING SCRIPT:
+'Time for our 5-Question Knowledge Check!
+Notice questions 2 and 4 specifically ask 'Why' and 'What happens if'.
+Take your time, select the best answer for each question, and let's review the rationale together.'">
+        <div class="slide-content">
+          <div class="slide-header">
+            <span class="slide-badge blue-badge">Knowledge Verification</span>
+            <h2 class="slide-title">Day 4 Evaluative Knowledge Check</h2>
+            <p class="slide-lead">Answer all 5 questions to verify your mastery of conditions, operators, and boolean evaluation.</p>
+          </div>
+
+          <div class="quiz-container" id="quiz-widget">
+            <div class="quiz-header-bar">
+              <span id="quiz-question-counter">Question 1 of 5</span>
+              <span id="quiz-score-display">Score: 0 / 5</span>
+            </div>
+
+            <div class="quiz-body" id="quiz-body">
+              <!-- Dynamically rendered via script.js -->
+            </div>
+
+            <div class="quiz-navigation">
+              <button class="btn-subtle" id="quiz-prev-btn" disabled>&#8592; Previous</button>
+              <button class="btn-primary" id="quiz-next-btn">Next Question &#8594;</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- =================================================================== -->
+      <!-- SLIDE 21: Final Challenge: Quality Inspection Gate (8 Conditions)   -->
+      <!-- =================================================================== -->
+      <section class="slide" id="slide-21" data-title="Final Challenge: Quality Gate" data-segment="Part 6: Assessment &amp;amp; Forward Bridge (75:00 - 90:00)" data-notes="TRAINER SPEAKING SCRIPT:
+'Here is your Day 4 Capstone Challenge:
+Apex Plastics is implementing a digital Quality Gate for manufactured automotive parts.
+You have 8 inspection rules:
+1. Part Weight between 48.0g and 52.0g.
+2. Defect Count equal to 0.
+3. Mold Cavity ID not equal to 'C-99'.
+4. Plastic Melt Temp &gt;= 210°C.
+5. Inspector ID not empty.
+6. Inspection Date &lt;= Today().
+7. Wall Thickness &gt;= 2.5mm.
+8. Part Passed Visual Inspection = true.
+Formulate each condition and determine what it evaluates to for Sample Part #882!'">
+        <div class="slide-content">
+          <div class="slide-header">
+            <span class="slide-badge purple-badge">Independent Capstone</span>
+            <h2 class="slide-title">Final Challenge: Apex Quality Gate Inspection</h2>
+            <p class="slide-lead">Translate 8 factory quality standards into syntactic Power Fx condition expressions.</p>
+          </div>
+
+          <div class="challenge-table-wrapper">
+            <table class="challenge-table">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Quality Inspection Rule</th>
+                  <th>Sample Part #882 Data</th>
+                  <th>Target Condition Expression</th>
+                  <th>Truth Verdict</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td>1</td><td>Part Weight &gt;= 48.0</td><td><code>Weight = 49.5g</code></td><td>?</td><td>?</td></tr>
+                <tr><td>2</td><td>Defect Count = 0</td><td><code>Defects = 0</code></td><td>?</td><td>?</td></tr>
+                <tr><td>3</td><td>Cavity ID &lt;&gt; "C-99"</td><td><code>Cavity = "C-04"</code></td><td>?</td><td>?</td></tr>
+                <tr><td>4</td><td>Melt Temp &gt;= 210°C</td><td><code>Temp = 218°C</code></td><td>?</td><td>?</td></tr>
+                <tr><td>5</td><td>Inspector Name Not Empty</td><td><code>Inspector = "Dara"</code></td><td>?</td><td>?</td></tr>
+                <tr><td>6</td><td>Inspection Date &lt;= Today()</td><td><code>Date = Today()</code></td><td>?</td><td>?</td></tr>
+                <tr><td>7</td><td>Wall Thickness &gt;= 2.5mm</td><td><code>Thickness = 2.1mm</code></td><td>?</td><td>?</td></tr>
+                <tr><td>8</td><td>Visual QC Passed = true</td><td><code>QC = true</code></td><td>?</td><td>?</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- =================================================================== -->
+      <!-- SLIDE 22: Challenge Solution Reveal & Evaluation Rubric              -->
+      <!-- =================================================================== -->
+      <section class="slide" id="slide-22" data-title="Challenge Solution &amp;amp; Rubric" data-segment="Part 6: Assessment &amp;amp; Forward Bridge (75:00 - 90:00)" data-notes="TRAINER SPEAKING SCRIPT:
+'Let's reveal the exemplar solution!
+Click 'Reveal Solution' to inspect the benchmark answer key.
+Notice rule 7: Wall Thickness was 2.1mm, so 2.1 &gt;= 2.5 evaluates to FALSE!
+All other 7 rules evaluate to TRUE!
+Because rule 7 was FALSE, this part fails the quality gate!
+Check your work against our 4-level evaluation rubric:
+Level 4 Mastery means all 8 conditions are syntactically perfect with correct True/False verdicts.'">
+        <div class="slide-content">
+          <div class="slide-header">
+            <span class="slide-badge green-badge">Exemplar &amp; Rubric</span>
+            <h2 class="slide-title">Final Challenge Solution &amp; 4-Level Evaluation Rubric</h2>
+            <p class="slide-lead">Compare your condition expressions against the production standard and evaluate your performance.</p>
+          </div>
+
+          <div class="grid-2-col">
+            <div class="solution-card">
+              <div class="solution-header">
+                <h4>Exemplar Condition Specifications</h4>
+                <button class="btn-reveal" id="btn-reveal-solution">Reveal Solution</button>
+              </div>
+              <div class="solution-body collapsed" id="solution-content">
+                <ul class="solution-list">
+                  <li><strong>1. Weight:</strong> <code>Value(txtWeight.Text) &gt;= 48.0</code> ➔ <strong style="color:#4ade80;">TRUE</strong> (49.5 &gt;= 48.0)</li>
+                  <li><strong>2. Defects:</strong> <code>Value(txtDefects.Text) = 0</code> ➔ <strong style="color:#4ade80;">TRUE</strong> (0 = 0)</li>
+                  <li><strong>3. Cavity:</strong> <code>txtCavity.Text &lt;&gt; "C-99"</code> ➔ <strong style="color:#4ade80;">TRUE</strong> ("C-04" &lt;&gt; "C-99")</li>
+                  <li><strong>4. Temp:</strong> <code>Value(txtTemp.Text) &gt;= 210</code> ➔ <strong style="color:#4ade80;">TRUE</strong> (218 &gt;= 210)</li>
+                  <li><strong>5. Inspector:</strong> <code>IsBlank(txtInspector.Text) = false</code> ➔ <strong style="color:#4ade80;">TRUE</strong> (Not blank)</li>
+                  <li><strong>6. Date:</strong> <code>dpDate.SelectedDate &lt;= Today()</code> ➔ <strong style="color:#4ade80;">TRUE</strong> (Valid past/present)</li>
+                  <li><strong>7. Thickness:</strong> <code>Value(txtThick.Text) &gt;= 2.5</code> ➔ <strong style="color:#fb7185;">FALSE</strong> (2.1 &gt;= 2.5 fails!)</li>
+                  <li><strong>8. Visual:</strong> <code>chkVisual.Value = true</code> ➔ <strong style="color:#4ade80;">TRUE</strong> (QC toggle is ON)</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="rubric-card">
+              <h4>Evaluation Rubric (4 Performance Levels)</h4>
+              <div class="rubric-levels">
+                <div class="level-item level-4">
+                  <span class="lvl-title">Level 4: Mastery (100%)</span>
+                  <p>All 8 conditions syntactically correct; uses Value() where needed; correctly flags rule 7 as FALSE.</p>
+                </div>
+                <div class="level-item level-3">
+                  <span class="lvl-title">Level 3: Proficient (75-99%)</span>
+                  <p>6-7 conditions correct; accurately uses comparison symbols; minor syntax omission.</p>
+                </div>
+                <div class="level-item level-2">
+                  <span class="lvl-title">Level 2: Developing (50-74%)</span>
+                  <p>Confused &lt;&gt; with =; forgot quotes on text strings; evaluated rule 7 incorrectly.</p>
+                </div>
+                <div class="level-item level-1">
+                  <span class="lvl-title">Level 1: Novice (&lt;50%)</span>
+                  <p>Treats conditions as actions; confuses True/False with text words "Yes"/"No".</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- =================================================================== -->
+      <!-- SLIDE 23: The Connection Map (Before -> Today -> Next)              -->
+      <!-- =================================================================== -->
+      <section class="slide" id="slide-23" data-title="Curriculum Connection Map" data-segment="Part 6: Assessment &amp;amp; Forward Bridge (75:00 - 90:00)" data-notes="TRAINER SPEAKING SCRIPT:
+'Look at our 3-day Connection Map.
+BEFORE on Day 3: We learned that apps hold data in typed containers (Text, Number, Date, Boolean).
+TODAY on Day 4: We learned how an app asks questions about data using conditions to produce TRUE or FALSE.
+NEXT on Day 5: The big payoff! IF / DECISIONS!
+How does IF work?
+If (Condition, ActionIfTrue, ActionIfFalse)!
+Look at how seamless the chain is:
+Data feeds Condition. Condition yields True or False. True or False tells IF which action to execute!
+Everything in this course connects.'">
+        <div class="slide-content">
+          <div class="slide-header">
+            <span class="slide-badge purple-badge">Curriculum Bridge</span>
+            <h2 class="slide-title">The Three-Day Connection Map</h2>
+            <p class="slide-lead">How yesterday's data, today's conditions, and tomorrow's decisions form a seamless logic chain.</p>
+          </div>
+
+          <div class="bridge-three-col">
+            <div class="bridge-col before-col">
+              <span class="bridge-time-tag">YESTERDAY (Day 3)</span>
+              <h3>Data &amp; Containers</h3>
+              <div class="bridge-summary">
+                Apps hold information in typed containers: Text, Number, Date/Time, and Boolean.
+              </div>
+              <div class="bridge-flow-arrow">&#10142; Compared by...</div>
+            </div>
+
+            <div class="bridge-col today-col">
+              <span class="bridge-time-tag">TODAY (Day 4)</span>
+              <h3>Questions &amp; Conditions</h3>
+              <div class="bridge-summary">
+                Data is compared using relational operators (<code>=</code>, <code>&gt;</code>, <code>&lt;</code>, <code>&lt;&gt;</code>) yielding strictly <strong>True</strong> or <strong>False</strong>.
+              </div>
+              <div class="bridge-flow-arrow">&#10142; Evaluated by...</div>
+            </div>
+
+            <div class="bridge-col next-col">
+              <span class="bridge-time-tag">TOMORROW (Day 5)</span>
+              <h3>IF &amp; Branching Actions</h3>
+              <div class="bridge-summary">
+                <code>If()</code> consumes the True/False result to choose actions: <code>If(Downtime &gt; 4, NotifyManager(), AutoSave())</code>.
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- =================================================================== -->
+      <!-- SLIDE 24: Homework, Bilingual Glossary & Session Wrap-Up            -->
+      <!-- =================================================================== -->
+      <section class="slide" id="slide-24" data-title="Homework &amp;amp; Glossary" data-segment="Part 6: Assessment &amp;amp; Forward Bridge (75:00 - 90:00)" data-notes="TRAINER SPEAKING SCRIPT:
+'Congratulations on completing Day 4!
+Here is your 15-minute optional review homework: 'The Real-Life Condition Scout'.
+Identify 3 conditions in your daily routine:
+1. 'Is alarm time &gt;= 06:30?'
+2. 'Is fuel gauge &lt; 15%?'
+3. 'Is coffee pot temperature &gt; 80°C?'
+Also review the bilingual English-Khmer glossary below.
+Thank you for your fantastic focus today. Tomorrow on Day 5, we teach our apps to make intelligent decisions using IF!'">
+        <div class="slide-content">
+          <div class="slide-header">
+            <span class="slide-badge blue-badge">Session Wrap-Up</span>
+            <h2 class="slide-title">15-Minute Homework &amp; Bilingual Glossary</h2>
+            <p class="slide-lead">Reinforce today's concepts in your daily environment and master the technical logic vocabulary.</p>
+          </div>
+
+          <div class="grid-2-col">
+            <div class="homework-card">
+              <div class="hw-icon">&#128269;</div>
+              <div class="hw-content">
+                <h4>Homework: "The Real-Life Condition Scout" (&le; 15 Mins)</h4>
+                <p>1. Identify <strong>3 real-life conditions</strong> you evaluate every day at home or work.</p>
+                <p>2. Break each into: <code>[Left Data] + [Operator] + [Right Benchmark]</code>.</p>
+                <p>3. Note whether the condition evaluated to <strong>True</strong> or <strong>False</strong> today.</p>
+                <div class="hw-outcome">Expected Result: 3 written condition formulas ready to share tomorrow!</div>
+              </div>
+            </div>
+
+            <div class="glossary-card">
+              <h4>Bilingual Technical Glossary (Day 4)</h4>
+              <div class="glossary-list">
+                <div class="gloss-item">
+                  <span class="en-term">Condition</span>
+                  <span class="kh-term">លក្ខខណ្ឌ (សំណួរប្រៀបធៀប)</span>
+                </div>
+                <div class="gloss-item">
+                  <span class="en-term">Comparison Operator</span>
+                  <span class="kh-term">សញ្ញាប្រមាណវិធីប្រៀបធៀប (=, &lt;&gt;, &gt;, &lt;)</span>
+                </div>
+                <div class="gloss-item">
+                  <span class="en-term">True / False</span>
+                  <span class="kh-term">ពិត / មិនពិត (ចម្លើយតក្កវិទ្យា)</span>
+                </div>
+                <div class="gloss-item">
+                  <span class="en-term">Equal / Not Equal</span>
+                  <span class="kh-term">ស្មើ (=) / មិនស្មើ (&lt;&gt;)</span>
+                </div>
+                <div class="gloss-item">
+                  <span class="en-term">Greater / Less Than</span>
+                  <span class="kh-term">ធំជាង (&gt;) / តូចជាង (&lt;)</span>
+                </div>
+                <div class="gloss-item">
+                  <span class="en-term">IsBlank Function</span>
+                  <span class="kh-term">អនុគមន៍ពិនិត្យប្រអប់ទទេ IsBlank()</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- Bottom Controls & Navigation Bar -->
+        <footer id="bottom-hud">
+      <div id="progress-bar-container">
+        <div id="progress-bar"></div>
+      </div>
+
+      <div class="hud-left">
+        <button class="hud-btn" id="btn-prev" onclick="prevSlide()" title="Previous Slide (Left Arrow)">&#8592; Prev</button>
+        <button class="hud-btn" id="btn-next" onclick="nextSlide()" title="Next Slide (Right Arrow / Space)">Next &#8594;</button>
+        <span id="slide-counter">Slide <span id="slide-current-num">1</span> / <span id="slide-total-count">24</span></span>
+      </div>
+
+      <div class="hud-right">
+        <button class="hud-btn" id="btn-lang" onclick="toggleLanguage()" title="Toggle Language (L)">
+          🌐 <span id="lang-label">KH</span>
+        </button>
+        <button class="hud-btn active" id="btn-laser" onclick="toggleLaser()" title="Presenter Laser Pointer (P)">
+          🔴 Laser
+        </button>
+        <button class="hud-btn" id="btn-notes" onclick="toggleNotes()" title="Trainer Notes Drawer (N)">
+          📝 Notes
+        </button>
+        <button class="hud-btn" id="btn-overview" onclick="toggleOverview()" title="Slide Overview Modal (O)">
+          🗂️ Overview
+        </button>
+        <button class="hud-btn" id="btn-timer" onclick="toggleTimer()" title="90-Min Countdown (T)">
+          ⏱️ <span id="timer-display">90:00</span>
+        </button>
+        <button class="hud-btn" id="btn-fullscreen" onclick="toggleFullscreen()" title="Fullscreen (F)">
+          ⛶
+        </button>
+        <a href="../index.html" class="hud-btn hub-btn" title="Return to Master Curriculum Hub (ត្រឡប់ទៅទំព័រដើម)" style="text-decoration: none; display: inline-flex; align-items: center; gap: 4px; color: #fcd34d; font-weight: 600;"><span>🏠</span><span>Hub</span></a>
+      </div>
+    </footer>
+
+    
+
+  </div> <!-- /#presentation-container -->
+
+  <!-- Presenter Notes Bottom Drawer -->
+  <aside id="presenter-notes-panel" class="presenter-notes-panel" aria-label="Trainer Notes and Speaking Script">
+    <div class="notes-header">
+      <div class="notes-title">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+          <path d="M2.5 1A1.5 1.5 0 0 0 1 2.5v11A1.5 1.5 0 0 0 2.5 15h6.086a1.5 1.5 0 0 0 1.06-.44l4.915-4.914A1.5 1.5 0 0 0 15 8.586V2.5A1.5 1.5 0 0 0 13.5 1h-11zM2 2.5a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 .5.5v6H9.5A1.5 1.5 0 0 0 8 10v4.5H2.5a.5.5 0 0 1-.5-.5v-11zm7 7.5v4.379L13.379 10H9z"/>
+        </svg>
+        <span>Trainer Delivery Script &amp; Pedagogical Notes</span>
+      </div>
+      <button id="btn-close-notes" class="icon-btn-close" aria-label="Close Notes Panel">&times;</button>
+    </div>
+    <div class="notes-body" id="notes-content">
+      <!-- Dynamically filled with data-notes of current slide -->
+    </div>
+  </aside>
+
+  <!-- Floating Notes Tab (When panel is closed) -->
+  <button id="notes-floating-tab" class="notes-floating-tab" title="Open Trainer Script (Press N)">
+    <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor">
+      <path d="M2.5 1A1.5 1.5 0 0 0 1 2.5v11A1.5 1.5 0 0 0 2.5 15h6.086a1.5 1.5 0 0 0 1.06-.44l4.915-4.914A1.5 1.5 0 0 0 15 8.586V2.5A1.5 1.5 0 0 0 13.5 1h-11zM2 2.5a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 .5.5v6H9.5A1.5 1.5 0 0 0 8 10v4.5H2.5a.5.5 0 0 1-.5-.5v-11zm7 7.5v4.379L13.379 10H9z"/>
+    </svg>
+    <span>Trainer Notes (N)</span>
+  </button>
+
+  <!-- Slide Grid Overview Modal (Press O) -->
+  <div id="overview-modal" class="overview-modal hidden" aria-hidden="true" role="dialog" aria-label="Slide Navigation Grid">
+    <div class="overview-backdrop" id="overview-backdrop"></div>
+    <div class="overview-dialog">
+      <div class="overview-header">
+        <h3>Lesson Slide Grid Navigator (24 Slides)</h3>
+        <button id="btn-close-overview" class="icon-btn-close" aria-label="Close Overview">&times;</button>
+      </div>
+      <div class="overview-grid" id="overview-grid">
+        <!-- Dynamically rendered by script.js -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Presentation Engine & Bilingual Logic -->
+  <script src="script.js"></script>
+
+    <!-- Presenter Laser Focus Pointer & Click Ripple Elements -->
+    <div id="presenter-pointer" class="presenter-laser-dot">
+      <div class="laser-halo"></div>
+    </div>
+    <div id="pointer-click-ripple" class="pointer-click-ripple"></div>
+  <script>
+if (window.self !== window.top) {
+  document.documentElement.classList.add('in-iframe');
+  function hideHub() { document.querySelectorAll('.hub-btn, .back-to-hub-pill').forEach(e => e.style.display = 'none'); }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', hideHub);
+  } else {
+    hideHub();
+  }
+}
+</script>
+<style>
+.in-iframe .hub-btn, .in-iframe .back-to-hub-pill { display: none !important; }
+</style>
+</body>
+</html>
+

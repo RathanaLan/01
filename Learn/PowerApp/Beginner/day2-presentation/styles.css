@@ -1,0 +1,2347 @@
+/* ============================================================================
+   POWER APPS FOUNDATION: DAY 2 PRESENTATION STYLESHEET
+   Topic: Instructions & Sequence (Start, Order, Finish)
+   Design System: Microsoft Fluent Dark Presentation Theme (16:9 Stage)
+   Bilingual: English + Khmer Fonts (Kantumruy Pro & Battambang)
+   ============================================================================ */
+
+/* Khmer & Modern Latin Fonts Import */
+/* Famous & Universally Loved Khmer Fonts Import */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=Moul&family=Kantumruy+Pro:ital,wght@0,400..700;1,400..700&family=Battambang:wght@300;400;700;900&family=Koh+Santepheap:wght@300;400;700&family=Koulen&family=Siemreap&display=swap');
+
+/* CSS Variables & Theme Tokens */
+:root {
+  /* Famous & Universally Loved Khmer Fonts */
+  --font-latin: 'Inter', 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-heading: 'Plus Jakarta Sans', 'Inter', system-ui, -apple-system, sans-serif;
+  --font-khmer-title: 'Plus Jakarta Sans', 'Inter', 'Moul', 'Khmer OS Muol Light', serif;
+  --font-khmer-heading: 'Plus Jakarta Sans', 'Inter', 'Kantumruy Pro', 'Battambang', sans-serif;
+  --font-khmer-body: 'Plus Jakarta Sans', 'Inter', 'Battambang', 'Koh Santepheap', sans-serif;
+  --font-khmer: 'Plus Jakarta Sans', 'Inter', 'Battambang', 'Koh Santepheap', sans-serif;
+  --font-code: 'JetBrains Mono', 'Cascadia Code', 'Fira Code', 'Consolas', monospace;
+
+  --bg-canvas: #07090e;
+  --bg-stage: rgba(15, 20, 32, 0.92);
+  --bg-surface: rgba(24, 30, 48, 0.82);
+  --bg-card: rgba(30, 38, 58, 0.78);
+  --bg-card-hover: rgba(42, 53, 80, 0.95);
+  
+  --border-subtle: rgba(255, 255, 255, 0.12);
+  --border-strong: rgba(255, 255, 255, 0.22);
+  --border-glow: rgba(116, 39, 116, 0.55);
+
+  /* Microsoft Fluent Accent Palette */
+  --fluent-blue: #0078d4;
+  --fluent-blue-light: #38bdf8;
+  --fluent-teal: #008272;
+  --fluent-teal-light: #2dd4bf;
+  --fluent-purple: #742774;
+  --fluent-purple-light: #c084fc;
+  --fluent-green: #107c10;
+  --fluent-green-light: #4ade80;
+  --fluent-yellow: #f59e0b;
+  --fluent-yellow-light: #fde047;
+  --fluent-red: #ef4444;
+  --fluent-orange: #f97316;
+
+  /* High-Contrast Typography & Educational Palette */
+  --text-pure: #ffffff;
+  --text-primary: #f8fafc;          /* High-luminance crisp ice-white for supreme readability */
+  --text-secondary: #e2e8f0;        /* Slate-200: rich, crystal-clear reading body */
+  --text-muted: #94a3b8;            /* Slate-400: clear, bright metadata */
+  --text-dim: #64748b;
+
+  /* Thematic Pedagogical Learning Colors */
+  --color-problem: #fb7185;         /* Vibrant coral rose (human problem & hazard) */
+  --color-problem-light: #fecdd3;
+  --color-input: #38bdf8;           /* Radiant electric sky (data & user actions) */
+  --color-input-light: #bae6fd;
+  --color-process: #fbbf24;         /* Luminous warm amber gold (logic & processing) */
+  --color-process-light: #fef08a;
+  --color-output: #4ade80;          /* Fresh vivid lime/mint (app response) */
+  --color-output-light: #bbf7d0;
+  --color-result: #34d399;          /* Emerald green (business success) */
+  --color-result-light: #a7f3d0;
+  --color-gold-accent: #fde047;     /* High-luminance educational highlight */
+  --color-lilac-accent: #c084fc;    /* Radiant lilac for concepts & architecture */
+
+  /* Stage Geometry & Shadows */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 18px;
+  --shadow-subtle: 0 4px 14px rgba(0, 0, 0, 0.45);
+  --shadow-glow-purple: 0 0 28px rgba(116, 39, 116, 0.35);
+  --shadow-glow-blue: 0 0 28px rgba(0, 120, 212, 0.35);
+  --shadow-glow-teal: 0 0 28px rgba(0, 130, 114, 0.35);
+
+  --font-stack: 'Inter', 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --transition-morph: opacity 0.3s cubic-bezier(0.2, 0, 0.2, 1), transform 0.32s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background-color: var(--bg-canvas);
+  color: var(--text-primary);
+  font-family: var(--font-stack);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ============================================================================
+   Bilingual Mode Typography (Khmer Support with High Legibility)
+   ============================================================================ */
+body.khmer-mode {
+  font-family: 'Plus Jakarta Sans', 'Inter', 'Battambang', 'Kantumruy Pro', 'Koh Santepheap', 'Noto Sans Khmer', sans-serif !important;
+  line-height: 1.85 !important;
+  font-weight: 400 !important;
+  letter-spacing: 0 !important;
+}
+
+body.khmer-mode h1,
+body.khmer-mode h2,
+body.khmer-mode h3,
+body.khmer-mode h4,
+body.khmer-mode .slide-title,
+body.khmer-mode .hero-title {
+  font-family: var(--font-khmer-heading) !important;
+  font-weight: 700 !important;
+  font-weight: normal !important;
+  line-height: 1.5 !important;
+  letter-spacing: 0 !important;
+  font-weight: 700;
+}
+
+body.khmer-mode p,
+body.khmer-mode li,
+body.khmer-mode span,
+body.khmer-mode td,
+body.khmer-mode th {
+  line-height: 1.85 !important;
+}
+
+/* ============================================================================
+   Presentation Container & 16:9 Viewport Stage
+   ============================================================================ */
+.presentation-container {
+  display: flex;
+  flex-direction: column;
+  width: 100vw;
+  height: 100vh;
+  background: radial-gradient(circle at 50% 20%, rgba(30, 42, 74, 0.45) 0%, rgba(7, 9, 14, 0.98) 85%);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Top Header Bar */
+.presentation-header {
+  height: 54px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+  background: rgba(15, 20, 32, 0.85);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border-subtle);
+  z-index: 100;
+  flex-shrink: 0;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.power-logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.header-titles {
+  display: flex;
+  flex-direction: column;
+}
+
+.course-tag {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--color-lilac-accent);
+}
+
+.lesson-tag {
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: #ffffff;
+  white-space: nowrap;
+  max-width: 380px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.header-center {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* 90-Minute Agenda Live Timer Pill */
+.agenda-timer-pill {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(24, 30, 48, 0.9);
+  border: 1px solid var(--border-subtle);
+  padding: 4px 14px;
+  border-radius: 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.timer-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: var(--fluent-green-light);
+  box-shadow: 0 0 8px rgba(74, 222, 128, 0.8);
+  animation: pulse-dot 2s infinite ease-in-out;
+}
+
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(0.85); }
+}
+
+.timer-display {
+  font-family: 'Consolas', monospace;
+  font-size: 0.94rem;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.timer-total {
+  font-family: 'Consolas', monospace;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.current-segment-badge {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--color-gold-accent);
+  background: rgba(253, 224, 71, 0.12);
+  padding: 2px 10px;
+  border-radius: 12px;
+  border: 1px solid rgba(253, 224, 71, 0.3);
+  margin-left: 4px;
+}
+
+.timer-controls {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-left: 6px;
+}
+
+.icon-btn-tiny {
+  background: transparent;
+  border: 1px solid var(--border-subtle);
+  color: var(--text-secondary);
+  border-radius: 4px;
+  padding: 2px 6px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.icon-btn-tiny:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+  border-color: var(--border-strong);
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.header-tool-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(30, 38, 58, 0.6);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-secondary);
+  padding: 6px 12px;
+  border-radius: var(--radius-sm);
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.header-tool-btn:hover {
+  background: rgba(45, 55, 80, 0.9);
+  color: #ffffff;
+  border-color: var(--fluent-blue-light);
+}
+
+.lang-toggle-btn {
+  background: rgba(116, 39, 116, 0.3);
+  border-color: rgba(192, 132, 252, 0.4);
+  color: #ffffff;
+}
+
+.lang-toggle-btn:hover {
+  background: rgba(116, 39, 116, 0.5);
+  box-shadow: 0 0 12px rgba(192, 132, 252, 0.3);
+}
+
+/* ============================================================================
+   Main Slide Stage (16:9 Aspect Ratio Container)
+   ============================================================================ */
+.stage {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px 24px;
+  position: relative;
+  overflow: hidden;
+}
+
+.slide {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  padding: 24px 44px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transform: scale(0.98) translateY(12px);
+  transition: var(--transition-morph);
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.2) transparent;
+}
+
+.slide.active {
+  opacity: 1;
+  pointer-events: auto;
+  transform: scale(1) translateY(0);
+  z-index: 10;
+}
+
+.slide-content {
+  width: 100%;
+  max-width: 1220px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* Slide Header Elements */
+.slide-header {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.slide-header.flex-header {
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.section-tag {
+  align-self: flex-start;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: 3px 10px;
+  border-radius: 12px;
+  background: rgba(0, 120, 212, 0.2);
+  color: var(--fluent-blue-light);
+  border: 1px solid rgba(56, 189, 248, 0.35);
+}
+
+.section-tag.purple-tag {
+  background: rgba(116, 39, 116, 0.25);
+  color: var(--color-lilac-accent);
+  border-color: rgba(192, 132, 252, 0.4);
+}
+
+.section-tag.teal-tag {
+  background: rgba(0, 130, 114, 0.25);
+  color: var(--fluent-teal-light);
+  border-color: rgba(45, 212, 191, 0.4);
+}
+
+.section-tag.yellow-tag {
+  background: rgba(245, 158, 11, 0.2);
+  color: var(--color-gold-accent);
+  border-color: rgba(253, 224, 71, 0.4);
+}
+
+.slide-title {
+  font-size: 1.95rem;
+  font-weight: 700;
+  color: #ffffff;
+  letter-spacing: -0.01em;
+  line-height: 1.25;
+}
+
+.slide-lead {
+  font-size: 1.02rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+/* ============================================================================
+   Hero & Title Slide Layouts
+   ============================================================================ */
+.hero-layout {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  max-width: 1040px;
+  margin: 0 auto;
+}
+
+.hero-pill-group {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.hero-pill {
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 4px 12px;
+  border-radius: 14px;
+  background: rgba(116, 39, 116, 0.3);
+  color: var(--color-lilac-accent);
+  border: 1px solid rgba(192, 132, 252, 0.35);
+}
+
+.hero-pill.teal-pill {
+  background: rgba(0, 130, 114, 0.3);
+  color: var(--fluent-teal-light);
+  border-color: rgba(45, 212, 191, 0.35);
+}
+
+.hero-pill.blue-pill {
+  background: rgba(0, 120, 212, 0.3);
+  color: var(--fluent-blue-light);
+  border-color: rgba(56, 189, 248, 0.35);
+}
+
+.hero-title {
+  font-size: 2.7rem;
+  font-weight: 800;
+  color: #ffffff;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+}
+
+.gradient-text {
+  background: linear-gradient(135deg, #f8fafc 20%, #38bdf8 55%, #c084fc 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.hero-subtitle {
+  font-size: 1.15rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  max-width: 880px;
+}
+
+.title-feature-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-top: 10px;
+}
+
+.feature-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 16px;
+  box-shadow: var(--shadow-subtle);
+  transition: all 0.25s ease;
+}
+
+.feature-item:hover {
+  background: var(--bg-card-hover);
+  border-color: var(--border-strong);
+  transform: translateY(-2px);
+}
+
+.feature-icon {
+  font-size: 1.8rem;
+  line-height: 1;
+}
+
+.feature-info h4 {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 4px;
+}
+
+.feature-info p {
+  font-size: 0.88rem;
+  color: var(--text-secondary);
+  line-height: 1.45;
+}
+
+/* ============================================================================
+   Sequential Step Cards & Process Flow Containers
+   ============================================================================ */
+.sequence-flow-container {
+  display: flex;
+  align-items: stretch;
+  justify-content: space-between;
+  gap: 12px;
+  width: 100%;
+}
+
+.sequence-step-card {
+  flex: 1;
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  box-shadow: var(--shadow-subtle);
+  position: relative;
+  transition: all 0.25s ease;
+}
+
+.sequence-step-card:hover {
+  background: var(--bg-card-hover);
+  border-color: var(--border-strong);
+  transform: translateY(-3px);
+}
+
+.sequence-step-card.start-card {
+  border-top: 4px solid var(--fluent-blue-light);
+}
+
+.sequence-step-card.middle-card {
+  border-top: 4px solid var(--color-gold-accent);
+}
+
+.sequence-step-card.finish-card {
+  border-top: 4px solid var(--fluent-green-light);
+}
+
+.step-number-badge {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  padding: 2px 8px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--text-muted);
+  align-self: flex-start;
+}
+
+.step-card-icon {
+  font-size: 2.2rem;
+  line-height: 1;
+  margin: 4px 0;
+}
+
+.sequence-step-card h3 {
+  font-size: 1.12rem;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.sequence-step-card p {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+.flow-arrow-divider {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-muted);
+  font-size: 1.4rem;
+  font-weight: 800;
+  padding: 0 4px;
+}
+
+.flow-arrow-text {
+  font-size: 0.65rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  margin-top: 2px;
+}
+
+/* ============================================================================
+   Comparison Grids (Good vs. Bad / Clear vs. Vague / Correct vs. Disaster)
+   ============================================================================ */
+.comparison-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+  width: 100%;
+}
+
+.comparison-col {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  box-shadow: var(--shadow-subtle);
+}
+
+.comparison-col.bad-col {
+  border-top: 4px solid var(--fluent-red);
+  background: rgba(45, 20, 24, 0.5);
+}
+
+.comparison-col.good-col {
+  border-top: 4px solid var(--fluent-green-light);
+  background: rgba(16, 38, 28, 0.5);
+}
+
+.comparison-col-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.bad-icon {
+  color: var(--fluent-red);
+  font-size: 1.25rem;
+  font-weight: 800;
+}
+
+.good-icon {
+  color: var(--fluent-green-light);
+  font-size: 1.25rem;
+  font-weight: 800;
+}
+
+.comparison-col-header h3 {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.comparison-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.comparison-list li {
+  font-size: 0.95rem;
+  color: #e2e8f0;
+  line-height: 1.85 !important;
+  display: block !important;
+  margin-bottom: 10px;
+}
+
+.comparison-list li strong {
+  display: inline !important;
+  color: #fde047 !important;
+  font-weight: 700 !important;
+}
+
+.comparison-list li em {
+  font-style: normal;
+  color: #38bdf8;
+}
+
+/* ============================================================================
+   Objectives & Learning Roadmap Cards
+   ============================================================================ */
+.objectives-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+}
+
+.objective-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 14px 20px;
+  gap: 16px;
+  transition: all 0.2s ease;
+}
+
+.objective-card:hover {
+  background: var(--bg-card-hover);
+  border-color: var(--border-strong);
+}
+
+.objective-num {
+  font-size: 1.3rem;
+  font-weight: 800;
+  color: var(--fluent-blue-light);
+  font-family: 'Consolas', monospace;
+  min-width: 36px;
+}
+
+.objective-body {
+  flex: 1;
+}
+
+.objective-body h3 {
+  font-size: 1.02rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 2px;
+}
+
+.objective-body p {
+  font-size: 0.88rem;
+  color: var(--text-secondary);
+  line-height: 1.4;
+}
+
+.objective-badge {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  padding: 3px 10px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--text-muted);
+  border: 1px solid var(--border-subtle);
+  white-space: nowrap;
+}
+
+/* ============================================================================
+   Timed Agenda Table Layout
+   ============================================================================ */
+.agenda-table-wrapper {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  box-shadow: var(--shadow-subtle);
+}
+
+.fluent-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+.fluent-table th {
+  background: rgba(15, 20, 32, 0.9);
+  padding: 10px 16px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-muted);
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.fluent-table td {
+  padding: 9px 16px;
+  font-size: 0.88rem;
+  color: var(--text-secondary);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.fluent-table tr:last-child td {
+  border-bottom: none;
+}
+
+.fluent-table tr:hover td {
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.segment-pill {
+  font-size: 0.74rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  padding: 2px 8px;
+  border-radius: 8px;
+  background: rgba(0, 120, 212, 0.2);
+  color: var(--fluent-blue-light);
+  display: inline-block;
+}
+
+.time-range {
+  font-family: 'Consolas', monospace;
+  font-size: 0.84rem;
+  font-weight: 600;
+  color: var(--color-gold-accent);
+}
+
+.duration-tag {
+  font-size: 0.76rem;
+  font-weight: 700;
+  color: var(--text-muted);
+}
+
+/* ============================================================================
+   Interactive Sequencers & Simulation Boards
+   ============================================================================ */
+.interactive-sequencer-box {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 18px 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  box-shadow: var(--shadow-subtle);
+}
+
+.seq-builder-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.seq-builder-header h3 {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.seq-items-pool {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.seq-drag-item {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  color: #ffffff;
+  padding: 9px 16px;
+  border-radius: var(--radius-sm);
+  font-size: 0.88rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.2s ease;
+}
+
+.seq-drag-item:hover {
+  background: var(--bg-card-hover);
+  border-color: var(--fluent-blue-light);
+  transform: translateY(-2px);
+}
+
+.seq-drag-item.used {
+  opacity: 0.35;
+  pointer-events: none;
+  filter: grayscale(80%);
+}
+
+.seq-drop-slots {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  margin-top: 4px;
+}
+
+.seq-slot {
+  background: rgba(10, 14, 24, 0.7);
+  border: 2px dashed rgba(255, 255, 255, 0.18);
+  border-radius: var(--radius-sm);
+  padding: 12px;
+  min-height: 84px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: all 0.25s ease;
+}
+
+.seq-slot.filled {
+  border-style: solid;
+  border-color: var(--fluent-blue-light);
+  background: rgba(0, 120, 212, 0.15);
+}
+
+.slot-label {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.slot-content {
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: #ffffff;
+  margin-top: 6px;
+}
+
+.seq-feedback-banner {
+  padding: 10px 16px;
+  border-radius: var(--radius-sm);
+  font-size: 0.9rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.seq-feedback-banner.waiting {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-secondary);
+}
+
+.seq-feedback-banner.success {
+  background: rgba(16, 124, 16, 0.25);
+  border: 1px solid var(--fluent-green-light);
+  color: #a7f3d0;
+}
+
+.seq-feedback-banner.error {
+  background: rgba(239, 68, 68, 0.25);
+  border: 1px solid var(--fluent-red);
+  color: #fecdd3;
+}
+
+/* ============================================================================
+   Power Fx Formula Breakdown Cards
+   ============================================================================ */
+.powerfx-sequence-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  box-shadow: var(--shadow-subtle);
+}
+
+.pfx-formula-banner {
+  background: #090c14;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: var(--radius-sm);
+  padding: 16px 20px;
+  font-family: 'Consolas', monospace;
+  font-size: 1.15rem;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.pfx-step1 {
+  color: var(--fluent-teal-light);
+  font-weight: 700;
+}
+
+.pfx-semicolon {
+  color: var(--color-gold-accent);
+  font-weight: 900;
+  font-size: 1.4rem;
+  background: rgba(253, 224, 71, 0.18);
+  padding: 2px 10px;
+  border-radius: 6px;
+  border: 1px solid rgba(253, 224, 71, 0.4);
+}
+
+.pfx-step2 {
+  color: var(--fluent-blue-light);
+  font-weight: 700;
+}
+
+.pfx-step-explanations {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.pfx-exp-box {
+  flex: 1;
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  padding: 14px 18px;
+}
+
+.pfx-exp-box h4 {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 4px;
+}
+
+.pfx-exp-box p {
+  font-size: 0.86rem;
+  color: var(--text-secondary);
+  line-height: 1.45;
+}
+
+.pfx-connector-pill {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--color-gold-accent);
+  background: rgba(253, 224, 71, 0.15);
+  border: 1px solid rgba(253, 224, 71, 0.35);
+  padding: 6px 12px;
+  border-radius: 20px;
+  white-space: nowrap;
+}
+
+/* ============================================================================
+   Knowledge Check Quiz Widget
+   ============================================================================ */
+.quiz-widget-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 20px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  box-shadow: var(--shadow-subtle);
+}
+
+.quiz-progress-bar-wrap {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.quiz-question-text {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #ffffff;
+  line-height: 1.35;
+}
+
+.quiz-options-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.quiz-option-btn {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-secondary);
+  padding: 12px 18px;
+  border-radius: var(--radius-sm);
+  font-size: 0.92rem;
+  text-align: left;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.quiz-option-btn:hover {
+  background: var(--bg-card-hover);
+  border-color: var(--fluent-blue-light);
+  color: #ffffff;
+}
+
+.quiz-option-btn.correct {
+  background: rgba(16, 124, 16, 0.3) !important;
+  border-color: var(--fluent-green-light) !important;
+  color: #ffffff !important;
+  font-weight: 700;
+}
+
+.quiz-option-btn.wrong {
+  background: rgba(239, 68, 68, 0.25) !important;
+  border-color: var(--fluent-red) !important;
+  color: #ffffff !important;
+}
+
+.quiz-feedback-box {
+  padding: 12px 18px;
+  border-radius: var(--radius-sm);
+  font-size: 0.92rem;
+  line-height: 1.5;
+  background: rgba(0, 120, 212, 0.15);
+  border: 1px solid var(--fluent-blue-light);
+  color: #ffffff;
+}
+
+/* ============================================================================
+   Final Challenge & Evaluation Rubric
+   ============================================================================ */
+.challenge-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+}
+
+.challenge-task-card,
+.challenge-solution-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.challenge-task-card h3,
+.challenge-solution-card h3 {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.challenge-steps-ol {
+  padding-left: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.challenge-steps-ol li {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  line-height: 1.45;
+}
+
+.rubric-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  width: 100%;
+}
+
+.rubric-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.rubric-card.level-4 { border-top: 4px solid var(--fluent-green-light); }
+.rubric-card.level-3 { border-top: 4px solid var(--fluent-blue-light); }
+.rubric-card.level-2 { border-top: 4px solid var(--fluent-yellow); }
+.rubric-card.level-1 { border-top: 4px solid var(--fluent-red); }
+
+.rubric-level-badge {
+  font-size: 0.72rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.rubric-card h4 {
+  font-size: 0.98rem;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.rubric-card p {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  line-height: 1.4;
+}
+
+/* ============================================================================
+   Bottom Presentation Footer Bar & Nav Controls
+   ============================================================================ */
+.presentation-footer {
+  height: 58px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+  background: rgba(15, 20, 32, 0.92);
+  backdrop-filter: blur(12px);
+  border-top: 1px solid var(--border-subtle);
+  position: relative;
+  z-index: 100;
+  flex-shrink: 0;
+}
+
+/* Interactive Progress Scrub Track on top of footer */
+.slide-progress-track {
+  position: absolute;
+  top: -3px;
+  left: 0;
+  width: 100%;
+  height: 6px;
+  background: rgba(255, 255, 255, 0.08);
+  cursor: pointer;
+}
+
+.slide-progress-fill {
+  height: 100%;
+  width: 4.16%;
+  background: linear-gradient(90deg, #38bdf8, #c084fc);
+  transition: width 0.25s ease;
+}
+
+.footer-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.slide-counter-badge {
+  font-size: 0.84rem;
+  color: var(--text-muted);
+}
+
+.slide-counter-badge strong {
+  color: #ffffff;
+  font-weight: 700;
+}
+
+/* Centered Navigation Buttons */
+.footer-center {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.nav-control-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(30, 38, 58, 0.8);
+  border: 1px solid var(--border-subtle);
+  color: #ffffff;
+  padding: 8px 18px;
+  border-radius: var(--radius-sm);
+  font-size: 0.88rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.nav-control-btn:hover {
+  background: rgba(45, 55, 80, 0.95);
+  border-color: var(--border-strong);
+  transform: translateY(-1px);
+}
+
+.nav-control-btn.btn-primary-nav {
+  background: var(--fluent-blue);
+  border-color: rgba(56, 189, 248, 0.4);
+}
+
+.nav-control-btn.btn-primary-nav:hover {
+  background: #106ebe;
+  box-shadow: 0 0 14px rgba(0, 120, 212, 0.4);
+}
+
+.footer-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.shortcut-hint-text {
+  font-size: 0.75rem;
+  color: var(--text-dim);
+}
+
+.footer-icon-btn {
+  background: transparent;
+  border: 1px solid var(--border-subtle);
+  color: var(--text-muted);
+  border-radius: var(--radius-sm);
+  padding: 6px 10px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.footer-icon-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+  border-color: var(--border-strong);
+}
+
+/* ============================================================================
+   Floating Trainer Notes Drawer & Toggle Tab
+   ============================================================================ */
+.notes-floating-tab {
+  position: absolute;
+  right: 20px;
+  bottom: 74px;
+  background: rgba(116, 39, 116, 0.85);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(192, 132, 252, 0.4);
+  color: #ffffff;
+  padding: 7px 14px;
+  border-radius: 20px;
+  font-size: 0.82rem;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4);
+  z-index: 90;
+  transition: all 0.2s ease;
+}
+
+.notes-floating-tab:hover {
+  background: rgba(140, 48, 140, 0.95);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(116, 39, 116, 0.5);
+}
+
+.presenter-notes-panel {
+  position: absolute;
+  right: 0;
+  top: 54px;
+  bottom: 58px;
+  width: 440px;
+  background: rgba(14, 18, 30, 0.96);
+  backdrop-filter: blur(16px);
+  border-left: 1px solid var(--border-strong);
+  display: flex;
+  flex-direction: column;
+  z-index: 150;
+  transform: translateX(100%);
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: -8px 0 24px rgba(0, 0, 0, 0.6);
+}
+
+.presenter-notes-panel.open {
+  transform: translateX(0);
+}
+
+.notes-header {
+  padding: 14px 18px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--border-subtle);
+  background: rgba(22, 28, 44, 0.8);
+}
+
+.notes-title-group {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.notes-badge {
+  font-size: 0.76rem;
+  font-weight: 800;
+  color: var(--color-lilac-accent);
+  letter-spacing: 0.05em;
+}
+
+.notes-timing-badge {
+  font-size: 0.74rem;
+  color: var(--color-gold-accent);
+  font-family: 'Consolas', monospace;
+}
+
+.notes-close-btn {
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  font-size: 1.4rem;
+  cursor: pointer;
+  padding: 2px 6px;
+  line-height: 1;
+}
+
+.notes-close-btn:hover {
+  color: #ffffff;
+}
+
+.notes-body {
+  padding: 18px 20px;
+  overflow-y: auto;
+  font-size: 0.92rem;
+  color: var(--text-secondary);
+  line-height: 1.65;
+  white-space: pre-line;
+}
+
+/* ============================================================================
+   Overview Grid Modal
+   ============================================================================ */
+.overview-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(7, 9, 14, 0.85);
+  backdrop-filter: blur(12px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 200;
+  opacity: 1;
+  transition: opacity 0.25s ease;
+}
+
+.overview-modal.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.overview-dialog {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-lg);
+  width: 90vw;
+  max-width: 1200px;
+  max-height: 85vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.7);
+}
+
+.overview-header {
+  padding: 16px 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.overview-header h3 {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.overview-close-btn {
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  font-size: 1.6rem;
+  cursor: pointer;
+  line-height: 1;
+}
+
+.overview-close-btn:hover {
+  color: #ffffff;
+}
+
+.overview-grid {
+  padding: 24px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  overflow-y: auto;
+}
+
+.overview-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  padding: 14px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  transition: all 0.2s ease;
+}
+
+.overview-card:hover {
+  background: var(--bg-card-hover);
+  border-color: var(--fluent-blue-light);
+  transform: translateY(-2px);
+}
+
+.overview-card.active {
+  border-color: var(--fluent-blue-light);
+  background: rgba(0, 120, 212, 0.2);
+}
+
+.overview-card-num {
+  font-size: 0.74rem;
+  font-weight: 700;
+  color: var(--color-lilac-accent);
+}
+
+.overview-card-title {
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+/* Hidden Utility */
+.hidden {
+  display: none !important;
+}
+
+
+/* ============================================================================
+   === ENHANCED VISUAL ATTRACTION SYSTEM FOR STUDENTS & TEACHERS ===
+   Fluid Animated Glowing Aurora Orbs, Dynamic Ambient Spotlight,
+   Glassmorphism Elevation, Vibrant Pedagogical Accents, & Stagger Animations
+   ============================================================================ */
+
+/* Hardware-Accelerated 60fps Glowing Aurora Orbs */
+.presentation-container::before {
+  content: '';
+  position: absolute;
+  top: -15%;
+  left: -10%;
+  width: 58vw;
+  height: 58vw;
+  background: radial-gradient(circle, rgba(147, 51, 234, 0.32) 0%, rgba(192, 132, 252, 0.12) 40%, transparent 70%);
+  border-radius: 50%;
+  filter: blur(75px);
+  will-change: transform;
+  transform: translate3d(0, 0, 0);
+  animation: auroraFloat1 24s ease-in-out infinite alternate;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.presentation-container::after {
+  content: '';
+  position: absolute;
+  bottom: -20%;
+  right: -10%;
+  width: 65vw;
+  height: 65vw;
+  background: radial-gradient(circle, rgba(14, 116, 204, 0.28) 0%, rgba(56, 189, 248, 0.12) 45%, transparent 70%);
+  border-radius: 50%;
+  filter: blur(80px);
+  will-change: transform;
+  transform: translate3d(0, 0, 0);
+  animation: auroraFloat2 28s ease-in-out infinite alternate;
+  pointer-events: none;
+  z-index: 1;
+}
+
+@keyframes auroraFloat1 {
+  0% { transform: translate3d(0, 0, 0) scale(1) rotate(0deg); }
+  50% { transform: translate3d(70px, 80px, 0) scale(1.1) rotate(8deg); }
+  100% { transform: translate3d(-50px, 110px, 0) scale(0.92) rotate(-6deg); }
+}
+
+@keyframes auroraFloat2 {
+  0% { transform: translate3d(0, 0, 0) scale(1) rotate(0deg); }
+  50% { transform: translate3d(-80px, -70px, 0) scale(1.15) rotate(-10deg); }
+  100% { transform: translate3d(60px, -50px, 0) scale(0.9) rotate(8deg); }
+}
+
+/* Ambient Mouse Spotlight that softly follows the cursor */
+.presentation-stage {
+  background: radial-gradient(750px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(56, 189, 248, 0.08), transparent 60%) !important;
+}
+
+/* Slide Entrance Animations */
+.slide.active .slide-header {
+  animation: slideFadeDown 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.slide.active .slide-content > *:not(.slide-header) {
+  animation: slideFadeUp 0.45s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes slideFadeDown {
+  0% { opacity: 0; transform: translateY(-12px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideFadeUp {
+  0% { opacity: 0; transform: translateY(16px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+/* Vibrant Multi-Stop Gradient on Major Headings */
+.slide-header h2,
+.slide-title,
+h2.slide-title {
+  background: linear-gradient(135deg, #ffffff 30%, #93c5fd 75%, #c084fc 100%) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  text-shadow: 0 4px 24px rgba(56, 189, 248, 0.25) !important;
+}
+
+.hero-title,
+h1.hero-title {
+  background: linear-gradient(135deg, #ffffff 20%, #7dd3fc 60%, #c084fc 100%) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  filter: drop-shadow(0 6px 30px rgba(56, 189, 248, 0.35)) !important;
+}
+
+body.khmer-mode h1,
+body.khmer-mode .hero-title {
+  background: linear-gradient(135deg, #ffffff 30%, #7dd3fc 70%, #c084fc 100%) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  filter: drop-shadow(0 4px 20px rgba(56, 189, 248, 0.35)) !important;
+}
+
+body.khmer-mode h2,
+body.khmer-mode .slide-header h2,
+body.khmer-mode .slide-title {
+  background: linear-gradient(135deg, #ffffff 40%, #93c5fd 80%, #c084fc 100%) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  filter: drop-shadow(0 4px 18px rgba(56, 189, 248, 0.3)) !important;
+}
+
+/* Universal Glassmorphic Cards with Neon Elevation on Hover */
+.curr-card,
+.obj-card,
+.time-block,
+.retrieval-card,
+.dt-card,
+.pattern-card,
+.trap-card,
+.demo-step-card,
+.mini-task-brief-card,
+.mini-task-worksheet-card,
+.misconception-card,
+.homework-card,
+.trainer-quote-card,
+.bridge-card,
+.schema-workbench-layout,
+.blueprint-table-container,
+.sim-workbench-container,
+.quiz-card-layout,
+.solution-rubric-container,
+.crisis-card,
+.impact-card,
+.analogy-card,
+.pipeline-step-card,
+.pipeline-step,
+.status-powerfx-box,
+.model-pipeline-container,
+.flow-step-card,
+.concept-card,
+.workbench-box,
+.rubric-box {
+  background: rgba(15, 23, 42, 0.72) !important;
+  backdrop-filter: blur(16px) !important;
+  -webkit-backdrop-filter: blur(16px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.12) !important;
+  border-radius: 12px !important;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), 
+              box-shadow 0.25s cubic-bezier(0.16, 1, 0.3, 1), 
+              border-color 0.25s ease !important;
+}
+
+.curr-card:hover,
+.obj-card:hover,
+.time-block:hover,
+.retrieval-card:hover,
+.dt-card:hover,
+.pattern-card:hover,
+.trap-card:hover,
+.demo-step-card:hover,
+.bridge-card:hover,
+.homework-card:hover,
+.analogy-card:hover,
+.pipeline-step-card:hover,
+.concept-card:hover,
+.flow-step-card:hover {
+  transform: translateY(-4px) !important;
+  border-color: rgba(56, 189, 248, 0.45) !important;
+  box-shadow: 0 16px 36px -6px rgba(0, 0, 0, 0.6), 0 0 24px rgba(56, 189, 248, 0.22) !important;
+}
+
+/* Pedagogical Card Top Border Accent Stripes */
+.obj-card:nth-child(1) { border-top: 3px solid #38bdf8 !important; }
+.obj-card:nth-child(2) { border-top: 3px solid #4ade80 !important; }
+.obj-card:nth-child(3) { border-top: 3px solid #fde047 !important; }
+.obj-card:nth-child(4) { border-top: 3px solid #c084fc !important; }
+
+.dt-card:nth-child(1) { border-top: 3px solid #38bdf8 !important; }
+.dt-card:nth-child(2) { border-top: 3px solid #c084fc !important; }
+.dt-card:nth-child(3) { border-top: 3px solid #4ade80 !important; }
+
+.pattern-card:nth-child(1) { border-top: 3px solid #38bdf8 !important; }
+.pattern-card:nth-child(2) { border-top: 3px solid #4ade80 !important; }
+.pattern-card:nth-child(3) { border-top: 3px solid #c084fc !important; }
+.pattern-card:nth-child(4) { border-top: 3px solid #f59e0b !important; }
+
+.bridge-card.bridge-yesterday { border-top: 3px solid #64748b !important; }
+.bridge-card.bridge-today { 
+  border-top: 3px solid #38bdf8 !important; 
+  box-shadow: 0 0 28px rgba(56, 189, 248, 0.28) !important; 
+}
+.bridge-card.bridge-tomorrow { border-top: 3px solid #c084fc !important; }
+
+/* Enhanced Laser Pointer Focal Point */
+.presenter-laser-dot {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 16px !important;
+  height: 16px !important;
+  margin-left: -8px !important;
+  margin-top: -8px !important;
+  border-radius: 50% !important;
+  background: radial-gradient(circle, #ffffff 15%, #ff3b30 65%, #ff1a1a 100%) !important;
+  box-shadow: 
+    0 0 8px #ffffff,
+    0 0 16px #ff3b30,
+    0 0 32px #ff3b30,
+    0 0 48px rgba(255, 59, 48, 0.6) !important;
+  pointer-events: none !important;
+  z-index: 99999 !important;
+  display: none;
+  transform: translate3d(-100px, -100px, 0);
+  transition: opacity 0.2s ease, transform 0.04s linear !important;
+}
+
+body.laser-mode .presenter-laser-dot {
+  display: block !important;
+}
+
+.laser-halo {
+  position: absolute !important;
+  top: -12px !important;
+  left: -12px !important;
+  width: 40px !important;
+  height: 40px !important;
+  border-radius: 50% !important;
+  border: 2px solid rgba(255, 59, 48, 0.65) !important;
+  box-shadow: 0 0 14px rgba(255, 59, 48, 0.4) !important;
+  animation: haloPulse 1.2s infinite ease-out !important;
+  pointer-events: none !important;
+}
+
+@keyframes haloPulse {
+  0% { transform: scale(0.5); opacity: 1; border-color: rgba(255, 255, 255, 0.9); }
+  50% { opacity: 0.7; }
+  100% { transform: scale(1.9); opacity: 0; border-color: rgba(255, 59, 48, 0); }
+}
+
+.pointer-click-ripple {
+  position: fixed !important;
+  width: 70px !important;
+  height: 70px !important;
+  margin-left: -35px !important;
+  margin-top: -35px !important;
+  border-radius: 50% !important;
+  border: 3px solid #ff3b30 !important;
+  background: radial-gradient(circle, rgba(255, 59, 48, 0.4) 0%, rgba(255, 59, 48, 0.1) 40%, transparent 75%) !important;
+  box-shadow: 0 0 25px rgba(255, 59, 48, 0.8), inset 0 0 15px rgba(255, 255, 255, 0.6) !important;
+  pointer-events: none !important;
+  z-index: 99998 !important;
+  opacity: 0;
+  transform: scale(0.15);
+}
+
+.pointer-click-ripple.rippling {
+  animation: rippleShockwave 0.5s cubic-bezier(0.1, 0.85, 0.25, 1) forwards !important;
+}
+
+@keyframes rippleShockwave {
+  0% { transform: scale(0.15); opacity: 1; }
+  60% { opacity: 0.8; }
+  100% { transform: scale(2.2); opacity: 0; }
+}
+
+/* Glowing Neon Header Progress Bar */
+.progress-bar,
+.progress-fill {
+  background: linear-gradient(90deg, #c084fc 0%, #38bdf8 50%, #4ade80 100%) !important;
+  box-shadow: 0 0 14px rgba(56, 189, 248, 0.7) !important;
+  transition: width 0.4s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  position: relative !important;
+}
+
+.progress-bar::after,
+.progress-fill::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  top: -2px;
+  bottom: -2px;
+  width: 8px;
+  border-radius: 4px;
+  background: #ffffff;
+  box-shadow: 0 0 10px #ffffff, 0 0 20px #38bdf8;
+}
+
+/* Interactive Simulator Choice Buttons */
+.sim-choice-btn {
+  background: rgba(15, 23, 42, 0.85) !important;
+  border: 1.5px solid rgba(255, 255, 255, 0.14) !important;
+  border-radius: 10px !important;
+  padding: 14px 18px !important;
+  color: var(--text-primary) !important;
+  font-size: 0.96rem !important;
+  font-weight: 600 !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 12px !important;
+  cursor: pointer !important;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25) !important;
+}
+
+.sim-choice-btn:hover {
+  background: rgba(30, 41, 69, 0.95) !important;
+  border-color: var(--fluent-blue-light) !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35), 0 0 16px rgba(56, 189, 248, 0.25) !important;
+}
+
+.sim-choice-btn.correct {
+  background: rgba(16, 124, 65, 0.25) !important;
+  border-color: #4ade80 !important;
+  box-shadow: 0 0 24px rgba(74, 222, 128, 0.45) !important;
+  transform: scale(1.02) !important;
+}
+
+.sim-choice-btn.incorrect {
+  background: rgba(239, 68, 68, 0.2) !important;
+  border-color: #ef4444 !important;
+  box-shadow: 0 0 20px rgba(239, 68, 68, 0.35) !important;
+}
+
+/* Quiz Option Buttons */
+.quiz-opt-btn {
+  background: rgba(15, 23, 42, 0.85) !important;
+  border: 1.5px solid rgba(255, 255, 255, 0.14) !important;
+  border-radius: 10px !important;
+  padding: 14px 18px !important;
+  color: var(--text-primary) !important;
+  font-size: 0.98rem !important;
+  text-align: left !important;
+  cursor: pointer !important;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2) !important;
+}
+
+.quiz-opt-btn:hover {
+  background: rgba(30, 41, 69, 0.95) !important;
+  border-color: var(--fluent-purple-light) !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35), 0 0 16px rgba(192, 132, 252, 0.25) !important;
+}
+
+.quiz-opt-btn.correct {
+  background: rgba(16, 124, 65, 0.28) !important;
+  border-color: #4ade80 !important;
+  box-shadow: 0 0 24px rgba(74, 222, 128, 0.45) !important;
+}
+
+.quiz-opt-btn.incorrect {
+  background: rgba(239, 68, 68, 0.22) !important;
+  border-color: #ef4444 !important;
+  box-shadow: 0 0 20px rgba(239, 68, 68, 0.35) !important;
+}
+
+
+/* ============================================================================
+   DAY 12 STANDARDIZED KHMER TYPOGRAPHY SYSTEM (MOUL, SIEMREAP, BATTAMBANG)
+   ============================================================================ */
+body.khmer-mode {
+  font-family: var(--font-khmer-body) !important;
+  font-weight: 400 !important;
+  font-weight: normal !important;
+  font-size: 16px !important;
+}
+
+body.khmer-mode h1,
+body.khmer-mode .hero-title {
+  font-family: var(--font-khmer-title) !important;
+  font-weight: normal !important;
+  font-weight: normal !important;
+  letter-spacing: 0.01em !important;
+  line-height: 1.65 !important;
+  font-size: 2.15rem !important;
+  color: #ffffff !important;
+  background: linear-gradient(135deg, #ffffff 30%, #7dd3fc 70%, #c084fc 100%) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  filter: drop-shadow(0 4px 20px rgba(56, 189, 248, 0.35)) !important;
+}
+
+body.khmer-mode h2,
+body.khmer-mode .slide-header h2,
+body.khmer-mode .slide-title {
+  font-family: var(--font-khmer-heading) !important;
+  font-weight: 700 !important;
+  letter-spacing: normal !important;
+  line-height: 1.6 !important;
+  font-size: 1.68rem !important;
+  color: #ffffff !important;
+  text-align: left !important;
+  background: linear-gradient(135deg, #ffffff 40%, #93c5fd 80%, #c084fc 100%) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  filter: drop-shadow(0 4px 18px rgba(56, 189, 248, 0.3)) !important;
+}
+
+body.khmer-mode .slide-header {
+  align-items: flex-start !important;
+  text-align: left !important;
+}
+
+body.khmer-mode .section-tag {
+  align-self: flex-start !important;
+}
+
+body.khmer-mode .subtitle {
+  text-align: left !important;
+  font-size: 1.08rem !important;
+  line-height: 1.75 !important;
+}
+
+body.khmer-mode h3 {
+  font-family: var(--font-khmer-heading) !important;
+  font-weight: 700 !important;
+  line-height: 1.65 !important;
+  font-size: 1.15rem !important;
+  color: #ffffff !important;
+}
+
+body.khmer-mode h4 {
+  font-family: var(--font-khmer-heading) !important;
+  font-weight: 700 !important;
+  font-weight: 700 !important;
+  line-height: 1.6 !important;
+  font-size: 1.05rem !important;
+  color: #f8fafc !important;
+}
+
+body.khmer-mode p,
+body.khmer-mode li,
+body.khmer-mode td,
+body.khmer-mode th,
+body.khmer-mode .time-content,
+body.khmer-mode .sim-desc,
+body.khmer-mode .notes-drawer-content,
+body.khmer-mode .misconception-wrong,
+body.khmer-mode .misconception-right,
+body.khmer-mode .screen-desc {
+  font-family: var(--font-khmer-body) !important;
+  font-weight: 400 !important;
+  line-height: 1.88 !important;
+  font-weight: 400 !important;
+  color: #f8fafc !important;
+  font-size: 1.02rem !important;
+}
+
+body.khmer-mode .hero-subtitle {
+  font-size: 1.25rem !important;
+  line-height: 1.85 !important;
+}
+
+body.khmer-mode .pill,
+body.khmer-mode .section-tag,
+body.khmer-mode .card-phase,
+body.khmer-mode .course-tag,
+body.khmer-mode .lesson-tag,
+body.khmer-mode .current-segment-badge,
+body.khmer-mode .fluent-btn-primary,
+body.khmer-mode .fluent-btn-secondary,
+body.khmer-mode .chain-node,
+body.khmer-mode .screen-badge,
+body.khmer-mode .rubric-badge,
+body.khmer-mode .header-tool-btn,
+body.khmer-mode .nav-control-btn {
+  font-family: var(--font-khmer-body) !important;
+  font-weight: 400 !important;
+  font-size: 0.96rem !important;
+  line-height: 1.6 !important;
+}
+
+body.khmer-mode .quiz-option-btn,
+body.khmer-mode .quiz-opt-btn,
+body.khmer-mode .sim-choice-btn {
+  font-family: var(--font-khmer-body) !important;
+  font-size: 1.02rem !important;
+  line-height: 1.78 !important;
+}
+
+body.khmer-mode .quiz-question-title,
+body.khmer-mode .sim-scenario-title {
+  font-family: var(--font-khmer-heading) !important;
+  font-size: 1.22rem !important;
+  font-weight: 700 !important;
+  line-height: 1.7 !important;
+}
+
+body.khmer-mode .quiz-feedback-box,
+body.khmer-mode .sim-feedback-box {
+  font-family: var(--font-khmer-body) !important;
+  font-size: 0.98rem !important;
+  line-height: 1.75 !important;
+}
+
+body.khmer-mode table th,
+body.khmer-mode .capstone-table th {
+  font-family: var(--font-khmer-heading) !important;
+  font-size: 0.98rem !important;
+  font-weight: 400 !important;
+  line-height: 1.6 !important;
+  padding: 12px 14px !important;
+}
+
+body.khmer-mode table td,
+body.khmer-mode .capstone-table td {
+  font-family: var(--font-khmer-body) !important;
+  font-size: 0.98rem !important;
+  line-height: 1.82 !important;
+}
+
+/* Strict Monospace Safeguard in Khmer Mode */
+body.khmer-mode code,
+body.khmer-mode pre,
+body.khmer-mode .timer-display,
+body.khmer-mode .timer-total,
+body.khmer-mode .time-stamp,
+body.khmer-mode .slide-counter-badge,
+body.khmer-mode .pipe-num,
+body.khmer-mode .step-num,
+body.khmer-mode .node-num,
+body.khmer-mode .obj-num {
+  font-family: var(--font-code) !important;
+  line-height: 1.5 !important;
+}
+
+
+/* ============================================================================
+   KHMER FONT OVERRIDES & ANTI-CLIPPING SYSTEM (Standardized across Days 1-15)
+   ============================================================================ */
+body.khmer-mode {
+  font-family: 'Plus Jakarta Sans', 'Inter', 'Battambang', 'Kantumruy Pro', 'Koh Santepheap', 'Noto Sans Khmer', sans-serif !important;
+  font-size: 16px;
+}
+
+body.khmer-mode h1,
+body.khmer-mode .hero-title,
+body.khmer-mode .slide-title-khmer {
+  font-family: var(--font-khmer-title) !important;
+  font-weight: normal !important;
+  font-weight: 400 !important;
+  line-height: 1.75 !important;
+  letter-spacing: normal !important;
+  text-transform: none !important;
+  background: none !important;
+  -webkit-background-clip: unset !important;
+  -webkit-text-fill-color: #ffffff !important;
+  color: #ffffff !important;
+  padding-top: 6px !important;
+  padding-bottom: 12px !important;
+  overflow: visible !important;
+}
+
+body.khmer-mode .slide-header {
+  overflow: visible !important;
+  margin-bottom: 1.4rem !important;
+  align-items: flex-start !important;
+}
+
+body.khmer-mode h2,
+body.khmer-mode .slide-header h2 {
+  font-family: var(--font-khmer-heading, 'Noto Sans Khmer', 'Kantumruy Pro', 'Battambang', sans-serif) !important;
+  font-weight: 700 !important;
+  letter-spacing: normal !important;
+  text-transform: none !important;
+  line-height: 1.75 !important;
+  font-size: 1.85rem !important;
+  background: none !important;
+  -webkit-background-clip: unset !important;
+  -webkit-text-fill-color: #ffffff !important;
+  color: #ffffff !important;
+  padding-top: 6px !important;
+  padding-bottom: 14px !important;
+  margin-bottom: 0.25rem !important;
+  overflow: visible !important;
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.6) !important;
+}
+
+body.khmer-mode .section-tag,
+body.khmer-mode .section-tag-danger,
+body.khmer-mode .section-tag-warning,
+body.khmer-mode .section-tag-success {
+  font-family: var(--font-khmer-heading, 'Noto Sans Khmer', 'Kantumruy Pro', 'Battambang', sans-serif) !important;
+  font-size: 0.88rem !important;
+  font-weight: 500 !important;
+  letter-spacing: normal !important;
+  text-transform: none !important;
+  line-height: 1.95 !important;
+  padding: 8px 20px 10px 20px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  height: auto !important;
+  margin-bottom: 0.65rem !important;
+  overflow: visible !important;
+  border-radius: 9999px !important;
+}
+
+body.khmer-mode h3,
+body.khmer-mode h4,
+body.khmer-mode .card-title,
+body.khmer-mode .hud-title,
+body.khmer-mode .overview-card-title {
+  font-family: var(--font-khmer-heading) !important;
+  font-weight: 700 !important;
+  font-weight: 700 !important;
+  letter-spacing: normal !important;
+  text-transform: none !important;
+  line-height: 1.68 !important;
+  padding-top: 4px !important;
+  padding-bottom: 8px !important;
+  overflow: visible !important;
+  color: #f8fafc !important;
+}
+
+body.khmer-mode .card-badge,
+body.khmer-mode .role-badge-pill,
+body.khmer-mode .consequence-badge,
+body.khmer-mode .chain-item,
+body.khmer-mode .hero-badge {
+  font-family: var(--font-khmer-heading, 'Noto Sans Khmer', 'Kantumruy Pro', 'Battambang', sans-serif) !important;
+  font-size: 0.8rem !important;
+  font-weight: 500 !important;
+  letter-spacing: normal !important;
+  text-transform: none !important;
+  line-height: 1.75 !important;
+  padding: 6px 14px 8px 14px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  overflow: visible !important;
+}
+
+body.khmer-mode .subtitle,
+body.khmer-mode .slide-header .subtitle,
+body.khmer-mode .hero-subtitle,
+body.khmer-mode p,
+body.khmer-mode span,
+body.khmer-mode li,
+body.khmer-mode label,
+body.khmer-mode td,
+body.khmer-mode th,
+body.khmer-mode button,
+body.khmer-mode .card-body,
+body.khmer-mode .notes-body {
+  font-family: var(--font-khmer-body) !important;
+  font-weight: 400 !important;
+  letter-spacing: normal !important;
+  line-height: 1.88 !important;
+  text-transform: none !important;
+  overflow: visible !important;
+}
+
+body.khmer-mode .slide-header .subtitle {
+  font-size: 1.05rem !important;
+  line-height: 1.75 !important;
+  color: #cbd5e1 !important;
+  margin-top: 0.2rem !important;
+}
+
+
+/* ============================================================================
+   Slide 8: Enhanced High-Contrast Comparison Grid & Key Takeaway Card
+   ============================================================================ */
+.comparison-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 22px;
+  width: 100%;
+  margin-top: 14px;
+  align-items: stretch;
+}
+
+.comparison-col {
+  background: rgba(15, 23, 42, 0.88);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: var(--radius-md, 12px);
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(12px);
+  transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+.comparison-col:hover {
+  transform: translateY(-2px);
+}
+
+.comparison-col.bad-col {
+  border-top: 4px solid #ef4444 !important;
+  background: linear-gradient(180deg, rgba(239, 68, 68, 0.1) 0%, rgba(15, 23, 42, 0.92) 100%) !important;
+  box-shadow: 0 8px 24px rgba(239, 68, 68, 0.15) !important;
+}
+
+.comparison-col.good-col {
+  border-top: 4px solid #10b981 !important;
+  background: linear-gradient(180deg, rgba(16, 185, 129, 0.1) 0%, rgba(15, 23, 42, 0.92) 100%) !important;
+  box-shadow: 0 8px 24px rgba(16, 185, 129, 0.15) !important;
+}
+
+.comparison-col-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.bad-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  background: rgba(239, 68, 68, 0.2);
+  color: #f87171;
+  font-size: 1.15rem;
+  font-weight: 800;
+  flex-shrink: 0;
+}
+
+.good-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  background: rgba(16, 185, 129, 0.2);
+  color: #34d399;
+  font-size: 1.15rem;
+  font-weight: 800;
+  flex-shrink: 0;
+}
+
+.comparison-col-header h3 {
+  font-size: 1.18rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin: 0;
+  letter-spacing: -0.01em;
+}
+
+.comparison-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin: 0;
+  padding: 0;
+}
+
+.comparison-list li {
+  display: flex !important;
+  align-items: flex-start !important;
+  gap: 12px !important;
+  background: rgba(255, 255, 255, 0.035);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 8px;
+  padding: 12px 14px;
+  color: #e2e8f0;
+  font-size: 0.95rem;
+  line-height: 1.6 !important;
+  margin-bottom: 0 !important;
+  transition: background 0.15s ease, border-color 0.15s ease;
+  text-align: left !important;
+  word-break: normal !important;
+}
+
+.comparison-list li:hover {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(255, 255, 255, 0.14);
+}
+
+.comparison-list li em {
+  font-style: normal;
+  font-weight: 600;
+  color: #38bdf8;
+}
+
+.comparison-list li span:last-child {
+  color: #94a3b8;
+  font-size: 0.9rem;
+}
+
+.comparison-takeaway {
+  margin-top: 18px;
+  background: rgba(56, 189, 248, 0.08);
+  border: 1px solid rgba(56, 189, 248, 0.28);
+  border-left: 4px solid var(--fluent-blue-light, #38bdf8);
+  border-radius: var(--radius-md, 12px);
+  padding: 14px 20px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
+}
+
+.takeaway-icon {
+  font-size: 1.5rem;
+  flex-shrink: 0;
+}
+
+.takeaway-text {
+  font-size: 0.95rem;
+  color: #f1f5f9;
+  line-height: 1.6;
+}
+
+.takeaway-text strong {
+  color: #38bdf8;
+  font-weight: 700;
+}

@@ -1,0 +1,1530 @@
+<!DOCTYPE html>
+<html lang="en" translate="no" class="notranslate">
+<head>
+  <meta name="google" content="notranslate">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Day 22: Forms: One Record, Many Fields | Microsoft Power Apps Foundation</title>
+  <link rel="stylesheet" href="../shared/design-system.css">
+  <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=Moul&family=Kantumruy+Pro:ital,wght@0,400..700;1,400..700&family=Battambang:wght@300;400;700;900&family=Koh+Santepheap:wght@300;400;700&family=Koulen&family=Siemreap&display=swap" rel="stylesheet">
+  <style>
+    /* Strict Speaker Notes Lock: Never render on slide stage under any circumstance */
+    aside.trainer-notes,
+    .trainer-notes,
+    .slide aside,
+    aside {
+      display: none !important;
+      visibility: hidden !important;
+      height: 0 !important;
+      width: 0 !important;
+      overflow: hidden !important;
+      opacity: 0 !important;
+      position: absolute !important;
+      pointer-events: none !important;
+      margin: 0 !important;
+      padding: 0 !important;
+      border: none !important;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Presentation Stage Wrapper (Lesson 14 Architecture) -->
+  <div id="presentation-stage">
+    
+    <!-- Ambient Aurora Orbs (60fps backdrop) -->
+    <div class="aurora-orb orb-1"></div>
+    <div class="aurora-orb orb-2"></div>
+    <div class="aurora-orb orb-3"></div>
+
+    <!-- Presenter Laser Pointer & Shockwave Click Ripple -->
+    <div id="presenter-laser"></div>
+    <div id="pointer-ripple" class="pointer-click-ripple"></div>
+
+    <!-- Viewport for 24 Slides -->
+    <main id="slides-viewport">
+
+      <!-- ====================================================================
+           SLIDE 1: HERO TITLE & SYSTEM MENTAL MODEL
+           ==================================================================== -->
+      <section class="slide active" id="slide-1" data-slide-index="0" data-title="Forms: One Record, Many Fields" data-segment="Phase 7: Power Apps Data">
+        <div class="slide-content hero-content">
+          <div class="hero-badge">
+            <span>Microsoft Power Apps Professional Foundation</span>
+            <span>&bull;</span>
+            <span>Day 22 of 27</span>
+          </div>
+          <h1 class="hero-title">Forms: One Record, Many Fields</h1>
+          <p class="hero-subtitle">
+            A Gallery browses hundreds of records, but an Edit Form dives into the details. Today we master form architecture: connecting a single selected business record to structured, editable DataCards ready for inspection and update.
+          </p>
+
+          <div class="model-chain">
+            <span class="chain-item">Real Problem</span>
+            <span class="chain-arrow">&rarr;</span>
+            <span class="chain-item">Process</span>
+            <span class="chain-arrow">&rarr;</span>
+            <span class="chain-item">Data</span>
+            <span class="chain-arrow">&rarr;</span>
+            <span class="chain-item active">UI / Screen [FORM]</span>
+            <span class="chain-arrow">&rarr;</span>
+            <span class="chain-item">Logic/Decision</span>
+            <span class="chain-arrow">&rarr;</span>
+            <span class="chain-item">Action</span>
+            <span class="chain-arrow">&rarr;</span>
+            <span class="chain-item">Storage [BINDING]</span>
+            <span class="chain-arrow">&rarr;</span>
+            <span class="chain-item">Feedback</span>
+            <span class="chain-arrow">&rarr;</span>
+            <span class="chain-item">Test</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 2: AGENDA & 4 MEASURABLE LEARNING OBJECTIVES
+           ==================================================================== -->
+      <section class="slide" id="slide-2" data-slide-index="1" data-title="90-Minute Agenda & Learning Objectives" data-segment="Part 1: Overview & Objectives">
+        <header class="slide-header">
+          <div class="section-tag">Part 1 &bull; Blueprint &amp; Schedule</div>
+          <h2>90-Minute Agenda &amp; Measurable Objectives</h2>
+          <p class="subtitle">A structured spiral progression from loose input chaos to a unified, reactive enterprise form.</p>
+        </header>
+
+        <div class="slide-content grid-2-col">
+          <div class="card">
+            <h3 class="card-title">4 Measurable Learning Objectives</h3>
+            <div class="objective-item">
+              <span class="obj-num">1</span>
+              <div>
+                <strong>Understand Form Architecture:</strong>
+                <p>Explain in plain language why an Edit Form is a smart folder container, eliminating the need for loose, fragile input controls.</p>
+              </div>
+            </div>
+            <div class="objective-item">
+              <span class="obj-num">2</span>
+              <div>
+                <strong>Master the Golden Property <code>Form.Item</code>:</strong>
+                <p>Correctly configure <code>Form.Item = galRequests.Selected</code> to dynamically load the exact record chosen in the gallery.</p>
+              </div>
+            </div>
+            <div class="objective-item">
+              <span class="obj-num">3</span>
+              <div>
+                <strong>Deconstruct DataCards:</strong>
+                <p>Identify the 4 standard parts of a DataCard (Key, Value, Star, ErrorMessage) and understand when and why to unlock a card safely.</p>
+              </div>
+            </div>
+            <div class="objective-item">
+              <span class="obj-num">4</span>
+              <div>
+                <strong>Differentiate the 3 Form Modes:</strong>
+                <p>Predict and control the behavioral differences between <code>FormMode.Edit</code>, <code>FormMode.View</code>, and <code>FormMode.New</code>.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <h3 class="card-title">Timed 90-Minute Agenda</h3>
+            <div class="agenda-timeline">
+              <div class="agenda-row">
+                <span class="agenda-time">00 - 08 min</span>
+                <div><strong>Recall &amp; Mental Model:</strong> Connect Days 10, 11, 20, 21 to the "One Record" problem.</div>
+              </div>
+              <div class="agenda-row">
+                <span class="agenda-time">08 - 20 min</span>
+                <div><strong>Workplace Crisis &amp; Analogy:</strong> The 30 loose inputs disaster; Doctor's Medical Chart.</div>
+              </div>
+              <div class="agenda-row">
+                <span class="agenda-time">20 - 32 min</span>
+                <div><strong>Anatomy &amp; Golden Property:</strong> DataCards deconstruction and <code>Form.Item</code> scoping.</div>
+              </div>
+              <div class="agenda-row">
+                <span class="agenda-time">32 - 45 min</span>
+                <div><strong>Trainer Live Demo:</strong> Dropping an Edit Form, adding fields, binding to <code>galRequests.Selected</code>.</div>
+              </div>
+              <div class="agenda-row">
+                <span class="agenda-time">45 - 65 min</span>
+                <div><strong>Guided Learner Practice:</strong> Building the Master-Detail Apex Maintenance Console.</div>
+              </div>
+              <div class="agenda-row">
+                <span class="agenda-time">65 - 75 min</span>
+                <div><strong>Independent Mini-Task:</strong> Choice field binding, card reordering, mode toggle button.</div>
+              </div>
+              <div class="agenda-row">
+                <span class="agenda-time">75 - 90 min</span>
+                <div><strong>Check &amp; Bridge Forward:</strong> 5 architecture checks and bridge to Day 23 <code>SubmitForm()</code>.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 3: CONCEPT MAP CONTINUITY
+           ==================================================================== -->
+      <section class="slide" id="slide-3" data-slide-index="2" data-title="Connected Curriculum: The Data Journey" data-segment="Part 1: Curriculum Continuity">
+        <header class="slide-header">
+          <div class="section-tag">Part 1 &bull; Curriculum Journey</div>
+          <h2>Connected Curriculum: The Data Journey</h2>
+          <p class="subtitle">Yesterday we browsed the list. Today we inspect the record. Tomorrow we save changes permanently.</p>
+        </header>
+
+        <div class="slide-content grid-3-col">
+          <div class="card" style="border-left: 3px solid #0d9488;">
+            <span class="card-badge" style="background: rgba(13, 148, 136, 0.2); color: #5eead4;">Day 21: Yesterday</span>
+            <h3 class="card-title">Gallery: Browse Many Records</h3>
+            <p style="color: var(--text-muted); font-size: 0.9rem; line-height: 1.6;">
+              We bound <code>galRequests.Items = Apex_Maintenance_Requests</code>. A master template stamped out 100 rows, and user clicking set <code>galRequests.Selected</code>.
+            </p>
+            <div style="margin-top: auto; padding-top: 1rem; color: #5eead4; font-weight: 600; font-size: 0.85rem;">
+              &check; Table &rarr; Browsable List
+            </div>
+          </div>
+
+          <div class="card" style="border-left: 3px solid var(--color-warning); background: rgba(245, 158, 11, 0.08);">
+            <span class="card-badge" style="background: rgba(245, 158, 11, 0.25); color: #fcd34d;">Day 22: Today</span>
+            <h3 class="card-title">Form: One Record, Many Fields</h3>
+            <p style="color: var(--text-main); font-size: 0.9rem; line-height: 1.6;">
+              We take the single record from <code>galRequests.Selected</code> and plug it into <code>Form.Item</code>. The form generates organized, typed DataCards for all 15 columns.
+            </p>
+            <div style="margin-top: auto; padding-top: 1rem; color: #fcd34d; font-weight: 700; font-size: 0.85rem;">
+              &bull; Selected Row &rarr; Editable Fields
+            </div>
+          </div>
+
+          <div class="card" style="border-left: 3px solid #8b5cf6;">
+            <span class="card-badge" style="background: rgba(139, 92, 246, 0.2); color: #c084fc;">Day 23: Tomorrow</span>
+            <h3 class="card-title">SubmitForm: Permanent Storage</h3>
+            <p style="color: var(--text-muted); font-size: 0.9rem; line-height: 1.6;">
+              Once technician Davi edits fields in the form, he presses Save! We execute <code>SubmitForm(frmMaintenance)</code> to write every change back to SharePoint with validation.
+            </p>
+            <div style="margin-top: auto; padding-top: 1rem; color: #c084fc; font-weight: 600; font-size: 0.85rem;">
+              &rarr; Save Changes Back to Cloud
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 4: PREREQUISITE RETRIEVAL (4 FLIP CARDS)
+           ==================================================================== -->
+      <section class="slide" id="slide-4" data-slide-index="3" data-title="Prerequisite Retrieval: 4 Core Anchors" data-segment="Part 2: Prerequisite Recall">
+        <header class="slide-header">
+          <div class="section-tag">Part 2 &bull; Memory Retrieval</div>
+          <h2>Prerequisite Retrieval: 4 Core Anchors</h2>
+          <p class="subtitle">Click any card to reveal how previous lessons directly power today's Form engine.</p>
+        </header>
+
+        <div class="slide-content grid-4-col">
+          <div class="flip-card" onclick="this.classList.toggle('flipped')">
+            <div class="flip-card-inner">
+              <div class="flip-card-front">
+                <span class="card-badge" style="background: rgba(59, 130, 246, 0.15); color: #93c5fd;">Day 10 &bull; Tables</span>
+                <h4 style="color: #f8fafc; font-size: 1.05rem; margin-top: 0.5rem;">Record vs Table?</h4>
+                <p style="color: var(--text-muted); font-size: 0.85rem;">What is the mathematical difference?</p>
+                <div class="flip-hint">&circlearrowright; Click to flip</div>
+              </div>
+              <div class="flip-card-back">
+                <span class="card-badge" style="background: rgba(6, 182, 212, 0.2); color: #67e8f9;">Core Anchor</span>
+                <h4 style="color: #67e8f9; font-size: 1rem; margin-top: 0.5rem;">One Row vs Many</h4>
+                <p style="color: #e2e8f0; font-size: 0.82rem; line-height: 1.5;">
+                  A <strong>Table</strong> is a whole collection of rows. A <strong>Record</strong> is exactly ONE horizontal row containing values for each column.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="flip-card" onclick="this.classList.toggle('flipped')">
+            <div class="flip-card-inner">
+              <div class="flip-card-front">
+                <span class="card-badge" style="background: rgba(59, 130, 246, 0.15); color: #93c5fd;">Day 11 &bull; Schema</span>
+                <h4 style="color: #f8fafc; font-size: 1.05rem; margin-top: 0.5rem;">Column Types?</h4>
+                <p style="color: var(--text-muted); font-size: 0.85rem;">Why do types matter to inputs?</p>
+                <div class="flip-hint">&circlearrowright; Click to flip</div>
+              </div>
+              <div class="flip-card-back">
+                <span class="card-badge" style="background: rgba(6, 182, 212, 0.2); color: #67e8f9;">Core Anchor</span>
+                <h4 style="color: #67e8f9; font-size: 1rem; margin-top: 0.5rem;">Shapes Match Data</h4>
+                <p style="color: #e2e8f0; font-size: 0.82rem; line-height: 1.5;">
+                  Text needs a text box; Numbers need numeric rules; Choices need dropdowns; Dates need date pickers. Forms generate these automatically!
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="flip-card" onclick="this.classList.toggle('flipped')">
+            <div class="flip-card-inner">
+              <div class="flip-card-front">
+                <span class="card-badge" style="background: rgba(59, 130, 246, 0.15); color: #93c5fd;">Day 20 &bull; SharePoint</span>
+                <h4 style="color: #f8fafc; font-size: 1.05rem; margin-top: 0.5rem;">What is DataSource?</h4>
+                <p style="color: var(--text-muted); font-size: 0.85rem;">Where does the form get fields?</p>
+                <div class="flip-hint">&circlearrowright; Click to flip</div>
+              </div>
+              <div class="flip-card-back">
+                <span class="card-badge" style="background: rgba(6, 182, 212, 0.2); color: #67e8f9;">Core Anchor</span>
+                <h4 style="color: #67e8f9; font-size: 1rem; margin-top: 0.5rem;">The Cloud Schema</h4>
+                <p style="color: #e2e8f0; font-size: 0.82rem; line-height: 1.5;">
+                  <code>Apex_Maintenance_Requests</code> is the living data source. It defines which columns exist, which are required, and what choices are allowed.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="flip-card" onclick="this.classList.toggle('flipped')">
+            <div class="flip-card-inner">
+              <div class="flip-card-front">
+                <span class="card-badge" style="background: rgba(59, 130, 246, 0.15); color: #93c5fd;">Day 21 &bull; Gallery</span>
+                <h4 style="color: #f8fafc; font-size: 1.05rem; margin-top: 0.5rem;">Gallery.Selected?</h4>
+                <p style="color: var(--text-muted); font-size: 0.85rem;">What does it evaluate to?</p>
+                <div class="flip-hint">&circlearrowright; Click to flip</div>
+              </div>
+              <div class="flip-card-back">
+                <span class="card-badge" style="background: rgba(6, 182, 212, 0.2); color: #67e8f9;">Core Anchor</span>
+                <h4 style="color: #67e8f9; font-size: 1rem; margin-top: 0.5rem;">The Active Record</h4>
+                <p style="color: #e2e8f0; font-size: 0.82rem; line-height: 1.5;">
+                  It evaluates to the single record currently clicked by the user! Today, we pass this exact record directly into <code>Form.Item</code>.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 5: THE MANUFACTURING CRISIS (WHY FORMS EXIST)
+           ==================================================================== -->
+      <section class="slide" id="slide-5" data-slide-index="4" data-title="The Workplace Crisis: 30 Loose Inputs" data-segment="Part 3: Workplace Problem">
+        <header class="slide-header">
+          <div class="section-tag">Part 3 &bull; Why This Exists</div>
+          <h2>The Workplace Crisis: "The 30 Loose Inputs Disaster"</h2>
+          <p class="subtitle">Why building forms manually without container architecture leads to immediate application failure.</p>
+        </header>
+
+        <div class="slide-content grid-2-col">
+          <div class="card" style="border-left: 3px solid #ef4444;">
+            <span class="card-badge" style="background: rgba(239, 68, 68, 0.2); color: #fca5a5;">Failure Scenario &bull; 08:30 AM Shift 2</span>
+            <h3 class="card-title">Apex Plastics Maintenance Incident</h3>
+            <p style="color: var(--text-muted); font-size: 0.9rem; line-height: 1.6; margin-bottom: 1rem;">
+              Technician Davi taps Ticket #104 in the gallery: <em>"Hydraulic Valve Leaking on Press P-04"</em>. To repair it, he must inspect and update 12 distinct fields (Hazard, PSI, Duration, Parts, Notes).
+            </p>
+            <div style="background: rgba(239, 68, 68, 0.1); border: 1px solid rgba(239, 68, 68, 0.3); padding: 0.85rem; border-radius: 0.5rem; margin-bottom: 1rem;">
+              <strong style="color: #fca5a5; font-size: 0.88rem;">The Rookie Developer's Blunder:</strong>
+              <p style="color: #fecaca; font-size: 0.82rem; margin-top: 0.25rem;">
+                A new developer dragged <strong>12 loose Text Inputs and 12 loose Labels</strong> onto the screen. Every input needed a custom formula just to display data. When Davi tapped "Save", the developer had to write a 40-line `Patch()` statement matching every control name.
+              </p>
+            </div>
+            <p style="color: var(--text-muted); font-size: 0.85rem;">
+              One typo in a control name caused the "Pressure PSI" field to overwrite the "Machine ID"! Production was halted for 4 hours due to corrupted work orders.
+            </p>
+          </div>
+
+          <div class="card" style="border-left: 3px solid var(--color-warning);">
+            <span class="card-badge" style="background: rgba(245, 158, 11, 0.2); color: #fcd34d;">The Architectural Fix</span>
+            <h3 class="card-title">Why an Edit Form is Required</h3>
+            <div style="display: flex; flex-direction: column; gap: 0.85rem; margin-top: 0.5rem;">
+              <div style="display: flex; gap: 0.75rem; align-items: flex-start;">
+                <div style="width: 24px; height: 24px; border-radius: 50%; background: rgba(16, 185, 129, 0.2); color: #10b981; display: flex; align-items: center; justify-content: center; font-weight: bold; flex-shrink: 0;">&check;</div>
+                <div>
+                  <strong style="color: #86efac; font-size: 0.9rem;">Single Unified Container:</strong>
+                  <p style="color: var(--text-muted); font-size: 0.82rem;">The Form binds to the entire SharePoint row at once. No manual wiring needed for each individual input.</p>
+                </div>
+              </div>
+
+              <div style="display: flex; gap: 0.75rem; align-items: flex-start;">
+                <div style="width: 24px; height: 24px; border-radius: 50%; background: rgba(16, 185, 129, 0.2); color: #10b981; display: flex; align-items: center; justify-content: center; font-weight: bold; flex-shrink: 0;">&check;</div>
+                <div>
+                  <strong style="color: #86efac; font-size: 0.9rem;">Automatic Schema Typing:</strong>
+                  <p style="color: var(--text-muted); font-size: 0.82rem;">SharePoint Choice fields get real Choice dropdowns; Dates get DatePickers; Booleans get Toggles automatically.</p>
+                </div>
+              </div>
+
+              <div style="display: flex; gap: 0.75rem; align-items: flex-start;">
+                <div style="width: 24px; height: 24px; border-radius: 50%; background: rgba(16, 185, 129, 0.2); color: #10b981; display: flex; align-items: center; justify-content: center; font-weight: bold; flex-shrink: 0;">&check;</div>
+                <div>
+                  <strong style="color: #86efac; font-size: 0.9rem;">Built-in Validation &amp; Errors:</strong>
+                  <p style="color: var(--text-muted); font-size: 0.82rem;">Required fields get red asterisks; invalid numbers show inline error prompts without writing complex logic.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 6: EVERYDAY PHYSICAL ANALOGY (THE MEDICAL CLIPBOARD)
+           ==================================================================== -->
+      <section class="slide" id="slide-6" data-slide-index="5" data-title="Everyday Analogy: The Doctor's Clipboard" data-segment="Part 3: Everyday Analogy">
+        <header class="slide-header">
+          <div class="section-tag">Part 3 &bull; Mental Model</div>
+          <h2>Everyday Analogy: The Doctor's Medical Clipboard</h2>
+          <p class="subtitle">Understand form architecture and modes through a hospital workflow you already know.</p>
+        </header>
+
+        <div class="slide-content grid-3-col">
+          <div class="card" style="align-items: center; text-align: center;">
+            <div style="width: 64px; height: 64px; border-radius: 50%; background: rgba(2, 132, 199, 0.15); border: 1px solid #0284c7; display: flex; align-items: center; justify-content: center; font-size: 2rem; color: #38bdf8; margin-bottom: 1rem;">
+              &#128203;
+            </div>
+            <span class="card-badge" style="background: rgba(2, 132, 199, 0.2); color: #7dd3fc;">The Container</span>
+            <h3 class="card-title">1. The Medical Clipboard</h3>
+            <p style="color: var(--text-muted); font-size: 0.88rem; line-height: 1.6;">
+              The nurse holds a clipboard for <strong>Davi Santos</strong>. The clipboard doesn't hold all 50 patients in the lobby; it holds all the clinical details of <strong>one patient</strong>.
+            </p>
+            <div style="margin-top: auto; padding-top: 1rem; color: #38bdf8; font-weight: 700; font-size: 0.85rem;">
+              = The Edit Form
+            </div>
+          </div>
+
+          <div class="card" style="align-items: center; text-align: center;">
+            <div style="width: 64px; height: 64px; border-radius: 50%; background: rgba(245, 158, 11, 0.15); border: 1px solid #f59e0b; display: flex; align-items: center; justify-content: center; font-size: 2rem; color: #fbbf24; margin-bottom: 1rem;">
+              &#128196;
+            </div>
+            <span class="card-badge" style="background: rgba(245, 158, 11, 0.2); color: #fcd34d;">The Sections</span>
+            <h3 class="card-title">2. Pre-Printed Sections</h3>
+            <p style="color: var(--text-muted); font-size: 0.88rem; line-height: 1.6;">
+              Section 1: <em>Blood Pressure</em>. Section 2: <em>Allergies</em>. Section 3: <em>Prescription</em>. Each pre-printed section has its own label, box, and required mark.
+            </p>
+            <div style="margin-top: auto; padding-top: 1rem; color: #fcd34d; font-weight: 700; font-size: 0.85rem;">
+              = The DataCards
+            </div>
+          </div>
+
+          <div class="card" style="align-items: center; text-align: center;">
+            <div style="width: 64px; height: 64px; border-radius: 50%; background: rgba(139, 92, 246, 0.15); border: 1px solid #8b5cf6; display: flex; align-items: center; justify-content: center; font-size: 2rem; color: #c084fc; margin-bottom: 1rem;">
+              &#128274;
+            </div>
+            <span class="card-badge" style="background: rgba(139, 92, 246, 0.2); color: #c084fc;">The Permissions</span>
+            <h3 class="card-title">3. The Three Clipboard States</h3>
+            <p style="color: var(--text-muted); font-size: 0.88rem; line-height: 1.6;">
+              <strong>View Mode:</strong> Patient reads history under plastic. <strong>Edit Mode:</strong> Doctor updates dosage. <strong>New Mode:</strong> Fresh blank sheet for new patient.
+            </p>
+            <div style="margin-top: auto; padding-top: 1rem; color: #c084fc; font-weight: 700; font-size: 0.85rem;">
+              = FormMode (View / Edit / New)
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 7: PLAIN-LANGUAGE CONCEPTS BEFORE TECH JARGON
+           ==================================================================== -->
+      <section class="slide" id="slide-7" data-slide-index="6" data-title="Plain-Language Concepts: 4 Key Terms" data-segment="Part 3: Technical Concepts">
+        <header class="slide-header">
+          <div class="section-tag">Part 3 &bull; Plain Language First</div>
+          <h2>Plain-Language Concepts: 4 Key Form Terms</h2>
+          <p class="subtitle">Understand their human role before writing Power Fx formulas or configuring properties.</p>
+        </header>
+
+        <div class="slide-content grid-4-col">
+          <div class="card">
+            <span class="card-badge" style="background: rgba(2, 132, 199, 0.2); color: #7dd3fc;">The Smart Folder</span>
+            <h4 style="color: #f8fafc; font-size: 1rem;">1. Edit Form</h4>
+            <p style="color: var(--text-muted); font-size: 0.85rem; line-height: 1.5; margin-top: 0.35rem;">
+              <strong>Plain Language:</strong> "The digital folder on your desk."<br><br>
+              <strong>Technical Role:</strong> A container control that communicates with SharePoint to display and edit multiple fields of a single record.
+            </p>
+          </div>
+
+          <div class="card">
+            <span class="card-badge" style="background: rgba(245, 158, 11, 0.2); color: #fcd34d;">The Specific Paper</span>
+            <h4 style="color: #f8fafc; font-size: 1rem;">2. Item Property</h4>
+            <p style="color: var(--text-muted); font-size: 0.85rem; line-height: 1.5; margin-top: 0.35rem;">
+              <strong>Plain Language:</strong> "Which specific record folder are we looking at?"<br><br>
+              <strong>Technical Role:</strong> The formula property (e.g. <code>galRequests.Selected</code>) that feeds one exact row object into the form.
+            </p>
+          </div>
+
+          <div class="card">
+            <span class="card-badge" style="background: rgba(13, 148, 136, 0.2); color: #5eead4;">The Field Box</span>
+            <h4 style="color: #f8fafc; font-size: 1rem;">3. DataCard</h4>
+            <p style="color: var(--text-muted); font-size: 0.85rem; line-height: 1.5; margin-top: 0.35rem;">
+              <strong>Plain Language:</strong> "One pre-printed box for one question."<br><br>
+              <strong>Technical Role:</strong> A sub-container bundling the field title, input control, required star, and database error message for one column.
+            </p>
+          </div>
+
+          <div class="card">
+            <span class="card-badge" style="background: rgba(139, 92, 246, 0.2); color: #c084fc;">The Lock State</span>
+            <h4 style="color: #f8fafc; font-size: 1rem;">4. FormMode</h4>
+            <p style="color: var(--text-muted); font-size: 0.85rem; line-height: 1.5; margin-top: 0.35rem;">
+              <strong>Plain Language:</strong> "Are we reading, fixing, or creating fresh?"<br><br>
+              <strong>Technical Role:</strong> Dictates form behavior: <code>FormMode.View</code> (read-only), <code>FormMode.Edit</code> (update existing), or <code>FormMode.New</code> (blank new).
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 8: THE ARCHITECTURAL DATA PIPELINE
+           ==================================================================== -->
+      <section class="slide" id="slide-8" data-slide-index="7" data-title="Architectural Pipeline: Master-Detail Flow" data-segment="Part 3: Architecture Diagram">
+        <header class="slide-header">
+          <div class="section-tag">Part 3 &bull; System Data Pipeline</div>
+          <h2>Architectural Pipeline: Master-Detail Flow</h2>
+          <p class="subtitle">How a user tap in the gallery travels through memory into the Form's editable DataCards.</p>
+        </header>
+
+        <div class="slide-content">
+          <div class="pipeline-stage">
+            <div class="pipeline-node">
+              <div class="pipeline-icon icon-table">&#128196;</div>
+              <strong style="color: #5eead4; font-size: 0.95rem;">SharePoint List</strong>
+              <span style="font-size: 0.75rem; color: var(--text-muted); margin-top: 0.25rem;">Cloud Database</span>
+              <p style="font-size: 0.8rem; color: #cbd5e1; margin-top: 0.5rem; line-height: 1.4;">
+                Contains 150 maintenance tickets across 12 structured columns.
+              </p>
+            </div>
+
+            <div class="pipeline-arrow">&rarr;</div>
+
+            <div class="pipeline-node">
+              <div class="pipeline-icon icon-items">&#128260;</div>
+              <strong style="color: #67e8f9; font-size: 0.95rem;">Gallery (Master)</strong>
+              <span style="font-size: 0.75rem; color: var(--text-muted); margin-top: 0.25rem;">Browsing 100 Rows</span>
+              <p style="font-size: 0.8rem; color: #cbd5e1; margin-top: 0.5rem; line-height: 1.4;">
+                User scrolls the list and taps Row #3: <em>"P-04 Pressure Drop"</em>.
+              </p>
+            </div>
+
+            <div class="pipeline-arrow">&rarr;</div>
+
+            <div class="pipeline-node">
+              <div class="pipeline-icon icon-thisitem">&#9757;</div>
+              <strong style="color: #fcd34d; font-size: 0.95rem;">galRequests.Selected</strong>
+              <span style="font-size: 0.75rem; color: var(--text-muted); margin-top: 0.25rem;">One Isolated Record</span>
+              <p style="font-size: 0.8rem; color: #cbd5e1; margin-top: 0.5rem; line-height: 1.4;">
+                Power Apps isolates that single row and exposes it to the entire screen.
+              </p>
+            </div>
+
+            <div class="pipeline-arrow">&rarr;</div>
+
+            <div class="pipeline-node">
+              <div class="pipeline-icon icon-selected">&#128203;</div>
+              <strong style="color: #c084fc; font-size: 0.95rem;">Form.Item (Detail)</strong>
+              <span style="font-size: 0.75rem; color: var(--text-muted); margin-top: 0.25rem;">12 Typed DataCards</span>
+              <p style="font-size: 0.8rem; color: #cbd5e1; margin-top: 0.5rem; line-height: 1.4;">
+                The Edit Form receives the record and populates every DataCard automatically!
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 9: ANATOMY OF A DATACARD
+           ==================================================================== -->
+      <section class="slide" id="slide-9" data-slide-index="8" data-title="Anatomy of a DataCard: 4 Standard Controls" data-segment="Part 3: UI Architecture">
+        <header class="slide-header">
+          <div class="section-tag">Part 3 &bull; Deep Component Anatomy</div>
+          <h2>Anatomy of a DataCard: 4 Standard Controls</h2>
+          <p class="subtitle">Every field inside an Edit Form is managed by an autonomous 4-part coordination card.</p>
+        </header>
+
+        <div class="slide-content grid-2-col">
+          <div class="card">
+            <span class="card-badge" style="background: rgba(245, 158, 11, 0.2); color: #fcd34d;">Visual Architecture</span>
+            <h3 class="card-title">Inside the DataCard Box</h3>
+            
+            <div style="background: #090e17; border: 1px dashed rgba(245, 158, 11, 0.5); border-radius: 0.5rem; padding: 1rem; margin-top: 0.75rem;">
+              <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.4rem;">
+                <div>
+                  <span style="color: #f8fafc; font-weight: 700; font-size: 0.9rem;">Machine ID</span>
+                  <span style="color: #ef4444; font-weight: bold; margin-left: 0.25rem;">* (StarVisible)</span>
+                </div>
+                <span style="font-family: var(--font-code); font-size: 0.72rem; color: #94a3b8;">DataCardKey1</span>
+              </div>
+
+              <div style="background: #1e293b; border: 1px solid var(--border-subtle); border-radius: 0.35rem; padding: 0.6rem 0.85rem; color: #f8fafc; font-family: var(--font-code); font-size: 0.85rem; margin-bottom: 0.4rem; display: flex; justify-content: space-between;">
+                <span>Press P-04</span>
+                <span style="color: #64748b; font-size: 0.72rem;">DataCardValue1</span>
+              </div>
+
+              <div style="font-size: 0.75rem; color: #ef4444; display: flex; justify-content: space-between;">
+                <span>&cross; Machine ID is required by plant policy.</span>
+                <span style="color: #64748b; font-size: 0.72rem;">ErrorMessage1</span>
+              </div>
+            </div>
+
+            <p style="color: var(--text-muted); font-size: 0.85rem; margin-top: 0.85rem; line-height: 1.5;">
+              You never need to build this manually. Power Apps creates this 4-piece harmony for every SharePoint column automatically.
+            </p>
+          </div>
+
+          <div class="card">
+            <span class="card-badge" style="background: rgba(6, 182, 212, 0.2); color: #67e8f9;">Component Roles</span>
+            <h3 class="card-title">The 4 Sub-Control Responsibilities</h3>
+            <div style="display: flex; flex-direction: column; gap: 0.75rem; margin-top: 0.5rem;">
+              <div style="background: rgba(255, 255, 255, 0.04); padding: 0.65rem; border-radius: 0.4rem; border-left: 3px solid #38bdf8;">
+                <strong style="color: #38bdf8; font-size: 0.88rem;">1. DataCardKey:</strong>
+                <p style="color: var(--text-muted); font-size: 0.8rem; margin-top: 0.15rem;">The field label. Reads the column name from SharePoint by default.</p>
+              </div>
+
+              <div style="background: rgba(255, 255, 255, 0.04); padding: 0.65rem; border-radius: 0.4rem; border-left: 3px solid #10b981;">
+                <strong style="color: #86efac; font-size: 0.88rem;">2. DataCardValue:</strong>
+                <p style="color: var(--text-muted); font-size: 0.8rem; margin-top: 0.15rem;">The interactive input control (TextBox, Dropdown, DatePicker, Toggle).</p>
+              </div>
+
+              <div style="background: rgba(255, 255, 255, 0.04); padding: 0.65rem; border-radius: 0.4rem; border-left: 3px solid #ef4444;">
+                <strong style="color: #fca5a5; font-size: 0.88rem;">3. StarVisible:</strong>
+                <p style="color: var(--text-muted); font-size: 0.8rem; margin-top: 0.15rem;">Automatically displays the red asterisk <code>*</code> if SharePoint marked the field as required.</p>
+              </div>
+
+              <div style="background: rgba(255, 255, 255, 0.04); padding: 0.65rem; border-radius: 0.4rem; border-left: 3px solid #f59e0b;">
+                <strong style="color: #fcd34d; font-size: 0.88rem;">4. ErrorMessage:</strong>
+                <p style="color: var(--text-muted); font-size: 0.8rem; margin-top: 0.15rem;">Automatically lights up in red if the user's entry violates database schema rules.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 10: STEP-BY-STEP PROCEDURE TO INSERT & BIND A FORM
+           ==================================================================== -->
+      <section class="slide" id="slide-10" data-slide-index="9" data-title="Step-by-Step: Adding an Edit Form" data-segment="Part 4: Studio Workflow">
+        <header class="slide-header">
+          <div class="section-tag">Part 4 &bull; Studio Workflow</div>
+          <h2>Step-by-Step: Adding &amp; Binding an Edit Form</h2>
+          <p class="subtitle">The exact 4-step sequence from a blank canvas to a fully populated inspection form.</p>
+        </header>
+
+        <div class="slide-content grid-4-col">
+          <div class="card">
+            <span class="obj-num" style="margin-bottom: 0.75rem;">1</span>
+            <h4 style="color: #f8fafc; font-size: 1rem;">Insert Edit Form</h4>
+            <p style="color: var(--text-muted); font-size: 0.85rem; line-height: 1.5; margin-top: 0.35rem;">
+              Click <strong>+ Insert</strong> &rarr; Search <strong>Edit form</strong> &rarr; Drag onto canvas.
+            </p>
+            <div style="margin-top: auto; padding-top: 0.75rem; font-family: var(--font-code); font-size: 0.75rem; color: #67e8f9;">
+              Name: frmMaintenance
+            </div>
+          </div>
+
+          <div class="card">
+            <span class="obj-num" style="margin-bottom: 0.75rem;">2</span>
+            <h4 style="color: #f8fafc; font-size: 1rem;">Connect Data Source</h4>
+            <p style="color: var(--text-muted); font-size: 0.85rem; line-height: 1.5; margin-top: 0.35rem;">
+              In the right Properties pane, select <code>Apex_Maintenance_Requests</code> as <strong>Data source</strong>.
+            </p>
+            <div style="margin-top: auto; padding-top: 0.75rem; font-family: var(--font-code); font-size: 0.75rem; color: #67e8f9;">
+              DataSource = Cloud Table
+            </div>
+          </div>
+
+          <div class="card">
+            <span class="obj-num" style="margin-bottom: 0.75rem;">3</span>
+            <h4 style="color: #f8fafc; font-size: 1rem;">Select Fields</h4>
+            <p style="color: var(--text-muted); font-size: 0.85rem; line-height: 1.5; margin-top: 0.35rem;">
+              Click <strong>Edit fields</strong> &rarr; <strong>+ Add field</strong> &rarr; Check Title, MachineID, Priority, Hazard, Status.
+            </p>
+            <div style="margin-top: auto; padding-top: 0.75rem; font-family: var(--font-code); font-size: 0.75rem; color: #67e8f9;">
+              Cards Auto-Generated &check;
+            </div>
+          </div>
+
+          <div class="card">
+            <span class="obj-num" style="margin-bottom: 0.75rem;">4</span>
+            <h4 style="color: #f8fafc; font-size: 1rem;">Wire Golden Item</h4>
+            <p style="color: var(--text-muted); font-size: 0.85rem; line-height: 1.5; margin-top: 0.35rem;">
+              In the formula bar, select <strong>Item</strong> and write <code>galRequests.Selected</code>.
+            </p>
+            <div style="margin-top: auto; padding-top: 0.75rem; font-family: var(--font-code); font-size: 0.75rem; color: #67e8f9;">
+              frmMaintenance.Item = Row
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 11: THE GOLDEN PROPERTY: FORM.ITEM
+           ==================================================================== -->
+      <section class="slide" id="slide-11" data-slide-index="10" data-title="Deep Dive: The Golden Property Form.Item" data-segment="Part 4: Deep Scoping">
+        <header class="slide-header">
+          <div class="section-tag">Part 4 &bull; Power Fx Scoping</div>
+          <h2>Deep Dive: The Golden Property <code>Form.Item</code></h2>
+          <p class="subtitle">Why Item expects a Record, why Table names crash it, and how gallery selection creates reactivity.</p>
+        </header>
+
+        <div class="slide-content grid-2-col">
+          <div class="card" style="border-left: 3px solid #ef4444;">
+            <span class="card-badge" style="background: rgba(239, 68, 68, 0.2); color: #fca5a5;">The Beginner Trap</span>
+            <h3 class="card-title">Writing <code>Form.Item = Apex_Maintenance_Requests</code></h3>
+            <p style="color: var(--text-muted); font-size: 0.88rem; line-height: 1.6; margin-bottom: 0.75rem;">
+              Beginners often think: <em>"The form needs data, so I will give it the SharePoint List name in Item."</em>
+            </p>
+            <div style="background: #090e17; border: 1px solid var(--border-subtle); border-radius: 0.5rem; padding: 0.75rem; font-family: var(--font-code); font-size: 0.85rem; color: #fca5a5; margin-bottom: 0.75rem;">
+              &cross; frmMaintenance.Item = Apex_Maintenance_Requests<br>
+              <span style="color: #ef4444; font-size: 0.78rem;">// Error: Expected Record, but received Table (150 rows)!</span>
+            </div>
+            <p style="color: var(--text-muted); font-size: 0.82rem; line-height: 1.5;">
+              <strong>Why it fails:</strong> A Form cannot display 150 rows simultaneously. It has only one Title box, one Machine box, and one Priority dropdown. It needs <strong>exactly ONE record</strong>.
+            </p>
+          </div>
+
+          <div class="card" style="border-left: 3px solid var(--color-warning);">
+            <span class="card-badge" style="background: rgba(245, 158, 11, 0.2); color: #fcd34d;">The Correct Solution</span>
+            <h3 class="card-title">Writing <code>Form.Item = galRequests.Selected</code></h3>
+            <p style="color: var(--text-muted); font-size: 0.88rem; line-height: 1.6; margin-bottom: 0.75rem;">
+              The gallery's <code>.Selected</code> property produces the exact single row currently highlighted by the user.
+            </p>
+            <div style="background: #090e17; border: 1px solid var(--border-subtle); border-radius: 0.5rem; padding: 0.75rem; font-family: var(--font-code); font-size: 0.85rem; color: #86efac; margin-bottom: 0.75rem;">
+              &check; frmMaintenance.Item = galRequests.Selected<br>
+              <span style="color: #10b981; font-size: 0.78rem;">// When user clicks Row 1 &rarr; Form displays Row 1<br>// When user clicks Row 2 &rarr; Form displays Row 2</span>
+            </div>
+            <p style="color: var(--text-muted); font-size: 0.82rem; line-height: 1.5;">
+              <strong>Zero Event Handlers:</strong> You don't write an OnSelect script to push data into the form. Power Fx automatically pulls the data through reactive dependency binding!
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 12: UNLOCKING DATACARDS & CHOICE BINDING
+           ==================================================================== -->
+      <section class="slide" id="slide-12" data-slide-index="11" data-title="Unlocking DataCards & Choice Binding" data-segment="Part 4: DataCard Customization">
+        <header class="slide-header">
+          <div class="section-tag">Part 4 &bull; Advanced Customization</div>
+          <h2>Unlocking DataCards &amp; Choice Binding</h2>
+          <p class="subtitle">Why DataCards have padlocks, how to customize them safely, and how Choices() powers dropdowns.</p>
+        </header>
+
+        <div class="slide-content grid-2-col">
+          <div class="card">
+            <span class="card-badge" style="background: rgba(139, 92, 246, 0.2); color: #c084fc;">The Safety Padlock</span>
+            <h3 class="card-title">Why are DataCards Locked?</h3>
+            <p style="color: var(--text-muted); font-size: 0.88rem; line-height: 1.6; margin-bottom: 0.75rem;">
+              When you select a DataCard, you will see a small padlock icon in the Advanced properties pane.
+            </p>
+            <div style="background: rgba(139, 92, 246, 0.08); border-left: 3px solid #8b5cf6; padding: 0.75rem; border-radius: 0.4rem; margin-bottom: 0.75rem;">
+              <strong style="color: #c084fc; font-size: 0.85rem;">Why it's locked by default:</strong>
+              <p style="color: #e2e8f0; font-size: 0.82rem; margin-top: 0.2rem;">
+                Power Apps locks cards so you don't accidentally break the automated link between the input control and the SharePoint column.
+              </p>
+            </div>
+            <p style="color: var(--text-muted); font-size: 0.82rem; line-height: 1.5;">
+              <strong>How to unlock safely:</strong> Right-click the card and select <em>"Unlock to change properties"</em>. Now you can translate the label to Khmer (e.g. <code>"លេខសម្គាល់ម៉ាស៊ីន"</code>) without breaking data flow.
+            </p>
+          </div>
+
+          <div class="card">
+            <span class="card-badge" style="background: rgba(13, 148, 136, 0.2); color: #5eead4;">SharePoint Choices()</span>
+            <h3 class="card-title">How Choice Dropdowns Populate</h3>
+            <p style="color: var(--text-muted); font-size: 0.88rem; line-height: 1.6; margin-bottom: 0.75rem;">
+              In SharePoint, <code>Priority</code> is a Choice column ("High", "Medium", "Low").
+            </p>
+            <div style="background: #090e17; border: 1px solid var(--border-subtle); border-radius: 0.5rem; padding: 0.75rem; font-family: var(--font-code); font-size: 0.85rem; color: #5eead4; margin-bottom: 0.75rem;">
+              DataCardValue.Items = Choices(Apex_Maintenance_Requests.Priority)
+            </div>
+            <p style="color: var(--text-muted); font-size: 0.82rem; line-height: 1.5;">
+              <strong>Live Metadata Sync:</strong> You never type <code>["High", "Medium", "Low"]</code> manually. Power Apps queries SharePoint metadata directly. If an admin adds "Emergency / P1" in SharePoint, your app updates automatically!
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 13: INTERACTIVE WIDGET 1: LIVE FORM MODE SIMULATOR
+           ==================================================================== -->
+      <section class="slide" id="slide-13" data-slide-index="12" data-title="Simulator 1: Live Form Mode Switcher" data-segment="Part 4: Interactive Tool">
+        <header class="slide-header">
+          <div class="section-tag">Part 4 &bull; Interactive Simulator</div>
+          <h2>Live Form Mode Simulator: View vs Edit vs New</h2>
+          <p class="subtitle">Toggle between the 3 form modes below and watch how input cards react dynamically in real time.</p>
+        </header>
+
+        <div class="slide-content grid-2-col">
+          <div class="studio-chrome">
+            <div class="studio-chrome-header">
+              <span>Form Controls</span>
+              <span>frmMaintenance.DefaultMode</span>
+            </div>
+            <div class="studio-chrome-body">
+              <label style="font-size: 0.78rem; color: var(--text-muted); text-transform: uppercase;">Select Form Mode:</label>
+              <div style="display: flex; gap: 0.5rem; margin: 0.5rem 0 1rem 0;">
+                <button class="hud-btn active" id="btn-mode-edit" onclick="setSimMode('Edit')">FormMode.Edit</button>
+                <button class="hud-btn" id="btn-mode-view" onclick="setSimMode('View')">FormMode.View</button>
+                <button class="hud-btn" id="btn-mode-new" onclick="setSimMode('New')">FormMode.New</button>
+              </div>
+
+              <div style="background: rgba(255, 255, 255, 0.04); padding: 0.75rem; border-radius: 0.4rem; font-size: 0.82rem; color: #cbd5e1; margin-bottom: 1rem;">
+                <strong style="color: #67e8f9;" id="sim-mode-explanation-title">FormMode.Edit Active</strong>
+                <p style="margin-top: 0.25rem; font-size: 0.78rem; color: var(--text-muted);" id="sim-mode-explanation-body">
+                  Loads existing record fields into editable input boxes. Ready for user modification.
+                </p>
+              </div>
+
+              <button class="hud-btn" style="width: 100%; justify-content: center; background: rgba(245, 158, 11, 0.2); border-color: var(--color-warning); color: #fcd34d;" onclick="resetSimMode()">
+                Reset Simulator
+              </button>
+            </div>
+          </div>
+
+          <div class="card" style="background: rgba(12, 19, 31, 0.95); justify-content: space-between;">
+            <div>
+              <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.75rem;">
+                <span class="card-badge" id="sim-form-badge" style="background: rgba(245, 158, 11, 0.2); color: #fcd34d;">frmMaintenance [Mode: Edit]</span>
+                <span style="font-family: var(--font-code); font-size: 0.75rem; color: var(--text-dim);" id="sim-item-label">Item: Ticket #104</span>
+              </div>
+
+              <div style="display: flex; flex-direction: column; gap: 0.75rem;" id="sim-cards-container">
+                <!-- Card 1: Title -->
+                <div class="sim-datacard">
+                  <div style="display: flex; justify-content: space-between; font-size: 0.8rem; margin-bottom: 0.25rem;">
+                    <span style="font-weight: 700; color: #f8fafc;">Work Order Title <span style="color: #ef4444;">*</span></span>
+                  </div>
+                  <input type="text" class="sim-input" id="sim-field-title" value="Hydraulic Valve Leaking Oil">
+                </div>
+
+                <!-- Card 2: Machine ID -->
+                <div class="sim-datacard">
+                  <div style="display: flex; justify-content: space-between; font-size: 0.8rem; margin-bottom: 0.25rem;">
+                    <span style="font-weight: 700; color: #f8fafc;">Machine Equipment ID <span style="color: #ef4444;">*</span></span>
+                  </div>
+                  <input type="text" class="sim-input" id="sim-field-machine" value="Press P-04">
+                </div>
+
+                <!-- Card 3: Priority -->
+                <div class="sim-datacard">
+                  <div style="display: flex; justify-content: space-between; font-size: 0.8rem; margin-bottom: 0.25rem;">
+                    <span style="font-weight: 700; color: #f8fafc;">Hazard Priority Level</span>
+                  </div>
+                  <select class="sim-input" id="sim-field-priority">
+                    <option value="High" selected>High (Safety Hazard)</option>
+                    <option value="Medium">Medium (Maintenance Needed)</option>
+                    <option value="Low">Low (Routine Check)</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <div style="margin-top: 1rem; padding: 0.5rem 0.75rem; border-radius: 0.35rem; background: rgba(6, 182, 212, 0.1); border-left: 3px solid #06b6d4; font-size: 0.8rem; color: #67e8f9;">
+              &bull; Notice how switching to <strong>View</strong> disables inputs, and <strong>New</strong> clears them blank!
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 14: TRAINER DEMONSTRATION SCRIPT
+           ==================================================================== -->
+      <section class="slide" id="slide-14" data-slide-index="13" data-title="Trainer Demonstration: Live Studio Script" data-segment="Part 5: Trainer Walkthrough">
+        <header class="slide-header">
+          <div class="section-tag">Part 5 &bull; Live Trainer Action</div>
+          <h2>Trainer Demonstration: Live Studio Steps</h2>
+          <p class="subtitle">Watch the step-by-step teacher walkthrough, live narration cues, and hazards to avoid.</p>
+        </header>
+
+        <div class="slide-content grid-3-col">
+          <div class="card">
+            <span class="card-badge" style="background: rgba(59, 130, 246, 0.2); color: #93c5fd;">Phase 1 &bull; 0-4 min</span>
+            <h3 class="card-title">1. Drop &amp; Position</h3>
+            <p style="color: var(--text-muted); font-size: 0.85rem; line-height: 1.6;">
+              <strong>Trainer Action:</strong> Drag Edit Form to the right half of the screen. Name it <code>frmMaintenance</code>.<br><br>
+              <strong>Speaking Cue:</strong> <em>"Notice the big grey placeholder box. Power Apps is saying: 'Give me a filing cabinet (DataSource) and give me a specific folder (Item)!' Let's give it both."</em>
+            </p>
+          </div>
+
+          <div class="card" style="border-left: 3px solid var(--color-warning);">
+            <span class="card-badge" style="background: rgba(245, 158, 11, 0.25); color: #fcd34d;">Phase 2 &bull; 4-8 min</span>
+            <h3 class="card-title">2. Add Schema Fields</h3>
+            <p style="color: var(--text-muted); font-size: 0.85rem; line-height: 1.6;">
+              <strong>Trainer Action:</strong> Click Edit Fields &rarr; Add Title, MachineID, Priority, LoggedDate.<br><br>
+              <strong>Speaking Cue:</strong> <em>"Watch the magic of schema reflection. Priority gets a dropdown because SharePoint says it's a Choice. LoggedDate gets a date picker. Zero coding required!"</em>
+            </p>
+          </div>
+
+          <div class="card" style="border-left: 3px solid #10b981;">
+            <span class="card-badge" style="background: rgba(16, 185, 129, 0.2); color: #86efac;">Phase 3 &bull; 8-13 min</span>
+            <h3 class="card-title">3. Wire Item to Gallery</h3>
+            <p style="color: var(--text-muted); font-size: 0.85rem; line-height: 1.6;">
+              <strong>Trainer Action:</strong> Set <code>frmMaintenance.Item = galRequests.Selected</code>. Click through gallery rows.<br><br>
+              <strong>Speaking Cue:</strong> <em>"Now watch the master-detail link! I click Machine M-04 on the left &rarr; the form updates in 1 millisecond. I click Belt C-02 &rarr; the form follows instantly!"</em>
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 15: GUIDED LEARNER PRACTICE
+           ==================================================================== -->
+      <section class="slide" id="slide-15" data-slide-index="14" data-title="Guided Practice: Build the Master-Detail Console" data-segment="Part 5: Hands-On Practice">
+        <header class="slide-header">
+          <div class="section-tag">Part 5 &bull; Student Hands-On</div>
+          <h2>Guided Practice: Build the Master-Detail Console</h2>
+          <p class="subtitle">Open your Power Apps Studio browser tab and execute these 4 structured build milestones.</p>
+        </header>
+
+        <div class="slide-content grid-2-col">
+          <div class="card">
+            <h3 class="card-title">Milestone Instructions</h3>
+            <div class="objective-item">
+              <span class="obj-num">A</span>
+              <div>
+                <strong>Insert &amp; Align Edit Form:</strong>
+                <p>Insert an <strong>Edit form</strong> on the right half of Screen 1. Set its Name to <code>frmMaintenance</code>.</p>
+              </div>
+            </div>
+            <div class="objective-item">
+              <span class="obj-num">B</span>
+              <div>
+                <strong>Connect SharePoint Data Source:</strong>
+                <p>Set <code>DataSource = Apex_Maintenance_Requests</code>.</p>
+              </div>
+            </div>
+            <div class="objective-item">
+              <span class="obj-num">C</span>
+              <div>
+                <strong>Add 4 Core Columns:</strong>
+                <p>Add <code>Title</code>, <code>MachineID</code>, <code>Priority</code>, and <code>WorkDescription</code>.</p>
+              </div>
+            </div>
+            <div class="objective-item">
+              <span class="obj-num">D</span>
+              <div>
+                <strong>Bind Item Property:</strong>
+                <p>Set <code>frmMaintenance.Item = galRequests.Selected</code>.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="card" style="border-left: 3px solid var(--color-warning);">
+            <h3 class="card-title">Student Success Verification Checklist</h3>
+            <div style="display: flex; flex-direction: column; gap: 0.85rem; margin-top: 0.5rem;">
+              <label style="display: flex; align-items: center; gap: 0.65rem; font-size: 0.9rem; color: #e2e8f0;">
+                <input type="checkbox" style="width: 18px; height: 18px;">
+                <span>Form displays 4 clean DataCards on the right side of the canvas</span>
+              </label>
+              <label style="display: flex; align-items: center; gap: 0.65rem; font-size: 0.9rem; color: #e2e8f0;">
+                <input type="checkbox" style="width: 18px; height: 18px;">
+                <span><code>frmMaintenance.Item</code> is set to <code>galRequests.Selected</code></span>
+              </label>
+              <label style="display: flex; align-items: center; gap: 0.65rem; font-size: 0.9rem; color: #e2e8f0;">
+                <input type="checkbox" style="width: 18px; height: 18px;">
+                <span>Holding Alt and clicking row 2 in Gallery updates the Form to row 2</span>
+              </label>
+              <label style="display: flex; align-items: center; gap: 0.65rem; font-size: 0.9rem; color: #e2e8f0;">
+                <input type="checkbox" style="width: 18px; height: 18px;">
+                <span>The Priority Choice dropdown reflects real SharePoint options</span>
+              </label>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 16: INTERACTIVE WIDGET 2: MASTER-DETAIL CONSOLE
+           ==================================================================== -->
+      <section class="slide" id="slide-16" data-slide-index="15" data-title="Simulator 2: Live Master-Detail Console" data-segment="Part 6: Interactive Tool">
+        <header class="slide-header">
+          <div class="section-tag">Part 6 &bull; Master-Detail Simulation</div>
+          <h2>Live Master-Detail Console: Gallery &rarr; Form</h2>
+          <p class="subtitle">Click any work order in the left Gallery to see how Form.Item updates all DataCards instantaneously.</p>
+        </header>
+
+        <div class="slide-content grid-2-col">
+          <!-- Left: Gallery -->
+          <div class="sim-gallery-box" style="height: 100%;">
+            <div class="sim-gallery-row selected" id="md-row-1" onclick="selectMasterDetail(1, 'Hydraulic Valve Leaking Oil', 'Press P-04', 'High', 'Davi Santos', '31-Oct-2026', 'Heavy hydraulic fluid puddle under main piston chamber.')">
+              <div>
+                <strong style="color: #f8fafc; font-size: 0.92rem;">Hydraulic Valve Leaking Oil</strong>
+                <div style="font-size: 0.75rem; color: var(--text-muted); margin-top: 0.2rem;">Press P-04 &bull; 31-Oct-2026</div>
+              </div>
+              <span class="pill-priority-high">High</span>
+            </div>
+
+            <div class="sim-gallery-row" id="md-row-2" onclick="selectMasterDetail(2, 'Motor Bearings Screeching', 'Conveyor C-02', 'Medium', 'Bopha Chen', '31-Oct-2026', 'High friction whine audible during package acceleration.')">
+              <div>
+                <strong style="color: #f8fafc; font-size: 0.92rem;">Motor Bearings Screeching</strong>
+                <div style="font-size: 0.75rem; color: var(--text-muted); margin-top: 0.2rem;">Conveyor C-02 &bull; 31-Oct-2026</div>
+              </div>
+              <span class="pill-priority-med">Medium</span>
+            </div>
+
+            <div class="sim-gallery-row" id="md-row-3" onclick="selectMasterDetail(3, 'Thermocouple Reading Drifting', 'Extruder E-01', 'Low', 'Alex Vong', '30-Oct-2026', 'Variance of +/- 12C recorded on digital PID display.')">
+              <div>
+                <strong style="color: #f8fafc; font-size: 0.92rem;">Thermocouple Reading Drifting</strong>
+                <div style="font-size: 0.75rem; color: var(--text-muted); margin-top: 0.2rem;">Extruder E-01 &bull; 30-Oct-2026</div>
+              </div>
+              <span class="pill-priority-low">Low</span>
+            </div>
+
+            <div class="sim-gallery-row" id="md-row-4" onclick="selectMasterDetail(4, 'Pneumatic Pressure Drop', 'Compressor K-03', 'High', 'Sokha Ly', '29-Oct-2026', 'Secondary manifold valve hiss detected at 85 PSI.')">
+              <div>
+                <strong style="color: #f8fafc; font-size: 0.92rem;">Pneumatic Pressure Drop</strong>
+                <div style="font-size: 0.75rem; color: var(--text-muted); margin-top: 0.2rem;">Compressor K-03 &bull; 29-Oct-2026</div>
+              </div>
+              <span class="pill-priority-high">High</span>
+            </div>
+          </div>
+
+          <!-- Right: Edit Form Details -->
+          <div class="card" style="background: rgba(12, 19, 31, 0.95); justify-content: space-between;">
+            <div>
+              <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.75rem;">
+                <span class="card-badge" style="background: rgba(245, 158, 11, 0.2); color: #fcd34d;">frmMaintenanceDetail</span>
+                <span style="font-family: var(--font-code); font-size: 0.75rem; color: #67e8f9;">Item = galRequests.Selected</span>
+              </div>
+
+              <div style="display: flex; flex-direction: column; gap: 0.65rem;">
+                <!-- Card 1 -->
+                <div class="sim-datacard">
+                  <span style="font-size: 0.75rem; color: var(--text-muted);">Title DataCard</span>
+                  <input type="text" class="sim-input" id="md-detail-title" value="Hydraulic Valve Leaking Oil">
+                </div>
+
+                <!-- Card 2 -->
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem;">
+                  <div class="sim-datacard">
+                    <span style="font-size: 0.75rem; color: var(--text-muted);">Machine ID</span>
+                    <input type="text" class="sim-input" id="md-detail-machine" value="Press P-04">
+                  </div>
+                  <div class="sim-datacard">
+                    <span style="font-size: 0.75rem; color: var(--text-muted);">Priority Choice</span>
+                    <input type="text" class="sim-input" id="md-detail-priority" value="High">
+                  </div>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="sim-datacard">
+                  <span style="font-size: 0.75rem; color: var(--text-muted);">Work Description (Multi-line)</span>
+                  <textarea class="sim-input" id="md-detail-desc" rows="3" style="resize: none;">Heavy hydraulic fluid puddle under main piston chamber.</textarea>
+                </div>
+              </div>
+            </div>
+
+            <div style="background: rgba(255, 255, 255, 0.04); border-radius: 0.5rem; padding: 0.75rem; font-size: 0.82rem; color: #cbd5e1; margin-top: 0.75rem;">
+              <strong>Tomorrow's Hook (Day 23):</strong> When you click the <strong>Save</strong> button, <code>SubmitForm(frmMaintenanceDetail)</code> writes these exact boxes directly back into SharePoint!
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 17: 5 DANGEROUS MISCONCEPTIONS
+           ==================================================================== -->
+      <section class="slide" id="slide-17" data-slide-index="16" data-title="5 Dangerous Misconceptions vs Reality" data-segment="Part 6: Common Pitfalls">
+        <header class="slide-header">
+          <div class="section-tag">Part 6 &bull; Pitfall Prevention</div>
+          <h2>5 Dangerous Misconceptions vs. Cloud Reality</h2>
+          <p class="subtitle">Avoid these 5 common rookie mistakes before they break form data binding or corrupt records.</p>
+        </header>
+
+        <div class="slide-content grid-2-col">
+          <div class="card">
+            <div style="display: flex; flex-direction: column; gap: 0.85rem;">
+              <div style="background: rgba(239, 68, 68, 0.08); border-left: 3px solid #ef4444; padding: 0.75rem; border-radius: 0.4rem;">
+                <strong style="color: #fca5a5; font-size: 0.88rem;">Misconception 1: "The Form makes a duplicate local copy of the data."</strong>
+                <p style="color: var(--text-muted); font-size: 0.82rem; margin: 0.2rem 0 0 0;">
+                  <strong>Reality:</strong> False! The form is a direct window to the SharePoint record. It does not clone data into a detached memory sandbox.
+                </p>
+              </div>
+
+              <div style="background: rgba(239, 68, 68, 0.08); border-left: 3px solid #ef4444; padding: 0.75rem; border-radius: 0.4rem;">
+                <strong style="color: #fca5a5; font-size: 0.88rem;">Misconception 2: "To edit a card label, I must delete the whole DataCard."</strong>
+                <p style="color: var(--text-muted); font-size: 0.82rem; margin: 0.2rem 0 0 0;">
+                  <strong>Reality:</strong> Never delete a card! Just right-click and choose <em>"Unlock to change properties"</em>. You can modify any label safely.
+                </p>
+              </div>
+
+              <div style="background: rgba(239, 68, 68, 0.08); border-left: 3px solid #ef4444; padding: 0.75rem; border-radius: 0.4rem;">
+                <strong style="color: #fca5a5; font-size: 0.88rem;">Misconception 3: "Setting Form.Item to the Table name will show all tickets."</strong>
+                <p style="color: var(--text-muted); font-size: 0.82rem; margin: 0.2rem 0 0 0;">
+                  <strong>Reality:</strong> Forms only accept a single <strong>Record</strong>. A table will throw a red error: <em>"Expected Record, got Table"</em>.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div style="display: flex; flex-direction: column; gap: 0.85rem;">
+              <div style="background: rgba(239, 68, 68, 0.08); border-left: 3px solid #ef4444; padding: 0.75rem; border-radius: 0.4rem;">
+                <strong style="color: #fca5a5; font-size: 0.88rem;">Misconception 4: "FormMode.View lets users type notes without saving."</strong>
+                <p style="color: var(--text-muted); font-size: 0.82rem; margin: 0.2rem 0 0 0;">
+                  <strong>Reality:</strong> In View mode, all input controls are locked into read-only display. Users cannot focus or open the keyboard.
+                </p>
+              </div>
+
+              <div style="background: rgba(239, 68, 68, 0.08); border-left: 3px solid #ef4444; padding: 0.75rem; border-radius: 0.4rem;">
+                <strong style="color: #fca5a5; font-size: 0.88rem;">Misconception 5: "I need to write an OnSelect formula to update the form."</strong>
+                <p style="color: var(--text-muted); font-size: 0.82rem; margin: 0.2rem 0 0 0;">
+                  <strong>Reality:</strong> You write zero lines on the gallery button! <code>Form.Item = galRequests.Selected</code> reacts automatically.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 18: KNOWLEDGE CHECK 1 OF 5 (CORE SCOPING)
+           ==================================================================== -->
+      <section class="slide" id="slide-18" data-slide-index="17" data-title="Knowledge Check 1: Scoping Purpose" data-segment="Part 7: Knowledge Checks">
+        <header class="slide-header">
+          <div class="section-tag">Part 7 &bull; Knowledge Check 1 of 5</div>
+          <h2>Knowledge Check: Fundamental Scoping Purpose</h2>
+          <p class="subtitle">Testing your core understanding of how a Gallery and a Form divide data responsibilities.</p>
+        </header>
+
+        <div class="slide-content">
+          <div class="quiz-container">
+            <div class="quiz-card">
+              <span class="card-badge" style="background: rgba(59, 130, 246, 0.2); color: #93c5fd;">Question 1 &bull; Data Scope</span>
+              <p style="color: var(--text-main); font-size: 1.05rem; line-height: 1.6; margin-top: 0.5rem;">
+                What is the fundamental architectural difference in data scope between a Gallery and an Edit Form?
+              </p>
+
+              <div class="quiz-options">
+                <button class="quiz-option-btn" onclick="handleQuizAnswer(1, 'A', false, this)">
+                  <strong>A.</strong> <span>Galleries are for mobile phones, while Forms only work on desktop monitors</span>
+                </button>
+                <button class="quiz-option-btn" onclick="handleQuizAnswer(1, 'B', true, this)">
+                  <strong>B.</strong> <span>A Gallery takes a Table (many records) for browsing, while a Form takes a single Record for detailed editing</span>
+                </button>
+                <button class="quiz-option-btn" onclick="handleQuizAnswer(1, 'C', false, this)">
+                  <strong>C.</strong> <span>Galleries can only display numbers, while Forms can only display text</span>
+                </button>
+                <button class="quiz-option-btn" onclick="handleQuizAnswer(1, 'D', false, this)">
+                  <strong>D.</strong> <span>A Form deletes the record after reading it</span>
+                </button>
+              </div>
+            </div>
+
+            <div class="quiz-inspector-card" id="quiz-feedback-1">
+              <div class="feedback-placeholder">
+                <div style="width: 52px; height: 52px; border-radius: 50%; background: rgba(245, 158, 11, 0.15); border: 1px solid rgba(245, 158, 11, 0.35); display: flex; align-items: center; justify-content: center; margin: 0 auto 0.85rem auto; font-size: 1.5rem; color: #fcd34d;">
+                  &quest;
+                </div>
+                <span class="card-badge" style="background: rgba(245, 158, 11, 0.2); color: #fcd34d; margin-bottom: 0.65rem;">Awaiting Answer Selection</span>
+                <h4 style="color: #f8fafc; font-size: 1.05rem; margin-bottom: 0.5rem;">Live Architecture Inspector</h4>
+                <p style="color: var(--text-muted); font-size: 0.88rem; line-height: 1.6; max-width: 380px; margin: 0 auto;">
+                  Select an option on the left (A, B, C, or D) to submit your answer and unlock the system architecture rationale.
+                </p>
+              </div>
+              <div class="feedback-content">
+                <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.75rem;">
+                  <span class="card-badge" id="quiz-badge-1" style="background: rgba(16, 185, 129, 0.2); color: #86efac;">Correct!</span>
+                  <strong style="color: var(--text-main); font-size: 1.05rem;" id="quiz-status-1">Scoping Mastery Confirmed!</strong>
+                </div>
+                <p style="color: var(--text-muted); font-size: 0.88rem; line-height: 1.6;">
+                  Exactly right! A Gallery translates a whole Table (array of rows) into a repeated browsing list. A Form opens up ONE specific Record (row) to show and edit all its individual column fields.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 19: KNOWLEDGE CHECK 2 OF 5 (ARCHITECTURAL WHY OF DATACARDS)
+           ==================================================================== -->
+      <section class="slide" id="slide-19" data-slide-index="18" data-title="Knowledge Check 2: Architectural 'Why'" data-segment="Part 7: Knowledge Checks">
+        <header class="slide-header">
+          <div class="section-tag">Part 7 &bull; Knowledge Check 2 of 5</div>
+          <h2>Knowledge Check: The Architectural "Why" of DataCards</h2>
+          <p class="subtitle">Why Power Apps enforces card sub-containers instead of letting developers drop loose inputs.</p>
+        </header>
+
+        <div class="slide-content">
+          <div class="quiz-container">
+            <div class="quiz-card">
+              <span class="card-badge" style="background: rgba(59, 130, 246, 0.2); color: #93c5fd;">Question 2 &bull; Architectural 'Why'</span>
+              <p style="color: var(--text-main); font-size: 1.05rem; line-height: 1.6; margin-top: 0.5rem;">
+                Why does Power Apps bundle every form field into a self-contained "DataCard" instead of letting developers drop loose inputs directly into the form?
+              </p>
+
+              <div class="quiz-options">
+                <button class="quiz-option-btn" onclick="handleQuizAnswer(2, 'A', false, this)">
+                  <strong>A.</strong> <span>Because DataCards allow Power Apps to charge extra licensing fees</span>
+                </button>
+                <button class="quiz-option-btn" onclick="handleQuizAnswer(2, 'B', false, this)">
+                  <strong>B.</strong> <span>Because loose inputs cannot render text in bold font</span>
+                </button>
+                <button class="quiz-option-btn" onclick="handleQuizAnswer(2, 'C', true, this)">
+                  <strong>C.</strong> <span>Because a DataCard bundles label, input, required validation asterisk, and database error messages into one coordinated unit</span>
+                </button>
+                <button class="quiz-option-btn" onclick="handleQuizAnswer(2, 'D', false, this)">
+                  <strong>D.</strong> <span>Because DataCards prevent users from clicking buttons</span>
+                </button>
+              </div>
+            </div>
+
+            <div class="quiz-inspector-card" id="quiz-feedback-2">
+              <div class="feedback-placeholder">
+                <div style="width: 52px; height: 52px; border-radius: 50%; background: rgba(245, 158, 11, 0.15); border: 1px solid rgba(245, 158, 11, 0.35); display: flex; align-items: center; justify-content: center; margin: 0 auto 0.85rem auto; font-size: 1.5rem; color: #fcd34d;">
+                  &quest;
+                </div>
+                <span class="card-badge" style="background: rgba(245, 158, 11, 0.2); color: #fcd34d; margin-bottom: 0.65rem;">Awaiting Answer Selection</span>
+                <h4 style="color: #f8fafc; font-size: 1.05rem; margin-bottom: 0.5rem;">Live Architecture Inspector</h4>
+                <p style="color: var(--text-muted); font-size: 0.88rem; line-height: 1.6; max-width: 380px; margin: 0 auto;">
+                  Select an option on the left (A, B, C, or D) to submit your answer and unlock the system architecture rationale.
+                </p>
+              </div>
+              <div class="feedback-content">
+                <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.75rem;">
+                  <span class="card-badge" id="quiz-badge-2" style="background: rgba(16, 185, 129, 0.2); color: #86efac;">Correct!</span>
+                  <strong style="color: var(--text-main); font-size: 1.05rem;" id="quiz-status-2">Component Architecture Mastered!</strong>
+                </div>
+                <p style="color: var(--text-muted); font-size: 0.88rem; line-height: 1.6;">
+                  Brilliant! A DataCard is an autonomous field coordinator. It manages the column's title, value control, required status (StarVisible), and cloud database validation errors as a single cohesive component.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 20: KNOWLEDGE CHECK 3 OF 5 (WHAT HAPPENS IF)
+           ==================================================================== -->
+      <section class="slide" id="slide-20" data-slide-index="19" data-title="Knowledge Check 3: 'What Happens If'" data-segment="Part 7: Knowledge Checks">
+        <header class="slide-header">
+          <div class="section-tag">Part 7 &bull; Knowledge Check 3 of 5</div>
+          <h2>Knowledge Check: "What Happens If" Selection Changes</h2>
+          <p class="subtitle">Investigating real-time dependency reactivity between Gallery selection and Form Item.</p>
+        </header>
+
+        <div class="slide-content">
+          <div class="quiz-container">
+            <div class="quiz-card">
+              <span class="card-badge" style="background: rgba(59, 130, 246, 0.2); color: #93c5fd;">Question 3 &bull; Dynamic Reactivity</span>
+              <p style="color: var(--text-main); font-size: 1.05rem; line-height: 1.6; margin-top: 0.5rem;">
+                When <code>frmMaintenance.Item = galRequests.Selected</code>, what happens to the form fields the moment a technician taps a different row in the gallery?
+              </p>
+
+              <div class="quiz-options">
+                <button class="quiz-option-btn" onclick="handleQuizAnswer(3, 'A', false, this)">
+                  <strong>A.</strong> <span>Nothing happens until the technician reboots the app</span>
+                </button>
+                <button class="quiz-option-btn" onclick="handleQuizAnswer(3, 'B', false, this)">
+                  <strong>B.</strong> <span>The app crashes because formulas cannot listen to gallery clicks</span>
+                </button>
+                <button class="quiz-option-btn" onclick="handleQuizAnswer(3, 'C', true, this)">
+                  <strong>C.</strong> <span>The form instantly flushes the old values and repopulates all DataCards with the newly clicked record's fields</span>
+                </button>
+                <button class="quiz-option-btn" onclick="handleQuizAnswer(3, 'D', false, this)">
+                  <strong>D.</strong> <span>The form duplicates the record in SharePoint</span>
+                </button>
+              </div>
+            </div>
+
+            <div class="quiz-inspector-card" id="quiz-feedback-3">
+              <div class="feedback-placeholder">
+                <div style="width: 52px; height: 52px; border-radius: 50%; background: rgba(245, 158, 11, 0.15); border: 1px solid rgba(245, 158, 11, 0.35); display: flex; align-items: center; justify-content: center; margin: 0 auto 0.85rem auto; font-size: 1.5rem; color: #fcd34d;">
+                  &quest;
+                </div>
+                <span class="card-badge" style="background: rgba(245, 158, 11, 0.2); color: #fcd34d; margin-bottom: 0.65rem;">Awaiting Answer Selection</span>
+                <h4 style="color: #f8fafc; font-size: 1.05rem; margin-bottom: 0.5rem;">Live Architecture Inspector</h4>
+                <p style="color: var(--text-muted); font-size: 0.88rem; line-height: 1.6; max-width: 380px; margin: 0 auto;">
+                  Select an option on the left (A, B, C, or D) to submit your answer and unlock the system architecture rationale.
+                </p>
+              </div>
+              <div class="feedback-content">
+                <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.75rem;">
+                  <span class="card-badge" id="quiz-badge-3" style="background: rgba(16, 185, 129, 0.2); color: #86efac;">Correct!</span>
+                  <strong style="color: var(--text-main); font-size: 1.05rem;" id="quiz-status-3">Reactivity Understood!</strong>
+                </div>
+                <p style="color: var(--text-muted); font-size: 0.88rem; line-height: 1.6;">
+                  Spot on! Because Power Fx recalculates dependencies continuously (like Microsoft Excel), changing <code>galRequests.Selected</code> instantly forces the form to refresh its bound inputs.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 21: KNOWLEDGE CHECK 4 OF 5 (THE 3 FORMMODES)
+           ==================================================================== -->
+      <section class="slide" id="slide-21" data-slide-index="20" data-title="Knowledge Check 4: Form Modes" data-segment="Part 7: Knowledge Checks">
+        <header class="slide-header">
+          <div class="section-tag">Part 7 &bull; Knowledge Check 4 of 5</div>
+          <h2>Knowledge Check: Form Modes (Edit vs View vs New)</h2>
+          <p class="subtitle">Testing your ability to predict form behavior under different operational states.</p>
+        </header>
+
+        <div class="slide-content">
+          <div class="quiz-container">
+            <div class="quiz-card">
+              <span class="card-badge" style="background: rgba(59, 130, 246, 0.2); color: #93c5fd;">Question 4 &bull; Mode Control</span>
+              <p style="color: var(--text-main); font-size: 1.05rem; line-height: 1.6; margin-top: 0.5rem;">
+                A plant manager wants operators to read work order details but strictly prevents them from editing any text. Which mode must the form be set to?
+              </p>
+
+              <div class="quiz-options">
+                <button class="quiz-option-btn" onclick="handleQuizAnswer(4, 'A', false, this)">
+                  <strong>A.</strong> <span>FormMode.New</span>
+                </button>
+                <button class="quiz-option-btn" onclick="handleQuizAnswer(4, 'B', true, this)">
+                  <strong>B.</strong> <span>FormMode.View</span>
+                </button>
+                <button class="quiz-option-btn" onclick="handleQuizAnswer(4, 'C', false, this)">
+                  <strong>C.</strong> <span>FormMode.Edit</span>
+                </button>
+                <button class="quiz-option-btn" onclick="handleQuizAnswer(4, 'D', false, this)">
+                  <strong>D.</strong> <span>DisplayMode.Disabled</span>
+                </button>
+              </div>
+            </div>
+
+            <div class="quiz-inspector-card" id="quiz-feedback-4">
+              <div class="feedback-placeholder">
+                <div style="width: 52px; height: 52px; border-radius: 50%; background: rgba(245, 158, 11, 0.15); border: 1px solid rgba(245, 158, 11, 0.35); display: flex; align-items: center; justify-content: center; margin: 0 auto 0.85rem auto; font-size: 1.5rem; color: #fcd34d;">
+                  &quest;
+                </div>
+                <span class="card-badge" style="background: rgba(245, 158, 11, 0.2); color: #fcd34d; margin-bottom: 0.65rem;">Awaiting Answer Selection</span>
+                <h4 style="color: #f8fafc; font-size: 1.05rem; margin-bottom: 0.5rem;">Live Architecture Inspector</h4>
+                <p style="color: var(--text-muted); font-size: 0.88rem; line-height: 1.6; max-width: 380px; margin: 0 auto;">
+                  Select an option on the left (A, B, C, or D) to submit your answer and unlock the system architecture rationale.
+                </p>
+              </div>
+              <div class="feedback-content">
+                <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.75rem;">
+                  <span class="card-badge" id="quiz-badge-4" style="background: rgba(16, 185, 129, 0.2); color: #86efac;">Correct!</span>
+                  <strong style="color: var(--text-main); font-size: 1.05rem;" id="quiz-status-4">Mode Architecture Mastered!</strong>
+                </div>
+                <p style="color: var(--text-muted); font-size: 0.88rem; line-height: 1.6;">
+                  Exactly! <code>FormMode.View</code> renders all cards as read-only labels, protecting the underlying SharePoint record from accidental keyboard alterations.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 22: KNOWLEDGE CHECK 5 OF 5 (CHOICE BINDING)
+           ==================================================================== -->
+      <section class="slide" id="slide-22" data-slide-index="21" data-title="Knowledge Check 5: Choice Metadata" data-segment="Part 7: Knowledge Checks">
+        <header class="slide-header">
+          <div class="section-tag">Part 7 &bull; Knowledge Check 5 of 5</div>
+          <h2>Knowledge Check: Choice Metadata Synchronization</h2>
+          <p class="subtitle">How Power Apps queries cloud schema metadata to keep dropdown lists automatically updated.</p>
+        </header>
+
+        <div class="slide-content">
+          <div class="quiz-container">
+            <div class="quiz-card">
+              <span class="card-badge" style="background: rgba(59, 130, 246, 0.2); color: #93c5fd;">Question 5 &bull; Metadata Sync</span>
+              <p style="color: var(--text-main); font-size: 1.05rem; line-height: 1.6; margin-top: 0.5rem;">
+                Inside a DataCard for a Choice column like <code>Priority</code>, where does the dropdown control get its list of selectable options?
+              </p>
+
+              <div class="quiz-options">
+                <button class="quiz-option-btn" onclick="handleQuizAnswer(5, 'A', false, this)">
+                  <strong>A.</strong> <span>The developer must type out each option manually inside a collection</span>
+                </button>
+                <button class="quiz-option-btn" onclick="handleQuizAnswer(5, 'B', true, this)">
+                  <strong>B.</strong> <span>It uses the function `Choices(TableName.ColumnName)` to read options dynamically from SharePoint</span>
+                </button>
+                <button class="quiz-option-btn" onclick="handleQuizAnswer(5, 'C', false, this)">
+                  <strong>C.</strong> <span>It reads a static Excel file stored in OneDrive</span>
+                </button>
+                <button class="quiz-option-btn" onclick="handleQuizAnswer(5, 'D', false, this)">
+                  <strong>D.</strong> <span>Choices are generated randomly by Bing AI</span>
+                </button>
+              </div>
+            </div>
+
+            <div class="quiz-inspector-card" id="quiz-feedback-5">
+              <div class="feedback-placeholder">
+                <div style="width: 52px; height: 52px; border-radius: 50%; background: rgba(245, 158, 11, 0.15); border: 1px solid rgba(245, 158, 11, 0.35); display: flex; align-items: center; justify-content: center; margin: 0 auto 0.85rem auto; font-size: 1.5rem; color: #fcd34d;">
+                  &quest;
+                </div>
+                <span class="card-badge" style="background: rgba(245, 158, 11, 0.2); color: #fcd34d; margin-bottom: 0.65rem;">Awaiting Answer Selection</span>
+                <h4 style="color: #f8fafc; font-size: 1.05rem; margin-bottom: 0.5rem;">Live Architecture Inspector</h4>
+                <p style="color: var(--text-muted); font-size: 0.88rem; line-height: 1.6; max-width: 380px; margin: 0 auto;">
+                  Select an option on the left (A, B, C, or D) to submit your answer and unlock the system architecture rationale.
+                </p>
+              </div>
+              <div class="feedback-content">
+                <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.75rem;">
+                  <span class="card-badge" id="quiz-badge-5" style="background: rgba(16, 185, 129, 0.2); color: #86efac;">Correct!</span>
+                  <strong style="color: var(--text-main); font-size: 1.05rem;" id="quiz-status-5">Cloud Metadata Mastered!</strong>
+                </div>
+                <p style="color: var(--text-muted); font-size: 0.88rem; line-height: 1.6;">
+                  Perfect! The <code>Choices()</code> function queries SharePoint's live column metadata schema. When SharePoint changes, the app updates automatically without modifying any app code!
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 23: FINAL CAPSTONE CHALLENGE
+           ==================================================================== -->
+      <section class="slide" id="slide-23" data-slide-index="22" data-title="Capstone Challenge: Work Order Inspection" data-segment="Part 7: Practical Evaluation">
+        <header class="slide-header">
+          <div class="section-tag">Part 7 &bull; Capstone Challenge</div>
+          <h2>Capstone Challenge: Emergency Work Order Inspection</h2>
+          <p class="subtitle">Build an end-to-end Master-Detail console for the plant supervisor at Apex Plastics.</p>
+        </header>
+
+        <div class="slide-content grid-2-col">
+          <div class="card">
+            <span class="card-badge" style="background: rgba(245, 158, 11, 0.2); color: #fcd34d;">Operational Briefing</span>
+            <h3 class="card-title">Supervisor Console Specification</h3>
+            <p style="color: var(--text-muted); font-size: 0.88rem; line-height: 1.6; margin-bottom: 1rem;">
+              Create a side-by-side production workstation layout:
+            </p>
+            <div style="display: flex; flex-direction: column; gap: 0.65rem;">
+              <div style="background: rgba(255, 255, 255, 0.04); padding: 0.75rem; border-radius: 0.4rem; border-left: 3px solid #0284c7;">
+                <strong style="color: #67e8f9; font-size: 0.85rem;">Left Side (Vertical Gallery):</strong>
+                <p style="color: var(--text-muted); font-size: 0.8rem; margin-top: 0.2rem;">Displays <code>Apex_Maintenance_Requests</code> showing Title, Machine ID, and Priority.</p>
+              </div>
+              <div style="background: rgba(255, 255, 255, 0.04); padding: 0.75rem; border-radius: 0.4rem; border-left: 3px solid #f59e0b;">
+                <strong style="color: #fcd34d; font-size: 0.85rem;">Right Side (Edit Form):</strong>
+                <p style="color: var(--text-muted); font-size: 0.8rem; margin-top: 0.2rem;">Binds to <code>galRequests.Selected</code> displaying Title, Machine ID, Priority, and Description.</p>
+              </div>
+              <div style="background: rgba(255, 255, 255, 0.04); padding: 0.75rem; border-radius: 0.4rem; border-left: 3px solid #10b981;">
+                <strong style="color: #86efac; font-size: 0.85rem;">Mode Toggle Switch:</strong>
+                <p style="color: var(--text-muted); font-size: 0.8rem; margin-top: 0.2rem;">Provides an interactive toggle between <code>FormMode.View</code> and <code>FormMode.Edit</code>.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="card" style="border-left: 3px solid var(--color-warning);">
+            <span class="card-badge" style="background: rgba(245, 158, 11, 0.2); color: #fcd34d;">Evaluation Rubric (100 Pts)</span>
+            <h3 class="card-title">Architectural Scorecard</h3>
+            <div style="display: flex; flex-direction: column; gap: 0.75rem; margin-top: 0.5rem;">
+              <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-subtle); padding-bottom: 0.4rem;">
+                <span style="font-size: 0.85rem; color: #cbd5e1;">A. Form correctly bound to SharePoint DataSource</span>
+                <span style="font-family: var(--font-code); color: #fcd34d; font-weight: bold;">25 Pts</span>
+              </div>
+              <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-subtle); padding-bottom: 0.4rem;">
+                <span style="font-size: 0.85rem; color: #cbd5e1;">B. Item correctly wired to `galRequests.Selected`</span>
+                <span style="font-family: var(--font-code); color: #fcd34d; font-weight: bold;">25 Pts</span>
+              </div>
+              <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-subtle); padding-bottom: 0.4rem;">
+                <span style="font-size: 0.85rem; color: #cbd5e1;">C. Choice dropdown using Choices() without hardcoding</span>
+                <span style="font-family: var(--font-code); color: #fcd34d; font-weight: bold;">25 Pts</span>
+              </div>
+              <div style="display: flex; justify-content: space-between; align-items: center; padding-bottom: 0.4rem;">
+                <span style="font-size: 0.85rem; color: #cbd5e1;">D. Form mode toggling cleanly between View and Edit</span>
+                <span style="font-family: var(--font-code); color: #fcd34d; font-weight: bold;">25 Pts</span>
+              </div>
+            </div>
+            <div style="margin-top: auto; padding-top: 1rem; color: #86efac; font-weight: 700; font-size: 0.9rem;">
+              Total Score: 100/100 &bull; Enterprise Form Architect Certified
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 24: CONNECTION MAP & BRIDGE FORWARD TO DAY 23
+           ==================================================================== -->
+      <section class="slide" id="slide-24" data-slide-index="23" data-title="Bridge Forward to Day 23: SubmitForm" data-segment="Part 8: Next Destination">
+        <header class="slide-header">
+          <div class="section-tag">Part 8 &bull; The Next Horizon</div>
+          <h2>Connection Map &amp; Bridge to Day 23</h2>
+          <p class="subtitle">You have mastered viewing and editing records in memory. Tomorrow, we write changes back to SharePoint!</p>
+        </header>
+
+        <div class="slide-content grid-3-col">
+          <div class="card" style="border-left: 3px solid #0d9488;">
+            <span class="card-badge" style="background: rgba(13, 148, 136, 0.2); color: #5eead4;">Day 21 Mastered</span>
+            <h3 class="card-title">Gallery Browsing</h3>
+            <p style="color: var(--text-muted); font-size: 0.85rem; line-height: 1.6;">
+              Browsed hundreds of records via <code>galRequests.Items</code>. Stamped repeated rows with a single master template.
+            </p>
+            <div style="margin-top: auto; padding-top: 1rem; color: #5eead4; font-weight: 700; font-size: 0.85rem;">
+              &check; Repeating Record UI
+            </div>
+          </div>
+
+          <div class="card" style="border-left: 3px solid var(--color-warning); background: rgba(245, 158, 11, 0.08);">
+            <span class="card-badge" style="background: rgba(245, 158, 11, 0.25); color: #fcd34d;">Day 22 Mastered</span>
+            <h3 class="card-title">Form Field Binding</h3>
+            <p style="color: var(--text-main); font-size: 0.85rem; line-height: 1.6;">
+              Bound <code>Form.Item = galRequests.Selected</code>. Deconstructed DataCards and harnessed View, Edit, and New modes.
+            </p>
+            <div style="margin-top: auto; padding-top: 1rem; color: #fcd34d; font-weight: 700; font-size: 0.85rem;">
+              &check; Typed Single-Record Fields
+            </div>
+          </div>
+
+          <div class="card" style="border-left: 3px solid #8b5cf6;">
+            <span class="card-badge" style="background: rgba(139, 92, 246, 0.2); color: #c084fc;">Tomorrow &bull; Day 23</span>
+            <h3 class="card-title">SubmitForm &amp; Save</h3>
+            <p style="color: var(--text-muted); font-size: 0.85rem; line-height: 1.6;">
+              Tomorrow, we wire up the <strong>Save Button</strong>! With <code>SubmitForm(frmMaintenance)</code>, we write all card changes back to SharePoint permanently!
+            </p>
+            <div style="margin-top: auto; padding-top: 1rem; color: #c084fc; font-weight: 700; font-size: 0.85rem;">
+              &rarr; Day 23: Cloud Database Writing
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- Bottom HUD & Navigation Controls -->
+    <footer id="bottom-hud">
+      <div id="progress-bar-container">
+        <div id="progress-bar"></div>
+      </div>
+
+      <div class="hud-left">
+        <button id="btn-prev" class="hud-btn" onclick="prevSlide()">&larr; Prev</button>
+        <button id="btn-next" class="hud-btn" onclick="nextSlide()">Next &rarr;</button>
+        <span id="slide-counter">Slide 1 / 24</span>
+      </div>
+
+      <div class="hud-right">
+        <button id="btn-lang" class="hud-btn" onclick="toggleLanguage()"><span id="lang-label">KH</span></button>
+        <button id="btn-laser" class="hud-btn active" onclick="toggleLaser()">Laser</button>
+        <button id="btn-notes" class="hud-btn" onclick="toggleNotes()">Notes (N)</button>
+        <button id="btn-overview" class="hud-btn" onclick="toggleOverview()">Overview (O)</button>
+        <button id="btn-timer" class="hud-btn" onclick="toggleTimer()"><span id="timer-display">90:00</span></button>
+        <button id="btn-fullscreen" class="hud-btn" onclick="toggleFullscreen()">Full</button>
+        <a href="../index.html" class="hud-btn hub-btn" title="Return to Master Curriculum Hub (ត្រឡប់ទៅទំព័រដើម)" style="text-decoration: none; display: inline-flex; align-items: center; gap: 4px; color: #fcd34d; font-weight: 600;"><span>🏠</span><span>Hub</span></a>
+      </div></footer>
+
+    <!-- Slide-Out Trainer Notes Drawer (Strictly off-screen until N pressed) -->
+    <div id="notes-drawer">
+      <div class="notes-header">
+        <h3 id="notes-slide-title" style="color: #fcd34d; font-size: 1.15rem;">Trainer Speaking Notes</h3>
+        <button class="notes-close-btn" id="notes-close-btn" onclick="toggleNotes()">&times;</button>
+      </div>
+      <div class="notes-body" id="notes-body-content">
+        <!-- Dynamically populated by script.js -->
+      </div>
+    </div>
+
+    <!-- Slide Overview Grid Modal -->
+    <div id="overview-modal">
+      <div class="overview-header">
+        <h2 style="color: #f8fafc; font-size: 1.6rem;">Slide Overview (24 Slides)</h2>
+        <button class="notes-close-btn" id="overview-close-btn" onclick="toggleOverview()">&times;</button>
+      </div>
+      <div class="overview-grid" id="overview-grid">
+        <!-- Dynamically populated by script.js -->
+      </div>
+    </div>
+
+  </div>
+
+  <script src="script.js"></script>
+<script>
+if (window.self !== window.top) {
+  document.documentElement.classList.add('in-iframe');
+  function hideHub() { document.querySelectorAll('.hub-btn, .back-to-hub-pill').forEach(e => e.style.display = 'none'); }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', hideHub);
+  } else {
+    hideHub();
+  }
+}
+</script>
+<style>
+.in-iframe .hub-btn, .in-iframe .back-to-hub-pill { display: none !important; }
+</style>
+</body>
+</html>
+

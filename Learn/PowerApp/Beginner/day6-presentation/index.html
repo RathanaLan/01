@@ -1,0 +1,1545 @@
+<!DOCTYPE html>
+<html lang="en" translate="no" class="notranslate">
+<head>
+  <meta name="google" content="notranslate">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Power Apps Foundation — Day 6: Combining Conditions (AND / OR / NOT)</title>
+  
+    <!-- Famous & Universally Loved Khmer Fonts (Moul for Formal Titles, Siemreap & Battambang for Easy Reading) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=Moul&family=Kantumruy+Pro:ital,wght@0,400..700;1,400..700&family=Battambang:wght@300;400;700;900&family=Koh+Santepheap:wght@300;400;700&family=Koulen&family=Siemreap&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="../shared/design-system.css">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="fluent-dark-theme">
+
+  <!-- Main Presentation Stage Container (16:9 Viewport Constrained) -->
+  <div id="presentation-container" class="presentation-container">
+
+    <!-- Top Status Bar: Branding, Segment Indicator, Timer & Controls -->
+    <!-- Presentation Header removed to match Day 25 Standard -->
+
+    <!-- Presentation Visual Stage (16:9 Canvas) -->
+    <main id="stage" class="stage" role="region" aria-label="Slide Presentation Stage">
+
+      <!-- =================================================================== -->
+      <!-- SLIDE 1: Title & Mental Model Anchor                                -->
+      <!-- =================================================================== -->
+      <section class="slide active" id="slide-1" 
+        data-title="Day 6: Combining Conditions (AND / OR / NOT)" 
+        data-segment="Part 1: Welcome &amp; Spiral Recall (00:00 - 10:00)"
+        data-notes="TRAINER SPEAKING SCRIPT:
+'Welcome to Day 6 of Microsoft Power Apps Foundation!
+Yesterday on Day 5, our application learned how to make single-condition decisions using IF.
+If True ➔ Action A; Else ➔ Action B.
+Like a railway switch choosing between two tracks!
+But here is the workplace reality:
+Real business decisions rarely depend on just ONE question!
+A boiler doesn't just need safe pressure; it needs safe pressure AND water level!
+An emergency alarm sounds if toxic smoke is detected OR flammable gas is detected!
+Today, we master the combiners: AND (&&), OR (||), and NOT (!).
+Notice today's connection chain:
+Multiple Conditions ➔ AND / OR / NOT ➔ Single Consolidated Verdict ➔ IF Decision ➔ Action.
+Let's see how compound logic models real-world business and safety rules!'">
+        <div class="slide-content">
+          <div class="hero-layout">
+            <div class="hero-pill-group">
+              <span class="hero-pill">Phase 2: Logic &amp; Decisions</span>
+              <span class="hero-pill teal-pill">Day 6 of 27</span>
+              <span class="hero-pill blue-pill">90 Minutes</span>
+            </div>
+            <h1 class="hero-title">
+              <span class="gradient-text">Combining Conditions: AND / OR / NOT</span><br>
+              How an App Models Real Multi-Rule Business Decisions
+            </h1>
+            <p class="hero-subtitle">
+              Yesterday, <code>If()</code> gave our app the ability to choose a path based on a single condition. Today, we discover that real business decisions require multi-gate checkpoints: combining several True/False conditions into a single unified verdict.
+            </p>
+
+            <div class="title-feature-grid">
+              <div class="feature-item">
+                <span class="feature-icon">&#128272;</span>
+                <div class="feature-info">
+                  <h4>1. The AND Gate (&&)</h4>
+                  <p>Strict conjunction: requires <strong>every single condition</strong> to be True (Two-Key Vault).</p>
+                </div>
+              </div>
+              <div class="feature-item">
+                <span class="feature-icon">&#128680;</span>
+                <div class="feature-info">
+                  <h4>2. The OR Gate (||)</h4>
+                  <p>Permissive safety disjunction: triggers if <strong>at least one condition</strong> is True (Multi-Sensor Alarm).</p>
+                </div>
+              </div>
+              <div class="feature-item">
+                <span class="feature-icon">&#128260;</span>
+                <div class="feature-info">
+                  <h4>3. The NOT Inverter (!)</h4>
+                  <p>Inverts truth: flips True to False and False to True (e.g. <code>!IsBlank()</code>).</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- =================================================================== -->
+      <!-- SLIDE 2: 5-Minute Concept-Map Recap (Master Mental Model)            -->
+      <!-- =================================================================== -->
+      <section class="slide" id="slide-2" 
+        data-title="Master Curriculum Concept Map" 
+        data-segment="Part 1: Welcome &amp; Spiral Recall (00:00 - 10:00)"
+        data-notes="TRAINER SPEAKING SCRIPT:
+'Look at our Master Mental Model map on screen.
+Every single day builds directly on the previous day.
+On Day 3, we had typed DATA (text, numbers, booleans).
+On Day 4, we asked CONDITIONS about that data (Pressure > 200?).
+On Day 5, we fed that True/False answer into a single IF decision.
+Today on Day 6, we complete Phase 2 Logic by combining multiple conditions with AND, OR, and NOT!
+Notice: AND and OR do not replace IF!
+They act as condition combiners: taking multiple questions and squeezing them into ONE consolidated True/False answer that IF acts upon!
+Look at tomorrow on Day 7: We will take this logic and organize it into complete business workflows!'">
+        <div class="slide-content">
+          <div class="slide-header">
+            <span class="slide-badge purple-badge">Curriculum Architecture</span>
+            <h2 class="slide-title">Where Today Fits in the 27-Day Master Mental Model</h2>
+            <p class="slide-lead">We never teach isolated features. Today completes Phase 2 Logic by enabling multi-condition business rules.</p>
+          </div>
+
+          <div class="mental-model-chain">
+            <div class="chain-step step-completed">
+              <span class="step-num">Days 1-2</span>
+              <span class="step-name">Problem &amp; Sequence</span>
+              <span class="step-status">&#10003; Foundation</span>
+            </div>
+            <span class="chain-arrow">&#8594;</span>
+            <div class="chain-step step-completed">
+              <span class="step-num">Days 3-4</span>
+              <span class="step-name">Data &amp; Conditions</span>
+              <span class="step-status">&#10003; True / False</span>
+            </div>
+            <span class="chain-arrow">&#8594;</span>
+            <div class="chain-step step-completed">
+              <span class="step-num">Day 5</span>
+              <span class="step-name">Single IF</span>
+              <span class="step-status">&#10003; Decision Fork</span>
+            </div>
+            <span class="chain-arrow">&#8594;</span>
+            <div class="chain-step step-active-day5">
+              <span class="step-num">TODAY (Day 6)</span>
+              <span class="step-name">AND / OR / NOT</span>
+              <span class="step-status">&#9733; Compound Gates</span>
+            </div>
+            <span class="chain-arrow">&#8594;</span>
+            <div class="chain-step step-future">
+              <span class="step-num">Days 7-27</span>
+              <span class="step-name">Process ➔ UI ➔ Store</span>
+              <span class="step-status">Ahead</span>
+            </div>
+          </div>
+
+          <div class="grid-2-col" style="margin-top: 1.25rem;">
+            <div class="info-card border-blue">
+              <div class="card-header-icon">&#128260; How Day 5 Connects to Day 6</div>
+              <p>Yesterday, <code>If()</code> learned to listen to a single True or False verdict. Today, <code>AND</code> and <code>OR</code> combine several questions into that exact same True/False format, allowing <code>If()</code> to make sophisticated, multi-factor business decisions.</p>
+            </div>
+            <div class="info-card border-purple">
+              <div class="card-header-icon">&#128301; Why Day 7 Requires Day 6</div>
+              <p>Tomorrow on Day 7, we design end-to-end business workflows and application wireframes. Real business workflows require multi-condition validation (e.g. valid badge AND budget approved) before routing tasks.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- =================================================================== -->
+      <!-- SLIDE 3: Prerequisite Active Recall Check                           -->
+      <!-- =================================================================== -->
+      <section class="slide" id="slide-3" 
+        data-title="Prerequisite Retrieval Check" 
+        data-segment="Part 1: Welcome &amp; Spiral Recall (00:00 - 10:00)"
+        data-notes="TRAINER SPEAKING SCRIPT:
+'Let's warm up our active memory with 3 retrieval questions from Days 4 & 5!
+Question 1: In Power Fx If(Condition, ActionA, ActionB), what do the two commas mean?
+(Learner response: First comma = THEN; Second comma = ELSE!)
+Question 2: What is the only answer a condition can ever produce?
+(Learner response: Strictly TRUE or FALSE!)
+Question 3: If txtPSI.Text contains '250', what function is required before comparing it with 200?
+(Learner response: Value(txtPSI.Text), to convert text into a number!)
+Fantastic! You are ready to combine multiple conditions together!'">
+        <div class="slide-content">
+          <div class="slide-header">
+            <span class="slide-badge blue-badge">Spiral Active Recall</span>
+            <h2 class="slide-title">Testing Prior Knowledge: Days 4 &amp; 5 Logic Recall</h2>
+            <p class="slide-lead">Retrieve the fundamental condition and IF decision concepts before we combine them into compound gates.</p>
+          </div>
+
+          <div class="grid-3-col">
+            <div class="retrieval-card">
+              <div class="retrieval-num">01</div>
+              <h4>From Day 5: Anatomy of IF</h4>
+              <p class="retrieval-q">What do the two commas mean in `If(Cond, ActA, ActB)`?</p>
+              <div class="retrieval-answer">
+                <strong>Answer:</strong> First comma = <strong>THEN</strong> (action if True); second comma = <strong>ELSE</strong> (fallback action if False).
+              </div>
+            </div>
+            <div class="retrieval-card">
+              <div class="retrieval-num">02</div>
+              <h4>From Day 4: Condition Verdict</h4>
+              <p class="retrieval-q">Can a condition ever produce a word or number?</p>
+              <div class="retrieval-answer">
+                <strong>Answer:</strong> Never! A condition is a comparison question that strictly yields a Boolean <strong>True</strong> or <strong>False</strong>.
+              </div>
+            </div>
+            <div class="retrieval-card">
+              <div class="retrieval-num">03</div>
+              <h4>From Day 3: Type Discipline</h4>
+              <p class="retrieval-q">Why is `txtPSI.Text &gt; 200` a critical beginner bug?</p>
+              <div class="retrieval-answer">
+                <strong>Answer:</strong> Because `txtPSI.Text` is <strong>Text</strong>! It must be wrapped in <code>Value()</code> before mathematical comparison.
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- =================================================================== -->
+      <!-- SLIDE 4: Measurable Learning Objectives                             -->
+      <!-- =================================================================== -->
+      <section class="slide" id="slide-4" 
+        data-title="Measurable Learning Objectives" 
+        data-segment="Part 1: Welcome &amp; Spiral Recall (00:00 - 10:00)"
+        data-notes="TRAINER SPEAKING SCRIPT:
+'Here are our 4 measurable learning targets for Day 6.
+By 90:00 today, you will independently:
+1. Differentiate AND vs OR using the strict Two-Key Vault rule vs permissive Multi-Sensor Alarm rule.
+2. Group mixed compound conditions using parentheses to prevent silent logic errors.
+3. Diagnose and correct the 4 critical beginner logic traps—especially the human speech trap!
+4. Author clean Power Fx compound formulas using &&, ||, and ! across validation and button actions.'">
+        <div class="slide-content">
+          <div class="slide-header">
+            <span class="slide-badge green-badge">Target Competencies</span>
+            <h2 class="slide-title">4 Measurable Learning Objectives for Day 6</h2>
+            <p class="slide-lead">By the end of this 90-minute session, you will independently demonstrate these four practical competencies:</p>
+          </div>
+
+          <div class="grid-2-col">
+            <div class="objective-card">
+              <div class="obj-badge">OBJ 1 • Comprehension</div>
+              <h3>Differentiate AND vs OR Logic Gates</h3>
+              <p>Predict with 100% accuracy whether a compound expression yields True or False using the strict Two-Key Vault rule (<code>AND</code>) vs permissive Multi-Sensor rule (<code>OR</code>).</p>
+              <div class="obj-outcome">&#10004; Evaluated via Formal Truth Table Tracing</div>
+            </div>
+
+            <div class="objective-card">
+              <div class="obj-badge">OBJ 2 • Logic Tracing</div>
+              <h3>Group Mixed Conditions with Parentheses</h3>
+              <p>Apply parentheses <code>(A || B) &amp;&amp; C</code> to explicitly control evaluation precedence, preventing dangerous logic flaws in business workflows.</p>
+              <div class="obj-outcome">&#10004; Evaluated via Precedence Blueprint Analysis</div>
+            </div>
+
+            <div class="objective-card">
+              <div class="obj-badge">OBJ 3 • Diagnosis</div>
+              <h3>Correct 4 Common Beginner Logic Traps</h3>
+              <p>Diagnose and fix human speech syntax shortcuts (<code>A = 1 || 2</code>), inverted negative conditions, and redundant <code>= true</code> checks.</p>
+              <div class="obj-outcome">&#10004; Evaluated via Misconception Audit Cards</div>
+            </div>
+
+            <div class="objective-card">
+              <div class="obj-badge">OBJ 4 • Application</div>
+              <h3>Author Power Fx <code>&amp;&amp;</code>, <code>||</code>, <code>!</code> Formulas</h3>
+              <p>Write syntactically flawless Power Fx expressions combining multiple conditions for safety interlocks, dynamic styling, and button validation.</p>
+              <div class="obj-outcome">&#10004; Evaluated via Apex Hazmat Dispatch Challenge</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- =================================================================== -->
+      <!-- SLIDE 5: 90-Minute Timed Agenda                                     -->
+      <!-- =================================================================== -->
+      <section class="slide" id="slide-5" 
+        data-title="90-Minute Timed Agenda" 
+        data-segment="Part 1: Welcome &amp; Spiral Recall (00:00 - 10:00)"
+        data-notes="TRAINER SPEAKING SCRIPT:
+'Here is our strict, disciplined 90-minute roadmap.
+We spend 10 minutes on recall and objectives.
+From 10 to 25 minutes, we examine the $24,000 resin scorch disaster at Apex Plastics and explore our 3 everyday physical analogies: The Two-Key Vault, The Multi-Sensor Alarm, and The Inverter Switch.
+From 25 to 45 minutes, we dive into logic gate diagrams, formal truth tables, and Power Fx syntax.
+At 45:00 sharp, we do our mid-session hydration and posture reset.
+From 45 to 60 minutes, I demonstrate the live Multi-Gate Decision Workbench.
+From 60 to 75 minutes, you practice with the 6-scenario simulator.
+And our final 15 minutes is our quiz, Hazmat capstone challenge, rubric, and bridge to Day 7!'">
+        <div class="slide-content">
+          <div class="slide-header">
+            <span class="slide-badge purple-badge">Lesson Structure</span>
+            <h2 class="slide-title">Master 90-Minute Spiral Agenda</h2>
+            <p class="slide-lead">A balanced pedagogical progression from industrial safety failure to hands-on compound logic mastery.</p>
+          </div>
+
+          <div class="agenda-timeline-grid">
+            <div class="agenda-row">
+              <div class="agenda-time">00:00 - 10:00 (10m)</div>
+              <div class="agenda-topic">
+                <strong>Part 1: Welcome &amp; Spiral Recall</strong>
+                <span>Master mental model anchor, active retrieval of Days 1–5, 4 measurable learning objectives.</span>
+              </div>
+              <div class="agenda-milestone">Milestone: Mental Anchor</div>
+            </div>
+            <div class="agenda-row">
+              <div class="agenda-time">10:00 - 25:00 (15m)</div>
+              <div class="agenda-topic">
+                <strong>Part 2: Why Compound Logic Exists &amp; Analogies</strong>
+                <span>Apex Plastics $24,000 Resin Scorch Disaster, Two-Key Vault (AND), Multi-Sensor Alarm (OR), Inverter (NOT).</span>
+              </div>
+              <div class="agenda-milestone">Milestone: Problem Clarity</div>
+            </div>
+            <div class="agenda-row">
+              <div class="agenda-time">25:00 - 45:00 (20m)</div>
+              <div class="agenda-topic">
+                <strong>Part 3: Logic Gates, Truth Tables &amp; Power Fx</strong>
+                <span>Gate flow diagram, Truth Tables, Power Fx syntax (`&&`, `||`, `!`), operator precedence &amp; short-circuit safety.</span>
+              </div>
+              <div class="agenda-milestone">Milestone: Logic Grammar</div>
+            </div>
+            <div class="agenda-row">
+              <div class="agenda-time">45:00 - 60:00 (15m)</div>
+              <div class="agenda-topic">
+                <strong>Part 4: Trainer Demonstration &amp; Multi-Gate Lab</strong>
+                <span>Mid-session pulse reset; Interactive Multi-Gate Decision Workbench with live pressure &amp; coolant controls.</span>
+              </div>
+              <div class="agenda-milestone">Milestone: Visual Modeling</div>
+            </div>
+            <div class="agenda-row">
+              <div class="agenda-time">60:00 - 75:00 (15m)</div>
+              <div class="agenda-topic">
+                <strong>Part 5: Guided Learner Practice &amp; Simulator</strong>
+                <span>Deconstructing Extruder #4 safety matrix; hands-on practice with the 6-scenario compound logic board.</span>
+              </div>
+              <div class="agenda-milestone">Milestone: Independent Practice</div>
+            </div>
+            <div class="agenda-row">
+              <div class="agenda-time">75:00 - 90:00 (15m)</div>
+              <div class="agenda-topic">
+                <strong>Part 6: Knowledge Check, Capstone &amp; Forward Bridge</strong>
+                <span>5-question quiz, 8-rule Hazmat Dispatch challenge, rubric, homework &amp; bridge to Day 7 process workflows.</span>
+              </div>
+              <div class="agenda-milestone">Milestone: Master Assessment</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- =================================================================== -->
+      <!-- SLIDE 6: Workplace Problem: The $24,000 Resin Scorch Disaster        -->
+      <!-- =================================================================== -->
+      <section class="slide" id="slide-6" 
+        data-title="Workplace Problem: $24,000 Disaster" 
+        data-segment="Part 2: Why Decisions Exist (10:00 - 25:00)"
+        data-notes="TRAINER SPEAKING SCRIPT:
+'Let's step into Extruder Hall #4 at Apex Plastics.
+An extruder melts plastic pellets at 220°C.
+Two safety systems protect the barrel: Temperature Sensor (Temp > 240) and Coolant Pump (CoolantActive).
+A junior app maker wrote a single IF:
+If(Temp > 240, ShutdownHeaters(), MaintainHeat())!
+At 02:00 AM, the temperature was 235°C (under 240, so condition evaluated to FALSE).
+However, a water pipe burst and the coolant pump died (CoolantActive = false)!
+Because the app ONLY checked temperature, it executed MaintainHeat()!
+Without cooling water, 600 kg of resin scorched and baked into solid rock inside the screw barrel!
+6 hours of manual chiseling: $15,000 downtime.
+600 kg of destroyed resin: $9,000 scrap.
+Total loss: $24,000!
+All because an app checked only ONE condition instead of combining them:
+If(Temp > 240 || CoolantActive = false, ShutdownHeaters(), MaintainHeat())!'">
+        <div class="slide-content">
+          <div class="slide-header">
+            <span class="slide-badge red-badge">Workplace Case Study</span>
+            <h2 class="slide-title">Apex Plastics: The $24,000 "Resin Scorch" Disaster</h2>
+            <p class="slide-lead">How a single-condition IF statement scorched 600 kg of molten plastic by ignoring coolant failure.</p>
+          </div>
+
+          <div class="story-case-box">
+            <div class="story-header">
+              <span class="warning-icon">&#9888;</span>
+              <div>
+                <h3 style="margin:0; color:#fb7185;">INCIDENT REPORT: Catastrophic Extruder Barrel Solidification</h3>
+                <span style="font-size:0.85rem; color:#cbd5e1;">Apex Plastics Manufacturing • Extruder Line #4 Night Shift</span>
+              </div>
+            </div>
+
+            <div class="story-grid">
+              <div class="story-panel">
+                <h4>What the App Executed (Single-Condition Flaw):</h4>
+                <div class="math-card math-actual">
+                  <span>Checked Condition: <code>Temp &gt; 240°C</code> (Temp = 235°C ➔ FALSE)</span>
+                  <span>Coolant Status: <code>CoolantPump = false</code> (Ignored!)</span>
+                  <div class="calc-divider"></div>
+                  <span class="result-line-fail">Action: <strong>Maintained Heaters ➔ 600 kg Scorched ($24,000 Lost)</strong></span>
+                </div>
+              </div>
+
+              <div class="story-panel">
+                <h4>What Compound Logic Would Have Done (OR Gate):</h4>
+                <div class="math-card math-expected">
+                  <span>Compound Rule: <code>Temp &gt; 240 || !CoolantActive</code> (Evaluated: TRUE)</span>
+                  <span>True Branch: <code>ShutdownHeaters() &amp; SoundAlarm()</code></span>
+                  <div class="calc-divider"></div>
+                  <span class="result-line">Result: <strong>Heaters Cut Immediately • Zero Barrel Damage</strong></span>
+                </div>
+              </div>
+            </div>
+
+            <div class="story-footer">
+              <strong>Root Cause:</strong> Single-condition thinking is dangerous in modern industry. Real operations require <strong>compound logic gates</strong> to monitor multiple interdependent safety and operational variables.
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- =================================================================== -->
+      <!-- SLIDE 7: Plain Concept: What is a Compound Condition?               -->
+      <!-- =================================================================== -->
+      <section class="slide" id="slide-7" 
+        data-title="Plain Concept: What is a Compound Gate?" 
+        data-segment="Part 2: Why Decisions Exist (10:00 - 25:00)"
+        data-notes="TRAINER SPEAKING SCRIPT:
+'Before we look at code syntax, let's understand compound conditions in plain English.
+What is a Compound Condition?
+It is simply TWO OR MORE QUESTIONS joined together so they produce ONE FINAL TRUE/FALSE VERDICT!
+Think of it like this:
+If() is sitting at its desk waiting for an answer.
+If() doesn't want to hear two different answers!
+If() demands: 'Give me ONE True or False!'
+AND (&&) and OR (||) are the committee that evaluates both questions and delivers that single final True or False verdict to If()!
+If the verdict is True ➔ Action A!
+If the verdict is False ➔ Action B!'">
+        <div class="slide-content">
+          <div class="slide-header">
+            <span class="slide-badge blue-badge">Core Mental Model</span>
+            <h2 class="slide-title">Plain Language: What is a "Compound Condition"?</h2>
+            <p class="slide-lead">Combining several questions into a single consolidated True/False verdict before handing it to <code>If()</code>.</p>
+          </div>
+
+          <div class="grid-2-col" style="gap: 1.5rem;">
+            <div class="concept-card">
+              <div class="concept-badge red-badge">&#10060; Single Condition (Naive Decision)</div>
+              <h3>Inspects Exactly One Variable</h3>
+              <p>Looks at a single number or text field. Fails whenever real safety or business policy depends on multiple interdependent factors.</p>
+              <div class="concept-examples">
+                <div class="example-item">Checks only temperature, misses coolant failure.</div>
+                <div class="example-item">Checks only manager approval, misses budget cap.</div>
+                <div class="example-item">Checks only driver name, misses missing truck weight.</div>
+              </div>
+            </div>
+
+            <div class="concept-card">
+              <div class="concept-badge green-badge">&#10004; Compound Gate (Intelligent Rule)</div>
+              <h3>Combines Multiple Checks into One Verdict</h3>
+              <p>Evaluates multiple conditions using logical gates, compressing them into a single True or False answer for the app.</p>
+              <div class="concept-examples">
+                <div class="example-item">&#10004; <strong>AND:</strong> Valid Badge <strong>AND</strong> Certified Operator.</div>
+                <div class="example-item">&#10004; <strong>OR:</strong> Overpressure <strong>OR</strong> High Temperature.</div>
+                <div class="example-item">&#10004; <strong>NOT:</strong> Tank is Full <strong>AND NOT</strong> Draining.</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="takeaway-banner">
+            <strong>Key Insight:</strong> <code>AND</code> and <code>OR</code> do not replace <code>If()</code>! They are <strong>condition combiners</strong> that squeeze multiple questions into a single consolidated True/False verdict!
+          </div>
+        </div>
+      </section>
+
+      <!-- =================================================================== -->
+      <!-- SLIDE 8: Everyday Analogy 1: The Two-Key Security Vault (AND)       -->
+      <!-- =================================================================== -->
+      <section class="slide" id="slide-8" 
+        data-title="Everyday Analogy: Two-Key Vault (AND)" 
+        data-segment="Part 2: Why Decisions Exist (10:00 - 25:00)"
+        data-notes="TRAINER SPEAKING SCRIPT:
+'To make AND unforgettable, think of a Two-Key High-Security Bank Vault.
+Two security officers must turn their keys simultaneously.
+Officer A turns Key A (Condition A = TRUE).
+Officer B is at lunch and does NOT turn Key B (Condition B = FALSE).
+Does the vault door open?
+ABSOLUTELY NOT!
+For an AND gate, having one True is NOT enough!
+Every single condition must be TRUE for the final verdict to be TRUE!
+If even one condition is False, the entire AND gate evaluates to FALSE!'">
+        <div class="slide-content">
+          <div class="slide-header">
+            <span class="slide-badge gold-badge">Everyday Metaphor 1</span>
+            <h2 class="slide-title">The `AND` Gate (<code>&amp;&amp;</code>): The Two-Key Security Vault</h2>
+            <p class="slide-lead">Strict conjunction: Both keys must be turned simultaneously. If even one key is missing, the door stays locked.</p>
+          </div>
+
+          <div class="railway-switch-box">
+            <div class="train-origin">
+              <span class="rail-icon">&#128271;</span>
+              <strong>Officer 1 Key</strong>
+              <p>Condition A: True</p>
+            </div>
+
+            <div class="switch-lever">
+              <div class="lever-indicator">&#10133;</div>
+              <span class="lever-label">THE AND GATE (&amp;&amp;)</span>
+              <code>Both Must Be True</code>
+            </div>
+
+            <div class="track-branches">
+              <div class="track-branch branch-true">
+                <span class="branch-pill pill-true">TRUE ONLY IF ALL TRUE</span>
+                <strong>Vault Unlocks (Action A)</strong>
+                <p>Both keys turned: Authorized bank access granted.</p>
+              </div>
+
+              <div class="track-branch branch-false">
+                <span class="branch-pill pill-false">FALSE IF ANY IS FALSE</span>
+                <strong>Vault Stays Locked (Action B)</strong>
+                <p>Any key missing: Access denied and alarm armed.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- =================================================================== -->
+      <!-- SLIDE 9: Everyday Analogy 2: The Multi-Sensor Alarm (OR)            -->
+      <!-- =================================================================== -->
+      <section class="slide" id="slide-9" 
+        data-title="Everyday Analogy: Multi-Sensor Alarm (OR)" 
+        data-segment="Part 2: Why Decisions Exist (10:00 - 25:00)"
+        data-notes="TRAINER SPEAKING SCRIPT:
+'Now let's contrast AND with OR!
+Think of an industrial Multi-Sensor Fire & Safety Alarm.
+The factory ceiling has a Smoke Detector, a Heat Detector, and an Emergency Pull-Cord.
+Does the factory need ALL THREE to trigger before sounding the alarm?
+Of course not! That would kill people!
+If smoke is detected ➔ ALARM!
+OR if extreme heat is detected ➔ ALARM!
+OR if a worker pulls the emergency cord ➔ ALARM!
+An OR gate is permissive and protective.
+It evaluates to TRUE if AT LEAST ONE condition is True!'">
+        <div class="slide-content">
+          <div class="slide-header">
+            <span class="slide-badge gold-badge">Everyday Metaphor 2</span>
+            <h2 class="slide-title">The `OR` Gate (<code>||</code>): The Multi-Sensor Fire Alarm</h2>
+            <p class="slide-lead">Permissive safety disjunction: If at least one sensor detects danger, the emergency alarm sounds immediately.</p>
+          </div>
+
+          <div class="railway-switch-box">
+            <div class="train-origin">
+              <span class="rail-icon">&#128293;</span>
+              <strong>Hazard Sensors</strong>
+              <p>Smoke OR Heat OR Cord</p>
+            </div>
+
+            <div class="switch-lever">
+              <div class="lever-indicator">&#128279;</div>
+              <span class="lever-label">THE OR GATE (||)</span>
+              <code>At Least One True</code>
+            </div>
+
+            <div class="track-branches">
+              <div class="track-branch branch-true">
+                <span class="branch-pill pill-true">TRUE IF ANY IS TRUE</span>
+                <strong>Sound Siren (Action A)</strong>
+                <p>Any hazard detected: Immediate plant-wide alert triggered.</p>
+              </div>
+
+              <div class="track-branch branch-false">
+                <span class="branch-pill pill-false">FALSE ONLY IF ALL FALSE</span>
+                <strong>Safe Normal Run (Action B)</strong>
+                <p>All sensors clear: Continuous factory operation.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- =================================================================== -->
+      <!-- SLIDE 10: Everyday Analogy 3: The Inverter Switch (NOT)             -->
+      <!-- =================================================================== -->
+      <section class="slide" id="slide-10" 
+        data-title="Everyday Analogy: The Inverter (NOT)" 
+        data-segment="Part 2: Why Decisions Exist (10:00 - 25:00)"
+        data-notes="TRAINER SPEAKING SCRIPT:
+'Our third logical operator is NOT, represented by the exclamation mark (!).
+Think of NOT as a light inverter or a reversible raincoat.
+It simply flips whatever truth value you give it!
+If a condition is True, NOT turns it into False!
+If a condition is False, NOT turns it into True!
+Why is this useful in Power Apps?
+Because Power Apps has functions like IsBlank(txtName.Text).
+IsBlank() returns TRUE when the box is EMPTY.
+But what if you want to ask: 'Is the box NOT empty?'
+You simply put an exclamation mark in front: !IsBlank(txtName.Text)!'">
+        <div class="slide-content">
+          <div class="slide-header">
+            <span class="slide-badge gold-badge">Everyday Metaphor 3</span>
+            <h2 class="slide-title">The `NOT` Gate (<code>!</code>): The Truth Inverter Switch</h2>
+            <p class="slide-lead">Logical inversion: Flips True into False, and False into True. Essential for testing non-blank inputs.</p>
+          </div>
+
+          <div class="pantry-grid">
+            <div class="pantry-jar border-blue">
+              <div class="jar-icon">&#128260;</div>
+              <h4>Original Verdict: TRUE</h4>
+              <span class="jar-substance">Input: true</span>
+              <p>Example: <code>IsBlank(txt)</code> evaluates to True (box is empty).</p>
+              <div class="jar-example"><code>Input = true</code></div>
+            </div>
+
+            <div class="pantry-jar border-num">
+              <div class="jar-icon">&#9889;</div>
+              <h4>The Inverter Gate (!)</h4>
+              <span class="jar-substance">Operator: ! or Not()</span>
+              <p>Reverses the electrical logic flow to the opposite state.</p>
+              <div class="jar-example"><code>!true ➔ FALSE</code></div>
+            </div>
+
+            <div class="pantry-jar border-date">
+              <div class="jar-icon">&#10060;</div>
+              <h4>Flipped Result: FALSE</h4>
+              <span class="jar-substance">Output: false</span>
+              <p>The app now treats the empty box as a validation failure.</p>
+              <div class="jar-example"><code>Result = false</code></div>
+            </div>
+
+            <div class="pantry-jar border-bool">
+              <div class="jar-icon">&#10004;</div>
+              <h4>Reversing False: TRUE</h4>
+              <span class="jar-substance">Output: true</span>
+              <p><code>!false</code> produces True, confirming field is populated!</p>
+              <div class="jar-example"><code>!IsBlank("Dara") = true</code></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- =================================================================== -->
+      <!-- SLIDE 11: Visual Cause-and-Effect Flow: The Compound Logic Gate     -->
+      <!-- =================================================================== -->
+      <section class="slide" id="slide-11" 
+        data-title="Visual Logic Gate Architecture" 
+        data-segment="Part 3: Logic Gates &amp; Syntax (25:00 - 45:00)"
+        data-notes="TRAINER SPEAKING SCRIPT:
+'Look at the visual cause-and-effect flow on screen.
+Watch how data moves through the compound pipeline:
+Step 1: Input Data 1 (Pressure = 240 PSI) and Input Data 2 (Coolant Level = 12%).
+Step 2: Two independent comparison questions:
+Is Pressure > 200? ➔ Evaluates to TRUE!
+Is Coolant < 20%? ➔ Evaluates to TRUE!
+Step 3: Both verdicts enter the AND (&&) gate.
+TRUE && TRUE evaluates to a SINGLE CONSOLIDATED VERDICT: TRUE!
+Step 4: That consolidated True verdict is passed into If().
+Step 5: If() shifts to Path A: Emergency Depressurize and Shut Down Barrel!
+This is clean, predictable, industrial software engineering!'">
+        <div class="slide-content">
+          <div class="slide-header">
+            <span class="slide-badge blue-badge">Logical Flow Architecture</span>
+            <h2 class="slide-title">Visual Cause &amp; Effect: The Compound Logic Pipeline</h2>
+            <p class="slide-lead">Tracing live factory data through multiple condition questions into the consolidated logic gate and final action.</p>
+          </div>
+
+          <div class="branching-diagram-container">
+            <div class="diagram-root">
+              <span class="root-badge">LIVE SENSOR INPUTS</span>
+              <code>Pressure: 240 PSI &bull; Coolant: 12%</code>
+            </div>
+
+            <div class="diagram-stem">&#10142;</div>
+
+            <div class="diagram-decision-diamond">
+              <span class="diamond-tag">COMPOUND GATE (AND)</span>
+              <strong>Value(PSI) &gt; 200 &amp;&amp; Value(Coolant) &lt; 20</strong>
+              <div class="diamond-result">Consolidated Verdict: TRUE</div>
+            </div>
+
+            <div class="diagram-fork-branches">
+              <div class="fork-path path-active">
+                <span class="fork-tag tag-true">&#10004; TRUE PATH TAKEN (IF TRUE)</span>
+                <h4>Action A: Critical Emergency Depressurize</h4>
+                <p>Both severe conditions met: Cut hydraulic feed, sound siren, and dispatch line technician.</p>
+              </div>
+
+              <div class="fork-path path-dormant">
+                <span class="fork-tag tag-false">&#10060; FALSE PATH (SKIPPED)</span>
+                <h4>Action B: Maintain Steady Operation</h4>
+                <p>Parameters within safe operational envelope: Continue standard automated injection cycle.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- =================================================================== -->
+      <!-- SLIDE 12: Trainer Demo: Interactive Multi-Gate Decision Workbench   -->
+      <!-- =================================================================== -->
+      <section class="slide" id="slide-12" 
+        data-title="Trainer Demo: Multi-Gate Workbench" 
+        data-segment="Part 4: Trainer Demonstration (45:00 - 60:00)"
+        data-notes="TRAINER SPEAKING SCRIPT:
+'Now let's open our live Interactive Multi-Gate Decision Workbench!
+Watch as I interact with the live factory controls:
+Look at the Pressure Slider: currently at 150 PSI.
+Look at the Coolant Slider: currently at 80%.
+The formula we are testing is:
+Pressure > 200 && Coolant < 20 (Critical Overpressure & Dry Barrel).
+Watch: When I drag Pressure to 250 PSI, does the emergency alarm fire?
+NO! Look at the card: it remains in cool blue routine state!
+Why? Because Coolant is still 80%! For an AND gate, having one True is NOT enough!
+Now watch: I drag Coolant down to 15%...
+BOOM! Both conditions evaluate to TRUE!
+The card turns RADIANT RED with flashing emergency alarms!
+Look at the Submit button below:
+It requires !IsBlank(OperatorName) && !HazardFlagged.
+Type a name: it turns green and unlocks!
+Click the hazard button: it instantly locks down!
+This is how citizen developers build bulletproof multi-condition apps!'">
+        <div class="slide-content">
+          <div class="slide-header">
+            <span class="slide-badge blue-badge">Interactive Simulation</span>
+            <h2 class="slide-title">Trainer Demonstration: Multi-Gate Decision Workbench</h2>
+            <p class="slide-lead">Adjust the live factory controls on the left to see how <code>&amp;&amp;</code>, <code>||</code>, and <code>!</code> dynamically consolidate multiple rules.</p>
+          </div>
+
+          <div class="workbench-grid">
+            <div class="workbench-inputs">
+              <h4>Live Extruder #4 Machine Controls:</h4>
+              <div class="input-control-row">
+                <label>Hydraulic Pressure: <strong id="wb-pressure-val">150</strong> PSI</label>
+                <input type="range" id="wb-pressure-slider" min="50" max="300" step="10" value="150" class="fluent-slider">
+              </div>
+              <div class="input-control-row">
+                <label>Coolant Reserve: <strong id="wb-coolant-val">80</strong>%</label>
+                <input type="range" id="wb-coolant-slider" min="5" max="100" step="5" value="80" class="fluent-slider">
+              </div>
+              <div class="input-control-row">
+                <label>Operator Badge Name:</label>
+                <input type="text" id="wb-op-input" value="" class="fluent-text-input" placeholder="Type badge name...">
+              </div>
+              <div class="input-control-row">
+                <label>Emergency Hazard Active?</label>
+                <button type="button" id="wb-hazard-btn" class="workbench-toggle-btn">
+                  <span class="toggle-indicator off"></span> Hazard: NO (false)
+                </button>
+              </div>
+            </div>
+
+            <div class="workbench-evaluations">
+              <h4>Live Gate Evaluation: <code>Pressure &gt; 200 &amp;&amp; Coolant &lt; 20</code></h4>
+              
+              <!-- Dynamic Notification Card -->
+              <div class="decision-result-card" id="card-alert-branch">
+                <span class="branch-label" id="branch-indicator">FALSE PATH ACTIVE: Normal Operation</span>
+                <h4 id="branch-title" style="color: #38bdf8;">&#128227; Operating Within Safe Envelope</h4>
+                <p id="branch-desc">Both conditions must be True for shutdown. Safe status maintained.</p>
+              </div>
+
+              <!-- Dynamic Submit Button State -->
+              <div class="submit-state-demo">
+                <label>Button DisplayMode: <code>If(!IsBlank(Name) &amp;&amp; !Hazard, Edit, Disabled)</code></label>
+                <button id="demo-submit-btn" class="nav-btn" disabled style="width: 100%; justify-content: center; opacity: 0.4;">
+                  &#128274; Start Injection Stroke (Locked: Badge Required)
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- =================================================================== -->
+      <!-- SLIDE 13: Mid-Session Pulse Checkpoint & Hydration                  -->
+      <!-- =================================================================== -->
+      <section class="slide" id="slide-13" 
+        data-title="Mid-Session Pulse Check" 
+        data-segment="Part 4: Trainer Demonstration (45:00 - 60:00)"
+        data-notes="TRAINER SPEAKING SCRIPT:
+'We have reached the 45-minute mark! Halfway through Day 6!
+Let's pause for a quick 60-second breathing, posture reset, and hydration.
+Take a sip of water.
+Quick thumb check for everyone in the room:
+Thumbs UP if you clearly see the difference: AND demands ALL True; OR needs only ONE True!
+Thumbs SIDEWAYS if you want to see how parentheses work when mixing AND and OR.
+Remember our golden rule:
+When mixing AND and OR, always put parentheses around your sub-questions!'">
+        <div class="slide-content">
+          <div class="checkpoint-card">
+            <div class="checkpoint-icon">&#9749;</div>
+            <h2 class="checkpoint-title">Mid-Session Pulse Checkpoint (45:00 Elapsed)</h2>
+            <p class="checkpoint-subtitle">Take a breath, hydrate, and verify your mental foundation before we practice writing compound logic.</p>
+
+            <div class="checkpoint-grid">
+              <div class="check-item">
+                <div class="check-icon">&#128077;</div>
+                <h4>Thumbs Up: Clear</h4>
+                <p>I know the difference: <code>&amp;&amp;</code> requires ALL conditions True; <code>||</code> requires at least ONE condition True.</p>
+              </div>
+              <div class="check-item">
+                <div class="check-icon">&#9995;</div>
+                <h4>Thumbs Sideways: Unsure</h4>
+                <p>I understand the Two-Key Vault, but I want to practice combining them in Power Fx formulas.</p>
+              </div>
+              <div class="check-item">
+                <div class="check-icon">&#128161;</div>
+                <h4>The Golden Rule Remembered</h4>
+                <p><em>"AND is strict (both keys); OR is permissive (any sensor); NOT inverts truth."</em></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- =================================================================== -->
+      <!-- SLIDE 14: Workplace Case Study: Apex Molding Press #4 Safety Matrix -->
+      <!-- =================================================================== -->
+      <section class="slide" id="slide-14" 
+        data-title="Case Study: Safety Matrix" 
+        data-segment="Part 5: Guided Learner Practice (60:00 - 75:00)"
+        data-notes="TRAINER SPEAKING SCRIPT:
+'Now let's examine the real industrial safety matrix for Apex Molding Press #4!
+Look at how complex factory safety rules map directly into compound formulas:
+Rule 1: Injection Stroke Interlock:
+Clamp Pressure >= 180 AND Light Curtain Clear AND NOT Lockout Active.
+Rule 2: Emergency Coolant Boost:
+Oil Temp > 85 OR Ambient Room Temp > 40.
+Rule 3: Kiosk Dispatch Sign-In:
+Operator Name is NOT Blank AND Certified Operator Checkbox is True.
+Notice: Every single rule follows the exact same pattern!'">
+        <div class="slide-content">
+          <div class="slide-header">
+            <span class="slide-badge teal-badge">Workplace DX Architecture</span>
+            <h2 class="slide-title">Apex Plastics: Extruder Line #4 Multi-Gate Safety Matrix</h2>
+            <p class="slide-lead">Translating complex multi-sensor industrial specifications into clean compound Power Fx formulas.</p>
+          </div>
+
+          <div class="form-blueprint-grid">
+            <div class="form-preview-card">
+              <div class="form-title-bar">Molding Press #4 Safety Blueprint</div>
+              <div class="form-field-row">
+                <label>Rule 1: Injection Stroke Interlock</label>
+                <div class="mock-input"><code>Pressure &gt;= 180 &amp;&amp; CurtainClear &amp;&amp; !Lockout</code></div>
+              </div>
+              <div class="form-field-row">
+                <label>Rule 2: Auxiliary Chiller Trigger</label>
+                <div class="mock-input"><code>OilTemp &gt; 85 || AmbientTemp &gt; 40</code></div>
+              </div>
+              <div class="form-field-row">
+                <label>Rule 3: Operator Tablet Sign-In</label>
+                <div class="mock-input"><code>!IsBlank(txtName.Text) &amp;&amp; chkCertified.Value</code></div>
+              </div>
+              <div class="form-field-row">
+                <label>Rule 4: Automatic Resin Purge</label>
+                <div class="mock-input"><code>ScrapWeight &gt; 50 || PurgeValveOpen = true</code></div>
+              </div>
+            </div>
+
+            <div class="schema-mapping-card">
+              <h4 style="margin-top:0; color:#38bdf8;">Compound Logic Breakdown:</h4>
+              <div class="mapping-row">
+                <span class="field-name">Clamp Interlock</span>
+                <span class="type-pill pill-bool">Triple AND Gate</span>
+                <span class="ui-ctrl">Pressure &amp;&amp; Curtain &amp;&amp; !Lockout</span>
+              </div>
+              <div class="mapping-row">
+                <span class="field-name">Chiller Pump</span>
+                <span class="type-pill pill-text">Dual OR Gate</span>
+                <span class="ui-ctrl">OilTemp || RoomTemp</span>
+              </div>
+              <div class="mapping-row">
+                <span class="field-name">Button Lock</span>
+                <span class="type-pill pill-date">NOT Blank &amp;&amp; True</span>
+                <span class="ui-ctrl">!IsBlank &amp;&amp; Certified</span>
+              </div>
+              <div class="mapping-row">
+                <span class="field-name">Resin Purge</span>
+                <span class="type-pill pill-num">Dual OR Trigger</span>
+                <span class="ui-ctrl">Scrap &gt; 50 || Valve</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- =================================================================== -->
+      <!-- SLIDE 15: Power Fx Connection: Writing &&, ||, ! in Power Apps      -->
+      <!-- =================================================================== -->
+      <section class="slide" id="slide-15" 
+        data-title="Power Fx Syntax Grammar" 
+        data-segment="Part 5: Guided Learner Practice (60:00 - 75:00)"
+        data-notes="TRAINER SPEAKING SCRIPT:
+'How do we author compound formulas in Power Fx?
+Notice on screen:
+Example 1: Using && inside If() on a button's OnSelect property:
+If(Value(txtPressure.Text) > 200 && chkValve.Value, Notify('OVERPRESSURE', Error), Notify('Safe', Success))!
+Example 2: Using || on a Label's Color property:
+lblWarning.Color = If(chkSmoke.Value || chkGas.Value, Color.Red, Color.Green)!
+Example 3: Using ! for negation:
+btnStart.DisplayMode = If(!IsBlank(txtName.Text) && chkSafe.Value, DisplayMode.Edit, DisplayMode.Disabled)!
+Both modern C-style syntax (&&, ||, !) and functional syntax (And, Or, Not) work identically in Power Apps.'">
+        <div class="slide-content">
+          <div class="slide-header">
+            <span class="slide-badge purple-badge">Power Fx Connection</span>
+            <h2 class="slide-title">How Power Fx Authors Compound Decisions</h2>
+            <p class="slide-lead">Connecting multi-factor business logic to syntactic Power Fx <code>&amp;&amp;</code>, <code>||</code>, and <code>!</code> implementations.</p>
+          </div>
+
+          <div class="grid-2-col">
+            <div class="code-card">
+              <div class="code-header">Compound Actions (OnSelect)</div>
+              <pre class="powerfx-code">
+<span class="comment">// 1. Both conditions required (AND)</span>
+<span class="keyword">If</span>(
+    <span class="func">Value</span>(txtPSI.<span class="prop">Text</span>) &gt; 200 &amp;&amp; chkValveOpen.<span class="prop">Value</span>,
+    <span class="func">Notify</span>("CRITICAL DANGER: DEPRESSURIZE NOW!", NotificationType.<span class="prop">Error</span>),
+    <span class="func">Notify</span>("Pressure normal.", NotificationType.<span class="prop">Success</span>)
+);
+              </pre>
+            </div>
+
+            <div class="code-card">
+              <div class="code-header">Dynamic UI Visibility &amp; Permissions</div>
+              <pre class="powerfx-code">
+<span class="comment">// 2. Either condition triggers warning (OR)</span>
+lblWarning.<span class="prop">Visible</span> = chkGasLeak.<span class="prop">Value</span> || chkOverheat.<span class="prop">Value</span>;
+
+<span class="comment">// 3. Button unlocked only if NOT blank AND certified</span>
+btnSubmit.<span class="prop">DisplayMode</span> = <span class="keyword">If</span>(
+    !<span class="func">IsBlank</span>(txtOperator.<span class="prop">Text</span>) &amp;&amp; chkCertified.<span class="prop">Value</span>,
+    DisplayMode.<span class="prop">Edit</span>,
+    DisplayMode.<span class="prop">Disabled</span>
+);
+              </pre>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- =================================================================== -->
+      <!-- SLIDE 16: Precedence, Parentheses & Short-Circuit Safety            -->
+      <!-- =================================================================== -->
+      <section class="slide" id="slide-16" 
+        data-title="Precedence &amp; Short-Circuit Safety" 
+        data-segment="Part 5: Guided Learner Practice (60:00 - 75:00)"
+        data-notes="TRAINER SPEAKING SCRIPT:
+'Let's examine two vital engineering concepts:
+1. Operator Precedence:
+Just like in math where multiplication happens before addition, in computer logic AND (&&) evaluates before OR (||)!
+If you write: A || B && C, the app evaluates B && C first!
+If you meant (A || B) && C, you MUST put parentheses around (A || B)!
+2. Short-Circuit Evaluation:
+Power Apps evaluates from left to right.
+If the first condition in an AND gate is FALSE, it immediately stops and never evaluates the second condition!
+Look at the defensive pattern:
+!IsBlank(txt.Text) && Value(txt.Text) > 10.
+If the box is blank, !IsBlank is False. Power Apps stops! It never tries to run Value() on an empty string!'">
+        <div class="slide-content">
+          <div class="slide-header">
+            <span class="slide-badge blue-badge">Logic Mechanics</span>
+            <h2 class="slide-title">Precedence, Parentheses &amp; Short-Circuit Evaluation</h2>
+            <p class="slide-lead">Mastering grouping rules and understanding how short-circuit evaluation prevents runtime crashes.</p>
+          </div>
+
+          <div class="conversion-bridge-grid">
+            <div class="bridge-card bridge-to-num">
+              <div class="bridge-direction">
+                <span class="type-pill pill-bool">Precedence Rule</span>
+                <span class="bridge-arrow">&#10142;</span>
+                <span class="type-pill pill-text">Parentheses Grouping</span>
+              </div>
+              <h3>AND Evaluates Before OR</h3>
+              <p>Without parentheses, <code>A || B &amp;&amp; C</code> evaluates as <code>A || (B &amp;&amp; C)</code>. Always use parentheses to group your intended business sub-rules!</p>
+              <div class="code-box">
+                <code>(chkSigned.Value || chkEscort.Value) &amp;&amp; chkUnlocked.Value</code>
+              </div>
+              <div class="bridge-note">&#10004; Explicit parentheses prevent silent, catastrophic business bugs.</div>
+            </div>
+
+            <div class="bridge-card bridge-to-text">
+              <div class="bridge-direction">
+                <span class="type-pill pill-num">Short-Circuit Shield</span>
+                <span class="bridge-arrow">&#10142;</span>
+                <span class="type-pill pill-date">Crash Prevention</span>
+              </div>
+              <h3>Early Stopping Evaluation</h3>
+              <p>If the first condition of an <code>&amp;&amp;</code> gate is False, Power Apps stops immediately and never evaluates the second condition.</p>
+              <div class="code-box">
+                <code>!IsBlank(txtHours.Text) &amp;&amp; Value(txtHours.Text) &gt; 4.0</code>
+              </div>
+              <div class="bridge-note">&#9888; Prevents errors when converting blank text into numbers!</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- =================================================================== -->
+      <!-- SLIDE 17: Guided Practice Brief: Apex Extruder Line 4 Dispatcher    -->
+      <!-- =================================================================== -->
+      <section class="slide" id="slide-17" 
+        data-title="Guided Practice Brief" 
+        data-segment="Part 5: Guided Learner Practice (60:00 - 75:00)"
+        data-notes="TRAINER SPEAKING SCRIPT:
+'Now it is time for your guided hands-on practice!
+You are the automation architect configuring Extruder Line #4.
+The plant manager gives you 6 operational compound scenarios:
+1. Pressure > 200 AND Valve is Closed.
+2. Temp > 90 OR Coolant Reserve < 15%.
+3. Badge is NOT Blank AND Shift is Morning.
+4. Material is Flammable OR Sparks Detected.
+5. Scrap > 50 kg AND ErrorCode is NOT 0.
+6. Tank Level >= 95% AND Drain is NOT Open.
+On the next slide, trace each scenario through its compound logic gate!'">
+        <div class="slide-content">
+          <div class="slide-header">
+            <span class="slide-badge teal-badge">Guided Challenge Brief</span>
+            <h2 class="slide-title">Guided Practice: Extruder Line 4 Multi-Gate Board</h2>
+            <p class="slide-lead">Analyze the 6 operational compound scenarios below before evaluating their consolidated logic branches.</p>
+          </div>
+
+          <div class="parts-brief-grid">
+            <div class="brief-item">
+              <span class="brief-num">1</span>
+              <div>
+                <strong>Overpressure &amp; Closed Valve</strong>
+                <p>Rule: <code>Pressure &gt; 200 &amp;&amp; ValveClosed = true</code> &bull; Live: 240 PSI, Valve: Closed.</p>
+              </div>
+            </div>
+            <div class="brief-item">
+              <span class="brief-num">2</span>
+              <div>
+                <strong>High Temp OR Low Coolant</strong>
+                <p>Rule: <code>Temp &gt; 90 || Coolant &lt; 15</code> &bull; Live: Temp = 82°C, Coolant = 8%.</p>
+              </div>
+            </div>
+            <div class="brief-item">
+              <span class="brief-num">3</span>
+              <div>
+                <strong>Badge Entered &amp; Morning Shift</strong>
+                <p>Rule: <code>!IsBlank(Badge) &amp;&amp; Shift = "Morning"</code> &bull; Live: Badge = "", Shift: Morning.</p>
+              </div>
+            </div>
+            <div class="brief-item">
+              <span class="brief-num">4</span>
+              <div>
+                <strong>Flammable OR Sparks Detected</strong>
+                <p>Rule: <code>IsFlammable || SparksDetected</code> &bull; Live: Flammable: false, Sparks: false.</p>
+              </div>
+            </div>
+            <div class="brief-item">
+              <span class="brief-num">5</span>
+              <div>
+                <strong>Excess Scrap AND Error Code</strong>
+                <p>Rule: <code>ScrapKg &gt; 50 &amp;&amp; ErrorCode &lt;&gt; 0</code> &bull; Live: Scrap = 65 kg, Error: 0.</p>
+              </div>
+            </div>
+            <div class="brief-item">
+              <span class="brief-num">6</span>
+              <div>
+                <strong>Tank Full AND NOT Draining</strong>
+                <p>Rule: <code>Level &gt;= 95 &amp;&amp; !DrainOpen</code> &bull; Live: Level = 98%, DrainOpen: false.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- =================================================================== -->
+      <!-- SLIDE 18: Interactive Practice Board: 6-Scenario Simulator          -->
+      <!-- =================================================================== -->
+      <section class="slide" id="slide-18" 
+        data-title="Interactive Compound Simulator" 
+        data-segment="Part 5: Guided Learner Practice (60:00 - 75:00)"
+        data-notes="TRAINER SPEAKING SCRIPT:
+'Here is your live Compound Logic Simulator!
+For each of the 6 manufacturing scenarios, read the rule and the live data, then click which action executes: Path A (True) or Path B (False)!
+Notice:
+In Scenario 1: 240 > 200 is True AND ValveClosed is True ➔ Path A executes!
+In Scenario 2: Temp is 82 (False), BUT Coolant is 8% (True)! Because it is an OR gate, Path A executes!
+In Scenario 3: Badge is empty! Because it is an AND gate, Path B executes!
+Let's see if you can achieve a perfect 6 out of 6 score!'">
+        <div class="slide-content">
+          <div class="slide-header">
+            <span class="slide-badge green-badge">Hands-On Practice</span>
+            <h2 class="slide-title">Interactive 6-Scenario Compound Logic Simulator</h2>
+            <p class="slide-lead">Trace each scenario below. Select which branch executes based on the consolidated gate truth.</p>
+          </div>
+
+          <div class="evaluator-grid-container" id="compound-simulator-widget">
+            <div class="evaluator-card" data-scenario="s1" data-correct="path-a">
+              <div class="cond-title">1. Overpressure: <code>240 &gt; 200 &amp;&amp; Closed</code></div>
+              <div class="cond-btn-pair">
+                <button class="cond-btn" data-choice="path-a">Path A: Emergency Dump</button>
+                <button class="cond-btn" data-choice="path-b">Path B: Keep Running</button>
+              </div>
+              <div class="cond-status-text">Select Path A or Path B</div>
+            </div>
+
+            <div class="evaluator-card" data-scenario="s2" data-correct="path-a">
+              <div class="cond-title">2. Chiller: <code>82 &gt; 90 || 8 &lt; 15</code></div>
+              <div class="cond-btn-pair">
+                <button class="cond-btn" data-choice="path-a">Path A: Auxiliary Pump</button>
+                <button class="cond-btn" data-choice="path-b">Path B: Standard Fan</button>
+              </div>
+              <div class="cond-status-text">Select Path A or Path B</div>
+            </div>
+
+            <div class="evaluator-card" data-scenario="s3" data-correct="path-b">
+              <div class="cond-title">3. Access: <code>!Blank("") &amp;&amp; Morning</code></div>
+              <div class="cond-btn-pair">
+                <button class="cond-btn" data-choice="path-a">Path A: Unlock Station</button>
+                <button class="cond-btn" data-choice="path-b">Path B: Lock Access</button>
+              </div>
+              <div class="cond-status-text">Select Path A or Path B</div>
+            </div>
+
+            <div class="evaluator-card" data-scenario="s4" data-correct="path-b">
+              <div class="cond-title">4. Hazard: <code>false || false</code></div>
+              <div class="cond-btn-pair">
+                <button class="cond-btn" data-choice="path-a">Path A: Evacuate Hall</button>
+                <button class="cond-btn" data-choice="path-b">Path B: Normal Airflow</button>
+              </div>
+              <div class="cond-status-text">Select Path A or Path B</div>
+            </div>
+
+            <div class="evaluator-card" data-scenario="s5" data-correct="path-b">
+              <div class="cond-title">5. Scrap Alarm: <code>65 &gt; 50 &amp;&amp; 0 &lt;&gt; 0</code></div>
+              <div class="cond-btn-pair">
+                <button class="cond-btn" data-choice="path-a">Path A: Sound Line Alarm</button>
+                <button class="cond-btn" data-choice="path-b">Path B: Normal Shift Log</button>
+              </div>
+              <div class="cond-status-text">Select Path A or Path B</div>
+            </div>
+
+            <div class="evaluator-card" data-scenario="s6" data-correct="path-a">
+              <div class="cond-title">6. Tank Cutoff: <code>98 &gt;= 95 &amp;&amp; !false</code></div>
+              <div class="cond-btn-pair">
+                <button class="cond-btn" data-choice="path-a">Path A: Cutoff Inflow</button>
+                <button class="cond-btn" data-choice="path-b">Path B: Keep Filling</button>
+              </div>
+              <div class="cond-status-text">Select Path A or Path B</div>
+            </div>
+          </div>
+
+          <div class="evaluator-footer-bar">
+            <span>Score: <strong id="sim-score">0</strong> / 6 Correct</span>
+            <span id="sim-feedback">Select the executing branch for all 6 scenarios above.</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- =================================================================== -->
+      <!-- SLIDE 19: 4 Common Beginner Misconceptions & Corrections            -->
+      <!-- =================================================================== -->
+      <section class="slide" id="slide-19" 
+        data-title="Common Beginner Misconceptions" 
+        data-segment="Part 6: Assessment &amp; Forward Bridge (75:00 - 90:00)"
+        data-notes="TRAINER SPEAKING SCRIPT:
+'Let's examine 4 common misconceptions beginners make about compound logic:
+Misconception 1: The Human Speech Shortcut:
+People type: Status = 'Approved' || 'Pending'.
+Correction: SYNTAX ERROR! || must sit between two complete questions! Write: Status = 'Approved' || Status = 'Pending'!
+Misconception 2: Confusing English 'And' with Logical 'Or':
+'Show machines on Line 1 and Line 2' ➔ In logic, a machine cannot be on both lines at once! You must use OR (Line = 1 || Line = 2)!
+Misconception 3: Inverting conditions without De Morgan's Law:
+To ensure neither field is blank, writing !IsBlank(A) || !IsBlank(B) fails if one is blank! You must use &&: !IsBlank(A) && !IsBlank(B)!
+Misconception 4: Redundant = true checks:
+chkHazard.Value = true && chkSafe.Value = true is verbose. Clean pro style is: chkHazard.Value && chkSafe.Value!'">
+        <div class="slide-content">
+          <div class="slide-header">
+            <span class="slide-badge red-badge">Mental Model Corrections</span>
+            <h2 class="slide-title">4 Common Beginner Misconceptions &amp; Trainer Fixes</h2>
+            <p class="slide-lead">Correcting plausible but dangerous wrong mental models before they become bad habits.</p>
+          </div>
+
+          <div class="grid-2-col">
+            <div class="misconception-card">
+              <div class="misc-bad">&#10060; Wrong Mental Model #1</div>
+              <h4>"I can write: Status = 'Approved' || 'Pending'"</h4>
+              <p class="misc-fix"><strong>Trainer Correction:</strong> <code>||</code> can only join complete comparison questions. You must write: <code>Status = "Approved" || Status = "Pending"</code>.</p>
+            </div>
+
+            <div class="misconception-card">
+              <div class="misc-bad">&#10060; Wrong Mental Model #2</div>
+              <h4>"English 'And' means computer AND (&&)."</h4>
+              <p class="misc-fix"><strong>Trainer Correction:</strong> In speech, we say "Show me Line 1 and Line 2". But in Boolean logic, a single item cannot be on two lines at once. You must use <code>Line = 1 || Line = 2</code>!</p>
+            </div>
+
+            <div class="misconception-card">
+              <div class="misc-bad">&#10060; Wrong Mental Model #3</div>
+              <h4>"To require two non-blanks, use !IsBlank(A) || !IsBlank(B)"</h4>
+              <p class="misc-fix"><strong>Trainer Correction:</strong> If A is filled, <code>||</code> returns True even if B is blank! To require both fields to be populated, you must use <code>!IsBlank(A) &amp;&amp; !IsBlank(B)</code>.</p>
+            </div>
+
+            <div class="misconception-card">
+              <div class="misc-bad">&#10060; Wrong Mental Model #4</div>
+              <h4>"I must always write `chkHazard.Value = true`"</h4>
+              <p class="misc-fix"><strong>Trainer Correction:</strong> Checkbox values are already booleans. Writing <code>= true</code> is asking "Is it true that it's true?". Write clean pro code: <code>chkHazard.Value</code>.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- =================================================================== -->
+      <!-- SLIDE 20: 5-Question Knowledge Check (Interactive Quiz)             -->
+      <!-- =================================================================== -->
+      <section class="slide" id="slide-20" 
+        data-title="5-Question Knowledge Check" 
+        data-segment="Part 6: Assessment &amp; Forward Bridge (75:00 - 90:00)"
+        data-notes="TRAINER SPEAKING SCRIPT:
+'Time for our 5-Question Knowledge Check!
+Notice questions 2, 3, and 4 specifically ask 'Why' and 'What happens if'.
+Take your time, select the best answer for each question, and let's review the rationale together.'">
+        <div class="slide-content">
+          <div class="slide-header">
+            <span class="slide-badge blue-badge">Knowledge Verification</span>
+            <h2 class="slide-title">Day 6 Evaluative Knowledge Check</h2>
+            <p class="slide-lead">Answer all 5 questions to verify your mastery of AND, OR, NOT, precedence, and short-circuit evaluation.</p>
+          </div>
+
+          <div class="quiz-container" id="quiz-widget">
+            <div class="quiz-header-bar">
+              <span id="quiz-question-counter">Question 1 of 5</span>
+              <span id="quiz-score-display">Score: 0 / 5</span>
+            </div>
+
+            <div class="quiz-body" id="quiz-body">
+              <!-- Dynamically rendered via script.js -->
+            </div>
+
+            <div class="quiz-navigation">
+              <button class="btn-subtle" id="quiz-prev-btn" disabled>&#8592; Previous</button>
+              <button class="btn-primary" id="quiz-next-btn">Next Question &#8594;</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- =================================================================== -->
+      <!-- SLIDE 21: Final Challenge: Apex Hazmat Chemical Dispatch (8 Rules)  -->
+      <!-- =================================================================== -->
+      <section class="slide" id="slide-21" 
+        data-title="Final Challenge: Hazmat Dispatch" 
+        data-segment="Part 6: Assessment &amp; Forward Bridge (75:00 - 90:00)"
+        data-notes="TRAINER SPEAKING SCRIPT:
+'Here is your Day 6 Capstone Challenge:
+Apex Plastics is commissioning their hazardous chemical waste dispatch kiosk.
+You must author the 8 compound Power Fx rules:
+1. Pallet Weight > 1000 AND Hazmat = true ➔ Dispatch Heavy Escort.
+2. Gas Leak = true OR Fire Alarm = true ➔ Sound Plant Siren.
+3. Badge NOT Blank AND Certified = true ➔ Enable Dispatch Button.
+4. Sunday OR Hour >= 22 ➔ Night Shift Protocol.
+5. PSI > 250 AND Temp > 100 ➔ Red Warning Color.
+6. Tank Level >= 95% AND Drain NOT Open ➔ Emergency Valve Cutoff.
+7. Driver Name NOT Blank AND Manifest Signed ➔ Manifest Approved.
+8. Stock < 10 OR Urgent Order = true ➔ Expedited Reorder.
+Author the complete Power Fx formulas!'">
+        <div class="slide-content">
+          <div class="slide-header">
+            <span class="slide-badge purple-badge">Independent Capstone</span>
+            <h2 class="slide-title">Final Challenge: Apex Hazmat Chemical Dispatch Interlock</h2>
+            <p class="slide-lead">Author the 8 complete compound <code>If()</code> formulas controlling chemical storage and gate authorization.</p>
+          </div>
+
+          <div class="challenge-table-wrapper">
+            <table class="challenge-table">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Operational Business Rule</th>
+                  <th>Compound Condition Gate</th>
+                  <th>Action If TRUE (Then)</th>
+                  <th>Action If FALSE (Else)</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td>1</td><td>Heavy Hazmat Escort</td><td><code>Weight &gt; 1000 &amp;&amp; IsHazmat</code></td><td>Dispatch Escort Vehicle</td><td>Standard Bay Transit</td></tr>
+                <tr><td>2</td><td>Emergency Siren Trigger</td><td><code>GasLeak || FireAlarm</code></td><td>Sound Evacuation Siren</td><td>Green Safe Light</td></tr>
+                <tr><td>3</td><td>Badge &amp; Certification Check</td><td><code>!IsBlank(Badge) &amp;&amp; Certified</code></td><td>Button.Edit (Unlock)</td><td>Button.Disabled</td></tr>
+                <tr><td>4</td><td>Night / Weekend Routing</td><td><code>Day = "Sunday" || Hour &gt;= 22</code></td><td>Apply Night Protocol</td><td>Apply Day Protocol</td></tr>
+                <tr><td>5</td><td>Dual Threshold Danger</td><td><code>PSI &gt; 250 &amp;&amp; Temp &gt; 100</code></td><td>Label Color = Red</td><td>Label Color = Blue</td></tr>
+                <tr><td>6</td><td>Tank Overflow Cutoff</td><td><code>Level &gt;= 95 &amp;&amp; !DrainOpen</code></td><td>Close Inflow Valve</td><td>Keep Inflow Open</td></tr>
+                <tr><td>7</td><td>Manifest Verification</td><td><code>!IsBlank(Driver) &amp;&amp; Signed</code></td><td>Approve Manifest</td><td>Hold Manifest</td></tr>
+                <tr><td>8</td><td>Inventory Reorder Gate</td><td><code>Stock &lt; 10 || IsUrgent</code></td><td>Order From Supplier</td><td>Maintain Stock</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- =================================================================== -->
+      <!-- SLIDE 22: Challenge Solution Reveal & Evaluation Rubric              -->
+      <!-- =================================================================== -->
+      <section class="slide" id="slide-22" 
+        data-title="Challenge Solution &amp; Rubric" 
+        data-segment="Part 6: Assessment &amp; Forward Bridge (75:00 - 90:00)"
+        data-notes="TRAINER SPEAKING SCRIPT:
+'Let's reveal the benchmark solution!
+Click 'Reveal Solution' to inspect the formulas.
+Notice how clean each compound formula is:
+If(ConditionA && ConditionB, ActionTrue, ActionFalse).
+Check your formulas against our 4-level evaluation rubric:
+Level 4 Mastery means all 8 formulas are syntactically perfect with correct logical operators and Value() conversions!'">
+        <div class="slide-content">
+          <div class="slide-header">
+            <span class="slide-badge green-badge">Exemplar &amp; Rubric</span>
+            <h2 class="slide-title">Final Challenge Solution &amp; 4-Level Evaluation Rubric</h2>
+            <p class="slide-lead">Compare your compound branching formulas against the production benchmark and evaluate your performance.</p>
+          </div>
+
+          <div class="grid-2-col">
+            <div class="solution-card">
+              <div class="solution-header">
+                <h4>Exemplar Power Fx Compound Formulas</h4>
+                <button class="btn-reveal" id="btn-reveal-solution">Reveal Solution</button>
+              </div>
+              <div class="solution-body collapsed" id="solution-content">
+                <ul class="solution-list">
+                  <li><strong>1. Escort:</strong> <code>If(Value(txtWeight.Text) &gt; 1000 &amp;&amp; chkHazmat.Value, "DISPATCH ESCORT", "STANDARD DOCK")</code></li>
+                  <li><strong>2. Siren:</strong> <code>If(chkGasLeak.Value || chkFireAlarm.Value, SoundAlarm(), GreenLight())</code></li>
+                  <li><strong>3. Access:</strong> <code>If(!IsBlank(txtBadge.Text) &amp;&amp; chkCertified.Value, DisplayMode.Edit, DisplayMode.Disabled)</code></li>
+                  <li><strong>4. Shift:</strong> <code>If(txtDay.Text = "Sunday" || Hour(Now()) &gt;= 22, "NIGHT_PROTOCOL", "DAY_PROTOCOL")</code></li>
+                  <li><strong>5. Danger:</strong> <code>If(Value(txtPSI.Text) &gt; 250 &amp;&amp; Value(txtTemp.Text) &gt; 100, Color.Red, Color.Blue)</code></li>
+                  <li><strong>6. Cutoff:</strong> <code>If(Value(txtLevel.Text) &gt;= 95 &amp;&amp; !chkDrainOpen.Value, CloseValve(), OpenValve())</code></li>
+                  <li><strong>7. Sign-in:</strong> <code>If(!IsBlank(txtDriver.Text) &amp;&amp; chkSigned.Value, true, false)</code></li>
+                  <li><strong>8. Reorder:</strong> <code>If(Value(txtStock.Text) &lt; 10 || chkUrgentOrder.Value, ReorderParts(), InStock())</code></li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="rubric-card">
+              <h4>Evaluation Rubric (4 Performance Levels)</h4>
+              <div class="rubric-levels">
+                <div class="level-item level-4">
+                  <span class="lvl-title">Level 4: Mastery (100%)</span>
+                  <p>All 8 compound formulas syntactically flawless; correct usage of &amp;&amp;, ||, !; proper Value() wrapping.</p>
+                </div>
+                <div class="level-item level-3">
+                  <span class="lvl-title">Level 3: Proficient (75-99%)</span>
+                  <p>6-7 formulas correct; understands AND vs OR; minor typo in property names.</p>
+                </div>
+                <div class="level-item level-2">
+                  <span class="lvl-title">Level 2: Developing (50-74%)</span>
+                  <p>Confused &amp;&amp; with ||; omitted Value(); struggled with negation syntax.</p>
+                </div>
+                <div class="level-item level-1">
+                  <span class="lvl-title">Level 1: Novice (&lt;50%)</span>
+                  <p>Used human speech shortcuts (A = 1 || 2); unable to construct valid compound gates.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- =================================================================== -->
+      <!-- SLIDE 23: The Connection Map (Before -> Today -> Next)              -->
+      <!-- =================================================================== -->
+      <section class="slide" id="slide-23" 
+        data-title="Curriculum Connection Map" 
+        data-segment="Part 6: Assessment &amp; Forward Bridge (75:00 - 90:00)"
+        data-notes="TRAINER SPEAKING SCRIPT:
+'Look at our 3-day Connection Map.
+BEFORE on Day 5: We learned single-condition IF decisions (the single railway switch).
+TODAY on Day 6: We combined multiple conditions using AND, OR, and NOT (the Two-Key Vault).
+NEXT on Day 7: Now that we master data, conditions, and decisions, we step into Phase 3: Business Thinking!
+Tomorrow, we organize these decisions and actions into an end-to-end Business Process Flow and application wireframe!
+Everything connects. One skill unlocks the next!'">
+        <div class="slide-content">
+          <div class="slide-header">
+            <span class="slide-badge purple-badge">Curriculum Bridge</span>
+            <h2 class="slide-title">The Three-Day Connection Map</h2>
+            <p class="slide-lead">How yesterday's single IF, today's compound gates, and tomorrow's business process flows form a continuous progression.</p>
+          </div>
+
+          <div class="bridge-three-col">
+            <div class="bridge-col before-col">
+              <span class="bridge-time-tag">YESTERDAY (Day 5)</span>
+              <h3>Single IF Decisions</h3>
+              <div class="bridge-summary">
+                <code>If()</code> takes a single True/False verdict and chooses between Action A and Action B (Single Railway Switch).
+              </div>
+              <div class="bridge-flow-arrow">&#10142; Expanded by...</div>
+            </div>
+
+            <div class="bridge-col today-col">
+              <span class="bridge-time-tag">TODAY (Day 6)</span>
+              <h3>Combining Conditions (AND / OR / NOT)</h3>
+              <div class="bridge-summary">
+                Multiple conditions combined into one consolidated verdict via <code>&amp;&amp;</code>, <code>||</code>, and <code>!</code> (Two-Key Security Gate).
+              </div>
+              <div class="bridge-flow-arrow">&#10142; Organized into...</div>
+            </div>
+
+            <div class="bridge-col next-col">
+              <span class="bridge-time-tag">TOMORROW (Day 7)</span>
+              <h3>Business Process &amp; Wireframing</h3>
+              <div class="bridge-summary">
+                Organizing inputs, logic gates, and actions into end-to-end business workflows and application wireframe blueprints.
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- =================================================================== -->
+      <!-- SLIDE 24: Homework, Bilingual Glossary & Session Wrap-Up            -->
+      <!-- =================================================================== -->
+      <section class="slide" id="slide-24" 
+        data-title="Homework &amp; Glossary" 
+        data-segment="Part 6: Assessment &amp; Forward Bridge (75:00 - 90:00)"
+        data-notes="TRAINER SPEAKING SCRIPT:
+'Congratulations on completing Day 6! You now possess the power to model real-world multi-factor business rules!
+Here is your 15-minute optional review homework: 'The Double-Lock Tracker'.
+Identify 3 compound decisions you make in your daily routine:
+1. One with AND (e.g. Alarm rings AND Time >= 06:00).
+2. One with OR (e.g. Raining OR Temp < 15°C).
+3. One with NOT (e.g. Refrigerator is NOT empty).
+Review the bilingual English-Khmer glossary below.
+Thank you for your fantastic focus today. Tomorrow on Day 7, we step into Phase 3: Business Process & Workflow Wireframing!'">
+        <div class="slide-content">
+          <div class="slide-header">
+            <span class="slide-badge blue-badge">Session Wrap-Up</span>
+            <h2 class="slide-title">15-Minute Homework &amp; Bilingual Glossary</h2>
+            <p class="slide-lead">Reinforce compound logic in your daily environment and master the technical multi-gate vocabulary.</p>
+          </div>
+
+          <div class="grid-2-col">
+            <div class="homework-card">
+              <div class="hw-icon">&#128269;</div>
+              <div class="hw-content">
+                <h4>Homework: "The Double-Lock Tracker" (&le; 15 Mins)</h4>
+                <p>1. Identify <strong>3 real-life compound decisions</strong> you make every day (one AND, one OR, one NOT).</p>
+                <p>2. Write each in standard format: <code>If ( ConditionA &amp;&amp; ConditionB , TrueAction , FalseAction )</code>.</p>
+                <p>3. Note which action you executed today based on the combined truth!</p>
+                <div class="hw-outcome">Expected Result: 3 written compound formulas ready to share tomorrow!</div>
+              </div>
+            </div>
+
+            <div class="glossary-card">
+              <h4>Bilingual Technical Glossary (Day 6)</h4>
+              <div class="glossary-list">
+                <div class="gloss-item">
+                  <span class="en-term">Compound Condition</span>
+                  <span class="kh-term">លក្ខខណ្ឌចម្រុះ / ច្រកទ្វាររួម</span>
+                </div>
+                <div class="gloss-item">
+                  <span class="en-term">AND Gate (&&)</span>
+                  <span class="kh-term">ច្រក AND (និង - ត្រូវតែពិតទាំងអស់)</span>
+                </div>
+                <div class="gloss-item">
+                  <span class="en-term">OR Gate (||)</span>
+                  <span class="kh-term">ច្រក OR (ឬ - យ៉ាងហោចពិតមួយ)</span>
+                </div>
+                <div class="gloss-item">
+                  <span class="en-term">NOT Gate (!)</span>
+                  <span class="kh-term">ច្រក NOT (មិន - បញ្ច្រាសការពិត)</span>
+                </div>
+                <div class="gloss-item">
+                  <span class="en-term">Operator Precedence</span>
+                  <span class="kh-term">លំដាប់អាទិភាពនៃសញ្ញាគណនា</span>
+                </div>
+                <div class="gloss-item">
+                  <span class="en-term">Short-Circuit Evaluation</span>
+                  <span class="kh-term">ការកាត់ផ្តាច់វាយតម្លៃរហ័សការពារកំហុស</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- Bottom Navigation Bar & Slide Footer -->
+        <footer id="bottom-hud">
+      <div id="progress-bar-container">
+        <div id="progress-bar"></div>
+      </div>
+
+      <div class="hud-left">
+        <button class="hud-btn" id="btn-prev" onclick="prevSlide()" title="Previous Slide (Left Arrow)">&#8592; Prev</button>
+        <button class="hud-btn" id="btn-next" onclick="nextSlide()" title="Next Slide (Right Arrow / Space)">Next &#8594;</button>
+        <span id="slide-counter">Slide <span id="slide-current-num">1</span> / <span id="slide-total-count">24</span></span>
+      </div>
+
+      <div class="hud-right">
+        <button class="hud-btn" id="btn-lang" onclick="toggleLanguage()" title="Toggle Language (L)">
+          🌐 <span id="lang-label">KH</span>
+        </button>
+        <button class="hud-btn active" id="btn-laser" onclick="toggleLaser()" title="Presenter Laser Pointer (P)">
+          🔴 Laser
+        </button>
+        <button class="hud-btn" id="btn-notes" onclick="toggleNotes()" title="Trainer Notes Drawer (N)">
+          📝 Notes
+        </button>
+        <button class="hud-btn" id="btn-overview" onclick="toggleOverview()" title="Slide Overview Modal (O)">
+          🗂️ Overview
+        </button>
+        <button class="hud-btn" id="btn-timer" onclick="toggleTimer()" title="90-Min Countdown (T)">
+          ⏱️ <span id="timer-display">90:00</span>
+        </button>
+        <button class="hud-btn" id="btn-fullscreen" onclick="toggleFullscreen()" title="Fullscreen (F)">
+          ⛶
+        </button>
+        <a href="../index.html" class="hud-btn hub-btn" title="Return to Master Curriculum Hub (ត្រឡប់ទៅទំព័រដើម)" style="text-decoration: none; display: inline-flex; align-items: center; gap: 4px; color: #fcd34d; font-weight: 600;"><span>🏠</span><span>Hub</span></a>
+      </div>
+    </footer>
+
+  </div>
+
+  <!-- Presenter Script Notes Drawer Panel (Press N) -->
+  <aside id="presenter-notes-panel" class="presenter-notes-panel hidden" aria-hidden="true" role="complementary" aria-label="Trainer Speaking Notes">
+    <div class="notes-header">
+      <div class="notes-title">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M2.5 1A1.5 1.5 0 0 0 1 2.5v11A1.5 1.5 0 0 0 2.5 15h6.086a1.5 1.5 0 0 0 1.06-.44l4.915-4.914A1.5 1.5 0 0 0 15 8.586V2.5A1.5 1.5 0 0 0 13.5 1h-11zM2 2.5a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 .5.5v6H9.5A1.5 1.5 0 0 0 8 10v4.5H2.5a.5.5 0 0 1-.5-.5v-11zm7 7.5v4.379L13.379 10H9z"/></svg>
+        <span>Trainer Speaking Script &amp; Pedagogical Guidance</span>
+      </div>
+      <button id="btn-close-notes" class="icon-btn-close" aria-label="Close Notes">&times;</button>
+    </div>
+    <div class="notes-body" id="notes-body">
+      <!-- Injected dynamically by script.js -->
+    </div>
+  </aside>
+
+  <!-- Slide Grid Overview Modal (Press O) -->
+  <div id="overview-modal" class="overview-modal hidden" aria-hidden="true" role="dialog" aria-label="Slide Navigation Grid">
+    <div class="overview-backdrop" id="overview-backdrop"></div>
+    <div class="overview-dialog">
+      <div class="overview-header">
+        <h3>Lesson Slide Grid Navigator (24 Slides)</h3>
+        <button id="btn-close-overview" class="icon-btn-close" aria-label="Close Overview">&times;</button>
+      </div>
+      <div class="overview-grid" id="overview-grid">
+        <!-- Dynamically rendered by script.js -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Presentation Engine & Bilingual Logic -->
+  <script src="script.js"></script>
+
+    <!-- Presenter Laser Focus Pointer & Click Ripple Elements -->
+    <div id="presenter-pointer" class="presenter-laser-dot">
+      <div class="laser-halo"></div>
+    </div>
+    <div id="pointer-click-ripple" class="pointer-click-ripple"></div>
+  <script>
+if (window.self !== window.top) {
+  document.documentElement.classList.add('in-iframe');
+  function hideHub() { document.querySelectorAll('.hub-btn, .back-to-hub-pill').forEach(e => e.style.display = 'none'); }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', hideHub);
+  } else {
+    hideHub();
+  }
+}
+</script>
+<style>
+.in-iframe .hub-btn, .in-iframe .back-to-hub-pill { display: none !important; }
+</style>
+</body>
+</html>
+

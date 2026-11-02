@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en" translate="no" class="notranslate">
+<head>
+  <meta name="google" content="notranslate">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Microsoft Power Apps Master Curriculum Portal | 27-Day Complete Journey</title>
+  <meta name="description" content="Master portal for the 27-day connected Microsoft Power Apps beginner training curriculum. Track progress, launch interactive presentations, and learn connected software architecture.">
+  
+  <!-- High-Readability English & Khmer Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=Moul&family=Kantumruy+Pro:ital,wght@0,400..700;1,400..700&family=Battambang:wght@300;400;700;900&family=Koh+Santepheap:wght@300;400;700&family=Koulen&family=Siemreap&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="shared/design-system.css">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- Ambient Dynamic Aurora Glow Background -->
+  <div class="aurora-bg">
+    <div class="aurora-orb orb-1"></div>
+    <div class="aurora-orb orb-2"></div>
+    <div class="aurora-orb orb-3"></div>
+  </div>
+
+  <!-- Master Top Navigation Bar -->
+  <header class="portal-header">
+    <div class="header-content">
+      <div class="brand-group">
+        <div class="brand-icon">⚡</div>
+        <div class="brand-text">
+          <h1>
+            <span>Power Apps Academy</span>
+            <span class="brand-tag">27-Day Master Hub</span>
+          </h1>
+          <div class="brand-subtitle">Connected Engineering Curriculum &bull; Zero to Solution Architect</div>
+        </div>
+      </div>
+
+      <div class="header-actions">
+        <!-- Progress Pill with Pulsing Dot -->
+        <span class="header-progress-pill" id="header-progress-pill" title="Overall Curriculum Progress">
+          <span class="pulse-dot"></span>
+          <span>0/27 (0%)</span>
+        </span>
+
+        <!-- Student / Trainer Mode Switcher -->
+        <button class="action-btn mode-btn" id="btn-mode-toggle" onclick="toggleTrainerMode()" title="Toggle Trainer Mode (Teacher Speaking Notes & Lesson Durations)">
+          <span id="btn-mode-icon">🎓</span>
+          <span id="btn-mode-text">Student Mode</span>
+        </button>
+
+        <!-- Language Toggle -->
+        <button class="action-btn lang-pill" onclick="toggleLanguage()" title="Toggle Language (English / ភាសាខ្មែរ) [Key: L]">
+          <span>🌐</span>
+          <span id="btn-lang-label">KH</span>
+        </button>
+
+        <!-- Cheatsheet & Mental Model Drawer -->
+        <button class="action-btn" onclick="toggleCheatsheet()" title="Open Curriculum Cheatsheet & Mental Model [Key: ?]">
+          <span>📖</span>
+          <span>Syllabus</span>
+        </button>
+
+        <!-- Reset Button -->
+        <button class="action-btn danger-icon" onclick="openResetModal()" title="Reset All Lesson Progress">
+          <span>🔄</span>
+        </button>
+
+        <!-- Primary Resume Button -->
+        <button class="action-btn primary pulse-cta" onclick="resumeNextLesson()" title="Resume Next Lesson [Key: R]">
+          <span>🚀</span>
+          <span id="resume-btn-text">Resume Day 1</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Optional Trainer Mode Banner (Visible only when Trainer Mode is on) -->
+  <div class="trainer-banner" id="trainer-banner" style="display: none;">
+    <div class="trainer-banner-content">
+      <div class="trainer-banner-info">
+        <span class="trainer-badge">👨‍🏫 TRAINER CONSOLE</span>
+        <span>40.5 Total Instruction Hours &bull; 27 Interactive Decks &bull; 648 Production Slides with Speaker Scripts &bull; Projector Ready (16:9)</span>
+      </div>
+      <div class="trainer-banner-actions">
+        <button class="action-btn" onclick="markAllComplete()" title="Mark All 27 Days Completed (For Trainer Live Demo)">
+          ✓ Mark All Complete (Demo)
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Curriculum Workspace -->
+  <main class="portal-container">
+
+    <!-- Hero Section & Dashboard -->
+    <section class="hero-section">
+      <div class="hero-content">
+        <div class="hero-titles">
+          <div class="hero-eyebrow">
+            <span class="hero-eyebrow-dot"></span>
+            <span>ENTERPRISE POWER PLATFORM CURRICULUM &bull; 27 DAYS</span>
+          </div>
+          <h2 id="hero-title">From Zero to Power Platform Architect</h2>
+          <p id="hero-desc">
+            Master the complete 27-day connected engineering journey: Real Problem ➔ Business Process ➔ Data Schema ➔ UI &amp; Screens ➔ Logic &amp; Decision ➔ Action &amp; Routing ➔ Cloud Storage (SharePoint) ➔ Cloud Automation (Power Automate) ➔ Feedback &amp; System Testing (Test &amp; Verify).
+          </p>
+          
+          <div class="hero-cta-group">
+            <button class="hero-primary-btn" onclick="resumeNextLesson()">
+              <span>🚀 Start Today's Lesson</span>
+            </button>
+            <button class="hero-secondary-btn" onclick="toggleMentalModelRibbon()">
+              <span>🧠 9-Stage Causality Chain</span>
+              <span class="accordion-arrow" id="ribbon-arrow-icon">&#9662;</span>
+            </button>
+          </div>
+
+          <div class="hero-feature-badges">
+            <span class="feature-badge">⏱️ 40.5 Training Hours</span>
+            <span class="feature-badge">🏭 Real Manufacturing Stories</span>
+            <span class="feature-badge">⚡ 100% Offline-Safe HTML5</span>
+          </div>
+        </div>
+
+        <!-- Curriculum Progress Dashboard Card -->
+        <div class="hero-stats-card">
+          <div class="stats-header">
+            <span class="stat-label">Curriculum Progress</span>
+            <span class="stat-badge-phase" id="current-phase-badge">Phase 1 of 8</span>
+          </div>
+          
+          <div class="hero-stat-row">
+            <span class="stat-value" id="hero-stat-count">0 / 27</span>
+            <span class="stat-percent" id="hero-stat-percent">0%</span>
+          </div>
+          
+          <div class="progress-track">
+            <div class="progress-fill" id="hero-progress-fill"></div>
+          </div>
+          
+          <div class="hero-stat-meta">
+            <span id="hero-stat-hours">0.0 hrs / 40.5 hrs</span>
+            <span class="meta-dot">&bull;</span>
+            <span id="hero-stat-remaining">27 days left</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Collapsible 9-Stage Causality Chain Ribbon -->
+      <div class="model-ribbon-wrapper" id="model-ribbon-wrapper" style="display: none;">
+        <div class="model-ribbon-title">
+          <span>🧠 The Central Mental Model Architecture &bull; Click any stage to filter lessons:</span>
+          <button class="ribbon-close-btn" onclick="toggleMentalModelRibbon()">&times;</button>
+        </div>
+        <div class="model-ribbon">
+          <div class="ribbon-node" data-stage="PROBLEM" onclick="setStageFilter('PROBLEM')">
+            <span>1. Real Problem</span>
+          </div>
+          <span class="ribbon-arrow">&rarr;</span>
+          <div class="ribbon-node" data-stage="PROCESS" onclick="setStageFilter('PROCESS')">
+            <span>2. Process</span>
+          </div>
+          <span class="ribbon-arrow">&rarr;</span>
+          <div class="ribbon-node" data-stage="DATA" onclick="setStageFilter('DATA')">
+            <span>3. Data Schema</span>
+          </div>
+          <span class="ribbon-arrow">&rarr;</span>
+          <div class="ribbon-node" data-stage="UI" onclick="setStageFilter('UI')">
+            <span>4. UI / Screen</span>
+          </div>
+          <span class="ribbon-arrow">&rarr;</span>
+          <div class="ribbon-node" data-stage="LOGIC" onclick="setStageFilter('LOGIC')">
+            <span>5. Logic / Decision</span>
+          </div>
+          <span class="ribbon-arrow">&rarr;</span>
+          <div class="ribbon-node" data-stage="ACTION" onclick="setStageFilter('ACTION')">
+            <span>6. Action / Routing</span>
+          </div>
+          <span class="ribbon-arrow">&rarr;</span>
+          <div class="ribbon-node" data-stage="STORAGE" onclick="setStageFilter('STORAGE')">
+            <span>7. Storage</span>
+          </div>
+          <span class="ribbon-arrow">&rarr;</span>
+          <div class="ribbon-node" data-stage="FLOW" onclick="setStageFilter('FLOW')">
+            <span>8. Cloud Flow</span>
+          </div>
+          <span class="ribbon-arrow">&rarr;</span>
+          <div class="ribbon-node" data-stage="CAPSTONE" onclick="setStageFilter('CAPSTONE')">
+            <span>9. Test &amp; Audit 🎓</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Phase Milestones Breakdown Grid -->
+    <section class="phases-section">
+      <div class="section-heading-bar">
+        <h3>
+          <span>📚 Curriculum Learning Phases</span>
+          <span class="heading-subtext">(Select any phase to view its lessons)</span>
+        </h3>
+        <button class="action-btn all-phases-btn" onclick="setPhaseFilter('all')">
+          <span>Show All 27 Lessons</span>
+        </button>
+      </div>
+      
+      <div class="phase-grid" id="phase-summary-grid">
+        <!-- 8 Rich Phase Cards Rendered Dynamically by script.js -->
+      </div>
+    </section>
+
+    <!-- Sticky Search and Filter Controls Toolbar -->
+    <section class="filter-toolbar">
+      <div class="search-box">
+        <span class="search-icon">🔍</span>
+        <input 
+          type="search" 
+          class="search-input" 
+          id="search-input" 
+          placeholder="Search lessons, topics, Power Fx formulas, or keywords (e.g. SharePoint, If, Gallery)..." 
+          oninput="handleSearchInput(event)"
+        >
+      </div>
+
+      <div class="toolbar-right-controls">
+        <span class="results-count-badge" id="results-count-badge">Showing 27 Lessons</span>
+        
+        <select class="status-dropdown" onchange="handleStatusFilterChange(event)">
+          <option value="all">All Statuses</option>
+          <option value="incomplete">Incomplete / Ready</option>
+          <option value="in-progress">In Progress</option>
+          <option value="completed">Completed (✓)</option>
+        </select>
+      </div>
+    </section>
+
+    <!-- Empty State for Search -->
+    <div id="empty-search-state" style="display: none;" class="empty-state-box">
+      <div class="empty-state-icon">🔍</div>
+      <h3>No matching lessons found</h3>
+      <p>Try clearing your search term or switching the phase filter to 'All'.</p>
+      <button class="action-btn primary" onclick="document.getElementById('search-input').value=''; handleSearchInput({target:{value:''}}); setPhaseFilter('all');" style="margin-top: 1rem;">
+        Reset Filters
+      </button>
+    </div>
+
+    <!-- 27 Rich Lesson Cards Grid -->
+    <div class="curriculum-grid" id="curriculum-grid">
+      <!-- 27 Interactive Cards Rendered Dynamically by script.js -->
+    </div>
+
+    <!-- Portal Footer -->
+    <footer class="portal-footer">
+      <div>
+        <strong>Microsoft Power Apps Foundation &bull; 27-Day Master Curriculum</strong>
+        <p style="margin-top: 0.25rem;">Built with pure HTML5, CSS3, and Vanilla JavaScript. Zero CDNs &bull; Edge &amp; Chrome Ready.</p>
+      </div>
+      <div class="keyboard-hints">
+        <span><span class="kbd">/</span> Search</span>
+        <span><span class="kbd">L</span> Khmer / English</span>
+        <span><span class="kbd">R</span> Resume Next</span>
+        <span><span class="kbd">?</span> Cheatsheet</span>
+        <span><span class="kbd">Esc</span> Exit Player</span>
+      </div>
+    </footer>
+
+  </main>
+
+  <!-- ====================================================================
+       INTEGRATED THEATER VIEWER (MODAL PLAYER)
+       Allows learners to view any day's presentation right inside the hub!
+       ==================================================================== -->
+  <div class="theater-overlay" id="theater-overlay">
+    <!-- Sleek Floating Glassmorphic Control Capsule (Floats in Top-Right) -->
+    <div class="theater-floating-capsule">
+      <button class="capsule-btn back-btn" onclick="closeTheater()" title="Return to Master Curriculum Hub (Esc)">
+        <span>◀ Back to Hub</span>
+      </button>
+      <div class="capsule-divider"></div>
+      <button class="capsule-btn stepper-btn" id="theater-btn-prev" onclick="stepTheater(-1)" title="Previous Day">
+        &larr;
+      </button>
+      <span class="capsule-day-label" id="theater-day-label">Day 1</span>
+      <button class="capsule-btn stepper-btn" id="theater-btn-next" onclick="stepTheater(1)" title="Next Day">
+        &rarr;
+      </button>
+      <div class="capsule-divider"></div>
+      <button class="capsule-btn done-btn" id="theater-btn-complete" onclick="toggleTheaterComplete()" title="Toggle Lesson Completed">
+        <span>✓ Done</span>
+      </button>
+      <a href="#" target="_blank" class="capsule-btn icon-btn" id="theater-btn-popout" title="Open in Full Window / New Tab">
+        ↗
+      </a>
+      <button class="capsule-btn close-btn" onclick="closeTheater()" title="Close Viewer (Esc)">
+        &times;
+      </button>
+    </div>
+
+    <!-- 100% Fullscreen Iframe: Edge-to-Edge 16:9 Presentation Stage with Zero Distortion -->
+    <iframe class="theater-iframe" id="theater-iframe" src="about:blank" title="Lesson Presentation Stage"></iframe>
+  </div>
+
+  <!-- ====================================================================
+       RESET CONFIRMATION MODAL
+       ==================================================================== -->
+  <div class="modal-backdrop" id="reset-modal">
+    <div class="modal-box">
+      <div class="modal-icon-danger">⚠️</div>
+      <h3 class="modal-title">Reset Curriculum Progress?</h3>
+      <p class="modal-desc">
+        Are you sure you want to reset your curriculum progress? This will clear all 27 completed day checkmarks, study time, and active pointers back to Day 1. This action cannot be undone.
+      </p>
+      <div class="modal-actions">
+        <button class="action-btn" onclick="closeResetModal()">Cancel</button>
+        <button class="action-btn danger" onclick="confirmReset()">Yes, Reset Everything</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ====================================================================
+       CHEATSHEET & ARCHITECTURE DRAWER
+       ==================================================================== -->
+  <aside class="cheatsheet-drawer" id="cheatsheet-drawer">
+    <div class="drawer-header">
+      <h3>
+        <span>📖 Curriculum Quick Reference</span>
+      </h3>
+      <button class="drawer-close" onclick="toggleCheatsheet()">&times;</button>
+    </div>
+
+    <div class="cheat-card">
+      <h4>🧠 The 9-Stage Connected Chain</h4>
+      <p style="font-size: 0.82rem; color: var(--text-muted); line-height: 1.6;">
+        Every single feature in Power Apps maps directly to this 9-stage causality chain:
+      </p>
+      <div style="font-family: var(--font-code); font-size: 0.74rem; color: var(--accent-gold-light); background: rgba(0,0,0,0.3); padding: 8px; border-radius: 6px; line-height: 1.7; margin-top: 0.25rem;">
+        1. REAL PROBLEM<br>
+        2. BUSINESS PROCESS<br>
+        3. DATA SCHEMA (SharePoint)<br>
+        4. UI / SCREENS (Gallery &amp; Form)<br>
+        5. LOGIC / DECISION (If &amp; Validation)<br>
+        6. ACTION / ROUTING (Navigate &amp; Submit)<br>
+        7. STORAGE (Cloud Database Rows)<br>
+        8. CLOUD FLOW (Power Automate Alerts)<br>
+        9. TEST &amp; TROUBLESHOOT (3-Tier Audit)
+      </div>
+    </div>
+
+    <div class="cheat-card">
+      <h4>⚡ Core Power Fx Formula Reference</h4>
+      <div style="display: flex; flex-direction: column; gap: 0.4rem; font-size: 0.78rem;">
+        <div><code>If(Condition, ActionA, ActionB)</code> &bull; Decision gate</div>
+        <div><code>IsBlank(txtField.Text)</code> &bull; Empty check</div>
+        <div><code>DisplayMode.Disabled</code> &bull; Button interlock</div>
+        <div><code>Navigate(scrDetails, Fade)</code> &bull; Screen flow</div>
+        <div><code>SubmitForm(frmOrder)</code> &bull; Cloud commit</div>
+        <div><code>galOrders.Selected</code> &bull; Active record</div>
+        <div><code>Set(gblUser, User().FullName)</code> &bull; Global state</div>
+      </div>
+    </div>
+
+    <div class="cheat-card">
+      <h4>🛠️ 3-Tier Troubleshooting Audit</h4>
+      <div style="font-size: 0.8rem; color: var(--text-muted); line-height: 1.5;">
+        <div><strong style="color: #86efac;">Tier A (App):</strong> Check if row exists in SharePoint. If yes, Power Apps is 100% innocent!</div>
+        <div style="margin-top: 0.4rem;"><strong style="color: #fcd34d;">Tier B (Flow Trigger):</strong> Check Power Automate 28-day Run History. If 0 runs, check credentials or list name.</div>
+        <div style="margin-top: 0.4rem;"><strong style="color: #67e8f9;">Tier C (Action Delivery):</strong> Inspect the run's email card. If red ✕, bad address; if green ✓, check Spam.</div>
+      </div>
+    </div>
+
+    <div class="cheat-card">
+      <h4>🎯 Graduation Standard</h4>
+      <p style="font-size: 0.82rem; color: var(--text-muted); line-height: 1.5;">
+        You graduate not when you memorize clicks, but when given an unfamiliar problem, you can independently design the schema, build the 3-screen app, automate alerts, and explain why it works!
+      </p>
+    </div>
+  </aside>
+
+  <script src="script.js"></script>
+</body>
+</html>
