@@ -1,0 +1,746 @@
+<!DOCTYPE html>
+<html lang="en" translate="no" class="notranslate">
+<head>
+  <meta name="google" content="notranslate">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>QA Network Standard Worksheet &bull; Practice Template</title>
+  
+  <!-- High-Readability Fonts Aligned with PowerApp Design System -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@500;600;700;800&family=JetBrains+Mono:wght@400;600&family=Kantumruy+Pro:wght@400;600;700&family=Battambang:wght@400;700&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --font-body: 'Plus Jakarta Sans', 'Inter', 'Kantumruy Pro', 'Battambang', system-ui, sans-serif;
+      --font-heading: 'Plus Jakarta Sans', 'Inter', 'Kantumruy Pro', sans-serif;
+      --font-code: 'JetBrains Mono', monospace;
+
+      --bg-page: #06090e;
+      --bg-surface: #0f1422;
+      --bg-card: #182032;
+      --border-color: rgba(255, 255, 255, 0.12);
+      --border-focus: #38bdf8;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      
+      --qa-blue: #0284c7;
+      --qa-blue-light: #38bdf8;
+      --qa-green: #10b981;
+      --qa-green-light: #34d399;
+      --qa-amber: #f59e0b;
+      --qa-amber-light: #fbbf24;
+      --qa-red: #ef4444;
+      --qa-red-light: #f87171;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    
+    body {
+      background-color: var(--bg-page);
+      color: var(--text-main);
+      font-family: var(--font-body);
+      padding: clamp(12px, 2vw, 24px);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .container {
+      max-width: 1720px;
+      margin: 0 auto;
+    }
+
+    .header-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: clamp(12px, 1.5vw, 18px) clamp(16px, 2vw, 24px);
+      margin-bottom: 16px;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .header-title-group {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .header-logo-badge {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 42px;
+      height: 42px;
+      background: linear-gradient(135deg, #0284c7, #742774);
+      border-radius: 10px;
+      box-shadow: 0 4px 14px rgba(2, 132, 199, 0.4);
+      flex-shrink: 0;
+    }
+
+    .header-title h1 {
+      font-family: var(--font-heading);
+      font-size: clamp(1.1rem, 1.2vw + 0.6rem, 1.6rem);
+      font-weight: 800;
+      color: #fff;
+      line-height: 1.3;
+    }
+
+    .header-title p {
+      font-size: clamp(0.75rem, 0.5vw + 0.4rem, 0.9rem);
+      color: var(--qa-blue-light);
+      line-height: 1.5;
+    }
+
+    .header-actions {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid var(--border-color);
+      color: #fff;
+      padding: 7px 14px;
+      border-radius: 6px;
+      font-weight: 600;
+      font-size: clamp(0.75rem, 0.4vw + 0.45rem, 0.85rem);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      text-decoration: none;
+      transition: all 0.2s ease;
+      user-select: none;
+    }
+
+    .btn:hover {
+      background: rgba(255, 255, 255, 0.16);
+      border-color: rgba(255, 255, 255, 0.3);
+      color: #fff;
+    }
+
+    .btn-primary {
+      background: var(--qa-blue);
+      border-color: var(--qa-blue-light);
+    }
+
+    .btn-primary:hover {
+      background: #0369a1;
+    }
+
+    .btn-success {
+      background: rgba(16, 185, 129, 0.2);
+      border-color: rgba(52, 211, 153, 0.4);
+      color: #34d399;
+    }
+
+    .btn-success:hover {
+      background: rgba(16, 185, 129, 0.35);
+      color: #fff;
+    }
+
+    .admin-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      border-radius: 10px;
+      padding: 14px 18px;
+      margin-bottom: 16px;
+    }
+
+    .admin-field label {
+      display: block;
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      font-weight: 700;
+      margin-bottom: 4px;
+      letter-spacing: 0.3px;
+    }
+
+    .admin-field input {
+      width: 100%;
+      background: rgba(0, 0, 0, 0.35);
+      border: 1px solid var(--border-color);
+      border-radius: 5px;
+      padding: 7px 10px;
+      color: #fff;
+      font-size: 0.85rem;
+      font-family: var(--font-body);
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    .admin-field input:focus {
+      border-color: var(--border-focus);
+    }
+
+    .table-container {
+      overflow-x: auto;
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      margin-bottom: 20px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      font-size: 0.82rem;
+      min-width: 1400px;
+    }
+
+    th, td {
+      border: 1px solid var(--border-color);
+      padding: 8px 10px;
+      vertical-align: middle;
+    }
+
+    th {
+      background: #101626;
+      font-weight: 700;
+      color: #fff;
+      text-align: center;
+      font-size: 0.78rem;
+    }
+
+    .th-group {
+      background: #172136;
+      font-size: 0.74rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    td input, td select {
+      width: 100%;
+      background: rgba(0, 0, 0, 0.3);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 4px;
+      padding: 5px 7px;
+      color: #fff;
+      font-size: 0.8rem;
+      font-family: var(--font-body);
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    td input:focus, td select:focus {
+      border-color: var(--border-focus);
+    }
+
+    .badge-center {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 0.85rem;
+      border-radius: 4px;
+      padding: 3px 8px;
+      min-width: 60px;
+    }
+
+    .status-pass {
+      background: rgba(16, 185, 129, 0.22);
+      color: #34d399;
+      border: 1px solid rgba(52, 211, 153, 0.4);
+    }
+
+    .status-gap {
+      background: rgba(239, 68, 68, 0.22);
+      color: #f87171;
+      border: 1px solid rgba(248, 113, 113, 0.4);
+    }
+
+    .delete-btn {
+      background: transparent;
+      border: none;
+      color: #ef4444;
+      cursor: pointer;
+      font-size: 1.15rem;
+      padding: 2px 6px;
+      border-radius: 4px;
+      transition: background 0.2s;
+    }
+
+    .delete-btn:hover {
+      background: rgba(239, 68, 68, 0.2);
+    }
+
+    /* Print Formatting (A4 Landscape Clean) */
+    @media print {
+      body {
+        background: #fff;
+        color: #000;
+        padding: 0;
+        font-size: 9pt;
+      }
+      .header-actions, .btn, .delete-btn { display: none !important; }
+      .header-bar, .admin-grid, .table-container {
+        background: #fff !important;
+        border-color: #999 !important;
+        box-shadow: none !important;
+      }
+      .header-title h1 { color: #000 !important; font-size: 14pt; }
+      .header-title p { color: #333 !important; }
+      .header-logo-badge { display: none !important; }
+      th { background: #e2e8f0 !important; color: #000 !important; }
+      td, th { border-color: #94a3b8 !important; color: #000 !important; }
+      input, select {
+        background: transparent !important;
+        color: #000 !important;
+        border: none !important;
+        padding: 0 !important;
+      }
+      .status-pass { background: #dcfce7 !important; color: #166534 !important; }
+      .status-gap { background: #fee2e2 !important; color: #991b1b !important; }
+    }
+
+    @media (max-width: 1024px) {
+      .admin-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <!-- Header Bar -->
+    <header class="header-bar">
+      <div class="header-title-group">
+        <div class="header-logo-badge" title="QA Precision Academy">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+            <path d="m9 12 2 2 4-4"/>
+          </svg>
+        </div>
+        <div class="header-title">
+          <h1>QA Network Standard Worksheet (តារាងអនុវត្ត QA Network)</h1>
+          <p>Process Quality Assurance &bull; Defect Barrier Analysis &bull; Bilingual EN / KH &bull; QA Precision Academy</p>
+        </div>
+      </div>
+
+      <div class="header-actions">
+        <a href="index.html" class="btn">
+          <span>📽️ Presentation</span>
+        </a>
+        <button class="btn btn-success" onclick="exportToCSV()" title="Export filled rows to CSV for Excel / Power Apps">
+          <span>📥 Export CSV</span>
+        </button>
+        <button class="btn btn-primary" onclick="window.print()">
+          <span>🖨️ Print / Save PDF</span>
+        </button>
+        <button class="btn" onclick="addNewRow()">
+          <span>➕ Add Row</span>
+        </button>
+      </div>
+    </header>
+
+    <!-- Administrative Header Information -->
+    <div class="admin-grid">
+      <div class="admin-field">
+        <label>Part Name / ឈ្មោះគ្រឿងបន្លាស់:</label>
+        <input type="text" id="part-name" value="Plastic Terminal Connector Box" placeholder="e.g. Wire Harness Connector">
+      </div>
+      <div class="admin-field">
+        <label>Part Number / លេខកូដគ្រឿង:</label>
+        <input type="text" id="part-no" value="CN-9942-REV-B" placeholder="e.g. Part No.">
+      </div>
+      <div class="admin-field">
+        <label>Line / Process / ខ្សែសង្វាក់:</label>
+        <input type="text" id="line-name" value="Molding &amp; Assembly Line #02" placeholder="e.g. Line 1">
+      </div>
+      <div class="admin-field">
+        <label>Review Date / កាលបរិច្ឆេទ:</label>
+        <input type="date" id="review-date" value="2026-11-02">
+      </div>
+      <div class="admin-field">
+        <label>Revision / កំណែកែប្រែ:</label>
+        <input type="text" id="rev-no" value="Rev. 03 (Post-Kaizen)">
+      </div>
+      <div class="admin-field">
+        <label>Team Leader / ប្រធានក្រុម:</label>
+        <input type="text" id="leader-name" value="Lead Quality Engineer">
+      </div>
+      <div class="admin-field" style="grid-column: span 2;">
+        <label>Cross-Functional Team / សមាជិកក្រុមចម្រុះមុខងារ (PE, QA, PROD, MAINT):</label>
+        <input type="text" id="team-members" value="Production Supervisor, Maintenance Tech, Process Engineer, QA Inspector">
+      </div>
+    </div>
+
+    <!-- Master Worksheet Table -->
+    <div class="table-container">
+      <table id="qa-table">
+        <thead>
+          <tr class="th-group">
+            <th colspan="3">1. Process Information</th>
+            <th colspan="2">2. Defect &amp; Damage Analysis</th>
+            <th colspan="2">3. Severity &amp; Target</th>
+            <th colspan="3">4. Current Baseline (Step 2)</th>
+            <th rowspan="2" style="width: 100px;">Gap Status<br>(គម្លាត)</th>
+            <th colspan="3">5. Improvement Plan (Step 4)</th>
+            <th colspan="3">6. Post-Kaizen (Step 5)</th>
+            <th rowspan="2" style="width: 40px;"></th>
+          </tr>
+          <tr>
+            <th style="width: 50px;">Step</th>
+            <th style="width: 130px;">Station</th>
+            <th style="width: 140px;">Operation</th>
+            <th style="width: 160px;">Potential Defect (6M)</th>
+            <th style="width: 150px;">Damage Analysis</th>
+            <th style="width: 70px;">Rank</th>
+            <th style="width: 70px;">Target</th>
+            <th style="width: 80px;">Occ ①-④</th>
+            <th style="width: 80px;">Det [1]-[4]</th>
+            <th style="width: 80px;">Assur</th>
+            <th style="width: 180px;">Action Item</th>
+            <th style="width: 90px;">Owner</th>
+            <th style="width: 90px;">Due Date</th>
+            <th style="width: 70px;">New Occ</th>
+            <th style="width: 70px;">New Det</th>
+            <th style="width: 70px;">New Assur</th>
+          </tr>
+        </thead>
+        <tbody id="qa-tbody">
+          <!-- Row 1: Sample Injection Molding -->
+          <tr>
+            <td style="text-align: center;"><input type="text" value="10" style="text-align: center;"></td>
+            <td><input type="text" value="Resin Dryer"></td>
+            <td><input type="text" value="Polymer moisture drying"></td>
+            <td><input type="text" value="Wet resin &rarr; Splay / brittleness"></td>
+            <td><input type="text" value="Terminal locking tab breaks"></td>
+            <td>
+              <select onchange="updateRow(this)">
+                <option value="S">S</option>
+                <option value="X">X</option>
+                <option value="XA">XA</option>
+                <option value="XB">XB</option>
+                <option value="R">R</option>
+                <option value="E">E</option>
+                <option value="V" selected>V</option>
+                <option value="A">A</option>
+                <option value="B">B</option>
+                <option value="C">C</option>
+              </select>
+            </td>
+            <td class="target-cell" style="text-align: center; font-weight: 800; color: #38bdf8;">B</td>
+            <td>
+              <select onchange="updateRow(this)">
+                <option value="1">1 (Auto)</option>
+                <option value="2">2 (Device)</option>
+                <option value="3" selected>3 (WI)</option>
+                <option value="4">4 (None)</option>
+              </select>
+            </td>
+            <td>
+              <select onchange="updateRow(this)">
+                <option value="1">1 (Auto)</option>
+                <option value="2">2 (Device)</option>
+                <option value="3" selected>3 (WI)</option>
+                <option value="4">4 (None)</option>
+              </select>
+            </td>
+            <td class="assur-cell" style="text-align: center; font-weight: 800; color: #fb923c;">D</td>
+            <td class="gap-cell" style="text-align: center;"><span class="badge-center status-gap">GAP</span></td>
+            <td><input type="text" value="Install dew-point moisture interlock"></td>
+            <td><input type="text" value="Maintenance"></td>
+            <td><input type="date" value="2026-11-20"></td>
+            <td>
+              <select onchange="updateRow(this)">
+                <option value="1" selected>1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+              </select>
+            </td>
+            <td>
+              <select onchange="updateRow(this)">
+                <option value="1" selected>1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+              </select>
+            </td>
+            <td class="new-assur-cell" style="text-align: center; font-weight: 800; color: #34d399;">A</td>
+            <td style="text-align: center;"><button class="delete-btn" onclick="deleteRow(this)" title="Delete Row">&times;</button></td>
+          </tr>
+
+          <!-- Row 2: Sample Pin Insertion -->
+          <tr>
+            <td style="text-align: center;"><input type="text" value="20" style="text-align: center;"></td>
+            <td><input type="text" value="Pin Insertion"></td>
+            <td><input type="text" value="Insert electrical terminals"></td>
+            <td><input type="text" value="Missing pin / bent contact"></td>
+            <td><input type="text" value="Vehicle electrical harness open circuit"></td>
+            <td>
+              <select onchange="updateRow(this)">
+                <option value="S">S</option>
+                <option value="X" selected>X</option>
+                <option value="XA">XA</option>
+                <option value="XB">XB</option>
+                <option value="R">R</option>
+                <option value="E">E</option>
+                <option value="V">V</option>
+                <option value="A">A</option>
+                <option value="B">B</option>
+                <option value="C">C</option>
+              </select>
+            </td>
+            <td class="target-cell" style="text-align: center; font-weight: 800; color: #34d399;">A</td>
+            <td>
+              <select onchange="updateRow(this)">
+                <option value="1">1 (Auto)</option>
+                <option value="2" selected>2 (Device)</option>
+                <option value="3">3 (WI)</option>
+                <option value="4">4 (None)</option>
+              </select>
+            </td>
+            <td>
+              <select onchange="updateRow(this)">
+                <option value="1">1 (Auto)</option>
+                <option value="2">2 (Device)</option>
+                <option value="3" selected>3 (WI)</option>
+                <option value="4">4 (None)</option>
+              </select>
+            </td>
+            <td class="assur-cell" style="text-align: center; font-weight: 800; color: #fbbf24;">C</td>
+            <td class="gap-cell" style="text-align: center;"><span class="badge-center status-gap">GAP</span></td>
+            <td><input type="text" value="Add 100% pin height probe &amp; electrical interlock"></td>
+            <td><input type="text" value="PE Lead"></td>
+            <td><input type="date" value="2026-11-28"></td>
+            <td>
+              <select onchange="updateRow(this)">
+                <option value="1" selected>1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+              </select>
+            </td>
+            <td>
+              <select onchange="updateRow(this)">
+                <option value="1" selected>1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+              </select>
+            </td>
+            <td class="new-assur-cell" style="text-align: center; font-weight: 800; color: #34d399;">A</td>
+            <td style="text-align: center;"><button class="delete-btn" onclick="deleteRow(this)" title="Delete Row">&times;</button></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+
+  <script>
+    // 4x4 Total Assurance Matrix [row = Detection 1-4][col = Occurrence 1-4]
+    const matrix = {
+      1: { 1: 'A', 2: 'A', 3: 'A', 4: 'B' },
+      2: { 1: 'A', 2: 'B', 3: 'C', 4: 'D' },
+      3: { 1: 'A', 2: 'C', 3: 'D', 4: 'E' },
+      4: { 1: 'B', 2: 'D', 3: 'E', 4: 'F' }
+    };
+
+    const rankMap = { 'A': 1, 'B': 2, 'C': 3, 'D': 4, 'E': 5, 'F': 6 };
+
+    function calculateTarget(sev) {
+      if (['S', 'X', 'XA', 'XB'].includes(sev)) return 'A';
+      if (['E', 'R', 'V', 'A', 'B'].includes(sev)) return 'B';
+      return 'C';
+    }
+
+    function updateRow(elem) {
+      const row = elem.closest('tr');
+      const selects = row.querySelectorAll('select');
+      
+      const sev = selects[0].value;
+      const occ = parseInt(selects[1].value, 10);
+      const det = parseInt(selects[2].value, 10);
+      const newOcc = parseInt(selects[3].value, 10);
+      const newDet = parseInt(selects[4].value, 10);
+
+      // Target
+      const target = calculateTarget(sev);
+      const targetCell = row.querySelector('.target-cell');
+      targetCell.textContent = target;
+      targetCell.style.color = target === 'A' ? '#34d399' : (target === 'B' ? '#38bdf8' : '#fbbf24');
+
+      // Baseline Assurance
+      const assur = (matrix[det] && matrix[det][occ]) ? matrix[det][occ] : 'F';
+      const assurCell = row.querySelector('.assur-cell');
+      assurCell.textContent = assur;
+
+      // Gap Status
+      const gapCell = row.querySelector('.gap-cell');
+      const isMet = rankMap[assur] <= rankMap[target];
+      if (isMet) {
+        gapCell.innerHTML = '<span class="badge-center status-pass">PASS</span>';
+      } else {
+        gapCell.innerHTML = '<span class="badge-center status-gap">GAP</span>';
+      }
+
+      // New Assurance
+      const newAssur = (matrix[newDet] && matrix[newDet][newOcc]) ? matrix[newDet][newOcc] : 'F';
+      const newAssurCell = row.querySelector('.new-assur-cell');
+      newAssurCell.textContent = newAssur;
+      newAssurCell.style.color = rankMap[newAssur] <= rankMap[target] ? '#34d399' : '#f87171';
+    }
+
+    function addNewRow() {
+      const tbody = document.getElementById('qa-tbody');
+      const rowCount = tbody.children.length + 1;
+      const tr = document.createElement('tr');
+      tr.innerHTML = `
+        <td style="text-align: center;"><input type="text" value="${rowCount * 10}" style="text-align: center;"></td>
+        <td><input type="text" placeholder="Station name"></td>
+        <td><input type="text" placeholder="Operation details"></td>
+        <td><input type="text" placeholder="Potential defect"></td>
+        <td><input type="text" placeholder="Damage analysis"></td>
+        <td>
+          <select onchange="updateRow(this)">
+            <option value="S">S</option>
+            <option value="X">X</option>
+            <option value="XA">XA</option>
+            <option value="XB">XB</option>
+            <option value="R">R</option>
+            <option value="E">E</option>
+            <option value="V">V</option>
+            <option value="A" selected>A</option>
+            <option value="B">B</option>
+            <option value="C">C</option>
+          </select>
+        </td>
+        <td class="target-cell" style="text-align: center; font-weight: 800; color: #38bdf8;">B</td>
+        <td>
+          <select onchange="updateRow(this)">
+            <option value="1">1 (Auto)</option>
+            <option value="2">2 (Device)</option>
+            <option value="3" selected>3 (WI)</option>
+            <option value="4">4 (None)</option>
+          </select>
+        </td>
+        <td>
+          <select onchange="updateRow(this)">
+            <option value="1">1 (Auto)</option>
+            <option value="2">2 (Device)</option>
+            <option value="3" selected>3 (WI)</option>
+            <option value="4">4 (None)</option>
+          </select>
+        </td>
+        <td class="assur-cell" style="text-align: center; font-weight: 800; color: #fb923c;">D</td>
+        <td class="gap-cell" style="text-align: center;"><span class="badge-center status-gap">GAP</span></td>
+        <td><input type="text" placeholder="Improvement action"></td>
+        <td><input type="text" placeholder="Owner"></td>
+        <td><input type="date"></td>
+        <td>
+          <select onchange="updateRow(this)">
+            <option value="1" selected>1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+          </select>
+        </td>
+        <td>
+          <select onchange="updateRow(this)">
+            <option value="1" selected>1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+          </select>
+        </td>
+        <td class="new-assur-cell" style="text-align: center; font-weight: 800; color: #34d399;">A</td>
+        <td style="text-align: center;"><button class="delete-btn" onclick="deleteRow(this)" title="Delete Row">&times;</button></td>
+      `;
+      tbody.appendChild(tr);
+      updateRow(tr.querySelector('select'));
+    }
+
+    function deleteRow(btn) {
+      const row = btn.closest('tr');
+      if (document.querySelectorAll('#qa-tbody tr').length > 1) {
+        row.remove();
+      } else {
+        alert("Cannot delete the only row in the worksheet.");
+      }
+    }
+
+    // Export Filled Worksheet to CSV
+    function exportToCSV() {
+      const rows = [];
+      
+      // Header Info
+      rows.push(['QA NETWORK STANDARD WORKSHEET']);
+      rows.push(['Part Name', document.getElementById('part-name').value]);
+      rows.push(['Part Number', document.getElementById('part-no').value]);
+      rows.push(['Line / Process', document.getElementById('line-name').value]);
+      rows.push(['Review Date', document.getElementById('review-date').value]);
+      rows.push(['Revision', document.getElementById('rev-no').value]);
+      rows.push(['Team Leader', document.getElementById('leader-name').value]);
+      rows.push(['Cross-Functional Team', document.getElementById('team-members').value]);
+      rows.push([]);
+
+      // Column Headers
+      rows.push([
+        'Step', 'Station', 'Operation', 'Potential Defect', 'Damage Analysis',
+        'Rank', 'Target', 'Occ Level', 'Det Level', 'Baseline Assur', 'Gap Status',
+        'Action Item', 'Owner', 'Due Date', 'New Occ', 'New Det', 'Post-Kaizen Assur'
+      ]);
+
+      // Data Rows
+      const trs = document.querySelectorAll('#qa-tbody tr');
+      trs.forEach(tr => {
+        const inputs = tr.querySelectorAll('input');
+        const selects = tr.querySelectorAll('select');
+        const target = tr.querySelector('.target-cell').textContent.trim();
+        const assur = tr.querySelector('.assur-cell').textContent.trim();
+        const gap = tr.querySelector('.gap-cell').textContent.trim();
+        const newAssur = tr.querySelector('.new-assur-cell').textContent.trim();
+
+        rows.push([
+          inputs[0].value,
+          inputs[1].value,
+          inputs[2].value,
+          inputs[3].value,
+          inputs[4].value,
+          selects[0].value,
+          target,
+          selects[1].value,
+          selects[2].value,
+          assur,
+          gap,
+          inputs[5].value,
+          inputs[6].value,
+          inputs[7].value,
+          selects[3].value,
+          selects[4].value,
+          newAssur
+        ]);
+      });
+
+      // Encode CSV content
+      const csvContent = '\uFEFF' + rows.map(e => e.map(cell => `"${String(cell || '').replace(/"/g, '""')}"`).join(',')).join('\n');
+      const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `QA_Network_Worksheet_${document.getElementById('part-no').value || 'Export'}.csv`;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+    }
+  </script>
+</body>
+</html>
+

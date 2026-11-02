@@ -6,42 +6,48 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>QA Network Standard Worksheet &bull; Practice Template</title>
   
-  <!-- High-Readability Fonts -->
+  <!-- High-Readability Fonts Aligned with PowerApp Design System -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@500;600;700;800&family=JetBrains+Mono:wght@400;600&family=Kantumruy+Pro:wght@400;600;700&family=Battambang:wght@400;700&display=swap" rel="stylesheet">
   
   <style>
     :root {
-      --font-body: 'Inter', 'Kantumruy Pro', 'Battambang', system-ui, sans-serif;
-      --font-heading: 'Plus Jakarta Sans', 'Kantumruy Pro', sans-serif;
+      --font-body: 'Plus Jakarta Sans', 'Inter', 'Kantumruy Pro', 'Battambang', system-ui, sans-serif;
+      --font-heading: 'Plus Jakarta Sans', 'Inter', 'Kantumruy Pro', sans-serif;
       --font-code: 'JetBrains Mono', monospace;
 
-      --bg-page: #0f1422;
-      --bg-surface: #182032;
-      --bg-card: #1e2840;
+      --bg-page: #06090e;
+      --bg-surface: #0f1422;
+      --bg-card: #182032;
       --border-color: rgba(255, 255, 255, 0.12);
+      --border-focus: #38bdf8;
       --text-main: #f8fafc;
       --text-muted: #94a3b8;
       
       --qa-blue: #0284c7;
       --qa-blue-light: #38bdf8;
       --qa-green: #10b981;
+      --qa-green-light: #34d399;
       --qa-amber: #f59e0b;
+      --qa-amber-light: #fbbf24;
       --qa-red: #ef4444;
+      --qa-red-light: #f87171;
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
+    
     body {
       background-color: var(--bg-page);
       color: var(--text-main);
       font-family: var(--font-body);
-      padding: 24px;
-      line-height: 1.5;
+      padding: clamp(12px, 2vw, 24px);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
     }
 
     .container {
-      max-width: 1600px;
+      max-width: 1720px;
       margin: 0 auto;
     }
 
@@ -52,45 +58,71 @@
       background: var(--bg-surface);
       border: 1px solid var(--border-color);
       border-radius: 12px;
-      padding: 16px 24px;
-      margin-bottom: 20px;
+      padding: clamp(12px, 1.5vw, 18px) clamp(16px, 2vw, 24px);
+      margin-bottom: 16px;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .header-title-group {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .header-logo-badge {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 42px;
+      height: 42px;
+      background: linear-gradient(135deg, #0284c7, #742774);
+      border-radius: 10px;
+      box-shadow: 0 4px 14px rgba(2, 132, 199, 0.4);
+      flex-shrink: 0;
     }
 
     .header-title h1 {
       font-family: var(--font-heading);
-      font-size: 1.5rem;
+      font-size: clamp(1.1rem, 1.2vw + 0.6rem, 1.6rem);
       font-weight: 800;
       color: #fff;
+      line-height: 1.3;
     }
 
     .header-title p {
-      font-size: 0.85rem;
+      font-size: clamp(0.75rem, 0.5vw + 0.4rem, 0.9rem);
       color: var(--qa-blue-light);
+      line-height: 1.5;
     }
 
     .header-actions {
       display: flex;
-      gap: 12px;
+      gap: 8px;
+      flex-wrap: wrap;
     }
 
     .btn {
       background: rgba(255, 255, 255, 0.08);
       border: 1px solid var(--border-color);
       color: #fff;
-      padding: 8px 16px;
+      padding: 7px 14px;
       border-radius: 6px;
       font-weight: 600;
-      font-size: 0.9rem;
+      font-size: clamp(0.75rem, 0.4vw + 0.45rem, 0.85rem);
       cursor: pointer;
       display: inline-flex;
       align-items: center;
       gap: 6px;
       text-decoration: none;
-      transition: background 0.2s ease;
+      transition: all 0.2s ease;
+      user-select: none;
     }
 
     .btn:hover {
       background: rgba(255, 255, 255, 0.16);
+      border-color: rgba(255, 255, 255, 0.3);
+      color: #fff;
     }
 
     .btn-primary {
@@ -102,35 +134,53 @@
       background: #0369a1;
     }
 
+    .btn-success {
+      background: rgba(16, 185, 129, 0.2);
+      border-color: rgba(52, 211, 153, 0.4);
+      color: #34d399;
+    }
+
+    .btn-success:hover {
+      background: rgba(16, 185, 129, 0.35);
+      color: #fff;
+    }
+
     .admin-grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
-      gap: 12px;
+      gap: 10px;
       background: var(--bg-surface);
       border: 1px solid var(--border-color);
-      border-radius: 8px;
-      padding: 16px;
-      margin-bottom: 20px;
+      border-radius: 10px;
+      padding: 14px 18px;
+      margin-bottom: 16px;
     }
 
     .admin-field label {
       display: block;
-      font-size: 0.75rem;
+      font-size: 0.72rem;
       color: var(--text-muted);
       text-transform: uppercase;
       font-weight: 700;
       margin-bottom: 4px;
+      letter-spacing: 0.3px;
     }
 
     .admin-field input {
       width: 100%;
-      background: rgba(0, 0, 0, 0.3);
+      background: rgba(0, 0, 0, 0.35);
       border: 1px solid var(--border-color);
-      border-radius: 4px;
-      padding: 8px 12px;
+      border-radius: 5px;
+      padding: 7px 10px;
       color: #fff;
-      font-size: 0.9rem;
+      font-size: 0.85rem;
+      font-family: var(--font-body);
       outline: none;
+      transition: border-color 0.2s;
+    }
+
+    .admin-field input:focus {
+      border-color: var(--border-focus);
     }
 
     .table-container {
@@ -139,70 +189,76 @@
       border: 1px solid var(--border-color);
       border-radius: 12px;
       margin-bottom: 20px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
     }
 
     table {
       width: 100%;
       border-collapse: collapse;
       text-align: left;
-      font-size: 0.88rem;
+      font-size: 0.82rem;
+      min-width: 1400px;
     }
 
     th, td {
       border: 1px solid var(--border-color);
-      padding: 10px 12px;
+      padding: 8px 10px;
       vertical-align: middle;
     }
 
     th {
-      background: #111726;
+      background: #101626;
       font-weight: 700;
       color: #fff;
       text-align: center;
+      font-size: 0.78rem;
     }
 
     .th-group {
-      background: #1e293b;
-      font-size: 0.78rem;
+      background: #172136;
+      font-size: 0.74rem;
       text-transform: uppercase;
       letter-spacing: 0.5px;
     }
 
     td input, td select {
       width: 100%;
-      background: rgba(0, 0, 0, 0.25);
-      border: 1px solid rgba(255, 255, 255, 0.1);
+      background: rgba(0, 0, 0, 0.3);
+      border: 1px solid rgba(255, 255, 255, 0.12);
       border-radius: 4px;
-      padding: 6px 8px;
+      padding: 5px 7px;
       color: #fff;
-      font-size: 0.85rem;
+      font-size: 0.8rem;
+      font-family: var(--font-body);
       outline: none;
+      transition: border-color 0.2s;
     }
 
     td input:focus, td select:focus {
-      border-color: var(--qa-blue-light);
+      border-color: var(--border-focus);
     }
 
     .badge-center {
-      display: flex;
+      display: inline-flex;
       align-items: center;
       justify-content: center;
       font-weight: 800;
-      font-size: 1rem;
+      font-size: 0.85rem;
       border-radius: 4px;
-      padding: 4px 8px;
+      padding: 3px 8px;
+      min-width: 60px;
     }
 
     .status-pass {
-      background: rgba(16, 185, 129, 0.2);
+      background: rgba(16, 185, 129, 0.22);
       color: #34d399;
-      border: 1px solid rgba(52, 211, 153, 0.3);
+      border: 1px solid rgba(52, 211, 153, 0.4);
     }
 
     .status-gap {
-      background: rgba(239, 68, 68, 0.2);
+      background: rgba(239, 68, 68, 0.22);
       color: #f87171;
-      border: 1px solid rgba(248, 113, 113, 0.3);
+      border: 1px solid rgba(248, 113, 113, 0.4);
     }
 
     .delete-btn {
@@ -210,16 +266,49 @@
       border: none;
       color: #ef4444;
       cursor: pointer;
-      font-size: 1.1rem;
+      font-size: 1.15rem;
+      padding: 2px 6px;
+      border-radius: 4px;
+      transition: background 0.2s;
     }
 
+    .delete-btn:hover {
+      background: rgba(239, 68, 68, 0.2);
+    }
+
+    /* Print Formatting (A4 Landscape Clean) */
     @media print {
-      body { background: #fff; color: #000; padding: 0; }
+      body {
+        background: #fff;
+        color: #000;
+        padding: 0;
+        font-size: 9pt;
+      }
       .header-actions, .btn, .delete-btn { display: none !important; }
-      .header-bar, .admin-grid, .table-container { background: #fff; border-color: #ccc; }
-      th { background: #eee !important; color: #000 !important; }
-      td, th { border-color: #999 !important; color: #000 !important; }
-      input, select { background: transparent !important; color: #000 !important; border: none !important; }
+      .header-bar, .admin-grid, .table-container {
+        background: #fff !important;
+        border-color: #999 !important;
+        box-shadow: none !important;
+      }
+      .header-title h1 { color: #000 !important; font-size: 14pt; }
+      .header-title p { color: #333 !important; }
+      .header-logo-badge { display: none !important; }
+      th { background: #e2e8f0 !important; color: #000 !important; }
+      td, th { border-color: #94a3b8 !important; color: #000 !important; }
+      input, select {
+        background: transparent !important;
+        color: #000 !important;
+        border: none !important;
+        padding: 0 !important;
+      }
+      .status-pass { background: #dcfce7 !important; color: #166534 !important; }
+      .status-gap { background: #fee2e2 !important; color: #991b1b !important; }
+    }
+
+    @media (max-width: 1024px) {
+      .admin-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
     }
   </style>
 </head>
@@ -228,15 +317,26 @@
   <div class="container">
     <!-- Header Bar -->
     <header class="header-bar">
-      <div class="header-title">
-        <h1>QA Network Standard Worksheet (តារាងអនុវត្ត QA Network)</h1>
-        <p>Shop-Floor Process Quality Assurance &amp; Defect Barrier Analysis &bull; Bilingual EN / KH</p>
+      <div class="header-title-group">
+        <div class="header-logo-badge" title="QA Precision Academy">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+            <path d="m9 12 2 2 4-4"/>
+          </svg>
+        </div>
+        <div class="header-title">
+          <h1>QA Network Standard Worksheet (តារាងអនុវត្ត QA Network)</h1>
+          <p>Process Quality Assurance &bull; Defect Barrier Analysis &bull; Bilingual EN / KH &bull; QA Precision Academy</p>
+        </div>
       </div>
 
       <div class="header-actions">
         <a href="index.html" class="btn">
-          <span>📽️ Presentation Deck</span>
+          <span>📽️ Presentation</span>
         </a>
+        <button class="btn btn-success" onclick="exportToCSV()" title="Export filled rows to CSV for Excel / Power Apps">
+          <span>📥 Export CSV</span>
+        </button>
         <button class="btn btn-primary" onclick="window.print()">
           <span>🖨️ Print / Save PDF</span>
         </button>
@@ -250,31 +350,31 @@
     <div class="admin-grid">
       <div class="admin-field">
         <label>Part Name / ឈ្មោះគ្រឿងបន្លាស់:</label>
-        <input type="text" value="Plastic Terminal Connector Box" placeholder="e.g. Wire Harness Connector">
+        <input type="text" id="part-name" value="Plastic Terminal Connector Box" placeholder="e.g. Wire Harness Connector">
       </div>
       <div class="admin-field">
         <label>Part Number / លេខកូដគ្រឿង:</label>
-        <input type="text" value="CN-9942-REV-B" placeholder="e.g. Part No.">
+        <input type="text" id="part-no" value="CN-9942-REV-B" placeholder="e.g. Part No.">
       </div>
       <div class="admin-field">
         <label>Line / Process / ខ្សែសង្វាក់:</label>
-        <input type="text" value="Molding &amp; Assembly Line #02" placeholder="e.g. Line 1">
+        <input type="text" id="line-name" value="Molding &amp; Assembly Line #02" placeholder="e.g. Line 1">
       </div>
       <div class="admin-field">
         <label>Review Date / កាលបរិច្ឆេទ:</label>
-        <input type="date" value="2026-11-02">
+        <input type="date" id="review-date" value="2026-11-02">
       </div>
       <div class="admin-field">
         <label>Revision / កំណែកែប្រែ:</label>
-        <input type="text" value="Rev. 03 (Post-Kaizen)">
+        <input type="text" id="rev-no" value="Rev. 03 (Post-Kaizen)">
       </div>
       <div class="admin-field">
         <label>Team Leader / ប្រធានក្រុម:</label>
-        <input type="text" value="Lead Quality Engineer">
+        <input type="text" id="leader-name" value="Lead Quality Engineer">
       </div>
       <div class="admin-field" style="grid-column: span 2;">
         <label>Cross-Functional Team / សមាជិកក្រុមចម្រុះមុខងារ (PE, QA, PROD, MAINT):</label>
-        <input type="text" value="Production Supervisor, Maintenance Tech, Process Engineer, QA Inspector">
+        <input type="text" id="team-members" value="Production Supervisor, Maintenance Tech, Process Engineer, QA Inspector">
       </div>
     </div>
 
@@ -287,7 +387,7 @@
             <th colspan="2">2. Defect &amp; Damage Analysis</th>
             <th colspan="2">3. Severity &amp; Target</th>
             <th colspan="3">4. Current Baseline (Step 2)</th>
-            <th rowspan="2" style="width: 120px;">Gap Status<br>(គម្លាត)</th>
+            <th rowspan="2" style="width: 100px;">Gap Status<br>(គម្លាត)</th>
             <th colspan="3">5. Improvement Plan (Step 4)</th>
             <th colspan="3">6. Post-Kaizen (Step 5)</th>
             <th rowspan="2" style="width: 40px;"></th>
@@ -372,7 +472,7 @@
               </select>
             </td>
             <td class="new-assur-cell" style="text-align: center; font-weight: 800; color: #34d399;">A</td>
-            <td style="text-align: center;"><button class="delete-btn" onclick="deleteRow(this)">&times;</button></td>
+            <td style="text-align: center;"><button class="delete-btn" onclick="deleteRow(this)" title="Delete Row">&times;</button></td>
           </tr>
 
           <!-- Row 2: Sample Pin Insertion -->
@@ -381,7 +481,7 @@
             <td><input type="text" value="Pin Insertion"></td>
             <td><input type="text" value="Insert electrical terminals"></td>
             <td><input type="text" value="Missing pin / bent contact"></td>
-            <td><input type="text" value="Vehicle electrical harness open"></td>
+            <td><input type="text" value="Vehicle electrical harness open circuit"></td>
             <td>
               <select onchange="updateRow(this)">
                 <option value="S">S</option>
@@ -435,7 +535,7 @@
               </select>
             </td>
             <td class="new-assur-cell" style="text-align: center; font-weight: 800; color: #34d399;">A</td>
-            <td style="text-align: center;"><button class="delete-btn" onclick="deleteRow(this)">&times;</button></td>
+            <td style="text-align: center;"><button class="delete-btn" onclick="deleteRow(this)" title="Delete Row">&times;</button></td>
           </tr>
         </tbody>
       </table>
@@ -444,6 +544,7 @@
   </div>
 
   <script>
+    // 4x4 Total Assurance Matrix [row = Detection 1-4][col = Occurrence 1-4]
     const matrix = {
       1: { 1: 'A', 2: 'A', 3: 'A', 4: 'B' },
       2: { 1: 'A', 2: 'B', 3: 'C', 4: 'D' },
@@ -559,7 +660,7 @@
           </select>
         </td>
         <td class="new-assur-cell" style="text-align: center; font-weight: 800; color: #34d399;">A</td>
-        <td style="text-align: center;"><button class="delete-btn" onclick="deleteRow(this)">&times;</button></td>
+        <td style="text-align: center;"><button class="delete-btn" onclick="deleteRow(this)" title="Delete Row">&times;</button></td>
       `;
       tbody.appendChild(tr);
       updateRow(tr.querySelector('select'));
@@ -573,7 +674,72 @@
         alert("Cannot delete the only row in the worksheet.");
       }
     }
+
+    // Export Filled Worksheet to CSV
+    function exportToCSV() {
+      const rows = [];
+      
+      // Header Info
+      rows.push(['QA NETWORK STANDARD WORKSHEET']);
+      rows.push(['Part Name', document.getElementById('part-name').value]);
+      rows.push(['Part Number', document.getElementById('part-no').value]);
+      rows.push(['Line / Process', document.getElementById('line-name').value]);
+      rows.push(['Review Date', document.getElementById('review-date').value]);
+      rows.push(['Revision', document.getElementById('rev-no').value]);
+      rows.push(['Team Leader', document.getElementById('leader-name').value]);
+      rows.push(['Cross-Functional Team', document.getElementById('team-members').value]);
+      rows.push([]);
+
+      // Column Headers
+      rows.push([
+        'Step', 'Station', 'Operation', 'Potential Defect', 'Damage Analysis',
+        'Rank', 'Target', 'Occ Level', 'Det Level', 'Baseline Assur', 'Gap Status',
+        'Action Item', 'Owner', 'Due Date', 'New Occ', 'New Det', 'Post-Kaizen Assur'
+      ]);
+
+      // Data Rows
+      const trs = document.querySelectorAll('#qa-tbody tr');
+      trs.forEach(tr => {
+        const inputs = tr.querySelectorAll('input');
+        const selects = tr.querySelectorAll('select');
+        const target = tr.querySelector('.target-cell').textContent.trim();
+        const assur = tr.querySelector('.assur-cell').textContent.trim();
+        const gap = tr.querySelector('.gap-cell').textContent.trim();
+        const newAssur = tr.querySelector('.new-assur-cell').textContent.trim();
+
+        rows.push([
+          inputs[0].value,
+          inputs[1].value,
+          inputs[2].value,
+          inputs[3].value,
+          inputs[4].value,
+          selects[0].value,
+          target,
+          selects[1].value,
+          selects[2].value,
+          assur,
+          gap,
+          inputs[5].value,
+          inputs[6].value,
+          inputs[7].value,
+          selects[3].value,
+          selects[4].value,
+          newAssur
+        ]);
+      });
+
+      // Encode CSV content
+      const csvContent = '\uFEFF' + rows.map(e => e.map(cell => `"${String(cell || '').replace(/"/g, '""')}"`).join(',')).join('\n');
+      const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `QA_Network_Worksheet_${document.getElementById('part-no').value || 'Export'}.csv`;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+    }
   </script>
 </body>
 </html>
-
