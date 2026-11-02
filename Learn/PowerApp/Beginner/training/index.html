@@ -1,0 +1,2251 @@
+<!DOCTYPE html>
+<html lang="en" translate="no" class="notranslate">
+<head>
+  <meta name="google" content="notranslate">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>QA Network — Process-Oriented Quality Assurance Training</title>
+  
+  <!-- High-Readability English & Khmer Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=Moul&family=Kantumruy+Pro:ital,wght@0,400..700;1,400..700&family=Battambang:wght@300;400;700;900&family=Koh+Santepheap:wght@300;400;700&family=Koulen&family=Siemreap&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- Ambient Dynamic Aurora Glow Background -->
+  <div class="aurora-bg">
+    <div class="aurora-orb orb-1"></div>
+    <div class="aurora-orb orb-2"></div>
+    <div class="aurora-orb orb-3"></div>
+  </div>
+
+  <div class="presentation-container">
+
+    <!-- Top Master Header Bar -->
+    <header class="top-bar">
+      <div class="brand-wrapper">
+        <div class="brand-logo-badge" title="QA Precision Academy">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+            <path d="m9 12 2 2 4-4"/>
+          </svg>
+        </div>
+        <div class="brand-title-group">
+          <h2>QA PRECISION ACADEMY</h2>
+          <span>Process-Oriented Quality Assurance System &bull; 1-Day Master Course</span>
+        </div>
+      </div>
+
+      <div class="top-meta-group">
+        <span class="badge-pill active-pill" id="module-pill">ORIENTATION</span>
+        <span class="badge-pill" id="segment-pill">09:00 - 16:00</span>
+        <button class="hud-tool-btn" id="btn-lang-top" onclick="toggleLanguage()" title="Toggle English / Khmer (L)">
+          🌐 <span id="lang-label-top">KH</span>
+        </button>
+      </div>
+    </header>
+
+    <!-- Main 16:9 Presentation Stage -->
+    <main class="stage" id="stage">
+
+      <!-- ====================================================================
+           SLIDE 1: Cover Slide
+           ==================================================================== -->
+      <section class="slide active" id="slide-1" data-title="QA Network Master Course" data-segment="Course Introduction">
+        <div class="hero-layout">
+          <div class="hero-pill-group">
+            <span class="hero-pill">MANUFACTURING QUALITY ENGINEERING</span>
+            <span class="hero-pill teal-pill">FULL 1-DAY EDITION</span>
+            <span class="hero-pill purple-pill">ZERO DEFECT METHODOLOGY</span>
+          </div>
+          
+          <h1 class="hero-title">
+            QA Network <span class="gradient-text">Master Training</span>
+          </h1>
+
+          <p class="hero-subtitle">
+            A systematic, process-linked methodology to identify potential and actual defects, eliminate root causes before problems occur, and build world-class quality assurance into every production operation.
+          </p>
+
+          <div style="display: flex; gap: 16px; margin-top: 10px;">
+            <div class="badge-pill" style="padding: 10px 20px; font-size: 0.95rem;">
+              <span>🛡️ Build Quality at the Process</span>
+            </div>
+            <div class="badge-pill" style="padding: 10px 20px; font-size: 0.95rem;">
+              <span>⚙️ 1-30-300-3000 Prevention Rule</span>
+            </div>
+            <div class="badge-pill" style="padding: 10px 20px; font-size: 0.95rem;">
+              <span>📊 Objective 5 Gen Observation</span>
+            </div>
+          </div>
+
+          <div style="margin-top: 36px; font-size: 0.85rem; color: var(--text-dim);">
+            Sample Training Academy &bull; Practical Shop-Floor Engineering Edition &bull; Bilingual EN / KH
+          </div>
+        </div>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 2: Course Introduction & Training Purpose
+           ==================================================================== -->
+      <section class="slide" id="slide-2" data-title="Course Introduction &amp; Purpose" data-segment="09:00 - 09:30">
+        <div class="slide-header">
+          <span class="section-tag">COURSE INTRODUCTION</span>
+          <h2 class="slide-title">Training Purpose &amp; Learning Outcomes</h2>
+          <p class="slide-lead">Expanded one-day training material &bull; 09:00–16:00 &bull; Process-Oriented Quality Assurance</p>
+        </div>
+
+        <div class="grid-2">
+          <div class="concept-card">
+            <div class="card-icon-header">
+              <span class="card-icon-circle">🎯</span>
+              <h3>Primary Training Purpose</h3>
+            </div>
+            <p>
+              Use a process-oriented <strong>QA Network</strong> to identify potential and actual defects, understand where they arise and escape, evaluate operational impact and safeguards, and plan verified quality and cost improvements across all manufacturing steps.
+            </p>
+            <div class="callout-box" style="margin-top: 16px;">
+              <strong>Core Philosophy:</strong> Quality cannot be inspected into a product at the final gate; it must be designed and built into every single operation.
+            </div>
+          </div>
+
+          <div class="concept-card">
+            <div class="card-icon-header">
+              <span class="card-icon-circle green-icon">✓</span>
+              <h3>By the End of the Course, Participants Can:</h3>
+            </div>
+            <ul>
+              <li><strong>Distinguish QC from QA:</strong> Differentiate reactive product inspection from proactive process assurance.</li>
+              <li><strong>Apply Cost of Quality (COQ):</strong> Measure and describe preventable losses (Prevention, Appraisal, Internal &amp; External failures).</li>
+              <li><strong>Construct a QA Network Sheet:</strong> Map process sequences, potential defect pathways, and defense barriers.</li>
+              <li><strong>Gather Objective Facts:</strong> Conduct shop-floor investigations using <em>Go &amp; See (Genchi Genbutsu)</em> and the 5 Gen framework.</li>
+              <li><strong>Evaluate Quality Safeguards:</strong> Rigorously score occurrence prevention, flow-out detection, and total assurance levels.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 3: Course Schedule & Facilitation Method
+           ==================================================================== -->
+      <section class="slide" id="slide-3" data-title="Agenda &amp; Facilitation Method" data-segment="09:00 - 09:30">
+        <div class="slide-header">
+          <span class="section-tag">COURSE STRUCTURE</span>
+          <h2 class="slide-title">Full 1-Day Training Agenda &amp; Workshop Method</h2>
+          <p class="slide-lead">Hands-on, shop-floor-grounded curriculum alternating short lectures with practical team exercises.</p>
+        </div>
+
+        <div class="grid-2">
+          <div class="data-table-wrapper">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th style="width: 130px;">Time</th>
+                  <th>Training Activity &amp; Milestone</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="color: var(--qa-primary-light); font-weight: 700;">09:00–09:30</td>
+                  <td>Quality concepts, course objectives &amp; opening discussion</td>
+                </tr>
+                <tr>
+                  <td style="color: var(--qa-primary-light); font-weight: 700;">09:30–10:30</td>
+                  <td>QC vs QA, loss reduction &amp; Cost of Quality (COQ)</td>
+                </tr>
+                <tr style="background: rgba(255,255,255,0.02);">
+                  <td style="color: var(--text-dim);">10:30–10:45</td>
+                  <td style="color: var(--text-dim);"><em>Morning Coffee Break (15 mins)</em></td>
+                </tr>
+                <tr>
+                  <td style="color: var(--qa-primary-light); font-weight: 700;">10:45–12:00</td>
+                  <td>QA Network fundamentals, scope definition &amp; PDCA cycle</td>
+                </tr>
+                <tr style="background: rgba(255,255,255,0.02);">
+                  <td style="color: var(--text-dim);">12:00–13:00</td>
+                  <td style="color: var(--text-dim);"><em>Lunch Break (60 mins)</em></td>
+                </tr>
+                <tr>
+                  <td style="color: var(--qa-primary-light); font-weight: 700;">13:00–14:00</td>
+                  <td>Go &amp; See, 5 Gen observation &amp; process/defect analysis</td>
+                </tr>
+                <tr>
+                  <td style="color: var(--qa-primary-light); font-weight: 700;">14:00–14:30</td>
+                  <td>QA Network Sheet scoring, severity &amp; assurance matrix</td>
+                </tr>
+                <tr style="background: rgba(255,255,255,0.02);">
+                  <td style="color: var(--text-dim);">14:30–14:45</td>
+                  <td style="color: var(--text-dim);"><em>Afternoon Break (15 mins)</em></td>
+                </tr>
+                <tr>
+                  <td style="color: var(--qa-primary-light); font-weight: 700;">14:45–15:30</td>
+                  <td>Group case study: building the QA Network &amp; improvement plan</td>
+                </tr>
+                <tr>
+                  <td style="color: var(--qa-primary-light); font-weight: 700;">15:30–16:00</td>
+                  <td>Presentations, answer guide, follow-up &amp; final assessment</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="concept-card">
+            <div class="card-icon-header">
+              <span class="card-icon-circle purple-icon">👥</span>
+              <h3>Facilitation &amp; Workshop Rules</h3>
+            </div>
+            <p>
+              This course rejects passive theory. We alternate short conceptual briefs with guided, interactive team problem-solving.
+            </p>
+            <ul>
+              <li><strong>Observe Real Lines:</strong> Ask participants to describe what is <em>actually observed</em> in their own lines, not what outdated procedures claim should happen.</li>
+              <li><strong>Group Size:</strong> Collaborative workshops in small groups of 3 to 5 engineers and supervisors.</li>
+              <li><strong>Ground Truth:</strong> Provide authentic production data, live case examples, and blank QA Network worksheets for immediate practical application.</li>
+            </ul>
+            <div class="callout-box green-box" style="margin-top: 14px;">
+              <strong>Key Rule:</strong> No assumptions without physical evidence! Every defect rating must be supported by measurable facts.
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 4: Module 1 — What Does Quality Mean?
+           ==================================================================== -->
+      <section class="slide" id="slide-4" data-title="Module 1: What Does Quality Mean?" data-segment="09:30 - 10:30">
+        <div class="slide-header">
+          <span class="section-tag">MODULE 1 — QUALITY CONCEPTS</span>
+          <h2 class="slide-title">What Does "Quality" Really Mean?</h2>
+          <p class="slide-lead">Quality means meeting agreed product and process requirements, not merely passing the final inspection.</p>
+        </div>
+
+        <div class="grid-2">
+          <div class="concept-card">
+            <div class="card-icon-header">
+              <span class="card-icon-circle">📐</span>
+              <h3>Observable &amp; Measurable Requirements</h3>
+            </div>
+            <p>Define product requirements in clear, verifiable terms rather than vague descriptions:</p>
+            <ul>
+              <li><strong>Dimensions:</strong> Geometric tolerances, lengths, diameters, runout.</li>
+              <li><strong>Function:</strong> Torque resistance, electrical conductivity, leak tightness.</li>
+              <li><strong>Visual Criteria:</strong> Surface finish, absence of burrs, flash, or color variation.</li>
+              <li><strong>Safety &amp; Traceability:</strong> Zero sharp edges, barcode readability, lot integrity.</li>
+            </ul>
+            <div class="callout-box amber-box" style="margin-top: 16px;">
+              <strong>Critical Distinction:</strong> Differentiate <em>Conformity</em> (part meets specs right now) from <em>Process Effectiveness</em> (the process continues to meet specs predictably over time).
+            </div>
+          </div>
+
+          <div class="concept-card">
+            <div class="card-icon-header">
+              <span class="card-icon-circle red-icon">⚠️</span>
+              <h3>The Changing-Risk Manufacturing Example</h3>
+            </div>
+            <p>
+              <strong>The Case:</strong> A CNC machined pin measures perfectly within drawing tolerance during final inspection.
+            </p>
+            <p>
+              However, after an operator changeover, cutting tool wear causes the offset to drift toward the upper control limit. 
+            </p>
+            <div class="callout-box red-box" style="margin-top: 14px;">
+              <strong>The Quality Reality:</strong> The product is conforming right now, while tomorrow's risk is continuously increasing! Passing the final inspection today does not prove the process is under control tomorrow.
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 5: Module 1 — Quality Assurance (QA) vs Quality Control (QC)
+           ==================================================================== -->
+      <section class="slide" id="slide-5" data-title="QA vs QC: What's the Real Difference?" data-segment="09:30 - 10:30">
+        <div class="slide-header">
+          <span class="section-tag">MODULE 1 — QUALITY CONCEPTS</span>
+          <h2 class="slide-title">QA vs QC: What's the Real Difference?</h2>
+          <p class="slide-lead">Both are essential for manufacturing excellence, but their targets and mechanisms are fundamentally distinct.</p>
+        </div>
+
+        <div class="grid-2">
+          <div class="concept-card" style="border-top: 4px solid var(--color-success);">
+            <div class="card-icon-header">
+              <span class="card-icon-circle green-icon">🛡️</span>
+              <h3>Quality Assurance (QA) &bull; Prevent Problems</h3>
+            </div>
+            <p><strong>Orientation:</strong> Process-Oriented</p>
+            <p><strong>Primary Mission:</strong> Prevents defects <em>before</em> they can happen in the line.</p>
+            <p><strong>Core Focus:</strong> Planning, process capability, design standards, poke-yoke error-proofing, and robust operating procedures.</p>
+            <div class="callout-box green-box" style="margin-top: 16px;">
+              <strong>Industrial Example:</strong> Concrete mix design approval, poke-yoke guide pin installation, robot weld parameter validation.
+            </div>
+          </div>
+
+          <div class="concept-card" style="border-top: 4px solid var(--qa-primary);">
+            <div class="card-icon-header">
+              <span class="card-icon-circle">🔍</span>
+              <h3>Quality Control (QC) &bull; Find Problems</h3>
+            </div>
+            <p><strong>Orientation:</strong> Product-Oriented</p>
+            <p><strong>Primary Mission:</strong> Detects defects <em>after</em> work has been completed.</p>
+            <p><strong>Core Focus:</strong> Physical inspection, dimension measurement, laboratory testing, sorting, and rework screening.</p>
+            <div class="callout-box" style="margin-top: 16px;">
+              <strong>Industrial Example:</strong> Concrete slump test, coordinate measuring machine (CMM) check, rebar inspection, final continuity test.
+            </div>
+          </div>
+        </div>
+
+        <div class="callout-box" style="margin-top: 20px; text-align: center; border-left: none; border: 1px solid var(--border-strong); background: rgba(2, 132, 199, 0.1);">
+          <strong style="color: var(--qa-primary-light); font-size: 1.05rem;">The Golden Rule:</strong> QC finds the fire after it starts; QA builds fireproof walls so the fire never ignites!
+        </div>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 6: Module 1 — Three Lines of Defect Defense
+           ==================================================================== -->
+      <section class="slide" id="slide-6" data-title="Three Lines of Defect Defense" data-segment="09:30 - 10:30">
+        <div class="slide-header">
+          <span class="section-tag">MODULE 1 — DEFECT ESCAPE</span>
+          <h2 class="slide-title">The Three Lines of Defect Defense</h2>
+          <p class="slide-lead">Describe a defect's journey from creation at the machine to potential customer escape.</p>
+        </div>
+
+        <div class="grid-3">
+          <div class="concept-card" style="border-top: 4px solid var(--color-success);">
+            <div class="card-icon-header">
+              <span class="card-icon-circle green-icon">1</span>
+              <h3>First Line: Prevention</h3>
+            </div>
+            <p><strong>Stop Generation at Source:</strong></p>
+            <p>Prevent defect creation using correct qualified materials, rigid equipment maintenance, validated parameter windows, and foolproof poka-yoke mechanisms.</p>
+            <div class="callout-box green-box">
+              Goal: Zero defect generation.
+            </div>
+          </div>
+
+          <div class="concept-card" style="border-top: 4px solid var(--color-warning);">
+            <div class="card-icon-header">
+              <span class="card-icon-circle amber-icon">2</span>
+              <h3>Second Line: Detection</h3>
+            </div>
+            <p><strong>Catch In-Process Early:</strong></p>
+            <p>Detect abnormal output immediately at or adjacent to the station with inline sensors, first-piece inspection, or automatic interlocks.</p>
+            <div class="callout-box amber-box">
+              Goal: Immediate containment.
+            </div>
+          </div>
+
+          <div class="concept-card" style="border-top: 4px solid var(--color-danger);">
+            <div class="card-icon-header">
+              <span class="card-icon-circle red-icon">3</span>
+              <h3>Third Line: Containment</h3>
+            </div>
+            <p><strong>Stop Customer Escape:</strong></p>
+            <p>Physical barrier stopping defective lots from leaving the plant via quarantine segregation, final release audits, and end-to-end traceability.</p>
+            <div class="callout-box red-box">
+              Goal: Zero customer escape.
+            </div>
+          </div>
+        </div>
+
+        <div class="callout-box" style="margin-top: 20px;">
+          <strong>Manufacturing Packaging Example:</strong> A wrong label can be generated at printing (Line 1 weakness), detected by a barcode scanner at station 2 (Line 2 defense), and re-checked at packing (Line 3). <em>If operators routinely bypass the barcode scanner, the second line collapses completely!</em>
+        </div>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 7: Module 1 — Process Inputs & The 6M Lens
+           ==================================================================== -->
+      <section class="slide" id="slide-7" data-title="Process Inputs &amp; The 6M Lens" data-segment="09:30 - 10:30">
+        <div class="slide-header">
+          <span class="section-tag">MODULE 1 — ROOT CAUSE LENS</span>
+          <h2 class="slide-title">Process Inputs &amp; The 6M System Lens</h2>
+          <p class="slide-lead">Look beyond simplistic operator error to analyze the full production system architecture.</p>
+        </div>
+
+        <div class="grid-6">
+          <div class="concept-card">
+            <div class="card-icon-header">
+              <span class="card-icon-circle">1</span>
+              <h3>Man (People)</h3>
+            </div>
+            <p>Skills, training records, competency certification, human factors, ergonomic fatigue, shift handover rigor, and accountability.</p>
+          </div>
+
+          <div class="concept-card">
+            <div class="card-icon-header">
+              <span class="card-icon-circle">2</span>
+              <h3>Machine</h3>
+            </div>
+            <p>Tooling wear, machine repeatability, sensor health, safety interlocks, PM preventive maintenance schedules, and breakdown alerts.</p>
+          </div>
+
+          <div class="concept-card">
+            <div class="card-icon-header">
+              <span class="card-icon-circle">3</span>
+              <h3>Material</h3>
+            </div>
+            <p>Supplier lot conformance, raw material spec drift, component identification, FIFO discipline, storage temperature/humidity, and lot segregation.</p>
+          </div>
+
+          <div class="concept-card">
+            <div class="card-icon-header">
+              <span class="card-icon-circle">4</span>
+              <h3>Method</h3>
+            </div>
+            <p>Clear standard operating procedures (SOP), work instructions (WI), sequence validation, clamping standards, and takt time adherence.</p>
+          </div>
+
+          <div class="concept-card">
+            <div class="card-icon-header">
+              <span class="card-icon-circle">5</span>
+              <h3>Measurement</h3>
+            </div>
+            <p>Gauge calibration status, Measurement System Analysis (Gage R&amp;R), resolution, gauge positioning accuracy, and inspection frequency.</p>
+          </div>
+
+          <div class="concept-card">
+            <div class="card-icon-header">
+              <span class="card-icon-circle">6</span>
+              <h3>Mother Nature</h3>
+            </div>
+            <p>Environmental cleanliness, dust, ambient temperature fluctuation, humidity condensation, lux lighting levels, and electrostatic discharge (ESD).</p>
+          </div>
+        </div>
+
+        <div class="callout-box" style="margin-top: 14px;">
+          <strong>Industrial Case:</strong> An assembly defect suddenly spikes after night shift handover following a resin lot change. Both component dimensional tolerances (Material) and ambiguous setup notes (Method/Man) must be investigated together.
+        </div>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 8: Module 1 — Quality Losses in Production
+           ==================================================================== -->
+      <section class="slide" id="slide-8" data-title="Quality Losses in Production" data-segment="09:30 - 10:30">
+        <div class="slide-header">
+          <span class="section-tag">MODULE 1 — ECONOMIC IMPACT</span>
+          <h2 class="slide-title">Visible vs Hidden Quality Losses</h2>
+          <p class="slide-lead">Quantify true operational waste by identifying both obvious scrap and hidden indirect costs.</p>
+        </div>
+
+        <div class="grid-2">
+          <div class="concept-card">
+            <div class="card-icon-header">
+              <span class="card-icon-circle red-icon">📉</span>
+              <h3>Visible Quality Losses</h3>
+            </div>
+            <p>Direct costs immediately tracked in standard factory accounting:</p>
+            <ul>
+              <li><strong>Direct Material Scrap:</strong> Discarded raw materials and components.</li>
+              <li><strong>Direct Rework Labor:</strong> Man-hours spent repairing defective assemblies.</li>
+              <li><strong>100% Sorting Campaigns:</strong> Emergency screening labor on trapped inventory.</li>
+              <li><strong>Unplanned Line Stoppages:</strong> Downtime on bottleneck machines.</li>
+              <li><strong>Premium Freight:</strong> Air expediting to avoid OEM customer plant shutdown.</li>
+            </ul>
+          </div>
+
+          <div class="concept-card">
+            <div class="card-icon-header">
+              <span class="card-icon-circle amber-icon">🔍</span>
+              <h3>Less-Visible (Hidden) Losses</h3>
+            </div>
+            <p>Indirect drain on engineering capability and factory velocity:</p>
+            <ul>
+              <li><strong>Supervision &amp; Engineering Firefighting:</strong> Diverting engineers from kaizen.</li>
+              <li><strong>Lost Production Capacity:</strong> Takt time loss on starved downstream stations.</li>
+              <li><strong>Repeated Inspections &amp; Buffer Buildup:</strong> Excess work-in-progress (WIP).</li>
+              <li><strong>Erosion of Customer Trust:</strong> Downgraded vendor ratings and lost quotes.</li>
+              <li><strong>Warranty Administration:</strong> Field claims, legal reviews, and recall exposure.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="callout-box amber-box" style="margin-top: 18px;">
+          <strong>Financial Calculation Discipline:</strong> When calculating savings from quality improvements, distinguish <em>avoided actual cash expenditure</em> (e.g., documented reduction in overtime pay or scrap materials) from recovered theoretical capacity.
+        </div>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 9: Module 2 — Quality Cost (COQ) Fundamentals
+           ==================================================================== -->
+      <section class="slide" id="slide-9" data-title="Module 2: Cost of Quality (COQ)" data-segment="09:30 - 10:30">
+        <div class="slide-header">
+          <span class="section-tag purple-tag">MODULE 2 — QUALITY COST</span>
+          <h2 class="slide-title">Cost of Quality (COQ) &amp; The Quality Iceberg</h2>
+          <p class="slide-lead">COQ provides a common language for comparing investment in assurance with devastating failure losses.</p>
+        </div>
+
+        <div class="grid-2">
+          <div class="concept-card">
+            <div class="card-icon-header">
+              <span class="card-icon-circle purple-icon">🧊</span>
+              <h3>The Cost of Poor Quality Iceberg</h3>
+            </div>
+            <p><strong>Above the Waterline (Visible ~15%):</strong></p>
+            <p>Scrap, rework hours, standard warranty claims, in-line reject disposal.</p>
+            <div style="height: 2px; background: rgba(56, 189, 248, 0.4); margin: 12px 0;"></div>
+            <p><strong>Below the Waterline (Hidden ~85%):</strong></p>
+            <p>Customer dissatisfaction, engineering firefighting, increased lead times, reduced line velocity, excess buffer inventory, supplier destabilization, and brand destruction.</p>
+          </div>
+
+          <div class="concept-card">
+            <div class="card-icon-header">
+              <span class="card-icon-circle green-icon">⚖️</span>
+              <h3>The Total Cost of Quality Framework</h3>
+            </div>
+            <p>Total COQ splits into two fundamental categories:</p>
+            <div class="callout-box green-box" style="margin-bottom: 12px;">
+              <strong>1. Cost of Good Quality (CoGQ):</strong><br>
+              Investment made to do things right the first time.<br>
+              &bull; <strong>Prevention Costs</strong> + <strong>Appraisal Costs</strong>
+            </div>
+            <div class="callout-box red-box">
+              <strong>2. Cost of Poor Quality (CoPQ):</strong><br>
+              Losses incurred because products failed requirements.<br>
+              &bull; <strong>Internal Failure Costs</strong> + <strong>External Failure Costs</strong>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 10: Module 2 — The Four COQ Cost Categories
+           ==================================================================== -->
+      <section class="slide" id="slide-10" data-title="The Four COQ Categories" data-segment="09:30 - 10:30">
+        <div class="slide-header">
+          <span class="section-tag purple-tag">MODULE 2 — QUALITY COST</span>
+          <h2 class="slide-title">The Four Cost of Quality Categories</h2>
+          <p class="slide-lead">Clear definitions and manufacturing shop-floor assignments for every cost element.</p>
+        </div>
+
+        <div class="grid-4">
+          <div class="concept-card" style="border-top: 4px solid var(--color-success);">
+            <div class="card-icon-header">
+              <span class="card-icon-circle green-icon">1</span>
+              <h3>Prevention</h3>
+            </div>
+            <p><strong>Cost to prevent errors:</strong></p>
+            <ul>
+              <li>Operator training &amp; certification</li>
+              <li>Poka-yoke tooling design</li>
+              <li>Design &amp; Process FMEA studies</li>
+              <li>Process capability validation</li>
+              <li>Preventive maintenance of jigs</li>
+            </ul>
+          </div>
+
+          <div class="concept-card" style="border-top: 4px solid var(--qa-primary);">
+            <div class="card-icon-header">
+              <span class="card-icon-circle">2</span>
+              <h3>Appraisal</h3>
+            </div>
+            <p><strong>Cost to evaluate quality:</strong></p>
+            <ul>
+              <li>Receiving raw material audit</li>
+              <li>In-process coordinate inspection</li>
+              <li>First-piece sample verification</li>
+              <li>Laboratory material analysis</li>
+              <li>Measurement gauge calibration</li>
+            </ul>
+          </div>
+
+          <div class="concept-card" style="border-top: 4px solid var(--color-warning);">
+            <div class="card-icon-header">
+              <span class="card-icon-circle amber-icon">3</span>
+              <h3>Internal Failure</h3>
+            </div>
+            <p><strong>Defects caught before delivery:</strong></p>
+            <ul>
+              <li>Factory scrap &amp; material dump</li>
+              <li>Component rework &amp; repair</li>
+              <li>Re-testing failed lots</li>
+              <li>Sorting trapped inventory</li>
+              <li>Downtime due to defective feed</li>
+            </ul>
+          </div>
+
+          <div class="concept-card" style="border-top: 4px solid var(--color-danger);">
+            <div class="card-icon-header">
+              <span class="card-icon-circle red-icon">4</span>
+              <h3>External Failure</h3>
+            </div>
+            <p><strong>Defects escaping to customer:</strong></p>
+            <ul>
+              <li>Customer reject returns</li>
+              <li>Field warranty claims</li>
+              <li>OEM plant sorting fees</li>
+              <li>Product recall response</li>
+              <li>Customer line shutdown claims</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="callout-box" style="margin-top: 16px;">
+          <strong>Concrete Example:</strong> Servicing a poka-yoke limit switch is <em>Prevention</em>; final inspector wages are <em>Appraisal</em>; scrapped stamped brackets are <em>Internal Failure</em>; warranty repairs for loose screws in dealership cars are <em>External Failure</em>.
+        </div>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 11: Module 2 — Worked COQ Calculation
+           ==================================================================== -->
+      <section class="slide" id="slide-11" data-title="Worked COQ Calculation" data-segment="09:30 - 10:30">
+        <div class="slide-header">
+          <span class="section-tag purple-tag">MODULE 2 — FINANCIAL BENCHMARKS</span>
+          <h2 class="slide-title">Worked COQ Calculation &amp; Benchmark Metrics</h2>
+          <p class="slide-lead">Use consistent accounting periods and avoid double counting when tracking monthly quality performance.</p>
+        </div>
+
+        <div class="grid-2">
+          <div class="concept-card">
+            <div class="card-icon-header">
+              <span class="card-icon-circle purple-icon">🧮</span>
+              <h3>Mathematical Model &amp; Formulas</h3>
+            </div>
+            <div class="callout-box" style="font-family: var(--font-code); font-size: 1rem; line-height: 1.8; margin-bottom: 14px;">
+              COQ = Prevention + Appraisal + Internal Failure + External Failure<br><br>
+              Total Failure Cost = Internal Failure + External Failure<br><br>
+              Failure Cost Ratio = (Failure Cost / Total COQ) × 100%
+            </div>
+            <p>
+              To measure the financial benefit of a QA Network countermeasure, compare baseline expenditure to post-improvement values at comparable production volumes.
+            </p>
+          </div>
+
+          <div class="concept-card">
+            <div class="card-icon-header">
+              <span class="card-icon-circle green-icon">📊</span>
+              <h3>Monthly Production Line Benchmark Case</h3>
+            </div>
+            <table class="data-table">
+              <tbody>
+                <tr>
+                  <td><strong>Prevention Cost (P):</strong></td>
+                  <td style="text-align: right; color: var(--color-success-light); font-weight: 700;">THB 12,000</td>
+                </tr>
+                <tr>
+                  <td><strong>Appraisal Cost (A):</strong></td>
+                  <td style="text-align: right; color: var(--qa-primary-light); font-weight: 700;">THB 18,000</td>
+                </tr>
+                <tr>
+                  <td><strong>Internal Failure Cost (IF):</strong></td>
+                  <td style="text-align: right; color: var(--color-warning-light); font-weight: 700;">THB 13,400</td>
+                </tr>
+                <tr>
+                  <td><strong>External Failure Cost (EF):</strong></td>
+                  <td style="text-align: right; color: var(--color-danger-light); font-weight: 700;">THB 8,600</td>
+                </tr>
+                <tr style="border-top: 2px solid var(--border-strong); background: rgba(255,255,255,0.04);">
+                  <td><strong>Total Cost of Quality (COQ):</strong></td>
+                  <td style="text-align: right; font-weight: 800; color: #fff;">THB 52,000</td>
+                </tr>
+                <tr>
+                  <td><strong>Total Failure Loss (IF + EF):</strong></td>
+                  <td style="text-align: right; font-weight: 800; color: var(--color-danger-light);">THB 22,000 (42.3%)</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 12: Module 2 — Cost Curves: Prevention vs Failure Cost
+           ==================================================================== -->
+      <section class="slide" id="slide-12" data-title="Cost Dynamics: Prevention vs Failure" data-segment="09:30 - 10:30">
+        <div class="slide-header">
+          <span class="section-tag purple-tag">MODULE 2 — ECONOMIC DYNAMICS</span>
+          <h2 class="slide-title">Cost Curves: How Prevention Eliminates Failure Loss</h2>
+          <p class="slide-lead">Every dollar invested in robust prevention yields exponential reductions in appraisal and failure costs.</p>
+        </div>
+
+        <div class="grid-2">
+          <div class="concept-card">
+            <div class="card-icon-header">
+              <span class="card-icon-circle green-icon">📈</span>
+              <h3>The Economics of Early Prevention</h3>
+            </div>
+            <p>
+              As engineering effort and investment in <strong>Prevention</strong> (error-proofing, poka-yoke, training) increase, the occurrence of defects plummets.
+            </p>
+            <ul>
+              <li><strong>Internal Failures:</strong> Rapidly drop as scrap and rework disappear.</li>
+              <li><strong>External Failures:</strong> Drop toward absolute zero as defect generation is halted at the station.</li>
+              <li><strong>Net Financial Result:</strong> Total operating cost declines sharply, far out-weighing the modest cost of prevention fixtures!</li>
+            </ul>
+          </div>
+
+          <div class="concept-card">
+            <div class="card-icon-header">
+              <span class="card-icon-circle">📉</span>
+              <h3>The Trap of Relying Solely on Appraisal</h3>
+            </div>
+            <p>
+              Attempting to eliminate customer defects by adding more inspectors (Appraisal) results in skyrocketing labor costs without fixing root causes.
+            </p>
+            <ul>
+              <li>Inspection is never 100% effective (human visual fatigue misses 15–20% of defects).</li>
+              <li>Defective parts were still produced, wasting machine time and raw materials.</li>
+              <li>Appraisal costs rise steeply while failure risk remains high.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="callout-box green-box" style="margin-top: 16px;">
+          <strong>Strategic Takeaway:</strong> Move your budget out of appraisal and sorting into automatic station-level prevention!
+        </div>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 13: Module 2 — Pareto Prioritization: Frequency vs Cost
+           ==================================================================== -->
+      <section class="slide" id="slide-13" data-title="Pareto: Frequency vs Cost" data-segment="09:30 - 10:30">
+        <div class="slide-header">
+          <span class="section-tag purple-tag">MODULE 2 — DATA-DRIVEN PRIORITIZATION</span>
+          <h2 class="slide-title">Pareto Prioritization: Frequency vs Financial Impact</h2>
+          <p class="slide-lead">A frequency Pareto often disagrees with a financial loss Pareto. Always evaluate both!</p>
+        </div>
+
+        <div class="grid-2">
+          <div class="concept-card">
+            <div class="card-icon-header">
+              <span class="card-icon-circle">🔢</span>
+              <h3>Standard Pareto (By Defect Frequency)</h3>
+            </div>
+            <p>Monthly defect log by unit count:</p>
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Defect Mode</th>
+                  <th>Count</th>
+                  <th>Share</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Minor Surface Burrs</td>
+                  <td style="color: var(--qa-primary-light); font-weight: 700;">60</td>
+                  <td>60.0%</td>
+                </tr>
+                <tr>
+                  <td>Cosmetic Dents</td>
+                  <td style="color: var(--qa-primary-light); font-weight: 700;">25</td>
+                  <td>25.0%</td>
+                </tr>
+                <tr>
+                  <td>Missing Retaining Clip</td>
+                  <td style="color: var(--qa-primary-light); font-weight: 700;">10</td>
+                  <td>10.0%</td>
+                </tr>
+                <tr>
+                  <td>Major Hydraulic Oil Leak</td>
+                  <td style="color: var(--color-danger-light); font-weight: 700;">5</td>
+                  <td>5.0%</td>
+                </tr>
+              </tbody>
+            </table>
+            <div class="callout-box" style="margin-top: 10px;">
+              <strong>Frequency Trap:</strong> Burrs appear to be the top problem (60%), tempting the team to spend all resources deburring!
+            </div>
+          </div>
+
+          <div class="concept-card">
+            <div class="card-icon-header">
+              <span class="card-icon-circle red-icon">💰</span>
+              <h3>Weighted Pareto (By Financial Loss &amp; Risk)</h3>
+            </div>
+            <p>Monthly defect log evaluated by actual financial loss:</p>
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Defect Mode</th>
+                  <th>Cost Loss</th>
+                  <th>Share</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Major Hydraulic Oil Leak</td>
+                  <td style="color: var(--color-danger-light); font-weight: 800;">$4,500</td>
+                  <td>89.1%</td>
+                </tr>
+                <tr>
+                  <td>Missing Retaining Clip</td>
+                  <td style="color: var(--color-warning-light); font-weight: 700;">$300</td>
+                  <td>5.9%</td>
+                </tr>
+                <tr>
+                  <td>Minor Surface Burrs</td>
+                  <td style="color: var(--text-secondary); font-weight: 700;">$150</td>
+                  <td>3.0%</td>
+                </tr>
+                <tr>
+                  <td>Cosmetic Dents</td>
+                  <td style="color: var(--text-secondary); font-weight: 700;">$100</td>
+                  <td>2.0%</td>
+                </tr>
+              </tbody>
+            </table>
+            <div class="callout-box red-box" style="margin-top: 10px;">
+              <strong>The Reality:</strong> Just 5 major leaks account for <strong>89.1%</strong> of total losses! A weighted cost/severity Pareto prevents wasted engineering effort.
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 14: Module 2 — Quality-Driven Cost Reduction
+           ==================================================================== -->
+      <section class="slide" id="slide-14" data-title="Quality-Driven Cost Reduction" data-segment="09:30 - 10:30">
+        <div class="slide-header">
+          <span class="section-tag purple-tag">MODULE 2 — ROI &amp; PAYBACK</span>
+          <h2 class="slide-title">Quality-Driven Cost Reduction &amp; Payback Period</h2>
+          <p class="slide-lead">Remove failure mechanisms permanently without removing necessary quality assurance.</p>
+        </div>
+
+        <div class="grid-2">
+          <div class="concept-card">
+            <div class="card-icon-header">
+              <span class="card-icon-circle green-icon">⚡</span>
+              <h3>Core Principles of Quality Cost Reduction</h3>
+            </div>
+            <ul>
+              <li><strong>Shorten Detection Feedback:</strong> Reduce time between defect creation and detection from days/hours to seconds.</li>
+              <li><strong>Eliminate Variation:</strong> Eliminate setup variation, tooling wear drift, mixed lots, and manual selection mistakes.</li>
+              <li><strong>Objective Payback Assessment:</strong> Evaluate capital expenditure against verified, repeatable monthly savings (including ongoing maintenance and training costs).</li>
+            </ul>
+          </div>
+
+          <div class="concept-card">
+            <div class="card-icon-header">
+              <span class="card-icon-circle purple-icon">🧮</span>
+              <h3>Real-World Fixture Payback Example</h3>
+            </div>
+            <p><strong>The Proposal:</strong> Install an automated error-proofing guide fixture on an assembly station.</p>
+            <table class="data-table" style="margin: 10px 0;">
+              <tbody>
+                <tr>
+                  <td>Capital Investment in Keyed Fixture:</td>
+                  <td style="text-align: right; font-weight: 700;">THB 40,000</td>
+                </tr>
+                <tr>
+                  <td>Verified Scrap Reduction Savings:</td>
+                  <td style="text-align: right; color: var(--color-success-light); font-weight: 700;">+ THB 10,000 / month</td>
+                </tr>
+                <tr>
+                  <td>Operating &amp; Maintenance Cost:</td>
+                  <td style="text-align: right; color: var(--color-danger-light); font-weight: 700;">- THB 1,000 / month</td>
+                </tr>
+                <tr style="border-top: 2px solid var(--border-strong); background: rgba(255,255,255,0.04);">
+                  <td><strong>Net Monthly Savings:</strong></td>
+                  <td style="text-align: right; font-weight: 800; color: var(--color-success-light);">THB 9,000 / month</td>
+                </tr>
+              </tbody>
+            </table>
+            <div class="callout-box green-box">
+              <strong>Payback Period:</strong> 40,000 / 9,000 &approx; <strong>4.4 Months!</strong><br>
+              After 4.5 months, the fixture generates pure recurring net profit.
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 15: Module 3 — QA Network Fundamentals
+           ==================================================================== -->
+      <section class="slide" id="slide-15" data-title="Module 3: QA Network Fundamentals" data-segment="10:45 - 12:00">
+        <div class="slide-header">
+          <span class="section-tag green-tag">MODULE 3 — QA NETWORK FUNDAMENTALS</span>
+          <h2 class="slide-title">What Is a QA Network?</h2>
+          <p class="slide-lead">A process-linked map of potential defects, operational impacts, and defense assurance mechanisms.</p>
+        </div>
+
+        <div class="grid-2">
+          <div class="concept-card">
+            <div class="card-icon-header">
+              <span class="card-icon-circle green-icon">🌐</span>
+              <h3>Core Architecture of the Network</h3>
+            </div>
+            <p>The QA Network differs fundamentally from static tables:</p>
+            <ul>
+              <li><strong>Process-Connected Nodes:</strong> Each node represents an actual physical production step connected in true manufacturing sequence.</li>
+              <li><strong>Defect Pathways:</strong> Shows exactly how an error is created, transferred downstream, detected, or allowed to escape.</li>
+              <li><strong>Multi-Barrier Mapping:</strong> At each step, documents current occurrence prevention, detection barriers, reaction rules, and assigned owners.</li>
+            </ul>
+          </div>
+
+          <div class="concept-card">
+            <div class="card-icon-header">
+              <span class="card-icon-circle amber-icon">🔄</span>
+              <h3>Manufacturing Flow Example</h3>
+            </div>
+            <p>Consider a precision machined mechanical bracket:</p>
+            <div class="pipeline-container" style="flex-direction: column; align-items: stretch; gap: 8px;">
+              <div style="display: flex; justify-content: space-between; font-size: 0.85rem; padding: 6px 10px; background: rgba(255,255,255,0.05); border-radius: 4px;">
+                <span>10. Receiving Inspection</span> <span>&rarr;</span> <span>20. CNC Machining</span> <span>&rarr;</span> <span>30. Deburring</span>
+              </div>
+              <div style="display: flex; justify-content: space-between; font-size: 0.85rem; padding: 6px 10px; background: rgba(255,255,255,0.05); border-radius: 4px;">
+                <span>40. Part Washing</span> <span>&rarr;</span> <span>50. Dimensional Check</span> <span>&rarr;</span> <span>60. Final Packing</span>
+              </div>
+            </div>
+            <div class="callout-box red-box" style="margin-top: 12px;">
+              <strong>The Pathway Danger:</strong> A burr generated at step 20 (Machining) can easily pass undetected through washing into step 60 and directly into the customer's assembly line! The QA Network reveals this exposure gap instantly.
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 16: Module 3 — Three Core Implementation Requirements
+           ==================================================================== -->
+      <section class="slide" id="slide-16" data-title="Three Core Implementation Requirements" data-segment="10:45 - 12:00">
+        <div class="slide-header">
+          <span class="section-tag green-tag">MODULE 3 — PREREQUISITES</span>
+          <h2 class="slide-title">Three Core Implementation Requirements</h2>
+          <p class="slide-lead">Mandatory specifications required before initiating any QA Network deployment.</p>
+        </div>
+
+        <div class="grid-3">
+          <div class="concept-card" style="border-top: 4px solid var(--qa-primary);">
+            <div class="card-icon-header">
+              <span class="card-icon-circle">1</span>
+              <h3>Implement Before Problems Occur</h3>
+            </div>
+            <p>
+              QA Network is not a post-mortem autopsy report! It must be executed proactively during pilot launch, line changeover, or engineering revisions to anticipate defects and seal escape routes before parts are shipped.
+            </p>
+          </div>
+
+          <div class="concept-card" style="border-top: 4px solid var(--color-success);">
+            <div class="card-icon-header">
+              <span class="card-icon-circle green-icon">2</span>
+              <h3>Establish a Cross-Functional Team</h3>
+            </div>
+            <p>
+              Quality cannot work in isolation. The QA Network team must include representatives from <strong>Production Operators</strong>, <strong>Process Engineering</strong>, <strong>Quality Assurance</strong>, and <strong>Maintenance</strong>.
+            </p>
+          </div>
+
+          <div class="concept-card" style="border-top: 4px solid var(--color-warning);">
+            <div class="card-icon-header">
+              <span class="card-icon-circle amber-icon">3</span>
+              <h3>Shop-Floor Ground Truth (Go &amp; See)</h3>
+            </div>
+            <p>
+              Never complete a QA Network inside an office! Analysis must be based on actual, observable shop-floor conditions — <em>Genchi Genbutsu (Go &amp; See)</em> — observing real cycles, real wear, and real operator handovers.
+            </p>
+          </div>
+        </div>
+
+        <div class="callout-box green-box" style="margin-top: 20px;">
+          <strong>Summary:</strong> Proactive Timing + Multi-Disciplinary Team + Physical Shop-Floor Reality = Bulletproof Quality Network!
+        </div>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 17: Module 3 — The Cost Escalation Pyramid
+           ==================================================================== -->
+      <section class="slide" id="slide-17" data-title="The 1-30-300-3000 Cost Rule" data-segment="10:45 - 12:00">
+        <div class="slide-header">
+          <span class="section-tag green-tag">MODULE 3 — ESCALATION RULE</span>
+          <h2 class="slide-title">The 1-30-300-3000 Escalation Rule</h2>
+          <p class="slide-lead">Eliminate weaknesses at the machine before defects cascade down the supply chain.</p>
+        </div>
+
+        <div class="grid-2">
+          <div class="concept-card">
+            <div class="card-icon-header">
+              <span class="card-icon-circle red-icon">🔺</span>
+              <h3>The Defect Cost Escalation Hierarchy</h3>
+            </div>
+            <div style="display: flex; flex-direction: column; gap: 8px; margin: 12px 0;">
+              <div style="background: rgba(239, 68, 68, 0.3); border: 1px solid var(--color-danger); padding: 12px; border-radius: 6px; display: flex; justify-content: space-between; align-items: center;">
+                <span><strong>Level A: Vehicle End User</strong></span>
+                <span class="badge-pill" style="background: #ef4444; color: #fff;">Ratio: 1</span>
+              </div>
+              <div style="background: rgba(245, 158, 11, 0.25); border: 1px solid var(--color-warning); padding: 12px; border-radius: 6px; display: flex; justify-content: space-between; align-items: center;">
+                <span><strong>Level B: Vehicle Assembly Plant (OEM)</strong></span>
+                <span class="badge-pill" style="background: #f59e0b; color: #fff;">Ratio: 30</span>
+              </div>
+              <div style="background: rgba(2, 132, 199, 0.2); border: 1px solid var(--qa-primary); padding: 12px; border-radius: 6px; display: flex; justify-content: space-between; align-items: center;">
+                <span><strong>Level C: Supplier Final Inspection / Pack</strong></span>
+                <span class="badge-pill" style="background: #0284c7; color: #fff;">Ratio: 300</span>
+              </div>
+              <div style="background: rgba(16, 185, 129, 0.2); border: 1px solid var(--color-success); padding: 12px; border-radius: 6px; display: flex; justify-content: space-between; align-items: center;">
+                <span><strong>Level D: Supplier In-Process Production</strong></span>
+                <span class="badge-pill" style="background: #10b981; color: #fff;">Ratio: 3000</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="concept-card">
+            <div class="card-icon-header">
+              <span class="card-icon-circle green-icon">🛡️</span>
+              <h3>Core Operating Strategy</h3>
+            </div>
+            <p>
+              If a defect escapes to <strong>Level A</strong>, the company faces field recalls, legal liability, and brand destruction.
+            </p>
+            <p>
+              If it reaches <strong>Level B</strong>, the OEM halts assembly lines, charging massive shutdown penalties and issuing formal supplier warning notices.
+            </p>
+            <div class="callout-box green-box" style="margin-top: 14px;">
+              <strong>Action Strategy:</strong><br>
+              1. <em>Do not wait</em> for problems to occur at Level A or B.<br>
+              2. Systematically eliminate weaknesses at Level C and Level D step by step!
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 18: Module 3 — Objectives & Practical Inputs
+           ==================================================================== -->
+      <section class="slide" id="slide-18" data-title="Objectives &amp; Practical Inputs" data-segment="10:45 - 12:00">
+        <div class="slide-header">
+          <span class="section-tag green-tag">MODULE 3 — PURPOSE &amp; EVIDENCE</span>
+          <h2 class="slide-title">5 Core Objectives &amp; Practical Inputs</h2>
+          <p class="slide-lead">Ground the quality network on credible engineering blueprints and physical evidence.</p>
+        </div>
+
+        <div class="grid-2">
+          <div class="concept-card">
+            <div class="card-icon-header">
+              <span class="card-icon-circle green-icon">🎯</span>
+              <h3>5 Core Objectives (Purpose)</h3>
+            </div>
+            <ul>
+              <li><strong>1. Identify &amp; Assess:</strong> Discover all potential manufacturing defects and their consequences.</li>
+              <li><strong>2. Eliminate / Reduce:</strong> Lower the physical likelihood of occurrence at the source.</li>
+              <li><strong>3. Document Know-How:</strong> Preserve shop-floor operational wisdom for future lines.</li>
+              <li><strong>4. Continuous Improvement:</strong> Drive systematic PDCA problem prevention.</li>
+              <li><strong>5. Protect Downstream:</strong> Guarantee zero defective parts reach customers or next stations.</li>
+            </ul>
+          </div>
+
+          <div class="concept-card">
+            <div class="card-icon-header">
+              <span class="card-icon-circle">📋</span>
+              <h3>Mandatory Practical Inputs</h3>
+            </div>
+            <ul>
+              <li><strong>Process Flow &amp; Control Plan:</strong> Current approved revisions.</li>
+              <li><strong>Technical Blueprints:</strong> GD&amp;T drawings and specification sheets.</li>
+              <li><strong>Approved Work Instructions (WI):</strong> Point-of-use operator standards.</li>
+              <li><strong>Defect Logs:</strong> Scrap records, customer feedback, and abnormal shift logs.</li>
+              <li><strong>Agreed Severity Criteria:</strong> Calibrated definitions to prevent scoring inconsistencies.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="callout-box amber-box" style="margin-top: 16px;">
+          <strong>Calibration Example:</strong> Two engineers score "improper bolt torque" very differently because one considers catastrophic safety impact while the other evaluates only simple rework cost. Agreeing on unified scoring rules before the review eliminates subjectivity!
+        </div>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 19: Module 3 — Scope Selection Guidelines
+           ==================================================================== -->
+      <section class="slide" id="slide-19" data-title="Selecting Network Scope" data-segment="10:45 - 12:00">
+        <div class="slide-header">
+          <span class="section-tag green-tag">MODULE 3 — BOUNDARY SETTING</span>
+          <h2 class="slide-title">Selecting Network Scope &amp; Target Boundaries</h2>
+          <p class="slide-lead">Keep the analysis boundary meaningful enough for concrete, measurable engineering action.</p>
+        </div>
+
+        <div class="grid-2">
+          <div class="concept-card">
+            <div class="card-icon-header">
+              <span class="card-icon-circle">🔍</span>
+              <h3>When to Deploy QA Network</h3>
+            </div>
+            <ul>
+              <li><strong>1. New Products &amp; Processes:</strong> Establish robust error-proofing during APQP / launch.</li>
+              <li><strong>2. Engineering Changes (4M Changes):</strong> When tooling, materials, or methods are modified.</li>
+              <li><strong>3. High-Risk / High-Loss Defect Families:</strong> Chronic scrap lines or customer complaints.</li>
+              <li><strong>4. Every Process Station:</strong> Quality assurance must be built into every operation, never limited to final packaging!</li>
+              <li><strong>5. Proactive Problem Prevention:</strong> Strengthening QA means preventing defects, not merely sorting them after they happen.</li>
+            </ul>
+          </div>
+
+          <div class="concept-card">
+            <div class="card-icon-header">
+              <span class="card-icon-circle purple-icon">🔄</span>
+              <h3>Managing Process Interfaces</h3>
+            </div>
+            <p>
+              Define exact start and end steps, rework loops, and outsourced operations. Never ignore outsourced interfaces (e.g. outsourced plating or heat treatment) where wrong material or traceability loss can occur.
+            </p>
+            <div class="callout-box" style="margin-top: 14px;">
+              <strong>Scope Example:</strong> Raw polymer receiving &rarr; drying &rarr; molding &rarr; pin insertion &rarr; electrical test &rarr; packing. Outsourced pin plating remains a critical incoming interface.
+            </div>
+            <div class="callout-box red-box" style="margin-top: 10px;">
+              <strong>Mandatory Rule:</strong> Whenever a problem occurs in production, the corrective action must also be formally incorporated into the QA Network Sheet!
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 20: Module 3 — Tool Synergy: PFMEA, Control Plan & QA Network
+           ==================================================================== -->
+      <section class="slide" id="slide-20" data-title="Synergy: PFMEA, Control Plan &amp; QA Network" data-segment="10:45 - 12:00">
+        <div class="slide-header">
+          <span class="section-tag green-tag">MODULE 3 — TOOL HARMONIZATION</span>
+          <h2 class="slide-title">Tool Synergy: Process Flow, PFMEA, Control Plan &amp; QA Network</h2>
+          <p class="slide-lead">Use existing quality risk documents consistently without duplication.</p>
+        </div>
+
+        <div class="pipeline-container">
+          <div class="pipeline-step">
+            <div class="pipeline-badge">1</div>
+            <div class="pipeline-label">Process Flow</div>
+          </div>
+          <span class="pipeline-arrow">&rarr;</span>
+          <div class="pipeline-step">
+            <div class="pipeline-badge">2</div>
+            <div class="pipeline-label">PFMEA</div>
+          </div>
+          <span class="pipeline-arrow">&rarr;</span>
+          <div class="pipeline-step">
+            <div class="pipeline-badge">3</div>
+            <div class="pipeline-label">Control Plan</div>
+          </div>
+          <span class="pipeline-arrow">&rarr;</span>
+          <div class="pipeline-step active-step">
+            <div class="pipeline-badge" style="background: var(--color-success);">4</div>
+            <div class="pipeline-label" style="color: var(--color-success-light);">QA Network</div>
+          </div>
+        </div>
+
+        <div class="grid-2">
+          <div class="concept-card">
+            <div class="card-icon-header">
+              <span class="card-icon-circle">📚</span>
+              <h3>Complementary Roles of Quality Tools</h3>
+            </div>
+            <ul>
+              <li><strong>Process Flow:</strong> Defines operational sequence and material routing.</li>
+              <li><strong>PFMEA:</strong> Systematically identifies failure modes, potential causes, and design severity.</li>
+              <li><strong>Control Plan:</strong> Documents required inspection methods, sample sizes, frequencies, and reaction plans.</li>
+              <li><strong>QA Network:</strong> Bridges documentation and reality! Maps interconnected process barriers, reveals blind spots, and validates whether controls physically function on the shop floor.</li>
+            </ul>
+          </div>
+
+          <div class="concept-card">
+            <div class="card-icon-header">
+              <span class="card-icon-circle amber-icon">⚡</span>
+              <h3>The Reality Gap Example</h3>
+            </div>
+            <div class="callout-box" style="margin-bottom: 8px;">
+              <strong>PFMEA:</strong> Notes potential defect "Missing O-ring" with high severity.
+            </div>
+            <div class="callout-box" style="margin-bottom: 8px;">
+              <strong>Control Plan:</strong> Lists "Automated Vision Camera Check" with 100% frequency.
+            </div>
+            <div class="callout-box red-box">
+              <strong>QA Network Observation:</strong> Shop-floor walk reveals the vision camera was disabled by maintenance during a restart, leaving the line completely unprotected!
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 21: Module 3 — The PDCA Cycle in QA Network
+           ==================================================================== -->
+      <section class="slide" id="slide-21" data-title="The PDCA Cycle in QA Network" data-segment="10:45 - 12:00">
+        <div class="slide-header">
+          <span class="section-tag green-tag">MODULE 3 — CONTINUOUS IMPROVEMENT</span>
+          <h2 class="slide-title">The PDCA Cycle Applied to QA Network</h2>
+          <p class="slide-lead">Plan, Do, Check, and Act to prove controls work and sustain quality gains permanently.</p>
+        </div>
+
+        <div class="grid-4">
+          <div class="concept-card" style="border-top: 4px solid var(--qa-primary);">
+            <div class="card-icon-header">
+              <span class="card-icon-circle">P</span>
+              <h3>PLAN</h3>
+            </div>
+            <p><strong>Define the Problem:</strong></p>
+            <ul>
+              <li>State defect, station, period, and financial loss.</li>
+              <li>Confirm process boundary and suspected pathways.</li>
+              <li>Set measurable target, owner, and deadline.</li>
+            </ul>
+          </div>
+
+          <div class="concept-card" style="border-top: 4px solid var(--color-warning);">
+            <div class="card-icon-header">
+              <span class="card-icon-circle amber-icon">D</span>
+              <h3>DO</h3>
+            </div>
+            <p><strong>Pilot Improvements:</strong></p>
+            <ul>
+              <li>Trial error-proofing fixture on controlled scope.</li>
+              <li>Train operators and update point-of-use WI.</li>
+              <li>Record dates, part numbers, and test results.</li>
+            </ul>
+          </div>
+
+          <div class="concept-card" style="border-top: 4px solid var(--color-success);">
+            <div class="card-icon-header">
+              <span class="card-icon-circle green-icon">C</span>
+              <h3>CHECK</h3>
+            </div>
+            <p><strong>Prove Performance:</strong></p>
+            <ul>
+              <li>Compare normalized before/after defect rates.</li>
+              <li>Verify no new unintended failure modes arose.</li>
+              <li>Audit physical safeguard, not just paperwork!</li>
+            </ul>
+          </div>
+
+          <div class="concept-card" style="border-top: 4px solid var(--color-purple);">
+            <div class="card-icon-header">
+              <span class="card-icon-circle purple-icon">A</span>
+              <h3>ACT</h3>
+            </div>
+            <p><strong>Standardize &amp; Replicate:</strong></p>
+            <ul>
+              <li>Update PFMEA and Control Plan standards.</li>
+              <li>Revise training syllabus for new hires.</li>
+              <li>Replicate proven poka-yoke across parallel lines.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="callout-box" style="margin-top: 16px;">
+          <strong>Statistical Exposure Warning:</strong> After installing a sensor, zero defects occurred over 6 weeks, but only 30 units were produced compared to 10,000 units historically. The result is unproven without statistically comparable production exposure!
+        </div>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 22: QA Network Method — 5 Steps & 11 Sub-Steps Overview
+           ==================================================================== -->
+      <section class="slide" id="slide-22" data-title="QA Network Method: 5 Steps Roadmap" data-segment="13:00 - 14:30">
+        <div class="slide-header">
+          <span class="section-tag amber-tag">METHODOLOGY ROADMAP</span>
+          <h2 class="slide-title">The 5 Core Steps &amp; 11 Sub-Steps of QA Network</h2>
+          <p class="slide-lead">A disciplined step-by-step procedure to evaluate risks, assign targets, and verify improvements.</p>
+        </div>
+
+        <div style="display: flex; flex-direction: column; gap: 12px; margin-top: 10px;">
+          <div class="concept-card" style="padding: 14px 20px;">
+            <div style="display: flex; align-items: center; justify-content: space-between;">
+              <span style="font-weight: 800; color: var(--qa-primary-light);">STEP # 1: Baseline Analysis &amp; Target Setting</span>
+              <span class="badge-pill">Sub-steps 1 to 5</span>
+            </div>
+            <p style="margin: 6px 0 0 0; font-size: 0.88rem;">1. Review QC Process Chart &bull; 2. Identify Potential Defects (Key Points) &bull; 3. Analyze Damage/Effects &bull; 4. Evaluate Severity Ranking (S to C) &bull; 5. Set Severity-Based Target (A, B, C).</p>
+          </div>
+
+          <div class="concept-card" style="padding: 14px 20px;">
+            <div style="display: flex; align-items: center; justify-content: space-between;">
+              <span style="font-weight: 800; color: var(--color-warning-light);">STEP # 2: Occurrence, Flow-Out &amp; Assurance Matrix</span>
+              <span class="badge-pill">Sub-steps 6 to 8</span>
+            </div>
+            <p style="margin: 6px 0 0 0; font-size: 0.88rem;">6. Analyze Occurrence Prevention (Level 1-4) &bull; 7. Analyze Flow-Out Prevention (Level 1-4) &bull; 8. Evaluate Total Assurance Level (A to F via 4x4 Matrix).</p>
+          </div>
+
+          <div class="concept-card" style="padding: 14px 20px;">
+            <div style="display: flex; align-items: center; justify-content: space-between;">
+              <span style="font-weight: 800; color: var(--color-danger-light);">STEP # 3: Target Gap Evaluation</span>
+              <span class="badge-pill">Sub-step 9</span>
+            </div>
+            <p style="margin: 6px 0 0 0; font-size: 0.88rem;">9. Compare Required Target with Current Total Assurance Level to identify critical protection gaps.</p>
+          </div>
+
+          <div class="concept-card" style="padding: 14px 20px;">
+            <div style="display: flex; align-items: center; justify-content: space-between;">
+              <span style="font-weight: 800; color: var(--color-success-light);">STEP # 4: Quality Improvement Plan</span>
+              <span class="badge-pill">Sub-step 10</span>
+            </div>
+            <p style="margin: 6px 0 0 0; font-size: 0.88rem;">10. Formulate countermeasure action plan (improve occurrence, detection, or both) with Gantt milestones.</p>
+          </div>
+
+          <div class="concept-card" style="padding: 14px 20px;">
+            <div style="display: flex; align-items: center; justify-content: space-between;">
+              <span style="font-weight: 800; color: var(--color-purple);">STEP # 5: Post-Improvement Re-Evaluation</span>
+              <span class="badge-pill">Sub-step 11</span>
+            </div>
+            <p style="margin: 6px 0 0 0; font-size: 0.88rem;">11. Re-evaluate occurrence, flow-out, and total assurance to confirm gap closure and target achievement.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 23: Step 1 — Review QC Flow & Identify Potential Defects
+           ==================================================================== -->
+      <section class="slide" id="slide-23" data-title="Step 1: Process Review &amp; Defects" data-segment="13:00 - 14:30">
+        <div class="slide-header">
+          <span class="section-tag amber-tag">STEP 1 &bull; DEFECT IDENTIFICATION</span>
+          <h2 class="slide-title">Step 1: Review QC Flow &amp; Identify Potential Defects</h2>
+          <p class="slide-lead">Identify potential defects based on actual shop-floor conditions and operational realities.</p>
+        </div>
+
+        <div class="grid-2">
+          <div class="concept-card">
+            <div class="card-icon-header">
+              <span class="card-icon-circle">🔍</span>
+              <h3>Two Classes of Potential Defects</h3>
+            </div>
+            <div class="callout-box" style="margin-bottom: 12px;">
+              <strong>2.1 Human-Related Defects:</strong><br>
+              Failure to follow the Work Instruction (WI), skipped operations, missing components, inverted part insertion, or assembling incorrect model variants.
+            </div>
+            <div class="callout-box red-box">
+              <strong>2.2 Process-Related Defects:</strong><br>
+              Operating parameters drifting outside specification window, worn tooling, heater burnout, abnormal hydraulic pressure, or parts exceeding shelf life.
+            </div>
+          </div>
+
+          <div class="concept-card">
+            <div class="card-icon-header">
+              <span class="card-icon-circle amber-icon">📌</span>
+              <h3>5 Basic Assumptions for Defining Key Points</h3>
+            </div>
+            <ul>
+              <li><strong>1. Any Time Risk:</strong> A defect can occur at any time, even if it has never happened before in company history!</li>
+              <li><strong>2. Disregard Existing Controls:</strong> When brainstorming potential defects, do NOT consider current safeguards.</li>
+              <li><strong>3. In-Process Focus:</strong> Consider production operations; exclude final inspection unless the inspection itself can scratch or damage the product.</li>
+              <li><strong>4. Upstream Conformance:</strong> Assume parts arriving from preceding operations meet specifications.</li>
+              <li><strong>5. Voice of Customer:</strong> Review all downstream assembly complaints and customer field returns.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 24: Step 1 — Damage Analysis & Severity Ranking Symbols
+           ==================================================================== -->
+      <section class="slide" id="slide-24" data-title="Step 1: Severity Ranking Symbols" data-segment="13:00 - 14:30">
+        <div class="slide-header">
+          <span class="section-tag amber-tag">STEP 1 &bull; DAMAGE ANALYSIS</span>
+          <h2 class="slide-title">Step 1: Damage Analysis &amp; Severity Ranking Symbols</h2>
+          <p class="slide-lead">Sequence: Next Process &rarr; Customer (Vehicle Assembly) &rarr; Vehicle End Use. (Assume NO inspection by customer!)</p>
+        </div>
+
+        <div class="data-table-wrapper">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th style="width: 80px; text-align: center;">Symbol</th>
+                <th style="width: 220px;">Classification</th>
+                <th>Engineering Definition &amp; Real-World Example</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td style="text-align: center;"><span class="severity-badge badge-S">S</span></td>
+                <td><strong>Safety / Accident Critical</strong></td>
+                <td>Defect could cause a vehicle accident, fire, fuel leakage, or loss of braking.</td>
+              </tr>
+              <tr>
+                <td style="text-align: center;"><span class="severity-badge badge-X">X</span></td>
+                <td><strong>Vehicle Stop (Non-moving)</strong></td>
+                <td>Defect in a stationary structural component causes vehicle to stop immediately (e.g., Steering knuckle fracture).</td>
+              </tr>
+              <tr>
+                <td style="text-align: center;"><span class="severity-badge badge-XA">XA</span></td>
+                <td><strong>Vehicle Stop (Moving Part)</strong></td>
+                <td>Defect on a rotating/moving component causes immediate vehicle stop (e.g., Rear differential seizure).</td>
+              </tr>
+              <tr>
+                <td style="text-align: center;"><span class="severity-badge badge-XB">XB</span></td>
+                <td><strong>Vehicle Stop (Leakage)</strong></td>
+                <td>Severe fluid leakage causes vehicle to shut down or fail completely.</td>
+              </tr>
+              <tr>
+                <td style="text-align: center;"><span class="severity-badge badge-R">R</span></td>
+                <td><strong>Regulation &amp; Statutory</strong></td>
+                <td>Defect violates legal, safety, or homologation requirements in target country.</td>
+              </tr>
+              <tr>
+                <td style="text-align: center;"><span class="severity-badge badge-E">E</span></td>
+                <td><strong>Emissions / Environmental</strong></td>
+                <td>Component defect causes the vehicle to generate excessive emissions or environmental pollution.</td>
+              </tr>
+              <tr>
+                <td style="text-align: center;"><span class="severity-badge badge-V">V</span></td>
+                <td><strong>Customer Assembly Impact</strong></td>
+                <td>Defect detected during OEM customer assembly (e.g., crossmember cannot mount to frame); line claim.</td>
+              </tr>
+              <tr>
+                <td style="text-align: center;"><span class="severity-badge badge-A">A</span></td>
+                <td><strong>Moving Part Operates</strong></td>
+                <td>Defect on moving part, but vehicle can continue operating (e.g., abnormal differential gear whine).</td>
+              </tr>
+              <tr>
+                <td style="text-align: center;"><span class="severity-badge badge-B">B</span></td>
+                <td><strong>Non-moving Part Operates</strong></td>
+                <td>Vehicle continues operating after defect occurs (e.g., minor seepage around axle oil seal).</td>
+              </tr>
+              <tr>
+                <td style="text-align: center;"><span class="severity-badge badge-C">C</span></td>
+                <td><strong>Cosmetic / Appearance</strong></td>
+                <td>Aesthetic defect; vehicle operates normally (e.g., green corrosion stains on rear chrome bumper).</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 25: Step 1 — Converting Severity Ranking to Target Level
+           ==================================================================== -->
+      <section class="slide" id="slide-25" data-title="Step 1: Setting Severity-Based Targets" data-segment="13:00 - 14:30">
+        <div class="slide-header">
+          <span class="section-tag amber-tag">STEP 1 &bull; TARGET FORMULATION</span>
+          <h2 class="slide-title">Step 1: Converting Severity Ranking to Target Levels</h2>
+          <p class="slide-lead">Establish mandatory assurance target levels based on consequence severity.</p>
+        </div>
+
+        <div class="grid-2">
+          <div class="concept-card">
+            <div class="card-icon-header">
+              <span class="card-icon-circle green-icon">🎯</span>
+              <h3>Target Conversion Table</h3>
+            </div>
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Severity Ranking (ระดับความรุนแรง)</th>
+                  <th style="text-align: center;">Required Target (เป้าหมาย)</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr style="background: rgba(239, 68, 68, 0.1);">
+                  <td><span class="severity-badge badge-S">S</span> <span class="severity-badge badge-X">X</span> <span class="severity-badge badge-XA">XA</span> <span class="severity-badge badge-XB">XB</span></td>
+                  <td style="text-align: center; font-size: 1.5rem; font-weight: 800; color: #34d399;">A</td>
+                </tr>
+                <tr style="background: rgba(245, 158, 11, 0.1);">
+                  <td><span class="severity-badge badge-E">E</span> <span class="severity-badge badge-R">R</span> <span class="severity-badge badge-V">V</span> <span class="severity-badge badge-A">A</span> <span class="severity-badge badge-B">B</span></td>
+                  <td style="text-align: center; font-size: 1.5rem; font-weight: 800; color: #38bdf8;">B</td>
+                </tr>
+                <tr style="background: rgba(255, 255, 255, 0.03);">
+                  <td><span class="severity-badge badge-C">C</span></td>
+                  <td style="text-align: center; font-size: 1.5rem; font-weight: 800; color: #fbbf24;">C</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="concept-card">
+            <div class="card-icon-header">
+              <span class="card-icon-circle purple-icon">💡</span>
+              <h3>Practical Automotive Case Example</h3>
+            </div>
+            <p><strong>Brake Caliper Flange Nut Hardness:</strong></p>
+            <div class="pipeline-container" style="font-size: 0.8rem; padding: 10px;">
+              <span>Supplier Raw Material</span> &rarr;
+              <span>Forming &amp; Heat Treat</span> &rarr;
+              <span>Hardness Off-Spec</span> &rarr;
+              <span>Brake Assembly</span> &rarr;
+              <span style="color: #f87171; font-weight: 700;">Torque Failure!</span>
+            </div>
+            <div class="callout-box red-box" style="margin-top: 10px;">
+              <strong>Severity Analysis:</strong> Hardness off-spec causes bolt loosening &rarr; Brake system failure &rarr; Severity Ranking is <strong>[S]</strong>!<br>
+              <strong>Mandatory Target:</strong> Therefore, the required Total Assurance Level is <strong>"A"</strong>.
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 26: Step 2 — Occurrence Prevention Levels (1 to 4)
+           ==================================================================== -->
+      <section class="slide" id="slide-26" data-title="Step 2: Occurrence Prevention Levels" data-segment="13:00 - 14:30">
+        <div class="slide-header">
+          <span class="section-tag amber-tag">STEP 2 &bull; OCCURRENCE CONTROLS</span>
+          <h2 class="slide-title">Step 2: Occurrence Prevention Analysis (Levels 1 to 4)</h2>
+          <p class="slide-lead">Process controls that prevent or reduce the generation of defective parts at the machine.</p>
+        </div>
+
+        <div class="grid-4">
+          <div class="concept-card" style="border-top: 4px solid var(--color-success);">
+            <div class="card-icon-header">
+              <span class="card-icon-circle green-icon">1</span>
+              <h3>Level 1</h3>
+            </div>
+            <p><strong>Automatic Device-Based:</strong></p>
+            <p>A prevention device is installed and prevents <strong>100%</strong> of human- and process-related defects automatically (e.g. keyed fixture, electrical interlock).</p>
+            <div class="callout-box green-box">Highest Reliability</div>
+          </div>
+
+          <div class="concept-card" style="border-top: 4px solid var(--qa-primary);">
+            <div class="card-icon-header">
+              <span class="card-icon-circle">2</span>
+              <h3>Level 2</h3>
+            </div>
+            <p><strong>Person-Operated Device:</strong></p>
+            <p>A prevention device is installed to prevent defects, but an operator must manually position or trigger it (e.g. manual torque click-wrench, guide template).</p>
+            <div class="callout-box">Device + Human</div>
+          </div>
+
+          <div class="concept-card" style="border-top: 4px solid var(--color-warning);">
+            <div class="card-icon-header">
+              <span class="card-icon-circle amber-icon">3</span>
+              <h3>Level 3</h3>
+            </div>
+            <p><strong>Operator Prevention with WI:</strong></p>
+            <p>No prevention device is installed. Prevention depends entirely on the operator correctly following standard Work Instructions (WI).</p>
+            <div class="callout-box amber-box">Human Reliance</div>
+          </div>
+
+          <div class="concept-card" style="border-top: 4px solid var(--color-danger);">
+            <div class="card-icon-header">
+              <span class="card-icon-circle red-icon">4</span>
+              <h3>Level 4</h3>
+            </div>
+            <p><strong>Operator Without Adequate WI:</strong></p>
+            <p>No device provided; procedure is missing, unclear, not followed, or process inherently cannot prevent defects.</p>
+            <div class="callout-box red-box">Uncontrolled Risk</div>
+          </div>
+        </div>
+
+        <div class="callout-box green-box" style="margin-top: 16px;">
+          <strong>Design Principle:</strong> Absolute priority must be given to Machine- or Equipment-based automated prevention (Level 1)!
+        </div>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 27: Step 2 — Flow-Out Prevention Levels (1 to 4)
+           ==================================================================== -->
+      <section class="slide" id="slide-27" data-title="Step 2: Flow-Out Prevention Levels" data-segment="13:00 - 14:30">
+        <div class="slide-header">
+          <span class="section-tag amber-tag">STEP 2 &bull; DETECTION BARRIERS</span>
+          <h2 class="slide-title">Step 2: Flow-Out Prevention Analysis (Levels 1 to 4)</h2>
+          <p class="slide-lead">Inspection or detection controls that stop defective products from reaching downstream processes or customers.</p>
+        </div>
+
+        <div class="grid-4">
+          <div class="concept-card" style="border-top: 4px solid var(--color-success);">
+            <div class="card-icon-header">
+              <span class="card-icon-circle green-icon">1</span>
+              <h3>Level 1</h3>
+            </div>
+            <p><strong>Automatic Device-Based:</strong></p>
+            <p>A detection device is installed and detects <strong>100%</strong> of defects automatically with auto-reject or line interlock (e.g. vision camera, automated leak tester).</p>
+            <div class="callout-box green-box">100% Auto Detection</div>
+          </div>
+
+          <div class="concept-card" style="border-top: 4px solid var(--qa-primary);">
+            <div class="card-icon-header">
+              <span class="card-icon-circle">2</span>
+              <h3>Level 2</h3>
+            </div>
+            <p><strong>Person-Operated Device:</strong></p>
+            <p>A detection device is available, but a person must operate the instrument (e.g. micrometer, dial indicator, manual pressure tester).</p>
+            <div class="callout-box">Instrument + Human</div>
+          </div>
+
+          <div class="concept-card" style="border-top: 4px solid var(--color-warning);">
+            <div class="card-icon-header">
+              <span class="card-icon-circle amber-icon">3</span>
+              <h3>Level 3</h3>
+            </div>
+            <p><strong>Operator Detection with WI:</strong></p>
+            <p>No detection device available; detection depends entirely on operator visual or tactile check following the inspection WI.</p>
+            <div class="callout-box amber-box">Human Inspection</div>
+          </div>
+
+          <div class="concept-card" style="border-top: 4px solid var(--color-danger);">
+            <div class="card-icon-header">
+              <span class="card-icon-circle red-icon">4</span>
+              <h3>Level 4</h3>
+            </div>
+            <p><strong>No Detection Available:</strong></p>
+            <p>No detection device; procedure missing or defect physically undetectable before shipping.</p>
+            <div class="callout-box red-box">Blind Escape Route</div>
+          </div>
+        </div>
+
+        <div class="callout-box" style="margin-top: 16px;">
+          <strong>Detection Priority:</strong> Machine-automated inline detection (Level 1) eliminates human inspection fatigue and prevents defect flow-out with certainty.
+        </div>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 28: Step 2 & 3 — The Total Assurance Evaluation Matrix
+           ==================================================================== -->
+      <section class="slide" id="slide-28" data-title="Step 2 &amp; 3: Total Assurance Matrix" data-segment="13:00 - 14:30">
+        <div class="slide-header">
+          <span class="section-tag amber-tag">STEP 2 &amp; 3 &bull; MATRIX EVALUATION</span>
+          <h2 class="slide-title">Total Assurance Evaluation Matrix &amp; Gap Analysis</h2>
+          <p class="slide-lead">Map Occurrence Level (Circled) against Flow-out Level (Boxed) to derive Total Assurance Level (A through F).</p>
+        </div>
+
+        <div class="grid-2">
+          <div>
+            <table class="qa-matrix-table">
+              <thead>
+                <tr>
+                  <th rowspan="2" style="width: 140px; font-size: 0.85rem;">Flow-out Prevention<br>(ระดับป้องกันการหลุด)</th>
+                  <th colspan="4" style="font-size: 0.85rem;">Occurrence Prevention (ระดับป้องกันการเกิด)</th>
+                </tr>
+                <tr>
+                  <th>① Auto</th>
+                  <th>② Manual</th>
+                  <th>③ WI</th>
+                  <th>④ None</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th>[1] Auto Device</th>
+                  <td class="matrix-cell rank-A">A</td>
+                  <td class="matrix-cell rank-A">A</td>
+                  <td class="matrix-cell rank-A">A</td>
+                  <td class="matrix-cell rank-B">B</td>
+                </tr>
+                <tr>
+                  <th>[2] Person Device</th>
+                  <td class="matrix-cell rank-A">A</td>
+                  <td class="matrix-cell rank-B">B</td>
+                  <td class="matrix-cell rank-C">C</td>
+                  <td class="matrix-cell rank-D">D</td>
+                </tr>
+                <tr>
+                  <th>[3] Operator WI</th>
+                  <td class="matrix-cell rank-A">A</td>
+                  <td class="matrix-cell rank-C">C</td>
+                  <td class="matrix-cell rank-D">D</td>
+                  <td class="matrix-cell rank-E">E</td>
+                </tr>
+                <tr>
+                  <th>[4] No Detection</th>
+                  <td class="matrix-cell rank-B">B</td>
+                  <td class="matrix-cell rank-D">D</td>
+                  <td class="matrix-cell rank-E">E</td>
+                  <td class="matrix-cell rank-F">F</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="concept-card">
+            <div class="card-icon-header">
+              <span class="card-icon-circle purple-icon">⚖️</span>
+              <h3>Step 3: Target Gap Analysis</h3>
+            </div>
+            <p><strong>Evaluation Example:</strong></p>
+            <div class="callout-box" style="margin-bottom: 8px;">
+              &bull; Occurrence Prevention = Level ② (Person-operated device)<br>
+              &bull; Flow-out Prevention = Level [2] (Person-operated detection)<br>
+              &bull; Matrix Result = <strong>Total Assurance Level "B"</strong>
+            </div>
+            <div class="callout-box red-box">
+              <strong>Gap Check:</strong><br>
+              If Target is <strong>"A"</strong>, but Assurance Level is <strong>"B"</strong> or <strong>"C"</strong>, a dangerous gap exists! An immediate improvement countermeasure is mandatory in Step 4.
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 29: Step 4 & 5 — QA Improvement Plan & Re-Evaluation
+           ==================================================================== -->
+      <section class="slide" id="slide-29" data-title="Step 4 &amp; 5: Improvement Plan &amp; Re-Evaluation" data-segment="14:45 - 15:30">
+        <div class="slide-header">
+          <span class="section-tag green-tag">STEP 4 &amp; 5 &bull; ACTION &amp; VERIFICATION</span>
+          <h2 class="slide-title">Step 4 &amp; 5: Improvement Plan &amp; Re-Evaluation</h2>
+          <p class="slide-lead">Formulate accountable countermeasures, execute upgrades, and mathematically re-verify assurance levels.</p>
+        </div>
+
+        <div class="grid-2">
+          <div class="concept-card">
+            <div class="card-icon-header">
+              <span class="card-icon-circle green-icon">🛠️</span>
+              <h3>Step 4: Three Improvement Approaches</h3>
+            </div>
+            <p>When current assurance is below target (e.g. Target A vs Current C):</p>
+            <ul>
+              <li><strong>Approach 1: Improve Occurrence Prevention:</strong> Upgrade manual assembly to automated poka-yoke (Shift column right to left: ③ &rarr; ①).</li>
+              <li><strong>Approach 2: Improve Flow-Out Prevention:</strong> Install inline vision/sensor check (Shift row down to up: [3] &rarr; [1]).</li>
+              <li><strong>Approach 3: Improve Both:</strong> Combine dual-layer defense for maximum security.</li>
+            </ul>
+          </div>
+
+          <div class="concept-card">
+            <div class="card-icon-header">
+              <span class="card-icon-circle purple-icon">🔄</span>
+              <h3>Step 5: Post-Action Re-Evaluation</h3>
+            </div>
+            <p>After implementing countermeasures, repeat the evaluation:</p>
+            <ul>
+              <li>1. Re-evaluate Occurrence Prevention score after corrective action.</li>
+              <li>2. Re-evaluate Flow-Out Prevention score after corrective action.</li>
+              <li>3. Re-evaluate overall Total Assurance Level on the 4x4 matrix.</li>
+              <li>4. Confirm achieved score equals or exceeds required Target Level!</li>
+            </ul>
+            <div class="callout-box green-box" style="margin-top: 10px;">
+              <strong>Sustain:</strong> Update work instructions, train team, and archive verified line know-how.
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 30: Module 4 — Facts & Defect Discovery (Go & See + 5 Gen)
+           ==================================================================== -->
+      <section class="slide" id="slide-30" data-title="Module 4: Go &amp; See &amp; 5 Gen Framework" data-segment="13:00 - 14:00">
+        <div class="slide-header">
+          <span class="section-tag">MODULE 4 — FACTS &amp; DEFECT DISCOVERY</span>
+          <h2 class="slide-title">Go &amp; See (Genchi Genbutsu) &amp; The 5 Gen Framework</h2>
+          <p class="slide-lead">Verify the actual place, item, observable facts, operating conditions, and engineering principles.</p>
+        </div>
+
+        <div class="grid-2">
+          <div class="concept-card">
+            <div class="card-icon-header">
+              <span class="card-icon-circle">👀</span>
+              <h3>Go &amp; See: Observe the Real Workplace</h3>
+            </div>
+            <p>Go directly to the workstation where the defect can be created or escape:</p>
+            <ul>
+              <li>Prepare one focused observation question and follow an actual part through the complete cycle.</li>
+              <li>Observe critical transition states: startup, changeover, line restart, material replenishment, and abnormal handling.</li>
+              <li>Compare actual operator practice against current posted instructions.</li>
+              <li>Speak with operators without blame; separate raw observation from speculation.</li>
+            </ul>
+          </div>
+
+          <div class="concept-card">
+            <div class="card-icon-header">
+              <span class="card-icon-circle green-icon">⛩️</span>
+              <h3>The 5 Gen Observation Framework</h3>
+            </div>
+            <ul>
+              <li><strong>1. Genba (現場):</strong> The actual shop floor where work occurs.</li>
+              <li><strong>2. Genbutsu (現物):</strong> The actual physical part, tooling, or machine.</li>
+              <li><strong>3. Genjitsu (現実):</strong> The actual facts, measurements, and operating state.</li>
+              <li><strong>4. Genri (原理):</strong> The underlying scientific or engineering principle.</li>
+              <li><strong>5. Gensoku (原則):</strong> The standard rules, parameters, and specifications.</li>
+            </ul>
+            <div class="callout-box" style="margin-top: 10px;">
+              <strong>Press Station Example:</strong> Inspect cracked part (<em>Genbutsu</em>), record stamping force (<em>Genjitsu</em>), observe die seating (<em>Genba</em>), review metal flow dynamics (<em>Genri</em>), compare to setup standard (<em>Gensoku</em>).
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 31: Module 4 — Good Evidence vs Assumptions & Defect Pathways
+           ==================================================================== -->
+      <section class="slide" id="slide-31" data-title="Good Evidence vs Assumptions" data-segment="13:00 - 14:00">
+        <div class="slide-header">
+          <span class="section-tag">MODULE 4 — OBJECTIVE TRUTH</span>
+          <h2 class="slide-title">Good Evidence vs Assumptions &amp; Defect Pathways</h2>
+          <p class="slide-lead">An assessment is only as reliable as its supporting facts. Map how defects travel between stations.</p>
+        </div>
+
+        <div class="grid-2">
+          <div class="concept-card">
+            <div class="card-icon-header">
+              <span class="card-icon-circle amber-icon">⚖️</span>
+              <h3>Testable Observations vs Opinions</h3>
+            </div>
+            <div class="callout-box red-box" style="margin-bottom: 12px;">
+              <strong>Weak Opinion (Assumption):</strong><br>
+              "The operators do not care and fail to follow the Work Instruction."
+            </div>
+            <div class="callout-box green-box">
+              <strong>Strong Fact (Testable Evidence):</strong><br>
+              "On 14 October, during 3 of 5 observed cycles, step 4 was skipped; obsolete Revision B was posted while Revision C was released in the system."
+            </div>
+            <p style="margin-top: 12px; font-size: 0.9rem;">
+              Direct physical samples, calibrated gauge logs, and traceable reject bins are indisputable compared to verbal statements.
+            </p>
+          </div>
+
+          <div class="concept-card">
+            <div class="card-icon-header">
+              <span class="card-icon-circle purple-icon">🗺️</span>
+              <h3>Mapping Defect Creation &amp; Escape</h3>
+            </div>
+            <p>Trace how defective material could travel between workstations:</p>
+            <ul>
+              <li>Mark exact creation origin, transfer mechanisms, and inspection gates.</li>
+              <li>Record barrier failure conditions: bypass switches, sample rate gaps, and false acceptance thresholds.</li>
+              <li>Account for shift changes, mixed component bins, and line clearances.</li>
+            </ul>
+            <div class="callout-box" style="margin-top: 10px;">
+              <strong>Connector Case:</strong> Missing pin is generated at insertion; electrical tester detects continuity, but cannot verify secondary latch engagement!
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 32: Module 5 — Risk Evaluation: Severity, Weakness & Priority
+           ==================================================================== -->
+      <section class="slide" id="slide-32" data-title="Module 5: Severity, Weakness &amp; Priority" data-segment="14:00 - 14:30">
+        <div class="slide-header">
+          <span class="section-tag purple-tag">MODULE 5 — RISK EVALUATION</span>
+          <h2 class="slide-title">Risk Priority: Severity (S1–S4) &times; Weakness (W1–W4)</h2>
+          <p class="slide-lead">Use severity together with control weakness to prioritize engineering resources.</p>
+        </div>
+
+        <div class="grid-3">
+          <div class="concept-card">
+            <div class="card-icon-header">
+              <span class="card-icon-circle red-icon">S</span>
+              <h3>Severity Rating (S1 to S4)</h3>
+            </div>
+            <ul>
+              <li><strong>S1 (Minor):</strong> Small localized inconvenience; no functional impact.</li>
+              <li><strong>S2 (Moderate):</strong> Significant internal rework; controlled disruption.</li>
+              <li><strong>S3 (Major):</strong> Customer line stoppage; serious functional failure or complaint.</li>
+              <li><strong>S4 (Critical):</strong> Plausible safety hazard, crash risk, or regulatory violation.</li>
+            </ul>
+          </div>
+
+          <div class="concept-card">
+            <div class="card-icon-header">
+              <span class="card-icon-circle amber-icon">W</span>
+              <h3>Control Weakness (W1 to W4)</h3>
+            </div>
+            <ul>
+              <li><strong>W1 (Robust):</strong> Verified automatic interlock or reliable near-source poka-yoke.</li>
+              <li><strong>W2 (Adequate):</strong> Defined and evidenced control with some human/sampling reliance.</li>
+              <li><strong>W3 (Weak):</strong> Inconsistent coverage, delayed feedback, poor calibration.</li>
+              <li><strong>W4 (Absent):</strong> No barrier exists, or routine bypass is practiced.</li>
+            </ul>
+          </div>
+
+          <div class="concept-card">
+            <div class="card-icon-header">
+              <span class="card-icon-circle purple-icon">P</span>
+              <h3>Priority Score (P = S &times; W)</h3>
+            </div>
+            <div class="callout-box" style="font-family: var(--font-code); font-size: 0.95rem; margin-bottom: 10px;">
+              Score: 1 to 16<br>
+              &bull; 1–3: Routine Monitoring<br>
+              &bull; 4–7: Planned Improvement<br>
+              &bull; 8–11: High Priority<br>
+              &bull; 12–16: Urgent Escalation
+            </div>
+            <div class="callout-box red-box">
+              <strong>Safety Override Rule:</strong> Any S4 safety risk or actual customer escape requires immediate escalation regardless of score!
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 33: Module 5 — Detection Containment & Preventing Recurrence
+           ==================================================================== -->
+      <section class="slide" id="slide-33" data-title="Detection Containment &amp; Recurrence" data-segment="14:00 - 14:30">
+        <div class="slide-header">
+          <span class="section-tag purple-tag">MODULE 5 — CONTAINMENT &amp; RECURRENCE</span>
+          <h2 class="slide-title">Assessing Detection Containment &amp; Preventing Recurrence</h2>
+          <p class="slide-lead">Correcting one incident today is not the same as fixing the system to prevent repetition tomorrow.</p>
+        </div>
+
+        <div class="grid-2">
+          <div class="concept-card">
+            <div class="card-icon-header">
+              <span class="card-icon-circle">⏱️</span>
+              <h3>The Hidden Risk of Sampling Gaps</h3>
+            </div>
+            <p>
+              Evaluate inspection location, method, coverage, independence, and reaction latency:
+            </p>
+            <div class="callout-box amber-box" style="margin: 12px 0;">
+              <strong>The 59-Minute Exposure Gap:</strong><br>
+              An hourly 1-piece sampling inspection leaves <strong>59 minutes of production completely exposed</strong>! If tool drift starts at minute 05, up to 55 minutes of defective parts have moved downstream before detection.
+            </div>
+            <p style="font-size: 0.9rem;">
+              Automated 100% inline presence verification eliminates this gap completely. Challenge sensors daily using known defective master samples.
+            </p>
+          </div>
+
+          <div class="concept-card">
+            <div class="card-icon-header">
+              <span class="card-icon-circle green-icon">🛡️</span>
+              <h3>Containment vs True Recurrence Prevention</h3>
+            </div>
+            <div class="callout-box" style="margin-bottom: 12px;">
+              <strong>Emergency Containment:</strong><br>
+              Sorting 4,000 finished parts removes known bad units today. This fixes the immediate batch, but fixes zero root causes.
+            </div>
+            <div class="callout-box green-box">
+              <strong>Systemic Recurrence Prevention:</strong><br>
+              A verified mechanical guide fixture and automatic interlock prevent the defect from being physically created ever again!
+            </div>
+            <p style="margin-top: 10px; font-size: 0.9rem;">
+              Always verify root causes using physical evidence, update engineering standards, revise training, and conduct audit checks.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 34: Module 6 — Building the Standard QA Network Sheet
+           ==================================================================== -->
+      <section class="slide" id="slide-34" data-title="Module 6: Building the QA Network Sheet" data-segment="14:45 - 15:30">
+        <div class="slide-header">
+          <span class="section-tag teal-tag">MODULE 6 — WORKSHEET ARCHITECTURE</span>
+          <h2 class="slide-title">Anatomy of the Standard QA Network Sheet</h2>
+          <p class="slide-lead">A useful sheet tells a clear, connected story from physical process step to verified control action.</p>
+        </div>
+
+        <div class="grid-2">
+          <div class="concept-card">
+            <div class="card-icon-header">
+              <span class="card-icon-circle">📄</span>
+              <h3>Essential Header &amp; Sequence Fields</h3>
+            </div>
+            <ul>
+              <li><strong>Administrative Header:</strong> Part Name, Part No., Production Line, Review Date, Revision No., Cross-Functional Team Members.</li>
+              <li><strong>Process Sequence:</strong> Operation No., Station Name, Physical Activity.</li>
+              <li><strong>Potential Defect Profile:</strong> Defect mode, failure mechanism, and 6M root cause classification.</li>
+              <li><strong>Downstream Damage Analysis:</strong> Consequence on Next Station, Customer Assembly, and End User.</li>
+            </ul>
+          </div>
+
+          <div class="concept-card">
+            <div class="card-icon-header">
+              <span class="card-icon-circle green-icon">📊</span>
+              <h3>Evaluation &amp; Countermeasure Columns</h3>
+            </div>
+            <ul>
+              <li><strong>Severity Ranking:</strong> S, X, XA, XB, R, E, V, A, B, or C.</li>
+              <li><strong>Required Target:</strong> Target Level A, B, or C.</li>
+              <li><strong>Current Baseline:</strong> Occurrence Level (1–4) &bull; Flow-Out Level (1–4) &bull; Total Assurance Level (A–F).</li>
+              <li><strong>Gap Analysis:</strong> Immediate visual flag if Total Assurance Level is lower than Target.</li>
+              <li><strong>Action Item:</strong> Specific countermeasure, Owner, Due Date, and Post-Improvement Re-Evaluation score.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 35: Module 6 — Industrial Cases 1 &amp; 2: Injection Molding &amp; Stamping
+           ==================================================================== -->
+      <section class="slide" id="slide-35" data-title="Cases 1 &amp; 2: Molding &amp; Stamping" data-segment="14:45 - 15:30">
+        <div class="slide-header">
+          <span class="section-tag teal-tag">MODULE 6 — SHOP-FLOOR CASES</span>
+          <h2 class="slide-title">Industrial Cases 1 &amp; 2: Injection Molding &amp; Stamping</h2>
+          <p class="slide-lead">Real-world manufacturing applications showing defect creation, transfer, and barriers.</p>
+        </div>
+
+        <div class="grid-2">
+          <div class="concept-card">
+            <div class="card-icon-header">
+              <span class="card-icon-circle">🧪</span>
+              <h3>Case 1: Plastic Connector Injection Molding</h3>
+            </div>
+            <ul>
+              <li><strong>Drying:</strong> Wet resin causes visual splay and brittle locking tabs &rarr; <em>Countermeasure:</em> Automated dew-point moisture interlock.</li>
+              <li><strong>Molding:</strong> Short shots and flash &rarr; <em>Countermeasure:</em> Cavity pressure sensor and mold temperature limits.</li>
+              <li><strong>Pin Insertion:</strong> Bent or unseated pins &rarr; <em>Countermeasure:</em> Optical pin-height sensor and 100% electrical continuity check.</li>
+              <li><strong>Packing:</strong> Label/part mix-up &rarr; <em>Countermeasure:</em> Barcode scan matching carton label to tote RFID.</li>
+            </ul>
+          </div>
+
+          <div class="concept-card">
+            <div class="card-icon-header">
+              <span class="card-icon-circle amber-icon">⚙️</span>
+              <h3>Case 2: Progressive Metal Stamping &amp; Machining</h3>
+            </div>
+            <ul>
+              <li><strong>Stamping:</strong> Punch wear generates excessive sharp burrs &rarr; <em>Countermeasure:</em> Tonnage monitor and stroke-count die maintenance schedule.</li>
+              <li><strong>Deburring:</strong> Vibratory deburring hides root cause burrs &rarr; <em>Countermeasure:</em> First-off deburring check with go/no-go ring gauge.</li>
+              <li><strong>CNC Milling:</strong> Hole diameter drift due to tool wear &rarr; <em>Countermeasure:</em> Contact tool touch-probe after every 50 cycles.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 36: Module 6 — Industrial Cases 3 &amp; 4: Welding &amp; Packaging
+           ==================================================================== -->
+      <section class="slide" id="slide-36" data-title="Cases 3 &amp; 4: Welding &amp; Packaging" data-segment="14:45 - 15:30">
+        <div class="slide-header">
+          <span class="section-tag teal-tag">MODULE 6 — SHOP-FLOOR CASES</span>
+          <h2 class="slide-title">Industrial Cases 3 &amp; 4: Welding &amp; Packaging Traceability</h2>
+          <p class="slide-lead">Addressing critical safety joints and high-frequency label mix-ups.</p>
+        </div>
+
+        <div class="grid-2">
+          <div class="concept-card">
+            <div class="card-icon-header">
+              <span class="card-icon-circle red-icon">🔥</span>
+              <h3>Case 3: Robotic Welding &amp; Bracket Assembly</h3>
+            </div>
+            <p><strong>The Hazard:</strong> Incomplete fusion and weld porosity inside a suspension bracket joint.</p>
+            <ul>
+              <li><strong>Creation:</strong> Clamp incorrectly positioned before robotic spot weld cycle.</li>
+              <li><strong>Barrier Failure:</strong> Visual inspection after welding cannot reveal internal penetration defects!</li>
+              <li><strong>QA Network Action:</strong> Install proximity interlocks ensuring parts seat flush before robot start; implement ultrasonic testing at first-off.</li>
+            </ul>
+          </div>
+
+          <div class="concept-card">
+            <div class="card-icon-header">
+              <span class="card-icon-circle purple-icon">📦</span>
+              <h3>Case 4: Packaging &amp; Lot Traceability</h3>
+            </div>
+            <p><strong>The Hazard:</strong> Incorrect part number label applied to shipping cartons.</p>
+            <ul>
+              <li><strong>Creation:</strong> Two adjacent conveyor bins hold visually identical connectors; a shared zebra printer allows selection of either label.</li>
+              <li><strong>QA Network Action:</strong> Physical partition separating part bins; barcode reader interlock requiring carton scan before label prints; strict line clearance protocol.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 37: Module 6 — Action Plan Execution & Leading KPIs
+           ==================================================================== -->
+      <section class="slide" id="slide-37" data-title="Action Plan Execution &amp; Leading KPIs" data-segment="15:30 - 16:00">
+        <div class="slide-header">
+          <span class="section-tag teal-tag">MODULE 6 — SUSTAINING EXCELLENCE</span>
+          <h2 class="slide-title">Action Plan Execution, Leading KPIs &amp; Escalation</h2>
+          <p class="slide-lead">Turn assessments into owned, testable measures with clear containment and response triggers.</p>
+        </div>
+
+        <div class="grid-2">
+          <div class="concept-card">
+            <div class="card-icon-header">
+              <span class="card-icon-circle green-icon">📋</span>
+              <h3>Building Testable Action Plans</h3>
+            </div>
+            <div class="callout-box red-box" style="margin-bottom: 10px;">
+              <strong>Vague Action (Fails Audit):</strong> "Improve operator training and tell workers to pay attention."
+            </div>
+            <div class="callout-box green-box">
+              <strong>Testable Action (World-Class):</strong> "Install keyed nest fixture, validate with 20 deliberate misloads, revise WI with color photos, and audit daily for 4 weeks."
+            </div>
+            <p style="margin-top: 10px; font-size: 0.9rem;">
+              Always designate a single responsible owner, due date, interim containment protocol, and objective completion criteria.
+            </p>
+          </div>
+
+          <div class="concept-card">
+            <div class="card-icon-header">
+              <span class="card-icon-circle amber-icon">🚨</span>
+              <h3>Leading KPIs &amp; Reaction Planning</h3>
+            </div>
+            <ul>
+              <li><strong>Leading Indicators:</strong> Daily poka-yoke challenge test pass rate, sensor bypass event logs, PM audit completion.</li>
+              <li><strong>Lagging Indicators:</strong> Scrap THB, defect PPM, customer returns.</li>
+              <li><strong>Escalation Protocol:</strong> When a sensor fails, hold product back to the <em>last verified good check</em>, not merely the single part at the machine! Quarantine suspect material immediately.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 38: Interactive QA Network Matrix Calculator & Simulator
+           ==================================================================== -->
+      <section class="slide" id="slide-38" data-title="Interactive QA Network Calculator" data-segment="Workshop Simulation">
+        <div class="slide-header">
+          <span class="section-tag amber-tag">INTERACTIVE SIMULATION</span>
+          <h2 class="slide-title">Interactive QA Network Matrix Calculator</h2>
+          <p class="slide-lead">Test real-world scenarios: Select defect severity, occurrence level, and detection level to calculate assurance and identify gaps.</p>
+        </div>
+
+        <div class="simulator-card">
+          <div class="sim-control-group">
+            <div class="sim-field">
+              <label for="sim-severity">1. Defect Severity Ranking:</label>
+              <select id="sim-severity" class="sim-select" onchange="runSimCalculation()">
+                <option value="S">S — Safety / Accident Critical (Brakes, Fuel)</option>
+                <option value="X">X — Vehicle Stop Non-moving (Knuckle fracture)</option>
+                <option value="XA">XA — Vehicle Stop Moving (Diff seizure)</option>
+                <option value="XB">XB — Vehicle Stop Leakage (Fluid dump)</option>
+                <option value="R">R — Regulation / Statutory Law</option>
+                <option value="E">E — Emissions / Environmental Pollution</option>
+                <option value="V">V — Customer Assembly Line Claim</option>
+                <option value="A">A — Moving part operates (Gear whine)</option>
+                <option value="B">B — Non-moving operates (Minor seepage)</option>
+                <option value="C">C — Cosmetic / Appearance (Bumper corrosion)</option>
+              </select>
+            </div>
+
+            <div class="sim-field">
+              <label for="sim-occurrence">2. Occurrence Prevention Level:</label>
+              <select id="sim-occurrence" class="sim-select" onchange="runSimCalculation()">
+                <option value="1">Level 1 — Auto Device (100% Poka-yoke)</option>
+                <option value="2" selected>Level 2 — Person-Operated Device</option>
+                <option value="3">Level 3 — Operator Follows WI</option>
+                <option value="4">Level 4 — Operator Without Adequate WI</option>
+              </select>
+            </div>
+
+            <div class="sim-field">
+              <label for="sim-flowout">3. Flow-Out Detection Level:</label>
+              <select id="sim-flowout" class="sim-select" onchange="runSimCalculation()">
+                <option value="1">Level 1 — 100% Automatic Sensor / Camera</option>
+                <option value="2" selected>Level 2 — Person-Operated Gauge / Meter</option>
+                <option value="3">Level 3 — Visual Check per WI</option>
+                <option value="4">Level 4 — No Detection Device Available</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="sim-result-panel">
+            <div class="result-metric">
+              <div class="metric-label">Required Target Level</div>
+              <div class="metric-val" id="res-target" style="color: #34d399;">A</div>
+            </div>
+
+            <div class="result-metric">
+              <div class="metric-label">Current Total Assurance</div>
+              <div class="metric-val" id="res-assurance" style="color: #38bdf8;">B</div>
+            </div>
+
+            <div class="result-metric">
+              <div class="metric-label">Assurance Gap Status</div>
+              <div class="metric-val" id="res-status" style="font-size: 1.15rem; color: #fbbf24;">GAP DETECTED</div>
+            </div>
+          </div>
+
+          <div id="res-recommendation" class="callout-box amber-box" style="margin-top: 16px;">
+            <strong>Engineering Recommendation:</strong> Required Target is <strong>A</strong>, but current assurance is <strong>B</strong>. Upgrade Occurrence Prevention to Level 1 (Automatic Poka-Yoke) or upgrade Flow-Out Prevention to Level 1 (Automated Vision/Sensor Check) to close the gap.
+          </div>
+        </div>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 39: Course Summary, Action Assignments & Closing Q&A
+           ==================================================================== -->
+      <section class="slide" id="slide-39" data-title="Course Summary &amp; Q&amp;A" data-segment="15:30 - 16:00">
+        <div class="hero-layout">
+          <div class="hero-pill-group">
+            <span class="hero-pill">COURSE CONCLUSION</span>
+            <span class="hero-pill teal-pill">ZERO DEFECT CERTIFICATION</span>
+            <span class="hero-pill purple-pill">CONTINUOUS KAIZEN</span>
+          </div>
+
+          <h2 class="hero-title">
+            Build Quality at the Source &bull; <span class="gradient-text">Zero Defect Escape</span>
+          </h2>
+
+          <div class="grid-3" style="width: 100%; max-width: 1100px; margin-bottom: 24px; text-align: left;">
+            <div class="concept-card">
+              <div class="card-icon-header">
+                <span class="card-icon-circle green-icon">1</span>
+                <h3>Proactive Prevention</h3>
+              </div>
+              <p>Stop defects at Level D and C. Prioritize automated machine error-proofing over operator vigilance.</p>
+            </div>
+
+            <div class="concept-card">
+              <div class="card-icon-header">
+                <span class="card-icon-circle">2</span>
+                <h3>Ground Truth Facts</h3>
+              </div>
+              <p>Practice Go &amp; See (Genchi Genbutsu) using the 5 Gen framework. Accept only testable physical evidence.</p>
+            </div>
+
+            <div class="concept-card">
+              <div class="card-icon-header">
+                <span class="card-icon-circle purple-icon">3</span>
+                <h3>Sustained PDCA</h3>
+              </div>
+              <p>Regularly update QA Network Sheets after any 4M change or abnormal incident to protect customers permanently.</p>
+            </div>
+          </div>
+
+          <div style="display: flex; gap: 16px;">
+            <button class="hud-nav-btn" onclick="jumpToSlide(37)" style="background: var(--qa-primary); color: #fff; padding: 10px 24px;">
+              <span>🧮 Launch Simulator</span>
+            </button>
+            <button class="hud-nav-btn" onclick="jumpToSlide(0)" style="padding: 10px 24px;">
+              <span>⏮️ Restart Course</span>
+            </button>
+          </div>
+
+          <div style="margin-top: 32px; font-size: 0.9rem; color: var(--text-dim);">
+            Thank you for participating! Questions, Answers &amp; Next Action Steps for Production Lines.
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- Bottom Presentation HUD Bar -->
+    <footer class="hud-bar">
+      <div class="hud-left">
+        <button class="hud-nav-btn" id="btn-prev" onclick="prevSlide()" title="Previous Slide (Left Arrow, PageUp)">
+          <span>❮</span>
+          <span>Prev</span>
+        </button>
+        <button class="hud-nav-btn" id="btn-next" onclick="nextSlide()" title="Next Slide (Right Arrow, Space, PageDown)">
+          <span>Next</span>
+          <span>❯</span>
+        </button>
+
+        <div class="hud-progress-group">
+          <span class="slide-counter" id="slide-counter">1 / 39</span>
+          <div class="progress-track" title="Course Progress">
+            <div class="progress-fill" id="progress-fill"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="hud-right">
+        <button class="hud-tool-btn" id="btn-lang" onclick="toggleLanguage()" title="Toggle English / Khmer (L)">
+          🌐 <span id="lang-label">KH</span>
+        </button>
+        <button class="hud-tool-btn" id="btn-laser" onclick="toggleLaser()" title="Presenter Laser Pointer (P)">
+          🔴 Laser
+        </button>
+        <button class="hud-tool-btn" id="btn-notes" onclick="toggleNotes()" title="Speaker Notes Drawer (N)">
+          📝 Notes
+        </button>
+        <button class="hud-tool-btn" id="btn-overview" onclick="toggleOverview()" title="Slide Overview Grid (O)">
+          🗂️ Overview
+        </button>
+        <button class="hud-tool-btn" id="btn-timer" onclick="toggleTimer()" title="Timer (T)">
+          ⏱️ <span id="timer-display">90:00</span>
+        </button>
+        <button class="hud-tool-btn" id="btn-fullscreen" onclick="toggleFullscreen()" title="Fullscreen (F)">
+          ⛶
+        </button>
+        <a href="../index.html" class="hud-tool-btn" style="text-decoration: none; color: #facc15;" title="Return to Portal Hub">
+          🏠 Hub
+        </a>
+      </div>
+    </footer>
+
+  </div>
+
+  <!-- Presenter Notes Panel (Drawer) -->
+  <aside id="presenter-notes-panel" class="presenter-notes-panel" aria-label="Trainer Speaking Notes">
+    <div class="notes-header">
+      <div class="notes-title-group">
+        <h3>🎓 TRAINER SPEAKING NOTES &bull; QA NETWORK</h3>
+        <span class="notes-timing-badge" id="notes-timing-badge">09:00 - 09:30</span>
+      </div>
+      <button class="notes-close-btn" onclick="toggleNotes()">&times;</button>
+    </div>
+    <div class="notes-body" id="notes-content">
+      <!-- Dynamically populated from script.js -->
+    </div>
+  </aside>
+
+  <!-- Slide Overview Grid Modal -->
+  <div id="overview-modal" class="overview-modal" onclick="closeOverview(event)">
+    <div class="overview-dialog" onclick="event.stopPropagation()">
+      <div class="overview-header">
+        <h3>Presentation Slides (39 Master Slides)</h3>
+        <button class="notes-close-btn" onclick="toggleOverview()">&times;</button>
+      </div>
+      <div class="overview-grid" id="overview-grid">
+        <!-- Dynamically populated from script.js -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Presenter Laser Pointer & Halo -->
+  <div id="laser-dot" class="laser-pointer-dot">
+    <div class="laser-halo"></div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
+
