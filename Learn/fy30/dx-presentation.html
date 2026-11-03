@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DX Goal 2030 — Eliminate NVA Jobs</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Rajdhani:wght@300;500;600;700&family=Exo+2:wght@300;400;600;700;800;900&family=Bebas+Neue&family=Michroma&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="dx-presentation.css">
+</head>
+<body>
+
+<!-- ===== ALIVE BACKGROUND SYSTEM ===== -->
+<div class="bg-system">
+  <div class="mesh-gradient"></div>
+  <div class="grid-lines"></div>
+  <div class="orbs">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+    <div class="orb orb-4"></div>
+    <div class="orb orb-5"></div>
+  </div>
+  <div class="particles" id="particles"></div>
+  <div class="scan-lines"></div>
+  <div class="vignette"></div>
+</div>
+
+<!-- ===== Timer ===== -->
+<div class="timer-card" id="timer">
+  <div class="timer-label">SESSION TIME</div>
+  <div class="timer-value" id="timer-value">05:00</div>
+</div>
+
+<!-- ===== Slide Deck ===== -->
+<div id="deck">
+
+  <!-- SLIDE 1: TITLE -->
+  <div class="slide active" id="slide1">
+    <div class="slide-overlay"></div>
+    <div class="slide-content">
+      <div class="header-bar">
+        <div class="slide-number">01</div>
+        <div class="slide-kicker">2030 VISION</div>
+      </div>
+      <div class="main-title-block">
+        <h1 class="main-title">DX Goal</h1>
+        <h1 class="subtitle-title">Eliminate NVA Jobs</h1>
+        <div class="title-divider"></div>
+        <p class="title-sub">Utilize by DX Tools &nbsp;·&nbsp; People × Digital × Manufacturing = Sustainable Growth</p>
+      </div>
+      <div class="feature-stats">
+        <div class="stat-item">
+          <div class="stat-value">36</div>
+          <div class="stat-label">Issues Solved</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-value">1,440</div>
+          <div class="stat-label">MH Saved / Year</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-value">170→50</div>
+          <div class="stat-label">MH / Month</div>
+        </div>
+      </div>
+      <div class="footer-tag">DENSO (CAMBODIA) CO., LTD. &nbsp;·&nbsp; Crafting the Core &nbsp;·&nbsp; Play the Edge</div>
+    </div>
+    <div class="slide-nav-hint">▲ SPACE or ▼ to begin</div>
+  </div>
+
+  <!-- SLIDE 2: BACKGROUND -->
+  <div class="slide" id="slide2">
+    <div class="slide-overlay"></div>
+    <div class="slide-content">
+      <div class="header-bar">
+        <div class="slide-number">02</div>
+        <div class="slide-kicker">Background</div>
+      </div>
+      <h2 class="slide-title">From Challenge to Opportunity</h2>
+      <div class="two-col">
+        <div class="card-loy">
+          <div class="card-header-glow">
+            <span class="badge-badge">LOY</span>
+            <span class="badge-following">Following</span>
+          </div>
+          <div class="loy-content">
+            <div class="loy-big">LOY</div>
+            <p class="loy-text">We encourage all associates to participate in the overall DNNHK improvement activities idea. To make all associates better for great ideas improvement for faster next plant.</p>
+          </div>
+        </div>
+        <div class="card-kadai">
+          <div class="card-header-glow">
+            <span class="badge-badge">KADAI</span>
+            <span class="badge-before">Before</span>
+          </div>
+          <div class="kadai-items">
+            <div class="kadai-item"><div class="kadai-icon">📄</div><div class="kadai-text">Paper Record</div></div>
+            <div class="kadai-item"><div class="kadai-icon">🔄</div><div class="kadai-text">Re-input</div></div>
+            <div class="kadai-item"><div class="kadai-icon">🔍</div><div class="kadai-text">Difficult to find</div></div>
+            <div class="kadai-item"><div class="kadai-icon">☁️</div><div class="kadai-text">Cloud Storage<br>0368</div></div>
+          </div>
+        </div>
+      </div>
+      <div class="pillars-section">
+        <h3 class="pillars-title">3 Pillars to Develop Manufacturing Fundamentals</h3>
+        <div class="pillars-grid">
+          <div class="pillar-card pillar-1"><div class="pillar-num">01</div><div class="pillar-name">Strengthen Manufacturing</div><div class="pillar-desc">Lean from with DNTH · Improve Skill of Ownership</div></div>
+          <div class="pillar-card pillar-2"><div class="pillar-num">02</div><div class="pillar-name">Logistics to Overcome Distance</div><div class="pillar-desc">Legal Government Policy · Quick-Try and Learn</div></div>
+          <div class="pillar-card pillar-3"><div class="pillar-num">03</div><div class="pillar-name">Make Future Monozukuri</div><div class="pillar-desc">Lean and Align through Digital Transformation (DX)</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 3: LEAVE REQUEST SITUATION -->
+  <div class="slide" id="slide3">
+    <div class="slide-overlay"></div>
+    <div class="slide-content">
+      <div class="header-bar">
+        <div class="slide-number">03</div>
+        <div class="slide-kicker">Example 1 · Leave Request</div>
+      </div>
+      <h2 class="slide-title">Situation — The Problem</h2>
+      <div class="two-col">
+        <div class="col-problem">
+          <div class="card problem-card">
+            <div class="card-header-glow">
+              <span class="badge-badge">Current</span>
+              <span class="badge-danger">Manual by Paper</span>
+            </div>
+            <div class="problem-list">
+              <div class="problem-item"><span class="problem-num">1</span><div class="problem-text">Manual record causes extra time spent and correcting with HR.</div></div>
+              <div class="problem-item"><span class="problem-num">2</span><div class="problem-text">Leads to double work (NVA) and lost time, increasing inefficient task.</div></div>
+            </div>
+            <div class="mh-before-box"><div class="mh-label">MH Before</div><div class="mh-value">170 MH/month</div></div>
+          </div>
+          <div class="img-row-sit">
+            <div class="img-slot"><span>📄</span><div class="slot-label">Paper Record</div></div>
+            <div class="img-slot"><span>🔄</span><div class="slot-label">Re-input</div></div>
+            <div class="img-slot"><span>🔍</span><div class="slot-label">Difficult to Find</div></div>
+          </div>
+          <div class="img-row-sit">
+            <div class="img-slot"><span>🗑️</span><div class="slot-label">Lost Paper</div></div>
+            <div class="img-slot"><span>📋</span><div class="slot-label">Multiple Confirmation</div></div>
+            <div class="img-slot"><span>⏱️</span><div class="slot-label">Take Long Time</div></div>
+          </div>
+        </div>
+        <div class="col-target">
+          <div class="card target-card">
+            <div class="card-header-glow">
+              <span class="badge-badge">Target</span>
+              <span class="badge-success">Digital</span>
+            </div>
+            <div class="target-content">
+              <h3 class="target-main">100% Digital</h3>
+              <p class="target-sub">Zero paperwork for all associates</p>
+              <div class="thinking-box"><span class="thinking-label">Thinking Way</span><div class="thinking-text">Eliminate paper forms by digitizing processes with real-time data</div></div>
+            </div>
+            <div class="benefits-grid">
+              <div class="benefit-item"><div class="benefit-icon">📋</div><div class="benefit-txt">Auto Summary</div></div>
+              <div class="benefit-item"><div class="benefit-icon">✅</div><div class="benefit-txt">Approval Online</div></div>
+              <div class="benefit-item"><div class="benefit-icon">🧮</div><div class="benefit-txt">Auto Calculation</div></div>
+              <div class="benefit-item"><div class="benefit-icon">📅</div><div class="benefit-txt">Auto Calendar</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 4: RESULTS -->
+  <div class="slide" id="slide4">
+    <div class="slide-overlay"></div>
+    <div class="slide-content">
+      <div class="header-bar">
+        <div class="slide-number">04</div>
+        <div class="slide-kicker">Example 1 · Leave Request</div>
+      </div>
+      <h2 class="slide-title">Result — MH Saving</h2>
+      <div class="two-col">
+        <div class="col-chart">
+          <div class="chart-container">
+            <div class="chart-label-top">↓ 4T Faster (70.5%)</div>
+            <div class="bar-graph">
+              <div class="bar-column bar-bf"><div class="bar-fill bf-fill"></div><div class="bar-value">170</div><div class="bar-name">BF</div></div>
+              <div class="bar-column bar-af"><div class="bar-fill af-fill"></div><div class="bar-value">50</div><div class="bar-name">AF</div></div>
+              <div class="bar-arrow">▼</div>
+            </div>
+            <div class="chart-label-bottom">▲120MH/M</div>
+          </div>
+          <div class="big-result"><div class="result-number">Save 1,440 MH/Year</div></div>
+        </div>
+        <div class="col-benefits">
+          <div class="card changes-card">
+            <div class="card-header-glow"><span class="badge-badge">What Changed</span><span class="badge-success">After</span></div>
+            <ul class="changes-list">
+              <li class="change-item"><span class="change-check">✓</span> Automatic summary, no paper form</li>
+              <li class="change-item"><span class="change-check">✓</span> Approval and confirmation online</li>
+              <li class="change-item"><span class="change-check">✓</span> Automatic calculation Leave Type</li>
+              <li class="change-item"><span class="change-check">✓</span> Alert reminder & Auto Set Calendar</li>
+              <li class="change-item"><span class="change-check">✓</span> Summary for HR</li>
+            </ul>
+          </div>
+          <div class="card vdo-card">
+            <div class="card-header-glow"><span class="badge-badge">Activity</span><span class="badge-info">VDO</span></div>
+            <div class="vdo-preview"><div class="vdo-frame">▶ Factory Floor Video</div><div class="vdo-time">0:00 / 1:30</div></div>
+            <div class="vdo-caption">Leave data is centralized in the app and prepared for future development.</div>
+            <div class="vdo-tagline">Small Change · Big Impact</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 5: DEVELOPMENT ORG -->
+  <div class="slide" id="slide5">
+    <div class="slide-overlay"></div>
+    <div class="slide-content">
+      <div class="header-bar">
+        <div class="slide-number">05</div>
+        <div class="slide-kicker">Development</div>
+      </div>
+      <h2 class="slide-title">DX Development Organization</h2>
+      <div class="two-col">
+        <div class="col-org">
+          <div class="card org-card">
+            <div class="card-header-glow"><span class="badge-badge">Team</span><span class="badge-info">DX Devp. Org.</span></div>
+            <div class="org-lead"><div class="leader-avatar">Mok</div><div class="leader-info"><div class="leader-name">Mok Sangnaneng</div><div class="leader-role">App · Create / Develop</div></div></div>
+            <div class="team-grid-visual">
+              <div class="team-member-visual"><div class="member-avatar">R</div><div class="member-name">Rathana</div></div>
+              <div class="team-member-visual"><div class="member-avatar">S</div><div class="member-name">Sopeha</div></div>
+              <div class="team-member-visual"><div class="member-avatar">D</div><div class="member-name">Dara</div></div>
+              <div class="team-member-visual"><div class="member-avatar">Ch</div><div class="member-name">Chenda</div></div>
+              <div class="team-member-visual"><div class="member-avatar">V</div><div class="member-name">Visal</div></div>
+              <div class="team-member-visual"><div class="member-avatar">M</div><div class="member-name">Maliss</div></div>
+            </div>
+          </div>
+        </div>
+        <div class="col-problems">
+          <div class="card problems-card">
+            <div class="card-header-glow"><span class="badge-badge">Impact</span><span class="badge-success">Problems Solved</span></div>
+            <ul class="problems-list">
+              <li class="problem-solved-item"><span class="ps-icon">✓</span> Late visibility of attendance information</li>
+              <li class="problem-solved-item"><span class="ps-icon">✓</span> Delayed manpower decision at shift start</li>
+              <li class="problem-solved-item"><span class="ps-icon">✓</span> Manual HR & associate work</li>
+              <li class="problem-solved-item"><span class="ps-icon">✓</span> Difficult to find, re-check & calculate attendance</li>
+            </ul>
+            <div class="outcome-box"><div class="outcome-arrow">▼</div><div class="outcome-text">More timely action and stable operation</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 6: IMPACT CHARTS -->
+  <div class="slide" id="slide6">
+    <div class="slide-overlay"></div>
+    <div class="slide-content">
+      <div class="header-bar">
+        <div class="slide-number">06</div>
+        <div class="slide-kicker">Development</div>
+      </div>
+      <h2 class="slide-title">Total Impact — 36 Issues Solved</h2>
+      <div class="impact-big-number"><span class="impact-num">36</span><span class="impact-text">Issues Solved</span></div>
+      <div class="chart-bar-section">
+        <div class="chart-bar-group">
+          <div class="chart-bar-item"><div class="chart-bar-fill fy25"></div><div class="chart-bar-val">14</div><div class="chart-bar-name">FY25</div></div>
+          <div class="chart-bar-item"><div class="chart-bar-fill fy24"></div><div class="chart-bar-val">12</div><div class="chart-bar-name">FY24</div></div>
+          <div class="chart-bar-item"><div class="chart-bar-fill fy23"></div><div class="chart-bar-val">10</div><div class="chart-bar-name">FY23</div></div>
+        </div>
+        <div class="chart-note">Currently saving 1,712 MH/M of 3,001 MH/M</div>
+      </div>
+      <div class="mini-charts-grid">
+        <div class="mini-chart-card"><div class="mini-chart-label">MH PD</div><div class="mini-chart-val">129</div><div class="mini-chart-sub">of 400 · 600</div></div>
+        <div class="mini-chart-card"><div class="mini-chart-label">MH HR</div><div class="mini-chart-val">503</div><div class="mini-chart-sub">of 400 · 1,200</div></div>
+        <div class="mini-chart-card"><div class="mini-chart-label">MH TIE</div><div class="mini-chart-val">65</div><div class="mini-chart-sub">of 200 · 400</div></div>
+        <div class="mini-chart-card"><div class="mini-chart-label">MH AC</div><div class="mini-chart-val">72</div><div class="mini-chart-sub">of 100 · 150</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 7: FUNCTION BREAKDOWN -->
+  <div class="slide" id="slide7">
+    <div class="slide-overlay"></div>
+    <div class="slide-content">
+      <div class="header-bar">
+        <div class="slide-number">07</div>
+        <div class="slide-kicker">Development</div>
+      </div>
+      <h2 class="slide-title">Function Breakdown</h2>
+      <div class="function-grid">
+        <div class="function-card func-pur"><div class="func-icon">📦</div><div class="func-name">MH PUR</div><div class="func-big">105</div><div class="func-sub">of 300 · 400</div></div>
+        <div class="function-card func-qa"><div class="func-icon">🔍</div><div class="func-name">MH QA</div><div class="func-big">64</div><div class="func-sub">of 150 · 120</div></div>
+        <div class="function-card func-wh"><div class="func-icon">📦</div><div class="func-name">MH WH</div><div class="func-big">219</div><div class="func-sub">of 200 · 250</div></div>
+        <div class="function-card func-tpm"><div class="func-icon">⚙️</div><div class="func-name">MH TPM</div><div class="func-big">122</div><div class="func-sub">of 244 · 350</div></div>
+      </div>
+      <div class="final-result-card"><div class="final-result-label">Result : MH Saving</div><div class="final-result-big">Save 1,440 MH/Year</div><div class="final-result-sub">Leave data is centralized in the app and prepared for future development.</div></div>
+    </div>
+  </div>
+
+  <!-- SLIDE 8: CONCLUSION -->
+  <div class="slide" id="slide8">
+    <div class="slide-overlay"></div>
+    <div class="slide-content">
+      <div class="header-bar">
+        <div class="slide-number">08</div>
+        <div class="slide-kicker">Conclusion</div>
+      </div>
+      <div class="conclusion-block">
+        <h1 class="conclusion-title">Strengthen Development on DX</h1>
+        <p class="conclusion-sub">to support Manufacturing optimization<br>NVA job with high efficiency job Management.</p>
+        <div class="conclusion-stats">
+          <div class="conc-stat-item"><div class="conc-stat-val">36</div><div class="conc-stat-name">Issues Solved</div></div>
+          <div class="conc-stat-item"><div class="conc-stat-val">1,440</div><div class="conc-stat-name">MH Saved / Year</div></div>
+        </div>
+        <div class="conclusion-footer">DENSO (CAMBODIA) CO., LTD. · Crafting the Core</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ===== Navigation ===== -->
+<div class="nav-controls">
+  <button id="prevBtn" class="nav-btn nav-prev">‹ PREV</button>
+  <div class="nav-counter"><span id="slideCounter">01</span> / <span id="totalCounter">08</span></div>
+  <button id="nextBtn" class="nav-btn nav-next">NEXT ›</button>
+</div>
+
+<!-- ===== Presenter Notes ===== -->
+<button id="toggleNotes" class="notes-toggle">📝 Notes</button>
+<div class="notes-panel" id="notes">
+  <div class="notes-header"><span id="notesTitle">Slide 1</span><span class="notes-close" id="notesClose">✕</span></div>
+  <div class="notes-body"><p id="notesContent">Opening. State the DX Goal clearly: Eliminate NVA Jobs by utilizing DX Tools.</p></div>
+</div>
+
+<script src="dx-presentation.js"></script>
+</body>
+</html>

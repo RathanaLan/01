@@ -1,0 +1,941 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#e6f5fc">
+  <title>DX Goal 2030 | Real-Time Attendance Control &amp; Leave Request</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Orbitron:wght@700;800;900&family=Plus+Jakarta+Sans:ital,wght@0,500;0,600;0,700;0,800;1,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="attendance-2030.css">
+  <script src="attendance-2030.js" defer></script>
+</head>
+<body>
+  <canvas id="bgParticles" class="bg-canvas" aria-hidden="true"></canvas>
+
+  <!-- Floating Toolbar for View / Mode Switching -->
+  <div class="top-controls" role="region" aria-label="Dashboard Controls">
+    <div class="control-pill">
+      <span class="pulse-dot"></span>
+      <span class="control-label">LIVE DX BOARD</span>
+    </div>
+    <div class="mode-switcher" role="tablist" aria-label="Select DX Example View">
+      <button type="button" class="mode-btn active" data-mode="attendance" role="tab" aria-selected="true">
+        Ex:1 Real-Time Attendance Control
+      </button>
+      <button type="button" class="mode-btn" data-mode="leave" role="tab" aria-selected="false">
+        Ex:1 Leave Request Application
+      </button>
+    </div>
+    <button type="button" class="action-btn" id="replayAnimBtn" title="Replay Animations">
+      <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg>
+      <span>Replay</span>
+    </button>
+    <button type="button" class="action-btn" id="fullscreenBtn" title="Toggle Fullscreen">
+      <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"/></svg>
+      <span>Fullscreen</span>
+    </button>
+  </div>
+
+  <main class="board" id="board">
+    <!-- ==================== MASTHEAD ==================== -->
+    <header class="masthead">
+      <div class="masthead-bg-art" aria-hidden="true">
+        <svg class="factory-skyline" viewBox="0 0 520 120" preserveAspectRatio="xMidYMax slice">
+          <defs>
+            <linearGradient id="skyGrad" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stop-color="#c2e9fb" stop-opacity="0.35"/>
+              <stop offset="60%" stop-color="#81d4fa" stop-opacity="0.65"/>
+              <stop offset="100%" stop-color="#29b6f6" stop-opacity="0.4"/>
+            </linearGradient>
+            <linearGradient id="bldgGrad" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#1e6bb8"/>
+              <stop offset="100%" stop-color="#0b3d78"/>
+            </linearGradient>
+            <linearGradient id="bldgLight" x1="0" y1="0" x2="1" y2="0">
+              <stop offset="0%" stop-color="#e3f4fe"/>
+              <stop offset="100%" stop-color="#9ad4f5"/>
+            </linearGradient>
+          </defs>
+          <path d="M0,120 L520,120 L520,0 L120,0 Z" fill="url(#skyGrad)"/>
+          <!-- Sun / Glow -->
+          <circle cx="235" cy="24" r="36" fill="#ffffff" opacity="0.65"/>
+          <!-- Main Factory Building -->
+          <polygon points="155,22 225,8 225,105 155,105" fill="url(#bldgGrad)" opacity="0.9"/>
+          <polygon points="225,8 305,26 305,105 225,105" fill="url(#bldgLight)" opacity="0.92"/>
+          <!-- Windows left face -->
+          <g fill="#7ce0ff" opacity="0.75">
+            <polygon points="163,34 218,22 218,30 163,42"/>
+            <polygon points="163,48 218,36 218,44 163,56"/>
+            <polygon points="163,62 218,50 218,58 163,70"/>
+            <polygon points="163,76 218,64 218,72 163,84"/>
+          </g>
+          <!-- Windows right face -->
+          <g fill="#155a9a" opacity="0.65">
+            <polygon points="232,22 296,35 296,43 232,30"/>
+            <polygon points="232,36 296,49 296,57 232,44"/>
+            <polygon points="232,50 296,63 296,71 232,58"/>
+            <polygon points="232,64 296,77 296,85 232,72"/>
+          </g>
+          <!-- Side Annex Building -->
+          <rect x="295" y="55" width="75" height="50" fill="#d9f0fc" stroke="#499fd6" stroke-width="1"/>
+          <rect x="303" y="64" width="14" height="10" fill="#236eb0"/>
+          <rect x="323" y="64" width="14" height="10" fill="#236eb0"/>
+          <rect x="343" y="64" width="14" height="10" fill="#236eb0"/>
+          <!-- Green Trees & Foliage -->
+          <g fill="#2e8b57">
+            <circle cx="132" cy="88" r="18"/>
+            <circle cx="146" cy="83" r="15" fill="#3da35d"/>
+            <circle cx="160" cy="91" r="13"/>
+            <circle cx="272" cy="89" r="16"/>
+            <circle cx="288" cy="84" r="19" fill="#3da35d"/>
+            <circle cx="308" cy="91" r="14"/>
+            <circle cx="372" cy="90" r="15" fill="#3da35d"/>
+            <circle cx="390" cy="93" r="12"/>
+          </g>
+          <rect x="85" y="102" width="435" height="18" fill="#1b6ca8" opacity="0.35"/>
+        </svg>
+      </div>
+
+      <div class="vision">
+        <strong class="vision-year">2030</strong>
+        <span class="vision-sub">DIGITAL TODAY<br>A STRONGER TOMORROW</span>
+      </div>
+
+      <div class="headline">
+        <h1>DX Goal : Eliminate NVA Jobs <span>Utilize by DX Tools</span></h1>
+        <p class="formula">
+          <span>PEOPLE</span> <b>×</b> <span>DIGITAL</span> <b>×</b> <span>MANUFACTURING</span> <b>=</b> <span>SUSTAINABLE GROWTH</span>
+        </p>
+      </div>
+
+      <div class="brand">
+        <div class="play-edge">
+          <strong><i>Play</i> the Edge</strong>
+          <span>FOR A BETTER 2030</span>
+        </div>
+        <small class="smart-tag">SMART FACTORY &nbsp;|&nbsp; SUSTAINABLE MANUFACTURING</small>
+      </div>
+    </header>
+
+    <!-- ==================== MAIN 2x2 DASHBOARD GRID ==================== -->
+    <div class="dashboard">
+      <!-- ==================== LEFT COLUMN ==================== -->
+      <div class="left-column">
+        <!-- 1. BACKGROUND PANEL -->
+        <section class="panel background-panel reveal">
+          <div class="section-heading">
+            <span class="number">1.</span>
+            <div class="chevron-banner">
+              <h2>Background</h2>
+            </div>
+            <span class="heading-note">From Challenge to Opportunity</span>
+          </div>
+
+          <div class="background-content">
+            <!-- Left side: Following + LOY + KADAI -->
+            <div class="challenge">
+              <h3 class="sub-heading">
+                <svg class="inline-icon" viewBox="0 0 24 24" width="20" height="20" fill="#09469c"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg>
+                Following
+              </h3>
+
+              <div class="loy">
+                <strong class="loy-badge">LOY</strong>
+                <p>
+                  we encourage all associates to participate in the overall DNKH improvement activities idea.
+                  <small>To make all associates better for great ideas improvement for faster next plant.</small>
+                </p>
+              </div>
+
+              <h3 class="kadai-title">KADAI</h3>
+
+              <div class="process-labels">
+                <span class="lbl-before">Before</span>
+                <span class="lbl-thinking">Thinking way</span>
+              </div>
+
+              <div class="process-items">
+                <div class="proc-step before-step">
+                  <div class="proc-icon-wrap">
+                    <svg viewBox="0 0 48 48" width="38" height="38">
+                      <path d="M10 14L24 7l14 7-14 7-14-7z" fill="#b0bec5" stroke="#546e7a" stroke-width="1.5"/>
+                      <path d="M10 22l14 7 14-7" fill="none" stroke="#546e7a" stroke-width="2"/>
+                      <path d="M10 29l14 7 14-7" fill="none" stroke="#546e7a" stroke-width="2"/>
+                      <line x1="18" y1="12" x2="29" y2="17" stroke="#e53935" stroke-width="1.5"/>
+                    </svg>
+                  </div>
+                  <small>Paper, Record</small>
+                </div>
+
+                <div class="proc-step before-step">
+                  <div class="proc-icon-wrap">
+                    <svg viewBox="0 0 48 48" width="38" height="38">
+                      <rect x="6" y="10" width="36" height="28" rx="5" fill="#e53935"/>
+                      <circle cx="17" cy="20" r="4" fill="#fff"/>
+                      <circle cx="31" cy="20" r="4" fill="#fff"/>
+                      <path d="M11 33c0-3.5 5-5.5 13-5.5s13 2 13 5.5" fill="none" stroke="#fff" stroke-width="2.5"/>
+                      <path d="M21 13l3-3 3 3M27 35l-3 3-3-3" fill="none" stroke="#ffeb3b" stroke-width="1.8"/>
+                    </svg>
+                  </div>
+                  <small>Re-input,<br>Recheck...</small>
+                </div>
+
+                <div class="proc-step before-step">
+                  <div class="proc-icon-wrap">
+                    <svg viewBox="0 0 48 48" width="38" height="38">
+                      <circle cx="21" cy="21" r="11" fill="none" stroke="#3e2723" stroke-width="3.5"/>
+                      <line x1="29" y1="29" x2="40" y2="40" stroke="#3e2723" stroke-width="4" stroke-linecap="round"/>
+                      <path d="M16 18h10M16 23h7" stroke="#e53935" stroke-width="2" stroke-linecap="round"/>
+                    </svg>
+                  </div>
+                  <small>Difficult to find,<br>calculate etc.</small>
+                </div>
+
+                <div class="process-arrow" aria-hidden="true">
+                  <svg viewBox="0 0 24 36" width="18" height="28"><polygon points="2,2 22,18 2,34" fill="#0066cc"/></svg>
+                </div>
+
+                <div class="proc-step digital-step">
+                  <div class="proc-icon-wrap">
+                    <svg viewBox="0 0 48 48" width="38" height="38">
+                      <rect x="8" y="8" width="32" height="22" rx="3" fill="#e3f2fd" stroke="#0d6efd" stroke-width="2.5"/>
+                      <line x1="14" y1="15" x2="34" y2="15" stroke="#0d6efd" stroke-width="2"/>
+                      <line x1="14" y1="20" x2="28" y2="20" stroke="#0d6efd" stroke-width="2"/>
+                      <path d="M4 34h40l-4 5H8l-4-5z" fill="#0d6efd"/>
+                    </svg>
+                  </div>
+                  <small>Online Data<br>(One Data)</small>
+                </div>
+
+                <div class="proc-step digital-step">
+                  <div class="proc-icon-wrap">
+                    <svg viewBox="0 0 58 48" width="46" height="38">
+                      <circle cx="16" cy="24" r="9" fill="none" stroke="#0288d1" stroke-width="2.2" stroke-dasharray="4 2"/>
+                      <circle cx="16" cy="24" r="4" fill="#0288d1"/>
+                      <path d="M32 22a8 8 0 0 1 15-2 6 6 0 0 1 2 11H31a6 6 0 0 1 1-9z" fill="#0066cc"/>
+                      <text x="39" y="28" fill="#fff" font-size="6.5" font-weight="800" text-anchor="middle">O365</text>
+                      <text x="39" y="42" fill="#004ba0" font-size="8" font-weight="800" text-anchor="middle">0368</text>
+                    </svg>
+                  </div>
+                  <small>Cloud Storage<br>One Data<br>Same as Template</small>
+                </div>
+              </div>
+            </div>
+
+            <!-- Right side: 3 Pillars -->
+            <div class="pillars">
+              <div class="pillars-banner">
+                ※ Changing your <em>“Can't”</em> to be <strong>“Can”</strong><br>
+                <span>Where Knowledge and People Gather</span>
+              </div>
+
+              <div class="pillars-body">
+                <div class="pillars-header">
+                  <span class="pillar-header-badge">3</span>
+                  <h4>3 Pillars to develop Manufacturing<br>Fundamentals and Capacity</h4>
+                </div>
+
+                <div class="pillar">
+                  <b>1</b>
+                  <p>
+                    <strong>Strengthen Manufacturing</strong>
+                    <small>– Lean from and with DNTH<br>– Improve Skill of Ownership</small>
+                  </p>
+                </div>
+
+                <div class="pillar">
+                  <b>2</b>
+                  <p>
+                    <strong>Logistics to Overcome Distance</strong>
+                    <small>– Join Government Policy making process<br>– Quick-Try and Learn (Consultant, Rakuin etc...)</small>
+                  </p>
+                </div>
+
+                <div class="pillar">
+                  <b>3</b>
+                  <p>
+                    <strong>Make Future Monozukuri</strong>
+                    <small>– Lean and Align through Digital Transformation (DX)</small>
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="panel-ribbon">Advanced Operational &amp; IT for smart, optimized manufacturing</div>
+        </section>
+
+        <!-- 2. DEVELOPMENT PANEL -->
+        <section class="panel development-panel reveal">
+          <div class="section-heading">
+            <span class="number">2.</span>
+            <div class="chevron-banner">
+              <h2>Development</h2>
+            </div>
+            <span class="heading-note">
+              BF: Before &nbsp; AF: After &nbsp; <strong class="ex-tag">Ex:1</strong>
+              <span class="heading-arrow">›</span>
+            </span>
+          </div>
+
+          <div class="development-content">
+            <!-- Left Team Roster -->
+            <aside class="team">
+              <h3>DX Devp. Org.</h3>
+
+              <div class="person-card leader">
+                <div class="portrait-frame">
+                  <svg viewBox="0 0 60 64" class="portrait-svg">
+                    <defs>
+                      <linearGradient id="bgPhoto" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#e3f2fd"/><stop offset="100%" stop-color="#bbdefb"/></linearGradient>
+                    </defs>
+                    <rect width="60" height="64" rx="6" fill="url(#bgPhoto)"/>
+                    <!-- Suit & Tie -->
+                    <path d="M8 64 C8 46 52 46 52 64 Z" fill="#1e293b"/>
+                    <polygon points="24,47 36,47 33,64 27,64" fill="#ffffff"/>
+                    <polygon points="28,50 32,50 31,64 29,64" fill="#d32f2f"/>
+                    <!-- Head -->
+                    <circle cx="30" cy="27" r="12" fill="#f1c27d"/>
+                    <!-- Hair -->
+                    <path d="M18 25 C17 13 43 13 42 25 C40 18 22 18 18 25 Z" fill="#1f2937"/>
+                    <!-- Features -->
+                    <circle cx="25.5" cy="27" r="1.3" fill="#1f2937"/>
+                    <circle cx="34.5" cy="27" r="1.3" fill="#1f2937"/>
+                    <path d="M26 33 Q30 35.5 34 33" fill="none" stroke="#8d5524" stroke-width="1.4" stroke-linecap="round"/>
+                  </svg>
+                </div>
+                <small>Mok<br>Sangnarang</small>
+              </div>
+
+              <h4 class="team-group-label">App. Create/Develop</h4>
+              <div class="people">
+                <div class="person-card">
+                  <div class="portrait-frame sm">
+                    <svg viewBox="0 0 60 64" class="portrait-svg">
+                      <rect width="60" height="64" rx="6" fill="#e8f4fd"/>
+                      <path d="M8 64 C8 47 52 47 52 64 Z" fill="#dbeafe"/>
+                      <path d="M22 48 L30 58 L38 48" fill="none" stroke="#1d4ed8" stroke-width="2"/>
+                      <circle cx="30" cy="27" r="11.5" fill="#eab676"/>
+                      <path d="M18 24 C18 12 42 12 42 24 C39 18 21 18 18 24 Z" fill="#111827"/>
+                      <circle cx="26" cy="27" r="1.2" fill="#111"/>
+                      <circle cx="34" cy="27" r="1.2" fill="#111"/>
+                      <path d="M27 33 Q30 35 33 33" fill="none" stroke="#7c2d12" stroke-width="1.3"/>
+                    </svg>
+                  </div>
+                  <small>Rathana</small>
+                </div>
+                <div class="person-card">
+                  <div class="portrait-frame sm">
+                    <svg viewBox="0 0 60 64" class="portrait-svg">
+                      <rect width="60" height="64" rx="6" fill="#e8f4fd"/>
+                      <path d="M8 64 C8 47 52 47 52 64 Z" fill="#e0f2fe"/>
+                      <circle cx="30" cy="27" r="11.5" fill="#f1c27d"/>
+                      <path d="M18 25 C17 13 43 13 42 25 C38 17 22 17 18 25 Z" fill="#1e293b"/>
+                      <circle cx="26" cy="27" r="1.2" fill="#111"/>
+                      <circle cx="34" cy="27" r="1.2" fill="#111"/>
+                      <path d="M27 33 Q30 35 33 33" fill="none" stroke="#7c2d12" stroke-width="1.3"/>
+                    </svg>
+                  </div>
+                  <small>Sopheak</small>
+                </div>
+                <div class="person-card">
+                  <div class="portrait-frame sm">
+                    <svg viewBox="0 0 60 64" class="portrait-svg">
+                      <rect width="60" height="64" rx="6" fill="#e8f4fd"/>
+                      <path d="M8 64 C8 47 52 47 52 64 Z" fill="#dbeafe"/>
+                      <circle cx="30" cy="27" r="11.5" fill="#e0ac69"/>
+                      <path d="M18 24 C19 12 41 12 42 24 C38 18 22 18 18 24 Z" fill="#0f172a"/>
+                      <circle cx="26" cy="27" r="1.2" fill="#111"/>
+                      <circle cx="34" cy="27" r="1.2" fill="#111"/>
+                      <path d="M27 33 Q30 35 33 33" fill="none" stroke="#7c2d12" stroke-width="1.3"/>
+                    </svg>
+                  </div>
+                  <small>Dara</small>
+                </div>
+              </div>
+
+              <h4 class="team-group-label">Process Improvement</h4>
+              <div class="people">
+                <div class="person-card">
+                  <div class="portrait-frame sm">
+                    <svg viewBox="0 0 60 64" class="portrait-svg">
+                      <rect width="60" height="64" rx="6" fill="#e8f4fd"/>
+                      <path d="M16 26 C14 42 46 42 44 26 Z" fill="#1f2937"/>
+                      <path d="M10 64 C10 47 50 47 50 64 Z" fill="#f1f5f9"/>
+                      <circle cx="30" cy="27" r="11" fill="#f5cfa0"/>
+                      <path d="M18 26 C18 12 42 12 42 26 C38 18 22 18 18 26 Z" fill="#111827"/>
+                      <circle cx="26" cy="27" r="1.2" fill="#111"/>
+                      <circle cx="34" cy="27" r="1.2" fill="#111"/>
+                      <path d="M27 32.5 Q30 34.5 33 32.5" fill="none" stroke="#b91c1c" stroke-width="1.3"/>
+                    </svg>
+                  </div>
+                  <small>Chenda</small>
+                </div>
+                <div class="person-card">
+                  <div class="portrait-frame sm">
+                    <svg viewBox="0 0 60 64" class="portrait-svg">
+                      <rect width="60" height="64" rx="6" fill="#e8f4fd"/>
+                      <path d="M8 64 C8 47 52 47 52 64 Z" fill="#e2e8f0"/>
+                      <circle cx="30" cy="27" r="11.5" fill="#eab676"/>
+                      <path d="M18 24 C18 13 42 13 42 24 C38 18 22 18 18 24 Z" fill="#111827"/>
+                      <circle cx="26" cy="27" r="1.2" fill="#111"/>
+                      <circle cx="34" cy="27" r="1.2" fill="#111"/>
+                      <path d="M27 33 Q30 35 33 33" fill="none" stroke="#7c2d12" stroke-width="1.3"/>
+                    </svg>
+                  </div>
+                  <small>Visal</small>
+                </div>
+                <div class="person-card">
+                  <div class="portrait-frame sm">
+                    <svg viewBox="0 0 60 64" class="portrait-svg">
+                      <rect width="60" height="64" rx="6" fill="#e8f4fd"/>
+                      <path d="M16 26 C14 43 46 43 44 26 Z" fill="#111827"/>
+                      <path d="M10 64 C10 47 50 47 50 64 Z" fill="#e0f2fe"/>
+                      <circle cx="30" cy="27" r="11" fill="#f5cfa0"/>
+                      <path d="M18 26 C18 12 42 12 42 26 C38 18 22 18 18 26 Z" fill="#111827"/>
+                      <circle cx="26" cy="27" r="1.2" fill="#111"/>
+                      <circle cx="34" cy="27" r="1.2" fill="#111"/>
+                      <path d="M27 32.5 Q30 34.5 33 32.5" fill="none" stroke="#b91c1c" stroke-width="1.3"/>
+                    </svg>
+                  </div>
+                  <small>Malis</small>
+                </div>
+              </div>
+            </aside>
+
+            <!-- Mode A: Project Overview (Attendance Image Default) -->
+            <div class="overview mode-panel active" data-mode-panel="attendance">
+              <h3 class="blue-strip">Project Overview (All DX Applications)</h3>
+
+              <div class="overview-grid">
+                <!-- Left Chart: All Application Type -->
+                <div class="chart-box">
+                  <h4>All Application Type</h4>
+                  <div class="app-chart-wrap">
+                    <div class="y-axis-title">Count of Classification</div>
+                    <div class="y-axis-scale">
+                      <span>60</span>
+                      <span>40</span>
+                      <span>20</span>
+                      <span>0</span>
+                    </div>
+                    <div class="app-chart" aria-label="Application type chart: 54 Power Apps, 4 Web App, 3 AI, 3 Automation, 3 IoT, 1 Karakuri">
+                      <div class="app-bar">
+                        <b class="count-num" data-target="54">54</b>
+                        <span class="bar-pillar" style="--height:88%"></span>
+                        <small>Power Apps</small>
+                      </div>
+                      <div class="app-bar">
+                        <b class="count-num" data-target="4">4</b>
+                        <span class="bar-pillar" style="--height:9%"></span>
+                        <small>Web App</small>
+                      </div>
+                      <div class="app-bar">
+                        <b class="count-num" data-target="3">3</b>
+                        <span class="bar-pillar" style="--height:7%"></span>
+                        <small>AI</small>
+                      </div>
+                      <div class="app-bar">
+                        <b class="count-num" data-target="3">3</b>
+                        <span class="bar-pillar" style="--height:7%"></span>
+                        <small>Automation</small>
+                      </div>
+                      <div class="app-bar">
+                        <b class="count-num" data-target="3">3</b>
+                        <span class="bar-pillar" style="--height:7%"></span>
+                        <small>IoT</small>
+                      </div>
+                      <div class="app-bar">
+                        <b class="count-num" data-target="1">1</b>
+                        <span class="bar-pillar" style="--height:3%"></span>
+                        <small>Karakuri</small>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Right Chart: Section Overview (68 Apps Donut + Exact 9 Department Breakdown) -->
+                <div class="chart-box">
+                  <h4>Section Overview</h4>
+                  <div class="donut-row">
+                    <div class="donut" title="68 Total DX Applications">
+                      <span>
+                        <b class="count-num" data-target="68">68</b>
+                        <small>Apps</small>
+                      </span>
+                    </div>
+                    <ul class="legend">
+                      <li><span class="dot" style="--c:#0d6efd"></span><span class="dept">Digital Transformation</span><b>21 (30.88%)</b></li>
+                      <li><span class="dot" style="--c:#29b6f6"></span><span class="dept">Manufacturing</span><b>12 (17.65%)</b></li>
+                      <li><span class="dot" style="--c:#ef6c00"></span><span class="dept">Human Resources</span><b>10 (14.71%)</b></li>
+                      <li><span class="dot" style="--c:#8e24aa"></span><span class="dept">Quality Assurance</span><b>5 (7.35%)</b></li>
+                      <li><span class="dot" style="--c:#fbc02d"></span><span class="dept">Information Security</span><b>3 (4.41%)</b></li>
+                      <li><span class="dot" style="--c:#43a047"></span><span class="dept">TPM</span><b>3 (4.41%)</b></li>
+                      <li><span class="dot" style="--c:#1e88e5"></span><span class="dept">Export</span><b>2 (2.94%)</b></li>
+                      <li><span class="dot" style="--c:#d81b60"></span><span class="dept">Production Engineering</span><b>2 (2.94%)</b></li>
+                      <li><span class="dot" style="--c:#00897b"></span><span class="dept">Purchasing</span><b>1 (1.47%)</b></li>
+                      <li><span class="dot" style="--c:#78909c"></span><span class="dept">Others</span><b>9 (13.24%)</b></li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+
+              <h3 class="blue-strip">NVA Reduction Impact (All DX Applications)</h3>
+              <div class="reduction">
+                <div class="db-icon" aria-hidden="true">
+                  <svg viewBox="0 0 40 44" width="34" height="38">
+                    <ellipse cx="20" cy="8" rx="15" ry="5" fill="#1565c0"/>
+                    <path d="M5 8v8c0 2.8 6.7 5 15 5s15-2.2 15-5V8" fill="#1e88e5"/>
+                    <ellipse cx="20" cy="8" rx="15" ry="5" fill="#42a5f5"/>
+                    <path d="M5 19v8c0 2.8 6.7 5 15 5s15-2.2 15-5v-8" fill="#1e88e5"/>
+                    <path d="M5 30v7c0 2.8 6.7 5 15 5s15-2.2 15-5v-7" fill="#1565c0"/>
+                  </svg>
+                </div>
+                <div class="mh-stat">
+                  <strong class="count-num" data-target="3001" data-comma="true">3,001</strong>
+                  <small>MH/M<br>Before</small>
+                </div>
+                <span class="forward-arrow" aria-hidden="true">▶</span>
+                <div class="mh-stat">
+                  <strong class="count-num" data-target="1289" data-comma="true">1,289</strong>
+                  <small>MH/M<br>After</small>
+                </div>
+                <div class="saving-badge">
+                  <span class="down-yellow" aria-hidden="true">⬇</span>
+                  <p>
+                    <strong><span class="count-num" data-target="1712" data-comma="true">1,712</span> MH/M</strong>
+                    <small>(57%)<br>NVA Reduction</small>
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Mode B: Leave Request Departmental Breakdown (from First Reference Image) -->
+            <div class="overview mode-panel" data-mode-panel="leave">
+              <div class="leave-dev-grid">
+                <div class="problems-solved-box">
+                  <h3 class="blue-strip">Problems Solved (Operational Impact)</h3>
+                  <ul class="solved-list">
+                    <li><span>✓</span> Late visibility of attendance information</li>
+                    <li><span>✓</span> Delayed manpower decision at shift start</li>
+                    <li><span>✓</span> Manual HR &amp; associate work</li>
+                    <li><span>✓</span> Difficult to find, re-check and calculate attendance</li>
+                  </ul>
+                  <div class="timely-action">
+                    More timely action<br>and stable operation
+                  </div>
+                </div>
+
+                <div class="total-impact-box">
+                  <h3 class="blue-strip">Total Impact</h3>
+                  <div class="issues-hero">
+                    <strong class="count-num" data-target="36">36</strong>
+                    <span>Issues<br>Solved</span>
+                  </div>
+                  <div class="fy-chart">
+                    <div class="fy-bar"><b>10</b><span style="--h:55%"></span><small>FY23</small></div>
+                    <div class="fy-bar"><b>12</b><span style="--h:72%"></span><small>FY24</small></div>
+                    <div class="fy-bar active"><b>14</b><span style="--h:92%"></span><small>FY25</small></div>
+                  </div>
+                </div>
+
+                <div class="dept-mini-grid">
+                  <div class="dept-card"><div class="dept-head"><span>MH</span><b>PD</b></div><div class="dept-bars"><div class="b-bf" style="--h:82%"><em>387</em></div><div class="b-af" style="--h:34%"><em>129</em></div></div><div class="dept-lbl"><span>BF</span><span>AF</span></div></div>
+                  <div class="dept-card"><div class="dept-head"><span>MH</span><b>HR</b></div><div class="dept-bars"><div class="b-bf" style="--h:92%"><em>1,300</em></div><div class="b-af" style="--h:42%"><em>503</em></div></div><div class="dept-lbl"><span>BF</span><span>AF</span></div></div>
+                  <div class="dept-card"><div class="dept-head"><span>MH</span><b>TIE</b></div><div class="dept-bars"><div class="b-bf" style="--h:76%"><em>267</em></div><div class="b-af" style="--h:30%"><em>85</em></div></div><div class="dept-lbl"><span>BF</span><span>AF</span></div></div>
+                  <div class="dept-card"><div class="dept-head"><span>MH</span><b>AC</b></div><div class="dept-bars"><div class="b-bf" style="--h:84%"><em>132</em></div><div class="b-af" style="--h:48%"><em>72</em></div></div><div class="dept-lbl"><span>BF</span><span>AF</span></div></div>
+                  <div class="dept-card"><div class="dept-head"><span>MH</span><b>PUR</b></div><div class="dept-bars"><div class="b-bf" style="--h:78%"><em>287</em></div><div class="b-af" style="--h:34%"><em>105</em></div></div><div class="dept-lbl"><span>BF</span><span>AF</span></div></div>
+                  <div class="dept-card"><div class="dept-head"><span>MH</span><b>QA</b></div><div class="dept-bars"><div class="b-bf" style="--h:80%"><em>120</em></div><div class="b-af" style="--h:45%"><em>64</em></div></div><div class="dept-lbl"><span>BF</span><span>AF</span></div></div>
+                  <div class="dept-card"><div class="dept-head"><span>MH</span><b>WH</b></div><div class="dept-bars"><div class="b-bf" style="--h:86%"><em>239</em></div><div class="b-af" style="--h:74%"><em>219</em></div></div><div class="dept-lbl"><span>BF</span><span>AF</span></div></div>
+                  <div class="dept-card"><div class="dept-head"><span>MH</span><b>TPM</b></div><div class="dept-bars"><div class="b-bf" style="--h:76%"><em>224</em></div><div class="b-af" style="--h:44%"><em>122</em></div></div><div class="dept-lbl"><span>BF</span><span>AF</span></div></div>
+                  <p class="dept-summary">Currently, we are saving a total <strong>from 1,712 MH/M of 3,001 MH/M</strong></p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <!-- ==================== RIGHT COLUMN ==================== -->
+      <div class="right-column">
+        <!-- EX:1 CASE STUDY PANEL (SWITCHABLE BETWEEN ATTENDANCE & LEAVE REQUEST) -->
+        <section class="panel example-panel reveal">
+          <!-- MODE A: REAL-TIME ATTENDANCE CONTROL -->
+          <div class="mode-panel active" data-mode-panel="attendance">
+            <div class="section-heading example-heading">
+              <span class="number icon-number" aria-hidden="true">
+                <svg viewBox="0 0 24 24" width="24" height="24" fill="#ffffff"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+              </span>
+              <div class="chevron-banner wide">
+                <h2>Ex:1. Real-Time Attendance Control</h2>
+                <small>See Earlier. Decide Faster. Stabilize Production.</small>
+              </div>
+              <span class="heading-note">
+                <b>DX FOR PEOPLE</b><br>DX FOR MANUFACTURING
+              </span>
+            </div>
+
+            <div class="example-body">
+              <div class="situation">
+                <div class="situation-text">
+                  <h3>Situation :</h3>
+                  <p><b>1</b> Attendance information was collected after the fact.</p>
+                  <p><b>2</b> Leaders had limited visibility of Present, Absent, Leave, Late/Early and No-Scan status at shift start.</p>
+                  <h3 class="kadai-sub">KADAI :</h3>
+                  <p class="kadai-desc">Late response to manpower shortages because scan data existed, but was not converted into a line-level decision signal for team leaders.</p>
+                </div>
+
+                <!-- Realistic Hand + Smartphone Card -->
+                <div class="phone-card">
+                  <div class="phone-mockup">
+                    <div class="phone-notch"></div>
+                    <div class="phone-header">Attendance</div>
+                    <div class="phone-line"><span class="status-dot present">●</span> Present <strong class="count-num" data-target="1184" data-comma="true">1,184</strong></div>
+                    <div class="phone-line"><span class="status-dot absent">●</span> Absent <strong class="count-num" data-target="32">32</strong></div>
+                    <div class="phone-line"><span class="status-dot leave">●</span> Leave <strong class="count-num" data-target="18">18</strong></div>
+                    <div class="phone-line"><span class="status-dot late">●</span> Late <strong class="count-num" data-target="26">26</strong></div>
+                    <div class="phone-line"><span class="status-dot noscan">●</span> No Scan <strong class="count-num" data-target="12">12</strong></div>
+                  </div>
+                  <div class="phone-caption">
+                    <strong>REAL-TIME<br>WORKFORCE<br>VISIBILITY</strong>
+                  </div>
+                </div>
+              </div>
+
+              <div class="target-bar">
+                <span class="target-pill">Target :</span>
+                <p>Real-time attendance visibility → Faster manpower decision → Stable production.</p>
+              </div>
+
+              <div class="comparison">
+                <div class="compare-card before">
+                  <h3>Before (As-Is)</h3>
+                  <ul>
+                    <li><span class="ico-bad">▤</span> Scan data (after check)</li>
+                    <li><span class="ico-bad">♟</span> Manual checking (HR/TL)</li>
+                    <li><span class="ico-bad">◷</span> Late visibility</li>
+                    <li><span class="ico-bad">✕</span> Delayed manpower action</li>
+                  </ul>
+                  <strong class="status-footer reactive">Reactive</strong>
+                </div>
+
+                <div class="compare-arrow" aria-hidden="true">
+                  <svg viewBox="0 0 24 36" width="16" height="26"><polygon points="2,2 22,18 2,34" fill="#0d6efd"/></svg>
+                </div>
+
+                <div class="compare-card after">
+                  <h3>After (To-Be)</h3>
+                  <ul>
+                    <li><span class="ico-good">✓</span> Scan data (Real-time)</li>
+                    <li><span class="ico-good">✓</span> Auto synchronize &amp; classify</li>
+                    <li><span class="ico-good">✓</span> Real-time dashboard</li>
+                    <li><span class="ico-good">✓</span> 7:40 summary to direct TL</li>
+                    <li><span class="ico-good">✓</span> Faster manpower action</li>
+                  </ul>
+                  <strong class="status-footer proactive">Proactive</strong>
+                </div>
+
+                <div class="compare-card impact">
+                  <h3>Expected Impact</h3>
+                  <div class="impact-item">
+                    <div class="impact-icon">
+                      <svg viewBox="0 0 36 36" width="32" height="32">
+                        <circle cx="18" cy="18" r="14" fill="none" stroke="#0288d1" stroke-width="2.5" stroke-dasharray="5 3"/>
+                        <circle cx="18" cy="18" r="7" fill="#0288d1"/>
+                      </svg>
+                    </div>
+                    <p>
+                      <b><span class="count-num" data-target="200">200</span> MH/month</b>
+                      <small>Manual-work reduction target</small>
+                    </p>
+                  </div>
+                  <div class="impact-item">
+                    <div class="impact-icon">
+                      <svg viewBox="0 0 36 36" width="32" height="32">
+                        <ellipse cx="18" cy="9" rx="12" ry="4.5" fill="#1976d2"/>
+                        <path d="M6 9v8c0 2.5 5.4 4.5 12 4.5s12-2 12-4.5V9" fill="#2196f3"/>
+                        <path d="M6 19v8c0 2.5 5.4 4.5 12 4.5s12-2 12-4.5v-8" fill="#1565c0"/>
+                      </svg>
+                    </div>
+                    <p>
+                      <b>0 Cost</b>
+                      <small>Investment &amp; running cost<br>(Using existing M365 services)</small>
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- MODE B: LEAVE REQUEST APPLICATION -->
+          <div class="mode-panel" data-mode-panel="leave">
+            <div class="section-heading example-heading">
+              <span class="number icon-number" aria-hidden="true">
+                <svg viewBox="0 0 24 24" width="22" height="22" fill="#ffffff"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6zm4 18H6V4h7v5h5v11z"/></svg>
+              </span>
+              <div class="chevron-banner wide">
+                <h2>Ex:1. Leave Request Application</h2>
+              </div>
+              <span class="heading-note">
+                <b>DX FOR PEOPLE</b><br>DX FOR MANUFACTURING
+              </span>
+            </div>
+
+            <div class="example-body">
+              <div class="situation">
+                <div class="situation-text">
+                  <h3>Situation :</h3>
+                  <p><b>1</b> Manual record causes extra time spent and correcting with HR.</p>
+                  <p><b>2</b> Leads to double work (NVA) and lost time, increasing inefficient task.</p>
+                </div>
+                <div class="phone-card paperless-card">
+                  <div class="paperless-tags">
+                    <span>PAPERLESS</span>
+                    <span>FASTER</span>
+                    <span>SMARTER</span>
+                    <span>TOGETHER</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="leave-target-grid">
+                <div class="lt-row">
+                  <span class="lt-badge thinking">Thinking Way</span>
+                  <p>Eliminate paper forms by digitizing processes with real-time data</p>
+                </div>
+                <div class="lt-row">
+                  <span class="lt-badge target">Target</span>
+                  <p>100% digital, zero paperwork for all associates</p>
+                </div>
+              </div>
+
+              <div class="leave-compare">
+                <div class="leave-box before">
+                  <h4>✕ Before (Using manual by paper)</h4>
+                  <div class="leave-mini-cards">
+                    <div><b>📄</b><small>Paper Record</small></div>
+                    <div><b>⌨️</b><small>Re-input, recheck...</small></div>
+                    <div><b>🔍</b><small>Difficult to find</small></div>
+                    <div><b>🗑️</b><small>Lost paper</small></div>
+                    <div><b>✍️</b><small>Multiple confirm</small></div>
+                    <div><b>⏳</b><small>Take long time</small></div>
+                  </div>
+                  <strong class="mh-footer bad">MH Before : 170 MH/month</strong>
+                </div>
+
+                <div class="compare-arrow" aria-hidden="true">▶</div>
+
+                <div class="leave-box after">
+                  <h4>✓ After (Develop by Power App.)</h4>
+                  <ul class="leave-benefits">
+                    <li>✓ Automatic summary, no paper form</li>
+                    <li>✓ Approval and confirmation online</li>
+                    <li>✓ Automatic calculation Leave Type</li>
+                  </ul>
+                  <div class="m365-Flow">
+                    <span><b>T</b> Alert reminder</span>
+                    <span><b>O</b> Auto Set Calendar</span>
+                    <span><b>X</b> Summary for HR</span>
+                  </div>
+                  <strong class="mh-footer good">MH After : 50 MH/month</strong>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- BOTTOM RIGHT ROW: RESULT MH SAVING + VDO SHOWING ACTIVITY -->
+        <div class="results-row">
+          <!-- Result: MH saving -->
+          <section class="panel result-panel reveal">
+            <h2>Result : <span>MH saving</span></h2>
+            <p class="result-caption">
+              ↓ 4T Faster (70.5%)<br>
+              <span>(▲120MH/M)</span>
+            </p>
+
+            <div class="result-chart-wrap">
+              <div class="result-y-axis">
+                <span>200</span>
+                <span>150</span>
+                <span>100</span>
+                <span>50</span>
+                <span>0</span>
+              </div>
+
+              <div class="result-chart" aria-label="Before 170 man-hours per month; after 50 man-hours per month">
+                <div class="result-bar">
+                  <b class="count-num" data-target="170">170</b>
+                  <span class="r-pillar bf" style="--height:85%"></span>
+                  <strong>BF</strong>
+                </div>
+
+                <!-- Curved Saving Arrow SVG -->
+                <svg class="curve-arrow" viewBox="0 0 70 60" aria-hidden="true">
+                  <path d="M 6 8 Q 44 10 54 46" fill="none" stroke="#0d2b9c" stroke-width="2.6" stroke-linecap="round"/>
+                  <polygon points="54,52 47,42 59,41" fill="#0d2b9c"/>
+                </svg>
+
+                <div class="result-bar">
+                  <b class="count-num" data-target="50">50</b>
+                  <span class="r-pillar af" style="--height:26%"></span>
+                  <strong>AF</strong>
+                </div>
+              </div>
+            </div>
+
+            <div class="result-save">Save <span class="count-num" data-target="1440" data-comma="true">1,440</span> MH/Year</div>
+          </section>
+
+          <!-- VDO Showing activity (Interactive Player) -->
+          <section class="panel activity-panel reveal">
+            <h2>VDO Showing activity</h2>
+
+            <div class="video-player" id="vdoPlayer" role="button" tabindex="0" aria-label="Play Smart Factory Activity Video Preview">
+              <!-- Animated SVG Smart Factory Floor -->
+              <svg class="factory-video-svg" viewBox="0 0 420 210" preserveAspectRatio="xMidYMid slice">
+                <defs>
+                  <linearGradient id="floorGrad" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0%" stop-color="#0b2847"/>
+                    <stop offset="55%" stop-color="#12497b"/>
+                    <stop offset="100%" stop-color="#09233d"/>
+                  </linearGradient>
+                  <linearGradient id="aisleGlow" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0%" stop-color="#38bdf8" stop-opacity="0.15"/>
+                    <stop offset="100%" stop-color="#0284c7" stop-opacity="0.45"/>
+                  </linearGradient>
+                </defs>
+                <rect width="420" height="210" fill="url(#floorGrad)"/>
+                <!-- Ceiling Lights -->
+                <g stroke="#bae6fd" stroke-width="2" opacity="0.6">
+                  <line x1="60" y1="12" x2="155" y2="65"/>
+                  <line x1="210" y1="8" x2="210" y2="65"/>
+                  <line x1="360" y1="12" x2="265" y2="65"/>
+                </g>
+                <!-- Perspective Production Line Corridor -->
+                <polygon points="165,68 255,68 380,190 40,190" fill="url(#aisleGlow)"/>
+                <!-- Left Workstations -->
+                <g fill="#1e6091" stroke="#7dd3fc" stroke-width="1">
+                  <polygon points="25,175 135,175 165,115 85,115"/>
+                  <polygon points="95,110 168,110 185,78 135,78"/>
+                </g>
+                <!-- Right Workstations -->
+                <g fill="#1e6091" stroke="#7dd3fc" stroke-width="1">
+                  <polygon points="285,175 395,175 335,115 255,115"/>
+                  <polygon points="252,110 325,110 285,78 235,78"/>
+                </g>
+                <!-- Associates in Blue Uniforms along the line -->
+                <g class="workers-group">
+                  <!-- Left workers -->
+                  <circle cx="115" cy="122" r="6" fill="#f1c27d"/><rect x="108" y="128" width="14" height="20" rx="3" fill="#0284c7"/>
+                  <circle cx="142" cy="96" r="5" fill="#f1c27d"/><rect x="136" y="101" width="12" height="16" rx="3" fill="#0284c7"/>
+                  <circle cx="162" cy="80" r="4" fill="#f1c27d"/><rect x="157" y="84" width="10" height="12" rx="2" fill="#0284c7"/>
+                  <!-- Right workers -->
+                  <circle cx="305" cy="122" r="6" fill="#f1c27d"/><rect x="298" y="128" width="14" height="20" rx="3" fill="#0284c7"/>
+                  <circle cx="278" cy="96" r="5" fill="#f1c27d"/><rect x="272" y="101" width="12" height="16" rx="3" fill="#0284c7"/>
+                  <circle cx="258" cy="80" r="4" fill="#f1c27d"/><rect x="253" y="84" width="10" height="12" rx="2" fill="#0284c7"/>
+                </g>
+                <!-- Animated Data Scan Waves -->
+                <g class="scan-pulse" stroke="#38bdf8" fill="none" stroke-width="1.5">
+                  <circle cx="210" cy="118" r="14"/>
+                  <circle cx="210" cy="118" r="28" opacity="0.5"/>
+                </g>
+              </svg>
+
+              <div class="vdo-overlay-title" id="vdoOverlayTitle">
+                See Earlier<br>
+                Decide Faster<br>
+                <strong>Stabilize Production</strong>
+              </div>
+
+              <!-- Center Play Button -->
+              <div class="vdo-play-circle" id="vdoPlayIcon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" width="26" height="26" fill="#ffffff"><polygon points="8,5 19,12 8,19"/></svg>
+              </div>
+
+              <!-- Video Player Controls Bar -->
+              <div class="vdo-controls-bar">
+                <span class="vdo-play-sm" id="vdoStateIcon">▶</span>
+                <span class="vdo-time" id="vdoTime">0:00 / 1:30</span>
+                <div class="vdo-progress"><span id="vdoProgressFill"></span></div>
+                <span class="vdo-ico" title="Volume">🔊</span>
+                <span class="vdo-ico" title="Settings">⚙</span>
+                <span class="vdo-ico" title="Fullscreen">⛶</span>
+              </div>
+            </div>
+
+            <p class="vdo-caption" id="vdoCaptionText">
+              Real-time attendance data enables faster manpower action and stable operation.
+            </p>
+          </section>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================== FOOTER ==================== -->
+    <footer class="footer">
+      <div class="footer-message">
+        <div class="footer-gear" aria-hidden="true">
+          <svg viewBox="0 0 48 48" width="44" height="44">
+            <circle cx="24" cy="24" r="15" fill="none" stroke="#ffffff" stroke-width="3.5" stroke-dasharray="6 3"/>
+            <path d="M18 28 L29 17 M29 17 H21 M29 17 V25" fill="none" stroke="#ffffff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <p>
+          Strengthen development on Dx to support Manufacturing optimization<br>
+          <b>NVA job with high efficiency job Management.</b>
+        </p>
+      </div>
+
+      <div class="footer-values">
+        <div class="val-item">
+          <svg viewBox="0 0 36 36" width="30" height="30" fill="#053c8c">
+            <circle cx="18" cy="14" r="8" fill="none" stroke="#053c8c" stroke-width="2.5" stroke-dasharray="4 2"/>
+            <circle cx="18" cy="14" r="3" fill="#053c8c"/>
+            <path d="M11 30h14l-2-6H13l-2 6z"/>
+          </svg>
+          <span>LEAN</span>
+        </div>
+        <div class="val-item">
+          <svg viewBox="0 0 36 36" width="30" height="30" fill="#053c8c">
+            <rect x="6" y="18" width="5" height="12" rx="1"/>
+            <rect x="14" y="12" width="5" height="18" rx="1"/>
+            <rect x="22" y="7" width="5" height="23" rx="1"/>
+            <path d="M6 14 L16 8 L26 4" fill="none" stroke="#0288d1" stroke-width="2.4" stroke-linecap="round"/>
+          </svg>
+          <span>DIGITAL</span>
+        </div>
+        <div class="val-item">
+          <svg viewBox="0 0 36 36" width="30" height="30" fill="#053c8c">
+            <circle cx="12" cy="12" r="4"/>
+            <circle cx="24" cy="12" r="4"/>
+            <circle cx="18" cy="10" r="4.5"/>
+            <path d="M5 28c0-4 5-6 13-6s13 2 13 6v2H5v-2z"/>
+          </svg>
+          <span>PEOPLE</span>
+        </div>
+        <div class="val-item">
+          <svg viewBox="0 0 36 36" width="30" height="30">
+            <path d="M18 28 V14" stroke="#15803d" stroke-width="2.5" stroke-linecap="round"/>
+            <path d="M18 20 C10 20 8 11 18 8 C28 11 26 20 18 20 Z" fill="#16a34a"/>
+            <path d="M10 30 Q18 26 26 30" fill="none" stroke="#0288d1" stroke-width="2.5" stroke-linecap="round"/>
+          </svg>
+          <span>SUSTAINABILITY</span>
+        </div>
+
+        <div class="denso-logo">
+          <strong>DENSO</strong>
+          <small>Crafting the Core</small>
+        </div>
+      </div>
+    </footer>
+
+    <div class="copyright">
+      <span>DENSO (CAMBODIA) CO., LTD.</span>
+      <span>FOR A BETTER 2030</span>
+    </div>
+  </main>
+</body>
+</html>

@@ -1,0 +1,18 @@
+# Environments and credentials
+.env
+*.env.local
+
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+*.log
+
+# Backups and temporary files
+*.tmp
+*.bak
+
+
+# MSAL Token Cache
+.msal_cache.bin
+*.cache
